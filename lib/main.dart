@@ -11,21 +11,14 @@ void main(List<String> args) async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  FirebaseAuth.instance.idTokenChanges().listen((User? user) {
-    if (user == null) {
-      print('User is currently signed out!');
-    } else {
-      print('User is signed in!');
-    }
-  });
   // runApp(
   //   ModularApp(
   //     module: AppModule(),
   //     child: const MyApp(),
   //   ),
   // );
-  runApp(MaterialApp(
-    builder: (context, child) => const MyApp(),
+  runApp(const MaterialApp(
+    home: MyApp(),
   ));
 }
 
@@ -41,38 +34,66 @@ class MyApp extends StatelessWidget {
     // );
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextButton(
-                onPressed: onRegister,
-                child: const Text('Register'),
-              ),
-              TextButton(
-                onPressed: onLogin,
-                child: const Text('Login'),
-              ),
-              TextButton(
-                onPressed: onForgotPassword,
-                child: const Text('Forgot password'),
-              ),
-              TextButton(
-                onPressed: onSignOut,
-                child: const Text('Sign out'),
-              ),
-            ],
+      body: Builder(builder: (context) {
+        FirebaseAuth.instance.idTokenChanges().listen((User? user) {
+          print(user);
+          if (user == null) {
+            print('User is currently signed out!');
+          } else {
+            print('User is signed in!');
+            if (!user.emailVerified) {
+              user.sendEmailVerification();
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const NeedVerifiedPage(),
+                  ));
+            } else {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const HomePage(),
+                  ));
+            }
+          }
+        });
+        return SafeArea(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  onPressed: onRegister,
+                  child: const Text('Register'),
+                ),
+                TextButton(
+                  onPressed: onLogin,
+                  child: const Text('Login'),
+                ),
+                TextButton(
+                  onPressed: onVerifyEmail,
+                  child: const Text('Verify email'),
+                ),
+                TextButton(
+                  onPressed: onForgotPassword,
+                  child: const Text('Forgot password'),
+                ),
+                TextButton(
+                  onPressed: onSignOut,
+                  child: const Text('Sign out'),
+                ),
+              ],
+            ),
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 
   void onLogin() async {
     try {
       final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: 'trongduc1509@gmail.com',
+        email: 'dgrayman1509@gmail.com',
         password: 'A_bc123',
       );
     } on FirebaseAuthException catch (e) {
@@ -88,7 +109,7 @@ class MyApp extends StatelessWidget {
     try {
       final credential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: 'trongduc1509@gmail.com',
+        email: 'dgrayman1509@gmail.com',
         password: 'A_bc123',
       );
     } on FirebaseAuthException catch (e) {
@@ -109,5 +130,49 @@ class MyApp extends StatelessWidget {
 
   void onSignOut() async {
     await FirebaseAuth.instance.signOut();
+  }
+
+  void onVerifyEmail() async {}
+}
+
+class NeedVerifiedPage extends StatelessWidget {
+  const NeedVerifiedPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      // appBar: AppBar(
+      //   automaticallyImplyLeading: false,
+      // ),
+      backgroundColor: Colors.white,
+      body: Center(
+          child: Text(
+        'Vui lòng xác thực email!',
+        style: TextStyle(
+          color: Colors.black,
+        ),
+      )),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      // appBar: AppBar(
+      //   automaticallyImplyLeading: false,
+      // ),
+      backgroundColor: Colors.white,
+      body: Center(
+          child: Text(
+        'HomePage',
+        style: TextStyle(
+          color: Colors.black,
+        ),
+      )),
+    );
   }
 }
