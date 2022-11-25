@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "145989393323",
+    "project_id": "centalki-staging",
+    "storage_bucket": "centalki-staging.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:145989393323:android:a3fd9e425ea9c941d490ee",
+        "android_client_info": {
+          "package_name": "com.example.centalki"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "145989393323-m9j2k0unqf6o0l2a0l39sd91ap0gdamr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgOSHDrH2IoFVLDzhkhykjdf8Zy7p00uU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "145989393323-m9j2k0unqf6o0l2a0l39sd91ap0gdamr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
