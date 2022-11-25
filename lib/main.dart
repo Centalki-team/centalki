@@ -58,6 +58,10 @@ class MyApp extends StatelessWidget {
                 onPressed: onForgotPassword,
                 child: const Text('Forgot password'),
               ),
+              TextButton(
+                onPressed: onSignOut,
+                child: const Text('Sign out'),
+              ),
             ],
           ),
         ),
@@ -65,7 +69,20 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  void onLogin() {}
+  void onLogin() async {
+    try {
+      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: 'trongduc1509@gmail.com',
+        password: 'A_bc123',
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+    }
+  }
 
   void onRegister() async {
     try {
@@ -85,5 +102,12 @@ class MyApp extends StatelessWidget {
     }
   }
 
-  void onForgotPassword() {}
+  void onForgotPassword() async {
+    await FirebaseAuth.instance
+        .sendPasswordResetEmail(email: 'trongduc1509@gmail.com');
+  }
+
+  void onSignOut() async {
+    await FirebaseAuth.instance.signOut();
+  }
 }
