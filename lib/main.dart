@@ -1,9 +1,8 @@
+import 'package:centalki/src/features/authentication/sign_in_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
-import 'app_module.dart';
 import 'firebase_options.dart';
 
 void main(List<String> args) async {
@@ -18,8 +17,39 @@ void main(List<String> args) async {
   //   ),
   // );
   runApp(const MaterialApp(
-    home: MyApp(),
+    home: AuthenticationTestFlow(),
   ));
+}
+
+class AuthenticationTestFlow extends StatelessWidget {
+  const AuthenticationTestFlow({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // FirebaseAuth.instance.idTokenChanges().listen((User? user) {
+    //   print(user);
+    //   if (user == null) {
+    //     print('User is currently signed out!');
+    //   } else {
+    //     print('User is signed in!');
+    //     if (!user.emailVerified) {
+    //       user.sendEmailVerification();
+    //       Navigator.push(
+    //           context,
+    //           MaterialPageRoute(
+    //             builder: (context) => const NeedVerifiedPage(),
+    //           ));
+    //     } else {
+    //       Navigator.push(
+    //           context,
+    //           MaterialPageRoute(
+    //             builder: (context) => const HomePage(),
+    //           ));
+    //     }
+    //   }
+    // });
+    return const SignInView();
+  }
 }
 
 class MyApp extends StatelessWidget {

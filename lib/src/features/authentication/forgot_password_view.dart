@@ -1,5 +1,6 @@
 import 'package:centalki/base/define/colors.dart';
 import 'package:centalki/base/define/dimensions.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPasswordContent extends StatefulWidget {
@@ -10,9 +11,11 @@ class ForgotPasswordContent extends StatefulWidget {
 }
 
 class _ForgotPasswordContentState extends State<ForgotPasswordContent> {
-
   final _emailController = TextEditingController();
-  final _errors = {'Empty': 'E-mail address cannot be empty', 'Wrong format': 'E-mail address is not right format'};
+  final _errors = {
+    'Empty': 'E-mail address cannot be empty',
+    'Wrong format': 'E-mail address is not right format'
+  };
   var _emailError = '';
 
   @override
@@ -63,26 +66,36 @@ class _ForgotPasswordContentState extends State<ForgotPasswordContent> {
                       hintText: 'Email',
                       prefixIcon: const Padding(
                         padding: EdgeInsets.only(left: 12, right: 16),
-                        child: Icon(Icons.email_rounded, size: 24,),
+                        child: Icon(
+                          Icons.email_rounded,
+                          size: 24,
+                        ),
                       ),
-                      contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 16, horizontal: 12),
                       enabledBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.transparent, width: 1),
-                        borderRadius: BorderRadius.all(Radius.circular(radiusTextField)),
+                        borderSide:
+                            BorderSide(color: Colors.transparent, width: 1),
+                        borderRadius:
+                            BorderRadius.all(Radius.circular(radiusTextField)),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: colorScheme.primary, width: 1),
+                        borderSide:
+                            BorderSide(color: colorScheme.primary, width: 1),
                         borderRadius: BorderRadius.circular(radiusTextField),
                       ),
                       errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: colorScheme.error, width: 1),
+                        borderSide:
+                            BorderSide(color: colorScheme.error, width: 1),
                         borderRadius: BorderRadius.circular(radiusTextField),
                       ),
                       focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: colorScheme.error, width: 1),
+                        borderSide:
+                            BorderSide(color: colorScheme.error, width: 1),
                         borderRadius: BorderRadius.circular(radiusTextField),
                       ),
-                      errorText: _emailError == '' ? null : _errors[_emailError],
+                      errorText:
+                          _emailError == '' ? null : _errors[_emailError],
                     ),
                   ),
                 ),
@@ -90,22 +103,32 @@ class _ForgotPasswordContentState extends State<ForgotPasswordContent> {
                   height: spaceBetweenLine20,
                 ),
                 TextButton(
-                  onPressed: () {
+                  onPressed: () async {
                     String email = _emailController.text;
                     final _emailRegExp = RegExp(
                       r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$',
                     );
-                    setState(() {
-                      _emailError = '';
-                      if (email.isEmpty || email == '') {
+                    if (email.isEmpty || email == '') {
+                      setState(() {
                         _emailError = 'Empty';
-                      }
-                      else {
+                      });
+                    } else {
+                      setState(() {
                         _emailRegExp.hasMatch(email)
                             ? _emailError = ''
                             : _emailError = 'Wrong format';
+                      });
+                    }
+
+                    if (!(email.isEmpty || email == '')) {
+                      await FirebaseAuth.instance
+                          .sendPasswordResetEmail(email: email);
+                      if (mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(
+                                "Reser password link was sent to email address: $email!\nPlease do not share to anybody!")));
                       }
-                    });
+                    }
                   },
                   style: TextButton.styleFrom(
                     backgroundColor: colorScheme.primary,
@@ -125,12 +148,19 @@ class _ForgotPasswordContentState extends State<ForgotPasswordContent> {
                   height: spaceBetweenLine12,
                 ),
                 OutlinedButton(
-                  onPressed: () {},
+                  onPressed: Navigator.of(context).pop,
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(colorScheme.surface,),
-                    foregroundColor: MaterialStateProperty.all(colorScheme.primary,),
-                    side: MaterialStateProperty.all(BorderSide(color: colorScheme.outline)),
-                    minimumSize: MaterialStateProperty.all(const Size.fromHeight(56),),
+                    backgroundColor: MaterialStateProperty.all(
+                      colorScheme.surface,
+                    ),
+                    foregroundColor: MaterialStateProperty.all(
+                      colorScheme.primary,
+                    ),
+                    side: MaterialStateProperty.all(
+                        BorderSide(color: colorScheme.outline)),
+                    minimumSize: MaterialStateProperty.all(
+                      const Size.fromHeight(56),
+                    ),
                   ),
                   child: const Text('Return Sign In'),
                 ),

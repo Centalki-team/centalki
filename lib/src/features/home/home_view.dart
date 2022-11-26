@@ -1,4 +1,5 @@
 import 'package:centalki/base/define/dimensions.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {
@@ -21,8 +22,15 @@ class HomeView extends StatelessWidget {
                 height: bigSpacing20,
               ),
               IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.logout_rounded, size: 48,),
+                onPressed: () async {
+                  await FirebaseAuth.instance.signOut();
+                  // ignore: use_build_context_synchronously
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                },
+                icon: const Icon(
+                  Icons.logout_rounded,
+                  size: 48,
+                ),
               ),
             ],
           ),

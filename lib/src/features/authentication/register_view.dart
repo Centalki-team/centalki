@@ -1,7 +1,10 @@
 import 'package:centalki/base/define/colors.dart';
 import 'package:centalki/src/features/authentication/verify_email.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
+
+import '../home/home_view.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
@@ -72,28 +75,31 @@ class _RegisterViewState extends State<RegisterView> {
                   contentPadding: const EdgeInsets.symmetric(vertical: 20),
                   enabledBorder: _emptyName
                       ? OutlineInputBorder(
-                    borderSide: BorderSide(color: colorScheme.error, width: 2),
-                    borderRadius: const BorderRadius.all(Radius.circular(16)),
-                  )
+                          borderSide:
+                              BorderSide(color: colorScheme.error, width: 2),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(16)),
+                        )
                       : const OutlineInputBorder(
-                    borderSide:
-                    BorderSide(color: Colors.transparent, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
-                  ),
+                          borderSide:
+                              BorderSide(color: Colors.transparent, width: 2),
+                          borderRadius: BorderRadius.all(Radius.circular(16)),
+                        ),
                   focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: colorScheme.primary, width: 2),
+                      borderSide:
+                          BorderSide(color: colorScheme.primary, width: 2),
                       borderRadius: BorderRadius.circular(16)),
                 ),
               ),
             ),
             _emptyName
                 ? Padding(
-              padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
-              child: Text(
-                'Name cannot be empty',
-                style: TextStyle(fontSize: 14, color: colorScheme.error),
-              ),
-            )
+                    padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
+                    child: Text(
+                      'Name cannot be empty',
+                      style: TextStyle(fontSize: 14, color: colorScheme.error),
+                    ),
+                  )
                 : const SizedBox.shrink(),
             const SizedBox(height: 16),
             Material(
@@ -120,37 +126,40 @@ class _RegisterViewState extends State<RegisterView> {
                   contentPadding: const EdgeInsets.symmetric(vertical: 20),
                   enabledBorder: _emptyEmail || _invalidEmail
                       ? OutlineInputBorder(
-                    borderSide: BorderSide(color: colorScheme.error, width: 2),
-                    borderRadius: const BorderRadius.all(Radius.circular(16)),
-                  )
+                          borderSide:
+                              BorderSide(color: colorScheme.error, width: 2),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(16)),
+                        )
                       : const OutlineInputBorder(
-                    borderSide:
-                    BorderSide(color: Colors.transparent, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
-                  ),
+                          borderSide:
+                              BorderSide(color: Colors.transparent, width: 2),
+                          borderRadius: BorderRadius.all(Radius.circular(16)),
+                        ),
                   focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: colorScheme.primary, width: 2),
+                      borderSide:
+                          BorderSide(color: colorScheme.primary, width: 2),
                       borderRadius: BorderRadius.circular(16)),
                 ),
               ),
             ),
             _emptyEmail
                 ? Padding(
-              padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
-              child: Text(
-                'E-mail address cannot be empty',
-                style: TextStyle(fontSize: 14, color: colorScheme.error),
-              ),
-            )
+                    padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
+                    child: Text(
+                      'E-mail address cannot be empty',
+                      style: TextStyle(fontSize: 14, color: colorScheme.error),
+                    ),
+                  )
                 : const SizedBox.shrink(),
             _invalidEmail
                 ? Padding(
-              padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
-              child: Text(
-                'Please enter a valid email address',
-                style: TextStyle(fontSize: 14, color: colorScheme.error),
-              ),
-            )
+                    padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
+                    child: Text(
+                      'Please enter a valid email address',
+                      style: TextStyle(fontSize: 14, color: colorScheme.error),
+                    ),
+                  )
                 : const SizedBox.shrink(),
             const SizedBox(height: 16),
             Material(
@@ -177,16 +186,19 @@ class _RegisterViewState extends State<RegisterView> {
                   contentPadding: const EdgeInsets.symmetric(vertical: 20),
                   enabledBorder: _emptyPassword
                       ? OutlineInputBorder(
-                    borderSide: BorderSide(color: colorScheme.error, width: 2),
-                    borderRadius: const BorderRadius.all(Radius.circular(16)),
-                  )
+                          borderSide:
+                              BorderSide(color: colorScheme.error, width: 2),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(16)),
+                        )
                       : const OutlineInputBorder(
-                    borderSide:
-                    BorderSide(color: Colors.transparent, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
-                  ),
+                          borderSide:
+                              BorderSide(color: Colors.transparent, width: 2),
+                          borderRadius: BorderRadius.all(Radius.circular(16)),
+                        ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: colorScheme.primary, width: 2),
+                    borderSide:
+                        BorderSide(color: colorScheme.primary, width: 2),
                     borderRadius: const BorderRadius.all(Radius.circular(16)),
                   ),
                 ),
@@ -194,12 +206,12 @@ class _RegisterViewState extends State<RegisterView> {
             ),
             _emptyPassword
                 ? Padding(
-              padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
-              child: Text(
-                'Password cannot be empty',
-                style: TextStyle(fontSize: 14, color: colorScheme.error),
-              ),
-            )
+                    padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
+                    child: Text(
+                      'Password cannot be empty',
+                      style: TextStyle(fontSize: 14, color: colorScheme.error),
+                    ),
+                  )
                 : const SizedBox.shrink(),
             const SizedBox(height: 16),
             Material(
@@ -226,16 +238,19 @@ class _RegisterViewState extends State<RegisterView> {
                   contentPadding: const EdgeInsets.symmetric(vertical: 20),
                   enabledBorder: _emptyRetypePassword || _passwordMismatch
                       ? OutlineInputBorder(
-                    borderSide: BorderSide(color: colorScheme.error, width: 2),
-                    borderRadius: const BorderRadius.all(Radius.circular(16)),
-                  )
+                          borderSide:
+                              BorderSide(color: colorScheme.error, width: 2),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(16)),
+                        )
                       : const OutlineInputBorder(
-                    borderSide:
-                    BorderSide(color: Colors.transparent, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
-                  ),
+                          borderSide:
+                              BorderSide(color: Colors.transparent, width: 2),
+                          borderRadius: BorderRadius.all(Radius.circular(16)),
+                        ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: colorScheme.primary, width: 2),
+                    borderSide:
+                        BorderSide(color: colorScheme.primary, width: 2),
                     borderRadius: const BorderRadius.all(Radius.circular(16)),
                   ),
                 ),
@@ -243,25 +258,25 @@ class _RegisterViewState extends State<RegisterView> {
             ),
             _emptyRetypePassword
                 ? Padding(
-              padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
-              child: Text(
-                'Please enter your password again',
-                style: TextStyle(fontSize: 14, color: colorScheme.error),
-              ),
-            )
+                    padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
+                    child: Text(
+                      'Please enter your password again',
+                      style: TextStyle(fontSize: 14, color: colorScheme.error),
+                    ),
+                  )
                 : const SizedBox.shrink(),
             _passwordMismatch
                 ? Padding(
-              padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
-              child: Text(
-                'Your password does not match',
-                style: TextStyle(fontSize: 14, color: colorScheme.error),
-              ),
-            )
+                    padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
+                    child: Text(
+                      'Your password does not match',
+                      style: TextStyle(fontSize: 14, color: colorScheme.error),
+                    ),
+                  )
                 : const SizedBox.shrink(),
             const SizedBox(height: 32),
             TextButton(
-              onPressed: () {
+              onPressed: () async {
                 // Validate full name
                 if (_nameController.text.isEmpty) {
                   setState(() {
@@ -282,7 +297,7 @@ class _RegisterViewState extends State<RegisterView> {
                     _emptyEmail = false;
                   });
                   if (!RegExp(
-                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                       .hasMatch(_emailController.text)) {
                     setState(() {
                       _invalidEmail = true;
@@ -312,7 +327,8 @@ class _RegisterViewState extends State<RegisterView> {
                   setState(() {
                     _emptyRetypePassword = false;
                   });
-                  if (_passwordController.text != _retypePasswordController.text) {
+                  if (_passwordController.text !=
+                      _retypePasswordController.text) {
                     setState(() {
                       _passwordMismatch = true;
                     });
@@ -321,6 +337,68 @@ class _RegisterViewState extends State<RegisterView> {
                       _passwordMismatch = false;
                     });
                   }
+                }
+                if (!_emptyName &&
+                    !_emptyEmail &&
+                    !_emptyPassword &&
+                    !_emptyRetypePassword &&
+                    !_passwordMismatch) {
+                  try {
+                    final credential = await FirebaseAuth.instance
+                        .createUserWithEmailAndPassword(
+                      email: _emailController.text.trim(),
+                      password: _passwordController.text.trim(),
+                    );
+                    if (credential.user != null) {
+                      if (credential.user!.emailVerified) {
+                        if (mounted) {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const HomeView(),
+                              ));
+                        }
+                      } else {
+                        credential.user!.sendEmailVerification();
+                        if (mounted) {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const VerifyEmailView(),
+                              ));
+                        }
+                      }
+                    } else {
+                      if (mounted) {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text("Can't create register new account!"),
+                        ));
+                      }
+                    }
+                  } on FirebaseAuthException catch (e) {
+                    if (e.code == 'weak-password') {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("The password provided is too weak."),
+                      ));
+                      //print('The password provided is too weak.');
+                    } else if (e.code == 'email-already-in-use') {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content:
+                            Text("The account already exists for that email."),
+                      ));
+                      //print('The account already exists for that email.');
+                    }
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text(e.toString()),
+                    ));
+                  }
+                  // Navigator.pushReplacement(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => const HomeView(),
+                  //     ));
                 }
                 // Navigator.push(
                 //     context,
@@ -349,8 +427,8 @@ class _RegisterViewState extends State<RegisterView> {
               children: [
                 Text(
                   'Have an account?',
-                  style:
-                  TextStyle(fontSize: 17, color: colorScheme.onPrimaryContainer),
+                  style: TextStyle(
+                      fontSize: 17, color: colorScheme.onPrimaryContainer),
                 ),
                 const SizedBox(width: 4),
                 InkWell(
@@ -371,5 +449,23 @@ class _RegisterViewState extends State<RegisterView> {
         ),
       ),
     );
+  }
+
+  void onRegister() async {
+    try {
+      final credential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: 'dgrayman1509@gmail.com',
+        password: 'A_bc123',
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 }

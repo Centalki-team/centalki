@@ -1,6 +1,13 @@
-import 'package:centalki/base/define/colors.dart';
-import 'package:centalki/base/define/dimensions.dart';
+import 'package:centalki/main.dart';
+import 'package:centalki/src/features/authentication/forgot_password_view.dart';
+import 'package:centalki/src/features/authentication/verify_email.dart';
+import 'package:centalki/src/features/home/home_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../../../base/define/colors.dart';
+import '../../../base/define/dimensions.dart';
+import 'register_view.dart';
 
 class SignInView extends StatefulWidget {
   const SignInView({Key? key}) : super(key: key);
@@ -10,11 +17,14 @@ class SignInView extends StatefulWidget {
 }
 
 class _SignInViewState extends State<SignInView> {
-
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  final _errors = {'Email empty': 'E-mail address cannot be empty', 'Wrong email format': 'E-mail address is not right format', 'Password empty': 'Password cannot be empty'};
+  final _errors = {
+    'Email empty': 'E-mail address cannot be empty',
+    'Wrong email format': 'E-mail address is not right format',
+    'Password empty': 'Password cannot be empty'
+  };
   var _emailError = '';
   var _passwordError = '';
 
@@ -66,23 +76,32 @@ class _SignInViewState extends State<SignInView> {
                     hintText: 'Email',
                     prefixIcon: const Padding(
                       padding: EdgeInsets.only(left: 12, right: 16),
-                      child: Icon(Icons.email_rounded, size: 24,),
+                      child: Icon(
+                        Icons.email_rounded,
+                        size: 24,
+                      ),
                     ),
-                    contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 16, horizontal: 12),
                     enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.transparent, width: 1),
-                      borderRadius: BorderRadius.all(Radius.circular(radiusTextField)),
+                      borderSide:
+                          BorderSide(color: Colors.transparent, width: 1),
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(radiusTextField)),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: colorScheme.primary, width: 2),
+                      borderSide:
+                          BorderSide(color: colorScheme.primary, width: 2),
                       borderRadius: BorderRadius.circular(radiusTextField),
                     ),
                     errorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: colorScheme.error, width: 1),
+                      borderSide:
+                          BorderSide(color: colorScheme.error, width: 1),
                       borderRadius: BorderRadius.circular(radiusTextField),
                     ),
                     focusedErrorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: colorScheme.error, width: 1),
+                      borderSide:
+                          BorderSide(color: colorScheme.error, width: 1),
                       borderRadius: BorderRadius.circular(radiusTextField),
                     ),
                     errorText: _emailError == '' ? null : _errors[_emailError],
@@ -109,26 +128,36 @@ class _SignInViewState extends State<SignInView> {
                     hintText: 'Password',
                     prefixIcon: const Padding(
                       padding: EdgeInsets.only(left: 12, right: 16),
-                      child: Icon(Icons.key_rounded, size: 24,),
+                      child: Icon(
+                        Icons.key_rounded,
+                        size: 24,
+                      ),
                     ),
-                    contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 16, horizontal: 12),
                     enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.transparent, width: 1),
-                      borderRadius: BorderRadius.all(Radius.circular(radiusTextField)),
+                      borderSide:
+                          BorderSide(color: Colors.transparent, width: 1),
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(radiusTextField)),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: colorScheme.primary, width: 2),
+                      borderSide:
+                          BorderSide(color: colorScheme.primary, width: 2),
                       borderRadius: BorderRadius.circular(radiusTextField),
                     ),
                     errorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: colorScheme.error, width: 1),
+                      borderSide:
+                          BorderSide(color: colorScheme.error, width: 1),
                       borderRadius: BorderRadius.circular(radiusTextField),
                     ),
                     focusedErrorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: colorScheme.error, width: 1),
+                      borderSide:
+                          BorderSide(color: colorScheme.error, width: 1),
                       borderRadius: BorderRadius.circular(radiusTextField),
                     ),
-                    errorText: _passwordError == '' ? null : _errors[_passwordError],
+                    errorText:
+                        _passwordError == '' ? null : _errors[_passwordError],
                   ),
                 ),
               ),
@@ -138,9 +167,14 @@ class _SignInViewState extends State<SignInView> {
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ForgotPasswordContent(),
+                      )),
                   style: ButtonStyle(
-                    foregroundColor: MaterialStateProperty.all(colorScheme.primary),
+                    foregroundColor:
+                        MaterialStateProperty.all(colorScheme.primary),
                   ),
                   child: const Text(
                     'Forgot Password?',
@@ -152,28 +186,97 @@ class _SignInViewState extends State<SignInView> {
                 height: spaceBetweenLine12,
               ),
               TextButton(
-                onPressed: () {
+                onPressed: () async {
                   String email = _emailController.text;
                   String password = _passwordController.text;
                   final _emailRegExp = RegExp(
                     r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$',
                   );
-                  setState(() {
-                    _emailError = '';
-                    _passwordError = '';
-                    if (email.isEmpty || email == '') {
+                  if (email.isEmpty || email == '') {
+                    setState(() {
                       _emailError = 'Email empty';
-                    }
-                    else {
+                    });
+                  } else {
+                    setState(() {
                       _emailRegExp.hasMatch(email)
                           ? _emailError = ''
                           : _emailError = 'Wrong email format';
-                    }
+                    });
+                  }
 
-                    if (password.isEmpty || password == '') {
+                  if (password.isEmpty || password == '') {
+                    setState(() {
                       _passwordError = 'Password empty';
+                    });
+                  }
+
+                  if (!(email.isEmpty || email == '') &&
+                      _emailRegExp.hasMatch(email) &&
+                      !(password.isEmpty || password == '')) {
+                    try {
+                      final credential = await FirebaseAuth.instance
+                          .signInWithEmailAndPassword(
+                        email: email,
+                        password: password,
+                      );
+                      if (credential.user != null) {
+                        if (credential.user!.emailVerified) {
+                          if (mounted) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const HomeView(),
+                                ));
+                          }
+                        } else {
+                          credential.user!.sendEmailVerification();
+                          if (mounted) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const VerifyEmailView(),
+                                ));
+                          }
+                        }
+                      } else {
+                        if (mounted) {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content: Text("Wrong email or password!"),
+                          ));
+                        }
+                      }
+                    } on FirebaseAuthException catch (e) {
+                      if (e.code == 'user-not-found') {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text("No user found for that email!"),
+                        ));
+                      } else if (e.code == 'wrong-password') {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content:
+                              Text('Wrong password provided for that user.'),
+                        ));
+                      }
                     }
-                  });
+                  }
+
+                  // setState(() {
+                  //   _emailError = '';
+                  //   _passwordError = '';
+                  //   if (email.isEmpty || email == '') {
+                  //     _emailError = 'Email empty';
+                  //   } else {
+                  //     _emailRegExp.hasMatch(email)
+                  //         ? _emailError = ''
+                  //         : _emailError = 'Wrong email format';
+                  //   }
+
+                  //   if (password.isEmpty || password == '') {
+                  //     _passwordError = 'Password empty';
+                  //   }
+                  // });
                 },
                 style: TextButton.styleFrom(
                   backgroundColor: colorScheme.primary,
@@ -233,13 +336,16 @@ class _SignInViewState extends State<SignInView> {
                     style: TextStyle(color: colorScheme.primary),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const RegisterView(),
+                        )),
                     child: Text(
                       'Sign Up',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: colorScheme.primary
-                      ),
+                          color: colorScheme.primary),
                     ),
                   ),
                 ],
@@ -249,5 +355,20 @@ class _SignInViewState extends State<SignInView> {
         ),
       ),
     );
+  }
+
+  void onLogin() async {
+    try {
+      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: 'dgrayman1509@gmail.com',
+        password: 'A_bc123',
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+    }
   }
 }

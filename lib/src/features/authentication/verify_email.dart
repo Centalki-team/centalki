@@ -1,4 +1,5 @@
 import 'package:centalki/base/define/colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class VerifyEmailView extends StatefulWidget {
@@ -12,9 +13,7 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-
-      ),
+      appBar: AppBar(),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -28,7 +27,11 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
             ),
             const SizedBox(height: 16),
             TextButton(
-                onPressed: () {},
+                onPressed: () async {
+                  await FirebaseAuth.instance.signOut();
+                  // ignore: use_build_context_synchronously
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                },
                 child: const Text(
                   'Log out',
                   style: TextStyle(
