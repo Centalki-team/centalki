@@ -80,27 +80,22 @@ class _SignInViewState extends State<SignInView> {
                       size: 24,
                     ),
                   ),
-                  contentPadding: const EdgeInsets.symmetric(
-                      vertical: 16, horizontal: 12),
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
                   enabledBorder: const OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Colors.transparent, width: 1),
-                    borderRadius:
-                        BorderRadius.all(Radius.circular(radiusTextField)),
+                    borderSide: BorderSide(color: Colors.transparent, width: 1),
+                    borderRadius: BorderRadius.all(Radius.circular(radiusTextField)),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: colorScheme.primary, width: 2),
+                    borderSide: BorderSide(color: colorScheme.primary, width: 2),
                     borderRadius: BorderRadius.circular(radiusTextField),
                   ),
                   errorBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: colorScheme.error, width: 1),
+                    borderSide: BorderSide(color: colorScheme.error, width: 1),
                     borderRadius: BorderRadius.circular(radiusTextField),
                   ),
                   focusedErrorBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: colorScheme.error, width: 1),
+                    borderSide: BorderSide(color: colorScheme.error, width: 1),
                     borderRadius: BorderRadius.circular(radiusTextField),
                   ),
                   errorText: _emailError == '' ? null : _errors[_emailError],
@@ -132,31 +127,25 @@ class _SignInViewState extends State<SignInView> {
                       size: 24,
                     ),
                   ),
-                  contentPadding: const EdgeInsets.symmetric(
-                      vertical: 16, horizontal: 12),
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
                   enabledBorder: const OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Colors.transparent, width: 1),
-                    borderRadius:
-                        BorderRadius.all(Radius.circular(radiusTextField)),
+                    borderSide: BorderSide(color: Colors.transparent, width: 1),
+                    borderRadius: BorderRadius.all(Radius.circular(radiusTextField)),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: colorScheme.primary, width: 2),
+                    borderSide: BorderSide(color: colorScheme.primary, width: 2),
                     borderRadius: BorderRadius.circular(radiusTextField),
                   ),
                   errorBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: colorScheme.error, width: 1),
+                    borderSide: BorderSide(color: colorScheme.error, width: 1),
                     borderRadius: BorderRadius.circular(radiusTextField),
                   ),
                   focusedErrorBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: colorScheme.error, width: 1),
+                    borderSide: BorderSide(color: colorScheme.error, width: 1),
                     borderRadius: BorderRadius.circular(radiusTextField),
                   ),
-                  errorText:
-                      _passwordError == '' ? null : _errors[_passwordError],
+                  errorText: _passwordError == '' ? null : _errors[_passwordError],
                 ),
               ),
             ),
@@ -172,8 +161,7 @@ class _SignInViewState extends State<SignInView> {
                       builder: (context) => const ForgotPasswordView(),
                     )),
                 style: ButtonStyle(
-                  foregroundColor:
-                      MaterialStateProperty.all(colorScheme.primary),
+                  foregroundColor: MaterialStateProperty.all(colorScheme.primary),
                 ),
                 child: const Text(
                   'Forgot Password?',
@@ -207,8 +195,7 @@ class _SignInViewState extends State<SignInView> {
                   setState(() {
                     _passwordError = 'Password empty';
                   });
-                }
-                else {
+                } else {
                   setState(() {
                     _passwordError = '';
                   });
@@ -218,8 +205,8 @@ class _SignInViewState extends State<SignInView> {
                     emailRegExp.hasMatch(email) &&
                     !(password.isEmpty || password == '')) {
                   try {
-                    final credential = await FirebaseAuth.instance
-                        .signInWithEmailAndPassword(
+                    final credential =
+                        await FirebaseAuth.instance.signInWithEmailAndPassword(
                       email: email,
                       password: password,
                     );
@@ -244,23 +231,19 @@ class _SignInViewState extends State<SignInView> {
                       }
                     } else {
                       if (mounted) {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content: Text("Wrong email or password!"),
                         ));
                       }
                     }
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'user-not-found') {
-                      ScaffoldMessenger.of(context)
-                          .showSnackBar(const SnackBar(
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text("No user found for that email!"),
                       ));
                     } else if (e.code == 'wrong-password') {
-                      ScaffoldMessenger.of(context)
-                          .showSnackBar(const SnackBar(
-                        content:
-                            Text('Wrong password provided for that user.'),
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text('Wrong password provided for that user.'),
                       ));
                     }
                   }
@@ -283,11 +266,11 @@ class _SignInViewState extends State<SignInView> {
                 // });
               },
               style: TextButton.styleFrom(
-                  backgroundColor: colorScheme.primary,
-                  minimumSize: const Size.fromHeight(56),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
+                backgroundColor: colorScheme.primary,
+                minimumSize: const Size.fromHeight(56),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
               ),
               child: Text(
                 'Sign In',
@@ -351,8 +334,7 @@ class _SignInViewState extends State<SignInView> {
                   child: Text(
                     'Sign Up',
                     style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: colorScheme.primary),
+                        fontWeight: FontWeight.bold, color: colorScheme.primary),
                   ),
                 ),
               ],
