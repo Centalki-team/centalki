@@ -31,30 +31,27 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MyWidget> {
+  String _status = 'loading';
   @override
   void initState() {
     FirebaseAuth.instance.idTokenChanges().listen((User? user) {
       print(user);
       if (user == null) {
         print('User is currently signed out!');
-        MaterialPageRoute(
-          builder: (context) => const SignInView(),
-        );
+        setState(() {
+          _status = "not_auth";
+        });
       } else {
         print('User is signed in!');
         if (!user.emailVerified) {
           user.sendEmailVerification();
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const VerifyEmailView(),
-              ));
+          setState(() {
+            _status = "not_email_verified";
+          });
         } else {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const HomeView(),
-              ));
+          setState(() {
+            _status = "success";
+          });
         }
       }
     });
@@ -63,6 +60,21 @@ class _MyWidgetState extends State<MyWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    switch (_status) {
+      case "loading":
+        return const Center(
+          child: Text("Splash screen here!"),
+        );
+      case "not_auth":
+        return const SignInView();
+      case "not_email_verified":
+        return const VerifyEmailView();
+      case "success":
+        return const HomeView();
+      default:
+        return const Center(
+          child: Text("Splash screen here!"),
+        );
+    }
   }
 }

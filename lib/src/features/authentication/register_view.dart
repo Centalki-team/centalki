@@ -77,8 +77,10 @@ class _RegisterViewState extends State<RegisterView> {
                   contentPadding: const EdgeInsets.symmetric(vertical: 20),
                   enabledBorder: _emptyName
                       ? OutlineInputBorder(
-                          borderSide: BorderSide(color: colorScheme.error, width: 2),
-                          borderRadius: const BorderRadius.all(Radius.circular(16)),
+                          borderSide:
+                              BorderSide(color: colorScheme.error, width: 2),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(16)),
                         )
                       : const OutlineInputBorder(
                           borderSide:
@@ -86,7 +88,8 @@ class _RegisterViewState extends State<RegisterView> {
                           borderRadius: BorderRadius.all(Radius.circular(16)),
                         ),
                   focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: colorScheme.primary, width: 2),
+                      borderSide:
+                          BorderSide(color: colorScheme.primary, width: 2),
                       borderRadius: BorderRadius.circular(16)),
                 ),
               ),
@@ -125,8 +128,10 @@ class _RegisterViewState extends State<RegisterView> {
                   contentPadding: const EdgeInsets.symmetric(vertical: 20),
                   enabledBorder: _emptyEmail || _invalidEmail
                       ? OutlineInputBorder(
-                          borderSide: BorderSide(color: colorScheme.error, width: 2),
-                          borderRadius: const BorderRadius.all(Radius.circular(16)),
+                          borderSide:
+                              BorderSide(color: colorScheme.error, width: 2),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(16)),
                         )
                       : const OutlineInputBorder(
                           borderSide:
@@ -134,7 +139,8 @@ class _RegisterViewState extends State<RegisterView> {
                           borderRadius: BorderRadius.all(Radius.circular(16)),
                         ),
                   focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: colorScheme.primary, width: 2),
+                      borderSide:
+                          BorderSide(color: colorScheme.primary, width: 2),
                       borderRadius: BorderRadius.circular(16)),
                 ),
               ),
@@ -182,8 +188,10 @@ class _RegisterViewState extends State<RegisterView> {
                   contentPadding: const EdgeInsets.symmetric(vertical: 20),
                   enabledBorder: _emptyPassword
                       ? OutlineInputBorder(
-                          borderSide: BorderSide(color: colorScheme.error, width: 2),
-                          borderRadius: const BorderRadius.all(Radius.circular(16)),
+                          borderSide:
+                              BorderSide(color: colorScheme.error, width: 2),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(16)),
                         )
                       : const OutlineInputBorder(
                           borderSide:
@@ -191,7 +199,8 @@ class _RegisterViewState extends State<RegisterView> {
                           borderRadius: BorderRadius.all(Radius.circular(16)),
                         ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: colorScheme.primary, width: 2),
+                    borderSide:
+                        BorderSide(color: colorScheme.primary, width: 2),
                     borderRadius: const BorderRadius.all(Radius.circular(16)),
                   ),
                 ),
@@ -231,8 +240,10 @@ class _RegisterViewState extends State<RegisterView> {
                   contentPadding: const EdgeInsets.symmetric(vertical: 20),
                   enabledBorder: _emptyRetypePassword || _passwordMismatch
                       ? OutlineInputBorder(
-                          borderSide: BorderSide(color: colorScheme.error, width: 2),
-                          borderRadius: const BorderRadius.all(Radius.circular(16)),
+                          borderSide:
+                              BorderSide(color: colorScheme.error, width: 2),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(16)),
                         )
                       : const OutlineInputBorder(
                           borderSide:
@@ -240,7 +251,8 @@ class _RegisterViewState extends State<RegisterView> {
                           borderRadius: BorderRadius.all(Radius.circular(16)),
                         ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: colorScheme.primary, width: 2),
+                    borderSide:
+                        BorderSide(color: colorScheme.primary, width: 2),
                     borderRadius: const BorderRadius.all(Radius.circular(16)),
                   ),
                 ),
@@ -282,8 +294,9 @@ class _RegisterViewState extends State<RegisterView> {
                     'I have read and accept Terms and Conditions',
                     style: TextStyle(
                         fontSize: 14,
-                        fontWeight:
-                            _termsAccepted ? FontWeight.bold : FontWeight.normal,
+                        fontWeight: _termsAccepted
+                            ? FontWeight.bold
+                            : FontWeight.normal,
                         color: _termsAccepted
                             ? colorScheme.primary
                             : colorScheme.onPrimaryContainer),
@@ -344,7 +357,8 @@ class _RegisterViewState extends State<RegisterView> {
                   setState(() {
                     _emptyRetypePassword = false;
                   });
-                  if (_passwordController.text != _retypePasswordController.text) {
+                  if (_passwordController.text !=
+                      _retypePasswordController.text) {
                     setState(() {
                       _passwordMismatch = true;
                     });
@@ -360,37 +374,11 @@ class _RegisterViewState extends State<RegisterView> {
                     !_emptyRetypePassword &&
                     !_passwordMismatch) {
                   try {
-                    final credential =
-                        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                    final credential = await FirebaseAuth.instance
+                        .createUserWithEmailAndPassword(
                       email: _emailController.text.trim(),
                       password: _passwordController.text.trim(),
                     );
-                    if (credential.user != null) {
-                      if (credential.user!.emailVerified) {
-                        if (mounted) {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const HomeView(),
-                              ));
-                        }
-                      } else {
-                        credential.user!.sendEmailVerification();
-                        if (mounted) {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const VerifyEmailView(),
-                              ));
-                        }
-                      }
-                    } else {
-                      if (mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          content: Text("Can't create register new account!"),
-                        ));
-                      }
-                    }
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'weak-password') {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -399,7 +387,8 @@ class _RegisterViewState extends State<RegisterView> {
                       //print('The password provided is too weak.');
                     } else if (e.code == 'email-already-in-use') {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text("The account already exists for that email."),
+                        content:
+                            Text("The account already exists for that email."),
                       ));
                       //print('The account already exists for that email.');
                     }
@@ -441,8 +430,8 @@ class _RegisterViewState extends State<RegisterView> {
               children: [
                 Text(
                   'Have an account?',
-                  style:
-                      TextStyle(fontSize: 17, color: colorScheme.onPrimaryContainer),
+                  style: TextStyle(
+                      fontSize: 17, color: colorScheme.onPrimaryContainer),
                 ),
                 const SizedBox(width: 4),
                 InkWell(
@@ -467,7 +456,8 @@ class _RegisterViewState extends State<RegisterView> {
 
   void onRegister() async {
     try {
-      final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      final credential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: 'dgrayman1509@gmail.com',
         password: 'A_bc123',
       );

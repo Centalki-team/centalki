@@ -84,10 +84,12 @@ class _SignInViewState extends State<SignInView> {
                       const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
                   enabledBorder: const OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.transparent, width: 1),
-                    borderRadius: BorderRadius.all(Radius.circular(radiusTextField)),
+                    borderRadius:
+                        BorderRadius.all(Radius.circular(radiusTextField)),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: colorScheme.primary, width: 2),
+                    borderSide:
+                        BorderSide(color: colorScheme.primary, width: 2),
                     borderRadius: BorderRadius.circular(radiusTextField),
                   ),
                   errorBorder: OutlineInputBorder(
@@ -131,10 +133,12 @@ class _SignInViewState extends State<SignInView> {
                       const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
                   enabledBorder: const OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.transparent, width: 1),
-                    borderRadius: BorderRadius.all(Radius.circular(radiusTextField)),
+                    borderRadius:
+                        BorderRadius.all(Radius.circular(radiusTextField)),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: colorScheme.primary, width: 2),
+                    borderSide:
+                        BorderSide(color: colorScheme.primary, width: 2),
                     borderRadius: BorderRadius.circular(radiusTextField),
                   ),
                   errorBorder: OutlineInputBorder(
@@ -145,7 +149,8 @@ class _SignInViewState extends State<SignInView> {
                     borderSide: BorderSide(color: colorScheme.error, width: 1),
                     borderRadius: BorderRadius.circular(radiusTextField),
                   ),
-                  errorText: _passwordError == '' ? null : _errors[_passwordError],
+                  errorText:
+                      _passwordError == '' ? null : _errors[_passwordError],
                 ),
               ),
             ),
@@ -161,7 +166,8 @@ class _SignInViewState extends State<SignInView> {
                       builder: (context) => const ForgotPasswordView(),
                     )),
                 style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all(colorScheme.primary),
+                  foregroundColor:
+                      MaterialStateProperty.all(colorScheme.primary),
                 ),
                 child: const Text(
                   'Forgot Password?',
@@ -210,32 +216,6 @@ class _SignInViewState extends State<SignInView> {
                       email: email,
                       password: password,
                     );
-                    if (credential.user != null) {
-                      if (credential.user!.emailVerified) {
-                        if (mounted) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const HomeView(),
-                              ));
-                        }
-                      } else {
-                        credential.user!.sendEmailVerification();
-                        if (mounted) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const VerifyEmailView(),
-                              ));
-                        }
-                      }
-                    } else {
-                      if (mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          content: Text("Wrong email or password!"),
-                        ));
-                      }
-                    }
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'user-not-found') {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -334,7 +314,8 @@ class _SignInViewState extends State<SignInView> {
                   child: Text(
                     'Sign Up',
                     style: TextStyle(
-                        fontWeight: FontWeight.bold, color: colorScheme.primary),
+                        fontWeight: FontWeight.bold,
+                        color: colorScheme.primary),
                   ),
                 ),
               ],
