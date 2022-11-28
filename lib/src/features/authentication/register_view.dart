@@ -379,6 +379,9 @@ class _RegisterViewState extends State<RegisterView> {
                       email: _emailController.text.trim(),
                       password: _passwordController.text.trim(),
                     );
+                    if (mounted) {
+                      Navigator.pop(context);
+                    }
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'weak-password') {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(

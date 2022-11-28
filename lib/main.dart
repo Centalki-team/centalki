@@ -34,6 +34,10 @@ class _MyWidgetState extends State<MyWidget> {
   String _status = 'loading';
   @override
   void initState() {
+    // Right after the listener has been registered.
+    // When a user is signed in.
+    // When the current user is signed out.
+    // When there is a change in the current user's token.
     FirebaseAuth.instance.idTokenChanges().listen((User? user) {
       print(user);
       if (user == null) {
@@ -60,6 +64,7 @@ class _MyWidgetState extends State<MyWidget> {
 
   @override
   Widget build(BuildContext context) {
+    print(_status);
     switch (_status) {
       case "loading":
         return const Center(
