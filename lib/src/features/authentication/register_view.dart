@@ -1,4 +1,6 @@
 import 'package:centalki/base/define/colors.dart';
+import 'package:centalki/base/define/dimensions.dart';
+import 'package:centalki/base/define/size.dart';
 import 'package:centalki/src/features/authentication/verify_email.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -37,13 +39,13 @@ class _RegisterViewState extends State<RegisterView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const SizedBox(height: 24),
+            const SizedBox(height: spaceBetweenLine20),
             Image.asset(
               'assets/illustration/register.png',
               width: 200,
               height: 200,
             ),
-            const SizedBox(height: 32),
+            const SizedBox(height: spaceBetweenLine20),
             Text(
               'Create new account',
               style: TextStyle(
@@ -52,45 +54,42 @@ class _RegisterViewState extends State<RegisterView> {
                 color: colorScheme.onPrimaryContainer,
               ),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: spaceBetweenLine12),
             Material(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(radiusTextField),
               elevation: 3.0,
               clipBehavior: Clip.hardEdge,
-              shadowColor: Colors.grey[200],
+              shadowColor: colorScheme.shadow,
               child: TextField(
                 controller: _nameController,
                 keyboardType: TextInputType.emailAddress,
                 autocorrect: false,
                 decoration: InputDecoration(
-                  hintStyle: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w300,
-                    color: Colors.grey[400],
-                  ),
+                  hintStyle: const TextStyle(fontSize: 16, letterSpacing: 0.5),
                   hintText: 'Full name',
                   prefixIcon: Padding(
-                    padding: const EdgeInsets.only(left: 16, right: 12),
-                    child: Icon(Icons.person_rounded,
-                        color: colorScheme.primary, size: 32),
+                    padding: const EdgeInsets.only(left: 12, right: 16),
+                    child: Icon(
+                      Icons.person_rounded,
+                      color: colorScheme.primary,
+                      size: 24,
+                    ),
                   ),
-                  contentPadding: const EdgeInsets.symmetric(vertical: 20),
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
                   enabledBorder: _emptyName
                       ? OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: colorScheme.error, width: 2),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(16)),
+                          borderSide: BorderSide(color: colorScheme.error, width: 1),
+                          borderRadius: BorderRadius.circular(radiusTextField),
                         )
-                      : const OutlineInputBorder(
+                      : OutlineInputBorder(
                           borderSide:
-                              BorderSide(color: Colors.transparent, width: 2),
-                          borderRadius: BorderRadius.all(Radius.circular(16)),
+                              const BorderSide(color: Colors.transparent, width: 1),
+                          borderRadius: BorderRadius.circular(radiusTextField),
                         ),
                   focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: colorScheme.primary, width: 2),
-                      borderRadius: BorderRadius.circular(16)),
+                      borderSide: BorderSide(color: colorScheme.primary, width: 2),
+                      borderRadius: BorderRadius.circular(radiusTextField)),
                 ),
               ),
             ),
@@ -99,49 +98,46 @@ class _RegisterViewState extends State<RegisterView> {
                     padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
                     child: Text(
                       'Name cannot be empty',
-                      style: TextStyle(fontSize: 14, color: colorScheme.error),
+                      style: TextStyle(fontSize: 12, color: colorScheme.error),
                     ),
                   )
                 : const SizedBox.shrink(),
-            const SizedBox(height: 16),
+            const SizedBox(height: spaceBetweenLine12),
             Material(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(radiusTextField),
               elevation: 3.0,
               clipBehavior: Clip.hardEdge,
-              shadowColor: Colors.grey[200],
+              shadowColor: colorScheme.shadow,
               child: TextField(
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
                 autocorrect: false,
                 decoration: InputDecoration(
-                  hintStyle: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w300,
-                    color: Colors.grey[400],
-                  ),
+                  hintStyle: const TextStyle(fontSize: 16, letterSpacing: 0.5),
                   hintText: 'Email',
                   prefixIcon: Padding(
-                    padding: const EdgeInsets.only(left: 16, right: 12),
-                    child: Icon(Icons.mail_rounded,
-                        color: colorScheme.primary, size: 32),
+                    padding: const EdgeInsets.only(left: 12, right: 16),
+                    child: Icon(
+                      Icons.mail_rounded,
+                      color: colorScheme.primary,
+                      size: 24,
+                    ),
                   ),
-                  contentPadding: const EdgeInsets.symmetric(vertical: 20),
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
                   enabledBorder: _emptyEmail || _invalidEmail
                       ? OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: colorScheme.error, width: 2),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(16)),
+                          borderSide: BorderSide(color: colorScheme.error, width: 1),
+                          borderRadius: BorderRadius.circular(radiusTextField),
                         )
-                      : const OutlineInputBorder(
+                      : OutlineInputBorder(
                           borderSide:
-                              BorderSide(color: Colors.transparent, width: 2),
-                          borderRadius: BorderRadius.all(Radius.circular(16)),
+                              const BorderSide(color: Colors.transparent, width: 1),
+                          borderRadius: BorderRadius.circular(radiusTextField),
                         ),
                   focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: colorScheme.primary, width: 2),
-                      borderRadius: BorderRadius.circular(16)),
+                      borderSide: BorderSide(color: colorScheme.primary, width: 2),
+                      borderRadius: BorderRadius.circular(radiusTextField)),
                 ),
               ),
             ),
@@ -163,45 +159,42 @@ class _RegisterViewState extends State<RegisterView> {
                     ),
                   )
                 : const SizedBox.shrink(),
-            const SizedBox(height: 16),
+            const SizedBox(height: spaceBetweenLine12),
             Material(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(radiusTextField),
               elevation: 3.0,
               clipBehavior: Clip.hardEdge,
-              shadowColor: Colors.grey[200],
+              shadowColor: colorScheme.shadow,
               child: TextField(
                 controller: _passwordController,
                 autocorrect: false,
                 obscureText: true,
                 decoration: InputDecoration(
-                  hintStyle: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w300,
-                    color: Colors.grey[400],
-                  ),
+                  hintStyle: const TextStyle(fontSize: 16, letterSpacing: 0.5),
                   hintText: 'Password',
                   prefixIcon: Padding(
-                    padding: const EdgeInsets.only(left: 16, right: 12),
-                    child: Icon(Icons.key_rounded,
-                        color: colorScheme.primary, size: 32),
+                    padding: const EdgeInsets.only(left: 12, right: 16),
+                    child: Icon(
+                      Icons.key_rounded,
+                      color: colorScheme.primary,
+                      size: 24,
+                    ),
                   ),
-                  contentPadding: const EdgeInsets.symmetric(vertical: 20),
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
                   enabledBorder: _emptyPassword
                       ? OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: colorScheme.error, width: 2),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(16)),
+                          borderSide: BorderSide(color: colorScheme.error, width: 1),
+                          borderRadius: BorderRadius.circular(radiusTextField),
                         )
-                      : const OutlineInputBorder(
+                      : OutlineInputBorder(
                           borderSide:
-                              BorderSide(color: Colors.transparent, width: 2),
-                          borderRadius: BorderRadius.all(Radius.circular(16)),
+                              const BorderSide(color: Colors.transparent, width: 1),
+                          borderRadius: BorderRadius.circular(radiusTextField),
                         ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: colorScheme.primary, width: 2),
-                    borderRadius: const BorderRadius.all(Radius.circular(16)),
+                    borderSide: BorderSide(color: colorScheme.primary, width: 2),
+                    borderRadius: BorderRadius.circular(radiusTextField),
                   ),
                 ),
               ),
@@ -215,45 +208,42 @@ class _RegisterViewState extends State<RegisterView> {
                     ),
                   )
                 : const SizedBox.shrink(),
-            const SizedBox(height: 16),
+            const SizedBox(height: spaceBetweenLine12),
             Material(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(radiusTextField),
               elevation: 3.0,
               clipBehavior: Clip.hardEdge,
-              shadowColor: Colors.grey[200],
+              shadowColor: colorScheme.shadow,
               child: TextField(
                 controller: _retypePasswordController,
                 autocorrect: false,
                 obscureText: true,
                 decoration: InputDecoration(
-                  hintStyle: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w300,
-                    color: Colors.grey[400],
-                  ),
+                  hintStyle: const TextStyle(fontSize: 16, letterSpacing: 0.5),
                   hintText: 'Re-type password',
                   prefixIcon: Padding(
-                    padding: const EdgeInsets.only(left: 16, right: 12),
-                    child: Icon(Icons.key_rounded,
-                        color: colorScheme.primary, size: 32),
+                    padding: const EdgeInsets.only(left: 12, right: 16),
+                    child: Icon(
+                      Icons.key_rounded,
+                      color: colorScheme.primary,
+                      size: 24,
+                    ),
                   ),
-                  contentPadding: const EdgeInsets.symmetric(vertical: 20),
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
                   enabledBorder: _emptyRetypePassword || _passwordMismatch
                       ? OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: colorScheme.error, width: 2),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(16)),
+                          borderSide: BorderSide(color: colorScheme.error, width: 1),
+                          borderRadius: BorderRadius.circular(radiusTextField),
                         )
-                      : const OutlineInputBorder(
+                      : OutlineInputBorder(
                           borderSide:
-                              BorderSide(color: Colors.transparent, width: 2),
-                          borderRadius: BorderRadius.all(Radius.circular(16)),
+                              const BorderSide(color: Colors.transparent, width: 1),
+                          borderRadius: BorderRadius.circular(radiusTextField),
                         ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: colorScheme.primary, width: 2),
-                    borderRadius: const BorderRadius.all(Radius.circular(16)),
+                    borderSide: BorderSide(color: colorScheme.primary, width: 2),
+                    borderRadius: BorderRadius.circular(radiusTextField),
                   ),
                 ),
               ),
@@ -276,7 +266,7 @@ class _RegisterViewState extends State<RegisterView> {
                     ),
                   )
                 : const SizedBox.shrink(),
-            const SizedBox(height: 16),
+            const SizedBox(height: spaceBetweenLine15),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -294,9 +284,8 @@ class _RegisterViewState extends State<RegisterView> {
                     'I have read and accept Terms and Conditions',
                     style: TextStyle(
                         fontSize: 14,
-                        fontWeight: _termsAccepted
-                            ? FontWeight.bold
-                            : FontWeight.normal,
+                        fontWeight:
+                            _termsAccepted ? FontWeight.bold : FontWeight.normal,
                         color: _termsAccepted
                             ? colorScheme.primary
                             : colorScheme.onPrimaryContainer),
@@ -304,7 +293,7 @@ class _RegisterViewState extends State<RegisterView> {
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: spaceBetweenLine15),
             TextButton(
               onPressed: () async {
                 // Validate full name
@@ -357,8 +346,7 @@ class _RegisterViewState extends State<RegisterView> {
                   setState(() {
                     _emptyRetypePassword = false;
                   });
-                  if (_passwordController.text !=
-                      _retypePasswordController.text) {
+                  if (_passwordController.text != _retypePasswordController.text) {
                     setState(() {
                       _passwordMismatch = true;
                     });
@@ -374,8 +362,8 @@ class _RegisterViewState extends State<RegisterView> {
                     !_emptyRetypePassword &&
                     !_passwordMismatch) {
                   try {
-                    final credential = await FirebaseAuth.instance
-                        .createUserWithEmailAndPassword(
+                    final credential =
+                        await FirebaseAuth.instance.createUserWithEmailAndPassword(
                       email: _emailController.text.trim(),
                       password: _passwordController.text.trim(),
                     );
@@ -390,8 +378,7 @@ class _RegisterViewState extends State<RegisterView> {
                       //print('The password provided is too weak.');
                     } else if (e.code == 'email-already-in-use') {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content:
-                            Text("The account already exists for that email."),
+                        content: Text("The account already exists for that email."),
                       ));
                       //print('The account already exists for that email.');
                     }
@@ -414,39 +401,34 @@ class _RegisterViewState extends State<RegisterView> {
               },
               style: TextButton.styleFrom(
                   backgroundColor: colorScheme.primary,
-                  minimumSize: const Size.fromHeight(64),
+                  minimumSize: const Size.fromHeight(56),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16))),
-              child: const Text(
+              child: Text(
                 'Register',
                 style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: 0.1,
+                  color: colorScheme.onPrimary,
                 ),
               ),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: spaceBetweenLine15),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  'Have an account?',
-                  style: TextStyle(
-                      fontSize: 17, color: colorScheme.onPrimaryContainer),
-                ),
+                const Text('Have an account?'),
                 const SizedBox(width: 4),
-                InkWell(
-                  onTap: () {
+                TextButton(
+                  onPressed: () {
                     Navigator.pop(context);
                   },
                   child: Text(
-                    'Login',
+                    'Sign In',
                     style: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold,
-                        color: colorScheme.primary),
+                        fontWeight: FontWeight.bold, color: colorScheme.primary),
                   ),
                 ),
               ],
@@ -459,8 +441,7 @@ class _RegisterViewState extends State<RegisterView> {
 
   void onRegister() async {
     try {
-      final credential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: 'dgrayman1509@gmail.com',
         password: 'A_bc123',
       );

@@ -21,7 +21,7 @@ class _SignInViewState extends State<SignInView> {
 
   final _errors = {
     'Email empty': 'E-mail address cannot be empty',
-    'Wrong email format': 'E-mail address is not right format',
+    'Wrong email format': 'Invalid email format',
     'Password empty': 'Password cannot be empty'
   };
   var _emailError = '';
@@ -73,10 +73,11 @@ class _SignInViewState extends State<SignInView> {
                     letterSpacing: 0.5,
                   ),
                   hintText: 'Email',
-                  prefixIcon: const Padding(
-                    padding: EdgeInsets.only(left: 12, right: 16),
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.only(left: 12, right: 16),
                     child: Icon(
                       Icons.email_rounded,
+                      color: colorScheme.primary,
                       size: 24,
                     ),
                   ),
@@ -122,10 +123,11 @@ class _SignInViewState extends State<SignInView> {
                     letterSpacing: 0.5,
                   ),
                   hintText: 'Password',
-                  prefixIcon: const Padding(
-                    padding: EdgeInsets.only(left: 12, right: 16),
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.only(left: 12, right: 16),
                     child: Icon(
                       Icons.key_rounded,
+                      color: colorScheme.primary,
                       size: 24,
                     ),
                   ),
