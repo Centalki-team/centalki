@@ -1,21 +1,18 @@
 import 'package:centalki/base/define/colors.dart';
 import 'package:centalki/base/define/dimensions.dart';
-import 'package:centalki/base/define/size.dart';
-import 'package:centalki/src/features/authentication/verify_email.dart';
+import 'package:centalki/src/features/authentication/terms.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 
-import '../home/home_view.dart';
-
-class RegisterView extends StatefulWidget {
-  const RegisterView({Key? key}) : super(key: key);
+class SignUpView extends StatefulWidget {
+  const SignUpView({Key? key}) : super(key: key);
 
   @override
-  State<RegisterView> createState() => _RegisterViewState();
+  State<SignUpView> createState() => _SignUpViewState();
 }
 
-class _RegisterViewState extends State<RegisterView> {
+class _SignUpViewState extends State<SignUpView> {
   bool _emptyName = false;
   bool _emptyEmail = false;
   bool _emptyPassword = false;
@@ -279,18 +276,20 @@ class _RegisterViewState extends State<RegisterView> {
                     });
                   },
                 ),
-                Expanded(
-                  child: Text(
-                    'I have read and accept Terms and Conditions',
-                    style: TextStyle(
-                        fontSize: 14,
-                        fontWeight:
-                            _termsAccepted ? FontWeight.bold : FontWeight.normal,
-                        color: _termsAccepted
-                            ? colorScheme.primary
-                            : colorScheme.onPrimaryContainer),
-                  ),
-                ),
+                const Text('I accept', style: TextStyle(fontSize: 14)),
+                TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const TermsAndConditions(),
+                          ));
+                    },
+                    child: Text(
+                      'Terms and Conditions',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: colorScheme.primary),
+                    ))
               ],
             ),
             const SizedBox(height: spaceBetweenLine15),
@@ -376,11 +375,14 @@ class _RegisterViewState extends State<RegisterView> {
                         content: Text("The password provided is too weak."),
                       ));
                       //print('The password provided is too weak.');
-                    } else if (e.code == 'email-already-in-use') {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text("The account already exists for that email."),
-                      ));
-                      //print('The account already exists for that email.');
+                    } else {
+                      if (e.code == 'email-already-in-use') {
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content:
+                              Text("The account already exists for that email."),
+                        ));
+                        //print('The account already exists for that email.');
+                      }
                     }
                   } catch (e) {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -405,7 +407,7 @@ class _RegisterViewState extends State<RegisterView> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16))),
               child: Text(
-                'Register',
+                'Sign Up',
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w500,

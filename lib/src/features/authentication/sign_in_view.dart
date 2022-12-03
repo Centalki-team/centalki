@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 import '../../../base/define/colors.dart';
 import '../../../base/define/dimensions.dart';
-import 'register_view.dart';
+import 'sign_up_view.dart';
 
 class SignInView extends StatefulWidget {
   const SignInView({Key? key}) : super(key: key);
@@ -311,7 +311,7 @@ class _SignInViewState extends State<SignInView> {
                   onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const RegisterView(),
+                        builder: (context) => const SignUpView(),
                       )),
                   child: Text(
                     'Sign Up',
