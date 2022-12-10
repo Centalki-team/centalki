@@ -5,6 +5,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 
+import 'package:dio/dio.dart';
+
+class DioClient {
+  static final Dio _dio = Dio();
+
+  static Future<dynamic> assignRole(String idToken) {
+    return _dio.post("https://centalki-master.onrender.com/v1/auth/assign-role",
+        data: {"idToken": idToken, "role": "STUDENT"});
+  }
+}
+
 class SignUpView extends StatefulWidget {
   const SignUpView({Key? key}) : super(key: key);
 
@@ -76,16 +87,18 @@ class _SignUpViewState extends State<SignUpView> {
                       const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
                   enabledBorder: _emptyName
                       ? OutlineInputBorder(
-                          borderSide: BorderSide(color: colorScheme.error, width: 1),
+                          borderSide:
+                              BorderSide(color: colorScheme.error, width: 1),
                           borderRadius: BorderRadius.circular(radiusTextField),
                         )
                       : OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: Colors.transparent, width: 1),
+                          borderSide: const BorderSide(
+                              color: Colors.transparent, width: 1),
                           borderRadius: BorderRadius.circular(radiusTextField),
                         ),
                   focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: colorScheme.primary, width: 2),
+                      borderSide:
+                          BorderSide(color: colorScheme.primary, width: 2),
                       borderRadius: BorderRadius.circular(radiusTextField)),
                 ),
               ),
@@ -124,16 +137,18 @@ class _SignUpViewState extends State<SignUpView> {
                       const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
                   enabledBorder: _emptyEmail || _invalidEmail
                       ? OutlineInputBorder(
-                          borderSide: BorderSide(color: colorScheme.error, width: 1),
+                          borderSide:
+                              BorderSide(color: colorScheme.error, width: 1),
                           borderRadius: BorderRadius.circular(radiusTextField),
                         )
                       : OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: Colors.transparent, width: 1),
+                          borderSide: const BorderSide(
+                              color: Colors.transparent, width: 1),
                           borderRadius: BorderRadius.circular(radiusTextField),
                         ),
                   focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: colorScheme.primary, width: 2),
+                      borderSide:
+                          BorderSide(color: colorScheme.primary, width: 2),
                       borderRadius: BorderRadius.circular(radiusTextField)),
                 ),
               ),
@@ -181,16 +196,18 @@ class _SignUpViewState extends State<SignUpView> {
                       const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
                   enabledBorder: _emptyPassword
                       ? OutlineInputBorder(
-                          borderSide: BorderSide(color: colorScheme.error, width: 1),
+                          borderSide:
+                              BorderSide(color: colorScheme.error, width: 1),
                           borderRadius: BorderRadius.circular(radiusTextField),
                         )
                       : OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: Colors.transparent, width: 1),
+                          borderSide: const BorderSide(
+                              color: Colors.transparent, width: 1),
                           borderRadius: BorderRadius.circular(radiusTextField),
                         ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: colorScheme.primary, width: 2),
+                    borderSide:
+                        BorderSide(color: colorScheme.primary, width: 2),
                     borderRadius: BorderRadius.circular(radiusTextField),
                   ),
                 ),
@@ -230,16 +247,18 @@ class _SignUpViewState extends State<SignUpView> {
                       const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
                   enabledBorder: _emptyRetypePassword || _passwordMismatch
                       ? OutlineInputBorder(
-                          borderSide: BorderSide(color: colorScheme.error, width: 1),
+                          borderSide:
+                              BorderSide(color: colorScheme.error, width: 1),
                           borderRadius: BorderRadius.circular(radiusTextField),
                         )
                       : OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: Colors.transparent, width: 1),
+                          borderSide: const BorderSide(
+                              color: Colors.transparent, width: 1),
                           borderRadius: BorderRadius.circular(radiusTextField),
                         ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: colorScheme.primary, width: 2),
+                    borderSide:
+                        BorderSide(color: colorScheme.primary, width: 2),
                     borderRadius: BorderRadius.circular(radiusTextField),
                   ),
                 ),
@@ -288,7 +307,8 @@ class _SignUpViewState extends State<SignUpView> {
                     child: Text(
                       'Terms and Conditions',
                       style: TextStyle(
-                          fontWeight: FontWeight.bold, color: colorScheme.primary),
+                          fontWeight: FontWeight.bold,
+                          color: colorScheme.primary),
                     ))
               ],
             ),
@@ -345,7 +365,8 @@ class _SignUpViewState extends State<SignUpView> {
                   setState(() {
                     _emptyRetypePassword = false;
                   });
-                  if (_passwordController.text != _retypePasswordController.text) {
+                  if (_passwordController.text !=
+                      _retypePasswordController.text) {
                     setState(() {
                       _passwordMismatch = true;
                     });
@@ -361,11 +382,14 @@ class _SignUpViewState extends State<SignUpView> {
                     !_emptyRetypePassword &&
                     !_passwordMismatch) {
                   try {
-                    final credential =
-                        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                    final credential = await FirebaseAuth.instance
+                        .createUserWithEmailAndPassword(
                       email: _emailController.text.trim(),
                       password: _passwordController.text.trim(),
                     );
+                    credential.user?.getIdToken().then((idToken) {
+                      DioClient.assignRole(idToken);
+                    });
                     if (mounted) {
                       Navigator.pop(context);
                     }
@@ -377,9 +401,10 @@ class _SignUpViewState extends State<SignUpView> {
                       //print('The password provided is too weak.');
                     } else {
                       if (e.code == 'email-already-in-use') {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          content:
-                              Text("The account already exists for that email."),
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text(
+                              "The account already exists for that email."),
                         ));
                         //print('The account already exists for that email.');
                       }
@@ -430,7 +455,8 @@ class _SignUpViewState extends State<SignUpView> {
                   child: Text(
                     'Sign In',
                     style: TextStyle(
-                        fontWeight: FontWeight.bold, color: colorScheme.primary),
+                        fontWeight: FontWeight.bold,
+                        color: colorScheme.primary),
                   ),
                 ),
               ],
@@ -443,7 +469,8 @@ class _SignUpViewState extends State<SignUpView> {
 
   void onRegister() async {
     try {
-      final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      final credential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: 'dgrayman1509@gmail.com',
         password: 'A_bc123',
       );
