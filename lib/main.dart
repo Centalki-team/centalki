@@ -18,8 +18,11 @@ void main(List<String> args) async {
   //     child: const MyApp(),
   //   ),
   // );
-  runApp(const MaterialApp(
-    home: MyWidget(),
+  runApp(MaterialApp(
+    theme: ThemeData(
+      useMaterial3: true,
+    ),
+    home: const MyWidget(),
   ));
 }
 
