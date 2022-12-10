@@ -33,34 +33,12 @@ class QuestionCard extends StatelessWidget {
             ),
           ),
           const SizedBox(width: smallSpacing10),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'This is question number one',
-                  style: TextStyle(
-                    fontSize: titleMediumSize,
-                    fontWeight: titleMediumWeight,
-                    color: colorScheme.onPrimaryContainer,
-                  ),
-                ),
-                const SizedBox(height: smallSpacing6),
-                Text(
-                  ' - This is an answer for question number one',
-                  softWrap: true,
-                  style: TextStyle(
-                    color: colorScheme.onPrimaryContainer,
-                  ),
-                ),
-                Text(
-                  ' - This is an answer for question number one',
-                  softWrap: true,
-                  style: TextStyle(
-                    color: colorScheme.onPrimaryContainer,
-                  ),
-                ),
-              ],
+          Text(
+            'This is question number one',
+            style: TextStyle(
+              fontSize: titleMediumSize,
+              fontWeight: titleMediumWeight,
+              color: colorScheme.onPrimaryContainer,
             ),
           ),
         ],
