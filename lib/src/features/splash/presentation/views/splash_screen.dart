@@ -6,13 +6,12 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-        child: Image.asset(
-          'assets/logo/centalki.png',
-          width: 160,
-          height: 160,
-        ),
+      backgroundColor: Colors.black,
+      body: Image.asset(
+        'assets/logo/centalki-banner.png',
+        width: double.maxFinite,
+        height: double.maxFinite,
+        fit: BoxFit.fitHeight,
       ),
     );
   }
