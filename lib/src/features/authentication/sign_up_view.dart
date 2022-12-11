@@ -5,22 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 
-import 'package:dio/dio.dart';
-
-class DioClient {
-  static final Dio _dio = Dio();
-
-  static Future<dynamic> assignRole(String idToken) {
-    return _dio.post("https://centalki-master.onrender.com/v1/auth/assign-role",
-        data: {"idToken": idToken, "role": "STUDENT"});
-  }
-
-  static Future<dynamic> validateRole(String? idToken) {
-    return _dio.post(
-        "https://centalki-master.onrender.com/v1/auth/validate-role",
-        data: {"idToken": idToken, "role": "STUDENT"});
-  }
-}
+import '../../../base/temp_dio/dio_client.dart';
 
 class SignUpView extends StatefulWidget {
   const SignUpView({Key? key}) : super(key: key);

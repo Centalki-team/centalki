@@ -1,10 +1,19 @@
 import 'package:centalki/base/define/colors.dart';
 import 'package:centalki/base/define/dimensions.dart';
 import 'package:centalki/base/define/size.dart';
+import 'package:centalki/src/features/topic/domain/entities/topic_item_entity.dart';
+import 'package:centalki/src/features/topic/presentation/views/topic_detail.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../gen/assets.gen.dart';
+
 class TopicCard extends StatelessWidget {
-  const TopicCard({Key? key}) : super(key: key);
+  const TopicCard({
+    Key? key,
+    required this.item,
+  }) : super(key: key);
+
+  final TopicItemEntity item;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +26,9 @@ class TopicCard extends StatelessWidget {
       child: Row(
         children: [
           Image.asset(
-            'assets/illustration/default-topic-image.png',
+            item.image != null || item.image!.isEmpty
+                ? Assets.images.tempAllTopic.path
+                : item.image!,
             width: 120,
             height: 120,
           ),
@@ -27,17 +38,17 @@ class TopicCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Topic Name',
-                    style: TextStyle(
+                  Text(
+                    item.topicName ?? '',
+                    style: const TextStyle(
                       fontSize: titleMediumSize,
                       fontWeight: titleMediumWeight,
                     ),
                   ),
                   const SizedBox(height: smallSpacing6),
-                  const Text(
-                    'Topic Category',
-                    style: TextStyle(
+                  Text(
+                    item.topicCategory ?? '',
+                    style: const TextStyle(
                       fontSize: bodySmallSize,
                       fontWeight: bodySmallWeight,
                     ),
@@ -48,7 +59,10 @@ class TopicCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () =>
+                            Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const TopicDetail(),
+                        )),
                         child: Row(
                           children: [
                             Icon(
@@ -58,7 +72,7 @@ class TopicCard extends StatelessWidget {
                             ),
                             const SizedBox(width: smallSpacing6),
                             Text(
-                              'Outline',
+                              'Detail',
                               style: TextStyle(color: colorScheme.primary),
                             ),
                           ],
@@ -67,11 +81,10 @@ class TopicCard extends StatelessWidget {
                       const SizedBox(width: spaceBetweenLine12),
                       TextButton(
                         style: TextButton.styleFrom(
-                          backgroundColor: colorScheme.secondary,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(32),
-                          )
-                        ),
+                            backgroundColor: colorScheme.secondary,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(32),
+                            )),
                         onPressed: () {},
                         child: Text(
                           'Talk',
