@@ -14,6 +14,12 @@ class DioClient {
     return _dio.post("https://centalki-master.onrender.com/v1/auth/assign-role",
         data: {"idToken": idToken, "role": "STUDENT"});
   }
+
+  static Future<dynamic> validateRole(String? idToken) {
+    return _dio.post(
+        "https://centalki-master.onrender.com/v1/auth/validate-role",
+        data: {"idToken": idToken, "role": "STUDENT"});
+  }
 }
 
 class SignUpView extends StatefulWidget {

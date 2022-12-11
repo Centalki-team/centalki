@@ -1,6 +1,7 @@
 import 'package:centalki/src/features/authentication/forgot_password_view.dart';
 import 'package:centalki/src/features/authentication/verify_email.dart';
 import 'package:centalki/src/features/home/home_view.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -218,6 +219,10 @@ class _SignInViewState extends State<SignInView> {
                       email: email,
                       password: password,
                     );
+                    final idToken = await credential.user?.getIdToken();
+                    if (idToken != null) {
+                      await DioClient.validateRole(idToken);
+                    }
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'user-not-found') {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -228,6 +233,10 @@ class _SignInViewState extends State<SignInView> {
                         content: Text('Wrong password provided for that user.'),
                       ));
                     }
+                  } on DioError catch (_) {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text('Cannot verify role!'),
+                    ));
                   }
                 }
 
