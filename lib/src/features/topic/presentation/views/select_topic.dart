@@ -11,7 +11,26 @@ class SelectTopicView extends StatefulWidget {
   State<SelectTopicView> createState() => _SelectTopicViewState();
 }
 
-class _SelectTopicViewState extends State<SelectTopicView> {
+class _SelectTopicViewState extends State<SelectTopicView>
+    with SingleTickerProviderStateMixin {
+  late final TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(
+      length: 3,
+      vsync: this,
+      initialIndex: 0,
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _tabController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -19,7 +38,9 @@ class _SelectTopicViewState extends State<SelectTopicView> {
       child: Column(
         children: [
           TabBar(
+            controller: _tabController,
             isScrollable: true,
+            physics: const NeverScrollableScrollPhysics(),
             tabs: [
               Tab(
                 child: Text(
@@ -42,22 +63,26 @@ class _SelectTopicViewState extends State<SelectTopicView> {
             ],
           ),
           Expanded(
-            child: TabBarView(children: [
-              Padding(
-                padding: const EdgeInsets.all(screenAutoPadding16),
-                child: ListView.separated(
-                  itemCount: 10,
-                  separatorBuilder: (context, index) => const SizedBox(height: smallSpacing8),
-                  itemBuilder: (context, index) => const TopicCard(),
-                ),
-              ),
-              const Center(
-                child: Text('Intermediate Tab'),
-              ),
-              const Center(
-                child: Text('Upper-Intermediate Tab'),
-              ),
-            ]),
+            child: TabBarView(
+                controller: _tabController,
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(screenAutoPadding16),
+                    child: ListView.separated(
+                      itemCount: 10,
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(height: smallSpacing8),
+                      itemBuilder: (context, index) => const TopicCard(),
+                    ),
+                  ),
+                  const Center(
+                    child: Text('Intermediate Tab'),
+                  ),
+                  const Center(
+                    child: Text('Upper-Intermediate Tab'),
+                  ),
+                ]),
           )
         ],
       ),

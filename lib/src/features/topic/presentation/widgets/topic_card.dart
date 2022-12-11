@@ -3,6 +3,8 @@ import 'package:centalki/base/define/dimensions.dart';
 import 'package:centalki/base/define/size.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../gen/assets.gen.dart';
+
 class TopicCard extends StatelessWidget {
   const TopicCard({Key? key}) : super(key: key);
 
@@ -17,7 +19,7 @@ class TopicCard extends StatelessWidget {
       child: Row(
         children: [
           Image.asset(
-            'assets/illustration/default-topic-image.png',
+            Assets.images.tempAllTopic.path,
             width: 120,
             height: 120,
           ),
@@ -67,11 +69,10 @@ class TopicCard extends StatelessWidget {
                       const SizedBox(width: spaceBetweenLine12),
                       TextButton(
                         style: TextButton.styleFrom(
-                          backgroundColor: colorScheme.secondary,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(32),
-                          )
-                        ),
+                            backgroundColor: colorScheme.secondary,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(32),
+                            )),
                         onPressed: () {},
                         child: Text(
                           'Talk',

@@ -1,11 +1,11 @@
 import 'package:centalki/src/features/authentication/sign_in_view.dart';
 import 'package:centalki/src/features/authentication/verify_email.dart';
-import 'package:centalki/src/features/home/home_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'firebase_options.dart';
+import 'src/features/home/presentation/views/home_page.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -78,7 +78,7 @@ class _MyWidgetState extends State<MyWidget> {
       case "not_email_verified":
         return const VerifyEmailView();
       case "success":
-        return const HomeView();
+        return const HomePage();
       default:
         return const Center(
           child: Text("Splash screen here!"),
