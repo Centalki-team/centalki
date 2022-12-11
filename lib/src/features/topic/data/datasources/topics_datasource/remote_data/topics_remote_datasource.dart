@@ -1,0 +1,3 @@
+class TopicRemoteDatasource {
+  const TopicRemoteDatasource();
+}

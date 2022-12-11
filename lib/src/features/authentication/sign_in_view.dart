@@ -1,13 +1,12 @@
-import 'package:centalki/src/features/authentication/forgot_password_view.dart';
-import 'package:centalki/src/features/authentication/verify_email.dart';
-import 'package:centalki/src/features/home/home_view.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../../base/define/colors.dart';
 import '../../../base/define/dimensions.dart';
+import '../../../base/temp_dio/dio_client.dart';
 import 'sign_up_view.dart';
+import 'forgot_password_view.dart';
 
 class SignInView extends StatefulWidget {
   const SignInView({Key? key}) : super(key: key);

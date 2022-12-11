@@ -1,4 +1,4 @@
-import 'package:centalki/src/features/home/home_view.dart';
+import 'package:centalki/src/features/home/presentation/views/home_view.dart';
 import 'package:centalki/src/features/home/presentation/blocs/home_bloc/home_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

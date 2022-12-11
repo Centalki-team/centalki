@@ -1,16 +1,13 @@
-import 'package:centalki/base/define/colors.dart';
-import 'package:centalki/base/define/common_txt_style.dart';
-import 'package:centalki/base/define/dimensions.dart';
-import 'package:centalki/base/widgets/internal_page.dart';
-import 'package:centalki/src/features/topic/presentation/views/select_topic.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../base/define/app_text.dart';
-import '../../../base/widgets/bottom_bar/custom_bottom_nav.dart';
-import '../../../gen/assets.gen.dart';
-import 'presentation/blocs/home_bloc/home_bloc.dart';
+import '../../../../../base/define/common_txt_style.dart';
+import '../../../../../base/widgets/internal_page.dart';
+import '../../../topic/presentation/views/select_topic_page.dart';
+import '../../../../../base/define/app_text.dart';
+import '../../../../../base/widgets/bottom_bar/custom_bottom_nav.dart';
+import '../../../../../gen/assets.gen.dart';
+import '../blocs/home_bloc/home_bloc.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -85,7 +82,7 @@ class _HomeViewState extends State<HomeView>
                         physics: const NeverScrollableScrollPhysics(),
                         controller: _tabController,
                         children: const [
-                          SelectTopicView(),
+                          SelectTopicPage(),
                           InternalPage(
                             title: 'Account Page',
                           ),

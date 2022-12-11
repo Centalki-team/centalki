@@ -1,7 +1,11 @@
 import 'package:centalki/base/define/colors.dart';
 import 'package:centalki/base/define/dimensions.dart';
+import 'package:centalki/base/temp_dio/dio_client.dart';
+import 'package:centalki/src/features/topic/domain/entities/topic_item_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../blocs/topics_bloc/topics_bloc.dart';
 import '../widgets/topic_card.dart';
 
 class SelectTopicView extends StatefulWidget {
@@ -67,14 +71,28 @@ class _SelectTopicViewState extends State<SelectTopicView>
                 controller: _tabController,
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(screenAutoPadding16),
-                    child: ListView.separated(
-                      itemCount: 10,
-                      separatorBuilder: (context, index) =>
-                          const SizedBox(height: smallSpacing8),
-                      itemBuilder: (context, index) => const TopicCard(),
-                    ),
+                  BlocBuilder<TopicsBloc, TopicsState>(
+                    builder: (context, state) {
+                      if (state is TopicsLoadDoneState) {
+                        return Padding(
+                          padding: const EdgeInsets.all(screenAutoPadding16),
+                          child: ListView.separated(
+                            itemCount: state.topics.topics!.length,
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(height: smallSpacing8),
+                            itemBuilder: (context, index) {
+                              print(state.topics.topics![index].topicName);
+                              return TopicCard(
+                                item: state.topics.topics![index],
+                              );
+                            },
+                          ),
+                        );
+                      }
+                      return const Center(
+                        child: Text('No data!'),
+                      );
+                    },
                   ),
                   const Center(
                     child: Text('Intermediate Tab'),
