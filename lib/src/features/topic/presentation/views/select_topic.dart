@@ -90,7 +90,7 @@ class _SelectTopicViewState extends State<SelectTopicView>
                         );
                       }
                       return const Center(
-                        child: Text('No data!'),
+                        child: Text('Loading...'),
                       );
                     },
                   ),
