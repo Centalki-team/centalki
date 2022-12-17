@@ -21,8 +21,7 @@ class TopicDetailBloc extends Bloc<TopicDetailEvent, TopicDetailState> {
   }
 
   void _onLoad(TopicDetailLoadEvent event, emit) async {
-    final topicDetail = await DioClient.getTopicDetailById(topicId);
-
-    emit(TopicDetailLoadDoneState(topicDetail: topicDetail));
+    // final topicDetail = await DioClient.getTopicDetailById(topicId);
+    // emit(TopicDetailLoadDoneState(topicDetail: topicDetail));
   }
 }
