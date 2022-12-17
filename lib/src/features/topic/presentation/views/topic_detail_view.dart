@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 import '../widgets/question_card.dart';
 import '../widgets/vocab_card.dart';
 
-class TopicDetail extends StatefulWidget {
-  const TopicDetail({Key? key}) : super(key: key);
+class TopicDetailView extends StatefulWidget {
+  const TopicDetailView({Key? key}) : super(key: key);
 
   @override
-  State<TopicDetail> createState() => _TopicDetailState();
+  State<TopicDetailView> createState() => _TopicDetailViewState();
 }
 
-class _TopicDetailState extends State<TopicDetail> {
+class _TopicDetailViewState extends State<TopicDetailView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

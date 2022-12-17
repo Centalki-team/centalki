@@ -62,7 +62,7 @@ class TopicCard extends StatelessWidget {
                       TextButton(
                         onPressed: () => Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const TopicDetail(),
+                            builder: (context) => const TopicDetailView(),
                           ),
                         ),
                         child: Row(
