@@ -2,7 +2,7 @@ import 'package:centalki/base/define/colors.dart';
 import 'package:centalki/base/define/dimensions.dart';
 import 'package:centalki/base/define/size.dart';
 import 'package:centalki/src/features/topic/domain/entities/topic_item_entity.dart';
-import 'package:centalki/src/features/topic/presentation/views/topic_detail.dart';
+import 'package:centalki/src/features/topic/presentation/views/topic_detail_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../gen/assets.gen.dart';
@@ -20,18 +20,19 @@ class TopicCard extends StatelessWidget {
     return Card(
       elevation: 1,
       clipBehavior: Clip.hardEdge,
+      surfaceTintColor: Colors.blue,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(radiusTextField),
+        borderRadius: BorderRadius.circular(24),
       ),
       child: Row(
         children: [
           Image.asset(
-            item.image != null || item.image!.isEmpty
-                ? Assets.images.tempAllTopic.path
-                : item.image!,
-            width: 120,
-            height: 120,
+            item.image != null || item.image!.isEmpty ? Assets.images.tempAllTopic.path : item.image!,
+            width: 128,
+            height: 128,
           ),
+          // Image.asset('assets/images/temp_all_topic.png', width: 128, height: 128),
+          // Container(width: 128, height: 128, color: Colors.redAccent),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(8, 8, 16, 8),
@@ -59,10 +60,11 @@ class TopicCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       TextButton(
-                        onPressed: () =>
-                            Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const TopicDetail(),
-                        )),
+                        onPressed: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const TopicDetail(),
+                          ),
+                        ),
                         child: Row(
                           children: [
                             Icon(

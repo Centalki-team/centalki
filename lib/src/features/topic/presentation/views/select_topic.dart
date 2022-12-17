@@ -15,8 +15,7 @@ class SelectTopicView extends StatefulWidget {
   State<SelectTopicView> createState() => _SelectTopicViewState();
 }
 
-class _SelectTopicViewState extends State<SelectTopicView>
-    with SingleTickerProviderStateMixin {
+class _SelectTopicViewState extends State<SelectTopicView> with SingleTickerProviderStateMixin {
   late final TabController _tabController;
 
   @override
@@ -44,7 +43,7 @@ class _SelectTopicViewState extends State<SelectTopicView>
           TabBar(
             controller: _tabController,
             isScrollable: true,
-            physics: const NeverScrollableScrollPhysics(),
+            // physics: const NeverScrollableScrollPhysics(),
             tabs: [
               Tab(
                 child: Text(
@@ -68,39 +67,52 @@ class _SelectTopicViewState extends State<SelectTopicView>
           ),
           Expanded(
             child: TabBarView(
-                controller: _tabController,
-                physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  BlocBuilder<TopicsBloc, TopicsState>(
-                    builder: (context, state) {
-                      if (state is TopicsLoadDoneState) {
-                        return Padding(
-                          padding: const EdgeInsets.all(screenAutoPadding16),
-                          child: ListView.separated(
-                            itemCount: state.topics.topics!.length,
-                            separatorBuilder: (context, index) =>
-                                const SizedBox(height: smallSpacing8),
-                            itemBuilder: (context, index) {
-                              print(state.topics.topics![index].topicName);
-                              return TopicCard(
-                                item: state.topics.topics![index],
-                              );
-                            },
-                          ),
-                        );
-                      }
-                      return const Center(
-                        child: Text('Loading...'),
+              controller: _tabController,
+              physics: const NeverScrollableScrollPhysics(),
+              children: [
+                // ListView.separated(
+                //     itemBuilder: (context, index) => Container(
+                //           width: double.maxFinite,
+                //           height: 128,
+                //           color: Colors.greenAccent,
+                //         ),
+                //     separatorBuilder: (context, index) => const SizedBox(height: 8),
+                //     itemCount: 5),
+                // Container(color: Colors.red,),
+                BlocBuilder<TopicsBloc, TopicsState>(
+                  builder: (context, state) {
+                    if (state is TopicsLoadDoneState) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: screenAutoPadding16),
+                        child: ListView.separated(
+                          itemCount: state.topics.topics!.length,
+                          separatorBuilder: (context, index) => const SizedBox(height: smallSpacing8),
+                          itemBuilder: (context, index) {
+                            print(state.topics.topics![index].topicName);
+                            return TopicCard(
+                              item: state.topics.topics![index],
+                            );
+                          },
+                        ),
                       );
-                    },
-                  ),
-                  const Center(
-                    child: Text('Intermediate Tab'),
-                  ),
-                  const Center(
-                    child: Text('Upper-Intermediate Tab'),
-                  ),
-                ]),
+                    }
+                    // return ListView.separated(
+                    //     itemBuilder: (context, index) => Container(width: double.maxFinite, height: 128, color: Colors.greenAccent,),
+                    //     separatorBuilder: (context, index) => const SizedBox(height: 8),
+                    //     itemCount: 5);
+                    return const Center(
+                      child: Text('Loading...'),
+                    );
+                  },
+                ),
+                const Center(
+                  child: Text('Intermediate Tab'),
+                ),
+                const Center(
+                  child: Text('Upper-Intermediate Tab'),
+                ),
+              ],
+            ),
           )
         ],
       ),
