@@ -1,5 +1,6 @@
 import 'package:centalki/base/define/colors.dart';
 import 'package:centalki/base/define/dimensions.dart';
+import 'package:centalki/base/define/manager/loading_manager.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -93,8 +94,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                           BorderSide(color: colorScheme.error, width: 1),
                       borderRadius: BorderRadius.circular(radiusTextField),
                     ),
-                    errorText:
-                        _emailError == '' ? null : _errors[_emailError],
+                    errorText: _emailError == '' ? null : _errors[_emailError],
                   ),
                 ),
               ),
@@ -120,9 +120,11 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                   }
 
                   if (!(email.isEmpty || email == '')) {
+                    LoadingManager.setLoading(true, context);
                     await FirebaseAuth.instance
                         .sendPasswordResetEmail(email: email);
                     if (mounted) {
+                      LoadingManager.setLoading(false, context);
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text(
                               "Reser password link was sent to email address: $email!\nPlease do not share to anybody!")));

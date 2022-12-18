@@ -1,5 +1,6 @@
 import 'package:centalki/base/define/colors.dart';
 import 'package:centalki/base/define/dimensions.dart';
+import 'package:centalki/base/define/manager/loading_manager.dart';
 import 'package:centalki/src/features/authentication/terms.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -372,6 +373,7 @@ class _SignUpViewState extends State<SignUpView> {
                     !_emptyPassword &&
                     !_emptyRetypePassword &&
                     !_passwordMismatch) {
+                  LoadingManager.setLoading(true, context);
                   try {
                     final credential = await FirebaseAuth.instance
                         .createUserWithEmailAndPassword(
@@ -384,7 +386,10 @@ class _SignUpViewState extends State<SignUpView> {
                     if (mounted) {
                       Navigator.pop(context);
                     }
+                    // ignore: use_build_context_synchronously
+                    LoadingManager.setLoading(false, context);
                   } on FirebaseAuthException catch (e) {
+                    LoadingManager.setLoading(false, context);
                     if (e.code == 'weak-password') {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text("The password provided is too weak."),
@@ -401,6 +406,7 @@ class _SignUpViewState extends State<SignUpView> {
                       }
                     }
                   } catch (e) {
+                    LoadingManager.setLoading(false, context);
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text(e.toString()),
                     ));

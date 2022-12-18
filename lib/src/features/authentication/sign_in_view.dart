@@ -1,3 +1,4 @@
+import 'package:centalki/base/define/manager/loading_manager.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -212,6 +213,7 @@ class _SignInViewState extends State<SignInView> {
                 if (!(email.isEmpty || email == '') &&
                     emailRegExp.hasMatch(email) &&
                     !(password.isEmpty || password == '')) {
+                  LoadingManager.setLoading(true, context);
                   try {
                     final credential =
                         await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -222,7 +224,10 @@ class _SignInViewState extends State<SignInView> {
                     if (idToken != null) {
                       await DioClient.validateRole(idToken);
                     }
+                    // ignore: use_build_context_synchronously
+                    LoadingManager.setLoading(false, context);
                   } on FirebaseAuthException catch (e) {
+                    LoadingManager.setLoading(false, context);
                     if (e.code == 'user-not-found') {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text("No user found for that email!"),
@@ -233,6 +238,7 @@ class _SignInViewState extends State<SignInView> {
                       ));
                     }
                   } on DioError catch (_) {
+                    LoadingManager.setLoading(false, context);
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text('Cannot verify role!'),
                     ));
