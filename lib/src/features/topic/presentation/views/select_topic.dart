@@ -1,7 +1,10 @@
 import 'package:centalki/base/define/colors.dart';
 import 'package:centalki/base/define/dimensions.dart';
 import 'package:centalki/base/temp_dio/dio_client.dart';
+import 'package:centalki/base/widgets/internal_page.dart';
+import 'package:centalki/src/features/home/presentation/blocs/home_bloc/home_bloc.dart';
 import 'package:centalki/src/features/topic/domain/entities/topic_item_entity.dart';
+import 'package:centalki/src/features/topic/presentation/blocs/topic_level_bloc/topic_level_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,8 +18,7 @@ class SelectTopicView extends StatefulWidget {
   State<SelectTopicView> createState() => _SelectTopicViewState();
 }
 
-class _SelectTopicViewState extends State<SelectTopicView>
-    with SingleTickerProviderStateMixin {
+class _SelectTopicViewState extends State<SelectTopicView> with SingleTickerProviderStateMixin {
   late final TabController _tabController;
 
   @override
@@ -37,6 +39,93 @@ class _SelectTopicViewState extends State<SelectTopicView>
 
   @override
   Widget build(BuildContext context) {
+    return BlocListener<TopicLevelBloc, TopicLevelState>(
+      listener: (context, state) {
+        if (state is TopicLevelChangeTabState) {
+          _tabController.index = state.currentTab;
+        }
+      },
+      listenWhen: (previous, current) =>
+          previous is TopicLevelChangeTabState &&
+          current is TopicLevelChangeTabState &&
+          previous.currentTab != current.currentTab,
+      child: Column(children: [
+        TabBar(
+          controller: _tabController,
+          isScrollable: true,
+          // physics: const NeverScrollableScrollPhysics(),
+          onTap: (index) {
+            context.read<TopicLevelBloc>().add(TopicLevelChangeTabEvent(desTab: index));
+          },
+          tabs: [
+            Tab(
+              child: Text(
+                'Pre-Intermediate',
+                style: TextStyle(color: colorScheme.primary),
+              ),
+            ),
+            Tab(
+              child: Text(
+                'Intermediate',
+                style: TextStyle(color: colorScheme.primary),
+              ),
+            ),
+            Tab(
+              child: Text(
+                'Upper-Intermediate',
+                style: TextStyle(color: colorScheme.primary),
+              ),
+            ),
+          ],
+        ),
+        BlocBuilder<TopicLevelBloc, TopicLevelState>(
+          buildWhen: (previous, current) => current is TopicLevelChangeTabState,
+          builder: (context, state) {
+            if (state is TopicLevelChangeTabState) {
+              return Expanded(
+                child: TabBarView(
+                  controller: _tabController,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                    BlocBuilder<TopicsBloc, TopicsState>(
+                      builder: (context, state) {
+                        if (state is TopicsLoadDoneState) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: screenAutoPadding16),
+                            child: ListView.separated(
+                              itemCount: state.topics.topics!.length,
+                              separatorBuilder: (context, index) => const SizedBox(height: smallSpacing8),
+                              itemBuilder: (context, index) {
+                                print(state.topics.topics![index].topicName);
+                                return TopicCard(
+                                  item: state.topics.topics![index],
+                                );
+                              },
+                            ),
+                          );
+                        }
+                        return const Center(
+                          child: Text('Loading...'),
+                        );
+                      },
+                    ),
+                    const Center(
+                      child: Text('Intermediate Tab'),
+                    ),
+                    const Center(
+                      child: Text('Upper-Intermediate Tab'),
+                    ),
+                  ],
+                ),
+              );
+            }
+
+            return const InternalPage(title: 'Select Topic Level');
+          },
+        ),
+      ]),
+    );
+
     return DefaultTabController(
       length: 3,
       child: Column(
@@ -44,7 +133,7 @@ class _SelectTopicViewState extends State<SelectTopicView>
           TabBar(
             controller: _tabController,
             isScrollable: true,
-            physics: const NeverScrollableScrollPhysics(),
+            // physics: const NeverScrollableScrollPhysics(),
             tabs: [
               Tab(
                 child: Text(
@@ -68,39 +157,38 @@ class _SelectTopicViewState extends State<SelectTopicView>
           ),
           Expanded(
             child: TabBarView(
-                controller: _tabController,
-                physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  BlocBuilder<TopicsBloc, TopicsState>(
-                    builder: (context, state) {
-                      if (state is TopicsLoadDoneState) {
-                        return Padding(
-                          padding: const EdgeInsets.all(screenAutoPadding16),
-                          child: ListView.separated(
-                            itemCount: state.topics.topics!.length,
-                            separatorBuilder: (context, index) =>
-                                const SizedBox(height: smallSpacing8),
-                            itemBuilder: (context, index) {
-                              print(state.topics.topics![index].topicName);
-                              return TopicCard(
-                                item: state.topics.topics![index],
-                              );
-                            },
-                          ),
-                        );
-                      }
-                      return const Center(
-                        child: Text('Loading...'),
+              controller: _tabController,
+              physics: const NeverScrollableScrollPhysics(),
+              children: [
+                BlocBuilder<TopicsBloc, TopicsState>(
+                  builder: (context, state) {
+                    if (state is TopicsLoadDoneState) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: screenAutoPadding16),
+                        child: ListView.separated(
+                          itemCount: state.topics.topics!.length,
+                          separatorBuilder: (context, index) => const SizedBox(height: smallSpacing8),
+                          itemBuilder: (context, index) {
+                            return TopicCard(
+                              item: state.topics.topics![index],
+                            );
+                          },
+                        ),
                       );
-                    },
-                  ),
-                  const Center(
-                    child: Text('Intermediate Tab'),
-                  ),
-                  const Center(
-                    child: Text('Upper-Intermediate Tab'),
-                  ),
-                ]),
+                    }
+                    return const Center(
+                      child: Text('Loading...'),
+                    );
+                  },
+                ),
+                const Center(
+                  child: Text('Intermediate Tab'),
+                ),
+                const Center(
+                  child: Text('Upper-Intermediate Tab'),
+                ),
+              ],
+            ),
           )
         ],
       ),

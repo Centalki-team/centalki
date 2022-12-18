@@ -16,8 +16,7 @@ class HomeView extends StatefulWidget {
   State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView>
-    with SingleTickerProviderStateMixin {
+class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin {
   late final TabController _tabController;
   final bottomNavList = <BottomIndicatorNavigationBarItem>[];
 
@@ -28,7 +27,7 @@ class _HomeViewState extends State<HomeView>
       length: 3,
       initialIndex: 0,
       vsync: this,
-      animationDuration: Duration.zero,
+      animationDuration: const Duration(milliseconds: 500),
     );
   }
 
@@ -47,75 +46,67 @@ class _HomeViewState extends State<HomeView>
         }
       },
       listenWhen: (previous, current) =>
-          previous is HomeChangeTabState &&
-          current is HomeChangeTabState &&
-          previous.currentTab != current.currentTab,
+          previous is HomeChangeTabState && current is HomeChangeTabState && previous.currentTab != current.currentTab,
       child: BlocBuilder<HomeBloc, HomeState>(
         buildWhen: (previous, current) => current is HomeChangeTabState,
         builder: (context, state) {
           if (state is HomeChangeTabState) {
-            return SafeArea(
-              child: Scaffold(
-                body: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20.0,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            AppText.appName,
-                            style: CommonTxtStyle.t36XMedium,
-                          ),
-                          Image.asset(
-                            Assets.icon.notifications.path,
-                            width: 32,
-                            height: 32,
-                          ),
-                        ],
-                      ),
+            return Scaffold(
+              body: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(20.0, MediaQuery.of(context).padding.top, 20.0, 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          AppText.appName,
+                          style: CommonTxtStyle.t36XMedium,
+                        ),
+                        Image.asset(
+                          Assets.icon.notifications.path,
+                          width: 32,
+                          height: 32,
+                        ),
+                      ],
                     ),
-                    Expanded(
-                      child: TabBarView(
-                        physics: const NeverScrollableScrollPhysics(),
-                        controller: _tabController,
-                        children: const [
-                          SelectTopicPage(),
-                          InternalPage(
-                            title: 'Account Page',
-                          ),
-                          InternalPage(
-                            title: 'Settings Page',
-                          ),
-                        ],
-                      ),
+                  ),
+                  Expanded(
+                    child: TabBarView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      controller: _tabController,
+                      children: const [
+                        SelectTopicPage(),
+                        InternalPage(
+                          title: 'Account Page',
+                        ),
+                        InternalPage(
+                          title: 'Settings Page',
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                bottomNavigationBar: BottomIndicatorBar(
-                  currentIndex: state.currentTab,
-                  onTap: (index) {
-                    context
-                        .read<HomeBloc>()
-                        .add(HomeChangeTabEvent(desTab: index));
-                  },
-                  items: [
-                    BottomIndicatorNavigationBarItem(
-                      iconName: Assets.icon.list.path,
-                      title: AppText.topic,
-                    ),
-                    BottomIndicatorNavigationBarItem(
-                      iconName: Assets.icon.account.path,
-                      title: AppText.account,
-                    ),
-                    BottomIndicatorNavigationBarItem(
-                      iconName: Assets.icon.settings.path,
-                      title: AppText.settings,
-                    ),
-                  ],
-                ),
+                  ),
+                ],
+              ),
+              bottomNavigationBar: BottomIndicatorBar(
+                currentIndex: state.currentTab,
+                onTap: (index) {
+                  context.read<HomeBloc>().add(HomeChangeTabEvent(desTab: index));
+                },
+                items: [
+                  BottomIndicatorNavigationBarItem(
+                    iconName: Assets.icon.list.path,
+                    title: AppText.topic,
+                  ),
+                  BottomIndicatorNavigationBarItem(
+                    iconName: Assets.icon.account.path,
+                    title: AppText.account,
+                  ),
+                  BottomIndicatorNavigationBarItem(
+                    iconName: Assets.icon.settings.path,
+                    title: AppText.settings,
+                  ),
+                ],
               ),
             );
           }

@@ -19,6 +19,7 @@ void main(List<String> args) async {
   //   ),
   // );
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     theme: ThemeData(
       useMaterial3: true,
     ),
