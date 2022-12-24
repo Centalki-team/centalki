@@ -9,11 +9,13 @@ class AppElevatedButton extends StatefulWidget {
     this.onPressed,
     required this.text,
     this.icon,
+    this.minimumSize,
   }) : super(key: key);
 
   final void Function()? onPressed;
   final String text;
   final IconData? icon;
+  final Size? minimumSize;
 
   @override
   State<AppElevatedButton> createState() => _AppElevatedButtonState();
@@ -25,20 +27,16 @@ class _AppElevatedButtonState extends State<AppElevatedButton> {
     return widget.icon == null
         ? ElevatedButton(
             onPressed: widget.onPressed == null ? null : widget.onPressed!,
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(colorScheme.surface),
-              foregroundColor: MaterialStateProperty.all(colorScheme.primary),
-              textStyle: MaterialStateProperty.all(
-                const TextStyle(
-                  fontSize: labelLargeSize,
-                  fontWeight: labelLargeWeight,
-                ),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: colorScheme.surface,
+              foregroundColor: colorScheme.primary,
+              textStyle: const TextStyle(
+                fontSize: labelLargeSize,
+                fontWeight: labelLargeWeight,
               ),
-              elevation: MaterialStateProperty.all(1.0),
-              shadowColor: MaterialStateProperty.all(colorScheme.shadow),
-              overlayColor: MaterialStateProperty.all(
-                colorScheme.primary.withOpacity(0.08),
-              ),
+              elevation: 1.0,
+              shadowColor: colorScheme.shadow,
+              minimumSize: widget.minimumSize,
             ),
             child: Text(
               widget.text,
@@ -46,20 +44,16 @@ class _AppElevatedButtonState extends State<AppElevatedButton> {
           )
         : ElevatedButton.icon(
             onPressed: widget.onPressed == null ? null : widget.onPressed!,
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(colorScheme.surface),
-              foregroundColor: MaterialStateProperty.all(colorScheme.primary),
-              textStyle: MaterialStateProperty.all(
-                const TextStyle(
-                  fontSize: labelLargeSize,
-                  fontWeight: labelLargeWeight,
-                ),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: colorScheme.surface,
+              foregroundColor: colorScheme.primary,
+              textStyle: const TextStyle(
+                fontSize: labelLargeSize,
+                fontWeight: labelLargeWeight,
               ),
-              elevation: MaterialStateProperty.all(1.0),
-              shadowColor: MaterialStateProperty.all(colorScheme.shadow),
-              overlayColor: MaterialStateProperty.all(
-                colorScheme.primary.withOpacity(0.08),
-              ),
+              elevation: 1.0,
+              shadowColor: colorScheme.shadow,
+              minimumSize: widget.minimumSize,
             ),
             icon: Icon(
               widget.icon!,

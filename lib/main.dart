@@ -1,4 +1,4 @@
-import 'package:centalki/src/features/authentication/sign_in_view.dart';
+import 'package:centalki/src/features/authentication/presentation/views/sign_in_page.dart';
 import 'package:centalki/src/features/authentication/verify_email.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -75,7 +75,7 @@ class _MyWidgetState extends State<MyWidget> {
           child: Text("Splash screen here!"),
         );
       case "not_auth":
-        return const SignInView();
+        return const SignInPage();
       case "not_email_verified":
         return const VerifyEmailView();
       case "success":
