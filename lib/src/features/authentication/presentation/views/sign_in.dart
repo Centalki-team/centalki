@@ -1,3 +1,4 @@
+import 'package:centalki/base/define/text.dart';
 import 'package:centalki/base/widgets/buttons/button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +58,7 @@ class _SignInViewState extends State<SignInView> {
                 height: spaceBetweenLine12,
               ),
               Text(
-                'Sign in your account',
+                TextDoc.txtSignInIntroduction,
                 style: TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
@@ -76,7 +77,7 @@ class _SignInViewState extends State<SignInView> {
                       AppOutlinedTextField(
                         controller: _emailController,
                         textInputType: TextInputType.emailAddress,
-                        labelText: 'Email',
+                        labelText: TextDoc.txtEmail,
                         errorText: (state is SignInValidateState &&
                                 state.emailError.isNotEmpty)
                             ? state.emailError
@@ -95,7 +96,7 @@ class _SignInViewState extends State<SignInView> {
                       AppOutlinedTextField(
                         controller: _passwordController,
                         obscureText: true,
-                        labelText: 'Password',
+                        labelText: TextDoc.txtPassword,
                         errorText: (state is SignInValidateState &&
                                 state.passwordError.isNotEmpty)
                             ? state.passwordError
@@ -123,7 +124,7 @@ class _SignInViewState extends State<SignInView> {
                       MaterialPageRoute(
                         builder: (context) => const ForgotPasswordPage(),
                       )),
-                  text: 'Forgot Password?',
+                  text: TextDoc.txtForgotPassword,
                 ),
               ),
               const SizedBox(
@@ -132,7 +133,7 @@ class _SignInViewState extends State<SignInView> {
               BlocBuilder<SignInBloc, SignInState>(
                 builder: (context, state) {
                   return AppFilledButton(
-                    text: 'Sign In',
+                    text: TextDoc.txtSignIn,
                     onPressed: (state is SignInValidateState &&
                             !state.forceDisabled)
                         ? () => context.read<SignInBloc>().add(SignInSendEvent(
@@ -150,8 +151,8 @@ class _SignInViewState extends State<SignInView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text(
-                    'Don\'t have an account?',
+                  Text(
+                    TextDoc.txtNotAccount,
                   ),
                   AppTextButton(
                     onPressed: () => Navigator.push(
@@ -159,7 +160,7 @@ class _SignInViewState extends State<SignInView> {
                         MaterialPageRoute(
                           builder: (context) => const SignUpView(),
                         )),
-                    text: 'Sign Up',
+                    text: TextDoc.txtSignUp,
                   ),
                 ],
               ),

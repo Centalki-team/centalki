@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/manager/loading_manager.dart';
+import '../../../../../base/define/text.dart';
 import '../../../../../base/widgets/buttons/button.dart';
 import '../../../../../base/widgets/text_fields/text_field.dart';
 import '../../../../../gen/assets.gen.dart';
@@ -57,7 +58,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                 height: spaceBetweenLine12,
               ),
               Text(
-                'Your email used to sign in Centalki',
+                TextDoc.txtForgotPasswordIntroduction,
                 style: TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
@@ -74,7 +75,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                     children: [
                       AppOutlinedTextField(
                         controller: _emailController,
-                        labelText: 'Email',
+                        labelText: TextDoc.txtEmail,
                         textInputType: TextInputType.emailAddress,
                         errorText: (state is ForgotPasswordValidateState &&
                                 state.emailError.isNotEmpty)
@@ -88,7 +89,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                         height: spaceBetweenLine20,
                       ),
                       AppFilledButton(
-                        text: 'Reset Password',
+                        text: TextDoc.txtResetPassword,
                         onPressed: (state is ForgotPasswordValidateState &&
                                 !state.forceDisabled)
                             ? () => context.read<ForgotPasswordBloc>().add(
@@ -106,7 +107,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
               ),
               AppOutlinedButton(
                 onPressed: Navigator.of(context).pop,
-                text: 'Return Sign In',
+                text: TextDoc.txtReturnSignIn,
                 minimumSize: const Size.fromHeight(48),
               ),
               const SizedBox(
