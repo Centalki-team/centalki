@@ -14,5 +14,5 @@ class TopicDetailLoadDoneState extends TopicDetailState {
     required this.topicDetail,
   });
 
-  final TopicDetail topicDetail;
+  final TopicDetailEntity topicDetail;
 }

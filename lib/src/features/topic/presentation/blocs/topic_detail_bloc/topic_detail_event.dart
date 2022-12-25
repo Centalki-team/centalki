@@ -10,5 +10,7 @@ class TopicDetailInitEvent extends TopicDetailEvent {
 }
 
 class TopicDetailLoadEvent extends TopicDetailEvent {
-  const TopicDetailLoadEvent();
+  const TopicDetailLoadEvent(this.topicId);
+
+  final String topicId;
 }

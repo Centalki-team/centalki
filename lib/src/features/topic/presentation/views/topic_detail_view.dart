@@ -1,19 +1,29 @@
 import 'package:centalki/base/define/colors.dart';
 import 'package:centalki/base/define/dimensions.dart';
 import 'package:centalki/base/define/size.dart';
+import 'package:centalki/src/features/topic/presentation/blocs/topic_detail_bloc/topic_detail_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../widgets/question_card.dart';
-import '../widgets/vocab_card.dart';
+import '../widgets/phrase_card.dart';
 
 class TopicDetailView extends StatefulWidget {
-  const TopicDetailView({Key? key}) : super(key: key);
+  const TopicDetailView({Key? key, required this.topicId}) : super(key: key);
+
+  final String topicId;
 
   @override
   State<TopicDetailView> createState() => _TopicDetailViewState();
 }
 
 class _TopicDetailViewState extends State<TopicDetailView> {
+  @override
+  void initState() {
+    context.read<TopicDetailBloc>().add(TopicDetailLoadEvent(widget.topicId));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,74 +39,97 @@ class _TopicDetailViewState extends State<TopicDetailView> {
         ],
       ),
       backgroundColor: colorScheme.surface,
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(screenAutoPadding16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const Text(
-              'This is topic name',
-              style: TextStyle(
-                fontSize: headlineSmallSize,
-                fontWeight: headlineSmallWeight,
+      body: BlocBuilder<TopicDetailBloc, TopicDetailState>(
+        builder: (context, state) {
+          if (state is TopicDetailLoadDoneState) {
+            return SingleChildScrollView(
+              padding: const EdgeInsets.all(screenAutoPadding16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    state.topicDetail.topicName ?? 'null name. Someone must be joking here',
+                    style: const TextStyle(
+                      fontSize: headlineSmallSize,
+                      fontWeight: headlineSmallWeight,
+                    ),
+                  ),
+                  const SizedBox(height: smallSpacing6),
+                  Text(
+                    state.topicDetail.topicCategory ?? 'null. This topic is out of this world',
+                    style: const TextStyle(
+                      fontSize: bodyLargeSize,
+                      fontWeight: bodyLargeWeight,
+                    ),
+                  ),
+                  const SizedBox(height: smallSpacing6),
+                  Text(
+                    'LEVEL: ${state.topicDetail.topicLevel ?? 'null. This topic is for Einstein'}'.toUpperCase(),
+                    style: const TextStyle(
+                      fontSize: bodyMediumSize,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black45,
+                    ),
+                  ),
+                  const SizedBox(height: spaceBetweenLine15),
+                  const Text(
+                    'Description',
+                    style: TextStyle(
+                      fontSize: titleLargeSize,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(height: smallSpacing8),
+                  Text(state.topicDetail.topicDescription ?? 'null. This topic is about nothing'),
+                  const SizedBox(height: spaceBetweenLine15),
+                  const Text(
+                    'Vocabulary',
+                    style: TextStyle(
+                      fontSize: titleLargeSize,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(height: smallSpacing8),
+                  ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: state.topicDetail.topicPhrases?.length,
+                    itemBuilder: (context, index) {
+                      final phrase = state.topicDetail.topicPhrases?[index];
+                      if (phrase == null) {
+                        return const Text('Null Phrase');
+                      }
+                      return PhraseCard(phraseEntity: phrase);
+                    },
+                  ),
+                  const Text(
+                    'Recommended Questions',
+                    style: TextStyle(
+                      fontSize: titleLargeSize,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(height: smallSpacing8),
+                  ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: state.topicDetail.topicQuestions?.length,
+                    itemBuilder: (context, index) {
+                      final questionContent = state.topicDetail.topicQuestions?[index].questionContent;
+                      return QuestionCard(
+                        index: index,
+                        questionContent: questionContent ?? 'null question',
+                      );
+                    },
+                  )
+                ],
               ),
-            ),
-            const SizedBox(height: smallSpacing6),
-            const Text(
-              'Topic Category',
-              style: TextStyle(
-                fontSize: bodyLargeSize,
-                fontWeight: bodyLargeWeight,
-              ),
-            ),
-            const SizedBox(height: smallSpacing6),
-            const Text(
-              'LEVEL: ELEMENTARY',
-              style: TextStyle(fontSize: bodyMediumSize, fontWeight: FontWeight.w500, color: Colors.black45),
-            ),
-            const SizedBox(height: spaceBetweenLine15),
-            const Text(
-              'Description',
-              style: TextStyle(
-                fontSize: titleLargeSize,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            const SizedBox(height: smallSpacing8),
-            const Text('In this topic, you will learn how to share with the teacher '
-                'about your daily routine, describe your everyday tasks, '
-                'and ask someone about their routine as well'),
-            const SizedBox(height: spaceBetweenLine15),
-            const Text(
-              'Vocabulary',
-              style: TextStyle(
-                fontSize: titleLargeSize,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            const SizedBox(height: smallSpacing8),
-            ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: 2,
-              itemBuilder: (context, index) => const VocabularyCard(),
-            ),
-            const Text(
-              'Recommended Questions',
-              style: TextStyle(
-                fontSize: titleLargeSize,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            const SizedBox(height: smallSpacing8),
-            ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: 2,
-              itemBuilder: (context, index) => const QuestionCard(),
-            )
-          ],
-        ),
+            );
+          }
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
       ),
     );
   }

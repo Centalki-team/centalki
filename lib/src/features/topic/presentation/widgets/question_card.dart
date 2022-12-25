@@ -4,7 +4,14 @@ import 'package:centalki/base/define/size.dart';
 import 'package:flutter/material.dart';
 
 class QuestionCard extends StatelessWidget {
-  const QuestionCard({Key? key}) : super(key: key);
+  const QuestionCard({
+    Key? key,
+    required this.index,
+    required this.questionContent,
+  }) : super(key: key);
+
+  final int index;
+  final String questionContent;
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +19,7 @@ class QuestionCard extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       color: colorScheme.surface,
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             clipBehavior: Clip.hardEdge,
@@ -24,23 +31,26 @@ class QuestionCard extends StatelessWidget {
             ),
             alignment: Alignment.center,
             child: Text(
-              '1',
+              '${index + 1}',
               style: TextStyle(
-                fontSize: titleLargeSize,
-                fontWeight: titleLargeWeight,
+                fontSize: titleMediumSize,
+                fontWeight: titleMediumWeight,
                 color: colorScheme.onPrimaryContainer,
               ),
             ),
           ),
           const SizedBox(width: smallSpacing10),
-          Text(
-            'This is question number one',
-            style: TextStyle(
-              fontSize: titleMediumSize,
-              fontWeight: titleMediumWeight,
-              color: colorScheme.onPrimaryContainer,
+          Expanded(
+            child: Text(
+              questionContent,
+              style: TextStyle(
+                fontSize: titleSmallSize,
+                fontWeight: titleSmallWeight,
+                color: colorScheme.onPrimaryContainer,
+              ),
             ),
           ),
+          const SizedBox(width: smallSpacing8),
         ],
       ),
     );

@@ -2,6 +2,7 @@ import 'package:centalki/base/define/colors.dart';
 import 'package:centalki/base/define/dimensions.dart';
 import 'package:centalki/base/define/size.dart';
 import 'package:centalki/src/features/topic/domain/entities/topic_item_entity.dart';
+import 'package:centalki/src/features/topic/presentation/views/topic_detail_page.dart';
 import 'package:centalki/src/features/topic/presentation/views/topic_detail_view.dart';
 import 'package:flutter/material.dart';
 
@@ -26,13 +27,27 @@ class TopicCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Image.asset(
-            item.image != null || item.image!.isEmpty ? Assets.images.tempAllTopic.path : item.image!,
-            width: 128,
-            height: 128,
-          ),
+          // Image.asset(
+          //   item.image != null || item.image!.isEmpty ? Assets.images.tempAllTopic.path : item.image!,
+          //   width: 128,
+          //   height: 128,
+          // ),
           // Image.asset('assets/images/temp_all_topic.png', width: 128, height: 128),
           // Container(width: 128, height: 128, color: Colors.redAccent),
+          Image.network(
+            item.image ?? '',
+            width: 128,
+            height: 128,
+            errorBuilder: (context, error, stackTrace) => const SizedBox(
+              width: 128,
+              height: 128,
+              child: Icon(
+                Icons.error_outline_rounded,
+                size: 32,
+                color: Colors.red,
+              ),
+            ),
+          ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(8, 8, 16, 8),
@@ -62,7 +77,7 @@ class TopicCard extends StatelessWidget {
                       TextButton(
                         onPressed: () => Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const TopicDetailView(),
+                            builder: (context) => TopicDetailPage(topicId: item.topicId ?? ''),
                           ),
                         ),
                         child: Row(
