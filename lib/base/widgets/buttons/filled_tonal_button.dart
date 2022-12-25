@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 import '../../define/colors.dart';
@@ -11,11 +9,13 @@ class AppFilledTonalButton extends StatefulWidget {
     this.onPressed,
     required this.text,
     this.icon,
+    this.minimumSize,
   }) : super(key: key);
 
   final void Function()? onPressed;
   final String text;
   final IconData? icon;
+  final Size? minimumSize;
 
   @override
   State<AppFilledTonalButton> createState() => _AppFilledTonalButtonState();
@@ -27,22 +27,16 @@ class _AppFilledTonalButtonState extends State<AppFilledTonalButton> {
     return widget.icon == null
         ? ElevatedButton(
             onPressed: widget.onPressed == null ? null : widget.onPressed!,
-            style: ButtonStyle(
-              backgroundColor:
-                  MaterialStateProperty.all(colorScheme.secondaryContainer),
-              foregroundColor:
-                  MaterialStateProperty.all(colorScheme.onSecondaryContainer),
-              textStyle: MaterialStateProperty.all(
-                const TextStyle(
-                  fontSize: labelLargeSize,
-                  fontWeight: labelLargeWeight,
-                ),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: colorScheme.secondaryContainer,
+              foregroundColor: colorScheme.onSecondaryContainer,
+              textStyle: const TextStyle(
+                fontSize: labelLargeSize,
+                fontWeight: labelLargeWeight,
               ),
-              elevation: MaterialStateProperty.all(0.0),
-              shadowColor: MaterialStateProperty.all(colorScheme.shadow),
-              overlayColor: MaterialStateProperty.all(
-                colorScheme.onSecondaryContainer.withOpacity(0.08),
-              ),
+              elevation: 0.0,
+              shadowColor: colorScheme.shadow,
+              minimumSize: widget.minimumSize,
             ),
             child: Text(
               widget.text,
@@ -50,22 +44,16 @@ class _AppFilledTonalButtonState extends State<AppFilledTonalButton> {
           )
         : ElevatedButton.icon(
             onPressed: widget.onPressed == null ? null : widget.onPressed!,
-            style: ButtonStyle(
-              backgroundColor:
-                  MaterialStateProperty.all(colorScheme.secondaryContainer),
-              foregroundColor:
-                  MaterialStateProperty.all(colorScheme.onSecondaryContainer),
-              textStyle: MaterialStateProperty.all(
-                const TextStyle(
-                  fontSize: labelLargeSize,
-                  fontWeight: labelLargeWeight,
-                ),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: colorScheme.secondaryContainer,
+              foregroundColor: colorScheme.onSecondaryContainer,
+              textStyle: const TextStyle(
+                fontSize: labelLargeSize,
+                fontWeight: labelLargeWeight,
               ),
-              elevation: MaterialStateProperty.all(0.0),
-              shadowColor: MaterialStateProperty.all(colorScheme.shadow),
-              overlayColor: MaterialStateProperty.all(
-                colorScheme.onSecondaryContainer.withOpacity(0.08),
-              ),
+              elevation: 0.0,
+              shadowColor: colorScheme.shadow,
+              minimumSize: widget.minimumSize,
             ),
             icon: Icon(
               widget.icon!,

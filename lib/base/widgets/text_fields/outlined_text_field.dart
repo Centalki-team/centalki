@@ -15,6 +15,7 @@ class AppOutlinedTextField extends StatefulWidget {
     this.errorText,
     this.icon,
     this.suffixIcon,
+    this.onChanged,
   }) : super(key: key);
 
   final TextEditingController controller;
@@ -24,6 +25,7 @@ class AppOutlinedTextField extends StatefulWidget {
   final String? errorText;
   final IconData? icon;
   final IconData? suffixIcon;
+  final void Function(String)? onChanged;
 
   @override
   State<AppOutlinedTextField> createState() => _AppOutlinedTextFieldState();
@@ -100,6 +102,7 @@ class _AppOutlinedTextFieldState extends State<AppOutlinedTextField> {
         ),
       ),
       keyboardType: widget.textInputType == null ? null : widget.textInputType!,
+      onChanged: widget.onChanged,
     );
   }
 }
