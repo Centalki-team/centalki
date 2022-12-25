@@ -37,7 +37,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     emit(SignInValidateState(
       emailError: emailError,
       passwordError: passwordError,
-      forceDisabled: emailError.isNotEmpty && passwordError.isNotEmpty,
+      forceDisabled: emailError.isNotEmpty || passwordError.isNotEmpty,
     ));
   }
 
