@@ -105,7 +105,7 @@ class _SelectTopicViewState extends State<SelectTopicView> with SingleTickerProv
                           );
                         }
                         return const Center(
-                          child: Text('Loading...'),
+                          child: CircularProgressIndicator(),
                         );
                       },
                     ),
@@ -119,79 +119,10 @@ class _SelectTopicViewState extends State<SelectTopicView> with SingleTickerProv
                 ),
               );
             }
-
             return const InternalPage(title: 'Select Topic Level');
           },
         ),
       ]),
-    );
-
-    return DefaultTabController(
-      length: 3,
-      child: Column(
-        children: [
-          TabBar(
-            controller: _tabController,
-            isScrollable: true,
-            // physics: const NeverScrollableScrollPhysics(),
-            tabs: [
-              Tab(
-                child: Text(
-                  'Pre-Intermediate',
-                  style: TextStyle(color: colorScheme.primary),
-                ),
-              ),
-              Tab(
-                child: Text(
-                  'Intermediate',
-                  style: TextStyle(color: colorScheme.primary),
-                ),
-              ),
-              Tab(
-                child: Text(
-                  'Upper-Intermediate',
-                  style: TextStyle(color: colorScheme.primary),
-                ),
-              ),
-            ],
-          ),
-          Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              physics: const NeverScrollableScrollPhysics(),
-              children: [
-                BlocBuilder<TopicsBloc, TopicsState>(
-                  builder: (context, state) {
-                    if (state is TopicsLoadDoneState) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: screenAutoPadding16),
-                        child: ListView.separated(
-                          itemCount: state.topics.topics!.length,
-                          separatorBuilder: (context, index) => const SizedBox(height: smallSpacing8),
-                          itemBuilder: (context, index) {
-                            return TopicCard(
-                              item: state.topics.topics![index],
-                            );
-                          },
-                        ),
-                      );
-                    }
-                    return const Center(
-                      child: Text('Loading...'),
-                    );
-                  },
-                ),
-                const Center(
-                  child: Text('Intermediate Tab'),
-                ),
-                const Center(
-                  child: Text('Upper-Intermediate Tab'),
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
     );
   }
 }

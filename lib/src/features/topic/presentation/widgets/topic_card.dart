@@ -2,6 +2,7 @@ import 'package:centalki/base/define/colors.dart';
 import 'package:centalki/base/define/dimensions.dart';
 import 'package:centalki/base/define/size.dart';
 import 'package:centalki/src/features/topic/domain/entities/topic_item_entity.dart';
+import 'package:centalki/src/features/topic/presentation/views/topic_detail_page.dart';
 import 'package:centalki/src/features/topic/presentation/views/topic_detail_view.dart';
 import 'package:flutter/material.dart';
 
@@ -62,7 +63,7 @@ class TopicCard extends StatelessWidget {
                       TextButton(
                         onPressed: () => Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const TopicDetailView(),
+                            builder: (context) => TopicDetailPage(topicId: item.topicId ?? ''),
                           ),
                         ),
                         child: Row(

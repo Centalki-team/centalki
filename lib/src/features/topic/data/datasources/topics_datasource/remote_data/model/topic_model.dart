@@ -30,7 +30,7 @@ class TopicItemBaseModel extends TopicItemEntity {
     this.name,
     this.levelId,
     this.category,
-  }) : super(image: imageUrl, topicName: name, topicCategory: category?.name);
+  }) : super(topicId: id, image: imageUrl, topicName: name, topicCategory: category?.name);
 
   final String? id;
   final String? categoryId;
