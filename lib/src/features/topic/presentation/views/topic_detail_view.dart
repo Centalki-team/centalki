@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../widgets/question_card.dart';
-import '../widgets/vocab_card.dart';
+import '../widgets/phrase_card.dart';
 
 class TopicDetailView extends StatefulWidget {
   const TopicDetailView({Key? key, required this.topicId}) : super(key: key);
@@ -93,8 +93,14 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                   ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: 2,
-                    itemBuilder: (context, index) => const VocabularyCard(),
+                    itemCount: state.topicDetail.topicPhrases?.length,
+                    itemBuilder: (context, index) {
+                      final phrase = state.topicDetail.topicPhrases?[index];
+                      if (phrase == null) {
+                        return const Text('Null Phrase');
+                      }
+                      return PhraseCard(phraseEntity: phrase);
+                    },
                   ),
                   const Text(
                     'Recommended Questions',

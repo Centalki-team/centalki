@@ -25,7 +25,7 @@ TopicDetailModel _$TopicDetailModelFromJson(Map<String, dynamic> json) =>
           ?.map((e) => TopicQuestionModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       phrases: (json['phrases'] as List<dynamic>?)
-          ?.map((e) => TopicPhraseEntity.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => TopicPhraseModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -81,4 +81,60 @@ Map<String, dynamic> _$TopicQuestionModelToJson(TopicQuestionModel instance) =>
       'id': instance.id,
       'question': instance.question,
       'topicId': instance.topicId,
+    };
+
+TopicPhraseModel _$TopicPhraseModelFromJson(Map<String, dynamic> json) =>
+    TopicPhraseModel(
+      id: json['id'] as String?,
+      topicId: json['topicId'] as String?,
+      examples: (json['examples'] as List<dynamic>?)
+          ?.map((e) => PhraseExampleModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      phonetic: json['phonetic'] as String?,
+      meanings: (json['meanings'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      phrase: json['phrase'] as String?,
+      updatedAt: json['updatedAt'] as String?,
+      createdAt: json['createdAt'] as String?,
+    );
+
+Map<String, dynamic> _$TopicPhraseModelToJson(TopicPhraseModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'topicId': instance.topicId,
+      'examples': instance.examples,
+      'phonetic': instance.phonetic,
+      'meanings': instance.meanings,
+      'phrase': instance.phrase,
+      'updatedAt': instance.updatedAt,
+      'createdAt': instance.createdAt,
+    };
+
+PhraseExampleModel _$PhraseExampleModelFromJson(Map<String, dynamic> json) =>
+    PhraseExampleModel(
+      permalink: json['permalink'] as String?,
+      currentVote: json['currentVote'] as String?,
+      example: json['example'] as String?,
+      author: json['author'] as String?,
+      word: json['word'] as String?,
+      thumbsUp: json['thumbsUp'] as int?,
+      defid: json['defid'] as int?,
+      thumbsDown: json['thumbsDown'] as int?,
+      writtenOn: json['writtenOn'] as String?,
+      definition: json['definition'] as String?,
+    );
+
+Map<String, dynamic> _$PhraseExampleModelToJson(PhraseExampleModel instance) =>
+    <String, dynamic>{
+      'permalink': instance.permalink,
+      'currentVote': instance.currentVote,
+      'example': instance.example,
+      'author': instance.author,
+      'word': instance.word,
+      'thumbsUp': instance.thumbsUp,
+      'defid': instance.defid,
+      'thumbsDown': instance.thumbsDown,
+      'writtenOn': instance.writtenOn,
+      'definition': instance.definition,
     };

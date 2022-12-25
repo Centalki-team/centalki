@@ -35,7 +35,7 @@ class TopicDetailModel extends TopicDetailEntity {
   final TopicDetailModel? level;
   final TopicCategoryModel? category;
   final List<TopicQuestionModel>? questions;
-  final List<TopicPhraseEntity>? phrases;
+  final List<TopicPhraseModel>? phrases;
 
   factory TopicDetailModel.fromJson(Map<String, dynamic> json) => _$TopicDetailModelFromJson(json);
 
@@ -86,4 +86,66 @@ class TopicQuestionModel extends TopicQuestionEntity {
   factory TopicQuestionModel.fromJson(Map<String, dynamic> json) => _$TopicQuestionModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$TopicQuestionModelToJson(this);
+}
+
+@JsonSerializable()
+class TopicPhraseModel extends TopicPhraseEntity {
+  const TopicPhraseModel({
+    this.id,
+    this.topicId,
+    this.examples,
+    this.phonetic,
+    this.meanings,
+    this.phrase,
+    this.updatedAt,
+    this.createdAt,
+  }) : super(
+          topicPhrase: phrase,
+          phraseMeanings: meanings,
+          phraseExamples: examples,
+        );
+
+  final String? id;
+  final String? topicId;
+  final List<PhraseExampleModel>? examples;
+  final String? phonetic;
+  final List<String>? meanings;
+  final String? phrase;
+  final String? updatedAt;
+  final String? createdAt;
+
+  factory TopicPhraseModel.fromJson(Map<String, dynamic> json) => _$TopicPhraseModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TopicPhraseModelToJson(this);
+}
+
+@JsonSerializable()
+class PhraseExampleModel extends PhraseExampleEntity {
+  PhraseExampleModel({
+    this.permalink,
+    this.currentVote,
+    this.example,
+    this.author,
+    this.word,
+    this.thumbsUp,
+    this.defid,
+    this.thumbsDown,
+    this.writtenOn,
+    this.definition,
+  }) : super(phraseExample: example);
+
+  final String? permalink;
+  final String? currentVote;
+  final String? example;
+  final String? author;
+  final String? word;
+  final int? thumbsUp;
+  final int? defid;
+  final int? thumbsDown;
+  final String? writtenOn;
+  final String? definition;
+
+  factory PhraseExampleModel.fromJson(Map<String, dynamic> json) => _$PhraseExampleModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PhraseExampleModelToJson(this);
 }

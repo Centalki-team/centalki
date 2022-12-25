@@ -27,13 +27,27 @@ class TopicCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Image.asset(
-            item.image != null || item.image!.isEmpty ? Assets.images.tempAllTopic.path : item.image!,
-            width: 128,
-            height: 128,
-          ),
+          // Image.asset(
+          //   item.image != null || item.image!.isEmpty ? Assets.images.tempAllTopic.path : item.image!,
+          //   width: 128,
+          //   height: 128,
+          // ),
           // Image.asset('assets/images/temp_all_topic.png', width: 128, height: 128),
           // Container(width: 128, height: 128, color: Colors.redAccent),
+          Image.network(
+            item.image ?? '',
+            width: 128,
+            height: 128,
+            errorBuilder: (context, error, stackTrace) => const SizedBox(
+              width: 128,
+              height: 128,
+              child: Icon(
+                Icons.error_outline_rounded,
+                size: 32,
+                color: Colors.red,
+              ),
+            ),
+          ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(8, 8, 16, 8),
