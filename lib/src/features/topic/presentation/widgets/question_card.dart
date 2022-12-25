@@ -1,7 +1,8 @@
-import 'package:centalki/base/define/colors.dart';
-import 'package:centalki/base/define/dimensions.dart';
-import 'package:centalki/base/define/size.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../base/define/colors.dart';
+import '../../../../../base/define/dimensions.dart';
+import '../../../../../base/define/size.dart';
 
 class QuestionCard extends StatelessWidget {
   const QuestionCard({

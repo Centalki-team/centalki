@@ -1,13 +1,10 @@
-import 'package:centalki/base/define/colors.dart';
-import 'package:centalki/base/define/dimensions.dart';
-import 'package:centalki/base/temp_dio/dio_client.dart';
-import 'package:centalki/base/widgets/internal_page.dart';
-import 'package:centalki/src/features/home/presentation/blocs/home_bloc/home_bloc.dart';
-import 'package:centalki/src/features/topic/domain/entities/topic_item_entity.dart';
-import 'package:centalki/src/features/topic/presentation/blocs/topic_level_bloc/topic_level_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../base/define/colors.dart';
+import '../../../../../base/define/dimensions.dart';
+import '../../../../../base/widgets/internal_page.dart';
+import '../blocs/topic_level_bloc/topic_level_bloc.dart';
 import '../blocs/topics_bloc/topics_bloc.dart';
 import '../widgets/topic_card.dart';
 
@@ -93,10 +90,10 @@ class _SelectTopicViewState extends State<SelectTopicView> with SingleTickerProv
                           return Padding(
                             padding: const EdgeInsets.symmetric(horizontal: screenAutoPadding16),
                             child: ListView.separated(
+                              padding: const EdgeInsets.only(top: 16),
                               itemCount: state.topics.topics!.length,
                               separatorBuilder: (context, index) => const SizedBox(height: smallSpacing8),
                               itemBuilder: (context, index) {
-                                print(state.topics.topics![index].topicName);
                                 return TopicCard(
                                   item: state.topics.topics![index],
                                 );

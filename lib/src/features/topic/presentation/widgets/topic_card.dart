@@ -1,12 +1,10 @@
-import 'package:centalki/base/define/colors.dart';
-import 'package:centalki/base/define/dimensions.dart';
-import 'package:centalki/base/define/size.dart';
-import 'package:centalki/src/features/topic/domain/entities/topic_item_entity.dart';
-import 'package:centalki/src/features/topic/presentation/views/topic_detail_page.dart';
-import 'package:centalki/src/features/topic/presentation/views/topic_detail_view.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../gen/assets.gen.dart';
+import '../../../../../base/define/colors.dart';
+import '../../../../../base/define/dimensions.dart';
+import '../../../../../base/define/size.dart';
+import '../../domain/entities/topic_item_entity.dart';
+import '../views/topic_detail_page.dart';
 
 class TopicCard extends StatelessWidget {
   const TopicCard({
@@ -38,6 +36,7 @@ class TopicCard extends StatelessWidget {
             item.image ?? '',
             width: 128,
             height: 128,
+            fit: BoxFit.cover,
             errorBuilder: (context, error, stackTrace) => const SizedBox(
               width: 128,
               height: 128,

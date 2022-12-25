@@ -1,5 +1,6 @@
-import 'package:centalki/src/features/topic/domain/entities/topic_item_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import '../../../../../domain/entities/topic_item_entity.dart';
 
 part 'topic_model.g.dart';
 

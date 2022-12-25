@@ -1,6 +1,6 @@
-import 'package:centalki/base/temp_dio/dio_client.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../../base/temp_dio/dio_client.dart';
 import '../../../domain/entities/topic_item_entity.dart';
 
 part 'topics_event.dart';
@@ -20,8 +20,6 @@ class TopicsBloc extends Bloc<TopicsEvent, TopicsState> {
 
   void _onLoad(TopicsLoadEvent event, emit) async {
     final topics = await DioClient.getTopicList();
-
-    print(topics);
 
     emit(TopicsLoadDoneState(topics: topics));
   }

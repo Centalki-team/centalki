@@ -27,7 +27,7 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
       length: 3,
       initialIndex: 0,
       vsync: this,
-      animationDuration: const Duration(milliseconds: 500),
+      animationDuration: const Duration(milliseconds: 300),
     );
   }
 

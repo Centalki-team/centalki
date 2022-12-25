@@ -1,9 +1,9 @@
-import 'package:centalki/src/features/topic/presentation/blocs/topic_detail_bloc/topic_detail_bloc.dart';
-import 'package:centalki/src/features/topic/presentation/blocs/topic_level_bloc/topic_level_bloc.dart';
-import 'package:centalki/src/features/topic/presentation/blocs/topics_bloc/topics_bloc.dart';
-import 'package:centalki/src/features/topic/presentation/views/select_topic_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../blocs/topic_level_bloc/topic_level_bloc.dart';
+import '../blocs/topics_bloc/topics_bloc.dart';
+import 'select_topic_view.dart';
 
 class SelectTopicPage extends StatelessWidget {
   const SelectTopicPage({super.key});
@@ -12,9 +12,17 @@ class SelectTopicPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<TopicsBloc>(create: (context) => TopicsBloc()),
-        // BlocProvider<TopicDetailBloc>(create: (context) => TopicDetailBloc()),
-        BlocProvider<TopicLevelBloc>(create: (context) => TopicLevelBloc()),
+        BlocProvider<TopicsBloc>(
+          create: (context) => TopicsBloc()..add(const TopicsLoadEvent()),
+        ),
+        BlocProvider<TopicLevelBloc>(
+          create: (context) => TopicLevelBloc()
+            ..add(
+              const TopicLevelChangeTabEvent(
+                desTab: 0,
+              ),
+            ),
+        ),
       ],
       child: const SelectTopicView(),
     );

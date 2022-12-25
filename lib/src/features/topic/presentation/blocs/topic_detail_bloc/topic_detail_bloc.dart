@@ -1,12 +1,11 @@
-import 'dart:async';
-
-import 'package:centalki/base/temp_dio/dio_client.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../../base/temp_dio/dio_client.dart';
 import '../../../domain/entities/topic_detail_entity.dart';
 
 part 'topic_detail_event.dart';
+
 part 'topic_detail_state.dart';
 
 class TopicDetailBloc extends Bloc<TopicDetailEvent, TopicDetailState> {

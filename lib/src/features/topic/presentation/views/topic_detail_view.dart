@@ -1,17 +1,15 @@
-import 'package:centalki/base/define/colors.dart';
-import 'package:centalki/base/define/dimensions.dart';
-import 'package:centalki/base/define/size.dart';
-import 'package:centalki/src/features/topic/presentation/blocs/topic_detail_bloc/topic_detail_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../base/define/colors.dart';
+import '../../../../../base/define/dimensions.dart';
+import '../../../../../base/define/size.dart';
+import '../blocs/topic_detail_bloc/topic_detail_bloc.dart';
 import '../widgets/question_card.dart';
 import '../widgets/phrase_card.dart';
 
 class TopicDetailView extends StatefulWidget {
-  const TopicDetailView({Key? key, required this.topicId}) : super(key: key);
-
-  final String topicId;
+  const TopicDetailView({Key? key}) : super(key: key);
 
   @override
   State<TopicDetailView> createState() => _TopicDetailViewState();
@@ -20,7 +18,6 @@ class TopicDetailView extends StatefulWidget {
 class _TopicDetailViewState extends State<TopicDetailView> {
   @override
   void initState() {
-    context.read<TopicDetailBloc>().add(TopicDetailLoadEvent(widget.topicId));
     super.initState();
   }
 
