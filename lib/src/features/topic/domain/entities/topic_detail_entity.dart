@@ -14,33 +14,17 @@ class TopicDetailEntity {
   final String? topicDescription;
   final String? topicLevel;
   final String? topicCategory;
-  final List<Question>? topicQuestions;
-  final List<Phrase>? topicPhrases;
+  final List<TopicQuestionEntity>? topicQuestions;
+  final List<TopicPhraseEntity>? topicPhrases;
 }
 
-class Question {
-  String? id;
-  String? question;
-  String? topicId;
+class TopicQuestionEntity {
+  const TopicQuestionEntity({this.questionContent});
 
-  Question({this.id, this.question, this.topicId});
-
-  Question.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    question = json['question'];
-    topicId = json['topicId'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
-    data['id'] = id;
-    data['question'] = question;
-    data['topicId'] = topicId;
-    return data;
-  }
+  final String? questionContent;
 }
 
-class Phrase {
+class TopicPhraseEntity {
   String? id;
   String? topicId;
   List<Examples>? examples;
@@ -50,7 +34,7 @@ class Phrase {
   String? updatedAt;
   String? createdAt;
 
-  Phrase({
+  TopicPhraseEntity({
     this.id,
     this.topicId,
     this.examples,
@@ -61,7 +45,7 @@ class Phrase {
     this.createdAt,
   });
 
-  Phrase.fromJson(Map<String, dynamic> json) {
+  TopicPhraseEntity.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     topicId = json['topicId'];
     if (json['examples'] != null) {

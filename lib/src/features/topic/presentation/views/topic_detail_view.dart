@@ -107,8 +107,14 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                   ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: 2,
-                    itemBuilder: (context, index) => const QuestionCard(),
+                    itemCount: state.topicDetail.topicQuestions?.length,
+                    itemBuilder: (context, index) {
+                      final questionContent = state.topicDetail.topicQuestions?[index].questionContent;
+                      return QuestionCard(
+                        index: index,
+                        questionContent: questionContent ?? 'null question',
+                      );
+                    },
                   )
                 ],
               ),

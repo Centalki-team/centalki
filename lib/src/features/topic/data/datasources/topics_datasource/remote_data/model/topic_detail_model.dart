@@ -34,8 +34,8 @@ class TopicDetailModel extends TopicDetailEntity {
   final String? description;
   final TopicDetailModel? level;
   final TopicCategoryModel? category;
-  final List<Question>? questions;
-  final List<Phrase>? phrases;
+  final List<TopicQuestionModel>? questions;
+  final List<TopicPhraseEntity>? phrases;
 
   factory TopicDetailModel.fromJson(Map<String, dynamic> json) => _$TopicDetailModelFromJson(json);
 
@@ -69,4 +69,21 @@ class TopicCategoryModel {
   factory TopicCategoryModel.fromJson(Map<String, dynamic> json) => _$TopicCategoryModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$TopicCategoryModelToJson(this);
+}
+
+@JsonSerializable()
+class TopicQuestionModel extends TopicQuestionEntity {
+  const TopicQuestionModel({
+    this.id,
+    this.question,
+    this.topicId,
+  }) : super(questionContent: question);
+
+  final String? id;
+  final String? question;
+  final String? topicId;
+
+  factory TopicQuestionModel.fromJson(Map<String, dynamic> json) => _$TopicQuestionModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TopicQuestionModelToJson(this);
 }
