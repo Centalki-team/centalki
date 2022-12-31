@@ -8,14 +8,14 @@ import '../blocs/topic_level_bloc/topic_level_bloc.dart';
 import '../blocs/topics_bloc/topics_bloc.dart';
 import '../widgets/topic_card.dart';
 
-class SelectTopicView extends StatefulWidget {
-  const SelectTopicView({Key? key}) : super(key: key);
+class SelectTopicLevelView extends StatefulWidget {
+  const SelectTopicLevelView({Key? key}) : super(key: key);
 
   @override
-  State<SelectTopicView> createState() => _SelectTopicViewState();
+  State<SelectTopicLevelView> createState() => _SelectTopicLevelViewState();
 }
 
-class _SelectTopicViewState extends State<SelectTopicView> with SingleTickerProviderStateMixin {
+class _SelectTopicLevelViewState extends State<SelectTopicLevelView> with SingleTickerProviderStateMixin {
   late final TabController _tabController;
 
   @override
