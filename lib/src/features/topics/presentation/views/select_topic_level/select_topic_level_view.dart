@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../base/define/colors.dart';
-import '../../../../../base/define/dimensions.dart';
-import '../../../../../base/widgets/internal_page.dart';
-import '../blocs/topic_level_bloc/topic_level_bloc.dart';
-import '../blocs/topics_bloc/topics_bloc.dart';
-import '../widgets/topic_card.dart';
+import '../../../../../../base/define/colors.dart';
+import '../../../../../../base/widgets/internal_page.dart';
+import '../../blocs/topic_level_bloc/topic_level_bloc.dart';
+import '../intermediate_topics/intermediate_topic_page.dart';
+import '../pre_intermediate_topics/pre_intermediate_topic_page.dart';
+import '../upper_intermediate_topics/upper_intermediate_topic_page.dart';
 
 class SelectTopicLevelView extends StatefulWidget {
   const SelectTopicLevelView({Key? key}) : super(key: key);
@@ -83,35 +83,10 @@ class _SelectTopicLevelViewState extends State<SelectTopicLevelView> with Single
                 child: TabBarView(
                   controller: _tabController,
                   physics: const NeverScrollableScrollPhysics(),
-                  children: [
-                    BlocBuilder<TopicsBloc, TopicsState>(
-                      builder: (context, state) {
-                        if (state is TopicsLoadDoneState) {
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: screenAutoPadding16),
-                            child: ListView.separated(
-                              padding: const EdgeInsets.only(top: 16),
-                              itemCount: state.topics.topics!.length,
-                              separatorBuilder: (context, index) => const SizedBox(height: smallSpacing8),
-                              itemBuilder: (context, index) {
-                                return TopicCard(
-                                  item: state.topics.topics![index],
-                                );
-                              },
-                            ),
-                          );
-                        }
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      },
-                    ),
-                    const Center(
-                      child: Text('Intermediate Tab'),
-                    ),
-                    const Center(
-                      child: Text('Upper-Intermediate Tab'),
-                    ),
+                  children: const [
+                    PreIntermediateTopicPage(),
+                    IntermediateTopicPage(),
+                    UpperIntermediateTopicPage(),
                   ],
                 ),
               );

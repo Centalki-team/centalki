@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../blocs/topic_level_bloc/topic_level_bloc.dart';
-import '../blocs/topics_bloc/topics_bloc.dart';
+import '../../blocs/topic_level_bloc/topic_level_bloc.dart';
 import 'select_topic_level_view.dart';
 
 class SelectTopicLevelPage extends StatelessWidget {
