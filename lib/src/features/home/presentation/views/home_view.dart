@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../base/define/common_txt_style.dart';
 import '../../../../../base/widgets/internal_page.dart';
-import '../../../topic/presentation/views/select_topic_page.dart';
+import '../../../topics/presentation/views/select_topic_level/select_topic_level_page.dart';
 import '../../../../../base/define/app_text.dart';
 import '../../../../../base/widgets/bottom_bar/custom_bottom_nav.dart';
 import '../../../../../gen/assets.gen.dart';
@@ -27,7 +27,7 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
       length: 3,
       initialIndex: 0,
       vsync: this,
-      animationDuration: const Duration(milliseconds: 500),
+      animationDuration: const Duration(milliseconds: 300),
     );
   }
 
@@ -76,7 +76,7 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
                       physics: const NeverScrollableScrollPhysics(),
                       controller: _tabController,
                       children: const [
-                        SelectTopicPage(),
+                        SelectTopicLevelPage(),
                         InternalPage(
                           title: 'Account Page',
                         ),
