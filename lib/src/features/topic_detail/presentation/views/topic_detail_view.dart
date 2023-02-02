@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
+import '../../../connect_teacher/presentation/views/connect_teacher_view.dart';
 import '../blocs/topic_detail_bloc/topic_detail_bloc.dart';
 import '../widgets/question_card.dart';
 import '../widgets/phrase_card.dart';
@@ -30,7 +31,14 @@ class _TopicDetailViewState extends State<TopicDetailView> {
         elevation: 0,
         actions: [
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ConnectTeacherView(),
+                ),
+              );
+            },
             child: const Text('TALK'),
           ),
         ],
