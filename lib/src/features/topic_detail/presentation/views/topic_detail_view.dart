@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
-import '../../../connect_teacher/presentation/views/connect_teacher_view.dart';
+import '../../../connect_teacher/presentation/views/connect_teacher.dart';
 import '../blocs/topic_detail_bloc/topic_detail_bloc.dart';
 import '../widgets/question_card.dart';
 import '../widgets/phrase_card.dart';
