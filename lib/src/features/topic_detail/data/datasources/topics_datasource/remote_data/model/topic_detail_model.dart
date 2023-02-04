@@ -2,7 +2,6 @@ import 'package:json_annotation/json_annotation.dart';
 
 import '../../../../../domain/entities/topic_detail_entity.dart';
 
-
 part 'topic_detail_model.g.dart';
 
 @JsonSerializable()
@@ -19,6 +18,7 @@ class TopicDetailModel extends TopicDetailEntity {
     this.questions,
     this.phrases,
   }) : super(
+          topicId: id,
           topicName: name,
           topicImage: imageURL,
           topicDescription: description,
@@ -39,7 +39,8 @@ class TopicDetailModel extends TopicDetailEntity {
   final List<TopicQuestionModel>? questions;
   final List<TopicPhraseModel>? phrases;
 
-  factory TopicDetailModel.fromJson(Map<String, dynamic> json) => _$TopicDetailModelFromJson(json);
+  factory TopicDetailModel.fromJson(Map<String, dynamic> json) =>
+      _$TopicDetailModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$TopicDetailModelToJson(this);
 }
@@ -56,7 +57,8 @@ class TopicLevelModel {
   final String? name;
   final String? code;
 
-  factory TopicLevelModel.fromJson(Map<String, dynamic> json) => _$TopicLevelModelFromJson(json);
+  factory TopicLevelModel.fromJson(Map<String, dynamic> json) =>
+      _$TopicLevelModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$TopicLevelModelToJson(this);
 }
@@ -68,7 +70,8 @@ class TopicCategoryModel {
   final String? id;
   final String? name;
 
-  factory TopicCategoryModel.fromJson(Map<String, dynamic> json) => _$TopicCategoryModelFromJson(json);
+  factory TopicCategoryModel.fromJson(Map<String, dynamic> json) =>
+      _$TopicCategoryModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$TopicCategoryModelToJson(this);
 }
@@ -85,7 +88,8 @@ class TopicQuestionModel extends TopicQuestionEntity {
   final String? question;
   final String? topicId;
 
-  factory TopicQuestionModel.fromJson(Map<String, dynamic> json) => _$TopicQuestionModelFromJson(json);
+  factory TopicQuestionModel.fromJson(Map<String, dynamic> json) =>
+      _$TopicQuestionModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$TopicQuestionModelToJson(this);
 }
@@ -116,7 +120,8 @@ class TopicPhraseModel extends TopicPhraseEntity {
   final String? updatedAt;
   final String? createdAt;
 
-  factory TopicPhraseModel.fromJson(Map<String, dynamic> json) => _$TopicPhraseModelFromJson(json);
+  factory TopicPhraseModel.fromJson(Map<String, dynamic> json) =>
+      _$TopicPhraseModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$TopicPhraseModelToJson(this);
 }
@@ -147,7 +152,8 @@ class PhraseExampleModel extends PhraseExampleEntity {
   final String? writtenOn;
   final String? definition;
 
-  factory PhraseExampleModel.fromJson(Map<String, dynamic> json) => _$PhraseExampleModelFromJson(json);
+  factory PhraseExampleModel.fromJson(Map<String, dynamic> json) =>
+      _$PhraseExampleModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$PhraseExampleModelToJson(this);
 }

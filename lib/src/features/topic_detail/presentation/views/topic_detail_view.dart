@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
-import '../../../connect_teacher/presentation/views/connect_teacher.dart';
+import '../../../connect_teacher/presentation/views/connect_teacher_page.dart';
 import '../blocs/topic_detail_bloc/topic_detail_bloc.dart';
 import '../widgets/question_card.dart';
 import '../widgets/phrase_card.dart';
@@ -30,16 +30,24 @@ class _TopicDetailViewState extends State<TopicDetailView> {
         centerTitle: false,
         elevation: 0,
         actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ConnectTeacherView(),
-                ),
-              );
+          BlocBuilder<TopicDetailBloc, TopicDetailState>(
+            builder: (context, state) {
+              if (state is TopicDetailLoadDoneState) {
+                return TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ConnectTeacherPage(
+                            topicId: state.topicDetail.topicId ?? ''),
+                      ),
+                    );
+                  },
+                  child: const Text('TALK'),
+                );
+              }
+              return Container();
             },
-            child: const Text('TALK'),
           ),
         ],
       ),
@@ -53,7 +61,8 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    state.topicDetail.topicName ?? 'null name. Someone must be joking here',
+                    state.topicDetail.topicName ??
+                        'null name. Someone must be joking here',
                     style: const TextStyle(
                       fontSize: headlineSmallSize,
                       fontWeight: headlineSmallWeight,
@@ -61,7 +70,8 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                   ),
                   const SizedBox(height: smallSpacing6),
                   Text(
-                    state.topicDetail.topicCategory ?? 'null. This topic is out of this world',
+                    state.topicDetail.topicCategory ??
+                        'null. This topic is out of this world',
                     style: const TextStyle(
                       fontSize: bodyLargeSize,
                       fontWeight: bodyLargeWeight,
@@ -69,7 +79,8 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                   ),
                   const SizedBox(height: smallSpacing6),
                   Text(
-                    'LEVEL: ${state.topicDetail.topicLevel ?? 'null. This topic is for Einstein'}'.toUpperCase(),
+                    'LEVEL: ${state.topicDetail.topicLevel ?? 'null. This topic is for Einstein'}'
+                        .toUpperCase(),
                     style: const TextStyle(
                       fontSize: bodyMediumSize,
                       fontWeight: FontWeight.w500,
@@ -85,7 +96,8 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                     ),
                   ),
                   const SizedBox(height: smallSpacing8),
-                  Text(state.topicDetail.topicDescription ?? 'null. This topic is about nothing'),
+                  Text(state.topicDetail.topicDescription ??
+                      'null. This topic is about nothing'),
                   const SizedBox(height: spaceBetweenLine15),
                   const Text(
                     'Vocabulary',
@@ -120,7 +132,8 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                     shrinkWrap: true,
                     itemCount: state.topicDetail.topicQuestions?.length,
                     itemBuilder: (context, index) {
-                      final questionContent = state.topicDetail.topicQuestions?[index].questionContent;
+                      final questionContent = state
+                          .topicDetail.topicQuestions?[index].questionContent;
                       return QuestionCard(
                         index: index,
                         questionContent: questionContent ?? 'null question',
