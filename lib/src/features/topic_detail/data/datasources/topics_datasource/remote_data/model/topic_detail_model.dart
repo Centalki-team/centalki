@@ -18,6 +18,7 @@ class TopicDetailModel extends TopicDetailEntity {
     this.questions,
     this.phrases,
   }) : super(
+          topicId: id,
           topicName: name,
           topicImage: imageURL,
           topicDescription: description,
