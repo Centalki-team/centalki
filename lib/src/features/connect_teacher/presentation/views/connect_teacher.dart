@@ -1,9 +1,10 @@
-import 'dart:async';
-
-import 'package:centalki/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../base/define/dimensions.dart';
+import '../../../../../base/define/text.dart';
+import '../../../../../base/widgets/buttons/button.dart';
+import '../blocs/connect_teacher_bloc.dart';
 import '../widgets/wave.dart';
 
 class ConnectTeacherView extends StatefulWidget {
@@ -14,148 +15,210 @@ class ConnectTeacherView extends StatefulWidget {
 }
 
 class _FindTeacherViewState extends State<ConnectTeacherView> {
-  bool _isLoading = true;
-  bool _isLoadDone = false;
-
-  _changeState() async {
-    // setStates are bad but we do not have BLoC yet
-    await Future.delayed(const Duration(seconds: 4));
-    setState(() {
-      _isLoading = false;
-    });
-    await Future.delayed(const Duration(seconds: 4));
-    setState(() {
-      _isLoadDone = true;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _changeState();
-  }
-
   @override
   Widget build(BuildContext context) {
     double width = -MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    return Material(
-      color: const Color(0xffFFD033),
-      child: SizedBox(
-        height: height,
-        width: -width,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Wave(
-                widthScreen: width,
-                heightScreen: _isLoading
-                    ? height * 1 / 3
-                    : _isLoadDone
-                        ? height
-                        : height * 2 / 3,
-                colors: _isLoading
-                    ? [const Color(0xffFF8811)]
-                    : _isLoadDone
-                        ? [const Color(0xff55C885)]
-                        : [const Color(0xff3AAFFF)],
-                pick: _isLoadDone ? 0 : 24,
-                amount: 12,
+    final pContext = context;
+
+    return BlocConsumer<ConnectTeacherBloc, ConnectTeacherState>(
+      listener: (context, state) {
+        if (state is ConnectTeacherLoadDoneState) {
+          context
+              .read<ConnectTeacherBloc>()
+              .add(ConnectTeacherConnectRoom(state.sessionId));
+        } else if (state is ConnectTeacherConnectErrorState) {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => AlertDialog(
+              icon: const Icon(
+                Icons.warning_amber_outlined,
+                color: Colors.redAccent,
               ),
+              title: Text(state.failureTitle),
+              content: Text(state.message),
+              actions: (state.failureType == ConnectFailure.INTERNET_CONNECTION)
+                  ? [
+                      AppFilledButton(
+                        text: TextDoc.txtTryAgain,
+                        onPressed: () {
+                          pContext
+                              .read<ConnectTeacherBloc>()
+                              .add(ConnectTeacherTryConnect());
+                        },
+                      )
+                    ]
+                  : (state.failureType == ConnectFailure.TEACHER_CANCELLATION
+                      ? [
+                          AppFilledButton(
+                            text: TextDoc.txtConnect,
+                            onPressed: () => pContext
+                                .read<ConnectTeacherBloc>()
+                                .add(ConnectTeacherFindOtherTeacher()),
+                          ),
+                          AppOutlinedButton(
+                            text: TextDoc.txtBack,
+                            onPressed: () {
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ]
+                      : [
+                          AppFilledButton(
+                            text: TextDoc.txtGoBack,
+                            onPressed: () {
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                            },
+                          )
+                        ]),
             ),
-            Align(
+          );
+        } else if (state is ConnectTeacherMeetingState) {
+          // TODO: connect to meeting room
+          Navigator.pop(context);
+        } else if (state is ConnectTeacherCancelState) {
+          showDialog(context: context, builder: (context) => AlertDialog(
+            icon: const Icon(Icons.check, color: Colors.green,),
+            title: Text(TextDoc.txtSuccessfullyCancel,),
+            actions: [AppFilledButton(text: TextDoc.txtOk, minimumSize: const Size.fromHeight(40), onPressed: () {
+              Navigator.pop(context);
+              Navigator.pop(context);
+            },)],
+          ));
+        }
+      },
+      builder: (context, state) {
+        return Material(
+          color: const Color(0xffFFD033),
+          child: SizedBox(
+            height: height,
+            width: -width,
+            child: Stack(
               alignment: Alignment.center,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  _isLoadDone
-                      ? const CircleAvatar(
-                          backgroundColor: Colors.white,
-                          radius: 48,
-                        )
-                      : const SizedBox.shrink(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 24),
-                    child: Text(
-                      _isLoading
-                          ? "Finding teacher for you..."
-                          : _isLoadDone
-                              ? "Connected to <teacher's name>\nLaunching session..."
-                              : "Teacher found. Connecting...",
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Positioned(
-              bottom: height * 0.1,
-              child: ElevatedButton(
-                onPressed: () async {
-                  final result = await showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title: const Text(
-                        'Cancel connecting',
-                        textAlign: TextAlign.center,
-                      ),
-                      content: const Text(
-                        'Are you sure to cancel connecting to teacher?',
-                        textAlign: TextAlign.center,
-                      ),
-                      actions: [
-                        Row(
-                          children: [
-                            Expanded(
-                              child: TextButton(
-                                style: TextButton.styleFrom(
-                                    side: const BorderSide(color: Colors.grey)),
-                                onPressed: () => Navigator.pop(context, false),
-                                child: const Text('No'),
-                              ),
-                            ),
-                            const SizedBox(width: smallSpacing10),
-                            Expanded(
-                              child: TextButton(
-                                style: TextButton.styleFrom(
-                                    backgroundColor: Colors.blue),
-                                onPressed: () => Navigator.pop(context, true),
-                                child: const Text(
-                                  'Yes',
-                                  style: TextStyle(color: Colors.white),
+              children: [
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Wave(
+                    widthScreen: width,
+                    heightScreen: state is ConnectTeacherLoadingState ||
+                            state is ConnectTeacherInitState
+                        ? height * 1 / 3
+                        : state is ConnectTeacherConnectDoneState
+                            ? height
+                            : height * 2 / 3,
+                    colors: state is ConnectTeacherLoadingState
+                        ? [const Color(0xffFF8811)]
+                        : state is ConnectTeacherConnectDoneState
+                            ? [const Color(0xff55C885)]
+                            : [const Color(0xff3AAFFF)],
+                    pick: state is ConnectTeacherConnectDoneState ? 0 : 24,
+                    amount: 12,
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      state is ConnectTeacherConnectingRoomState
+                          ? const CircleAvatar(
+                              backgroundColor: Colors.white,
+                              radius: 48,
+                            )
+                          : const SizedBox.shrink(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 24),
+                        child: Text(
+                          state is ConnectTeacherLoadingState
+                              ? TextDoc.txtFindTeacher
+                              : state is ConnectTeacherConnectDoneState
+                                  ? "Connected to <teacher's name>\nLaunching session..."
+                                  : TextDoc.txtFoundedTeacher,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Positioned(
+                  bottom: height * 0.1,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      final result = await showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text(
+                            TextDoc.txtCancelTitle,
+                            textAlign: TextAlign.center,
+                          ),
+                          content: Text(
+                            TextDoc.txtCancelContent,
+                            textAlign: TextAlign.center,
+                          ),
+                          actions: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: TextButton(
+                                    style: TextButton.styleFrom(
+                                        side: const BorderSide(
+                                            color: Colors.grey)),
+                                    onPressed: () =>
+                                        Navigator.pop(context, false),
+                                    child: Text(TextDoc.txtNo),
+                                  ),
                                 ),
-                              ),
+                                const SizedBox(width: smallSpacing10),
+                                Expanded(
+                                  child: TextButton(
+                                    style: TextButton.styleFrom(
+                                        backgroundColor: Colors.blue),
+                                    onPressed: () =>
+                                        Navigator.pop(context, true),
+                                    child: Text(
+                                      TextDoc.txtYes,
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
+                      ).then((value) => value ?? false);
+                      if (result) {
+                        if (mounted) {
+                          context.read<ConnectTeacherBloc>().add(
+                              ConnectTeacherCancelButtonPressed(
+                                  state.sessionId));
+                        }
+                      }
+                    },
+                    child: Row(
+                      children: [
+                        const Icon(Icons.close_rounded,
+                            color: Colors.redAccent),
+                        const SizedBox(width: smallSpacing4),
+                        Text(
+                          TextDoc.txtCancel,
+                          style: const TextStyle(
+                              fontSize: 18, color: Colors.redAccent),
+                        ),
                       ],
                     ),
-                  ).then((value) => value ?? false);
-                  if (result) {
-                    if (mounted) {
-                      Navigator.pop(context);
-                    }
-                  }
-                },
-                child: Row(
-                  children: const [
-                    Icon(Icons.close_rounded, color: Colors.redAccent),
-                    SizedBox(width: smallSpacing4),
-                    Text(
-                      'Cancel',
-                      style: TextStyle(fontSize: 18, color: Colors.redAccent),
-                    ),
-                  ],
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
