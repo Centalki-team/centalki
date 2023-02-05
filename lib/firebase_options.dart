@@ -49,6 +49,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '145989393323',
     projectId: 'centalki-staging',
     authDomain: 'centalki-staging.firebaseapp.com',
+    databaseURL: 'https://centalki-staging-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'centalki-staging.appspot.com',
     measurementId: 'G-P8J84QW1GC',
   );
@@ -58,6 +59,7 @@ class DefaultFirebaseOptions {
     appId: '1:145989393323:android:a3fd9e425ea9c941d490ee',
     messagingSenderId: '145989393323',
     projectId: 'centalki-staging',
+    databaseURL: 'https://centalki-staging-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'centalki-staging.appspot.com',
   );
 
@@ -66,6 +68,7 @@ class DefaultFirebaseOptions {
     appId: '1:145989393323:ios:f030431d45c62201d490ee',
     messagingSenderId: '145989393323',
     projectId: 'centalki-staging',
+    databaseURL: 'https://centalki-staging-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'centalki-staging.appspot.com',
     iosClientId: '145989393323-aa8m8kqhhjb93opbct6ftl33trmfo8vo.apps.googleusercontent.com',
     iosBundleId: 'com.example.centalki',
@@ -76,6 +79,7 @@ class DefaultFirebaseOptions {
     appId: '1:145989393323:ios:f030431d45c62201d490ee',
     messagingSenderId: '145989393323',
     projectId: 'centalki-staging',
+    databaseURL: 'https://centalki-staging-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'centalki-staging.appspot.com',
     iosClientId: '145989393323-aa8m8kqhhjb93opbct6ftl33trmfo8vo.apps.googleusercontent.com',
     iosBundleId: 'com.example.centalki',

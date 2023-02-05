@@ -18,6 +18,8 @@ class ConnectTeacherBloc
     on<ConnectTeacherFindOtherTeacher>(_onFindOtherTeacher);
   }
 
+  late final String sessionId;
+
   void _onInit(ConnectTeacherInit event, emit) async {
     emit(ConnectTeacherLoadingState(TextDoc.txtFindTeacher));
 
@@ -25,37 +27,41 @@ class ConnectTeacherBloc
       final String studentId = FirebaseAuth.instance.currentUser?.uid ?? '';
       final sessionSchedule =
           await DioClient.createNewSessionSchedule(studentId, event.topicId);
+      sessionId = sessionSchedule.sessionId ?? '';
       print(sessionSchedule.sessionId);
-      emit(ConnectTeacherLoadDoneState(
-          TextDoc.txtFindTeacher, sessionSchedule.sessionId ?? ''));
+      emit(ConnectTeacherLoadDoneState(TextDoc.txtFindTeacher));
     } else {
-      emit(ConnectTeacherConnectErrorState(TextDoc.txtNotSignIn, '',
+      emit(ConnectTeacherConnectErrorState(TextDoc.txtNotSignIn,
           TextDoc.txtNotSignInTitle, ConnectFailure.NOT_SIGN_IN));
     }
   }
 
   void _onCancelButtonPressed(
       ConnectTeacherCancelButtonPressed event, emit) async {
-    await DioClient.cancelSessionSchedule(event.sessionId);
+    await DioClient.cancelSessionSchedule(sessionId);
     emit(const ConnectTeacherCancelState());
   }
 
   void _onConnectRoom(ConnectTeacherConnectRoom event, emit) async {
     emit(ConnectTeacherConnectingRoomState(
-        TextDoc.txtFoundedTeacher, event.sessionId));
+        TextDoc.txtFoundedTeacher));
 
-    DatabaseReference statusSessionScheduleRef = FirebaseDatabase.instance.ref("https://centalki.firebaseio.com/session-schedule/744WzbvAOL3kZKmK6yCS/status");
-    statusSessionScheduleRef.onValue.listen((event) {
-      final data = event.snapshot.value;
-      print('DATA: $data');
-    });
-    await Future.delayed(Duration(seconds: 5));
-
-    emit(ConnectTeacherConnectDoneState('Launching session', event.sessionId));
-
-    await Future.delayed(Duration(seconds: 5));
-
-    emit(ConnectTeacherMeetingState());
+    try {
+      final statusSessionScheduleRef = FirebaseDatabase.instance
+          .ref("/session-schedule/$sessionId/status");
+      statusSessionScheduleRef.onValue.listen((eventDatabase) async {
+        final data = eventDatabase.snapshot.value;
+        print('DATA: $data');
+        if (data.toString() == 'ROUTING') {
+          emit(const ConnectTeacherConnectDoneState(
+              'Launching session'));
+        } else if (data.toString() == 'TIME_OUT') {
+          emit(const ConnectTeacherConnectDoneState('TIMEOUT'));
+        }
+      });
+    } catch (exception) {
+      print('EXCEPTION WHEN LISTEN CHANGE: $exception');
+    }
   }
 
   void _onTryConnect(ConnectTeacherTryConnect event, emit) {}
