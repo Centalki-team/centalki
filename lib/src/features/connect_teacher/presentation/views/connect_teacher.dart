@@ -26,7 +26,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
         if (state is ConnectTeacherLoadDoneState) {
           context
               .read<ConnectTeacherBloc>()
-              .add(ConnectTeacherConnectRoom(state.sessionId));
+              .add(const ConnectTeacherConnectRoom());
         } else if (state is ConnectTeacherConnectErrorState) {
           showDialog(
             context: context,
@@ -80,14 +80,27 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
           // TODO: connect to meeting room
           Navigator.pop(context);
         } else if (state is ConnectTeacherCancelState) {
-          showDialog(context: context, builder: (context) => AlertDialog(
-            icon: const Icon(Icons.check, color: Colors.green,),
-            title: Text(TextDoc.txtSuccessfullyCancel,),
-            actions: [AppFilledButton(text: TextDoc.txtOk, minimumSize: const Size.fromHeight(40), onPressed: () {
-              Navigator.pop(context);
-              Navigator.pop(context);
-            },)],
-          ));
+          showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                    icon: const Icon(
+                      Icons.check,
+                      color: Colors.green,
+                    ),
+                    title: Text(
+                      TextDoc.txtSuccessfullyCancel,
+                    ),
+                    actions: [
+                      AppFilledButton(
+                        text: TextDoc.txtOk,
+                        minimumSize: const Size.fromHeight(40),
+                        onPressed: () {
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                        },
+                      )
+                    ],
+                  ));
         }
       },
       builder: (context, state) {
@@ -194,9 +207,9 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                       ).then((value) => value ?? false);
                       if (result) {
                         if (mounted) {
-                          context.read<ConnectTeacherBloc>().add(
-                              ConnectTeacherCancelButtonPressed(
-                                  state.sessionId));
+                          context
+                              .read<ConnectTeacherBloc>()
+                              .add(const ConnectTeacherCancelButtonPressed());
                         }
                       }
                     },

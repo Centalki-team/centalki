@@ -11,21 +11,13 @@ class ConnectTeacherInit extends ConnectTeacherEvent {
 }
 
 class ConnectTeacherCancelButtonPressed extends ConnectTeacherEvent {
-  const ConnectTeacherCancelButtonPressed(this.sessionId);
-
-  final String sessionId;
+  const ConnectTeacherCancelButtonPressed();
 }
 
 class ConnectTeacherConnectRoom extends ConnectTeacherEvent {
-  const ConnectTeacherConnectRoom(this.sessionId);
-
-  final String sessionId;
+  const ConnectTeacherConnectRoom();
 }
 
-class ConnectTeacherTryConnect extends ConnectTeacherEvent {
+class ConnectTeacherTryConnect extends ConnectTeacherEvent {}
 
-}
-
-class ConnectTeacherFindOtherTeacher extends ConnectTeacherEvent {
-
-}
+class ConnectTeacherFindOtherTeacher extends ConnectTeacherEvent {}
