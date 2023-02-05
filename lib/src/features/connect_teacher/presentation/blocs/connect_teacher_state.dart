@@ -1,10 +1,9 @@
 part of 'connect_teacher_bloc.dart';
 
 abstract class ConnectTeacherState {
-  const ConnectTeacherState({this.message = '', this.sessionId = ''});
+  const ConnectTeacherState({this.message = ''});
 
   final String message;
-  final String sessionId;
 }
 
 class ConnectTeacherInitState extends ConnectTeacherState {
@@ -16,24 +15,23 @@ class ConnectTeacherLoadingState extends ConnectTeacherState {
 }
 
 class ConnectTeacherLoadDoneState extends ConnectTeacherState {
-  const ConnectTeacherLoadDoneState(String message, String sessionId)
-      : super(message: message, sessionId: sessionId);
+  const ConnectTeacherLoadDoneState(String message) : super(message: message);
 }
 
 class ConnectTeacherConnectingRoomState extends ConnectTeacherState {
-  const ConnectTeacherConnectingRoomState(String message, String sessionId)
-      : super(message: message, sessionId: sessionId);
+  const ConnectTeacherConnectingRoomState(String message)
+      : super(message: message);
 }
 
 class ConnectTeacherConnectDoneState extends ConnectTeacherState {
-  const ConnectTeacherConnectDoneState(String message, String sessionId)
-      : super(message: message, sessionId: sessionId);
+  const ConnectTeacherConnectDoneState(String message)
+      : super(message: message);
 }
 
 class ConnectTeacherConnectErrorState extends ConnectTeacherState {
   const ConnectTeacherConnectErrorState(
-      String message, String sessionId, this.failureTitle, this.failureType)
-      : super(message: message, sessionId: sessionId);
+      String message, this.failureTitle, this.failureType)
+      : super(message: message);
 
   final String failureTitle;
   final ConnectFailure failureType;
