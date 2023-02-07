@@ -18,6 +18,6 @@ class ConnectTeacherConnectRoom extends ConnectTeacherEvent {
   const ConnectTeacherConnectRoom();
 }
 
-class ConnectTeacherTryConnect extends ConnectTeacherEvent {}
+class ConnectTeacherTryInternetConnect extends ConnectTeacherEvent {}
 
 class ConnectTeacherFindOtherTeacher extends ConnectTeacherEvent {}

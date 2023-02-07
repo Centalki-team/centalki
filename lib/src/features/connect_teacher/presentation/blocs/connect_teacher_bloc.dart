@@ -14,19 +14,21 @@ class ConnectTeacherBloc
     on<ConnectTeacherInit>(_onInit);
     on<ConnectTeacherCancelButtonPressed>(_onCancelButtonPressed);
     on<ConnectTeacherConnectRoom>(_onConnectRoom);
-    on<ConnectTeacherTryConnect>(_onTryConnect);
+    on<ConnectTeacherTryInternetConnect>(_onTryInternetConnect);
     on<ConnectTeacherFindOtherTeacher>(_onFindOtherTeacher);
   }
 
   late final String sessionId;
+  late final String topicId;
 
   void _onInit(ConnectTeacherInit event, emit) async {
     emit(ConnectTeacherLoadingState(TextDoc.txtFindTeacher));
 
+    topicId = event.topicId;
     if (FirebaseAuth.instance.currentUser != null) {
       final String studentId = FirebaseAuth.instance.currentUser?.uid ?? '';
       final sessionSchedule =
-          await DioClient.createNewSessionSchedule(studentId, event.topicId);
+          await DioClient.createNewSessionSchedule(studentId, topicId);
       sessionId = sessionSchedule.sessionId ?? '';
       print(sessionSchedule.sessionId);
       emit(ConnectTeacherLoadDoneState(TextDoc.txtFindTeacher));
@@ -39,6 +41,7 @@ class ConnectTeacherBloc
   void _onCancelButtonPressed(
       ConnectTeacherCancelButtonPressed event, emit) async {
     await DioClient.cancelSessionSchedule(sessionId);
+    await FirebaseDatabase.instance.ref("session-schedule/$sessionId/status").onValue.listen((event) { }).cancel();
     emit(const ConnectTeacherCancelState());
   }
 
@@ -47,24 +50,37 @@ class ConnectTeacherBloc
         TextDoc.txtFoundedTeacher));
 
     try {
-      final statusSessionScheduleRef = FirebaseDatabase.instance
-          .ref("/session-schedule/$sessionId/status");
-      statusSessionScheduleRef.onValue.listen((eventDatabase) async {
-        final data = eventDatabase.snapshot.value;
-        print('DATA: $data');
-        if (data.toString() == 'ROUTING') {
-          emit(const ConnectTeacherConnectDoneState(
-              'Launching session'));
-        } else if (data.toString() == 'TIME_OUT') {
-          emit(const ConnectTeacherConnectDoneState('TIMEOUT'));
+      String currentStatus = '';
+      final events = FirebaseDatabase.instance.ref("session-schedule/$sessionId/status").onValue;
+      await for (var status in events) {
+        currentStatus = status.snapshot.value.toString();
+        switch (currentStatus) {
+          case 'PICKED_UP':
+            emit(ConnectTeacherConnectDoneState(TextDoc.txtConnectedTeacher));
+            break;
+          case 'CANCELLED':
+            await events.listen((event) { }).cancel();
+            emit(ConnectTeacherConnectErrorState(TextDoc.txtCancelledContent, TextDoc.txtCancelledTitle, ConnectFailure.TEACHER_CANCELLATION));
+            break;
+          case 'TIME_OUT':
+            await events.listen((event) { }).cancel();
+            await DioClient.cancelSessionSchedule(sessionId);
+            emit(ConnectTeacherConnectErrorState(TextDoc.txtNotTeacherAvailableContent, TextDoc.txtNotTeacherAvailableTitle, ConnectFailure.NOT_FOUND_TEACHER));
+            break;
+          default:
+            break;
         }
-      });
+      }
     } catch (exception) {
       print('EXCEPTION WHEN LISTEN CHANGE: $exception');
     }
   }
 
-  void _onTryConnect(ConnectTeacherTryConnect event, emit) {}
+  void _onTryInternetConnect(ConnectTeacherTryInternetConnect event, emit) {
 
-  void _onFindOtherTeacher(ConnectTeacherFindOtherTeacher event, emit) {}
+  }
+
+  void _onFindOtherTeacher(ConnectTeacherFindOtherTeacher event, emit) {
+    add(ConnectTeacherInit(topicId));
+  }
 }
