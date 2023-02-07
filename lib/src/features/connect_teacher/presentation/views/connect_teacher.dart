@@ -45,7 +45,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                         onPressed: () {
                           pContext
                               .read<ConnectTeacherBloc>()
-                              .add(ConnectTeacherTryConnect());
+                              .add(ConnectTeacherTryInternetConnect());
                         },
                       )
                     ]
@@ -66,6 +66,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                           ),
                         ]
                       : [
+                          // state.failureType == ConnectFailure.NOT_FOUND_TEACHER
                           AppFilledButton(
                             text: TextDoc.txtGoBack,
                             onPressed: () {
@@ -145,11 +146,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 24),
                         child: Text(
-                          state is ConnectTeacherLoadingState
-                              ? TextDoc.txtFindTeacher
-                              : state is ConnectTeacherConnectDoneState
-                                  ? "Connected to <teacher's name>\nLaunching session..."
-                                  : TextDoc.txtFoundedTeacher,
+                          state.message,
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),

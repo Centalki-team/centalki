@@ -33,4 +33,10 @@ class TextDoc {
   static String get txtNotSignInTitle => 'Failure to connect';
   static String get txtSuccessfullyCancel => 'Successfully Cancel';
   static String get txtOk => 'OK';
+  static String get txtConnectedTeacher => 'Connected to teacher. Launching session...';
+  static String get txtCancelledTitle => 'Cancelled session';
+  static String get txtCancelledContent => '''The teacher cancelled this session.
+  Do you want to try with another?''';
+  static String get txtNotTeacherAvailableTitle => 'No teacher available';
+  static String get txtNotTeacherAvailableContent => 'You can try again after 5 minutes';
 }
