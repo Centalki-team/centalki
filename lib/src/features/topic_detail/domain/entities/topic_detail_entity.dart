@@ -27,12 +27,12 @@ class TopicQuestionEntity {
 class TopicPhraseEntity {
   const TopicPhraseEntity({
     this.topicPhrase,
-    this.phraseMeanings,
+    this.phraseTranslations,
     this.phraseExamples,
   });
 
   final String? topicPhrase;
-  final List<String>? phraseMeanings;
+  final List<PhraseTranslationEntity>? phraseTranslations;
   final List<PhraseExampleEntity>? phraseExamples;
 }
 
@@ -40,4 +40,10 @@ class PhraseExampleEntity {
   const PhraseExampleEntity({this.phraseExample});
 
   final String? phraseExample;
+}
+
+class PhraseTranslationEntity {
+  const PhraseTranslationEntity({this.phraseMeaning});
+
+  final String? phraseMeaning;
 }
