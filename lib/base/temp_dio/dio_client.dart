@@ -36,6 +36,10 @@ class DioClient {
       throw Exception('ERROR\nTopic does not exist.');
     }
 
-    return TopicDetailModel.fromJson(response.data['data']);
+    try {
+      return TopicDetailModel.fromJson(response.data['data']);
+    } on Exception catch (e) {
+      throw Exception('ERROR\nTopic Model Mismatched.');
+    }
   }
 }
