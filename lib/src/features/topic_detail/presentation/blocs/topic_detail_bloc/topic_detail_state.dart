@@ -16,3 +16,11 @@ class TopicDetailLoadDoneState extends TopicDetailState {
 
   final TopicDetailEntity topicDetail;
 }
+
+class TopicDetailLoadFailedState extends TopicDetailState {
+  const TopicDetailLoadFailedState({
+    required this.errorMessage,
+  });
+
+  final String errorMessage;
+}

@@ -28,6 +28,14 @@ class DioClient {
     final response = await _dio.get(
       "$baseUrl/topic/$topicId",
     );
+
+    if (response.statusCode != 200) {
+      throw Exception('Error ${response.statusCode}\nCannot get detail for topic $topicId');
+    }
+    if (response.data.toString().isEmpty) {
+      throw Exception('ERROR\nTopic does not exist.');
+    }
+
     return TopicDetailModel.fromJson(response.data['data']);
   }
 }
