@@ -131,6 +131,20 @@ class _TopicDetailViewState extends State<TopicDetailView> {
               ),
             );
           }
+          if (state is TopicDetailLoadFailedState) {
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Text(
+                  state.errorMessage,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: colorScheme.error
+                  ),
+                ),
+              ),
+            );
+          }
           return const Center(
             child: CircularProgressIndicator(),
           );
