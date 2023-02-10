@@ -23,7 +23,10 @@ class LoadingManager {
     LoadingManager._overlayEntry = null;
   }
 
-  static void setLoading(bool loading, BuildContext context) {
+  static void setLoading(
+    BuildContext context, {
+    bool loading = false,
+  }) {
     if (loading) {
       if (LoadingManager._overlayEntry == null) {
         LoadingManager._showLoading(context: context);
