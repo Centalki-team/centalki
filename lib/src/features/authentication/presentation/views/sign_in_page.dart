@@ -8,10 +8,8 @@ class SignInPage extends StatelessWidget {
   const SignInPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SignInBloc(),
-      child: const SignInView(),
-    );
-  }
+  Widget build(BuildContext context) => BlocProvider(
+        create: (context) => SignInBloc(),
+        child: const SignInView(),
+      );
 }
