@@ -124,10 +124,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                       Expanded(
                         child: ListView(
                           padding: EdgeInsets.fromLTRB(
-                              screenAutoPadding16,
-                              widthView > 400 ? 50 : 80,
-                              screenAutoPadding16,
-                              0),
+                              screenAutoPadding16, widthView > 400 ? 50 : 80, screenAutoPadding16, 0),
                           children: [
                             GestureDetector(
                               onTap: () {},
