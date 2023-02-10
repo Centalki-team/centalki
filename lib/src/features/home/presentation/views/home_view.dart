@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../base/define/common_txt_style.dart';
 import '../../../../../base/widgets/internal_page.dart';
+import '../../../account/presentation/views/your_account/your_account_page.dart';
 import '../../../topics/presentation/views/select_topic_level/select_topic_level_page.dart';
 import '../../../../../base/define/app_text.dart';
 import '../../../../../base/widgets/bottom_bar/custom_bottom_nav.dart';
@@ -77,9 +78,10 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
                       controller: _tabController,
                       children: const [
                         SelectTopicLevelPage(),
-                        InternalPage(
+                        /*InternalPage(
                           title: 'Account Page',
-                        ),
+                        ),*/
+                        YourAccountPage(),
                         InternalPage(
                           title: 'Settings Page',
                         ),
