@@ -44,7 +44,7 @@ class DeleteAccountBloc extends Bloc<DeleteAccountEvent, DeleteAccountState> {
       }
     } on FirebaseAuthException catch (e) {
       emit(DeleteAccountLoadErrorState(e.message ?? ''));
-    } catch (exception) {
+    } on Exception catch (_) {
       emit(const DeleteAccountLoadErrorState(
           'Something wrong when delete account!\nTry again after some minutes.'));
     }
