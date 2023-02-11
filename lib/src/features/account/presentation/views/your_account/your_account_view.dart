@@ -17,10 +17,8 @@ class YourAccountView extends StatefulWidget {
 
 class _YourAccountViewState extends State<YourAccountView> {
   @override
-  Widget build(BuildContext context) {
-    return OrientationBuilder(
-      builder: (context, orientation) {
-        return LayoutBuilder(
+  Widget build(BuildContext context) => OrientationBuilder(
+      builder: (context, orientation) => LayoutBuilder(
           builder: (context, constraint) {
             final heightView = constraint.maxHeight;
             final widthView = constraint.maxWidth;
@@ -395,8 +393,6 @@ class _YourAccountViewState extends State<YourAccountView> {
               ),
             );
           },
-        );
-      },
+        ),
     );
-  }
 }
