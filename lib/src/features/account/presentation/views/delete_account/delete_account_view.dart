@@ -5,7 +5,7 @@ import '../../../../../../base/define/colors.dart';
 import '../../../../../../base/define/dimensions.dart';
 import '../../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../../base/define/text.dart';
-import '../../blocs/delete_account/delete_account_bloc.dart';
+import '../../blocs/delete_account_bloc/delete_account_bloc.dart';
 
 class DeleteAccountView extends StatelessWidget {
   const DeleteAccountView({Key? key}) : super(key: key);

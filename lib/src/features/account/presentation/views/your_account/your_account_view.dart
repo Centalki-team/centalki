@@ -6,6 +6,7 @@ import '../../../../../../base/define/dimensions.dart';
 import '../../../../../../base/define/text.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../blocs/your_account_bloc/your_account_bloc.dart';
+import '../change_password/change_password_page.dart';
 import '../delete_account/delete_account_page.dart';
 
 class YourAccountView extends StatefulWidget {
@@ -18,7 +19,7 @@ class YourAccountView extends StatefulWidget {
 class _YourAccountViewState extends State<YourAccountView> {
   @override
   Widget build(BuildContext context) => OrientationBuilder(
-      builder: (context, orientation) => LayoutBuilder(
+        builder: (context, orientation) => LayoutBuilder(
           builder: (context, constraint) {
             final heightView = constraint.maxHeight;
             final widthView = constraint.maxWidth;
@@ -122,7 +123,10 @@ class _YourAccountViewState extends State<YourAccountView> {
                       Expanded(
                         child: ListView(
                           padding: EdgeInsets.fromLTRB(
-                              screenAutoPadding16, widthView > 400 ? 50 : 80, screenAutoPadding16, 0),
+                              screenAutoPadding16,
+                              widthView > 400 ? 50 : 80,
+                              screenAutoPadding16,
+                              0),
                           children: [
                             GestureDetector(
                               onTap: () {},
@@ -225,7 +229,11 @@ class _YourAccountViewState extends State<YourAccountView> {
                               ),
                             ),
                             GestureDetector(
-                              onTap: () {},
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ChangePasswordPage())),
                               child: Card(
                                 surfaceTintColor: Colors.white,
                                 child: Padding(
@@ -394,5 +402,5 @@ class _YourAccountViewState extends State<YourAccountView> {
             );
           },
         ),
-    );
+      );
 }
