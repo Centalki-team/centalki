@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../../base/define/colors.dart';
 import '../../../../../../base/define/dimensions.dart';
 import '../../../../../../base/define/text.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../blocs/your_account_bloc/your_account_bloc.dart';
-
-const mainColor1 = Color(0xFF3AAFFF);
-const mainColor2 = Color(0xFFFFD033);
-const support = Color(0xFF55C885);
-const secondary = Color(0xFFFF8811);
-const mainColor2Surface = Color(0xFFFFE384);
-const error = Color(0xFFFD6363);
-const background = Color(0xFFE6E6EA);
+import '../delete_account/delete_account_page.dart';
 
 class YourAccountView extends StatefulWidget {
   const YourAccountView({Key? key}) : super(key: key);
@@ -80,53 +74,60 @@ class _YourAccountViewState extends State<YourAccountView> {
                                 ),
                               ),
                             ),
-                            orientation == Orientation.portrait || heightView > 400 ? Center(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  CircleAvatar(
-                                    backgroundColor: secondary,
-                                    maxRadius: (heightView / 8),
-                                    child: const Text('AN'),
-                                  ),
-                                  const SizedBox(
-                                    height: spaceBetweenLine18,
-                                  ),
-                                  const Text(
-                                    'Nguyễn Ngọc Mai Anh',
-                                    style: TextStyle(fontSize: 20),
-                                  ),
-                                ],
-                              ),
-                            ) : SizedBox(
-                              height: heightView / 2 - 30,
-                              child: Center(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    CircleAvatar(
-                                      backgroundColor: secondary,
-                                      maxRadius: (heightView / 8),
-                                      child: const Text('AN'),
+                            orientation == Orientation.portrait ||
+                                    heightView > 400
+                                ? Center(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        CircleAvatar(
+                                          backgroundColor: secondary,
+                                          maxRadius: (heightView / 8),
+                                          child: const Text('AN'),
+                                        ),
+                                        const SizedBox(
+                                          height: spaceBetweenLine18,
+                                        ),
+                                        const Text(
+                                          'Nguyễn Ngọc Mai Anh',
+                                          style: TextStyle(fontSize: 20),
+                                        ),
+                                      ],
                                     ),
-                                    const SizedBox(
-                                      width: spaceBetweenLine18,
+                                  )
+                                : SizedBox(
+                                    height: heightView / 2 - 30,
+                                    child: Center(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          CircleAvatar(
+                                            backgroundColor: secondary,
+                                            maxRadius: (heightView / 8),
+                                            child: const Text('AN'),
+                                          ),
+                                          const SizedBox(
+                                            width: spaceBetweenLine18,
+                                          ),
+                                          const Text(
+                                            'Nguyễn Ngọc Mai Anh',
+                                            style: TextStyle(fontSize: 20),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                    const Text(
-                                      'Nguyễn Ngọc Mai Anh',
-                                      style: TextStyle(fontSize: 20),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
+                                  ),
                           ],
                         ),
                       ),
                       Expanded(
                         child: ListView(
                           padding: EdgeInsets.fromLTRB(
-                              screenAutoPadding16, widthView > 400 ? 50 : 80, screenAutoPadding16, 0),
+                              screenAutoPadding16,
+                              widthView > 400 ? 50 : 80,
+                              screenAutoPadding16,
+                              0),
                           children: [
                             GestureDetector(
                               onTap: () {},
@@ -288,7 +289,11 @@ class _YourAccountViewState extends State<YourAccountView> {
                                         )).then((value) => value ?? false);
                                 if (confirmedDelete) {
                                   if (mounted) {
-                                    // TODO: navigate to ConfirmPasswordScreen
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const DeleteAccountPage()));
                                   }
                                 }
                               },
