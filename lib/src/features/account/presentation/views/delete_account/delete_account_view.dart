@@ -11,70 +11,69 @@ class DeleteAccountView extends StatelessWidget {
   const DeleteAccountView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return BlocListener<DeleteAccountBloc, DeleteAccountState>(
-      listener: (context, state) async {
-        if (state is DeleteAccountLoadingState) {
-          LoadingManager.setLoading(true, context);
-        } else {
-          LoadingManager.setLoading(false, context);
-          if (state is DeleteAccountLoadDoneState) {
-          } else if (state is DeleteAccountLoadErrorState) {
-            await showDialog(
-                barrierDismissible: false,
-                context: context,
-                builder: (context) => AlertDialog(
-                      icon: const Icon(
-                        Icons.error_outline,
-                        color: error,
-                      ),
-                      title: const Text('Delete result'),
-                      content: Flexible(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(state.message),
-                          ],
+  Widget build(BuildContext context) =>
+      BlocListener<DeleteAccountBloc, DeleteAccountState>(
+        listener: (context, state) async {
+          if (state is DeleteAccountLoadingState) {
+            LoadingManager.setLoading(context, loading: true);
+          } else {
+            LoadingManager.setLoading(context);
+            if (state is DeleteAccountLoadDoneState) {
+            } else if (state is DeleteAccountLoadErrorState) {
+              await showDialog(
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (context) => AlertDialog(
+                        icon: const Icon(
+                          Icons.error_outline,
+                          color: error,
                         ),
-                      ),
-                      actions: [
-                        TextButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: const Text('OK')),
-                      ],
-                    ));
+                        title: const Text('Delete result'),
+                        content: Flexible(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(state.message),
+                            ],
+                          ),
+                        ),
+                        actions: [
+                          TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: const Text('OK')),
+                        ],
+                      ));
+            }
           }
-        }
-      },
-      child: Scaffold(
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(
-              screenAutoPadding16, 24.0, screenAutoPadding16, 0),
-          child: Column(
-            children: [
-              const Text(
-                'Confirm delete',
-                style: TextStyle(
-                  fontSize: 24,
-                  //fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(
-                height: spaceBetweenLine20,
-              ),
-              Row(
-                children: [
-                  Text(
-                    TextDoc.txtPassword,
+        },
+        child: Scaffold(
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.fromLTRB(
+                screenAutoPadding16, 24.0, screenAutoPadding16, 0),
+            child: Column(
+              children: [
+                const Text(
+                  'Confirm delete',
+                  style: TextStyle(
+                    fontSize: 24,
+                    //fontWeight: FontWeight.bold,
                   ),
-                ],
-              ),
-              const SizedBox(
-                height: smallSpacing8,
-              ),
-              BlocBuilder<DeleteAccountBloc, DeleteAccountState>(
-                builder: (context, state) {
-                  return TextField(
+                ),
+                const SizedBox(
+                  height: spaceBetweenLine20,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      TextDoc.txtPassword,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: smallSpacing8,
+                ),
+                BlocBuilder<DeleteAccountBloc, DeleteAccountState>(
+                  builder: (context, state) => TextField(
                     onChanged: (value) => context
                         .read<DeleteAccountBloc>()
                         .add(DeleteAccountChangePasswordEvent(value)),
@@ -89,15 +88,13 @@ class DeleteAccountView extends StatelessWidget {
                           ? state.message
                           : null,
                     ),
-                  );
-                },
-              ),
-              const SizedBox(
-                height: spaceBetweenLine18,
-              ),
-              BlocBuilder<DeleteAccountBloc, DeleteAccountState>(
-                builder: (context, state) {
-                  return ElevatedButton(
+                  ),
+                ),
+                const SizedBox(
+                  height: spaceBetweenLine18,
+                ),
+                BlocBuilder<DeleteAccountBloc, DeleteAccountState>(
+                  builder: (context, state) => ElevatedButton(
                       onPressed: state is DeleteAccountPasswordValidState
                           ? () => context
                               .read<DeleteAccountBloc>()
@@ -108,20 +105,18 @@ class DeleteAccountView extends StatelessWidget {
                         foregroundColor: Colors.white,
                         minimumSize: const Size.fromHeight(48),
                       ),
-                      child: const Text('Confirm'));
-                },
-              ),
-              OutlinedButton(
-                onPressed: () => Navigator.pop(context),
-                style: OutlinedButton.styleFrom(
-                  minimumSize: const Size.fromHeight(48),
+                      child: const Text('Confirm')),
                 ),
-                child: const Text('Cancel'),
-              ),
-            ],
+                OutlinedButton(
+                  onPressed: () => Navigator.pop(context),
+                  style: OutlinedButton.styleFrom(
+                    minimumSize: const Size.fromHeight(48),
+                  ),
+                  child: const Text('Cancel'),
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-    );
-  }
+      );
 }
