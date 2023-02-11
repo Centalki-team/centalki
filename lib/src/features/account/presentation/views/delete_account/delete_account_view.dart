@@ -77,6 +77,7 @@ class DeleteAccountView extends StatelessWidget {
                     onChanged: (value) => context
                         .read<DeleteAccountBloc>()
                         .add(DeleteAccountChangePasswordEvent(value)),
+                    obscureText: true,
                     decoration: InputDecoration(
                       border: const OutlineInputBorder(),
                       errorBorder: const OutlineInputBorder(
