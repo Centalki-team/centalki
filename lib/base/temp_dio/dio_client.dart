@@ -34,7 +34,8 @@ class DioClient {
     );
 
     if (response.statusCode != 200) {
-      throw Exception('Error ${response.statusCode}\nCannot get detail for topic $topicId');
+      throw Exception(
+          'Error ${response.statusCode}\nCannot get detail for topic $topicId');
     }
     if (response.data.toString().isEmpty) {
       throw Exception('ERROR\nTopic does not exist.');
