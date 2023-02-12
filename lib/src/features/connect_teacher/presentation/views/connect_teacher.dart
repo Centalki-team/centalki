@@ -17,8 +17,8 @@ class ConnectTeacherView extends StatefulWidget {
 class _FindTeacherViewState extends State<ConnectTeacherView> {
   @override
   Widget build(BuildContext context) {
-    double width = -MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
+    var width = -MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
     final pContext = context;
 
     return BlocConsumer<ConnectTeacherBloc, ConnectTeacherState>(
@@ -104,8 +104,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                   ));
         }
       },
-      builder: (context, state) {
-        return Material(
+      builder: (context, state) => Material(
           color: const Color(0xffFFD033),
           child: SizedBox(
             height: height,
@@ -227,8 +226,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
               ],
             ),
           ),
-        );
-      },
+        ),
     );
   }
 }

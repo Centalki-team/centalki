@@ -18,7 +18,7 @@ class ConnectTeacherBloc
     on<ConnectTeacherFindOtherTeacher>(_onFindOtherTeacher);
   }
 
-  late final String sessionId;
+  String sessionId = '';
   late final String topicId;
 
   void _onInit(ConnectTeacherInit event, emit) async {
@@ -26,7 +26,7 @@ class ConnectTeacherBloc
 
     topicId = event.topicId;
     if (FirebaseAuth.instance.currentUser != null) {
-      final String studentId = FirebaseAuth.instance.currentUser?.uid ?? '';
+      final studentId = FirebaseAuth.instance.currentUser?.uid ?? '';
       final sessionSchedule =
           await DioClient.createNewSessionSchedule(studentId, topicId);
       sessionId = sessionSchedule.sessionId ?? '';
@@ -41,17 +41,22 @@ class ConnectTeacherBloc
   void _onCancelButtonPressed(
       ConnectTeacherCancelButtonPressed event, emit) async {
     await DioClient.cancelSessionSchedule(sessionId);
-    await FirebaseDatabase.instance.ref("session-schedule/$sessionId/status").onValue.listen((event) { }).cancel();
+    await FirebaseDatabase.instance
+        .ref("session-schedule/$sessionId/status")
+        .onValue
+        .listen((event) {})
+        .cancel();
     emit(const ConnectTeacherCancelState());
   }
 
   void _onConnectRoom(ConnectTeacherConnectRoom event, emit) async {
-    emit(ConnectTeacherConnectingRoomState(
-        TextDoc.txtFoundedTeacher));
+    emit(ConnectTeacherConnectingRoomState(TextDoc.txtFoundedTeacher));
 
     try {
-      String currentStatus = '';
-      final events = FirebaseDatabase.instance.ref("session-schedule/$sessionId/status").onValue;
+      var currentStatus = '';
+      final events = FirebaseDatabase.instance
+          .ref("session-schedule/$sessionId/status")
+          .onValue;
       await for (var status in events) {
         currentStatus = status.snapshot.value.toString();
         switch (currentStatus) {
@@ -59,26 +64,30 @@ class ConnectTeacherBloc
             emit(ConnectTeacherConnectDoneState(TextDoc.txtConnectedTeacher));
             break;
           case 'CANCELLED':
-            await events.listen((event) { }).cancel();
-            emit(ConnectTeacherConnectErrorState(TextDoc.txtCancelledContent, TextDoc.txtCancelledTitle, ConnectFailure.TEACHER_CANCELLATION));
+            await events.listen((event) {}).cancel();
+            emit(ConnectTeacherConnectErrorState(
+                TextDoc.txtCancelledContent,
+                TextDoc.txtCancelledTitle,
+                ConnectFailure.TEACHER_CANCELLATION));
             break;
           case 'TIME_OUT':
-            await events.listen((event) { }).cancel();
+            await events.listen((event) {}).cancel();
             await DioClient.cancelSessionSchedule(sessionId);
-            emit(ConnectTeacherConnectErrorState(TextDoc.txtNotTeacherAvailableContent, TextDoc.txtNotTeacherAvailableTitle, ConnectFailure.NOT_FOUND_TEACHER));
+            emit(ConnectTeacherConnectErrorState(
+                TextDoc.txtNotTeacherAvailableContent,
+                TextDoc.txtNotTeacherAvailableTitle,
+                ConnectFailure.NOT_FOUND_TEACHER));
             break;
           default:
             break;
         }
       }
-    } catch (exception) {
+    } on Exception catch (exception) {
       print('EXCEPTION WHEN LISTEN CHANGE: $exception');
     }
   }
 
-  void _onTryInternetConnect(ConnectTeacherTryInternetConnect event, emit) {
-
-  }
+  void _onTryInternetConnect(ConnectTeacherTryInternetConnect event, emit) {}
 
   void _onFindOtherTeacher(ConnectTeacherFindOtherTeacher event, emit) {
     add(ConnectTeacherInit(topicId));
