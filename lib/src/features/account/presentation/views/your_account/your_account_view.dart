@@ -8,6 +8,7 @@ import '../../../../../../base/widgets/buttons/button.dart';
 import '../../blocs/your_account_bloc/your_account_bloc.dart';
 import '../change_password/change_password_page.dart';
 import '../delete_account/delete_account_page.dart';
+import '../student_profile/student_profile_page.dart';
 
 class YourAccountView extends StatefulWidget {
   const YourAccountView({Key? key}) : super(key: key);
@@ -129,7 +130,13 @@ class _YourAccountViewState extends State<YourAccountView> {
                               0),
                           children: [
                             GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) =>
+                                            const StudentProfilePage()));
+                              },
                               child: Card(
                                 surfaceTintColor: Colors.white,
                                 child: Padding(
