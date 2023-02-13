@@ -1,8 +1,9 @@
+import 'package:dio/dio.dart';
+
 import '../../src/features/topic_detail/data/datasources/topics_datasource/remote_data/model/topic_detail_model.dart';
 import '../../src/features/topic_detail/domain/entities/topic_detail_entity.dart';
 import '../../src/features/topics/data/datasources/topics_datasource/remote_data/model/topic_model.dart';
 import '../../src/features/topics/domain/entities/topic_item_entity.dart';
-import 'package:dio/dio.dart';
 
 class DioClient {
   static final Dio _dio = Dio();
