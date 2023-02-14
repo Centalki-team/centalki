@@ -78,3 +78,5 @@ const mainColor2Surface = Color(0xFFFFE384);
 const error = Color(0xFFFD6363);
 const background = Color(0xFFE6E6EA);
 const defaultFont = Color(0xFF1B1B2A);
+const tertiary = Color(0xFFA55FEF);
+const shadowColor = Color(0xFF9D9DAD);
