@@ -6,6 +6,7 @@ import '../../../../../../base/define/dimensions.dart';
 import '../../../../../../base/define/text.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../blocs/your_account_bloc/your_account_bloc.dart';
+import '../account_information/account_information_page.dart';
 import '../change_password/change_password_page.dart';
 import '../delete_account/delete_account_page.dart';
 import '../student_profile/student_profile_page.dart';
@@ -211,7 +212,13 @@ class _YourAccountViewState extends State<YourAccountView> {
                               ),
                             ),
                             GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const AccountInformationPage()));
+                              },
                               child: Card(
                                 surfaceTintColor: Colors.white,
                                 child: Padding(
