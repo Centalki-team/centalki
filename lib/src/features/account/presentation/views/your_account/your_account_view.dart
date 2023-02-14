@@ -10,6 +10,7 @@ import '../account_information/account_information_page.dart';
 import '../change_password/change_password_page.dart';
 import '../delete_account/delete_account_page.dart';
 import '../student_profile/student_profile_page.dart';
+import '../wallet/wallet_page.dart';
 
 class YourAccountView extends StatefulWidget {
   const YourAccountView({Key? key}) : super(key: key);
@@ -162,7 +163,13 @@ class _YourAccountViewState extends State<YourAccountView> {
                               ),
                             ),
                             GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) =>
+                                        const WalletPage()));
+                              },
                               child: Card(
                                 surfaceTintColor: Colors.white,
                                 child: Padding(
