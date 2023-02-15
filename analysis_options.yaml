@@ -22,65 +22,6 @@ linter:
   # `// ignore_for_file: name_of_lint` syntax on the line or in the file
   # producing the lint.
   rules:
-    camel_case_types: true
-    camel_case_extensions: true
-    library_names: true
-    file_names: true
-    library_prefixes: true
-    non_constant_identifier_names: true
-    constant_identifier_names: true
-    directives_ordering: true
-    curly_braces_in_flow_control_structures: true
-    slash_for_doc_comments: true
-    package_api_docs: false
-    public_member_api_docs: false
-    comment_references: true
-    implementation_imports: true
-    avoid_relative_lib_imports: true
-    prefer_relative_imports: true
-    avoid_init_to_null: true
-    prefer_adjacent_string_concatenation: true
-    prefer_interpolation_to_compose_strings: true
-    unnecessary_brace_in_string_interps: true
-    prefer_collection_literals: true
-    prefer_is_empty: true
-    prefer_is_not_empty: true
-    avoid_function_literals_in_foreach_calls: true
-    prefer_iterable_wheretype: true
-    prefer_function_declarations_over_variables: true
-    unnecessary_lambdas: true
-    unnecessary_getters_setters: true
-    prefer_expression_function_bodies: true
-    unnecessary_this: true
-    prefer_initializing_formals: true
-    empty_constructor_bodies: true
-    unnecessary_new: true
-    unnecessary_const: true
-    avoid_catches_without_on_clauses: true
-    avoid_catching_errors: true
-    use_rethrow_when_possible: true
-    use_to_and_as_if_applicable: true
-    one_member_abstracts: false
-    avoid_classes_with_only_static_members: false
-    prefer_mixin: true
-    prefer_final_fields: true
-    use_setters_to_change_properties: true
-    avoid_setters_without_getters: true
-    avoid_returning_this: true
-    prefer_typing_uninitialized_variables: true
-    type_annotate_public_apis: false
-    omit_local_variable_types: true
-    avoid_types_on_closure_parameters: true
-    type_init_formals: true
-    avoid_return_types_on_setters: true
-    prefer_generic_function_type_aliases: true
-    avoid_private_typedef_functions: true
-    use_function_type_syntax_for_parameters: true
-    avoid_positional_boolean_parameters: true
-    hash_and_equals: true
-    avoid_equals_and_hash_code_on_mutable_classes: true
-    avoid_null_checks_in_equality_operators:
-      true
     # avoid_print: false  # Uncomment to disable the `avoid_print` rule
     # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
 

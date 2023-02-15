@@ -29,9 +29,9 @@ class PhraseCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: smallSpacing4),
-          ...phraseEntity.phraseTranslations!.map(
+          ...phraseEntity.phraseMeanings!.map(
             (e) => Text(
-              e.phraseMeaning ?? 'null meaning',
+              e,
               style: const TextStyle(
                 fontSize: labelLargeSize,
                 fontWeight: labelLargeWeight,

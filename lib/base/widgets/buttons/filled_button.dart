@@ -9,7 +9,7 @@ class AppFilledButton extends StatefulWidget {
     this.onPressed,
     required this.text,
     this.icon,
-    this.minimumSize,
+    this.minimumSize
   }) : super(key: key);
 
   final void Function()? onPressed;
@@ -23,44 +23,46 @@ class AppFilledButton extends StatefulWidget {
 
 class _AppFilledButtonState extends State<AppFilledButton> {
   @override
-  Widget build(BuildContext context) => widget.icon == null
-      ? ElevatedButton(
-          onPressed: widget.onPressed == null ? null : widget.onPressed!,
-          style: ElevatedButton.styleFrom(
-            backgroundColor: colorScheme.primary,
-            foregroundColor: colorScheme.onPrimary,
-            textStyle: const TextStyle(
-              fontSize: labelLargeSize,
-              fontWeight: labelLargeWeight,
+  Widget build(BuildContext context) {
+    return widget.icon == null
+        ? ElevatedButton(
+            onPressed: widget.onPressed == null ? null : widget.onPressed!,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: colorScheme.primary,
+              foregroundColor: colorScheme.onPrimary,
+              textStyle: const TextStyle(
+                fontSize: labelLargeSize,
+                fontWeight: labelLargeWeight,
+              ),
+              elevation: 0.0,
+              shadowColor: colorScheme.shadow,
+              minimumSize: widget.minimumSize,
             ),
-            elevation: 0.0,
-            shadowColor: colorScheme.shadow,
-            minimumSize: widget.minimumSize,
-          ),
-          child: Text(
-            widget.text,
-          ),
-        )
-      : ElevatedButton.icon(
-          onPressed: widget.onPressed == null ? null : widget.onPressed!,
-          style: ElevatedButton.styleFrom(
-            backgroundColor: colorScheme.primary,
-            foregroundColor: colorScheme.onPrimary,
-            textStyle: const TextStyle(
-              fontSize: labelLargeSize,
-              fontWeight: labelLargeWeight,
+            child: Text(
+              widget.text,
             ),
-            elevation: 0.0,
-            shadowColor: colorScheme.shadow,
-            minimumSize: widget.minimumSize,
-          ),
-          icon: Icon(
-            widget.icon!,
-            size: iconButtonSize,
-            color: colorScheme.onPrimary,
-          ),
-          label: Text(
-            widget.text,
-          ),
-        );
+          )
+        : ElevatedButton.icon(
+            onPressed: widget.onPressed == null ? null : widget.onPressed!,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: colorScheme.primary,
+              foregroundColor: colorScheme.onPrimary,
+              textStyle: const TextStyle(
+                fontSize: labelLargeSize,
+                fontWeight: labelLargeWeight,
+              ),
+              elevation: 0.0,
+              shadowColor: colorScheme.shadow,
+              minimumSize: widget.minimumSize,
+            ),
+            icon: Icon(
+              widget.icon!,
+              size: iconButtonSize,
+              color: colorScheme.onPrimary,
+            ),
+            label: Text(
+              widget.text,
+            ),
+          );
+  }
 }

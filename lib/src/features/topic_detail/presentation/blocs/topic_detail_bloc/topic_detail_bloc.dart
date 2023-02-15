@@ -15,14 +15,12 @@ class TopicDetailBloc extends Bloc<TopicDetailEvent, TopicDetailState> {
     add(const TopicDetailInitEvent());
   }
 
-  void _onInit(TopicDetailInitEvent event, emit) {}
+  void _onInit(TopicDetailInitEvent event, emit) {
+    // add(const TopicDetailLoadEvent());
+  }
 
   void _onLoad(TopicDetailLoadEvent event, emit) async {
-    try {
-      final topicDetail = await DioClient.getTopicDetailById(event.topicId);
-      emit(TopicDetailLoadDoneState(topicDetail: topicDetail));
-    } on Exception catch (e) {
-      emit(TopicDetailLoadFailedState(errorMessage: e.toString().substring(11)));
-    }
+    final topicDetail = await DioClient.getTopicDetailById(event.topicId);
+    emit(TopicDetailLoadDoneState(topicDetail: topicDetail));
   }
 }

@@ -101,13 +101,13 @@ class TopicPhraseModel extends TopicPhraseEntity {
     this.topicId,
     this.examples,
     this.phonetic,
-    this.translations,
+    this.meanings,
     this.phrase,
     this.updatedAt,
     this.createdAt,
   }) : super(
           topicPhrase: phrase,
-          phraseTranslations: translations,
+          phraseMeanings: meanings,
           phraseExamples: examples,
         );
 
@@ -115,7 +115,7 @@ class TopicPhraseModel extends TopicPhraseEntity {
   final String? topicId;
   final List<PhraseExampleModel>? examples;
   final String? phonetic;
-  final List<PhraseTranslationModel>? translations;
+  final List<String>? meanings;
   final String? phrase;
   final String? updatedAt;
   final String? createdAt;
@@ -129,27 +129,31 @@ class TopicPhraseModel extends TopicPhraseEntity {
 @JsonSerializable()
 class PhraseExampleModel extends PhraseExampleEntity {
   PhraseExampleModel({
-    this.sentence,
-  }) : super(phraseExample: sentence);
+    this.permalink,
+    this.currentVote,
+    this.example,
+    this.author,
+    this.word,
+    this.thumbsUp,
+    this.defid,
+    this.thumbsDown,
+    this.writtenOn,
+    this.definition,
+  }) : super(phraseExample: example);
 
-  final String? sentence;
+  final String? permalink;
+  final String? currentVote;
+  final String? example;
+  final String? author;
+  final String? word;
+  final int? thumbsUp;
+  final int? defid;
+  final int? thumbsDown;
+  final String? writtenOn;
+  final String? definition;
 
   factory PhraseExampleModel.fromJson(Map<String, dynamic> json) =>
       _$PhraseExampleModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$PhraseExampleModelToJson(this);
-}
-
-@JsonSerializable()
-class PhraseTranslationModel extends PhraseTranslationEntity {
-  PhraseTranslationModel({
-    this.meaning,
-  }) : super(phraseMeaning: meaning);
-
-  final String? meaning;
-
-  factory PhraseTranslationModel.fromJson(Map<String, dynamic> json) =>
-      _$PhraseTranslationModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$PhraseTranslationModelToJson(this);
 }

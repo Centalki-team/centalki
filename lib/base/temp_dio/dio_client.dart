@@ -1,5 +1,3 @@
-import '../../src/features/connect_teacher/data/datasources/schedule_datasource/remote_data/model/session_schedule_model.dart';
-import '../../src/features/connect_teacher/domain/entities/session_schedule_entity.dart';
 import '../../src/features/topic_detail/data/datasources/topics_datasource/remote_data/model/topic_detail_model.dart';
 import '../../src/features/topic_detail/domain/entities/topic_detail_entity.dart';
 import '../../src/features/topics/data/datasources/topics_datasource/remote_data/model/topic_model.dart';
