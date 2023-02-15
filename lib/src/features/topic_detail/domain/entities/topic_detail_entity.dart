@@ -1,5 +1,6 @@
 class TopicDetailEntity {
   const TopicDetailEntity({
+    this.topicId,
     this.topicName,
     this.topicImage,
     this.topicDescription,
@@ -9,6 +10,7 @@ class TopicDetailEntity {
     this.topicPhrases,
   });
 
+  final String? topicId;
   final String? topicName;
   final String? topicImage;
   final String? topicDescription;
