@@ -52,7 +52,6 @@ class DioClient {
   static Future<SessionScheduleEntity> createNewSessionSchedule(
       String studentId, String topicId) async {
     try {
-      print(topicId);
       final response = await _dio.post("$baseUrl/session-schedule", data: {
         "studentId": studentId,
         "topicId": topicId,
@@ -69,8 +68,7 @@ class DioClient {
         default:
           throw Exception('Try again later!');
       }
-    } on Exception catch (e) {
-      print(e);
+    } on Exception catch (_) {
       throw Exception('Something was wrong. Please try again later!');
     }
   }
