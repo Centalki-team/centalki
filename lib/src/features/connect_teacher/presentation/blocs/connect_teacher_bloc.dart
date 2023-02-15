@@ -26,12 +26,17 @@ class ConnectTeacherBloc
 
     topicId = event.topicId;
     if (FirebaseAuth.instance.currentUser != null) {
-      final studentId = FirebaseAuth.instance.currentUser?.uid ?? '';
-      final sessionSchedule =
-          await DioClient.createNewSessionSchedule(studentId, topicId);
-      sessionId = sessionSchedule.sessionId ?? '';
-      print(sessionSchedule.sessionId);
-      emit(ConnectTeacherLoadDoneState(TextDoc.txtFindTeacher));
+      try {
+        final studentId = FirebaseAuth.instance.currentUser?.uid ?? '';
+        final sessionSchedule =
+            await DioClient.createNewSessionSchedule(studentId, topicId);
+        sessionId = sessionSchedule.sessionId ?? '';
+        print(sessionSchedule.sessionId);
+        emit(ConnectTeacherLoadDoneState(TextDoc.txtFindTeacher));
+      } on Exception catch (e) {
+        var message = e.toString().split("Exception: ")[1];
+        emit(ConnectTeacherLoadFailureState(message));
+      }
     } else {
       emit(ConnectTeacherConnectErrorState(TextDoc.txtNotSignIn,
           TextDoc.txtNotSignInTitle, ConnectFailure.notSignIn));
@@ -40,12 +45,12 @@ class ConnectTeacherBloc
 
   void _onCancelButtonPressed(
       ConnectTeacherCancelButtonPressed event, emit) async {
-    await DioClient.cancelSessionSchedule(sessionId);
     await FirebaseDatabase.instance
         .ref("session-schedule/$sessionId/status")
         .onValue
         .listen((event) {})
         .cancel();
+    await DioClient.cancelSessionSchedule(sessionId);
     emit(const ConnectTeacherCancelState());
   }
 
@@ -65,10 +70,8 @@ class ConnectTeacherBloc
             break;
           case 'CANCELLED':
             await events.listen((event) {}).cancel();
-            emit(ConnectTeacherConnectErrorState(
-                TextDoc.txtCancelledContent,
-                TextDoc.txtCancelledTitle,
-                ConnectFailure.teacherCancellation));
+            emit(ConnectTeacherConnectErrorState(TextDoc.txtCancelledContent,
+                TextDoc.txtCancelledTitle, ConnectFailure.teacherCancellation));
             break;
           case 'TIME_OUT':
             await events.listen((event) {}).cancel();

@@ -14,6 +14,11 @@ class ConnectTeacherLoadingState extends ConnectTeacherState {
   const ConnectTeacherLoadingState(String message) : super(message: message);
 }
 
+class ConnectTeacherLoadFailureState extends ConnectTeacherState {
+  const ConnectTeacherLoadFailureState(String message)
+      : super(message: message);
+}
+
 class ConnectTeacherLoadDoneState extends ConnectTeacherState {
   const ConnectTeacherLoadDoneState(String message) : super(message: message);
 }

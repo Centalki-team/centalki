@@ -27,6 +27,27 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
           context
               .read<ConnectTeacherBloc>()
               .add(const ConnectTeacherConnectRoom());
+        } else if (state is ConnectTeacherLoadFailureState) {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              icon: const Icon(
+                Icons.warning_amber_outlined,
+                color: Colors.redAccent,
+              ),
+              title: const Text('Create session failed!'),
+              content: Text(state.message),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  },
+                  child: Text(TextDoc.txtOk),
+                ),
+              ],
+            ),
+          );
         } else if (state is ConnectTeacherConnectErrorState) {
           showDialog(
             context: context,
@@ -116,17 +137,23 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                 alignment: Alignment.bottomCenter,
                 child: Wave(
                   widthScreen: width,
-                  heightScreen: state is ConnectTeacherLoadingState ||
-                          state is ConnectTeacherInitState
+                  heightScreen: (state is ConnectTeacherLoadingState ||
+                          state is ConnectTeacherInitState ||
+                          state is ConnectTeacherLoadFailureState)
                       ? height * 1 / 3
-                      : state is ConnectTeacherConnectDoneState
+                      : (state is ConnectTeacherConnectDoneState)
                           ? height
                           : height * 2 / 3,
-                  colors: state is ConnectTeacherLoadingState
+                  colors: state is ConnectTeacherLoadingState ||
+                          state is ConnectTeacherInitState
                       ? [const Color(0xffFF8811)]
-                      : state is ConnectTeacherConnectDoneState
-                          ? [const Color(0xff55C885)]
-                          : [const Color(0xff3AAFFF)],
+                      : (state is ConnectTeacherLoadFailureState ||
+                              state is ConnectTeacherConnectErrorState ||
+                              state is ConnectTeacherCancelState)
+                          ? [const Color(0xFFFD6363)]
+                          : state is ConnectTeacherConnectDoneState
+                              ? [const Color(0xff55C885)]
+                              : [const Color(0xff3AAFFF)],
                   pick: state is ConnectTeacherConnectDoneState ? 0 : 24,
                   amount: 12,
                 ),
@@ -156,69 +183,68 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
               ),
               Positioned(
                 bottom: height * 0.1,
-                child: ElevatedButton(
-                  onPressed: () async {
-                    final result = await showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        title: Text(
-                          TextDoc.txtCancelTitle,
-                          textAlign: TextAlign.center,
-                        ),
-                        content: Text(
-                          TextDoc.txtCancelContent,
-                          textAlign: TextAlign.center,
-                        ),
-                        actions: [
-                          Row(
-                            children: [
-                              Expanded(
-                                child: TextButton(
-                                  style: TextButton.styleFrom(
-                                      side:
-                                          const BorderSide(color: Colors.grey)),
-                                  onPressed: () =>
-                                      Navigator.pop(context, false),
-                                  child: Text(TextDoc.txtNo),
-                                ),
+                child: state is ConnectTeacherConnectDoneState
+                    ? Container()
+                    : ElevatedButton.icon(
+                        onPressed: () async {
+                          final result = await showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: Text(
+                                TextDoc.txtCancelTitle,
+                                textAlign: TextAlign.center,
                               ),
-                              const SizedBox(width: smallSpacing10),
-                              Expanded(
-                                child: TextButton(
-                                  style: TextButton.styleFrom(
-                                      backgroundColor: Colors.blue),
-                                  onPressed: () => Navigator.pop(context, true),
-                                  child: Text(
-                                    TextDoc.txtYes,
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                ),
+                              content: Text(
+                                TextDoc.txtCancelContent,
+                                textAlign: TextAlign.center,
                               ),
-                            ],
-                          ),
-                        ],
+                              actions: [
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: TextButton(
+                                        style: TextButton.styleFrom(
+                                            side: const BorderSide(
+                                                color: Colors.grey)),
+                                        onPressed: () =>
+                                            Navigator.pop(context, false),
+                                        child: Text(TextDoc.txtNo),
+                                      ),
+                                    ),
+                                    const SizedBox(width: smallSpacing10),
+                                    Expanded(
+                                      child: TextButton(
+                                        style: TextButton.styleFrom(
+                                            backgroundColor: Colors.blue),
+                                        onPressed: () =>
+                                            Navigator.pop(context, true),
+                                        child: Text(
+                                          TextDoc.txtYes,
+                                          style: const TextStyle(
+                                              color: Colors.white),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ).then((value) => value ?? false);
+                          if (result) {
+                            if (mounted) {
+                              context.read<ConnectTeacherBloc>().add(
+                                  const ConnectTeacherCancelButtonPressed());
+                            }
+                          }
+                        },
+                        icon: const Icon(Icons.close_rounded,
+                            color: Colors.redAccent),
+                        label: Text(
+                          TextDoc.txtCancel,
+                          style: const TextStyle(
+                              fontSize: 18, color: Colors.redAccent),
+                        ),
                       ),
-                    ).then((value) => value ?? false);
-                    if (result) {
-                      if (mounted) {
-                        context
-                            .read<ConnectTeacherBloc>()
-                            .add(const ConnectTeacherCancelButtonPressed());
-                      }
-                    }
-                  },
-                  child: Row(
-                    children: [
-                      const Icon(Icons.close_rounded, color: Colors.redAccent),
-                      const SizedBox(width: smallSpacing4),
-                      Text(
-                        TextDoc.txtCancel,
-                        style: const TextStyle(
-                            fontSize: 18, color: Colors.redAccent),
-                      ),
-                    ],
-                  ),
-                ),
               )
             ],
           ),

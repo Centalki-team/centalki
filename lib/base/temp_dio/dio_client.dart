@@ -51,11 +51,28 @@ class DioClient {
 
   static Future<SessionScheduleEntity> createNewSessionSchedule(
       String studentId, String topicId) async {
-    final response = await _dio.post("$baseUrl/session-schedule", data: {
-      "studentId": studentId,
-      "topicId": topicId,
-    });
-    return SessionScheduleModel.fromJson(response.data);
+    try {
+      print(topicId);
+      final response = await _dio.post("$baseUrl/session-schedule", data: {
+        "studentId": studentId,
+        "topicId": topicId,
+      });
+      return SessionScheduleModel.fromJson(response.data);
+    } on DioError catch (dioError) {
+      switch (dioError.response?.statusCode) {
+        case 402:
+          throw Exception('Insufficient balance.\nPlease refill your wallet.');
+        case 404:
+          throw Exception('Topic does not exist.');
+        case 409:
+          throw Exception('The student has already been in another session.');
+        default:
+          throw Exception('Try again later!');
+      }
+    } on Exception catch (e) {
+      print(e);
+      throw Exception('Something was wrong. Please try again later!');
+    }
   }
 
   static Future<void> cancelSessionSchedule(String sessionId) async {
