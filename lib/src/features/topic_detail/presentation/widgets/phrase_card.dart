@@ -14,21 +14,29 @@ class PhraseCard extends StatelessWidget {
   final TopicPhraseEntity phraseEntity;
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
+  Widget build(BuildContext context) => Container(
       padding: const EdgeInsets.all(8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            phraseEntity.topicPhrase ?? 'null',
+            phraseEntity.topicPhrase ?? 'null phrase',
             style: TextStyle(
               fontSize: titleMediumSize,
               fontWeight: titleMediumWeight,
               color: colorScheme.primary,
             ),
           ),
-          const SizedBox(height: smallSpacing4),
+          const SizedBox(height: smallSpacing1),
+          Text(
+            phraseEntity.phrasePhonetic ?? 'no phonetic',
+            style: TextStyle(
+              fontSize: titleSmallSize,
+              fontWeight: titleSmallWeight,
+              color: colorScheme.onBackground,
+            ),
+          ),
+          const SizedBox(height: smallSpacing8),
           ...phraseEntity.phraseTranslations!.map(
             (e) => Text(
               e.phraseMeaning ?? 'null meaning',
@@ -58,7 +66,6 @@ class PhraseCard extends StatelessWidget {
         ],
       ),
     );
-  }
 }
 
 // return Container(

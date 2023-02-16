@@ -29,11 +29,13 @@ class TopicQuestionEntity {
 class TopicPhraseEntity {
   const TopicPhraseEntity({
     this.topicPhrase,
+    this.phrasePhonetic,
     this.phraseTranslations,
     this.phraseExamples,
   });
 
   final String? topicPhrase;
+  final String? phrasePhonetic;
   final List<PhraseTranslationEntity>? phraseTranslations;
   final List<PhraseExampleEntity>? phraseExamples;
 }
