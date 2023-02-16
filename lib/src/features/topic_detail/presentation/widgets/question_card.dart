@@ -15,8 +15,7 @@ class QuestionCard extends StatelessWidget {
   final String questionContent;
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
+  Widget build(BuildContext context) => Container(
       padding: const EdgeInsets.all(8),
       color: colorScheme.surface,
       child: Row(
@@ -55,5 +54,4 @@ class QuestionCard extends StatelessWidget {
         ],
       ),
     );
-  }
 }

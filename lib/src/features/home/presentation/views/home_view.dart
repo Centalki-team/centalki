@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../base/define/common_txt_style.dart';
-import '../../../../../base/widgets/internal_page.dart';
-import '../../../topics/presentation/views/select_topic_level/select_topic_level_page.dart';
 import '../../../../../base/define/app_text.dart';
+import '../../../../../base/define/common_txt_style.dart';
 import '../../../../../base/widgets/bottom_bar/custom_bottom_nav.dart';
+import '../../../../../base/widgets/internal_page.dart';
 import '../../../../../gen/assets.gen.dart';
+import '../../../topics/presentation/views/select_topic_level/select_topic_level_page.dart';
 import '../blocs/home_bloc/home_bloc.dart';
 
 class HomeView extends StatefulWidget {
@@ -38,8 +38,7 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
   }
 
   @override
-  Widget build(BuildContext context) {
-    return BlocListener<HomeBloc, HomeState>(
+  Widget build(BuildContext context) => BlocListener<HomeBloc, HomeState>(
       listener: (context, state) {
         if (state is HomeChangeTabState) {
           _tabController.index = state.currentTab;
@@ -116,5 +115,4 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
         },
       ),
     );
-  }
 }

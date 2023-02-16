@@ -67,38 +67,3 @@ class PhraseCard extends StatelessWidget {
       ),
     );
 }
-
-// return Container(
-// padding: const EdgeInsets.all(8),
-// child: Column(
-// crossAxisAlignment: CrossAxisAlignment.start,
-// children: [
-// Text(
-// 'exercise (noun, countable)',
-// style: TextStyle(
-// fontSize: titleMediumSize,
-// fontWeight: titleMediumWeight,
-// color: colorScheme.primary,
-// ),
-// ),
-// const SizedBox(height: smallSpacing4),
-// const Text(
-// 'bài thể dục bài tập',
-// style: TextStyle(
-// fontSize: labelLargeSize,
-// fontWeight: labelLargeWeight,
-// ),
-// ),
-// const SizedBox(height: smallSpacing4),
-// const Text(
-// 'Example',
-// style: TextStyle(
-// fontSize: bodyMediumSize,
-// fontWeight: bodyMediumWeight,
-// ),
-// ),
-// const Text(' - Sentence 1'),
-// const Text(' - Sentence 2')
-// ],
-// ),
-// );

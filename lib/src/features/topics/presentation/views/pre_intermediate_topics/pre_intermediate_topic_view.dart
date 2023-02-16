@@ -15,8 +15,7 @@ class PreIntermediateTopicView extends StatefulWidget {
 
 class _PreIntermediateTopicViewState extends State<PreIntermediateTopicView> {
   @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<PreIntermediateTopicsBloc, PreIntermediateTopicsState>(
+  Widget build(BuildContext context) => BlocBuilder<PreIntermediateTopicsBloc, PreIntermediateTopicsState>(
       builder: (context, state) {
         if (state is PreIntermediateTopicsLoadDoneState) {
           return Padding(
@@ -25,11 +24,9 @@ class _PreIntermediateTopicViewState extends State<PreIntermediateTopicView> {
               padding: const EdgeInsets.only(top: 16),
               itemCount: state.topics.topics!.length,
               separatorBuilder: (context, index) => const SizedBox(height: smallSpacing8),
-              itemBuilder: (context, index) {
-                return TopicCard(
+              itemBuilder: (context, index) => TopicCard(
                   item: state.topics.topics![index],
-                );
-              },
+                ),
             ),
           );
         }
@@ -38,5 +35,4 @@ class _PreIntermediateTopicViewState extends State<PreIntermediateTopicView> {
         );
       },
     );
-  }
 }

@@ -35,8 +35,7 @@ class _SelectTopicLevelViewState extends State<SelectTopicLevelView> with Single
   }
 
   @override
-  Widget build(BuildContext context) {
-    return BlocListener<TopicLevelBloc, TopicLevelState>(
+  Widget build(BuildContext context) => BlocListener<TopicLevelBloc, TopicLevelState>(
       listener: (context, state) {
         if (state is TopicLevelChangeTabState) {
           _tabController.index = state.currentTab;
@@ -96,5 +95,4 @@ class _SelectTopicLevelViewState extends State<SelectTopicLevelView> with Single
         ),
       ]),
     );
-  }
 }
