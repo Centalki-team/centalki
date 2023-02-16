@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../../../base/define/colors.dart';
-import '../../../base/define/dimensions.dart';
-import '../../../base/define/manager/loading_manager.dart';
-import '../../../base/temp_dio/dio_client.dart';
+import '../../../../../../base/define/colors.dart';
+import '../../../../../../base/define/dimensions.dart';
+import '../../../../../../base/define/manager/loading_manager.dart';
+import '../../../../../../base/temp_dio/dio_client.dart';
 import 'terms.dart';
 
 class SignUpView extends StatefulWidget {

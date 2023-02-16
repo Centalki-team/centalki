@@ -3,16 +3,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../base/define/colors.dart';
-import '../../../../../base/define/dimensions.dart';
-import '../../../../../base/define/manager/loading_manager.dart';
-import '../../../../../base/define/text.dart';
-import '../../../../../base/widgets/buttons/button.dart';
-import '../../../../../base/widgets/text_fields/text_field.dart';
-import '../../../../../gen/assets.gen.dart';
-import '../../sign_up_view.dart';
-import '../blocs/sign_in_bloc/sign_in_bloc.dart';
-import 'forgot_password_page.dart';
+import '../../../../../../base/define/colors.dart';
+import '../../../../../../base/define/dimensions.dart';
+import '../../../../../../base/define/manager/loading_manager.dart';
+import '../../../../../../base/define/text.dart';
+import '../../../../../../base/widgets/buttons/button.dart';
+import '../../../../../../base/widgets/text_fields/text_field.dart';
+import '../../../../../../gen/assets.gen.dart';
+import '../sign_up/sign_up_view.dart';
+import '../../blocs/sign_in_bloc/sign_in_bloc.dart';
+import '../forgot_password/forgot_password_page.dart';
 
 class SignInView extends StatefulWidget {
   const SignInView({Key? key}) : super(key: key);
