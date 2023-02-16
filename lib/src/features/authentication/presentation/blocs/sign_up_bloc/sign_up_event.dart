@@ -26,6 +26,7 @@ class SignUpValidateEvent extends SignUpEvent {
 
 class SignUpSubmitEvent extends SignUpEvent {
   const SignUpSubmitEvent({
+
     required this.email,
     required this.password,
   });

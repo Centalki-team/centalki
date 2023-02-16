@@ -1,10 +1,13 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../base/define/colors.dart';
 import '../../../../../../base/define/dimensions.dart';
-import '../../../../../../base/define/manager/loading_manager.dart';
-import '../../../../../../base/temp_dio/dio_client.dart';
+import '../../../../../../base/widgets/buttons/button.dart';
+import '../../../../../../base/widgets/text_fields/outlined_text_field.dart';
+import '../../../../../../gen/assets.gen.dart';
+import '../../blocs/sign_up_bloc/sign_up_bloc.dart';
 import 'terms.dart';
 
 class SignUpView extends StatefulWidget {
@@ -15,487 +18,168 @@ class SignUpView extends StatefulWidget {
 }
 
 class _SignUpViewState extends State<SignUpView> {
-  bool _emptyName = false;
-  bool _emptyEmail = false;
-  bool _emptyPassword = false;
-  bool _emptyRetypePassword = false;
-
-  bool _passwordMismatch = false;
-  bool _invalidEmail = false;
-
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _retypePasswordController = TextEditingController();
-
   bool _termsAccepted = false;
 
-  @override
-  Widget build(BuildContext context) => Scaffold(
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const SizedBox(height: spaceBetweenLine20),
-              Image.asset(
-                'assets/illustration/register.png',
-                width: 200,
-                height: 200,
-              ),
-              const SizedBox(height: spaceBetweenLine20),
-              Text(
-                'Create new account',
-                style: TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold,
-                  color: colorScheme.onPrimaryContainer,
-                ),
-              ),
-              const SizedBox(height: spaceBetweenLine12),
-              Material(
-                borderRadius: BorderRadius.circular(radiusTextField),
-                elevation: 3.0,
-                clipBehavior: Clip.hardEdge,
-                shadowColor: colorScheme.shadow,
-                child: TextField(
-                  controller: _nameController,
-                  keyboardType: TextInputType.emailAddress,
-                  autocorrect: false,
-                  decoration: InputDecoration(
-                    hintStyle:
-                        const TextStyle(fontSize: 16, letterSpacing: 0.5),
-                    hintText: 'Full name',
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.only(left: 12, right: 16),
-                      child: Icon(
-                        Icons.person_rounded,
-                        color: colorScheme.primary,
-                        size: 24,
-                      ),
-                    ),
-                    contentPadding: const EdgeInsets.symmetric(
-                        vertical: 16, horizontal: 12),
-                    enabledBorder: _emptyName
-                        ? OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: colorScheme.error, width: 1),
-                            borderRadius:
-                                BorderRadius.circular(radiusTextField),
-                          )
-                        : OutlineInputBorder(
-                            borderSide: const BorderSide(
-                                color: Colors.transparent, width: 1),
-                            borderRadius:
-                                BorderRadius.circular(radiusTextField),
-                          ),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: colorScheme.primary, width: 2),
-                        borderRadius: BorderRadius.circular(radiusTextField)),
-                  ),
-                ),
-              ),
-              _emptyName
-                  ? Padding(
-                      padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
-                      child: Text(
-                        'Name cannot be empty',
-                        style:
-                            TextStyle(fontSize: 12, color: colorScheme.error),
-                      ),
-                    )
-                  : const SizedBox.shrink(),
-              const SizedBox(height: spaceBetweenLine12),
-              Material(
-                borderRadius: BorderRadius.circular(radiusTextField),
-                elevation: 3.0,
-                clipBehavior: Clip.hardEdge,
-                shadowColor: colorScheme.shadow,
-                child: TextField(
-                  controller: _emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  autocorrect: false,
-                  decoration: InputDecoration(
-                    hintStyle:
-                        const TextStyle(fontSize: 16, letterSpacing: 0.5),
-                    hintText: 'Email',
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.only(left: 12, right: 16),
-                      child: Icon(
-                        Icons.mail_rounded,
-                        color: colorScheme.primary,
-                        size: 24,
-                      ),
-                    ),
-                    contentPadding: const EdgeInsets.symmetric(
-                        vertical: 16, horizontal: 12),
-                    enabledBorder: _emptyEmail || _invalidEmail
-                        ? OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: colorScheme.error, width: 1),
-                            borderRadius:
-                                BorderRadius.circular(radiusTextField),
-                          )
-                        : OutlineInputBorder(
-                            borderSide: const BorderSide(
-                                color: Colors.transparent, width: 1),
-                            borderRadius:
-                                BorderRadius.circular(radiusTextField),
-                          ),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: colorScheme.primary, width: 2),
-                        borderRadius: BorderRadius.circular(radiusTextField)),
-                  ),
-                ),
-              ),
-              _emptyEmail
-                  ? Padding(
-                      padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
-                      child: Text(
-                        'E-mail address cannot be empty',
-                        style:
-                            TextStyle(fontSize: 14, color: colorScheme.error),
-                      ),
-                    )
-                  : const SizedBox.shrink(),
-              _invalidEmail
-                  ? Padding(
-                      padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
-                      child: Text(
-                        'Please enter a valid email address',
-                        style:
-                            TextStyle(fontSize: 14, color: colorScheme.error),
-                      ),
-                    )
-                  : const SizedBox.shrink(),
-              const SizedBox(height: spaceBetweenLine12),
-              Material(
-                borderRadius: BorderRadius.circular(radiusTextField),
-                elevation: 3.0,
-                clipBehavior: Clip.hardEdge,
-                shadowColor: colorScheme.shadow,
-                child: TextField(
-                  controller: _passwordController,
-                  autocorrect: false,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    hintStyle:
-                        const TextStyle(fontSize: 16, letterSpacing: 0.5),
-                    hintText: 'Password',
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.only(left: 12, right: 16),
-                      child: Icon(
-                        Icons.key_rounded,
-                        color: colorScheme.primary,
-                        size: 24,
-                      ),
-                    ),
-                    contentPadding: const EdgeInsets.symmetric(
-                        vertical: 16, horizontal: 12),
-                    enabledBorder: _emptyPassword
-                        ? OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: colorScheme.error, width: 1),
-                            borderRadius:
-                                BorderRadius.circular(radiusTextField),
-                          )
-                        : OutlineInputBorder(
-                            borderSide: const BorderSide(
-                                color: Colors.transparent, width: 1),
-                            borderRadius:
-                                BorderRadius.circular(radiusTextField),
-                          ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: colorScheme.primary, width: 2),
-                      borderRadius: BorderRadius.circular(radiusTextField),
-                    ),
-                  ),
-                ),
-              ),
-              _emptyPassword
-                  ? Padding(
-                      padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
-                      child: Text(
-                        'Password cannot be empty',
-                        style:
-                            TextStyle(fontSize: 14, color: colorScheme.error),
-                      ),
-                    )
-                  : const SizedBox.shrink(),
-              const SizedBox(height: spaceBetweenLine12),
-              Material(
-                borderRadius: BorderRadius.circular(radiusTextField),
-                elevation: 3.0,
-                clipBehavior: Clip.hardEdge,
-                shadowColor: colorScheme.shadow,
-                child: TextField(
-                  controller: _retypePasswordController,
-                  autocorrect: false,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    hintStyle:
-                        const TextStyle(fontSize: 16, letterSpacing: 0.5),
-                    hintText: 'Re-type password',
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.only(left: 12, right: 16),
-                      child: Icon(
-                        Icons.key_rounded,
-                        color: colorScheme.primary,
-                        size: 24,
-                      ),
-                    ),
-                    contentPadding: const EdgeInsets.symmetric(
-                        vertical: 16, horizontal: 12),
-                    enabledBorder: _emptyRetypePassword || _passwordMismatch
-                        ? OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: colorScheme.error, width: 1),
-                            borderRadius:
-                                BorderRadius.circular(radiusTextField),
-                          )
-                        : OutlineInputBorder(
-                            borderSide: const BorderSide(
-                                color: Colors.transparent, width: 1),
-                            borderRadius:
-                                BorderRadius.circular(radiusTextField),
-                          ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: colorScheme.primary, width: 2),
-                      borderRadius: BorderRadius.circular(radiusTextField),
-                    ),
-                  ),
-                ),
-              ),
-              _emptyRetypePassword
-                  ? Padding(
-                      padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
-                      child: Text(
-                        'Please enter your password again',
-                        style:
-                            TextStyle(fontSize: 14, color: colorScheme.error),
-                      ),
-                    )
-                  : const SizedBox.shrink(),
-              _passwordMismatch
-                  ? Padding(
-                      padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
-                      child: Text(
-                        'Your password does not match',
-                        style:
-                            TextStyle(fontSize: 14, color: colorScheme.error),
-                      ),
-                    )
-                  : const SizedBox.shrink(),
-              const SizedBox(height: spaceBetweenLine15),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Checkbox(
-                    activeColor: colorScheme.primary,
-                    value: _termsAccepted,
-                    onChanged: (value) {
-                      setState(() {
-                        _termsAccepted = value!;
-                      });
-                    },
-                  ),
-                  const Text('I accept', style: TextStyle(fontSize: 14)),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const TermsAndConditions(),
-                            ));
-                      },
-                      child: Text(
-                        'Terms and Conditions',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: colorScheme.primary),
-                      ))
-                ],
-              ),
-              const SizedBox(height: spaceBetweenLine15),
-              TextButton(
-                onPressed: () async {
-                  // Validate full name
-                  if (_nameController.text.isEmpty) {
-                    setState(() {
-                      _emptyName = true;
-                    });
-                  } else {
-                    setState(() {
-                      _emptyName = false;
-                    });
-                  }
-                  // Validate email address
-                  if (_emailController.text.isEmpty) {
-                    setState(() {
-                      _emptyEmail = true;
-                    });
-                  } else {
-                    setState(() {
-                      _emptyEmail = false;
-                    });
-                    if (!RegExp(
-                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                        .hasMatch(_emailController.text)) {
-                      setState(() {
-                        _invalidEmail = true;
-                      });
-                    } else {
-                      setState(() {
-                        _invalidEmail = false;
-                      });
-                    }
-                  }
-                  // Validate password
-                  if (_passwordController.text.isEmpty) {
-                    setState(() {
-                      _emptyPassword = true;
-                    });
-                  } else {
-                    setState(() {
-                      _emptyPassword = false;
-                    });
-                  }
-                  // Validate re-typed password
-                  if (_retypePasswordController.text.isEmpty) {
-                    setState(() {
-                      _emptyRetypePassword = true;
-                    });
-                  } else {
-                    setState(() {
-                      _emptyRetypePassword = false;
-                    });
-                    if (_passwordController.text !=
-                        _retypePasswordController.text) {
-                      setState(() {
-                        _passwordMismatch = true;
-                      });
-                    } else {
-                      setState(() {
-                        _passwordMismatch = false;
-                      });
-                    }
-                  }
-                  if (!_emptyName &&
-                      !_emptyEmail &&
-                      !_emptyPassword &&
-                      !_emptyRetypePassword &&
-                      !_passwordMismatch) {
-                    LoadingManager.setLoading(context, loading: true);
-                    try {
-                      final credential = await FirebaseAuth.instance
-                          .createUserWithEmailAndPassword(
-                        email: _emailController.text.trim(),
-                        password: _passwordController.text.trim(),
-                      );
-                      credential.user?.getIdToken().then((id) {
-                        DioClient.assignRole(id, _nameController.text);
-                      });
-                      if (mounted) {
-                        Navigator.pop(context);
-                      }
-                      // ignore: use_build_context_synchronously
-                      LoadingManager.setLoading(context);
-                    } on FirebaseAuthException catch (e) {
-                      LoadingManager.setLoading(context);
-                      if (e.code == 'weak-password') {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
-                          content: Text("The password provided is too weak."),
-                        ));
-                        //print('The password provided is too weak.');
-                      } else {
-                        if (e.code == 'email-already-in-use') {
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(const SnackBar(
-                            content: Text(
-                                "The account already exists for that email."),
-                          ));
-                          //print('The account already exists for that email.');
-                        }
-                      }
-                      // ignore: avoid_catches_without_on_clauses
-                    } catch (e) {
-                      LoadingManager.setLoading(context);
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text(e.toString()),
-                      ));
-                    }
-                    // Navigator.pushReplacement(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //       builder: (context) => const HomeView(),
-                    //     ));
-                  }
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (context) => const VerifyEmailView(),
-                  //     ));
-                },
-                style: TextButton.styleFrom(
-                    backgroundColor: colorScheme.primary,
-                    minimumSize: const Size.fromHeight(56),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16))),
-                child: Text(
-                  'Sign Up',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    letterSpacing: 0.1,
-                    color: colorScheme.onPrimary,
-                  ),
-                ),
-              ),
-              const SizedBox(height: spaceBetweenLine15),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Text('Have an account?'),
-                  const SizedBox(width: 4),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      'Sign In',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: colorScheme.primary),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      );
-
-  void onRegister() async {
-    try {
-      final credential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: 'dgrayman1509@gmail.com',
-        password: 'A_bc123',
-      );
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
-      }
-    } catch (e) {
-      print(e);
-    }
+  void _validateSignUpInputs(String value) {
+    context.read<SignUpBloc>().add(SignUpValidateEvent(
+      fullname: _nameController.text,
+      email: _emailController.text,
+      password: _passwordController.text,
+      retypePassword: _retypePasswordController.text,
+      isTermsAccepted: _termsAccepted,
+    ));
   }
+
+  @override
+  Widget build(BuildContext context) => BlocListener<SignUpBloc, SignUpState>(
+    listener: (context, state) {
+      if (state is SignUpErrorState) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(state.message),
+          ),
+        );
+      }
+    },
+    child: Scaffold(
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const SizedBox(height: 16),
+            Image.asset(
+              Assets.illustration.register.path,
+              width: 200,
+              height: 200,
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'Create new account',
+              style: TextStyle(
+                fontSize: 26,
+                fontWeight: FontWeight.bold,
+                color: colorScheme.onPrimaryContainer,
+              ),
+            ),
+            const SizedBox(height: spaceBetweenLine18),
+            BlocBuilder<SignUpBloc, SignUpState>(
+              builder: (context, state) => Column(
+                children: [
+                  AppOutlinedTextField(
+                    controller: _nameController,
+                    labelText: 'Fullname',
+                    errorText:
+                    state is SignUpValidateState && state.fullnameError.isNotEmpty ? state.fullnameError : null,
+                    onChanged: _validateSignUpInputs,
+                  ),
+                  const SizedBox(height: spaceBetweenLine12),
+                  AppOutlinedTextField(
+                    controller: _emailController,
+                    labelText: 'Email',
+                    textInputType: TextInputType.emailAddress,
+                    errorText:
+                    state is SignUpValidateState && state.emailError.isNotEmpty ? state.emailError : null,
+                    onChanged: _validateSignUpInputs,
+                  ),
+                  const SizedBox(height: spaceBetweenLine12),
+                  AppOutlinedTextField(
+                    controller: _passwordController,
+                    labelText: 'Password',
+                    obscureText: true,
+                    errorText:
+                    state is SignUpValidateState && state.passwordError.isNotEmpty ? state.passwordError : null,
+                    onChanged: _validateSignUpInputs,
+                  ),
+                  const SizedBox(height: spaceBetweenLine12),
+                  AppOutlinedTextField(
+                      controller: _retypePasswordController,
+                      labelText: 'Retype Password',
+                      obscureText: true,
+                      errorText: state is SignUpValidateState && state.retypePasswordError.isNotEmpty
+                          ? state.retypePasswordError
+                          : null,
+                      onChanged: _validateSignUpInputs
+                  ),
+                  const SizedBox(height: spaceBetweenLine15),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Checkbox(
+                        activeColor: colorScheme.primary,
+                        value: _termsAccepted,
+                        onChanged: (value) {
+                          setState(() {
+                            _termsAccepted = value!;
+                          });
+
+                          _validateSignUpInputs('');
+                        },
+                      ),
+                      const Text('I accept', style: TextStyle(fontSize: 14)),
+                      AppTextButton(
+                        text: 'Terms & Conditions',
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const TermsAndConditions(),
+                              ));
+                        },
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: spaceBetweenLine15),
+            BlocBuilder<SignUpBloc, SignUpState>(
+              builder: (context, state) {
+                if (state is SignUpLoadingState) {
+                  return const Center(
+                    child: CupertinoActivityIndicator(),
+                  );
+                }
+                return AppFilledButton(
+                  text: 'Sign Up',
+                  minimumSize: const Size.fromHeight(48),
+                  onPressed: state is SignUpValidateState && state.forceDisabled == false
+                      ? () => context.read<SignUpBloc>().add(SignUpSubmitEvent(
+                    email: _emailController.text,
+                    password: _passwordController.text,
+                  ))
+                      : null,
+                );
+              },
+            ),
+            const SizedBox(height: spaceBetweenLine15),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Text('Have an account?'),
+                const SizedBox(width: 4),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    'Sign In',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: colorScheme.primary,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
 }

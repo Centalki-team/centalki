@@ -81,7 +81,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         password: event.password.trim(),
       );
 
-      credential.user?.getIdToken().then(DioClient.assignRole);
+      // credential.user?.getIdToken().then((id) => DioClient.assignRole(id, event.),);
       emit(const SignUpSuccessState());
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
