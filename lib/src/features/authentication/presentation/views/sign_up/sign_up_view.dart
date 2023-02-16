@@ -149,6 +149,7 @@ class _SignUpViewState extends State<SignUpView> {
                   minimumSize: const Size.fromHeight(48),
                   onPressed: state is SignUpValidateState && state.forceDisabled == false
                       ? () => context.read<SignUpBloc>().add(SignUpSubmitEvent(
+                    fullname: _nameController.text,
                     email: _emailController.text,
                     password: _passwordController.text,
                   ))

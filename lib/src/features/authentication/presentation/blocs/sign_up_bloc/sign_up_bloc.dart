@@ -32,6 +32,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
 
     if (event.fullname.isEmpty) {
       fullnameError = 'Name cannot be empty';
+    } else if (event.fullname.length > 50) {
+      fullnameError = 'Name cannot exceed 50 characters';
     }
 
     if (event.email.isEmpty) {
@@ -80,8 +82,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         email: event.email.trim(),
         password: event.password.trim(),
       );
-
-      // credential.user?.getIdToken().then((id) => DioClient.assignRole(id, event.),);
+      credential.user?.getIdToken().then((id) => DioClient.assignRole(id, event.fullname));
       emit(const SignUpSuccessState());
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
