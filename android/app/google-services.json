@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "145989393323",
+    "firebase_url": "https://centalki-staging-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "centalki-staging",
     "storage_bucket": "centalki-staging.appspot.com"
   },
@@ -14,7 +15,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "145989393323-m9j2k0unqf6o0l2a0l39sd91ap0gdamr.apps.googleusercontent.com",
+          "client_id": "145989393323-manbs7rm9bvh46koqskbm2amq6oi1n3h.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -29,6 +30,49 @@
             {
               "client_id": "145989393323-m9j2k0unqf6o0l2a0l39sd91ap0gdamr.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "145989393323-6e3nk83leo89chcg1elq2ibr7gm3c1p4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.centalkiTeacher"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:145989393323:android:9fb7e5f6e84564a0d490ee",
+        "android_client_info": {
+          "package_name": "com.example.centalki_teacher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "145989393323-manbs7rm9bvh46koqskbm2amq6oi1n3h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgOSHDrH2IoFVLDzhkhykjdf8Zy7p00uU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "145989393323-m9j2k0unqf6o0l2a0l39sd91ap0gdamr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "145989393323-6e3nk83leo89chcg1elq2ibr7gm3c1p4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.centalkiTeacher"
+              }
             }
           ]
         }

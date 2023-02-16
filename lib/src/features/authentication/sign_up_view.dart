@@ -396,7 +396,9 @@ class _SignUpViewState extends State<SignUpView> {
                         email: _emailController.text.trim(),
                         password: _passwordController.text.trim(),
                       );
-                      credential.user?.getIdToken().then(DioClient.assignRole);
+                      credential.user?.getIdToken().then((id) {
+                        DioClient.assignRole(id, _nameController.text);
+                      });
                       if (mounted) {
                         Navigator.pop(context);
                       }

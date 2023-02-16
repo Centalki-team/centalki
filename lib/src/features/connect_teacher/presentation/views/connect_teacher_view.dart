@@ -1,9 +1,11 @@
-import 'dart:async';
-
-import 'package:centalki/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../base/define/dimensions.dart';
+import '../../../../../base/define/text.dart';
+import '../../../../../base/widgets/buttons/button.dart';
+import '../blocs/connect_teacher_bloc.dart';
+import '../widgets/wave.dart';
 
 class ConnectTeacherView extends StatefulWidget {
   const ConnectTeacherView({Key? key}) : super(key: key);
@@ -12,241 +14,280 @@ class ConnectTeacherView extends StatefulWidget {
   State<ConnectTeacherView> createState() => _FindTeacherViewState();
 }
 
-class _FindTeacherViewState extends State<ConnectTeacherView> with TickerProviderStateMixin {
-  late Animation<double> animation;
-  late AnimationController animationController;
-  bool _isLoading = true;
-  bool _isLoadDone = false;
-
-  _changeState() async {
-    // setStates are bad but we do not have BLoC yet
-    await Future.delayed(const Duration(seconds: 4));
-    setState(() {
-      _isLoading = false;
-    });
-    await Future.delayed(const Duration(seconds: 4));
-    setState(() {
-      _isLoadDone = true;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 6500),
-    );
-    final Animation<double> curve = CurvedAnimation(
-      parent: animationController,
-      curve: Curves.easeInOutSine,
-      reverseCurve: Curves.easeInOutSine,
-    );
-    animation = Tween<double>(begin: 0, end: 1).animate(curve);
-    animationController.addListener(() {
-      setState(() {});
-    });
-    animationController.repeat(
-      reverse: true,
-      period: const Duration(milliseconds: 6500),
-    );
-    _changeState();
-  }
-
-  @override
-  void dispose() {
-    animationController.stop();
-    animationController.dispose();
-    super.dispose();
-  }
-
+class _FindTeacherViewState extends State<ConnectTeacherView> {
   @override
   Widget build(BuildContext context) {
-    double width = -MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-    return Material(
-      color: const Color(0xffFFD033),
-      child: SizedBox(
-        height: height,
-        width: -width,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Transform.translate(
-                offset: Offset(animation.value * 10 * width, 0),
-                child: AnimatedContainer(
-                  duration: const Duration(seconds: 1),
-                  height: _isLoading
-                      ? height * 1 / 3
-                      : _isLoadDone
-                          ? height
-                          : height * 2 / 3,
-                  width: -width * 12,
-                  child: CustomPaint(
-                    painter: WavePainter(
-                      realSize: Size(
-                          -width * 12,
-                          _isLoading
-                              ? height * 1 / 3
-                              : _isLoadDone
-                                  ? height
-                                  : height * 2 / 3),
-                      colors: _isLoading
-                          ? [const Color(0xffFF8811)]
-                          : _isLoadDone
-                              ? [const Color(0xff55C885)]
-                              : [const Color(0xff3AAFFF)],
-                      pick: _isLoadDone ? 0 : 24,
-                      amount: 12,
-                    ),
-                  ),
+    var width = -MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
+    final pContext = context;
+
+    return BlocConsumer<ConnectTeacherBloc, ConnectTeacherState>(
+      listener: (context, state) {
+        if (state is ConnectTeacherLoadDoneState) {
+          context
+              .read<ConnectTeacherBloc>()
+              .add(const ConnectTeacherFindTeacher());
+        } else if (state is ConnectTeacherLoadFailureState) {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => AlertDialog(
+              icon: const Icon(
+                Icons.warning_amber_outlined,
+                color: Colors.redAccent,
+              ),
+              title: const Text('Create session failed!'),
+              content: Text(state.message),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  },
+                  child: Text(TextDoc.txtOk),
                 ),
-              ),
+              ],
             ),
-            Align(
-              alignment: Alignment.center,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  _isLoadDone
-                      ? const CircleAvatar(
-                          backgroundColor: Colors.white,
-                          radius: 48,
-                        )
-                      : const SizedBox.shrink(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 24),
-                    child: Text(
-                      _isLoading
-                          ? "Finding teacher for you..."
-                          : _isLoadDone
-                              ? "Connected to <teacher's name>\nLaunching session..."
-                              : "Teacher found. Connecting...",
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Positioned(
-              bottom: height * 0.1,
-              child: ElevatedButton(
-                onPressed: () async {
-                  final result = await showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title: const Text(
-                        'Cancel connecting',
-                        textAlign: TextAlign.center,
+          );
+        } else if (state is ConnectTeacherFindFailureState) {
+          showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (context) => AlertDialog(
+                  icon: const Icon(
+                    Icons.warning_amber_outlined,
+                    color: Colors.redAccent,
+                  ),
+                  title: const Text('Find teacher failed!'),
+                  content: Text(state.message),
+                  actions: (state.message == TextDoc.txtInternetConnection)
+                      ? [
+                          AppFilledButton(
+                            text: TextDoc.txtTryAgain,
+                            onPressed: () {
+                              pContext
+                                  .read<ConnectTeacherBloc>()
+                                  .add(ConnectTeacherTryInternetConnect());
+                            },
+                          )
+                        ]
+                      : [
+                          // state.failureType == ConnectFailure.NOT_FOUND_TEACHER
+                          AppFilledButton(
+                            text: TextDoc.txtGoBack,
+                            onPressed: () {
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                            },
+                          )
+                        ]));
+        } else if (state is ConnectTeacherConnectDoneState) {
+          Navigator.pop(context);
+        } else if (state is ConnectTeacherConnectErrorState) {
+          showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (context) => AlertDialog(
+                      icon: const Icon(
+                        Icons.warning_amber_outlined,
+                        color: Colors.redAccent,
                       ),
-                      content: const Text(
-                        'Are you sure to cancel connecting to teacher?',
-                        textAlign: TextAlign.center,
-                      ),
+                      title: const Text('Connect room failed!'),
+                      content: Text(state.message),
                       actions: [
-                        Row(
-                          children: [
-                            Expanded(
-                              child: TextButton(
-                                style: TextButton.styleFrom(
-                                  side: const BorderSide(color: Colors.grey)
-                                ),
-                                onPressed: () => Navigator.pop(context, false),
-                                child: const Text('No'),
-                              ),
-                            ),
-                            const SizedBox(width: smallSpacing10),
-                            Expanded(
-                              child: TextButton(
-                                style: TextButton.styleFrom(
-                                  backgroundColor: Colors.blue
-                                ),
-                                onPressed: () => Navigator.pop(context, true),
-                                child: const Text('Yes', style: TextStyle(color: Colors.white),),
-                              ),
-                            ),
-                          ],
+                        AppFilledButton(
+                          text: TextDoc.txtTryAgain,
+                          onPressed: () {
+                            pContext
+                                .read<ConnectTeacherBloc>()
+                                .add(ConnectTeacherTryInternetConnect());
+                          },
+                        )
+                      ]));
+        } else if (state is ConnectTeacherCancelState) {
+          if (state.isTeacherCancelled) {
+            showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (context) => AlertDialog(
+                      icon: const Icon(
+                        Icons.warning_amber_outlined,
+                        color: Colors.redAccent,
+                      ),
+                      title: Text(
+                        TextDoc.txtCancelledTitle,
+                      ),
+                      content: Text(TextDoc.txtCancelledContent),
+                      actions: [
+                        AppFilledButton(
+                            text: TextDoc.txtConnect,
+                            onPressed: () => pContext
+                                .read<ConnectTeacherBloc>()
+                                .add(ConnectTeacherFindOtherTeacher())),
+                        AppOutlinedButton(
+                          text: TextDoc.txtBack,
+                          onPressed: () {
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          },
                         ),
                       ],
-                    ),
-                  ).then((value) => value ?? false);
-                  if (result) {
-                    if (mounted) {
-                      Navigator.pop(context);
-                    }
-                  }
-                },
-                child: Row(
-                  children: const [
-                    Icon(Icons.close_rounded, color: Colors.redAccent),
-                    SizedBox(width: smallSpacing4),
-                    Text(
-                      'Cancel',
-                      style: TextStyle(fontSize: 18, color: Colors.redAccent),
-                    ),
+                    ));
+          } else {
+            showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (context) => AlertDialog(
+                      icon: const Icon(
+                        Icons.check,
+                        color: Colors.green,
+                      ),
+                      title: Text(
+                        TextDoc.txtSuccessfullyCancel,
+                      ),
+                      actions: [
+                        AppFilledButton(
+                          text: TextDoc.txtOk,
+                          minimumSize: const Size.fromHeight(40),
+                          onPressed: () {
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          },
+                        )
+                      ],
+                    ));
+          }
+        }
+      },
+      builder: (context, state) => Material(
+        color: const Color(0xffFFD033),
+        child: SizedBox(
+          height: height,
+          width: -width,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Wave(
+                  widthScreen: width,
+                  heightScreen: (state is ConnectTeacherLoadingState ||
+                          state is ConnectTeacherInitState ||
+                          state is ConnectTeacherLoadFailureState ||
+                          state is ConnectTeacherFindingTeacherState ||
+                          state is ConnectTeacherFindFailureState)
+                      ? height * 1 / 3
+                      : (state is ConnectTeacherConnectingRoomState)
+                          ? height
+                          : height * 2 / 3,
+                  colors: state is ConnectTeacherLoadingState ||
+                          state is ConnectTeacherFindingTeacherState ||
+                          state is ConnectTeacherInitState
+                      ? [const Color(0xffFF8811)]
+                      : (state is ConnectTeacherLoadFailureState ||
+                              state is ConnectTeacherConnectErrorState ||
+                              state is ConnectTeacherFindFailureState ||
+                              state is ConnectTeacherCancelState)
+                          ? [const Color(0xFFFD6363)]
+                          : state is ConnectTeacherConnectingRoomState
+                              ? [const Color(0xff55C885)]
+                              : [const Color(0xff3AAFFF)],
+                  pick: state is ConnectTeacherConnectingRoomState ? 0 : 24,
+                  amount: 12,
+                ),
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    state is ConnectTeacherConnectingRoomState
+                        ? const CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 48,
+                          )
+                        : const SizedBox.shrink(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 24),
+                      child: Text(
+                        state.message,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    )
                   ],
                 ),
               ),
-            )
-          ],
+              Positioned(
+                bottom: height * 0.1,
+                child: state is ConnectTeacherConnectDoneState
+                    ? Container()
+                    : ElevatedButton.icon(
+                        onPressed: () async {
+                          final result = await showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: Text(
+                                TextDoc.txtCancelTitle,
+                                textAlign: TextAlign.center,
+                              ),
+                              content: Text(
+                                TextDoc.txtCancelContent,
+                                textAlign: TextAlign.center,
+                              ),
+                              actions: [
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: TextButton(
+                                        style: TextButton.styleFrom(
+                                            side: const BorderSide(
+                                                color: Colors.grey)),
+                                        onPressed: () =>
+                                            Navigator.pop(context, false),
+                                        child: Text(TextDoc.txtNo),
+                                      ),
+                                    ),
+                                    const SizedBox(width: smallSpacing10),
+                                    Expanded(
+                                      child: TextButton(
+                                        style: TextButton.styleFrom(
+                                            backgroundColor: Colors.blue),
+                                        onPressed: () =>
+                                            Navigator.pop(context, true),
+                                        child: Text(
+                                          TextDoc.txtYes,
+                                          style: const TextStyle(
+                                              color: Colors.white),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ).then((value) => value ?? false);
+                          if (result) {
+                            if (mounted) {
+                              context.read<ConnectTeacherBloc>().add(
+                                  const ConnectTeacherCancelButtonPressed());
+                            }
+                          }
+                        },
+                        icon: const Icon(Icons.close_rounded,
+                            color: Colors.redAccent),
+                        label: Text(
+                          TextDoc.txtCancel,
+                          style: const TextStyle(
+                              fontSize: 18, color: Colors.redAccent),
+                        ),
+                      ),
+              )
+            ],
+          ),
         ),
       ),
     );
-  }
-}
-
-class WavePainter extends CustomPainter {
-  List<Color> colors;
-  int amount;
-  double pick;
-  Size? realSize;
-
-  WavePainter({required this.colors, this.amount = 4, this.pick = 30, this.realSize});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    size = realSize ?? size;
-    var paint = Paint()..color = colors.first;
-    // In case we want to use gradient styles in the future
-    // ..shader = LinearGradient(
-    //   begin: Alignment.topCenter,
-    //   end: Alignment.bottomCenter,
-    //   colors: colors,
-    // ).createShader(Rect.fromPoints(
-    //   Offset.zero,
-    //   Offset(size.width, size.height),
-    // ));
-    var ww = size.width / (amount * 2 - 1);
-    var path = Path();
-    var hh = true;
-
-    // path.lineTo(0, 0);
-    for (var i = 1; i <= (4 * amount - 2); i++) {
-      if (i % 2 == 0) {
-        path.lineTo(i * ww / 2, 0);
-        path.lineTo(i * ww / 2, 0);
-      } else {
-        if (hh) {
-          path.quadraticBezierTo(i * (ww / 2), pick, (i + 1) * ww / 2, 0);
-          hh = false;
-        } else {
-          path.quadraticBezierTo(i * (ww / 2), -pick, (i + 1) * ww / 2, 0);
-          hh = true;
-        }
-      }
-    }
-    path.lineTo(size.width, 0);
-    path.lineTo(size.width, size.height);
-    path.lineTo(0, size.height);
-    path.close();
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
   }
 }
