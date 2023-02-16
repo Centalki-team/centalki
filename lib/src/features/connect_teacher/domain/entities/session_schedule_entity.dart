@@ -1,19 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 
-class SessionScheduleEntity {
-  const SessionScheduleEntity({
-    this.sessionId,
-    this.sessionStudentId,
-    this.sessionTeacherId,
-    this.sessionStatus,
-  });
-
-  final String? sessionId;
-  final String? sessionStudentId;
-  final String? sessionTeacherId;
-  final SessionScheduleStatus? sessionStatus;
-}
-
 enum SessionScheduleStatus {
   @JsonValue('ROUTING')
   routing,
@@ -25,4 +11,30 @@ enum SessionScheduleStatus {
   cancelled,
   @JsonValue('TIME_OUT')
   timeOut,
+}
+
+class SessionScheduleEntity {
+  const SessionScheduleEntity({
+    this.sessionId,
+    this.sessionTopicId,
+    this.sessionStudentId,
+    this.sessionTeacherId,
+    this.sessionTeacher,
+    this.sessionStatus,
+  });
+
+  final String? sessionId;
+  final String? sessionTopicId;
+  final String? sessionStudentId;
+  final String? sessionTeacherId;
+  final SessionScheduleUserEntity? sessionTeacher;
+  final SessionScheduleStatus? sessionStatus;
+}
+
+class SessionScheduleUserEntity {
+  const SessionScheduleUserEntity({
+    this.fullName,
+  });
+
+  final String? fullName;
 }

@@ -49,6 +49,7 @@ SessionScheduleUserModel _$SessionScheduleUserModelFromJson(
       emailVerified: json['emailVerified'] as bool?,
       disabled: json['disabled'] as bool?,
       email: json['email'] as String?,
+      displayName: json['displayName'] as String?,
       metadata: json['metadata'] == null
           ? null
           : MetadataModel.fromJson(json['metadata'] as Map<String, dynamic>),
@@ -59,6 +60,7 @@ ProviderDataModel _$ProviderDataModelFromJson(Map<String, dynamic> json) =>
     ProviderDataModel(
       uid: json['uid'] as String?,
       email: json['email'] as String?,
+      displayName: json['displayName'] as String?,
       providerId: json['providerId'] as String?,
     );
 

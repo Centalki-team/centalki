@@ -23,36 +23,41 @@ class ConnectTeacherLoadDoneState extends ConnectTeacherState {
   const ConnectTeacherLoadDoneState(String message) : super(message: message);
 }
 
+class ConnectTeacherFindingTeacherState extends ConnectTeacherState {
+  const ConnectTeacherFindingTeacherState(String message)
+      : super(message: message);
+}
+
+class ConnectTeacherFindDoneState extends ConnectTeacherState {
+  const ConnectTeacherFindDoneState(String message) : super(message: message);
+}
+
+class ConnectTeacherFindFailureState extends ConnectTeacherState {
+  const ConnectTeacherFindFailureState(String message)
+      : super(message: message);
+}
+
 class ConnectTeacherConnectingRoomState extends ConnectTeacherState {
   const ConnectTeacherConnectingRoomState(String message)
       : super(message: message);
 }
 
 class ConnectTeacherConnectDoneState extends ConnectTeacherState {
-  const ConnectTeacherConnectDoneState(String message)
-      : super(message: message);
+  const ConnectTeacherConnectDoneState() : super();
 }
 
 class ConnectTeacherConnectErrorState extends ConnectTeacherState {
-  const ConnectTeacherConnectErrorState(
-      String message, this.failureTitle, this.failureType)
+  const ConnectTeacherConnectErrorState(String message)
       : super(message: message);
-
-  final String failureTitle;
-  final ConnectFailure failureType;
-}
-
-class ConnectTeacherMeetingState extends ConnectTeacherState {
-  const ConnectTeacherMeetingState();
 }
 
 class ConnectTeacherCancelState extends ConnectTeacherState {
-  const ConnectTeacherCancelState();
+  const ConnectTeacherCancelState({this.isTeacherCancelled = false});
+
+  final bool isTeacherCancelled;
 }
 
-enum ConnectFailure {
-  internetConnection,
-  teacherCancellation,
-  notFoundTeacher,
-  notSignIn
-}
+//update Init -> Loading -> LoadDone -> Finding -> FindDone -> Connecting -> ConnectDone -> join meet
+// FindFailure -> Internet Connection, Not found teacher
+// LoadFailure -> Internet Connection, Not sign in
+// Connect Failure -> Internet Connection

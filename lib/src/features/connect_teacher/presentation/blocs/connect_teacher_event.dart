@@ -14,8 +14,16 @@ class ConnectTeacherCancelButtonPressed extends ConnectTeacherEvent {
   const ConnectTeacherCancelButtonPressed();
 }
 
+class ConnectTeacherFindTeacher extends ConnectTeacherEvent {
+  const ConnectTeacherFindTeacher();
+}
+
 class ConnectTeacherConnectRoom extends ConnectTeacherEvent {
   const ConnectTeacherConnectRoom();
+}
+
+class ConnectTeacherLaunchSession extends ConnectTeacherEvent {
+  const ConnectTeacherLaunchSession();
 }
 
 class ConnectTeacherTryInternetConnect extends ConnectTeacherEvent {}

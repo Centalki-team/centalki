@@ -21,8 +21,10 @@ class SessionScheduleModel extends SessionScheduleEntity {
     this.createdAt,
   }) : super(
           sessionId: id,
+          sessionTopicId: topicId,
           sessionStudentId: studentId,
           sessionTeacherId: teacherId,
+          sessionTeacher: teacher,
           sessionStatus: status,
         );
 
@@ -43,22 +45,26 @@ class SessionScheduleModel extends SessionScheduleEntity {
 }
 
 @JsonSerializable(createToJson: false)
-class SessionScheduleUserModel {
+class SessionScheduleUserModel extends SessionScheduleUserEntity {
   const SessionScheduleUserModel({
     this.tokensValidAfterTime,
     this.providerData,
     this.emailVerified,
     this.disabled,
     this.email,
+    this.displayName,
     this.metadata,
     this.uid,
-  });
+  }) : super(
+          fullName: displayName,
+        );
 
   final String? tokensValidAfterTime;
   final List<ProviderDataModel>? providerData;
   final bool? emailVerified;
   final bool? disabled;
   final String? email;
+  final String? displayName;
   final MetadataModel? metadata;
   final String? uid;
 
@@ -71,11 +77,13 @@ class ProviderDataModel {
   const ProviderDataModel({
     this.uid,
     this.email,
+    this.displayName,
     this.providerId,
   });
 
   final String? uid;
   final String? email;
+  final String? displayName;
   final String? providerId;
 
   factory ProviderDataModel.fromJson(Map<String, dynamic> json) =>
