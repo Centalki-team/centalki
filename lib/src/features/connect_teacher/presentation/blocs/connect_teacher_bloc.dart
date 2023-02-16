@@ -1,3 +1,4 @@
+import 'package:dartz/dartz_unsafe.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -93,11 +94,28 @@ class ConnectTeacherBloc
   }
 
   void _onConnectRoom(ConnectTeacherConnectRoom event, emit) async {
-    // TODO: call API get Session schedule with studentId and status PICKED_UP, transfer result to meeting page
-    await Future.delayed(const Duration(seconds: 3));
-    emit(ConnectTeacherConnectingRoomState('${TextDoc.txtConnectedTeacher}${TextDoc.txtLaunchSession}'));
-    await Future.delayed(const Duration(seconds: 3));
-    emit(const ConnectTeacherConnectDoneState());
+    var teacherName = '';
+    try {
+      final sessionsResponse = await DioClient.getPickedUpSessionListOfStudent(
+          FirebaseAuth.instance.currentUser!.uid, 'PICKED_UP');
+      sessionsResponse.sessions?.forEach((element) {
+        if (element.sessionId == sessionId) {
+          teacherName = element.sessionTeacher?.fullName ?? '';
+        }
+      });
+      if (teacherName.isNotEmpty) {
+        emit(ConnectTeacherConnectingRoomState(
+            '${TextDoc.txtConnectedTeacher}$teacherName${TextDoc.txtLaunchSession}'));
+        await Future.delayed(const Duration(seconds: 3));
+        emit(const ConnectTeacherConnectDoneState());
+      } else {
+        emit(ConnectTeacherConnectErrorState(
+            TextDoc.txtNotTeacherAvailableContent));
+      }
+    } on Exception catch (_) {
+      emit(ConnectTeacherConnectErrorState(
+          TextDoc.txtNotTeacherAvailableContent));
+    }
   }
 
   void _onTryInternetConnect(ConnectTeacherTryInternetConnect event, emit) {}

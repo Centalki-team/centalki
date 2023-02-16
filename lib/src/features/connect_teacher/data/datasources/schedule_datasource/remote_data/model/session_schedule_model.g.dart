@@ -6,6 +6,16 @@ part of 'session_schedule_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+SessionScheduleListModel _$SessionScheduleListModelFromJson(
+        Map<String, dynamic> json) =>
+    SessionScheduleListModel(
+      data: (json['data'] as List<dynamic>?)
+              ?.map((e) =>
+                  SessionScheduleModel.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
 SessionScheduleModel _$SessionScheduleModelFromJson(
         Map<String, dynamic> json) =>
     SessionScheduleModel(

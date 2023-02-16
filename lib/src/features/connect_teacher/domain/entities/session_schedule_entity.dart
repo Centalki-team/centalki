@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../topic_detail/data/datasources/topics_datasource/remote_data/model/topic_detail_model.dart';
+
 enum SessionScheduleStatus {
   @JsonValue('ROUTING')
   routing,
@@ -13,20 +15,26 @@ enum SessionScheduleStatus {
   timeOut,
 }
 
+class SessionScheduleListEntity {
+  const SessionScheduleListEntity({
+    this.sessions = const [],
+  });
+
+  final List<SessionScheduleEntity>? sessions;
+}
+
 class SessionScheduleEntity {
   const SessionScheduleEntity({
     this.sessionId,
-    this.sessionTopicId,
-    this.sessionStudentId,
-    this.sessionTeacherId,
+    this.sessionTopic,
+    this.sessionStudent,
     this.sessionTeacher,
     this.sessionStatus,
   });
 
   final String? sessionId;
-  final String? sessionTopicId;
-  final String? sessionStudentId;
-  final String? sessionTeacherId;
+  final TopicDetailModel? sessionTopic;
+  final SessionScheduleUserEntity? sessionStudent;
   final SessionScheduleUserEntity? sessionTeacher;
   final SessionScheduleStatus? sessionStatus;
 }

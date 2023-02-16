@@ -6,6 +6,19 @@ import '../../../../../domain/entities/session_schedule_entity.dart';
 part 'session_schedule_model.g.dart';
 
 @JsonSerializable(createToJson: false)
+class SessionScheduleListModel extends SessionScheduleListEntity {
+  const SessionScheduleListModel({
+    this.data,
+  }) : super(sessions: data);
+
+  @JsonKey(defaultValue: [])
+  final List<SessionScheduleModel>? data;
+
+  factory SessionScheduleListModel.fromJson(Map<String, dynamic> json) =>
+      _$SessionScheduleListModelFromJson(json);
+}
+
+@JsonSerializable(createToJson: false)
 class SessionScheduleModel extends SessionScheduleEntity {
   SessionScheduleModel({
     this.id,
@@ -21,9 +34,8 @@ class SessionScheduleModel extends SessionScheduleEntity {
     this.createdAt,
   }) : super(
           sessionId: id,
-          sessionTopicId: topicId,
-          sessionStudentId: studentId,
-          sessionTeacherId: teacherId,
+          sessionTopic: topic,
+          sessionStudent: student,
           sessionTeacher: teacher,
           sessionStatus: status,
         );

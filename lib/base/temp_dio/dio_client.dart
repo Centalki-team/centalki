@@ -80,4 +80,19 @@ class DioClient {
     if (sessionId.isEmpty) return;
     await _dio.post("$baseUrl/session-schedule/$sessionId/cancel");
   }
+
+  static Future<SessionScheduleListEntity> getPickedUpSessionListOfStudent(
+      String studentId, String status) async {
+    try {
+      final response =
+          await _dio.get("$baseUrl/session-schedule", queryParameters: {
+        "studentId": studentId,
+        "status": status,
+      });
+      final data = Map<String, dynamic>.from({"data": response.data});
+      return SessionScheduleListModel.fromJson(data);
+    } on Exception catch (e) {
+      rethrow;
+    }
+  }
 }
