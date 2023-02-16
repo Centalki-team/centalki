@@ -83,7 +83,7 @@ class PhraseCard extends StatelessWidget {
 // ),
 // const SizedBox(height: smallSpacing4),
 // const Text(
-// 'bài thể dục\nbài tập',
+// 'bài thể dục bài tập',
 // style: TextStyle(
 // fontSize: labelLargeSize,
 // fontWeight: labelLargeWeight,
