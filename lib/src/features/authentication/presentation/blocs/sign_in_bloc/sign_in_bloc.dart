@@ -19,10 +19,10 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
 
   void _onValidate(SignInValidateEvent event, emit) {
     final emailRegExp = RegExp(
-      r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$',
+      r'^[a-zA-Z\d.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z\d-]+(?:\.[a-zA-Z\d-]+)*$',
     );
-    String emailError = '';
-    String passwordError = '';
+    var emailError = '';
+    var passwordError = '';
 
     if (event.email.isEmpty) {
       emailError = TextDoc.txtEmailEmptyWarning;

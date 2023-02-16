@@ -12,18 +12,14 @@ class DioClient {
 
   static const baseUrl = 'http://api.centalki.com/v1';
 
-  static Future<dynamic> assignRole(String idToken, String displayName) {
-    return _dio.post("$baseUrl/auth/assign-role", data: {
+  static Future<dynamic> assignRole(String idToken, String displayName) => _dio.post("$baseUrl/auth/assign-role", data: {
       "idToken": idToken,
       "role": "STUDENT",
       "displayName": displayName
     });
-  }
 
-  static Future<dynamic> validateRole(String? idToken) {
-    return _dio.post("$baseUrl/auth/validate-role",
+  static Future<dynamic> validateRole(String? idToken) => _dio.post("$baseUrl/auth/validate-role",
         data: {"idToken": idToken, "role": "STUDENT"});
-  }
 
   static Future<TopicsListEntity> getTopicList() async {
     final response = await _dio.get(
@@ -47,7 +43,7 @@ class DioClient {
 
     try {
       return TopicDetailModel.fromJson(response.data['data']);
-    } on Exception catch (e) {
+    } on Exception catch (_) {
       throw Exception('ERROR\nTopic Model Mismatched.');
     }
   }
@@ -91,7 +87,7 @@ class DioClient {
       });
       final data = Map<String, dynamic>.from({"data": response.data});
       return SessionScheduleListModel.fromJson(data);
-    } on Exception catch (e) {
+    } on Exception catch (_) {
       rethrow;
     }
   }

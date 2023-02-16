@@ -15,8 +15,7 @@ class TopicCard extends StatelessWidget {
   final TopicItemEntity item;
 
   @override
-  Widget build(BuildContext context) {
-    return Card(
+  Widget build(BuildContext context) => Card(
       elevation: 1,
       clipBehavior: Clip.hardEdge,
       surfaceTintColor: Colors.blue,
@@ -116,5 +115,4 @@ class TopicCard extends StatelessWidget {
         ],
       ),
     );
-  }
 }

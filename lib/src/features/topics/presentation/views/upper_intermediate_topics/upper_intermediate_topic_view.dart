@@ -9,13 +9,11 @@ class UpperIntermediateTopicView extends StatefulWidget {
 
 class _UpperIntermediateTopicViewState extends State<UpperIntermediateTopicView> {
   @override
-  Widget build(BuildContext context) {
-    return const Center(
+  Widget build(BuildContext context) => const Center(
       child: Text(
         'Upper-Intermediate Topic(s) Goes Here\nWorks In Progress...',
         textAlign: TextAlign.center,
         style: TextStyle(fontSize: 16),
       ),
     );
-  }
 }

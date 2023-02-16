@@ -1,10 +1,10 @@
+import 'package:centalki/src/features/authentication/presentation/views/verify_email.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'firebase_options.dart';
-import 'src/features/authentication/presentation/views/sign_in_page.dart';
-import 'src/features/authentication/verify_email.dart';
+import 'src/features/authentication/presentation/views/sign_in/sign_in_page.dart';
 import 'src/features/home/presentation/views/home_page.dart';
 
 void main(List<String> args) async {
@@ -42,7 +42,7 @@ class _MyWidgetState extends State<MyWidget> {
     // When a user is signed in.
     // When the current user is signed out.
     // When there is a change in the current user's token.
-    FirebaseAuth.instance.idTokenChanges().listen((User? user) {
+    FirebaseAuth.instance.idTokenChanges().listen((user) {
       print(user);
       if (user == null) {
         print('User is currently signed out!');

@@ -4,8 +4,7 @@ class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  Widget build(BuildContext context) => Scaffold(
       backgroundColor: Colors.black,
       body: Image.asset(
         'assets/logo/centalki-banner.png',
@@ -14,5 +13,4 @@ class SplashScreen extends StatelessWidget {
         fit: BoxFit.fitHeight,
       ),
     );
-  }
 }

@@ -107,6 +107,7 @@ class TopicPhraseModel extends TopicPhraseEntity {
     this.createdAt,
   }) : super(
           topicPhrase: phrase,
+          phrasePhonetic: phonetic,
           phraseTranslations: translations,
           phraseExamples: examples,
         );

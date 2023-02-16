@@ -1,14 +1,14 @@
-import 'package:centalki/base/define/colors.dart';
-import 'package:centalki/base/define/dimensions.dart';
-import 'package:centalki/base/define/size.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../../base/define/colors.dart';
+import '../../../../../../base/define/dimensions.dart';
+import '../../../../../../base/define/size.dart';
 
 class TermsAndConditions extends StatelessWidget {
   const TermsAndConditions({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  Widget build(BuildContext context) => Scaffold(
       backgroundColor: colorScheme.onPrimary,
       appBar: AppBar(
         backgroundColor: colorScheme.onPrimary,
@@ -105,7 +105,7 @@ class TermsAndConditions extends StatelessWidget {
               Text('License to Use', style: TextStyle(fontSize: headlineSmallSize, fontWeight: headlineSmallWeight),),
               SizedBox(height: smallSpacing6),
               Text(
-                  """Subject to compliance with this EULA (including payment of applicable fees), Developer grants you a limited, non-transferable, revocable, non-exclusive, non-sublicensable license to access the Software Application(s) for which you have paid, through the provided user interfaces, to access your User Data and to utilize such Software Application(s) via the user interfaces provided by Developer to assist in practicing speaking English with a foreigh teacher."""),
+                  """Subject to compliance with this EULA (including payment of applicable fees), Developer grants you a limited, non-transferable, revocable, non-exclusive, non-sub-licensable license to access the Software Application(s) for which you have paid, through the provided user interfaces, to access your User Data and to utilize such Software Application(s) via the user interfaces provided by Developer to assist in practicing speaking English with a foreign teacher."""),
               SizedBox(height: spaceBetweenLine15),
               Text('Account and Password', style: TextStyle(fontSize: headlineSmallSize, fontWeight: headlineSmallWeight),),
               SizedBox(height: smallSpacing6),
@@ -160,7 +160,7 @@ class TermsAndConditions extends StatelessWidget {
                   """The said information will not be utilized and shared by us with any third parties other than our payment service unless required by law, regulation or court order."""),
               SizedBox(height: smallSpacing4),
               Text(
-                  """In consideration of the license granted pursuant to this EULA, you agree to pay the Developer, the Fees as set forth in the website or other location from which you are subscribing for the Software Application(s) and you agree that Developer or its payment processor may charge such amounts against the account information provided by you. Developer reserves the right to amend or revise the Fees for Software Applications from time to time. Licensee shall be responsible to pay the applicable taxes, i.e. any and all federal, foreign, state or local sales, use and excise taxes, cess, duties, levies, and any other assessments in the nature of taxes however designated on the purchase/license and/or use of the Software Applications, including without limitation VAT if applicable to your license/purchase and use of the Software Application(s). It is understood and agreed that the Fees are exclusive of such taxes, duties and other assessments unless expressly stated otherwise."""),
+                  """In consideration of the license granted pursuant to this EULA, you agree to pay the Developer, the Fees as set forth in the website or other location from which you are subscribing for the Software Application(s) and you agree that Developer or its payment processor may charge such amounts against the account information provided by you. Developer reserves the right to amend or revise the Fees for Software Applications from time to time. Licensee shall be responsible to pay the applicable taxes, i.e. any and all federal, foreign, state or local sales, use and excise taxes, duties, levies, and any other assessments in the nature of taxes however designated on the purchase/license and/or use of the Software Applications, including without limitation VAT if applicable to your license/purchase and use of the Software Application(s). It is understood and agreed that the Fees are exclusive of such taxes, duties and other assessments unless expressly stated otherwise."""),
               SizedBox(height: spaceBetweenLine15),
               Text('License Restrictions', style: TextStyle(fontSize: headlineSmallSize, fontWeight: headlineSmallWeight),),
               SizedBox(height: smallSpacing6),
@@ -196,5 +196,4 @@ class TermsAndConditions extends StatelessWidget {
             ],
           )),
     );
-  }
 }
