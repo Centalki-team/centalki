@@ -47,9 +47,9 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     }
 
     if (event.retypePassword.isEmpty) {
-      passwordError = 'Please enter your password again';
+      retypePasswordError = 'Please enter your password again';
     } else if (event.retypePassword != event.password) {
-      passwordError = 'Retyped password mismatched';
+      retypePasswordError = 'Retyped password mismatched';
     }
 
     if (event.isTermsAccepted == false) {

@@ -10,6 +10,7 @@ import '../../../../../../base/define/text.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/text_fields/text_field.dart';
 import '../../../../../../gen/assets.gen.dart';
+import '../sign_up/sign_up_page.dart';
 import '../sign_up/sign_up_view.dart';
 import '../../blocs/sign_in_bloc/sign_in_bloc.dart';
 import '../forgot_password/forgot_password_page.dart';
@@ -157,7 +158,7 @@ class _SignInViewState extends State<SignInView> {
                       onPressed: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const SignUpView(),
+                            builder: (context) => const SignUpPage(),
                           )),
                       text: TextDoc.txtSignUp,
                     ),
