@@ -30,6 +30,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
         } else if (state is ConnectTeacherLoadFailureState) {
           showDialog(
             context: context,
+            barrierDismissible: false,
             builder: (context) => AlertDialog(
               icon: const Icon(
                 Icons.warning_amber_outlined,
@@ -107,6 +108,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
           if (state.isTeacherCancelled) {
             showDialog(
                 context: context,
+                barrierDismissible: false,
                 builder: (context) => AlertDialog(
                       icon: const Icon(
                         Icons.warning_amber_outlined,
@@ -134,6 +136,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
           } else {
             showDialog(
                 context: context,
+                barrierDismissible: false,
                 builder: (context) => AlertDialog(
                       icon: const Icon(
                         Icons.check,
