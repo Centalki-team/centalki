@@ -15,12 +15,14 @@ class UserAccountEntity {
     this.fullName,
     this.avatarUrl,
     this.userProfile,
+    this.accountCompletedSessions,
   });
 
   final String? accountEmail;
   final String? fullName;
   final String? avatarUrl;
   final UserProfileEntity? userProfile;
+  final int? accountCompletedSessions;
 }
 
 class UserProfileEntity {

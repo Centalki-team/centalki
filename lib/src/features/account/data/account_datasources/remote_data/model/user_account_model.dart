@@ -10,6 +10,7 @@ class UserAccountModel extends UserAccountEntity {
   const UserAccountModel({
     this.role,
     this.profile,
+    this.completedSession,
     this.uid,
     this.email,
     this.emailVerified,
@@ -28,6 +29,7 @@ class UserAccountModel extends UserAccountEntity {
 
   final UserRoleModel? role;
   final UserProfileModel? profile;
+  final int? completedSession;
   final String? uid;
   final String? email;
   final bool? emailVerified;

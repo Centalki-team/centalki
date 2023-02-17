@@ -14,6 +14,7 @@ UserAccountModel _$UserAccountModelFromJson(Map<String, dynamic> json) =>
       profile: json['profile'] == null
           ? null
           : UserProfileModel.fromJson(json['profile'] as Map<String, dynamic>),
+      completedSession: json['completedSession'] as int?,
       uid: json['uid'] as String?,
       email: json['email'] as String?,
       emailVerified: json['emailVerified'] as bool?,
