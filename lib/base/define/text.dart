@@ -41,4 +41,66 @@ class TextDoc {
   static String get txtNotTeacherAvailableTitle => 'No teacher available';
   static String get txtNotTeacherAvailableContent => 'You can try again after 5 minutes';
   static String get txtInternetConnection => 'Please check your Internet connection and try again.';
+
+  // Your account
+  static String get txtLoadFailed => 'Load failed!';
+  static String get txtStudentProfile => 'Student Profile';
+  static String get txtWallet => 'Wallet';
+  static String get txtHistory => 'History';
+  static String get txtAccountInformation => 'Account Information';
+  static String get txtChangePassword => 'Change Password';
+  static String get txtConfirmDeleteAccountTitle => 'Delete your account?';
+  static String get txtConfirmDeleteAccountContent => 'You are requesting that your account be deleted.\nDeleting the account will:\n   \u{2022} Remove account information and images\n   \u{2022} Remove all messages\n   \u{2022} Unable to restore';
+  static String get txtDeleteAccount => 'Delete Account';
+  static String get txtLogOut => 'Log Out';
+  static String get txtBalanceSessions => '  Balance sessions';
+  static String get txtCompletedSessions => 'Completed sessions';
+
+  static String get txtFacebook => 'Facebook';
+  static String get txtGoogle => 'Google';
+  static String get txtApple => 'Apple';
+  static String get txtSaveFailed => 'Save failed!';
+  static String get txtSuccessfullySaved => 'Successfully saved!';
+  static String get txtPhoneNumberTitle => 'Phone Number';
+  static String get txtDateOfBirthTitle => 'Date of Birth';
+  static String get txtGenderTitle => 'Gender';
+  static String get txtConnectionsTitle => 'Connections';
+  static String get txtConnected => 'Connected';
+  static String get txtPaymentMethodTitle => 'Payment Method';
+  static String get txtSaveChanges => 'Save Changes';
+
+  static String get txtChangePasswordResult => 'Change password result';
+  static String get txtSuccessfullyChanged => 'Successfully changed!';
+  static String get txtCurrentPassword => 'Current password';
+  static String get txtNewPassword => 'New password';
+  static String get txtConfirmPassword => 'Confirm password';
+
+  static String get txtDeleteAccountResult => 'Delete result';
+  static String get txtReauthenticateAccount => 'Re-authenticate your account';
+  static String get txtReauthenticate => 'Re-authenticate';
+
+  static String get txtTotalCompletedSessions => 'Total Completed Sessions';
+  static String get txtTotalTime => 'Total time is';
+  static String get txtHours => 'hours';
+  static String get txtMinutes => 'minutes';
+  static String get txtSessions => 'Sessions';
+
+  static String get txtFullNameTitle => 'Full Name';
+  static String get txtEnglishNameTitle => 'English Name';
+  static String get txtBioTitle => 'Bio';
+  static String get txtInterestedTopics => 'Interested Topics';
+
+  static String get txtBalance => 'Balance';
+  static String get txtOr => 'or';
+  static String get txtEachSession => 'each session is';
+  static String get txt30Minutes => '/30 minutes';
+  static String get txtTransactions => 'Transactions';
+  static String get txtCharged => 'Charged';
+
+  static String get txtNewPasswordEmptyWarning => 'New password cannot be empty';
+  static String get txtConfirmedPasswordMatchWarning => 'Confirmed password must match the new password';
+  static String get txtConfirmedPasswordEmptyWarning => 'Confirmed password cannot be empty';
+  static String get txtChangePasswordError => 'Something went wrong. Please try again later!';
+  static String get txtUserNotSignIn => 'User does not sign in!';
+  static String get txtDeleteAccountError => 'Something wrong when delete account!\nTry again after some minutes.';
 }

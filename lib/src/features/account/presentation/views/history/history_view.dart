@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 import '../../../../../../base/define/colors.dart';
 import '../../../../../../base/define/dimensions.dart';
+import '../../../../../../base/define/text.dart';
 import '../../blocs/history_bloc/history_bloc.dart';
 
 class HistoryView extends StatelessWidget {
@@ -21,12 +22,12 @@ class HistoryView extends StatelessWidget {
                         Icons.error_outline,
                         color: error,
                       ),
-                      title: const Text('Load Failure'),
+                      title: Text(TextDoc.txtLoadFailed),
                       content: Text(state.message),
                       actions: [
                         TextButton(
                             onPressed: () => Navigator.pop(context),
-                            child: const Text('OK')),
+                            child: Text(TextDoc.txtOk)),
                       ],
                     ));
           }
@@ -42,7 +43,7 @@ class HistoryView extends StatelessWidget {
                 body: CustomScrollView(
                   slivers: [
                     SliverAppBar.medium(
-                      title: const Text('History'),
+                      title: Text(TextDoc.txtHistory),
                       centerTitle: true,
                     ),
                     SliverList(
@@ -64,31 +65,31 @@ class HistoryView extends StatelessWidget {
                                           horizontal: screenAutoPadding16,
                                           vertical: screenAutoPadding16),
                                       child: Column(
-                                        children: const [
+                                        children: [
                                           Text(
-                                            'Total Completed Sessions',
-                                            style: TextStyle(
+                                            TextDoc.txtTotalCompletedSessions,
+                                            style: const TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 18,
                                                 color: defaultFont),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: smallSpacing10,
                                           ),
-                                          Text(
+                                          const Text(
                                             '10',
                                             style: TextStyle(
                                                 fontSize: 18,
                                                 color: support,
                                                 fontWeight: FontWeight.bold),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: smallSpacing10,
                                           ),
                                           Text(
-                                            'Total time is 4 hours 55 minutes',
+                                            '${TextDoc.txtTotalTime} 4 ${TextDoc.txtHours} 55 ${TextDoc.txtMinutes}',
                                             style:
-                                                TextStyle(color: defaultFont),
+                                                const TextStyle(color: defaultFont),
                                           ),
                                         ],
                                       ),
@@ -99,9 +100,9 @@ class HistoryView extends StatelessWidget {
                               const SizedBox(
                                 height: spaceBetweenLine20,
                               ),
-                              const Text(
-                                'Sessions',
-                                style: TextStyle(
+                              Text(
+                                TextDoc.txtSessions,
+                                style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
                                   color: tertiary,
