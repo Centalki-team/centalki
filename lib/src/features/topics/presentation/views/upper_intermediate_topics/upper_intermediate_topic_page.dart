@@ -6,7 +6,5 @@ class UpperIntermediateTopicPage extends StatelessWidget {
   const UpperIntermediateTopicPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return const UpperIntermediateTopicView();
-  }
+  Widget build(BuildContext context) => const UpperIntermediateTopicView();
 }

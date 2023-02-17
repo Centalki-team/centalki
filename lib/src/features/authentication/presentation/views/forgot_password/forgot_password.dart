@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../base/define/colors.dart';
-import '../../../../../base/define/dimensions.dart';
-import '../../../../../base/define/manager/loading_manager.dart';
-import '../../../../../base/define/text.dart';
-import '../../../../../base/widgets/buttons/button.dart';
-import '../../../../../base/widgets/text_fields/text_field.dart';
-import '../../../../../gen/assets.gen.dart';
-import '../blocs/forgot_password_bloc/forgot_password_bloc.dart';
+import '../../../../../../base/define/colors.dart';
+import '../../../../../../base/define/dimensions.dart';
+import '../../../../../../base/define/manager/loading_manager.dart';
+import '../../../../../../base/define/text.dart';
+import '../../../../../../base/widgets/buttons/button.dart';
+import '../../../../../../base/widgets/text_fields/text_field.dart';
+import '../../../../../../gen/assets.gen.dart';
+import '../../blocs/forgot_password_bloc/forgot_password_bloc.dart';
 
 class ForgotPasswordView extends StatefulWidget {
   const ForgotPasswordView({super.key});

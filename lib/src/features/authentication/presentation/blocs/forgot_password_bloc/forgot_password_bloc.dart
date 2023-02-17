@@ -18,9 +18,9 @@ class ForgotPasswordBloc
 
   void _onValidate(ForgotPasswordValidateEvent event, emit) {
     final emailRegExp = RegExp(
-      r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$',
+      r'^[a-zA-Z\d.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z\d-]+(?:\.[a-zA-Z\d-]+)*$',
     );
-    String emailError = '';
+    var emailError = '';
 
     if (event.email.isEmpty) {
       emailError = TextDoc.txtEmailEmptyWarning;

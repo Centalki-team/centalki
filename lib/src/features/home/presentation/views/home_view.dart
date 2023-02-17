@@ -39,8 +39,7 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
   }
 
   @override
-  Widget build(BuildContext context) {
-    return BlocListener<HomeBloc, HomeState>(
+  Widget build(BuildContext context) => BlocListener<HomeBloc, HomeState>(
       listener: (context, state) {
         if (state is HomeChangeTabState) {
           _tabController.index = state.currentTab;
@@ -118,5 +117,4 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
         },
       ),
     );
-  }
 }

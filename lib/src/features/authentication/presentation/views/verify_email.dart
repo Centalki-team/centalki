@@ -1,6 +1,7 @@
-import 'package:centalki/base/define/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../base/define/colors.dart';
 
 class VerifyEmailView extends StatefulWidget {
   const VerifyEmailView({Key? key}) : super(key: key);
@@ -11,8 +12,7 @@ class VerifyEmailView extends StatefulWidget {
 
 class _VerifyEmailViewState extends State<VerifyEmailView> {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(),
       body: Center(
         child: Column(
@@ -43,5 +43,4 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
         ),
       ),
     );
-  }
 }

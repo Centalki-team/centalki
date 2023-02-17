@@ -8,8 +8,7 @@ class SelectTopicLevelPage extends StatelessWidget {
   const SelectTopicLevelPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
+  Widget build(BuildContext context) => BlocProvider(
       create: (context) => TopicLevelBloc()
         ..add(
           const TopicLevelChangeTabEvent(
@@ -18,5 +17,4 @@ class SelectTopicLevelPage extends StatelessWidget {
         ),
       child: const SelectTopicLevelView(),
     );
-  }
 }
