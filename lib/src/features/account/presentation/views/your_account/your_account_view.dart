@@ -466,7 +466,8 @@ class _YourAccountViewState extends State<YourAccountView> {
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    const Text('10'),
+                                    Text(
+                                        '${state.account.accountCompletedSessions ?? 0}'),
                                   ],
                                 ),
                               ),
