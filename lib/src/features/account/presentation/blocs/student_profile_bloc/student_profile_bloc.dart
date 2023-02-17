@@ -15,7 +15,7 @@ class StudentProfileBloc extends Bloc<StudentProfileEvent, StudentProfileState> 
 
     await Future.delayed(const Duration(seconds: 2));
 
-    emit(const StudentProfileLoadDoneState('', 'Nguyen Ngoc Mai Anh', 'Dapne', '', [true, false, true, false]));
+    emit(const StudentProfileLoadDoneState('', 'Nguyen Ngoc Mai Anh', 'Daphne', '', [true, false, true, false]));
   }
 
   void _onChange(StudentProfileChangeEvent event, emit) {

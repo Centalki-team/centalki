@@ -28,7 +28,7 @@ class DeleteAccountView extends StatelessWidget {
                           Icons.error_outline,
                           color: error,
                         ),
-                        title: const Text('Delete result'),
+                        title: Text(TextDoc.txtDeleteAccountResult),
                         content: Flexible(
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
@@ -40,7 +40,7 @@ class DeleteAccountView extends StatelessWidget {
                         actions: [
                           TextButton(
                               onPressed: () => Navigator.pop(context),
-                              child: const Text('OK')),
+                              child: Text(TextDoc.txtOk)),
                         ],
                       ));
             }
@@ -52,11 +52,10 @@ class DeleteAccountView extends StatelessWidget {
                 screenAutoPadding16, 24.0, screenAutoPadding16, 0),
             child: Column(
               children: [
-                const Text(
-                  'Confirm delete',
-                  style: TextStyle(
+                Text(
+                  TextDoc.txtReauthenticateAccount,
+                  style: const TextStyle(
                     fontSize: 24,
-                    //fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(
@@ -106,14 +105,14 @@ class DeleteAccountView extends StatelessWidget {
                         foregroundColor: Colors.white,
                         minimumSize: const Size.fromHeight(48),
                       ),
-                      child: const Text('Confirm')),
+                      child: Text(TextDoc.txtReauthenticate)),
                 ),
                 OutlinedButton(
                   onPressed: () => Navigator.pop(context),
                   style: OutlinedButton.styleFrom(
                     minimumSize: const Size.fromHeight(48),
                   ),
-                  child: const Text('Cancel'),
+                  child: Text(TextDoc.txtCancel),
                 ),
               ],
             ),

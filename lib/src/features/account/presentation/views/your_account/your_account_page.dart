@@ -8,13 +8,9 @@ class YourAccountPage extends StatelessWidget {
   const YourAccountPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => YourAccountBloc()
-        ..add(
-          const YourAccountLoadEvent(),
-        ),
-      child: const YourAccountView(),
-    );
-  }
+  Widget build(BuildContext context) => BlocProvider(
+        create: (context) =>
+            YourAccountBloc()..add(const YourAccountLoadEvent()),
+        child: const YourAccountView(),
+      );
 }

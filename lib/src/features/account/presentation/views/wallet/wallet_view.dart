@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 import '../../../../../../base/define/colors.dart';
 import '../../../../../../base/define/dimensions.dart';
+import '../../../../../../base/define/text.dart';
 import '../../blocs/wallet_bloc/wallet_bloc.dart';
 
 class WalletView extends StatelessWidget {
@@ -21,12 +22,12 @@ class WalletView extends StatelessWidget {
                         Icons.error_outline,
                         color: error,
                       ),
-                      title: const Text('Load Failure'),
+                      title: Text(TextDoc.txtLoadFailed),
                       content: Text(state.message),
                       actions: [
                         TextButton(
                             onPressed: () => Navigator.pop(context),
-                            child: const Text('OK')),
+                            child: Text(TextDoc.txtOk)),
                       ],
                     ));
           }
@@ -47,7 +48,7 @@ class WalletView extends StatelessWidget {
             body: CustomScrollView(
               slivers: [
                 SliverAppBar.medium(
-                  title: const Text('Wallet'),
+                  title: Text(TextDoc.txtWallet),
                   centerTitle: true,
                   actions: [
                     Padding(
@@ -87,9 +88,9 @@ class WalletView extends StatelessWidget {
                                         horizontal: screenAutoPadding16),
                                     child: Column(
                                       children: [
-                                        const Text(
-                                          'Balance',
-                                          style: TextStyle(
+                                        Text(
+                                          TextDoc.txtBalance,
+                                          style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: defaultFont,
                                               fontSize: 18),
@@ -101,7 +102,7 @@ class WalletView extends StatelessWidget {
                                               fontSize: 18,
                                               fontWeight: FontWeight.bold),
                                         ),
-                                        const Text('or'),
+                                        Text(TextDoc.txtOr),
                                         const Text(
                                           '10 sessions',
                                           style: TextStyle(
@@ -110,7 +111,7 @@ class WalletView extends StatelessWidget {
                                               fontWeight: FontWeight.bold),
                                         ),
                                         Text(
-                                          'each session is ${currencyFormat.format(100000)}/30 minutes',
+                                          '${TextDoc.txtEachSession} ${currencyFormat.format(100000)}${TextDoc.txt30Minutes}',
                                           style: const TextStyle(
                                               fontStyle: FontStyle.italic),
                                         ),
@@ -123,9 +124,9 @@ class WalletView extends StatelessWidget {
                             const SizedBox(
                               height: spaceBetweenLine20,
                             ),
-                            const Text(
-                              'Transactions',
-                              style: TextStyle(
+                            Text(
+                              TextDoc.txtTransactions,
+                              style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: tertiary,
                                   fontSize: 18),
@@ -165,9 +166,9 @@ class WalletView extends StatelessWidget {
                                               color: defaultFont,
                                             ),
                                           ),
-                                          const Text(
-                                            'Charged',
-                                            style: TextStyle(
+                                          Text(
+                                            TextDoc.txtCharged,
+                                            style: const TextStyle(
                                               color: defaultFont,
                                             ),
                                           ),

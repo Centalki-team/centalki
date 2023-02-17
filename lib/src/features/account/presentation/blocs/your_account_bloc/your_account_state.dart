@@ -13,9 +13,13 @@ class YourAccountLoadingState extends YourAccountState {
 }
 
 class YourAccountLoadDoneState extends YourAccountState {
-  const YourAccountLoadDoneState();
+  const YourAccountLoadDoneState(this.account);
+
+  final UserAccountEntity account;
 }
 
 class YourAccountLoadErrorState extends YourAccountState {
-  const YourAccountLoadErrorState();
+  const YourAccountLoadErrorState(this.message);
+
+  final String message;
 }
