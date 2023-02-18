@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'firebase_options.dart';
 import 'src/features/authentication/presentation/views/sign_in/sign_in_page.dart';
 import 'src/features/home/presentation/views/home_page.dart';
+import 'src/features/settings/presentation/views/settings_view.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
