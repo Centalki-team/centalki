@@ -14,6 +14,7 @@ class UserAccountEntity {
     this.accountEmail,
     this.fullName,
     this.avatarUrl,
+    this.accountPhoneNumber,
     this.userProfile,
     this.accountCompletedSessions,
   });
@@ -21,6 +22,7 @@ class UserAccountEntity {
   final String? accountEmail;
   final String? fullName;
   final String? avatarUrl;
+  final String? accountPhoneNumber;
   final UserProfileEntity? userProfile;
   final int? accountCompletedSessions;
 }

@@ -101,4 +101,12 @@ class DioClient {
         options: Options(headers: {'Authorization': idToken}));
     return UserAccountModel.fromJson(response.data);
   }
+
+  static Future<bool> updateUserInformation(
+      Map<String, dynamic> updateInformation, String idToken) async {
+    final response = await _dio.patch("$baseUrl/auth/profile",
+        data: updateInformation,
+        options: Options(headers: {'Authorization': idToken}));
+    return response.statusCode == 200;
+  }
 }

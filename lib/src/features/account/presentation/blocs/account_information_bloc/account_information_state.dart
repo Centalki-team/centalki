@@ -18,7 +18,7 @@ class AccountInformationLoadDoneState extends AccountInformationState {
   final String email;
   final String phoneNumber;
   final DateTime dateOfBirth;
-  final String gender;
+  final Gender gender;
 }
 
 class AccountInformationLoadFailureState extends AccountInformationState {

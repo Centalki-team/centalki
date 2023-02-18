@@ -103,4 +103,8 @@ class TextDoc {
   static String get txtChangePasswordError => 'Something went wrong. Please try again later!';
   static String get txtUserNotSignIn => 'User does not sign in!';
   static String get txtDeleteAccountError => 'Something wrong when delete account!\nTry again after some minutes.';
+
+  static String get txtMale => 'Male';
+  static String get txtFemale => 'Female';
+  static String get txtOthers => 'Others';
 }
