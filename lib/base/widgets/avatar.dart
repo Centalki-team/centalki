@@ -16,10 +16,13 @@ class Avatar extends StatelessWidget {
   final double maxRadius;
 
   String getUserDefaultAvatar(String fullName) {
+    if (fullName.isEmpty) return '';
     final splitName = fullName.split(' ');
     var result = '';
     for (var part in splitName) {
-      result += part[0];
+      if (part.isNotEmpty) {
+        result += part[0];
+      }
     }
     return result;
   }
@@ -37,7 +40,6 @@ class Avatar extends StatelessWidget {
           ),
           errorWidget: (context, url, error) => Text(
             getUserDefaultAvatar(fullName),
-            style: TextStyle(fontSize: maxRadius),
           ),
         ),
       );
