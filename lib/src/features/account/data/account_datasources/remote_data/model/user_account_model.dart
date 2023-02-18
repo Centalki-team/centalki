@@ -14,6 +14,7 @@ class UserAccountModel extends UserAccountEntity {
     this.uid,
     this.email,
     this.emailVerified,
+    this.phoneNumber,
     this.displayName,
     this.photoUrl,
     this.disabled,
@@ -24,7 +25,9 @@ class UserAccountModel extends UserAccountEntity {
           accountEmail: email,
           fullName: displayName,
           avatarUrl: photoUrl,
+          accountPhoneNumber: phoneNumber,
           userProfile: profile,
+          accountCompletedSessions: completedSession,
         );
 
   final UserRoleModel? role;
@@ -33,6 +36,7 @@ class UserAccountModel extends UserAccountEntity {
   final String? uid;
   final String? email;
   final bool? emailVerified;
+  final String? phoneNumber;
   final String? displayName;
   final String? photoUrl;
   final bool? disabled;

@@ -18,6 +18,7 @@ UserAccountModel _$UserAccountModelFromJson(Map<String, dynamic> json) =>
       uid: json['uid'] as String?,
       email: json['email'] as String?,
       emailVerified: json['emailVerified'] as bool?,
+      phoneNumber: json['phoneNumber'] as String?,
       displayName: json['displayName'] as String?,
       photoUrl: json['photoUrl'] as String?,
       disabled: json['disabled'] as bool?,

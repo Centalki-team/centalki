@@ -15,8 +15,8 @@ class AccountInformationChangeEvent extends AccountInformationEvent {
 class AccountInformationSaveEvent extends AccountInformationEvent {
   const AccountInformationSaveEvent(this.dateOfBirth, this.gender);
 
-  final String dateOfBirth;
-  final String gender;
+  final DateTime dateOfBirth;
+  final Gender gender;
 }
 
 class AccountInformationConnectEvent extends AccountInformationEvent {

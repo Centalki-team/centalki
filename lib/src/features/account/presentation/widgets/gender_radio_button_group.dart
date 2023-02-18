@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../base/define/text.dart';
+import '../../domain/entities/user_account_entity.dart';
+
 class GenderRadioButtonGroup extends StatefulWidget {
   const GenderRadioButtonGroup(
       {Key? key, required this.genderCallback, required this.gender})
       : super(key: key);
 
-  final void Function(String) genderCallback;
-  final String gender;
+  final void Function(Gender) genderCallback;
+  final Gender gender;
 
   @override
   State<GenderRadioButtonGroup> createState() => _GenderRadioButtonGroupState();
 }
-
-enum Gender { male, female, other }
 
 class _GenderRadioButtonGroupState extends State<GenderRadioButtonGroup> {
   var selectedGender = Gender.male;
 
   @override
   void initState() {
-    selectedGender =
-        Gender.values.firstWhere((element) => element.name == widget.gender);
+    selectedGender = widget.gender;
     super.initState();
   }
 
@@ -41,9 +41,9 @@ class _GenderRadioButtonGroupState extends State<GenderRadioButtonGroup> {
                     setState(() {
                       selectedGender = value ?? Gender.male;
                     });
-                    widget.genderCallback(selectedGender.name);
+                    widget.genderCallback(selectedGender);
                   },
-                  title: const Text('Male'),
+                  title: Text(TextDoc.txtMale),
                 ),
                 RadioListTile(
                   value: Gender.female,
@@ -52,20 +52,20 @@ class _GenderRadioButtonGroupState extends State<GenderRadioButtonGroup> {
                     setState(() {
                       selectedGender = value ?? Gender.male;
                     });
-                    widget.genderCallback(selectedGender.name);
+                    widget.genderCallback(selectedGender);
                   },
-                  title: const Text('Female'),
+                  title: Text(TextDoc.txtFemale),
                 ),
                 RadioListTile(
-                  value: Gender.other,
+                  value: Gender.others,
                   groupValue: selectedGender,
                   onChanged: (value) {
                     setState(() {
                       selectedGender = value ?? Gender.male;
                     });
-                    widget.genderCallback(selectedGender.name);
+                    widget.genderCallback(selectedGender);
                   },
-                  title: const Text('Other'),
+                  title: Text(TextDoc.txtOthers),
                 ),
               ],
             );
@@ -80,9 +80,9 @@ class _GenderRadioButtonGroupState extends State<GenderRadioButtonGroup> {
                     setState(() {
                       selectedGender = value ?? Gender.male;
                     });
-                    widget.genderCallback(selectedGender.name);
+                    widget.genderCallback(selectedGender);
                   },
-                  title: const Text('Male'),
+                  title: Text(TextDoc.txtMale),
                 ),
               ),
               Expanded(
@@ -93,22 +93,22 @@ class _GenderRadioButtonGroupState extends State<GenderRadioButtonGroup> {
                     setState(() {
                       selectedGender = value ?? Gender.male;
                     });
-                    widget.genderCallback(selectedGender.name);
+                    widget.genderCallback(selectedGender);
                   },
-                  title: const Text('Female'),
+                  title: Text(TextDoc.txtFemale),
                 ),
               ),
               Expanded(
                 child: RadioListTile(
-                  value: Gender.other,
+                  value: Gender.others,
                   groupValue: selectedGender,
                   onChanged: (value) {
                     setState(() {
                       selectedGender = value ?? Gender.male;
                     });
-                    widget.genderCallback(selectedGender.name);
+                    widget.genderCallback(selectedGender);
                   },
-                  title: const Text('Other'),
+                  title: Text(TextDoc.txtOthers),
                 ),
               ),
             ],
