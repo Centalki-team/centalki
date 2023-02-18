@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 
 import '../../src/features/account/data/account_datasources/remote_data/model/user_account_model.dart';
+import '../../src/features/account/data/balance_datasources/remote_data/model/balance_model.dart';
+import '../../src/features/account/domain/entities/balance_entity.dart';
 import '../../src/features/account/domain/entities/user_account_entity.dart';
 import '../../src/features/connect_teacher/data/datasources/schedule_datasource/remote_data/model/session_schedule_model.dart';
 import '../../src/features/connect_teacher/domain/entities/session_schedule_entity.dart';
@@ -108,5 +110,11 @@ class DioClient {
         data: updateInformation,
         options: Options(headers: {'Authorization': idToken}));
     return response.statusCode == 200;
+  }
+
+  static Future<BalanceEntity> getAccountBalance(String idToken) async {
+    final response = await _dio.get("$baseUrl/auth/balance",
+        options: Options(headers: {"Authorization": idToken}));
+    return BalanceModel.fromJson(response.data);
   }
 }
