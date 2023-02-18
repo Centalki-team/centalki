@@ -11,7 +11,12 @@ class WalletLoadingState extends WalletState {
 }
 
 class WalletLoadDoneState extends WalletState {
-  const WalletLoadDoneState();
+  const WalletLoadDoneState(
+      this.balanceMoney, this.balanceSessions, this.costPerSession);
+
+  final int balanceMoney;
+  final int balanceSessions;
+  final int costPerSession;
 }
 
 class WalletLoadFailureState extends WalletState {

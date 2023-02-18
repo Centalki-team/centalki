@@ -36,161 +36,176 @@ class WalletView extends StatelessWidget {
           final currencyFormat =
               NumberFormat.currency(locale: 'vi_VN', symbol: 'VND');
 
-          if (state is WalletLoadingState) {
+          if (state is WalletLoadDoneState) {
             return Scaffold(
-              appBar: AppBar(),
-              body: const Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          }
-          return Scaffold(
-            body: CustomScrollView(
-              slivers: [
-                SliverAppBar.medium(
-                  title: Text(TextDoc.txtWallet),
-                  centerTitle: true,
-                  actions: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: IconButton(
-                        onPressed: () {
-                          context
-                              .read<WalletBloc>()
-                              .add(const WalletGetMoreEvent());
-                        },
-                        icon: const Icon(
-                          Icons.add,
-                          color: mainColor1,
+              body: CustomScrollView(
+                slivers: [
+                  SliverAppBar.medium(
+                    title: Text(TextDoc.txtWallet),
+                    centerTitle: true,
+                    actions: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: IconButton(
+                          onPressed: () {
+                            context
+                                .read<WalletBloc>()
+                                .add(const WalletGetMoreEvent());
+                          },
+                          icon: const Icon(
+                            Icons.add,
+                            color: mainColor1,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    childCount: 1,
-                    (_, index) => Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: screenAutoPadding16, vertical: 24),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Card(
-                              color: mainColor2Surface,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                    ],
+                  ),
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      childCount: 1,
+                          (_, index) =>
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: screenAutoPadding16, vertical: 24),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 8.0,
-                                        horizontal: screenAutoPadding16),
-                                    child: Column(
+                                  Card(
+                                    color: mainColor2Surface,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment
+                                          .center,
                                       children: [
-                                        Text(
-                                          TextDoc.txtBalance,
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: defaultFont,
-                                              fontSize: 18),
-                                        ),
-                                        Text(
-                                          currencyFormat.format(1000000),
-                                          style: const TextStyle(
-                                              color: support,
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        Text(TextDoc.txtOr),
-                                        const Text(
-                                          '10 sessions',
-                                          style: TextStyle(
-                                              color: support,
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        Text(
-                                          '${TextDoc.txtEachSession} ${currencyFormat.format(100000)}${TextDoc.txt30Minutes}',
-                                          style: const TextStyle(
-                                              fontStyle: FontStyle.italic),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 8.0,
+                                              horizontal: screenAutoPadding16),
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                TextDoc.txtBalance,
+                                                style: const TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: defaultFont,
+                                                    fontSize: 18),
+                                              ),
+                                              Text(
+                                                currencyFormat.format(state.balanceMoney),
+                                                style: const TextStyle(
+                                                    color: support,
+                                                    fontSize: 18,
+                                                    fontWeight: FontWeight
+                                                        .bold),
+                                              ),
+                                              Text(TextDoc.txtOr),
+                                              Text(
+                                                '${state.balanceSessions} sessions',
+                                                style: const TextStyle(
+                                                    color: support,
+                                                    fontSize: 18,
+                                                    fontWeight: FontWeight
+                                                        .bold),
+                                              ),
+                                              Text(
+                                                '${TextDoc
+                                                    .txtEachSession} ${currencyFormat
+                                                    .format(state.costPerSession)}${TextDoc
+                                                    .txt30Minutes}',
+                                                style: const TextStyle(
+                                                    fontStyle: FontStyle
+                                                        .italic),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ],
                                     ),
                                   ),
+                                  const SizedBox(
+                                    height: spaceBetweenLine20,
+                                  ),
+                                  Text(
+                                    TextDoc.txtTransactions,
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: tertiary,
+                                        fontSize: 18),
+                                  ),
+                                  ListView.builder(
+                                    physics: const NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemCount: 10,
+                                    itemBuilder: (_, index) =>
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              bottom: 16.0),
+                                          child: Container(
+                                            decoration: const BoxDecoration(
+                                              border: Border(
+                                                bottom: BorderSide(
+                                                  color: shadowColor,
+                                                ),
+                                              ),
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                const Icon(
+                                                  Icons.arrow_upward,
+                                                  color: support,
+                                                ),
+                                                const SizedBox(
+                                                  width: smallSpacing10,
+                                                ),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      DateFormat(
+                                                          'yyyy-MM-dd hh:mm a')
+                                                          .format(
+                                                          DateTime.now()),
+                                                      style: const TextStyle(
+                                                        fontWeight: FontWeight
+                                                            .bold,
+                                                        color: defaultFont,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      TextDoc.txtCharged,
+                                                      style: const TextStyle(
+                                                        color: defaultFont,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      currencyFormat.format(
+                                                          100000),
+                                                      style:
+                                                      const TextStyle(
+                                                          color: support),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                  )
                                 ],
                               ),
                             ),
-                            const SizedBox(
-                              height: spaceBetweenLine20,
-                            ),
-                            Text(
-                              TextDoc.txtTransactions,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: tertiary,
-                                  fontSize: 18),
-                            ),
-                            ListView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              itemCount: 10,
-                              itemBuilder: (_, index) => Padding(
-                                padding: const EdgeInsets.only(bottom: 16.0),
-                                child: Container(
-                                  decoration: const BoxDecoration(
-                                    border: Border(
-                                      bottom: BorderSide(
-                                        color: shadowColor,
-                                      ),
-                                    ),
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      const Icon(
-                                        Icons.arrow_upward,
-                                        color: support,
-                                      ),
-                                      const SizedBox(
-                                        width: smallSpacing10,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            DateFormat('yyyy-MM-dd hh:mm a')
-                                                .format(DateTime.now()),
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: defaultFont,
-                                            ),
-                                          ),
-                                          Text(
-                                            TextDoc.txtCharged,
-                                            style: const TextStyle(
-                                              color: defaultFont,
-                                            ),
-                                          ),
-                                          Text(
-                                            currencyFormat.format(100000),
-                                            style:
-                                                const TextStyle(color: support),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
+                          ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
+            );
+          }
+          return Scaffold(
+            appBar: AppBar(),
+            body: const Center(
+              child: CircularProgressIndicator(),
             ),
           );
         },
