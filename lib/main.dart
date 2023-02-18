@@ -24,7 +24,7 @@ void main(List<String> args) async {
     theme: ThemeData(
       useMaterial3: true,
     ),
-    home: const SettingsView(),
+    home: const MyWidget(),
   ));
 }
 

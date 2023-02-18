@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../base/define/app_text.dart';
 import '../widgets/setting_switch_row.dart';
 
 class SettingsNotification extends StatelessWidget {
@@ -20,7 +21,7 @@ class SettingsNotification extends StatelessWidget {
           ),
           title: Row(children: const [
             Text(
-              'Notification',
+              AppText.txtNotification,
               style: TextStyle(
                 fontSize: 22.0,
                 height: 28.0,
@@ -42,7 +43,7 @@ class SettingsNotification extends StatelessWidget {
                   height: 4.0,
                 ),
                 Text(
-                  'Notify me about',
+                  AppText.txtNotifyMeAbout,
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 22.0,
@@ -54,7 +55,7 @@ class SettingsNotification extends StatelessWidget {
                     vertical: 16.0,
                   ),
                   child: SettingSwitchRow(
-                    title: 'Deals and Discounts',
+                    title: AppText.txtDealsAndDiscounts,
                   ),
                 ),
                 Padding(
@@ -63,7 +64,7 @@ class SettingsNotification extends StatelessWidget {
                     vertical: 16.0,
                   ),
                   child: SettingSwitchRow(
-                    title: 'New Topics',
+                    title: AppText.txtNewTopics,
                   ),
                 ),
                 Padding(
@@ -72,7 +73,7 @@ class SettingsNotification extends StatelessWidget {
                     vertical: 16.0,
                   ),
                   child: SettingSwitchRow(
-                    title: 'New Teachers',
+                    title: AppText.txtNewTeachers,
                   ),
                 ),
                 Padding(
@@ -96,7 +97,7 @@ class SettingsNotification extends StatelessWidget {
                     vertical: 16.0,
                   ),
                   child: SettingSwitchRow(
-                    title: 'Sounds',
+                    title: AppText.txtSounds,
                   ),
                 ),
                 Padding(
@@ -105,7 +106,7 @@ class SettingsNotification extends StatelessWidget {
                     vertical: 16.0,
                   ),
                   child: SettingSwitchRow(
-                    title: 'Vibrations',
+                    title: AppText.txtVibrations,
                   ),
                 ),
               ],

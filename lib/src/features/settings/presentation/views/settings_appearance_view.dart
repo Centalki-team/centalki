@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../base/define/app_text.dart';
 import '../widgets/setting_switch_row.dart';
 
 class SettingsAppearance extends StatelessWidget {
@@ -20,7 +21,7 @@ class SettingsAppearance extends StatelessWidget {
           ),
           title: Row(children: const [
             Text(
-              'Appearance',
+              AppText.txtAppearance,
               style: TextStyle(
                 fontSize: 22.0,
                 height: 28.0,
@@ -42,7 +43,7 @@ class SettingsAppearance extends StatelessWidget {
                   height: 4.0,
                 ),
                 Text(
-                  'Application Theme',
+                  AppText.txtApplicationTheme,
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 22.0,
@@ -54,7 +55,7 @@ class SettingsAppearance extends StatelessWidget {
                     vertical: 16.0,
                   ),
                   child: SettingSwitchRow(
-                    title: 'Dark Mode',
+                    title: AppText.txtDarkMode,
                   ),
                 ),
               ],

@@ -50,6 +50,17 @@ class $AssetsIconGen {
   SvgGenImage get icPaintPalette =>
       const SvgGenImage('assets/icon/ic_paint_palette.svg');
 
+  /// File path: assets/icon/ic_rating_star.svg
+  SvgGenImage get icRatingStar =>
+      const SvgGenImage('assets/icon/ic_rating_star.svg');
+
+  /// File path: assets/icon/ic_rating_star_selected.svg
+  SvgGenImage get icRatingStarSelected =>
+      const SvgGenImage('assets/icon/ic_rating_star_selected.svg');
+
+  /// File path: assets/icon/ic_send.svg
+  SvgGenImage get icSend => const SvgGenImage('assets/icon/ic_send.svg');
+
   /// File path: assets/icon/ic_warning.svg
   SvgGenImage get icWarning => const SvgGenImage('assets/icon/ic_warning.svg');
 
@@ -83,6 +94,9 @@ class $AssetsIconGen {
         icNoti,
         icNotiHeader,
         icPaintPalette,
+        icRatingStar,
+        icRatingStarSelected,
+        icSend,
         icWarning,
         list,
         notifications,

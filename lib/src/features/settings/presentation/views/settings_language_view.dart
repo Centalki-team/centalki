@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../base/define/app_text.dart';
 import '../widgets/vertical_radio_group.dart';
 
 class SettingsLanguage extends StatelessWidget {
@@ -21,7 +22,7 @@ class SettingsLanguage extends StatelessWidget {
           title: Row(
             children: const [
               Text(
-                'Language',
+                AppText.txtLanguage,
                 style: TextStyle(
                   fontSize: 22.0,
                   height: 28.0,
@@ -33,10 +34,10 @@ class SettingsLanguage extends StatelessWidget {
         ),
         body: const SingleChildScrollView(
           child: VerticalRadioGroup(
-            initValue: 'English',
+            initValue: AppText.txtEnglish,
             dataList: [
-              'English',
-              'Tiếng Việt',
+              AppText.txtEnglish,
+              AppText.txtVietnamese,
             ],
           ),
         ),
