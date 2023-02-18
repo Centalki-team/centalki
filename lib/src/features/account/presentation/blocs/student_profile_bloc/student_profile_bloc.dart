@@ -1,9 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../../../base/define/text.dart';
+import '../../../../../../base/temp_dio/dio_client.dart';
 
 part 'student_profile_event.dart';
 part 'student_profile_state.dart';
 
-class StudentProfileBloc extends Bloc<StudentProfileEvent, StudentProfileState> {
+class StudentProfileBloc
+    extends Bloc<StudentProfileEvent, StudentProfileState> {
   StudentProfileBloc() : super(const StudentProfileInitState()) {
     on<StudentProfileInitEvent>(_onInit);
     on<StudentProfileChangeEvent>(_onChange);
@@ -12,10 +17,17 @@ class StudentProfileBloc extends Bloc<StudentProfileEvent, StudentProfileState> 
 
   void _onInit(StudentProfileInitEvent event, emit) async {
     emit(const StudentProfileLoadingState());
-
-    await Future.delayed(const Duration(seconds: 2));
-
-    emit(const StudentProfileLoadDoneState('', 'Nguyen Ngoc Mai Anh', 'Daphne', '', [true, false, true, false]));
+    try {
+      final studentProfile = await FirebaseAuth.instance.currentUser
+          ?.getIdToken()
+          .then(DioClient.getUserInformation);
+      emit(StudentProfileLoadDoneState(
+          studentProfile?.avatarUrl ?? '',
+          studentProfile?.fullName ?? '',
+          studentProfile?.userProfile?.accountEnglishName ?? '',
+          '',
+          [true, false, true, false]));
+    } on Exception catch (_) {}
   }
 
   void _onChange(StudentProfileChangeEvent event, emit) {
@@ -25,9 +37,21 @@ class StudentProfileBloc extends Bloc<StudentProfileEvent, StudentProfileState> 
 
   void _onSaveChanges(StudentProfileSaveChangesEvent event, emit) async {
     emit(const StudentProfileSavingState());
-
-    await Future.delayed(const Duration(seconds: 2));
-
-    emit(const StudentProfileSaveDoneState());
+    final updateInformation = Map<String, dynamic>.from({
+      "photoUrl": event.avatarUrl,
+      "displayName": event.fullName,
+      "englishName": event.englishName,
+    });
+    try {
+      final idToken = await FirebaseAuth.instance.currentUser?.getIdToken() ?? '';
+      final isSuccess = await DioClient.updateUserInformation(updateInformation, idToken);
+      if (!isSuccess) {
+        throw Exception();
+      }
+      emit(const StudentProfileSaveDoneState());
+    }
+    on Exception catch (_) {
+      emit(StudentProfileSaveFailureState(TextDoc.txtSaveFailed));
+    }
   }
 }

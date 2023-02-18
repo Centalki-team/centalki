@@ -166,12 +166,15 @@ class _YourAccountViewState extends State<YourAccountView> {
                                   0),
                               children: [
                                 GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
+                                  onTap: () async {
+                                    await Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (_) =>
                                                 const StudentProfilePage()));
+                                    if (mounted) {
+                                      context.read<YourAccountBloc>().add(const YourAccountLoadEvent());
+                                    }
                                   },
                                   child: Card(
                                     surfaceTintColor: Colors.white,
