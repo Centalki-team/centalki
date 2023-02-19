@@ -26,8 +26,9 @@ class ConnectTeacherBloc
 
   void _onInit(ConnectTeacherInit event, emit) async {
     emit(ConnectTeacherLoadingState(TextDoc.txtFindTeacher));
+    emit(const ConnectTeacherConnectDoneState());
 
-    topicId = event.topicId;
+    /*topicId = event.topicId;
     if (FirebaseAuth.instance.currentUser != null) {
       try {
         final studentId = FirebaseAuth.instance.currentUser?.uid ?? '';
@@ -42,7 +43,7 @@ class ConnectTeacherBloc
       }
     } else {
       emit(ConnectTeacherLoadFailureState(TextDoc.txtNotSignIn));
-    }
+    }*/
   }
 
   void _onCancelButtonPressed(

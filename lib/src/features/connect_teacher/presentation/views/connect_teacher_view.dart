@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/text.dart';
 import '../../../../../base/widgets/buttons/button.dart';
+import '../../../meeting/presentation/views/meeting_page.dart';
 import '../blocs/connect_teacher_bloc.dart';
 import '../widgets/wave.dart';
 
@@ -82,7 +83,8 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                           )
                         ]));
         } else if (state is ConnectTeacherConnectDoneState) {
-          Navigator.pop(context);
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => const MeetingPage()));
         } else if (state is ConnectTeacherConnectErrorState) {
           showDialog(
               context: context,
