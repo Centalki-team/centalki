@@ -20,7 +20,7 @@ class DeleteAccountBloc extends Bloc<DeleteAccountEvent, DeleteAccountState> {
   void _onChangePassword(DeleteAccountChangePasswordEvent event, emit) {
     password = event.password;
     if (password.isEmpty) {
-      emit(DeleteAccountPasswordInvalidState(TextDoc.txtPasswordEmptyWarning));
+      emit(const DeleteAccountPasswordInvalidState(TextDoc.txtPasswordEmpty));
     } else {
       emit(const DeleteAccountPasswordValidState());
     }
@@ -40,12 +40,12 @@ class DeleteAccountBloc extends Bloc<DeleteAccountEvent, DeleteAccountState> {
             .delete()
             .then((value) => emit(const DeleteAccountLoadDoneState()));
       } else {
-        emit(DeleteAccountLoadErrorState(TextDoc.txtUserNotSignIn));
+        emit(const DeleteAccountLoadErrorState(TextDoc.txtUserNotSignIn));
       }
     } on FirebaseAuthException catch (e) {
       emit(DeleteAccountLoadErrorState(e.message ?? ''));
     } on Exception catch (_) {
-      emit(DeleteAccountLoadErrorState(TextDoc.txtDeleteAccountError));
+      emit(const DeleteAccountLoadErrorState(TextDoc.txtDeleteAccountError));
     }
   }
 }

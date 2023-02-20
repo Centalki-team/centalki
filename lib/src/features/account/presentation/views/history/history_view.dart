@@ -74,6 +74,7 @@ class _HistoryViewState extends State<HistoryView> {
           if (state is HistoryLoadDoneState) {
             return Scaffold(
               body: CustomScrollView(
+                controller: _scrollController,
                 slivers: [
                   SliverAppBar.medium(
                     title: Text(TextDoc.txtHistory),
@@ -139,9 +140,9 @@ class _HistoryViewState extends State<HistoryView> {
                             state.sessionList.isEmpty
                                 ? const Center(child: Text('No data'))
                                 : ListView.builder(
+                                    shrinkWrap: true,
                                     physics:
                                         const NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
                                     itemCount: state.sessionList.length,
                                     itemBuilder: (_, index) => Card(
                                       elevation: 0,
@@ -214,7 +215,7 @@ class _HistoryViewState extends State<HistoryView> {
                                         ],
                                       ),
                                     ),
-                                  )
+                                  ),
                           ],
                         ),
                       ),

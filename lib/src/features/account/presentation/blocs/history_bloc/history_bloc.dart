@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../base/define/text.dart';
 import '../../../../../../base/temp_dio/dio_client.dart';
 import '../../../../connect_teacher/domain/entities/session_schedule_entity.dart';
-import '../../../domain/entities/history_session_entity.dart';
 
 part 'history_event.dart';
 part 'history_state.dart';

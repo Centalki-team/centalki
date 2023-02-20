@@ -77,8 +77,10 @@ class _SignInViewState extends State<SignInView> {
                         controller: _emailController,
                         textInputType: TextInputType.emailAddress,
                         labelText: TextDoc.txtEmail,
-                        errorText:
-                            (state is SignInValidateState && state.emailError.isNotEmpty) ? state.emailError : null,
+                        errorText: (state is SignInValidateState &&
+                                state.emailError.isNotEmpty)
+                            ? state.emailError
+                            : null,
                         onChanged: _validateSignInInputs,
                       ),
                       const SizedBox(
@@ -88,7 +90,8 @@ class _SignInViewState extends State<SignInView> {
                         controller: _passwordController,
                         obscureText: true,
                         labelText: TextDoc.txtPassword,
-                        errorText: (state is SignInValidateState && state.passwordError.isNotEmpty)
+                        errorText: (state is SignInValidateState &&
+                                state.passwordError.isNotEmpty)
                             ? state.passwordError
                             : null,
                         onChanged: _validateSignInInputs,
@@ -122,11 +125,13 @@ class _SignInViewState extends State<SignInView> {
                     }
                     return AppFilledButton(
                       text: TextDoc.txtSignIn,
-                      onPressed: (state is SignInValidateState && !state.forceDisabled)
-                          ? () => context
-                              .read<SignInBloc>()
-                              .add(SignInSendEvent(email: _emailController.text, password: _passwordController.text))
-                          : null,
+                      onPressed:
+                          (state is SignInValidateState && !state.forceDisabled)
+                              ? () => context.read<SignInBloc>().add(
+                                  SignInSendEvent(
+                                      email: _emailController.text,
+                                      password: _passwordController.text))
+                              : null,
                       minimumSize: const Size.fromHeight(48),
                     );
                   },
@@ -138,9 +143,7 @@ class _SignInViewState extends State<SignInView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      TextDoc.txtNotAccount,
-                    ),
+                    const Text(TextDoc.txtHaveNoAccount),
                     AppTextButton(
                       onPressed: () => Navigator.push(
                           context,

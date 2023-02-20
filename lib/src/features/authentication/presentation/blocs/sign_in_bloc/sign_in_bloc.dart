@@ -25,13 +25,13 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     var passwordError = '';
 
     if (event.email.isEmpty) {
-      emailError = TextDoc.txtEmailEmptyWarning;
+      emailError = TextDoc.txtEmailEmpty;
     } else if (!emailRegExp.hasMatch(event.email)) {
-      emailError = TextDoc.txtEmailInvalidFormatWarning;
+      emailError = TextDoc.txtEmailInvalidFormat;
     }
 
     if (event.password.isEmpty) {
-      passwordError = TextDoc.txtPasswordEmptyWarning;
+      passwordError = TextDoc.txtPasswordEmpty;
     }
 
     emit(SignInValidateState(
@@ -56,14 +56,12 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       emit(const SignInLoadDoneState());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        emit(SignInLoadErrorState(
-            message: TextDoc.txtUserNotFound));
+        emit(const SignInLoadErrorState(message: TextDoc.txtUserNotFound));
       } else if (e.code == 'wrong-password') {
-        emit(SignInLoadErrorState(
-            message: TextDoc.txtWrongPassword));
+        emit(const SignInLoadErrorState(message: TextDoc.txtWrongPassword));
       }
     } on DioError catch (_) {
-      emit(SignInLoadErrorState(message: TextDoc.txtNotValidateRole));
+      emit(const SignInLoadErrorState(message: TextDoc.txtNotValidateRole));
     }
   }
 }

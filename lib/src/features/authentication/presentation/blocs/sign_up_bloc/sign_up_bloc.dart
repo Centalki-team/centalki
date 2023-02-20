@@ -37,13 +37,13 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     }
 
     if (event.email.isEmpty) {
-      emailError = TextDoc.txtEmailEmptyWarning;
+      emailError = TextDoc.txtEmailEmpty;
     } else if (emailRegExp.hasMatch(event.email) == false) {
-      emailError = TextDoc.txtEmailInvalidFormatWarning;
+      emailError = TextDoc.txtEmailInvalidFormat;
     }
 
     if (event.password.isEmpty) {
-      passwordError = TextDoc.txtPasswordEmptyWarning;
+      passwordError = TextDoc.txtPasswordEmpty;
     } else if (event.password.length < 6) {
       passwordError = 'Password must contain at least 6 characters';
     }
@@ -78,25 +78,30 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     emit(const SignUpLoadingState());
 
     try {
-      final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      final credential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: event.email.trim(),
         password: event.password.trim(),
       );
-      credential.user?.getIdToken().then((id) => DioClient.assignRole(id, event.fullname));
+      credential.user
+          ?.getIdToken()
+          .then((id) => DioClient.assignRole(id, event.fullname));
       emit(const SignUpSuccessState());
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'weak-password':
-          emit(const SignUpErrorState(message: 'The password provided is too weak.'));
+          emit(const SignUpErrorState(
+              message: 'The password provided is too weak.'));
           break;
         case 'email-already-in-use':
-          emit(const SignUpErrorState(message: 'Email is used by another account.'));
+          emit(const SignUpErrorState(
+              message: 'Email is used by another account.'));
           break;
         default:
           break;
       }
     } on DioError catch (_) {
-      emit(SignUpErrorState(message: TextDoc.txtNotValidateRole));
+      emit(const SignUpErrorState(message: TextDoc.txtNotValidateRole));
     }
   }
 }
