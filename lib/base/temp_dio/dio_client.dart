@@ -131,4 +131,12 @@ class DioClient {
         options: Options(headers: {"Authorization": idToken}));
     return HistorySessionModel.fromJson(response.data);
   }
+
+  static Future<bool> updateInterestedTopics(
+      List<String> topicIds, String idToken) async {
+    final response = await _dio.put("$baseUrl/auth/interested-topics",
+        data: {"interestedTopicIds": topicIds},
+        options: Options(headers: {"Authorization": idToken}));
+    return response.statusCode == 200;
+  }
 }

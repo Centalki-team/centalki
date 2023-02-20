@@ -50,6 +50,10 @@ UserProfileModel _$UserProfileModelFromJson(Map<String, dynamic> json) =>
       balance: json['balance'] as int?,
       costPerSession: json['costPerSession'] as int?,
       currency: json['currency'] as String?,
+      bio: json['bio'] as String?,
+      interestedTopicIds: (json['interestedTopicIds'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
     );
 
 const _$GenderEnumMap = {

@@ -75,6 +75,8 @@ class UserProfileModel extends UserProfileEntity {
     this.balance,
     this.costPerSession,
     this.currency,
+    this.bio,
+    this.interestedTopicIds,
   }) : super(
           accountEnglishName: englishName,
           dateOfBirth: dob,
@@ -82,6 +84,8 @@ class UserProfileModel extends UserProfileEntity {
           accountBalance: balance,
           currentCostPerSession: costPerSession,
           accountCurrency: currency,
+          accountBio: bio,
+          accountInterestedTopicIds: interestedTopicIds,
         );
 
   final String? id;
@@ -93,6 +97,8 @@ class UserProfileModel extends UserProfileEntity {
   final int? balance;
   final int? costPerSession;
   final String? currency;
+  final String? bio;
+  final List<String>? interestedTopicIds;
 
   factory UserProfileModel.fromJson(Map<String, dynamic> json) =>
       _$UserProfileModelFromJson(json);

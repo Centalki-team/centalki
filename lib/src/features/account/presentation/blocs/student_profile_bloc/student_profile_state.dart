@@ -14,13 +14,14 @@ class StudentProfileLoadingState extends StudentProfileState {
 
 class StudentProfileLoadDoneState extends StudentProfileState {
   const StudentProfileLoadDoneState(this.avatarUrl, this.fullName,
-      this.englishName, this.bio, this.selectedInterestedTopics);
+      this.englishName, this.bio, this.selectedInterestedTopicIds, this.topics);
 
   final String avatarUrl;
   final String fullName;
   final String englishName;
   final String bio;
-  final List<bool> selectedInterestedTopics;
+  final List<bool> selectedInterestedTopicIds;
+  final List<TopicItemEntity> topics;
 }
 
 class StudentProfileLoadFailureState extends StudentProfileState {
