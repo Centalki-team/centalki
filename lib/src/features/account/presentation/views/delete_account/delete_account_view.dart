@@ -28,7 +28,7 @@ class DeleteAccountView extends StatelessWidget {
                           Icons.error_outline,
                           color: error,
                         ),
-                        title: Text(TextDoc.txtDeleteAccountResult),
+                        title: const Text(TextDoc.txtDeleteAccountResult),
                         content: Flexible(
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
@@ -40,7 +40,7 @@ class DeleteAccountView extends StatelessWidget {
                         actions: [
                           TextButton(
                               onPressed: () => Navigator.pop(context),
-                              child: Text(TextDoc.txtOk)),
+                              child: const Text(TextDoc.txtOk)),
                         ],
                       ));
             }
@@ -52,9 +52,9 @@ class DeleteAccountView extends StatelessWidget {
                 screenAutoPadding16, 24.0, screenAutoPadding16, 0),
             child: Column(
               children: [
-                Text(
+                const Text(
                   TextDoc.txtReauthenticateAccount,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 24,
                   ),
                 ),
@@ -62,10 +62,8 @@ class DeleteAccountView extends StatelessWidget {
                   height: spaceBetweenLine20,
                 ),
                 Row(
-                  children: [
-                    Text(
-                      TextDoc.txtPassword,
-                    ),
+                  children: const [
+                    Text(TextDoc.txtPassword),
                   ],
                 ),
                 const SizedBox(
@@ -105,14 +103,14 @@ class DeleteAccountView extends StatelessWidget {
                         foregroundColor: Colors.white,
                         minimumSize: const Size.fromHeight(48),
                       ),
-                      child: Text(TextDoc.txtReauthenticate)),
+                      child: const Text(TextDoc.txtReauthenticate)),
                 ),
                 OutlinedButton(
                   onPressed: () => Navigator.pop(context),
                   style: OutlinedButton.styleFrom(
                     minimumSize: const Size.fromHeight(48),
                   ),
-                  child: Text(TextDoc.txtCancel),
+                  child: const Text(TextDoc.txtCancel),
                 ),
               ],
             ),

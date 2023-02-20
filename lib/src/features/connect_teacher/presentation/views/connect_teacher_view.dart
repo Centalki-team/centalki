@@ -44,7 +44,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                     Navigator.pop(context);
                     Navigator.pop(context);
                   },
-                  child: Text(TextDoc.txtOk),
+                  child: const Text(TextDoc.txtOk),
                 ),
               ],
             ),
@@ -114,10 +114,10 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                         Icons.warning_amber_outlined,
                         color: Colors.redAccent,
                       ),
-                      title: Text(
+                      title: const Text(
                         TextDoc.txtCancelledTitle,
                       ),
-                      content: Text(TextDoc.txtCancelledContent),
+                      content: const Text(TextDoc.txtCancelledContent),
                       actions: [
                         AppFilledButton(
                             text: TextDoc.txtConnect,
@@ -142,7 +142,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                         Icons.check,
                         color: Colors.green,
                       ),
-                      title: Text(
+                      title: const Text(
                         TextDoc.txtSuccessfullyCancel,
                       ),
                       actions: [
@@ -228,11 +228,11 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                           final result = await showDialog(
                             context: context,
                             builder: (context) => AlertDialog(
-                              title: Text(
+                              title: const Text(
                                 TextDoc.txtCancelTitle,
                                 textAlign: TextAlign.center,
                               ),
-                              content: Text(
+                              content: const Text(
                                 TextDoc.txtCancelContent,
                                 textAlign: TextAlign.center,
                               ),
@@ -246,7 +246,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                                                 color: Colors.grey)),
                                         onPressed: () =>
                                             Navigator.pop(context, false),
-                                        child: Text(TextDoc.txtNo),
+                                        child: const Text(TextDoc.txtNo),
                                       ),
                                     ),
                                     const SizedBox(width: smallSpacing10),
@@ -256,9 +256,9 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                                             backgroundColor: Colors.blue),
                                         onPressed: () =>
                                             Navigator.pop(context, true),
-                                        child: Text(
+                                        child: const Text(
                                           TextDoc.txtYes,
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                               color: Colors.white),
                                         ),
                                       ),
@@ -277,9 +277,9 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                         },
                         icon: const Icon(Icons.close_rounded,
                             color: Colors.redAccent),
-                        label: Text(
+                        label: const Text(
                           TextDoc.txtCancel,
-                          style: const TextStyle(
+                          style: TextStyle(
                               fontSize: 18, color: Colors.redAccent),
                         ),
                       ),

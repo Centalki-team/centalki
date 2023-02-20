@@ -27,7 +27,7 @@ class ChangePasswordView extends StatelessWidget {
                           Icons.error_outline,
                           color: error,
                         ),
-                        title: Text(TextDoc.txtChangePasswordResult),
+                        title: const Text(TextDoc.txtChangePasswordResult),
                         content: Flexible(
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
@@ -39,7 +39,7 @@ class ChangePasswordView extends StatelessWidget {
                         actions: [
                           TextButton(
                               onPressed: () => Navigator.pop(context),
-                              child: Text(TextDoc.txtOk)),
+                              child: const Text(TextDoc.txtOk)),
                         ],
                       ));
             } else if (state is ChangePasswordLoadDoneState) {
@@ -51,11 +51,11 @@ class ChangePasswordView extends StatelessWidget {
                           Icons.error_outline,
                           color: error,
                         ),
-                        title: Text(TextDoc.txtChangePasswordResult),
+                        title: const Text(TextDoc.txtChangePasswordResult),
                         content: Flexible(
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
-                            children: [
+                            children: const [
                               Text(TextDoc.txtSuccessfullyChanged),
                             ],
                           ),
@@ -63,7 +63,7 @@ class ChangePasswordView extends StatelessWidget {
                         actions: [
                           TextButton(
                               onPressed: () => Navigator.pop(context),
-                              child: Text(TextDoc.txtOk)),
+                              child: const Text(TextDoc.txtOk)),
                         ],
                       ));
             }
@@ -73,7 +73,7 @@ class ChangePasswordView extends StatelessWidget {
           body: CustomScrollView(
             slivers: [
               SliverAppBar.medium(
-                title: Text(TextDoc.txtChangePassword),
+                title: const Text(TextDoc.txtChangePassword),
                 centerTitle: true,
               ),
               SliverList(
@@ -85,9 +85,9 @@ class ChangePasswordView extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           TextDoc.txtCurrentPassword,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
                           builder: (context, state) => TextField(
@@ -112,9 +112,9 @@ class ChangePasswordView extends StatelessWidget {
                         const SizedBox(
                           height: spaceBetweenLine12,
                         ),
-                        Text(
+                        const Text(
                           TextDoc.txtNewPassword,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
                           builder: (context, state) => TextField(
@@ -138,9 +138,9 @@ class ChangePasswordView extends StatelessWidget {
                         const SizedBox(
                           height: spaceBetweenLine12,
                         ),
-                        Text(
+                        const Text(
                           TextDoc.txtConfirmPassword,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
                           builder: (context, state) => TextField(
@@ -177,7 +177,7 @@ class ChangePasswordView extends StatelessWidget {
                                 foregroundColor: Colors.white,
                                 minimumSize: const Size.fromHeight(48),
                               ),
-                              child: Text(TextDoc.txtChangePassword)),
+                              child: const Text(TextDoc.txtChangePassword)),
                         ),
                       ],
                     ),

@@ -25,7 +25,7 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
               (balanceInformation?.currentCostPerSession ?? 1),
           balanceInformation?.currentCostPerSession ?? 0));
     } on Exception catch (_) {
-      emit(WalletLoadFailureState(TextDoc.txtLoadFailed));
+      emit(const WalletLoadFailureState(TextDoc.txtLoadFailed));
     }
   }
 
