@@ -19,7 +19,7 @@ class AccountInformationView extends StatefulWidget {
 
 class _AccountInformationViewState extends State<AccountInformationView> {
   final emailController = TextEditingController();
-  final phoneController = TextEditingController();
+  //final phoneController = TextEditingController();
   final dateOfBirthController = TextEditingController();
   final nameConnections = [
     TextDoc.txtFacebook,
@@ -39,7 +39,7 @@ class _AccountInformationViewState extends State<AccountInformationView> {
           LoadingManager.setLoading(context);
           if (state is AccountInformationLoadDoneState) {
             emailController.text = state.email;
-            phoneController.text = state.phoneNumber;
+            //phoneController.text = state.phoneNumber;
             dateOfBirthController.text =
                 DateFormat('yyyy-MM-dd').format(state.dateOfBirth);
             gender = state.gender;
@@ -115,7 +115,7 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                         const SizedBox(
                           height: spaceBetweenLine12,
                         ),
-                        const Text(
+                        /*const Text(
                           TextDoc.txtPhoneNumberTitle,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
@@ -128,7 +128,7 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                         ),
                         const SizedBox(
                           height: spaceBetweenLine12,
-                        ),
+                        ),*/
                         const Text(
                           TextDoc.txtDateOfBirthTitle,
                           style: TextStyle(fontWeight: FontWeight.bold),
@@ -187,7 +187,7 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                         const SizedBox(
                           height: spaceBetweenLine12,
                         ),
-                        const Text(
+                        /*const Text(
                           TextDoc.txtConnectionsTitle,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
@@ -218,14 +218,14 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                         ),
                         const SizedBox(
                           height: spaceBetweenLine12,
-                        ),
-                        const Text(
+                        ),*/
+                        /*const Text(
                           TextDoc.txtPaymentMethodTitle,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(
                           height: spaceBetweenLine20,
-                        ),
+                        ),*/
                         BlocBuilder<AccountInformationBloc,
                                 AccountInformationState>(
                             builder: (context, state) => (state
