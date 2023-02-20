@@ -35,7 +35,7 @@ class TermsAndConditions extends StatelessWidget {
               SizedBox(height: smallSpacing4),
               Text(
                   """We are owned and operated by a small group called Centalki Team. The terms "we" and "our" as used herein refer to such group of people."""),
-              SizedBox(height: spaceBetweenLine15),
+              SizedBox(height: spaceBetweenLine14),
               Text('What we provide', style: TextStyle(fontSize: headlineSmallSize, fontWeight: headlineSmallWeight),),
               SizedBox(height: smallSpacing6),
               Text(
@@ -43,7 +43,7 @@ class TermsAndConditions extends StatelessWidget {
               SizedBox(height: smallSpacing4),
               Text(
                   """Please note that, other than purely billing (i.e., credit card numbers) and contact information, other information you post to the application may become publicly viewable. Therefore, you should not submit information that you consider confidential."""),
-              SizedBox(height: spaceBetweenLine15),
+              SizedBox(height: spaceBetweenLine14),
               Text('Who Our Services Are for', style: TextStyle(fontSize: headlineSmallSize, fontWeight: headlineSmallWeight),),
               SizedBox(height: smallSpacing6),
               Text(
@@ -57,7 +57,7 @@ class TermsAndConditions extends StatelessWidget {
               Text(""" • Post spam or link bait."""),
               Text(""" • Stalk or collect data about others."""),
               Text(""" • Crawl content without permission."""),
-              SizedBox(height: spaceBetweenLine15),
+              SizedBox(height: spaceBetweenLine14),
               Text('Rights Reserved', style: TextStyle(fontSize: headlineSmallSize, fontWeight: headlineSmallWeight),),
               SizedBox(height: smallSpacing6),
               Text(
@@ -65,7 +65,7 @@ class TermsAndConditions extends StatelessWidget {
               SizedBox(height: smallSpacing4),
               Text(
                   """In case you want to cancel your subscription, you will not receive a refund, but will continue to have access at the remaining learning hours until they are all used up or your account is deactivated."""),
-              SizedBox(height: spaceBetweenLine15),
+              SizedBox(height: spaceBetweenLine14),
               Text('User Submissions', style: TextStyle(fontSize: headlineSmallSize, fontWeight: headlineSmallWeight),),
               SizedBox(height: smallSpacing6),
               Text(
@@ -76,12 +76,12 @@ class TermsAndConditions extends StatelessWidget {
               SizedBox(height: smallSpacing4),
               Text(
                   """You understand that all information posted through our services is the sole responsibility of the person from which such content originated and that we are not and will not be liable for any errors or omissions in any content.  Furthermore, we cannot guarantee the identity of any other users you may interact with while using your app. Additionally, we cannot and do not guarantee the authenticity or accuracy of any data that users may provide about themselves or relationships they may describe."""),
-              SizedBox(height: spaceBetweenLine15),
+              SizedBox(height: spaceBetweenLine14),
               Text('Trademarks', style: TextStyle(fontSize: headlineSmallSize, fontWeight: headlineSmallWeight),),
               SizedBox(height: smallSpacing6),
               Text(
                   """Centalki and the Centalki logo, Centalki Mobile, Centalki Web, and the logos for each, and other logos and names relating to our products and services are trademarks of Centalki Team. You agree not to display or use these trademarks in any manner without our prior written permission."""),
-              SizedBox(height: spaceBetweenLine15),
+              SizedBox(height: spaceBetweenLine14),
               Text('Miscellaneous', style: TextStyle(fontSize: headlineSmallSize, fontWeight: headlineSmallWeight),),
               SizedBox(height: smallSpacing6),
               Text(
@@ -91,27 +91,27 @@ class TermsAndConditions extends StatelessWidget {
               SizedBox(height: smallSpacing6),
               Text(
                   """By registering, accessing or using Centalki App and Centalki Web (a "Software Application"), you are acknowledging that you are bound by the terms and conditions in this End User License Agreement (this "EULA"). Please review these carefully before accepting and utilizing our products or services."""),
-              SizedBox(height: spaceBetweenLine15),
+              SizedBox(height: spaceBetweenLine14),
               Text('Additional Software Applications', style: TextStyle(fontSize: headlineSmallSize, fontWeight: headlineSmallWeight),),
               SizedBox(height: smallSpacing6),
               Text(
                   """This EULA also applies to any additional widgets, add-ons or other applications provided by the Centalki Team for use with the Software Application(s) you are subscribing for, which shall also be considered Software Application(s) hereunder. Such additional Software Application(s) may also have additional terms and conditions set forth on the applicable webpage, form or documentation."""),
-              SizedBox(height: spaceBetweenLine15),
+              SizedBox(height: spaceBetweenLine14),
               Text('User Account and Service Security', style: TextStyle(fontSize: headlineSmallSize, fontWeight: headlineSmallWeight),),
               SizedBox(height: smallSpacing6),
               Text(
                   """Use of Software Applications is available only to persons who can enter into legally binding contracts under applicable law. If you are a minor, i.e. under the age of 18 years, not competent or otherwise do not have the capacity to enter into a legally binding contract without the consent or assistance of another person, you may use the application and/or the website only under the supervision of a parent or legal guardian, as applicable, who agrees to be bound by this EULA."""),
-              SizedBox(height: spaceBetweenLine15),
+              SizedBox(height: spaceBetweenLine14),
               Text('License to Use', style: TextStyle(fontSize: headlineSmallSize, fontWeight: headlineSmallWeight),),
               SizedBox(height: smallSpacing6),
               Text(
                   """Subject to compliance with this EULA (including payment of applicable fees), Developer grants you a limited, non-transferable, revocable, non-exclusive, non-sub-licensable license to access the Software Application(s) for which you have paid, through the provided user interfaces, to access your User Data and to utilize such Software Application(s) via the user interfaces provided by Developer to assist in practicing speaking English with a foreign teacher."""),
-              SizedBox(height: spaceBetweenLine15),
+              SizedBox(height: spaceBetweenLine14),
               Text('Account and Password', style: TextStyle(fontSize: headlineSmallSize, fontWeight: headlineSmallWeight),),
               SizedBox(height: smallSpacing6),
               Text(
                   """As a registered user of the Software Application(s), you may receive or establish an account ("Account"). You are solely responsible for maintaining the confidentiality and security of your Account. You should not reveal your Account information to anyone else, and must not use, or attempt to access or use anyone else’s Account. You are entirely responsible for all activities that occur on or through your Account, and you agree to immediately notify the Developer of any unauthorized use of your Account or any other breach of security. Developer shall not be responsible for any losses arising out of unauthorized use of your Account."""),
-              SizedBox(height: spaceBetweenLine15),
+              SizedBox(height: spaceBetweenLine14),
               Text('Content and Certain Restrictions', style: TextStyle(fontSize: headlineSmallSize, fontWeight: headlineSmallWeight),),
               SizedBox(height: smallSpacing6),
               Text(
@@ -133,7 +133,7 @@ class TermsAndConditions extends StatelessWidget {
                   """ • Making, transmitting or storing electronic copies of materials protected by copyright without the permission of the owner, including using or providing images or text for which you do not own or have sufficient use rights to the copyright for such materials."""),
               Text(
                   """ • You agree to indemnify Developer and its licensors for any and all claims arising from any violation by you of the terms of this EULA."""),
-              SizedBox(height: spaceBetweenLine15),
+              SizedBox(height: spaceBetweenLine14),
               Text('Disconnection', style: TextStyle(fontSize: headlineSmallSize, fontWeight: headlineSmallWeight),),
               SizedBox(height: smallSpacing6),
               Text(
@@ -142,12 +142,12 @@ class TermsAndConditions extends StatelessWidget {
                   """ • If you are the one who disconnected, you will have a 5-minute time period to rejoin the current session. Upon reconnecting successfully, the session will continue as usual. If you are unable to rejoin, the session will end and the system will count it as you have finished a session."""),
               Text(
                   """ • If the teacher is the one who disconnected, they will have a 1-minute time period to rejoin the current session. Upon reconnecting successfully, the session will continue as usual. If they are unable to rejoin, the system will find another teacher for you so that you may continue your learning processes."""),
-              SizedBox(height: spaceBetweenLine15),
+              SizedBox(height: spaceBetweenLine14),
               Text('Loss of Content; Security', style: TextStyle(fontSize: headlineSmallSize, fontWeight: headlineSmallWeight),),
               SizedBox(height: smallSpacing6),
               Text(
                   """The Developer utilizes industry standard reliability and security measures in an attempt to protect and preserve your data. However, due to the relative insecurity of any information which is transmitted over the internet (and over wireless networks or intranets in connection with transmission to or from the internet), stored on servers which are accessible via the internet and other means, it is impossible to guarantee complete security. Additionally, if our servers or the servers of third party providers fail or become corrupt, we may lose and be unable to retrieve data you have submitted via the Software Application. Additionally, if your account is deactivated for any reason, your content within the Software Application will be lost and/or inaccessible."""),
-              SizedBox(height: spaceBetweenLine15),
+              SizedBox(height: spaceBetweenLine14),
               Text('Payment Information', style: TextStyle(fontSize: headlineSmallSize, fontWeight: headlineSmallWeight),),
               SizedBox(height: smallSpacing6),
               Text(
@@ -161,7 +161,7 @@ class TermsAndConditions extends StatelessWidget {
               SizedBox(height: smallSpacing4),
               Text(
                   """In consideration of the license granted pursuant to this EULA, you agree to pay the Developer, the Fees as set forth in the website or other location from which you are subscribing for the Software Application(s) and you agree that Developer or its payment processor may charge such amounts against the account information provided by you. Developer reserves the right to amend or revise the Fees for Software Applications from time to time. Licensee shall be responsible to pay the applicable taxes, i.e. any and all federal, foreign, state or local sales, use and excise taxes, duties, levies, and any other assessments in the nature of taxes however designated on the purchase/license and/or use of the Software Applications, including without limitation VAT if applicable to your license/purchase and use of the Software Application(s). It is understood and agreed that the Fees are exclusive of such taxes, duties and other assessments unless expressly stated otherwise."""),
-              SizedBox(height: spaceBetweenLine15),
+              SizedBox(height: spaceBetweenLine14),
               Text('License Restrictions', style: TextStyle(fontSize: headlineSmallSize, fontWeight: headlineSmallWeight),),
               SizedBox(height: smallSpacing6),
               Text("""You shall NOT:"""),
@@ -176,11 +176,11 @@ class TermsAndConditions extends StatelessWidget {
                   """ (e) Sublicense to any third party, Software Application(s), or any part thereof"""),
               Text(
                   """ (f) Rent, lease or provide services to or for others via or based upon the Software Application(s). Any copy of Software Application(s) made by you, including any partial copy, is the property of the Developer."""),
-              SizedBox(height: spaceBetweenLine15),
+              SizedBox(height: spaceBetweenLine14),
               Text('Third Party Licenses', style: TextStyle(fontSize: headlineSmallSize, fontWeight: headlineSmallWeight),),
               SizedBox(height: smallSpacing6),
               Text("""Other third party software or technology that may be distributed together with the Software Application(s) will be subject to you explicitly accepting a license agreement with that third party. Developer is not responsible for any non-performance or breach of any contract entered into between you and the third party. You release and indemnify the Developer and/or any of its officers and representatives from any cost, damage, liability or other consequence of any of the actions of third-party providers and specifically waive any claims that you may have in this behalf under any applicable law. Developer may, but is not obligated, to add and make available additional features or functions, programming fixes, updates, upgrades or versions to the Software Application(s) ("Updates"). You may have to enter into a new version of this EULA if you want such Updates."""),
-              SizedBox(height: spaceBetweenLine15),
+              SizedBox(height: spaceBetweenLine14),
               Text('Developer\'s Confidential Information', style: TextStyle(fontSize: headlineSmallSize, fontWeight: headlineSmallWeight),),
               SizedBox(height: smallSpacing6),
               Text(""" 1. You acknowledge and agree that ownership of and title in and to all intellectual property rights, including patent, trademark, service mark, copyright, and trade secret rights, in the Software Application(s) are and shall remain with the Developer. You are acquiring only the right to use the Software Application(s) under this EULA and you are not acquiring any ownership rights or title in or to the Software Application(s) or any copy thereof, including without limitation in or to any copyright or other proprietary rights in the Software Application(s), either express or implied."""),
@@ -188,7 +188,7 @@ class TermsAndConditions extends StatelessWidget {
               Text(""" 2. You shall not remove any proprietary, copyright, trademark, or service mark legend from the Software Application(s)."""),
               SizedBox(height: smallSpacing4),
               Text(""" 3. All modifications and extensions to the Software Application(s) shall be considered part of the Software Application(s)."""),
-              SizedBox(height: spaceBetweenLine15),
+              SizedBox(height: spaceBetweenLine14),
               Text('Termination', style: TextStyle(fontSize: headlineSmallSize, fontWeight: headlineSmallWeight),),
               SizedBox(height: smallSpacing6),
               Text("""The rights granted under this EULA to you are effective until terminated by us upon your breach of this EULA or end of any period(s) for which Fees have been paid (except as otherwise provided above). Developers may terminate your rights hereunder by denying access to Software Application(s), or by written notice including by electronic transmission to an email address or device indicated by you. Developer’s rights and your representations and covenants under this EULA shall survive any termination or expiration hereof or your rights hereunder. Upon termination of your rights, you shall immediately cease use of the Software Application(s). You may not be able to retrieve any data you have submitted to us, including via the Software Application(s)."""),

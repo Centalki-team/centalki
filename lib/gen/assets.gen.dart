@@ -110,20 +110,20 @@ class $AssetsIconGen {
 class $AssetsIllustrationGen {
   const $AssetsIllustrationGen();
 
-  /// File path: assets/illustration/login.png
-  AssetGenImage get login =>
-      const AssetGenImage('assets/illustration/login.png');
+  /// File path: assets/illustration/forgot-password.svg
+  SvgGenImage get forgotPassword =>
+      const SvgGenImage('assets/illustration/forgot-password.svg');
 
-  /// File path: assets/illustration/register.png
-  AssetGenImage get register =>
-      const AssetGenImage('assets/illustration/register.png');
+  /// File path: assets/illustration/sign-in.svg
+  SvgGenImage get signIn =>
+      const SvgGenImage('assets/illustration/sign-in.svg');
 
-  /// File path: assets/illustration/reset_password.png
-  AssetGenImage get resetPassword =>
-      const AssetGenImage('assets/illustration/reset_password.png');
+  /// File path: assets/illustration/sign-up.svg
+  SvgGenImage get signUp =>
+      const SvgGenImage('assets/illustration/sign-up.svg');
 
   /// List of all assets
-  List<AssetGenImage> get values => [login, register, resetPassword];
+  List<SvgGenImage> get values => [forgotPassword, signIn, signUp];
 }
 
 class $AssetsImagesGen {
@@ -277,10 +277,10 @@ class SvgGenImage {
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
       theme: theme,
-      //colorFilter: colorFilter,
+      // colorFilter: colorFilter,
       color: color,
       colorBlendMode: colorBlendMode,
-      //clipBehavior: clipBehavior,
+      clipBehavior: clipBehavior ?? Clip.none,
       cacheColorFilter: cacheColorFilter,
     );
   }

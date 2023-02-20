@@ -82,7 +82,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                         color: Colors.black45,
                       ),
                     ),
-                    const SizedBox(height: spaceBetweenLine15),
+                    const SizedBox(height: spaceBetweenLine14),
                     const Text(
                       'Description',
                       style: TextStyle(
@@ -93,7 +93,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                     const SizedBox(height: smallSpacing8),
                     Text(state.topicDetail.topicDescription ??
                         'null. This topic is about nothing'),
-                    const SizedBox(height: spaceBetweenLine15),
+                    const SizedBox(height: spaceBetweenLine14),
                     const Text(
                       'Vocabulary',
                       style: TextStyle(

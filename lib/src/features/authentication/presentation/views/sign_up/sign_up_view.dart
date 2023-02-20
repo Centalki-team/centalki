@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../base/define/colors.dart';
 import '../../../../../../base/define/dimensions.dart';
+import '../../../../../../base/define/size.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/text_fields/outlined_text_field.dart';
 import '../../../../../../gen/assets.gen.dart';
@@ -26,161 +27,159 @@ class _SignUpViewState extends State<SignUpView> {
 
   void _validateSignUpInputs(String value) {
     context.read<SignUpBloc>().add(SignUpValidateEvent(
-      fullname: _nameController.text,
-      email: _emailController.text,
-      password: _passwordController.text,
-      retypePassword: _retypePasswordController.text,
-      isTermsAccepted: _termsAccepted,
-    ));
+          fullname: _nameController.text,
+          email: _emailController.text,
+          password: _passwordController.text,
+          retypePassword: _retypePasswordController.text,
+          isTermsAccepted: _termsAccepted,
+        ));
   }
 
   @override
   Widget build(BuildContext context) => BlocListener<SignUpBloc, SignUpState>(
-    listener: (context, state) {
-      if (state is SignUpErrorState) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(state.message),
-          ),
-        );
-      }
-    },
-    child: Scaffold(
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const SizedBox(height: 16),
-            Image.asset(
-              Assets.illustration.register.path,
-              width: 200,
-              height: 200,
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'Create new account',
-              style: TextStyle(
-                fontSize: 26,
-                fontWeight: FontWeight.bold,
-                color: colorScheme.onPrimaryContainer,
+        listener: (context, state) {
+          if (state is SignUpErrorState) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
               ),
-            ),
-            const SizedBox(height: spaceBetweenLine18),
-            BlocBuilder<SignUpBloc, SignUpState>(
-              builder: (context, state) => Column(
-                children: [
-                  AppOutlinedTextField(
-                    controller: _nameController,
-                    labelText: 'Fullname',
-                    errorText:
-                    state is SignUpValidateState && state.fullnameError.isNotEmpty ? state.fullnameError : null,
-                    onChanged: _validateSignUpInputs,
+            );
+          }
+        },
+        child: Scaffold(
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const SizedBox(height: spaceBetweenLine16),
+                SizedBox(
+                  height: 220,
+                  child: Assets.illustration.signUp.svg(),
+                ),
+                const SizedBox(height: spaceBetweenLine20),
+                Text(
+                  'Create new account',
+                  style: TextStyle(
+                    fontSize: headlineSmallSize,
+                    fontWeight: headlineSmallWeight,
+                    color: colorScheme.onPrimaryContainer,
                   ),
-                  const SizedBox(height: spaceBetweenLine12),
-                  AppOutlinedTextField(
-                    controller: _emailController,
-                    labelText: 'Email',
-                    textInputType: TextInputType.emailAddress,
-                    errorText:
-                    state is SignUpValidateState && state.emailError.isNotEmpty ? state.emailError : null,
-                    onChanged: _validateSignUpInputs,
-                  ),
-                  const SizedBox(height: spaceBetweenLine12),
-                  AppOutlinedTextField(
-                    controller: _passwordController,
-                    labelText: 'Password',
-                    obscureText: true,
-                    errorText:
-                    state is SignUpValidateState && state.passwordError.isNotEmpty ? state.passwordError : null,
-                    onChanged: _validateSignUpInputs,
-                  ),
-                  const SizedBox(height: spaceBetweenLine12),
-                  AppOutlinedTextField(
-                      controller: _retypePasswordController,
-                      labelText: 'Retype Password',
-                      obscureText: true,
-                      errorText: state is SignUpValidateState && state.retypePasswordError.isNotEmpty
-                          ? state.retypePasswordError
-                          : null,
-                      onChanged: _validateSignUpInputs
-                  ),
-                  const SizedBox(height: spaceBetweenLine15),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                ),
+                const SizedBox(height: spaceBetweenLine18),
+                BlocBuilder<SignUpBloc, SignUpState>(
+                  builder: (context, state) => Column(
                     children: [
-                      Checkbox(
-                        activeColor: colorScheme.primary,
-                        value: _termsAccepted,
-                        onChanged: (value) {
-                          setState(() {
-                            _termsAccepted = value!;
-                          });
-
-                          _validateSignUpInputs('');
-                        },
+                      AppOutlinedTextField(
+                        controller: _nameController,
+                        labelText: 'Fullname',
+                        errorText:
+                            state is SignUpValidateState && state.fullnameError.isNotEmpty ? state.fullnameError : null,
+                        onChanged: _validateSignUpInputs,
                       ),
-                      const Text('I accept', style: TextStyle(fontSize: 14)),
-                      AppTextButton(
-                        text: 'Terms & Conditions',
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const TermsAndConditions(),
-                              ));
-                        },
-                      )
+                      const SizedBox(height: spaceBetweenLine12),
+                      AppOutlinedTextField(
+                        controller: _emailController,
+                        labelText: 'Email',
+                        textInputType: TextInputType.emailAddress,
+                        errorText:
+                            state is SignUpValidateState && state.emailError.isNotEmpty ? state.emailError : null,
+                        onChanged: _validateSignUpInputs,
+                      ),
+                      const SizedBox(height: spaceBetweenLine12),
+                      AppOutlinedTextField(
+                        controller: _passwordController,
+                        labelText: 'Password',
+                        obscureText: true,
+                        errorText:
+                            state is SignUpValidateState && state.passwordError.isNotEmpty ? state.passwordError : null,
+                        onChanged: _validateSignUpInputs,
+                      ),
+                      const SizedBox(height: spaceBetweenLine12),
+                      AppOutlinedTextField(
+                          controller: _retypePasswordController,
+                          labelText: 'Retype Password',
+                          obscureText: true,
+                          errorText: state is SignUpValidateState && state.retypePasswordError.isNotEmpty
+                              ? state.retypePasswordError
+                              : null,
+                          onChanged: _validateSignUpInputs),
+                      const SizedBox(height: spaceBetweenLine14),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Checkbox(
+                            activeColor: colorScheme.primary,
+                            value: _termsAccepted,
+                            onChanged: (value) {
+                              setState(() {
+                                _termsAccepted = value!;
+                              });
+
+                              _validateSignUpInputs('');
+                            },
+                          ),
+                          const Text('I accept', style: TextStyle(fontSize: 14)),
+                          AppTextButton(
+                            text: 'Terms & Conditions',
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const TermsAndConditions(),
+                                  ));
+                            },
+                          )
+                        ],
+                      ),
                     ],
                   ),
-                ],
-              ),
-            ),
-            const SizedBox(height: spaceBetweenLine15),
-            BlocBuilder<SignUpBloc, SignUpState>(
-              builder: (context, state) {
-                if (state is SignUpLoadingState) {
-                  return const Center(
-                    child: CupertinoActivityIndicator(),
-                  );
-                }
-                return AppFilledButton(
-                  text: 'Sign Up',
-                  minimumSize: const Size.fromHeight(48),
-                  onPressed: state is SignUpValidateState && state.forceDisabled == false
-                      ? () => context.read<SignUpBloc>().add(SignUpSubmitEvent(
-                    fullname: _nameController.text,
-                    email: _emailController.text,
-                    password: _passwordController.text,
-                  ))
-                      : null,
-                );
-              },
-            ),
-            const SizedBox(height: spaceBetweenLine15),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Text('Have an account?'),
-                const SizedBox(width: 4),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
+                ),
+                const SizedBox(height: spaceBetweenLine14),
+                BlocBuilder<SignUpBloc, SignUpState>(
+                  builder: (context, state) {
+                    if (state is SignUpLoadingState) {
+                      return const Center(
+                        child: CupertinoActivityIndicator(),
+                      );
+                    }
+                    return AppFilledButton(
+                      text: 'Sign Up',
+                      minimumSize: const Size.fromHeight(48),
+                      onPressed: state is SignUpValidateState && state.forceDisabled == false
+                          ? () => context.read<SignUpBloc>().add(SignUpSubmitEvent(
+                                fullname: _nameController.text,
+                                email: _emailController.text,
+                                password: _passwordController.text,
+                              ))
+                          : null,
+                    );
                   },
-                  child: Text(
-                    'Sign In',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: colorScheme.primary,
+                ),
+                const SizedBox(height: spaceBetweenLine14),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Text('Have an account?'),
+                    const SizedBox(width: 4),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        'Sign In',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: colorScheme.primary,
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ],
             ),
-          ],
+          ),
         ),
-      ),
-    ),
-  );
+      );
 }
