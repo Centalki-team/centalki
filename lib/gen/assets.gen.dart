@@ -8,6 +8,8 @@
 // ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal,deprecated_member_use
 
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/services.dart';
 
 class $AssetsAvatarGen {
   const $AssetsAvatarGen();
@@ -29,12 +31,53 @@ class $AssetsIconGen {
   /// File path: assets/icon/chat.png
   AssetGenImage get chat => const AssetGenImage('assets/icon/chat.png');
 
+  /// File path: assets/icon/ic_feedback.svg
+  SvgGenImage get icFeedback =>
+      const SvgGenImage('assets/icon/ic_feedback.svg');
+
+  /// File path: assets/icon/ic_language.svg
+  SvgGenImage get icLanguage =>
+      const SvgGenImage('assets/icon/ic_language.svg');
+
+  /// File path: assets/icon/ic_noti.svg
+  SvgGenImage get icNoti => const SvgGenImage('assets/icon/ic_noti.svg');
+
+  /// File path: assets/icon/ic_noti_header.svg
+  SvgGenImage get icNotiHeader =>
+      const SvgGenImage('assets/icon/ic_noti_header.svg');
+
+  /// File path: assets/icon/ic_paint_palette.svg
+  SvgGenImage get icPaintPalette =>
+      const SvgGenImage('assets/icon/ic_paint_palette.svg');
+
+  /// File path: assets/icon/ic_rating_star.svg
+  SvgGenImage get icRatingStar =>
+      const SvgGenImage('assets/icon/ic_rating_star.svg');
+
+  /// File path: assets/icon/ic_rating_star_selected.svg
+  SvgGenImage get icRatingStarSelected =>
+      const SvgGenImage('assets/icon/ic_rating_star_selected.svg');
+
+  /// File path: assets/icon/ic_send.svg
+  SvgGenImage get icSend => const SvgGenImage('assets/icon/ic_send.svg');
+
+  /// File path: assets/icon/ic_warning.svg
+  SvgGenImage get icWarning => const SvgGenImage('assets/icon/ic_warning.svg');
+
   /// File path: assets/icon/list.png
   AssetGenImage get list => const AssetGenImage('assets/icon/list.png');
 
   /// File path: assets/icon/notifications.png
   AssetGenImage get notifications =>
       const AssetGenImage('assets/icon/notifications.png');
+
+  /// File path: assets/icon/radio_selected.svg
+  SvgGenImage get radioSelected =>
+      const SvgGenImage('assets/icon/radio_selected.svg');
+
+  /// File path: assets/icon/radio_unselected.svg
+  SvgGenImage get radioUnselected =>
+      const SvgGenImage('assets/icon/radio_unselected.svg');
 
   /// File path: assets/icon/settings.png
   AssetGenImage get settings => const AssetGenImage('assets/icon/settings.png');
@@ -43,8 +86,25 @@ class $AssetsIconGen {
   AssetGenImage get wallet => const AssetGenImage('assets/icon/wallet.png');
 
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [account, chat, list, notifications, settings, wallet];
+  List<dynamic> get values => [
+        account,
+        chat,
+        icFeedback,
+        icLanguage,
+        icNoti,
+        icNotiHeader,
+        icPaintPalette,
+        icRatingStar,
+        icRatingStarSelected,
+        icSend,
+        icWarning,
+        list,
+        notifications,
+        radioSelected,
+        radioUnselected,
+        settings,
+        wallet
+      ];
 }
 
 class $AssetsIllustrationGen {
@@ -137,7 +197,7 @@ class AssetGenImage {
     bool matchTextDirection = false,
     bool gaplessPlayback = false,
     bool isAntiAlias = false,
-    String? package = 'centalki',
+    String? package,
     FilterQuality filterQuality = FilterQuality.low,
     int? cacheWidth,
     int? cacheHeight,
@@ -174,5 +234,58 @@ class AssetGenImage {
 
   String get path => _assetName;
 
-  String get keyName => 'packages/centalki/$_assetName';
+  String get keyName => _assetName;
+}
+
+class SvgGenImage {
+  const SvgGenImage(this._assetName);
+
+  final String _assetName;
+
+  SvgPicture svg({
+    Key? key,
+    bool matchTextDirection = false,
+    AssetBundle? bundle,
+    String? package,
+    double? width,
+    double? height,
+    BoxFit fit = BoxFit.contain,
+    AlignmentGeometry alignment = Alignment.center,
+    bool allowDrawingOutsideViewBox = false,
+    WidgetBuilder? placeholderBuilder,
+    String? semanticsLabel,
+    bool excludeFromSemantics = false,
+    SvgTheme theme = const SvgTheme(),
+    ColorFilter? colorFilter,
+    @deprecated Color? color,
+    @deprecated BlendMode colorBlendMode = BlendMode.srcIn,
+    @deprecated Clip? clipBehavior,
+    @deprecated bool cacheColorFilter = false,
+  }) {
+    return SvgPicture.asset(
+      _assetName,
+      key: key,
+      matchTextDirection: matchTextDirection,
+      bundle: bundle,
+      package: package,
+      width: width,
+      height: height,
+      fit: fit,
+      alignment: alignment,
+      allowDrawingOutsideViewBox: allowDrawingOutsideViewBox,
+      placeholderBuilder: placeholderBuilder,
+      semanticsLabel: semanticsLabel,
+      excludeFromSemantics: excludeFromSemantics,
+      theme: theme,
+      //colorFilter: colorFilter,
+      color: color,
+      colorBlendMode: colorBlendMode,
+      //clipBehavior: clipBehavior,
+      cacheColorFilter: cacheColorFilter,
+    );
+  }
+
+  String get path => _assetName;
+
+  String get keyName => _assetName;
 }
