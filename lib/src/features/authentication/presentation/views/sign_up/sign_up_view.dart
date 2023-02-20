@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../base/define/colors.dart';
 import '../../../../../../base/define/dimensions.dart';
 import '../../../../../../base/define/size.dart';
+import '../../../../../../base/define/text.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/text_fields/outlined_text_field.dart';
 import '../../../../../../gen/assets.gen.dart';
@@ -59,7 +60,7 @@ class _SignUpViewState extends State<SignUpView> {
                 ),
                 const SizedBox(height: spaceBetweenLine20),
                 Text(
-                  'Create new account',
+                  TextDoc.txtSignUpIntroduction,
                   style: TextStyle(
                     fontSize: headlineSmallSize,
                     fontWeight: headlineSmallWeight,
@@ -72,7 +73,7 @@ class _SignUpViewState extends State<SignUpView> {
                     children: [
                       AppOutlinedTextField(
                         controller: _nameController,
-                        labelText: 'Fullname',
+                        labelText: TextDoc.txtFullname,
                         errorText:
                             state is SignUpValidateState && state.fullnameError.isNotEmpty ? state.fullnameError : null,
                         onChanged: _validateSignUpInputs,
@@ -80,7 +81,7 @@ class _SignUpViewState extends State<SignUpView> {
                       const SizedBox(height: spaceBetweenLine12),
                       AppOutlinedTextField(
                         controller: _emailController,
-                        labelText: 'Email',
+                        labelText: TextDoc.txtEmail,
                         textInputType: TextInputType.emailAddress,
                         errorText:
                             state is SignUpValidateState && state.emailError.isNotEmpty ? state.emailError : null,
@@ -89,7 +90,7 @@ class _SignUpViewState extends State<SignUpView> {
                       const SizedBox(height: spaceBetweenLine12),
                       AppOutlinedTextField(
                         controller: _passwordController,
-                        labelText: 'Password',
+                        labelText: TextDoc.txtPassword,
                         obscureText: true,
                         errorText:
                             state is SignUpValidateState && state.passwordError.isNotEmpty ? state.passwordError : null,
@@ -98,7 +99,7 @@ class _SignUpViewState extends State<SignUpView> {
                       const SizedBox(height: spaceBetweenLine12),
                       AppOutlinedTextField(
                           controller: _retypePasswordController,
-                          labelText: 'Retype Password',
+                          labelText: TextDoc.txtRetypePassword,
                           obscureText: true,
                           errorText: state is SignUpValidateState && state.retypePasswordError.isNotEmpty
                               ? state.retypePasswordError
@@ -119,15 +120,19 @@ class _SignUpViewState extends State<SignUpView> {
                               _validateSignUpInputs('');
                             },
                           ),
-                          const Text('I accept', style: TextStyle(fontSize: 14)),
+                          Text(
+                            TextDoc.txtTermsAccept,
+                            style: const TextStyle(fontSize: 14),
+                          ),
                           AppTextButton(
-                            text: 'Terms & Conditions',
+                            text: TextDoc.txtTerms,
                             onPressed: () {
                               Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const TermsAndConditions(),
-                                  ));
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const TermsAndConditions(),
+                                ),
+                              );
                             },
                           )
                         ],
@@ -144,7 +149,7 @@ class _SignUpViewState extends State<SignUpView> {
                       );
                     }
                     return AppFilledButton(
-                      text: 'Sign Up',
+                      text: TextDoc.txtSignUp,
                       minimumSize: const Size.fromHeight(48),
                       onPressed: state is SignUpValidateState && state.forceDisabled == false
                           ? () => context.read<SignUpBloc>().add(SignUpSubmitEvent(
@@ -161,14 +166,14 @@ class _SignUpViewState extends State<SignUpView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text('Have an account?'),
+                    Text(TextDoc.txtHaveAnAccount),
                     const SizedBox(width: 4),
                     TextButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
                       child: Text(
-                        'Sign In',
+                        TextDoc.txtSignIn,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: colorScheme.primary,

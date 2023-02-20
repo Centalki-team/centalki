@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
+import '../../../../../base/define/text.dart';
 import '../../domain/entities/topic_detail_entity.dart';
 
 class PhraseCard extends StatelessWidget {
@@ -47,9 +48,9 @@ class PhraseCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: smallSpacing4),
-          const Text(
-            'Example',
-            style: TextStyle(
+           Text(
+            TextDoc.txtTopicPhraseExample,
+            style: const TextStyle(
               fontSize: bodyMediumSize,
               fontWeight: bodyMediumWeight,
             ),
