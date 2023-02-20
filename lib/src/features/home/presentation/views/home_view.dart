@@ -6,6 +6,7 @@ import '../../../../../base/define/common_txt_style.dart';
 import '../../../../../base/widgets/bottom_bar/custom_bottom_nav.dart';
 import '../../../../../base/widgets/internal_page.dart';
 import '../../../../../gen/assets.gen.dart';
+import '../../../account/presentation/views/your_account/your_account_page.dart';
 import '../../../settings/presentation/views/settings_view.dart';
 import '../../../account/presentation/views/your_account/your_account_page.dart';
 import '../../../topics/presentation/views/select_topic_level/select_topic_level_page.dart';
@@ -82,7 +83,7 @@ class _HomeViewState extends State<HomeView>
                         controller: _tabController,
                         children: const [
                           SelectTopicLevelPage(),
-                        YourAccountPage(),
+                          YourAccountPage(),
                           SettingsView(),
                         ],
                       ),
