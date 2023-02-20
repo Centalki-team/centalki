@@ -22,12 +22,12 @@ class WalletView extends StatelessWidget {
                         Icons.error_outline,
                         color: error,
                       ),
-                      title: Text(TextDoc.txtLoadFailed),
+                      title: const Text(TextDoc.txtLoadFailed),
                       content: Text(state.message),
                       actions: [
                         TextButton(
                             onPressed: () => Navigator.pop(context),
-                            child: Text(TextDoc.txtOk)),
+                            child: const Text(TextDoc.txtOk)),
                       ],
                     ));
           }
@@ -41,7 +41,7 @@ class WalletView extends StatelessWidget {
               body: CustomScrollView(
                 slivers: [
                   SliverAppBar.medium(
-                    title: Text(TextDoc.txtWallet),
+                    title: const Text(TextDoc.txtWallet),
                     centerTitle: true,
                     actions: [
                       Padding(
@@ -83,9 +83,9 @@ class WalletView extends StatelessWidget {
                                               horizontal: screenAutoPadding16),
                                           child: Column(
                                             children: [
-                                              Text(
+                                              const Text(
                                                 TextDoc.txtBalance,
-                                                style: const TextStyle(
+                                                style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     color: defaultFont,
                                                     fontSize: 18),
@@ -98,7 +98,7 @@ class WalletView extends StatelessWidget {
                                                     fontWeight: FontWeight
                                                         .bold),
                                               ),
-                                              Text(TextDoc.txtOr),
+                                              const Text(TextDoc.txtOr),
                                               Text(
                                                 '${state.balanceSessions} sessions',
                                                 style: const TextStyle(
@@ -125,9 +125,9 @@ class WalletView extends StatelessWidget {
                                   const SizedBox(
                                     height: spaceBetweenLine20,
                                   ),
-                                  Text(
+                                  const Text(
                                     TextDoc.txtTransactions,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: tertiary,
                                         fontSize: 18),
@@ -172,9 +172,9 @@ class WalletView extends StatelessWidget {
                                                         color: defaultFont,
                                                       ),
                                                     ),
-                                                    Text(
+                                                    const Text(
                                                       TextDoc.txtCharged,
-                                                      style: const TextStyle(
+                                                      style: TextStyle(
                                                         color: defaultFont,
                                                       ),
                                                     ),

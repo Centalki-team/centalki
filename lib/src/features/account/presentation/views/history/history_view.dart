@@ -57,7 +57,7 @@ class _HistoryViewState extends State<HistoryView> {
                         Icons.error_outline,
                         color: error,
                       ),
-                      title: Text(TextDoc.txtLoadFailed),
+                      title: const Text(TextDoc.txtLoadFailed),
                       content: Text(state.message),
                       actions: [
                         TextButton(
@@ -65,7 +65,7 @@ class _HistoryViewState extends State<HistoryView> {
                               Navigator.pop(context);
                               Navigator.pop(context);
                             },
-                            child: Text(TextDoc.txtOk)),
+                            child: const Text(TextDoc.txtOk)),
                       ],
                     ));
           }
@@ -77,7 +77,7 @@ class _HistoryViewState extends State<HistoryView> {
                 controller: _scrollController,
                 slivers: [
                   SliverAppBar.medium(
-                    title: Text(TextDoc.txtHistory),
+                    title: const Text(TextDoc.txtHistory),
                     centerTitle: true,
                   ),
                   SliverList(
@@ -100,9 +100,9 @@ class _HistoryViewState extends State<HistoryView> {
                                         vertical: screenAutoPadding16),
                                     child: Column(
                                       children: [
-                                        Text(
+                                        const Text(
                                           TextDoc.txtTotalCompletedSessions,
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 18,
                                               color: defaultFont),
@@ -129,9 +129,9 @@ class _HistoryViewState extends State<HistoryView> {
                             const SizedBox(
                               height: spaceBetweenLine20,
                             ),
-                            Text(
+                            const Text(
                               TextDoc.txtSessions,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
                                 color: tertiary,

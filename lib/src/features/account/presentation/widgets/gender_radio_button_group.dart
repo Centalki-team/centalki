@@ -43,7 +43,7 @@ class _GenderRadioButtonGroupState extends State<GenderRadioButtonGroup> {
                     });
                     widget.genderCallback(selectedGender);
                   },
-                  title: Text(TextDoc.txtMale),
+                  title: const Text(TextDoc.txtMale),
                 ),
                 RadioListTile(
                   value: Gender.female,
@@ -54,7 +54,7 @@ class _GenderRadioButtonGroupState extends State<GenderRadioButtonGroup> {
                     });
                     widget.genderCallback(selectedGender);
                   },
-                  title: Text(TextDoc.txtFemale),
+                  title: const Text(TextDoc.txtFemale),
                 ),
                 RadioListTile(
                   value: Gender.others,
@@ -65,7 +65,7 @@ class _GenderRadioButtonGroupState extends State<GenderRadioButtonGroup> {
                     });
                     widget.genderCallback(selectedGender);
                   },
-                  title: Text(TextDoc.txtOthers),
+                  title: const Text(TextDoc.txtOthers),
                 ),
               ],
             );
@@ -82,7 +82,7 @@ class _GenderRadioButtonGroupState extends State<GenderRadioButtonGroup> {
                     });
                     widget.genderCallback(selectedGender);
                   },
-                  title: Text(TextDoc.txtMale),
+                  title: const Text(TextDoc.txtMale),
                 ),
               ),
               Expanded(
@@ -95,7 +95,7 @@ class _GenderRadioButtonGroupState extends State<GenderRadioButtonGroup> {
                     });
                     widget.genderCallback(selectedGender);
                   },
-                  title: Text(TextDoc.txtFemale),
+                  title: const Text(TextDoc.txtFemale),
                 ),
               ),
               Expanded(
@@ -108,7 +108,7 @@ class _GenderRadioButtonGroupState extends State<GenderRadioButtonGroup> {
                     });
                     widget.genderCallback(selectedGender);
                   },
-                  title: Text(TextDoc.txtOthers),
+                  title: const Text(TextDoc.txtOthers),
                 ),
               ),
             ],

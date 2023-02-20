@@ -47,12 +47,12 @@ class _AccountInformationViewState extends State<AccountInformationView> {
             showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
-                      title: Text(TextDoc.txtLoadFailed),
+                      title: const Text(TextDoc.txtLoadFailed),
                       content: Text(state.message),
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.pop(context),
-                          child: Text(TextDoc.txtOk),
+                          child: const Text(TextDoc.txtOk),
                         )
                       ],
                     ));
@@ -60,12 +60,12 @@ class _AccountInformationViewState extends State<AccountInformationView> {
             showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
-                      title: Text(TextDoc.txtSaveFailed),
+                      title: const Text(TextDoc.txtSaveFailed),
                       content: Text(state.message),
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.pop(context),
-                          child: Text(TextDoc.txtOk),
+                          child: const Text(TextDoc.txtOk),
                         )
                       ],
                     ));
@@ -73,11 +73,11 @@ class _AccountInformationViewState extends State<AccountInformationView> {
             showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
-                      title: Text(TextDoc.txtSuccessfullySaved),
+                      title: const Text(TextDoc.txtSuccessfullySaved),
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.pop(context),
-                          child: Text(TextDoc.txtOk),
+                          child: const Text(TextDoc.txtOk),
                         )
                       ],
                     ));
@@ -88,7 +88,7 @@ class _AccountInformationViewState extends State<AccountInformationView> {
         body: CustomScrollView(
           slivers: [
             SliverAppBar.medium(
-              title: Text(TextDoc.txtAccountInformation),
+              title: const Text(TextDoc.txtAccountInformation),
               centerTitle: true,
             ),
             SliverList(
@@ -101,9 +101,9 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           TextDoc.txtEmail,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         TextField(
                           controller: emailController,
@@ -115,9 +115,9 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                         const SizedBox(
                           height: spaceBetweenLine12,
                         ),
-                        Text(
+                        const Text(
                           TextDoc.txtPhoneNumberTitle,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         TextField(
                           controller: phoneController,
@@ -129,9 +129,9 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                         const SizedBox(
                           height: spaceBetweenLine12,
                         ),
-                        Text(
+                        const Text(
                           TextDoc.txtDateOfBirthTitle,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         TextField(
                           controller: dateOfBirthController,
@@ -163,9 +163,9 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                         const SizedBox(
                           height: spaceBetweenLine12,
                         ),
-                        Text(
+                        const Text(
                           TextDoc.txtGenderTitle,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         BlocBuilder<AccountInformationBloc,
                             AccountInformationState>(
@@ -187,9 +187,9 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                         const SizedBox(
                           height: spaceBetweenLine12,
                         ),
-                        Text(
+                        const Text(
                           TextDoc.txtConnectionsTitle,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         ListView.builder(
                           shrinkWrap: true,
@@ -219,9 +219,9 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                         const SizedBox(
                           height: spaceBetweenLine12,
                         ),
-                        Text(
+                        const Text(
                           TextDoc.txtPaymentMethodTitle,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(
                           height: spaceBetweenLine20,
@@ -243,7 +243,7 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                                       foregroundColor: defaultFont,
                                       minimumSize: const Size.fromHeight(48),
                                     ),
-                                    child: Text(TextDoc.txtSaveChanges))
+                                    child: const Text(TextDoc.txtSaveChanges))
                                 : Container()),
                       ],
                     ),

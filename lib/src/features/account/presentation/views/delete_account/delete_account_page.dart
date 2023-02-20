@@ -8,10 +8,8 @@ class DeleteAccountPage extends StatelessWidget {
   const DeleteAccountPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
+  Widget build(BuildContext context) => BlocProvider(
       create: (context) => DeleteAccountBloc(),
       child: const DeleteAccountView(),
     );
-  }
 }

@@ -53,8 +53,8 @@ class AccountInformationBloc
       } else {
         throw Exception();
       }
-    } on Exception catch (e) {
-      emit(AccountInformationSaveFailureState(TextDoc.txtSaveFailed));
+    } on Exception catch (_) {
+      emit(const AccountInformationSaveFailureState(TextDoc.txtSaveFailed));
     }
   }
 

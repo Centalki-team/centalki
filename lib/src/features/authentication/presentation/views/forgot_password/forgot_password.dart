@@ -69,8 +69,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                   height: spaceBetweenLine20,
                 ),
                 BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
-                  builder: (context, state) {
-                    return Column(
+                  builder: (context, state) => Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         AppOutlinedTextField(
@@ -99,8 +98,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                           minimumSize: const Size.fromHeight(48),
                         ),
                       ],
-                    );
-                  },
+                    ),
                 ),
                 const SizedBox(
                   height: spaceBetweenLine12,

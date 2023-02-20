@@ -28,7 +28,7 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
           completedSessions.historyMeta?.completedSessionCount ?? 0,
           completedSessions.historySessions ?? []));
     } on Exception catch (_) {
-      emit(HistoryLoadFailureState(TextDoc.txtLoadFailed));
+      emit(const HistoryLoadFailureState(TextDoc.txtLoadFailed));
     }
   }
 
@@ -52,7 +52,7 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
             state.currentPage + 1, state.sessionCount, currentMoreSessions));
       }
     } on Exception catch (_) {
-      emit(HistoryLoadFailureState(TextDoc.txtLoadFailed));
+      emit(const HistoryLoadFailureState(TextDoc.txtLoadFailed));
     }
   }
 }

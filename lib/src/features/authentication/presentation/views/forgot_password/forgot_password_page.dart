@@ -8,10 +8,8 @@ class ForgotPasswordPage extends StatelessWidget {
   const ForgotPasswordPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ForgotPasswordBloc(),
-      child: const ForgotPasswordView(),
-    );
-  }
+  Widget build(BuildContext context) => BlocProvider(
+        create: (context) => ForgotPasswordBloc(),
+        child: const ForgotPasswordView(),
+      );
 }

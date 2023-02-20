@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -44,12 +43,12 @@ class _StudentProfileViewState extends State<StudentProfileView> {
               showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
-                        title: Text(TextDoc.txtLoadFailed),
+                        title: const Text(TextDoc.txtLoadFailed),
                         content: Text(state.message),
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.pop(context),
-                            child: Text(TextDoc.txtOk),
+                            child: const Text(TextDoc.txtOk),
                           )
                         ],
                       ));
@@ -57,12 +56,12 @@ class _StudentProfileViewState extends State<StudentProfileView> {
               showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
-                        title: Text(TextDoc.txtSaveFailed),
+                        title: const Text(TextDoc.txtSaveFailed),
                         content: Text(state.message),
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.pop(context),
-                            child: Text(TextDoc.txtOk),
+                            child: const Text(TextDoc.txtOk),
                           )
                         ],
                       ));
@@ -70,11 +69,11 @@ class _StudentProfileViewState extends State<StudentProfileView> {
               showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
-                        title: Text(TextDoc.txtSuccessfullySaved),
+                        title: const Text(TextDoc.txtSuccessfullySaved),
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.pop(context),
-                            child: Text(TextDoc.txtOk),
+                            child: const Text(TextDoc.txtOk),
                           )
                         ],
                       ));
@@ -89,7 +88,7 @@ class _StudentProfileViewState extends State<StudentProfileView> {
               body: CustomScrollView(
                 slivers: [
                   SliverAppBar.medium(
-                    title: Text(TextDoc.txtStudentProfile),
+                    title: const Text(TextDoc.txtStudentProfile),
                     centerTitle: true,
                   ),
                   SliverList(
@@ -116,9 +115,9 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                               const SizedBox(
                                 height: spaceBetweenLine20,
                               ),
-                              Text(
+                              const Text(
                                 TextDoc.txtFullNameTitle,
-                                style: const TextStyle(
+                                style: TextStyle(
                                     fontWeight: FontWeight.bold),
                               ),
                               TextField(
@@ -139,9 +138,9 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                               const SizedBox(
                                 height: spaceBetweenLine12,
                               ),
-                              Text(
+                              const Text(
                                 TextDoc.txtEnglishNameTitle,
-                                style: const TextStyle(
+                                style: TextStyle(
                                     fontWeight: FontWeight.bold),
                               ),
                               TextField(
@@ -162,9 +161,9 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                               const SizedBox(
                                 height: spaceBetweenLine12,
                               ),
-                              Text(
+                              const Text(
                                 TextDoc.txtBioTitle,
-                                style: const TextStyle(
+                                style: TextStyle(
                                     fontWeight: FontWeight.bold),
                               ),
                               TextField(
@@ -185,9 +184,9 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                               const SizedBox(
                                 height: spaceBetweenLine12,
                               ),
-                              Text(
+                              const Text(
                                 TextDoc.txtInterestedTopics,
-                                style: const TextStyle(
+                                style: TextStyle(
                                     fontWeight: FontWeight.bold),
                               ),
                               BlocBuilder<StudentProfileBloc,
@@ -243,7 +242,7 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                           minimumSize:
                                               const Size.fromHeight(48),
                                         ),
-                                        child: Text(TextDoc.txtSaveChanges),
+                                        child: const Text(TextDoc.txtSaveChanges),
                                       )
                                     : Container(),
                               ),

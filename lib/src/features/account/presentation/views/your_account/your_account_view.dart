@@ -39,7 +39,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                             Icons.error_outline,
                             color: error,
                           ),
-                          title: Text(TextDoc.txtLoadFailed),
+                          title: const Text(TextDoc.txtLoadFailed),
                           content: Text(state.message),
                         ));
               }
@@ -182,18 +182,18 @@ class _YourAccountViewState extends State<YourAccountView> {
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 8.0, horizontal: 16.0),
                                       child: Row(
-                                        children: [
-                                          const Icon(
+                                        children: const [
+                                          Icon(
                                             Icons.person,
                                             size: 32,
                                           ),
-                                          const SizedBox(
+                                          SizedBox(
                                             width: 12,
                                           ),
                                           Text(
                                             TextDoc.txtStudentProfile,
                                             style:
-                                                const TextStyle(fontSize: 16),
+                                                TextStyle(fontSize: 16),
                                           )
                                         ],
                                       ),
@@ -214,18 +214,18 @@ class _YourAccountViewState extends State<YourAccountView> {
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 8.0, horizontal: 16.0),
                                       child: Row(
-                                        children: [
-                                          const Icon(
+                                        children: const [
+                                          Icon(
                                             Icons.wallet,
                                             size: 32,
                                           ),
-                                          const SizedBox(
+                                          SizedBox(
                                             width: 12,
                                           ),
                                           Text(
                                             TextDoc.txtWallet,
                                             style:
-                                                const TextStyle(fontSize: 16),
+                                                TextStyle(fontSize: 16),
                                           )
                                         ],
                                       ),
@@ -246,18 +246,18 @@ class _YourAccountViewState extends State<YourAccountView> {
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 8.0, horizontal: 16.0),
                                       child: Row(
-                                        children: [
-                                          const Icon(
+                                        children: const [
+                                          Icon(
                                             Icons.history,
                                             size: 32,
                                           ),
-                                          const SizedBox(
+                                          SizedBox(
                                             width: 12,
                                           ),
                                           Text(
                                             TextDoc.txtHistory,
                                             style:
-                                                const TextStyle(fontSize: 16),
+                                                TextStyle(fontSize: 16),
                                           )
                                         ],
                                       ),
@@ -278,18 +278,18 @@ class _YourAccountViewState extends State<YourAccountView> {
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 8.0, horizontal: 16.0),
                                       child: Row(
-                                        children: [
-                                          const Icon(
+                                        children: const [
+                                          Icon(
                                             Icons.info,
                                             size: 32,
                                           ),
-                                          const SizedBox(
+                                          SizedBox(
                                             width: 12,
                                           ),
                                           Text(
                                             TextDoc.txtAccountInformation,
                                             style:
-                                                const TextStyle(fontSize: 16),
+                                                TextStyle(fontSize: 16),
                                           )
                                         ],
                                       ),
@@ -308,18 +308,18 @@ class _YourAccountViewState extends State<YourAccountView> {
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 8.0, horizontal: 16.0),
                                       child: Row(
-                                        children: [
-                                          const Icon(
+                                        children: const [
+                                          Icon(
                                             Icons.password,
                                             size: 32,
                                           ),
-                                          const SizedBox(
+                                          SizedBox(
                                             width: 12,
                                           ),
                                           Text(
                                             TextDoc.txtChangePassword,
                                             style:
-                                                const TextStyle(fontSize: 16),
+                                                TextStyle(fontSize: 16),
                                           )
                                         ],
                                       ),
@@ -332,13 +332,13 @@ class _YourAccountViewState extends State<YourAccountView> {
                                         barrierDismissible: false,
                                         context: context,
                                         builder: (context) => AlertDialog(
-                                              title: Text(
+                                              title: const Text(
                                                 TextDoc
                                                     .txtConfirmDeleteAccountTitle,
-                                                style: const TextStyle(
+                                                style: TextStyle(
                                                     color: error),
                                               ),
-                                              content: Text(TextDoc
+                                              content: const Text(TextDoc
                                                   .txtConfirmDeleteAccountContent),
                                               actions: [
                                                 TextButton(
@@ -349,7 +349,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                                     foregroundColor: mainColor1,
                                                   ),
                                                   child:
-                                                      Text(TextDoc.txtCancel),
+                                                      const Text(TextDoc.txtCancel),
                                                 ),
                                                 ElevatedButton(
                                                   onPressed: () =>
@@ -361,7 +361,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                                     foregroundColor:
                                                         Colors.white,
                                                   ),
-                                                  child: Text(
+                                                  child: const Text(
                                                       TextDoc.txtDeleteAccount),
                                                 ),
                                               ],
@@ -382,18 +382,18 @@ class _YourAccountViewState extends State<YourAccountView> {
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 8.0, horizontal: 16.0),
                                       child: Row(
-                                        children: [
-                                          const Icon(
+                                        children: const [
+                                          Icon(
                                             Icons.person_remove,
                                             size: 32,
                                             color: error,
                                           ),
-                                          const SizedBox(
+                                          SizedBox(
                                             width: 12,
                                           ),
                                           Text(
                                             TextDoc.txtDeleteAccount,
-                                            style: const TextStyle(
+                                            style: TextStyle(
                                                 fontSize: 16, color: error),
                                           )
                                         ],
@@ -436,10 +436,10 @@ class _YourAccountViewState extends State<YourAccountView> {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Text(
+                                    const Text(
                                       TextDoc.txtBalanceSessions,
                                       textAlign: TextAlign.end,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Text(
@@ -464,9 +464,9 @@ class _YourAccountViewState extends State<YourAccountView> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Text(
+                                    const Text(
                                       TextDoc.txtCompletedSessions,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Text(
