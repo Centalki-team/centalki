@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../base/define/colors.dart';
+import '../../../../../../base/define/text.dart';
 import '../../../../../../base/widgets/internal_page.dart';
 import '../../blocs/topic_level_bloc/topic_level_bloc.dart';
 import '../intermediate_topics/intermediate_topic_page.dart';
@@ -56,19 +57,19 @@ class _SelectTopicLevelViewState extends State<SelectTopicLevelView> with Single
           tabs: [
             Tab(
               child: Text(
-                'Pre-Intermediate',
+                TextDoc.txtPreIntermediate,
                 style: TextStyle(color: colorScheme.primary),
               ),
             ),
             Tab(
               child: Text(
-                'Intermediate',
+                TextDoc.txtIntermediate,
                 style: TextStyle(color: colorScheme.primary),
               ),
             ),
             Tab(
               child: Text(
-                'Upper-Intermediate',
+                TextDoc.txtUpperIntermediate,
                 style: TextStyle(color: colorScheme.primary),
               ),
             ),
