@@ -120,9 +120,9 @@ class _SignUpViewState extends State<SignUpView> {
                               _validateSignUpInputs('');
                             },
                           ),
-                          Text(
+                          const Text(
                             TextDoc.txtTermsAccept,
-                            style: const TextStyle(fontSize: 14),
+                            style: TextStyle(fontSize: 14),
                           ),
                           AppTextButton(
                             text: TextDoc.txtTerms,
@@ -166,7 +166,7 @@ class _SignUpViewState extends State<SignUpView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(TextDoc.txtHaveAnAccount),
+                    const Text(TextDoc.txtHaveAnAccount),
                     const SizedBox(width: 4),
                     TextButton(
                       onPressed: () {

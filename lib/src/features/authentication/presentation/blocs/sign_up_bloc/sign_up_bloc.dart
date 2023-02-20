@@ -94,10 +94,10 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'weak-password':
-          emit(const SignUpErrorState(message: 'The password provided is too weak.'));
+          emit(const SignUpErrorState(message: TextDoc.txtWeakPassword));
           break;
         case 'email-already-in-use':
-          emit(const SignUpErrorState(message: 'Email is used by another account.'));
+          emit(const SignUpErrorState(message: TextDoc.txtEmailUsed));
           break;
         default:
           break;
