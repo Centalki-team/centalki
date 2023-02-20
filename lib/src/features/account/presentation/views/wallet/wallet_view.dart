@@ -125,7 +125,7 @@ class WalletView extends StatelessWidget {
                                   const SizedBox(
                                     height: spaceBetweenLine20,
                                   ),
-                                  const Text(
+                                  /*const Text(
                                     TextDoc.txtTransactions,
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
@@ -191,7 +191,7 @@ class WalletView extends StatelessWidget {
                                             ),
                                           ),
                                         ),
-                                  )
+                                  )*/
                                 ],
                               ),
                             ),
