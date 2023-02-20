@@ -6,6 +6,7 @@ import '../../../../../../base/define/dimensions.dart';
 import '../../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../../base/define/text.dart';
 import '../../../../../../base/widgets/avatar.dart';
+import '../../../../topics/domain/entities/topic_item_entity.dart';
 import '../../blocs/student_profile_bloc/student_profile_bloc.dart';
 
 class StudentProfileView extends StatefulWidget {
@@ -22,6 +23,7 @@ class _StudentProfileViewState extends State<StudentProfileView> {
   var avatarUrl = '';
   var fullName = '';
   var selectedTopics = <bool>[];
+  var topics = <TopicItemEntity>[];
 
   @override
   Widget build(BuildContext context) =>
@@ -38,7 +40,8 @@ class _StudentProfileViewState extends State<StudentProfileView> {
               bioController.text = state.bio;
               avatarUrl = state.avatarUrl;
               fullName = state.fullName;
-              selectedTopics = state.selectedInterestedTopics.toList();
+              selectedTopics = state.selectedInterestedTopicIds.toList();
+              topics = state.topics;
             } else if (state is StudentProfileLoadFailureState) {
               showDialog(
                   context: context,
@@ -117,8 +120,7 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                               ),
                               const Text(
                                 TextDoc.txtFullNameTitle,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold),
+                                style: TextStyle(fontWeight: FontWeight.bold),
                               ),
                               TextField(
                                 controller: fullNameController,
@@ -126,13 +128,9 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                   border: OutlineInputBorder(),
                                 ),
                                 onChanged: (value) {
-                                  context.read<StudentProfileBloc>().add(
-                                      StudentProfileChangeEvent(
-                                          avatarUrl,
-                                          fullNameController.text,
-                                          englishNameController.text,
-                                          bioController.text,
-                                          selectedTopics));
+                                  context
+                                      .read<StudentProfileBloc>()
+                                      .add(const StudentProfileChangeEvent());
                                 },
                               ),
                               const SizedBox(
@@ -140,8 +138,7 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                               ),
                               const Text(
                                 TextDoc.txtEnglishNameTitle,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold),
+                                style: TextStyle(fontWeight: FontWeight.bold),
                               ),
                               TextField(
                                 controller: englishNameController,
@@ -149,13 +146,9 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                   border: OutlineInputBorder(),
                                 ),
                                 onChanged: (value) {
-                                  context.read<StudentProfileBloc>().add(
-                                      StudentProfileChangeEvent(
-                                          avatarUrl,
-                                          fullNameController.text,
-                                          englishNameController.text,
-                                          bioController.text,
-                                          selectedTopics));
+                                  context
+                                      .read<StudentProfileBloc>()
+                                      .add(const StudentProfileChangeEvent());
                                 },
                               ),
                               const SizedBox(
@@ -163,8 +156,7 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                               ),
                               const Text(
                                 TextDoc.txtBioTitle,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold),
+                                style: TextStyle(fontWeight: FontWeight.bold),
                               ),
                               TextField(
                                 controller: bioController,
@@ -172,13 +164,9 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                   border: OutlineInputBorder(),
                                 ),
                                 onChanged: (value) {
-                                  context.read<StudentProfileBloc>().add(
-                                      StudentProfileChangeEvent(
-                                          avatarUrl,
-                                          fullNameController.text,
-                                          englishNameController.text,
-                                          bioController.text,
-                                          selectedTopics));
+                                  context
+                                      .read<StudentProfileBloc>()
+                                      .add(const StudentProfileChangeEvent());
                                 },
                               ),
                               const SizedBox(
@@ -186,8 +174,7 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                               ),
                               const Text(
                                 TextDoc.txtInterestedTopics,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold),
+                                style: TextStyle(fontWeight: FontWeight.bold),
                               ),
                               BlocBuilder<StudentProfileBloc,
                                   StudentProfileState>(
@@ -205,20 +192,16 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                                 : 10,
                                   ),
                                   physics: const NeverScrollableScrollPhysics(),
-                                  itemCount: selectedTopics.length,
+                                  itemCount: topics.length,
                                   itemBuilder: (_, index) => CheckboxListTile(
                                     value: selectedTopics[index],
                                     onChanged: (value) {
                                       selectedTopics[index] = value ?? false;
                                       context.read<StudentProfileBloc>().add(
-                                          StudentProfileChangeEvent(
-                                              avatarUrl,
-                                              fullNameController.text,
-                                              englishNameController.text,
-                                              bioController.text,
-                                              selectedTopics));
+                                          const StudentProfileChangeEvent());
                                     },
-                                    title: Text('${index + 1}. Clothes and Fashion'),
+                                    title: Text(
+                                        '${index + 1}. ${topics[index].topicName}'),
                                   ),
                                 ),
                               ),
@@ -242,7 +225,8 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                           minimumSize:
                                               const Size.fromHeight(48),
                                         ),
-                                        child: const Text(TextDoc.txtSaveChanges),
+                                        child:
+                                            const Text(TextDoc.txtSaveChanges),
                                       )
                                     : Container(),
                               ),

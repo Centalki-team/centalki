@@ -9,14 +9,7 @@ class StudentProfileInitEvent extends StudentProfileEvent {
 }
 
 class StudentProfileChangeEvent extends StudentProfileEvent {
-  const StudentProfileChangeEvent(this.avatarUrl, this.fullName,
-      this.englishName, this.bio, this.selectedInterestedTopics);
-
-  final String avatarUrl;
-  final String fullName;
-  final String englishName;
-  final String bio;
-  final List<bool> selectedInterestedTopics;
+  const StudentProfileChangeEvent();
 }
 
 class StudentProfileSaveChangesEvent extends StudentProfileEvent {

@@ -35,6 +35,8 @@ class UserProfileEntity {
     this.accountBalance,
     this.currentCostPerSession,
     this.accountCurrency,
+    this.accountBio,
+    this.accountInterestedTopicIds,
   });
 
   final String? accountEnglishName;
@@ -43,4 +45,6 @@ class UserProfileEntity {
   final int? accountBalance;
   final int? currentCostPerSession;
   final String? accountCurrency;
+  final String? accountBio;
+  final List<String>? accountInterestedTopicIds;
 }
