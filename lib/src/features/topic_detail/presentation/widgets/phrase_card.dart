@@ -48,9 +48,9 @@ class PhraseCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: smallSpacing4),
-           Text(
+           const Text(
             TextDoc.txtTopicPhraseExample,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: bodyMediumSize,
               fontWeight: bodyMediumWeight,
             ),

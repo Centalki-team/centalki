@@ -21,7 +21,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text(TextDoc.txtTopicDetail),
+          title: const Text(TextDoc.txtTopicDetail),
           centerTitle: false,
           elevation: 0,
           actions: [
@@ -39,7 +39,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                         ),
                       );
                     },
-                    child: Text(TextDoc.txtTalk),
+                    child: const Text(TextDoc.txtTalk),
                   );
                 }
                 return Container();
@@ -81,9 +81,9 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                       ),
                     ),
                     const SizedBox(height: spaceBetweenLine14),
-                    Text(
+                    const Text(
                       TextDoc.txtTopicDescription,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: titleLargeSize,
                         fontWeight: FontWeight.w600,
                       ),
@@ -91,9 +91,9 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                     const SizedBox(height: smallSpacing8),
                     Text(state.topicDetail.topicDescription ?? 'null. This topic is about nothing'),
                     const SizedBox(height: spaceBetweenLine14),
-                    Text(
+                    const Text(
                       TextDoc.txtTopicVocab,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: titleLargeSize,
                         fontWeight: FontWeight.w600,
                       ),
@@ -111,9 +111,9 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                         return PhraseCard(phraseEntity: phrase);
                       },
                     ),
-                    Text(
+                    const Text(
                       TextDoc.txtTopicQuestions,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: titleLargeSize,
                         fontWeight: FontWeight.w600,
                       ),
