@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../base/define/colors.dart';
 import '../../../../../../base/define/dimensions.dart';
 import '../../../../../../base/define/manager/loading_manager.dart';
+import '../../../../../../base/define/size.dart';
 import '../../../../../../base/define/text.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/text_fields/text_field.dart';
@@ -21,8 +22,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
   final _emailController = TextEditingController();
 
   @override
-  Widget build(BuildContext context) =>
-      BlocListener<ForgotPasswordBloc, ForgotPasswordState>(
+  Widget build(BuildContext context) => BlocListener<ForgotPasswordBloc, ForgotPasswordState>(
         listener: (context, state) {
           if (state is ForgotPasswordLoadingState) {
             LoadingManager.setLoading(context, loading: true);
@@ -46,22 +46,17 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 16.0),
-                  child: Image.asset(
-                    Assets.illustration.resetPassword.path,
-                    width: 200,
-                    height: 200,
-                  ),
+                const SizedBox(height: spaceBetweenLine16),
+                SizedBox(
+                  height: 220,
+                  child: Assets.illustration.signUp.svg(),
                 ),
-                const SizedBox(
-                  height: spaceBetweenLine12,
-                ),
+                const SizedBox(height: spaceBetweenLine20),
                 Text(
                   TextDoc.txtForgotPasswordIntroduction,
                   style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold,
+                    fontSize: headlineSmallSize,
+                    fontWeight: headlineSmallWeight,
                     color: colorScheme.onPrimaryContainer,
                   ),
                 ),

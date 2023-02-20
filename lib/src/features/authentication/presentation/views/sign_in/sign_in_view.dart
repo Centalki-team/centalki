@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../base/define/colors.dart';
 import '../../../../../../base/define/dimensions.dart';
+import '../../../../../../base/define/size.dart';
 import '../../../../../../base/define/text.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/text_fields/text_field.dart';
@@ -34,9 +35,11 @@ class _SignInViewState extends State<SignInView> {
   Widget build(BuildContext context) => BlocListener<SignInBloc, SignInState>(
         listener: (context, state) {
           if (state is SignInLoadErrorState) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text(state.message),
-            ));
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
+              ),
+            );
           }
         },
         listenWhen: (previous, current) => previous != current,
@@ -46,22 +49,17 @@ class _SignInViewState extends State<SignInView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 16),
-                  child: Image.asset(
-                    Assets.illustration.login.path,
-                    width: 200,
-                    height: 200,
-                  ),
+                const SizedBox(height: spaceBetweenLine16),
+                SizedBox(
+                  height: 220,
+                  child: Assets.illustration.signIn.svg(),
                 ),
-                const SizedBox(
-                  height: spaceBetweenLine12,
-                ),
+                const SizedBox(height: spaceBetweenLine20),
                 Text(
                   TextDoc.txtSignInIntroduction,
                   style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold,
+                    fontSize: headlineSmallSize,
+                    fontWeight: headlineSmallWeight,
                     color: colorScheme.onPrimaryContainer,
                   ),
                   textAlign: TextAlign.left,
