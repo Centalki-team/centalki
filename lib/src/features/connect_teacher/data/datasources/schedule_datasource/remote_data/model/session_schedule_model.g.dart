@@ -34,11 +34,13 @@ SessionScheduleModel _$SessionScheduleModelFromJson(
           ? null
           : SessionScheduleUserModel.fromJson(
               json['teacher'] as Map<String, dynamic>),
-      startAt: json['startAt'] as String?,
-      pickedUpAt: json['pickedUpAt'] as String?,
+      startAt: DateTimeHelper.stringToTime3Nullable(json['startAt'] as String?),
+      pickedUpAt:
+          DateTimeHelper.stringToTime3Nullable(json['pickedUpAt'] as String?),
       status:
           $enumDecodeNullable(_$SessionScheduleStatusEnumMap, json['status']),
-      createdAt: json['createdAt'] as String?,
+      createdAt:
+          DateTimeHelper.stringToTime3Nullable(json['createdAt'] as String?),
     );
 
 const _$SessionScheduleStatusEnumMap = {
