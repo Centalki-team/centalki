@@ -30,6 +30,7 @@ class SessionScheduleEntity {
     this.sessionStudent,
     this.sessionTeacher,
     this.sessionStatus,
+    this.sessionStartAt,
   });
 
   final String? sessionId;
@@ -37,6 +38,7 @@ class SessionScheduleEntity {
   final SessionScheduleUserEntity? sessionStudent;
   final SessionScheduleUserEntity? sessionTeacher;
   final SessionScheduleStatus? sessionStatus;
+  final DateTime? sessionStartAt;
 }
 
 class SessionScheduleUserEntity {

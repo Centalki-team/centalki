@@ -1,4 +1,3 @@
-import 'package:dartz/dartz_unsafe.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,7 +24,7 @@ class ConnectTeacherBloc
   bool isCancel = false;
 
   void _onInit(ConnectTeacherInit event, emit) async {
-    emit(ConnectTeacherLoadingState(TextDoc.txtFindTeacher));
+    emit(const ConnectTeacherLoadingState(TextDoc.txtFindTeacher));
 
     topicId = event.topicId;
     if (FirebaseAuth.instance.currentUser != null) {
@@ -34,14 +33,13 @@ class ConnectTeacherBloc
         final sessionSchedule =
             await DioClient.createNewSessionSchedule(studentId, topicId);
         sessionId = sessionSchedule.sessionId ?? '';
-        print(sessionSchedule.sessionId);
-        emit(ConnectTeacherLoadDoneState(TextDoc.txtFindTeacher));
+        emit(const ConnectTeacherLoadDoneState(TextDoc.txtFindTeacher));
       } on Exception catch (e) {
         var message = e.toString().split("Exception: ")[1];
         emit(ConnectTeacherLoadFailureState(message));
       }
     } else {
-      emit(ConnectTeacherLoadFailureState(TextDoc.txtNotSignIn));
+      emit(const ConnectTeacherLoadFailureState(TextDoc.txtNotSignIn));
     }
   }
 
@@ -58,7 +56,7 @@ class ConnectTeacherBloc
   }
 
   void _onFindTeacher(ConnectTeacherFindTeacher event, emit) async {
-    emit(ConnectTeacherFindingTeacherState(TextDoc.txtFindTeacher));
+    emit(const ConnectTeacherFindingTeacherState(TextDoc.txtFindTeacher));
 
     try {
       var currentStatus = '';
@@ -69,7 +67,7 @@ class ConnectTeacherBloc
         currentStatus = status.snapshot.value.toString();
         switch (currentStatus) {
           case 'PICKED_UP':
-            emit(ConnectTeacherFindDoneState(TextDoc.txtConnectedTeacher));
+            emit(const ConnectTeacherFindDoneState(TextDoc.txtConnectedTeacher));
             add(const ConnectTeacherConnectRoom());
             break;
           case 'CANCELLED':
@@ -81,7 +79,7 @@ class ConnectTeacherBloc
           case 'TIME_OUT':
             await events.listen((event) {}).cancel();
             await DioClient.cancelSessionSchedule(sessionId);
-            emit(ConnectTeacherFindFailureState(
+            emit(const ConnectTeacherFindFailureState(
                 TextDoc.txtNotTeacherAvailableContent));
             break;
           default:
@@ -109,11 +107,11 @@ class ConnectTeacherBloc
         await Future.delayed(const Duration(seconds: 3));
         emit(const ConnectTeacherConnectDoneState());
       } else {
-        emit(ConnectTeacherConnectErrorState(
+        emit(const ConnectTeacherConnectErrorState(
             TextDoc.txtNotTeacherAvailableContent));
       }
     } on Exception catch (_) {
-      emit(ConnectTeacherConnectErrorState(
+      emit(const ConnectTeacherConnectErrorState(
           TextDoc.txtNotTeacherAvailableContent));
     }
   }

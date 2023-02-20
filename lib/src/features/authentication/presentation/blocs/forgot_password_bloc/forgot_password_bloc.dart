@@ -23,9 +23,9 @@ class ForgotPasswordBloc
     var emailError = '';
 
     if (event.email.isEmpty) {
-      emailError = TextDoc.txtEmailEmptyWarning;
+      emailError = TextDoc.txtEmailEmpty;
     } else if (!emailRegExp.hasMatch(event.email)) {
-      emailError = TextDoc.txtEmailInvalidFormatWarning;
+      emailError = TextDoc.txtEmailInvalidFormat;
     }
 
     emit(ForgotPasswordValidateState(
@@ -42,7 +42,7 @@ class ForgotPasswordBloc
               'Reset password link was sent to email address: ${event.email}!\nPlease do not share to anybody!'));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        emit(ForgotPasswordLoadErrorState(message: TextDoc.txtUserNotFound));
+        emit(const ForgotPasswordLoadErrorState(message: TextDoc.txtUserNotFound));
       }
     }
   }
