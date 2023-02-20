@@ -27,33 +27,33 @@ class ChangePasswordBloc
         if (confirmPassword.isEmpty) {
           emit(const ChangePasswordInvalidInputState());
         } else {
-          emit(ChangePasswordInvalidInputState(
-              passwordError: TextDoc.txtPasswordEmptyWarning,
+          emit(const ChangePasswordInvalidInputState(
+              passwordError: TextDoc.txtPasswordEmpty,
               newPasswordError: TextDoc.txtNewPasswordEmptyWarning));
         }
       } else {
         if (confirmPassword.isEmpty || confirmPassword != newPassword) {
-          emit(ChangePasswordInvalidInputState(
-              passwordError: TextDoc.txtPasswordEmptyWarning,
+          emit(const ChangePasswordInvalidInputState(
+              passwordError: TextDoc.txtPasswordEmpty,
               confirmPasswordError: TextDoc.txtConfirmedPasswordMatchWarning));
         } else {
-          emit(ChangePasswordInvalidInputState(
-              passwordError: TextDoc.txtPasswordEmptyWarning));
+          emit(const ChangePasswordInvalidInputState(
+              passwordError: TextDoc.txtPasswordEmpty));
         }
       }
     } else {
       if (newPassword.isEmpty) {
         if (confirmPassword.isEmpty) {
-          emit(ChangePasswordInvalidInputState(
+          emit(const ChangePasswordInvalidInputState(
               newPasswordError: TextDoc.txtNewPasswordEmptyWarning,
               confirmPasswordError: TextDoc.txtConfirmedPasswordEmptyWarning));
         } else {
-          emit(ChangePasswordInvalidInputState(
+          emit(const ChangePasswordInvalidInputState(
               newPasswordError: TextDoc.txtNewPasswordEmptyWarning));
         }
       } else {
         if (confirmPassword.isEmpty || confirmPassword != newPassword) {
-          emit(ChangePasswordInvalidInputState(
+          emit(const ChangePasswordInvalidInputState(
               confirmPasswordError: TextDoc.txtConfirmedPasswordMatchWarning));
         } else {
           emit(const ChangePasswordValidInputState());
@@ -70,33 +70,33 @@ class ChangePasswordBloc
         if (confirmPassword.isEmpty) {
           emit(const ChangePasswordInvalidInputState());
         } else {
-          emit(ChangePasswordInvalidInputState(
-              passwordError: TextDoc.txtPasswordEmptyWarning,
+          emit(const ChangePasswordInvalidInputState(
+              passwordError: TextDoc.txtPasswordEmpty,
               newPasswordError: TextDoc.txtNewPasswordEmptyWarning));
         }
       } else {
         if (confirmPassword.isEmpty || confirmPassword != newPassword) {
-          emit(ChangePasswordInvalidInputState(
-              passwordError: TextDoc.txtPasswordEmptyWarning,
+          emit(const ChangePasswordInvalidInputState(
+              passwordError: TextDoc.txtPasswordEmpty,
               confirmPasswordError: TextDoc.txtConfirmedPasswordMatchWarning));
         } else {
-          emit(ChangePasswordInvalidInputState(
-              passwordError: TextDoc.txtPasswordEmptyWarning));
+          emit(const ChangePasswordInvalidInputState(
+              passwordError: TextDoc.txtPasswordEmpty));
         }
       }
     } else {
       if (newPassword.isEmpty) {
         if (confirmPassword.isEmpty) {
-          emit(ChangePasswordInvalidInputState(
+          emit(const ChangePasswordInvalidInputState(
               newPasswordError: TextDoc.txtNewPasswordEmptyWarning,
               confirmPasswordError: TextDoc.txtConfirmedPasswordEmptyWarning));
         } else {
-          emit(ChangePasswordInvalidInputState(
+          emit(const ChangePasswordInvalidInputState(
               newPasswordError: TextDoc.txtNewPasswordEmptyWarning));
         }
       } else {
         if (confirmPassword.isEmpty || confirmPassword != newPassword) {
-          emit(ChangePasswordInvalidInputState(
+          emit(const ChangePasswordInvalidInputState(
               confirmPasswordError: TextDoc.txtConfirmedPasswordMatchWarning));
         } else {
           emit(const ChangePasswordValidInputState());
@@ -114,33 +114,33 @@ class ChangePasswordBloc
         if (confirmPassword.isEmpty) {
           emit(const ChangePasswordInvalidInputState());
         } else {
-          emit(ChangePasswordInvalidInputState(
-              passwordError: TextDoc.txtPasswordEmptyWarning,
+          emit(const ChangePasswordInvalidInputState(
+              passwordError: TextDoc.txtPasswordEmpty,
               newPasswordError: TextDoc.txtNewPasswordEmptyWarning));
         }
       } else {
         if (confirmPassword.isEmpty || confirmPassword != newPassword) {
-          emit(ChangePasswordInvalidInputState(
-              passwordError: TextDoc.txtPasswordEmptyWarning,
+          emit(const ChangePasswordInvalidInputState(
+              passwordError: TextDoc.txtPasswordEmpty,
               confirmPasswordError: TextDoc.txtConfirmedPasswordMatchWarning));
         } else {
-          emit(ChangePasswordInvalidInputState(
-              passwordError: TextDoc.txtPasswordEmptyWarning));
+          emit(const ChangePasswordInvalidInputState(
+              passwordError: TextDoc.txtPasswordEmpty));
         }
       }
     } else {
       if (newPassword.isEmpty) {
         if (confirmPassword.isEmpty) {
-          emit(ChangePasswordInvalidInputState(
+          emit(const ChangePasswordInvalidInputState(
               newPasswordError: TextDoc.txtNewPasswordEmptyWarning,
               confirmPasswordError: TextDoc.txtConfirmedPasswordEmptyWarning));
         } else {
-          emit(ChangePasswordInvalidInputState(
+          emit(const ChangePasswordInvalidInputState(
               newPasswordError: TextDoc.txtNewPasswordEmptyWarning));
         }
       } else {
         if (confirmPassword.isEmpty || confirmPassword != newPassword) {
-          emit(ChangePasswordInvalidInputState(
+          emit(const ChangePasswordInvalidInputState(
               confirmPasswordError: TextDoc.txtConfirmedPasswordMatchWarning));
         } else {
           emit(const ChangePasswordValidInputState());
@@ -163,10 +163,10 @@ class ChangePasswordBloc
       } on FirebaseAuthException catch (e) {
         emit(ChangePasswordLoadErrorState(e.message ?? ''));
       } on Exception catch (_) {
-        emit(ChangePasswordLoadErrorState(TextDoc.txtChangePasswordError));
+        emit(const ChangePasswordLoadErrorState(TextDoc.txtChangePasswordError));
       }
     } else {
-      emit(ChangePasswordLoadErrorState(TextDoc.txtUserNotSignIn));
+      emit(const ChangePasswordLoadErrorState(TextDoc.txtUserNotSignIn));
     }
   }
 }
