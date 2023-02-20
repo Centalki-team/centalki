@@ -2,7 +2,9 @@ import 'package:dio/dio.dart';
 
 import '../../src/features/account/data/account_datasources/remote_data/model/user_account_model.dart';
 import '../../src/features/account/data/balance_datasources/remote_data/model/balance_model.dart';
+import '../../src/features/account/data/history_datasources/remote_data/model/history_session_model.dart';
 import '../../src/features/account/domain/entities/balance_entity.dart';
+import '../../src/features/account/domain/entities/history_session_entity.dart';
 import '../../src/features/account/domain/entities/user_account_entity.dart';
 import '../../src/features/connect_teacher/data/datasources/schedule_datasource/remote_data/model/session_schedule_model.dart';
 import '../../src/features/connect_teacher/domain/entities/session_schedule_entity.dart';
@@ -116,5 +118,17 @@ class DioClient {
     final response = await _dio.get("$baseUrl/auth/balance",
         options: Options(headers: {"Authorization": idToken}));
     return BalanceModel.fromJson(response.data);
+  }
+
+  static Future<HistorySessionEntity> getCompletedSessions(
+      {required String idToken, int page = 1, int size = 10}) async {
+    final response = await _dio.get("$baseUrl/auth/sessions",
+        queryParameters: {
+          "page": page,
+          "size": size,
+          "status": "COMPLETED",
+        },
+        options: Options(headers: {"Authorization": idToken}));
+    return HistorySessionModel.fromJson(response.data);
   }
 }

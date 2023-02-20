@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../../../../../../base/helpers/time_helper.dart';
 import '../../../../../../topic_detail/data/datasources/topics_datasource/remote_data/model/topic_detail_model.dart';
 import '../../../../../domain/entities/session_schedule_entity.dart';
 
@@ -38,6 +39,7 @@ class SessionScheduleModel extends SessionScheduleEntity {
           sessionStudent: student,
           sessionTeacher: teacher,
           sessionStatus: status,
+          sessionStartAt: startAt,
         );
 
   final String? id;
@@ -47,10 +49,13 @@ class SessionScheduleModel extends SessionScheduleEntity {
   final TopicDetailModel? topic;
   final String? teacherId;
   final SessionScheduleUserModel? teacher;
-  final String? startAt;
-  final String? pickedUpAt;
+  @JsonKey(name: 'startAt', fromJson: DateTimeHelper.stringToTime3Nullable)
+  final DateTime? startAt;
+  @JsonKey(name: 'pickedUpAt', fromJson: DateTimeHelper.stringToTime3Nullable)
+  final DateTime? pickedUpAt;
   final SessionScheduleStatus? status;
-  final String? createdAt;
+  @JsonKey(name: 'createdAt', fromJson: DateTimeHelper.stringToTime3Nullable)
+  final DateTime? createdAt;
 
   factory SessionScheduleModel.fromJson(Map<String, dynamic> json) =>
       _$SessionScheduleModelFromJson(json);

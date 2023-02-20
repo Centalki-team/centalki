@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -7,8 +8,42 @@ import '../../../../../../base/define/dimensions.dart';
 import '../../../../../../base/define/text.dart';
 import '../../blocs/history_bloc/history_bloc.dart';
 
-class HistoryView extends StatelessWidget {
+class HistoryView extends StatefulWidget {
   const HistoryView({Key? key}) : super(key: key);
+
+  @override
+  State<HistoryView> createState() => _HistoryViewState();
+}
+
+class _HistoryViewState extends State<HistoryView> {
+  final _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    _scrollController.addListener(_onScroll);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController
+      ..removeListener(_onScroll)
+      ..dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    if (_isBottom) {
+      context.read<HistoryBloc>().add(const HistoryLoadMoreEvent());
+    }
+  }
+
+  bool get _isBottom {
+    if (!_scrollController.hasClients) return false;
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final currentScroll = _scrollController.offset;
+    return currentScroll >= (maxScroll * 0.9);
+  }
 
   @override
   Widget build(BuildContext context) => BlocConsumer<HistoryBloc, HistoryState>(
@@ -26,158 +61,175 @@ class HistoryView extends StatelessWidget {
                       content: Text(state.message),
                       actions: [
                         TextButton(
-                            onPressed: () => Navigator.pop(context),
+                            onPressed: () {
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                            },
                             child: Text(TextDoc.txtOk)),
                       ],
                     ));
           }
         },
-        builder: (context, state) => (state is HistoryLoadingState)
-            ? Scaffold(
-                appBar: AppBar(),
-                body: const Center(
-                  child: CircularProgressIndicator(),
-                ),
-              )
-            : Scaffold(
-                body: CustomScrollView(
-                  slivers: [
-                    SliverAppBar.medium(
-                      title: Text(TextDoc.txtHistory),
-                      centerTitle: true,
-                    ),
-                    SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                        childCount: 1,
-                        (_, index) => Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: screenAutoPadding16, vertical: 24),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Card(
-                                color: mainColor2Surface,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: screenAutoPadding16,
-                                          vertical: screenAutoPadding16),
-                                      child: Column(
+        builder: (context, state) {
+          if (state is HistoryLoadDoneState) {
+            return Scaffold(
+              body: CustomScrollView(
+                slivers: [
+                  SliverAppBar.medium(
+                    title: Text(TextDoc.txtHistory),
+                    centerTitle: true,
+                  ),
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      childCount: 1,
+                      (_, index) => Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: screenAutoPadding16, vertical: 24),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Card(
+                              color: mainColor2Surface,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: screenAutoPadding16,
+                                        vertical: screenAutoPadding16),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          TextDoc.txtTotalCompletedSessions,
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18,
+                                              color: defaultFont),
+                                        ),
+                                        const SizedBox(
+                                          height: smallSpacing10,
+                                        ),
+                                        Text(
+                                          '${state.sessionCount}',
+                                          style: const TextStyle(
+                                              fontSize: 18,
+                                              color: support,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        const SizedBox(
+                                          height: smallSpacing10,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: spaceBetweenLine20,
+                            ),
+                            Text(
+                              TextDoc.txtSessions,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: tertiary,
+                              ),
+                            ),
+                            state.sessionList.isEmpty
+                                ? const Center(child: Text('No data'))
+                                : ListView.builder(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemCount: state.sessionList.length,
+                                    itemBuilder: (_, index) => Card(
+                                      elevation: 0,
+                                      clipBehavior: Clip.antiAlias,
+                                      child: Row(
                                         children: [
-                                          Text(
-                                            TextDoc.txtTotalCompletedSessions,
-                                            style: const TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 18,
-                                                color: defaultFont),
+                                          Expanded(
+                                            flex: 2,
+                                            child: CachedNetworkImage(
+                                              imageUrl: state.sessionList[index]
+                                                      .sessionTopic?.imageURL ??
+                                                  '',
+                                              fit: BoxFit.fill,
+                                              width: 100,
+                                              progressIndicatorBuilder:
+                                                  (context, url,
+                                                          downloadProgress) =>
+                                                      CircularProgressIndicator(
+                                                value:
+                                                    downloadProgress.progress,
+                                              ),
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                      const Text(''),
+                                            ),
                                           ),
-                                          const SizedBox(
-                                            height: smallSpacing10,
-                                          ),
-                                          const Text(
-                                            '10',
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                color: support,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          const SizedBox(
-                                            height: smallSpacing10,
-                                          ),
-                                          Text(
-                                            '${TextDoc.txtTotalTime} 4 ${TextDoc.txtHours} 55 ${TextDoc.txtMinutes}',
-                                            style:
-                                                const TextStyle(color: defaultFont),
+                                          Expanded(
+                                            flex: 3,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 12.0,
+                                                      vertical: 8.0),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    state
+                                                            .sessionList[index]
+                                                            .sessionTopic
+                                                            ?.name ??
+                                                        '',
+                                                    style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                  Text(
+                                                    state
+                                                            .sessionList[index]
+                                                            .sessionTeacher
+                                                            ?.fullName ??
+                                                        '',
+                                                  ),
+                                                  Text(
+                                                    DateFormat(
+                                                            'yyyy-MM-dd hh:mm a')
+                                                        .format(
+                                                      state.sessionList[index]
+                                                              .sessionStartAt ??
+                                                          DateTime.now(),
+                                                    ),
+                                                    style: const TextStyle(
+                                                        color: secondary),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
                                           ),
                                         ],
                                       ),
                                     ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(
-                                height: spaceBetweenLine20,
-                              ),
-                              Text(
-                                TextDoc.txtSessions,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: tertiary,
-                                ),
-                              ),
-                              ListView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: 10,
-                                itemBuilder: (_, index) => Card(
-                                  elevation: 0,
-                                  clipBehavior: Clip.antiAlias,
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 2,
-                                        child: Image.network(
-                                          'https://images.unsplash.com/photo-1616706161242-f1d591350d1c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=967&q=80',
-                                          width: 100,
-                                          fit: BoxFit.fill,
-                                          loadingBuilder:
-                                              (_, child, loadingProgress) {
-                                            if (loadingProgress == null) {
-                                              return child;
-                                            }
-                                            return CircularProgressIndicator(
-                                              value: loadingProgress
-                                                          .expectedTotalBytes !=
-                                                      null
-                                                  ? loadingProgress
-                                                          .cumulativeBytesLoaded /
-                                                      loadingProgress
-                                                          .expectedTotalBytes!
-                                                  : null,
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 3,
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 12.0, vertical: 8.0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              const Text(
-                                                'Your Hobbies',
-                                                style: TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                              const Text('Jessica'),
-                                              Text(
-                                                DateFormat('yyyy-MM-dd hh:mm a')
-                                                    .format(DateTime.now()),
-                                                style: const TextStyle(
-                                                    color: secondary),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
+                                  )
+                          ],
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
+            );
+          }
+          return Scaffold(
+            appBar: AppBar(),
+            body: const Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        },
       );
 }
