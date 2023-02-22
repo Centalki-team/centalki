@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 import '../../define/colors.dart';
@@ -33,27 +31,26 @@ class AppFilledTextField extends StatefulWidget {
 
 class _AppFilledTextFieldState extends State<AppFilledTextField> {
   @override
-  Widget build(BuildContext context) {
-    return TextField(
+  Widget build(BuildContext context) => TextField(
       controller: widget.controller,
       obscureText: widget.obscureText == null ? false : widget.obscureText!,
-      cursorColor: colorScheme.primary,
-      style: TextStyle(
-        color: colorScheme.onSurface,
+      cursorColor: AppColor.mainColor1,
+      style: const TextStyle(
+        color: AppColor.defaultFont,
         fontSize: bodyLargeSize,
         fontWeight: bodyLargeWeight,
       ),
       decoration: InputDecoration(
         filled: true,
-        fillColor: colorScheme.surfaceVariant,
+        fillColor: AppColor.white,
         labelText: widget.labelText,
         labelStyle: TextStyle(
-          color: widget.errorText == null ? colorScheme.onSurfaceVariant : colorScheme.error,
+          color: widget.errorText == null ? AppColor.shadow : AppColor.error,
           fontSize: bodyLargeSize,
           fontWeight: bodyLargeWeight,
         ),
         floatingLabelStyle: TextStyle(
-          color: widget.errorText == null ? colorScheme.primary : colorScheme.error,
+          color: widget.errorText == null ? AppColor.mainColor1 : AppColor.error,
         ),
         icon: widget.icon == null
             ? null
@@ -61,7 +58,7 @@ class _AppFilledTextFieldState extends State<AppFilledTextField> {
                 widget.icon!,
                 size: 20,
               ),
-        iconColor: widget.icon == null ? null : colorScheme.onSurfaceVariant,
+        iconColor: widget.icon == null ? null : AppColor.shadow,
         suffixIcon: widget.suffixIcon == null
             ? null
             : Icon(
@@ -69,41 +66,40 @@ class _AppFilledTextFieldState extends State<AppFilledTextField> {
                 size: 24,
               ),
         suffixIconColor:
-            widget.suffixIcon == null ? null : colorScheme.onSurfaceVariant,
-        enabledBorder: UnderlineInputBorder(
+            widget.suffixIcon == null ? null : AppColor.shadow,
+        enabledBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
-            color: colorScheme.onSurfaceVariant,
+            color: AppColor.container,
             width: enabledActiveIndicatorFilledTextField,
           ),
         ),
         disabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: colorScheme.onSurface.withOpacity(disabledActiveIndicatorOpacityFilledTextField),
+            color: AppColor.container.shade100,
             width: disabledActiveIndicatorFilledTextField,
           ),
         ),
-        focusedBorder: UnderlineInputBorder(
+        focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
-            color: colorScheme.primary,
+            color: AppColor.mainColor1,
             width: focusedActiveIndicatorFilledTextField,
           ),
         ),
         errorText: widget.errorText == null ? null : widget.errorText!,
-        errorBorder: UnderlineInputBorder(
+        errorBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
-            color: colorScheme.error,
+            color: AppColor.error,
           ),
         ),
-        focusedErrorBorder: UnderlineInputBorder(
+        focusedErrorBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
-            color: colorScheme.error,
+            color: AppColor.error,
           ),
         ),
-        errorStyle: TextStyle(
-          color: colorScheme.error,
+        errorStyle: const TextStyle(
+          color: AppColor.error,
         ),
       ),
       keyboardType: widget.textInputType == null ? null : widget.textInputType!,
     );
-  }
 }

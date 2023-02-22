@@ -51,16 +51,16 @@ class _SignInViewState extends State<SignInView> {
               children: [
                 const SizedBox(height: spaceBetweenLine16),
                 SizedBox(
-                  height: 220,
+                  height: 300,
                   child: Assets.illustration.signIn.svg(),
                 ),
                 const SizedBox(height: spaceBetweenLine20),
-                Text(
+                const Text(
                   TextDoc.txtSignInIntroduction,
                   style: TextStyle(
                     fontSize: headlineSmallSize,
                     fontWeight: headlineSmallWeight,
-                    color: colorScheme.onPrimaryContainer,
+                    color: AppColor.defaultFontContainer,
                   ),
                   textAlign: TextAlign.left,
                 ),

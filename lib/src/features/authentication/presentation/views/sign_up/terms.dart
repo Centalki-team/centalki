@@ -9,16 +9,16 @@ class TermsAndConditions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      backgroundColor: colorScheme.onPrimary,
+      backgroundColor: AppColor.defaultFont,
       appBar: AppBar(
-        backgroundColor: colorScheme.onPrimary,
-        title: Text(
+        backgroundColor: AppColor.defaultFont,
+        title: const Text(
           'Terms and Conditions',
-          style: TextStyle(color: colorScheme.primary),
+          style: TextStyle(color: AppColor.mainColor1),
         ),
         centerTitle: true,
         elevation: 0,
-        iconTheme: IconThemeData(color: colorScheme.primary),
+        iconTheme: const IconThemeData(color: AppColor.mainColor1),
       ),
       body: SingleChildScrollView(
           padding: const EdgeInsets.all(24),

@@ -24,9 +24,6 @@ class AppColor {
   static const white = MaterialColor(0xFFFFFFFF, AppColorSwatch.whiteSwatch);
 }
 
-const colorScheme = AppColor._();
-
-
 const mainColor1 = Color(0xFF3AAFFF);
 const mainColor2 = Color(0xFFFFD033);
 const support = Color(0xFF55C885);

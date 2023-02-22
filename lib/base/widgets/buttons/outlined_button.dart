@@ -23,21 +23,19 @@ class AppOutlinedButton extends StatefulWidget {
 
 class _AppOutlinedButtonState extends State<AppOutlinedButton> {
   @override
-  Widget build(BuildContext context) {
-    return widget.icon == null
+  Widget build(BuildContext context) => widget.icon == null
         ? OutlinedButton(
             onPressed: widget.onPressed == null ? null : widget.onPressed!,
             style: ElevatedButton.styleFrom(
-              backgroundColor: colorScheme.surface,
-              foregroundColor: colorScheme.primary,
+              backgroundColor: AppColor.white,
               textStyle: const TextStyle(
                 fontSize: labelLargeSize,
                 fontWeight: labelLargeWeight,
               ),
               elevation: 0.0,
-              shadowColor: colorScheme.shadow,
-              side: BorderSide(
-                color: colorScheme.outline,
+              shadowColor: AppColor.shadow,
+              side: const BorderSide(
+                color: AppColor.shadow,
               ),
               minimumSize: widget.minimumSize,
             ),
@@ -48,27 +46,26 @@ class _AppOutlinedButtonState extends State<AppOutlinedButton> {
         : OutlinedButton.icon(
             onPressed: widget.onPressed == null ? null : widget.onPressed!,
             style: ElevatedButton.styleFrom(
-              backgroundColor: colorScheme.surface,
-              foregroundColor: colorScheme.primary,
+              backgroundColor: AppColor.white,
+              foregroundColor: AppColor.mainColor1,
               textStyle: const TextStyle(
                 fontSize: labelLargeSize,
                 fontWeight: labelLargeWeight,
               ),
               elevation: 0.0,
-              shadowColor: colorScheme.shadow,
-              side: BorderSide(
-                color: colorScheme.outline,
+              shadowColor: AppColor.shadow,
+              side: const BorderSide(
+                color: AppColor.shadow,
               ),
               minimumSize: widget.minimumSize,
             ),
             icon: Icon(
               widget.icon!,
               size: iconButtonSize,
-              color: colorScheme.primary,
+              color: AppColor.mainColor1,
             ),
             label: Text(
               widget.text,
             ),
           );
-  }
 }

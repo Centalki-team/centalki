@@ -22,19 +22,19 @@ class PhraseCard extends StatelessWidget {
         children: [
           Text(
             phraseEntity.topicPhrase ?? 'null phrase',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: titleMediumSize,
               fontWeight: titleMediumWeight,
-              color: colorScheme.primary,
+              color: AppColor.mainColor1,
             ),
           ),
           const SizedBox(height: smallSpacing1),
           Text(
             phraseEntity.phrasePhonetic ?? 'no phonetic',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: titleSmallSize,
               fontWeight: titleSmallWeight,
-              color: colorScheme.onBackground,
+              color: AppColor.defaultFont,
             ),
           ),
           const SizedBox(height: smallSpacing8),

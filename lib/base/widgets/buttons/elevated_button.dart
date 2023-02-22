@@ -23,19 +23,18 @@ class AppElevatedButton extends StatefulWidget {
 
 class _AppElevatedButtonState extends State<AppElevatedButton> {
   @override
-  Widget build(BuildContext context) {
-    return widget.icon == null
+  Widget build(BuildContext context) => widget.icon == null
         ? ElevatedButton(
             onPressed: widget.onPressed == null ? null : widget.onPressed!,
             style: ElevatedButton.styleFrom(
-              backgroundColor: colorScheme.surface,
-              foregroundColor: colorScheme.primary,
+              backgroundColor: AppColor.white,
+              foregroundColor: AppColor.secondary,
               textStyle: const TextStyle(
                 fontSize: labelLargeSize,
                 fontWeight: labelLargeWeight,
               ),
               elevation: 1.0,
-              shadowColor: colorScheme.shadow,
+              shadowColor: AppColor.shadow,
               minimumSize: widget.minimumSize,
             ),
             child: Text(
@@ -45,24 +44,23 @@ class _AppElevatedButtonState extends State<AppElevatedButton> {
         : ElevatedButton.icon(
             onPressed: widget.onPressed == null ? null : widget.onPressed!,
             style: ElevatedButton.styleFrom(
-              backgroundColor: colorScheme.surface,
-              foregroundColor: colorScheme.primary,
+              backgroundColor: AppColor.white,
+              foregroundColor: AppColor.secondary,
               textStyle: const TextStyle(
                 fontSize: labelLargeSize,
                 fontWeight: labelLargeWeight,
               ),
               elevation: 1.0,
-              shadowColor: colorScheme.shadow,
+              shadowColor: AppColor.shadow,
               minimumSize: widget.minimumSize,
             ),
             icon: Icon(
               widget.icon!,
               size: iconButtonSize,
-              color: colorScheme.primary,
+              color: AppColor.defaultFont,
             ),
             label: Text(
               widget.text,
             ),
           );
-  }
 }

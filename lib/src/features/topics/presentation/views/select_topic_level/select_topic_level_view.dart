@@ -54,23 +54,23 @@ class _SelectTopicLevelViewState extends State<SelectTopicLevelView> with Single
           onTap: (index) {
             context.read<TopicLevelBloc>().add(TopicLevelChangeTabEvent(desTab: index));
           },
-          tabs: [
+          tabs: const [
             Tab(
               child: Text(
                 TextDoc.txtPreIntermediate,
-                style: TextStyle(color: colorScheme.primary),
+                style: TextStyle(color: AppColor.mainColor1),
               ),
             ),
             Tab(
               child: Text(
                 TextDoc.txtIntermediate,
-                style: TextStyle(color: colorScheme.primary),
+                style: TextStyle(color: AppColor.mainColor1),
               ),
             ),
             Tab(
               child: Text(
                 TextDoc.txtUpperIntermediate,
-                style: TextStyle(color: colorScheme.primary),
+                style: TextStyle(color: AppColor.mainColor1),
               ),
             ),
           ],
