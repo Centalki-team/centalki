@@ -49,10 +49,10 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                 const SizedBox(height: spaceBetweenLine16),
                 SizedBox(
                   height: 220,
-                  child: Assets.illustration.signUp.svg(),
+                  child: Assets.illustration.forgotPassword.svg(),
                 ),
                 const SizedBox(height: spaceBetweenLine20),
-                Text(
+                const Text(
                   TextDoc.txtForgotPasswordIntroduction,
                   style: TextStyle(
                     fontSize: headlineSmallSize,
