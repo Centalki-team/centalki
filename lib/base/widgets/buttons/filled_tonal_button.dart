@@ -23,19 +23,18 @@ class AppFilledTonalButton extends StatefulWidget {
 
 class _AppFilledTonalButtonState extends State<AppFilledTonalButton> {
   @override
-  Widget build(BuildContext context) {
-    return widget.icon == null
+  Widget build(BuildContext context) => widget.icon == null
         ? ElevatedButton(
             onPressed: widget.onPressed == null ? null : widget.onPressed!,
             style: ElevatedButton.styleFrom(
-              backgroundColor: colorScheme.secondaryContainer,
-              foregroundColor: colorScheme.onSecondaryContainer,
+              backgroundColor: AppColor.white,
+              foregroundColor: AppColor.mainColor2Container,
               textStyle: const TextStyle(
                 fontSize: labelLargeSize,
                 fontWeight: labelLargeWeight,
               ),
               elevation: 0.0,
-              shadowColor: colorScheme.shadow,
+              shadowColor: AppColor.shadow,
               minimumSize: widget.minimumSize,
             ),
             child: Text(
@@ -45,24 +44,23 @@ class _AppFilledTonalButtonState extends State<AppFilledTonalButton> {
         : ElevatedButton.icon(
             onPressed: widget.onPressed == null ? null : widget.onPressed!,
             style: ElevatedButton.styleFrom(
-              backgroundColor: colorScheme.secondaryContainer,
-              foregroundColor: colorScheme.onSecondaryContainer,
+              backgroundColor: AppColor.white,
+              foregroundColor: AppColor.defaultFont,
               textStyle: const TextStyle(
                 fontSize: labelLargeSize,
                 fontWeight: labelLargeWeight,
               ),
               elevation: 0.0,
-              shadowColor: colorScheme.shadow,
+              shadowColor: AppColor.shadow,
               minimumSize: widget.minimumSize,
             ),
             icon: Icon(
               widget.icon!,
               size: iconButtonSize,
-              color: colorScheme.onSecondaryContainer,
+              color: AppColor.defaultFont,
             ),
             label: Text(
               widget.text,
             ),
           );
-  }
 }

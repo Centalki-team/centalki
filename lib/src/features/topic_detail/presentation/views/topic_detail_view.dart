@@ -47,7 +47,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
             ),
           ],
         ),
-        backgroundColor: colorScheme.surface,
+        backgroundColor: AppColor.background,
         body: BlocBuilder<TopicDetailBloc, TopicDetailState>(
           builder: (context, state) {
             if (state is TopicDetailLoadDoneState) {
@@ -142,7 +142,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                   child: Text(
                     state.errorMessage,
                     textAlign: TextAlign.center,
-                    style: TextStyle(color: colorScheme.error),
+                    style: const TextStyle(color: AppColor.error),
                   ),
                 ),
               );

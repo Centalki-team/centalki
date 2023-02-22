@@ -24,13 +24,6 @@ class TopicCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          // Image.asset(
-          //   item.image != null || item.image!.isEmpty ? Assets.images.tempAllTopic.path : item.image!,
-          //   width: 128,
-          //   height: 128,
-          // ),
-          // Image.asset('assets/images/temp_all_topic.png', width: 128, height: 128),
-          // Container(width: 128, height: 128, color: Colors.redAccent),
           Image.network(
             item.image ?? '',
             width: 128,
@@ -79,16 +72,16 @@ class TopicCard extends StatelessWidget {
                           ),
                         ),
                         child: Row(
-                          children: [
+                          children: const [
                             Icon(
                               Icons.featured_play_list_rounded,
-                              color: colorScheme.primary,
+                              color: AppColor.mainColor1,
                               size: 20,
                             ),
-                            const SizedBox(width: smallSpacing6),
+                            SizedBox(width: smallSpacing6),
                             Text(
                               'Detail',
-                              style: TextStyle(color: colorScheme.primary),
+                              style: TextStyle(color: AppColor.mainColor1),
                             ),
                           ],
                         ),
@@ -96,14 +89,14 @@ class TopicCard extends StatelessWidget {
                       const SizedBox(width: spaceBetweenLine12),
                       TextButton(
                         style: TextButton.styleFrom(
-                            backgroundColor: colorScheme.secondary,
+                            backgroundColor: AppColor.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(32),
                             )),
                         onPressed: () {},
-                        child: Text(
+                        child: const Text(
                           'Talk',
-                          style: TextStyle(color: colorScheme.onSecondary),
+                          style: TextStyle(color: AppColor.defaultFont),
                         ),
                       ),
                     ],

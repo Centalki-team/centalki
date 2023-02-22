@@ -39,9 +39,9 @@ class _AppOutlinedTextFieldState extends State<AppOutlinedTextField> {
         maxLines: widget.maxLines,
         controller: widget.controller,
         obscureText: widget.obscureText == null ? false : widget.obscureText!,
-        cursorColor: colorScheme.primary,
-        style: TextStyle(
-          color: colorScheme.onSurface,
+        cursorColor: AppColor.mainColor1,
+        style: const TextStyle(
+          color: AppColor.defaultFont,
           fontSize: bodyLargeSize,
           fontWeight: bodyLargeWeight,
         ),
@@ -49,15 +49,15 @@ class _AppOutlinedTextFieldState extends State<AppOutlinedTextField> {
           labelText: widget.labelText,
           labelStyle: TextStyle(
             color: widget.errorText == null
-                ? colorScheme.onSurfaceVariant
-                : colorScheme.error,
+                ? AppColor.defaultFont
+                : AppColor.error,
             fontSize: bodyLargeSize,
             fontWeight: bodyLargeWeight,
           ),
           floatingLabelStyle: TextStyle(
             color: widget.errorText == null
-                ? colorScheme.primary
-                : colorScheme.error,
+                ? AppColor.mainColor1
+                : AppColor.error,
           ),
           icon: widget.icon == null
               ? null
@@ -65,7 +65,7 @@ class _AppOutlinedTextFieldState extends State<AppOutlinedTextField> {
                   widget.icon!,
                   size: 24,
                 ),
-          iconColor: widget.icon == null ? null : colorScheme.onSurfaceVariant,
+          iconColor: widget.icon == null ? null : AppColor.defaultFont,
           suffixIcon: widget.suffixIcon == null
               ? null
               : Icon(
@@ -73,39 +73,39 @@ class _AppOutlinedTextFieldState extends State<AppOutlinedTextField> {
                   size: 24,
                 ),
           suffixIconColor:
-              widget.suffixIcon == null ? null : colorScheme.onSurfaceVariant,
-          enabledBorder: OutlineInputBorder(
+              widget.suffixIcon == null ? null : AppColor.defaultFont,
+          enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(
-              color: colorScheme.outline,
+              color: AppColor.container,
               width: enabledOutlineWidthTextField,
             ),
           ),
           disabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: colorScheme.onSurface
+              color: AppColor.defaultFont
                   .withOpacity(disabledOutlineOpacityOutlinedTextField),
               width: disabledOutlineWidthTextField,
             ),
           ),
-          focusedBorder: OutlineInputBorder(
+          focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(
-              color: colorScheme.primary,
+              color: AppColor.mainColor1,
               width: focusedOutlineWidthTextField,
             ),
           ),
           errorText: widget.errorText == null ? null : widget.errorText!,
-          errorBorder: OutlineInputBorder(
+          errorBorder: const OutlineInputBorder(
             borderSide: BorderSide(
-              color: colorScheme.error,
+              color: AppColor.error,
             ),
           ),
-          focusedErrorBorder: OutlineInputBorder(
+          focusedErrorBorder: const OutlineInputBorder(
             borderSide: BorderSide(
-              color: colorScheme.error,
+              color: AppColor.error,
             ),
           ),
-          errorStyle: TextStyle(
-            color: colorScheme.error,
+          errorStyle: const TextStyle(
+            color: AppColor.error,
           ),
         ),
         keyboardType:

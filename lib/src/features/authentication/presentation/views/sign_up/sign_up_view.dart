@@ -59,12 +59,12 @@ class _SignUpViewState extends State<SignUpView> {
                   child: Assets.illustration.signUp.svg(),
                 ),
                 const SizedBox(height: spaceBetweenLine20),
-                Text(
+                const Text(
                   TextDoc.txtSignUpIntroduction,
                   style: TextStyle(
                     fontSize: headlineSmallSize,
                     fontWeight: headlineSmallWeight,
-                    color: colorScheme.onPrimaryContainer,
+                    color: AppColor.defaultFontContainer,
                   ),
                 ),
                 const SizedBox(height: spaceBetweenLine18),
@@ -110,7 +110,7 @@ class _SignUpViewState extends State<SignUpView> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Checkbox(
-                            activeColor: colorScheme.primary,
+                            activeColor: AppColor.mainColor1,
                             value: _termsAccepted,
                             onChanged: (value) {
                               setState(() {
@@ -172,11 +172,11 @@ class _SignUpViewState extends State<SignUpView> {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: Text(
+                      child: const Text(
                         TextDoc.txtSignIn,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: colorScheme.primary,
+                          color: AppColor.mainColor1,
                         ),
                       ),
                     ),
