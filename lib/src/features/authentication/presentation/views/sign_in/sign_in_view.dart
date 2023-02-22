@@ -51,7 +51,7 @@ class _SignInViewState extends State<SignInView> {
               children: [
                 const SizedBox(height: spaceBetweenLine16),
                 SizedBox(
-                  height: 300,
+                  height: 400,
                   child: Assets.illustration.signIn.svg(),
                 ),
                 const SizedBox(height: spaceBetweenLine20),
