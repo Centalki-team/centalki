@@ -29,6 +29,7 @@ class _AppOutlinedButtonState extends State<AppOutlinedButton> {
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColor.white,
               textStyle: const TextStyle(
+                fontFamily: 'Dongle',
                 fontSize: labelLargeSize,
                 fontWeight: labelLargeWeight,
               ),
@@ -49,6 +50,7 @@ class _AppOutlinedButtonState extends State<AppOutlinedButton> {
               backgroundColor: AppColor.white,
               foregroundColor: AppColor.mainColor1,
               textStyle: const TextStyle(
+                fontFamily: 'Dongle',
                 fontSize: labelLargeSize,
                 fontWeight: labelLargeWeight,
               ),

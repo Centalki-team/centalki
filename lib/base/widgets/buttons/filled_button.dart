@@ -35,6 +35,7 @@ class _AppFilledButtonState extends State<AppFilledButton> {
           child: Text(
             widget.text,
             style: const TextStyle(
+                fontFamily: 'Dongle',
                 fontSize: labelLargeSize,
                 fontWeight: labelLargeWeight,
                 color: AppColor.defaultFont
@@ -47,6 +48,7 @@ class _AppFilledButtonState extends State<AppFilledButton> {
             backgroundColor: AppColor.white,
             foregroundColor: AppColor.defaultFont,
             textStyle: const TextStyle(
+              fontFamily: 'Dongle',
               fontSize: labelLargeSize,
               fontWeight: labelLargeWeight,
             ),

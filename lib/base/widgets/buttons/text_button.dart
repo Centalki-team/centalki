@@ -29,6 +29,7 @@ class _AppTextButtonState extends State<AppTextButton> {
             style: ElevatedButton.styleFrom(
               foregroundColor: AppColor.white,
               textStyle: const TextStyle(
+                fontFamily: 'Dongle',
                 fontSize: labelLargeSize,
                 fontWeight: labelLargeWeight,
               ),
@@ -38,6 +39,7 @@ class _AppTextButtonState extends State<AppTextButton> {
             child: Text(
               widget.text,
               style: const TextStyle(
+                fontFamily: 'Dongle',
                 fontSize: labelLargeSize,
                 fontWeight: labelLargeWeight,
                 color: AppColor.mainColor1,
@@ -49,6 +51,7 @@ class _AppTextButtonState extends State<AppTextButton> {
             style: ElevatedButton.styleFrom(
               foregroundColor: AppColor.white,
               textStyle: const TextStyle(
+                fontFamily: 'Dongle',
                 fontSize: labelLargeSize,
                 fontWeight: labelLargeWeight,
               ),
@@ -63,6 +66,7 @@ class _AppTextButtonState extends State<AppTextButton> {
             label: Text(
               widget.text,
               style: const TextStyle(
+                fontFamily: 'Dongle',
                 fontSize: labelLargeSize,
                 fontWeight: labelLargeWeight,
                 color: AppColor.mainColor1,
