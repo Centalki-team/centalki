@@ -37,7 +37,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                     builder: (context) => AlertDialog(
                           icon: const Icon(
                             Icons.error_outline,
-                            color: error,
+                            color: AppColor.error,
                           ),
                           title: const Text(TextDoc.txtLoadFailed),
                           content: Text(state.message),
@@ -60,7 +60,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                           Container(
                             width: double.maxFinite,
                             height: heightView / 2,
-                            color: mainColor2,
+                            color: AppColor.mainColor2,
                             child: Stack(
                               children: [
                                 Positioned(
@@ -71,7 +71,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                         const AlwaysStoppedAnimation(45 / 360),
                                     child: ClipRect(
                                       child: Container(
-                                        color: support,
+                                        color: AppColor.support,
                                         height: 100,
                                         width: 100,
                                       ),
@@ -85,7 +85,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                     height: 60,
                                     width: 60,
                                     decoration: BoxDecoration(
-                                      color: mainColor2Surface,
+                                      color: AppColor.mainColor2Surface,
                                       borderRadius: BorderRadius.circular(48),
                                     ),
                                   ),
@@ -97,7 +97,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                     height: 100,
                                     width: 100,
                                     decoration: BoxDecoration(
-                                      color: error,
+                                      color: AppColor.error,
                                       borderRadius: BorderRadius.circular(48),
                                     ),
                                   ),
@@ -336,7 +336,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                                 TextDoc
                                                     .txtConfirmDeleteAccountTitle,
                                                 style: TextStyle(
-                                                    color: error),
+                                                    color: AppColor.error,),
                                               ),
                                               content: const Text(TextDoc
                                                   .txtConfirmDeleteAccountContent),
@@ -346,7 +346,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                                       Navigator.pop(
                                                           context, false),
                                                   style: TextButton.styleFrom(
-                                                    foregroundColor: mainColor1,
+                                                    foregroundColor: AppColor.mainColor1,
                                                   ),
                                                   child:
                                                       const Text(TextDoc.txtCancel),
@@ -357,7 +357,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                                           context, true),
                                                   style:
                                                       ElevatedButton.styleFrom(
-                                                    backgroundColor: error,
+                                                    backgroundColor: AppColor.error,
                                                     foregroundColor:
                                                         Colors.white,
                                                   ),
@@ -386,7 +386,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                           Icon(
                                             Icons.person_remove,
                                             size: 32,
-                                            color: error,
+                                            color: AppColor.error,
                                           ),
                                           SizedBox(
                                             width: 12,
@@ -394,7 +394,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                           Text(
                                             TextDoc.txtDeleteAccount,
                                             style: TextStyle(
-                                                fontSize: 16, color: error),
+                                                fontSize: 16, color: AppColor.error,),
                                           )
                                         ],
                                       ),
@@ -454,7 +454,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                               Container(
                                 width: 2,
                                 height: 40,
-                                color: background,
+                                color: AppColor.background,
                               ),
                               const SizedBox(
                                 width: 16,

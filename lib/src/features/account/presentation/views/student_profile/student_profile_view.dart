@@ -220,8 +220,8 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                                   selectedTopics));
                                         },
                                         style: ElevatedButton.styleFrom(
-                                          backgroundColor: secondary,
-                                          foregroundColor: defaultFont,
+                                          backgroundColor: AppColor.secondary,
+                                          foregroundColor: AppColor.defaultFont,
                                           minimumSize:
                                               const Size.fromHeight(48),
                                         ),
