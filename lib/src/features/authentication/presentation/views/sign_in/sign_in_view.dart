@@ -40,6 +40,10 @@ class _SignInViewState extends State<SignInView> {
                 content: Text(state.message),
               ),
             );
+            context.read<SignInBloc>().add(SignInValidateEvent(
+                  email: _emailController.text,
+                  password: _passwordController.text,
+                ));
           }
         },
         listenWhen: (previous, current) => previous != current,
@@ -49,47 +53,54 @@ class _SignInViewState extends State<SignInView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const SizedBox(height: spaceBetweenLine16),
                 SizedBox(
-                  height: 400,
+                  height: 280,
                   child: Assets.illustration.signIn.svg(),
                 ),
-                const SizedBox(height: spaceBetweenLine20),
                 const Text(
                   TextDoc.txtSignInIntroduction,
                   style: TextStyle(
-                    fontSize: headlineSmallSize,
-                    fontWeight: headlineSmallWeight,
+                    fontSize: titleLargeSize,
+                    fontWeight: titleLargeWeight,
                     color: AppColor.defaultFontContainer,
                   ),
                   textAlign: TextAlign.left,
                 ),
-                const SizedBox(
-                  height: spaceBetweenLine20,
-                ),
+                const SizedBox(height: spaceBetweenLine20),
                 BlocBuilder<SignInBloc, SignInState>(
                   builder: (context, state) => Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
+                      const Text(
+                        TextDoc.txtEmail,
+                        style: TextStyle(
+                          fontSize: titleMediumSize,
+                          fontWeight: titleMediumWeight,
+                          color: AppColor.defaultFont,
+                        ),
+                      ),
+                      const SizedBox(height: smallSpacing8),
                       AppOutlinedTextField(
                         controller: _emailController,
                         textInputType: TextInputType.emailAddress,
-                        labelText: TextDoc.txtEmail,
-                        errorText: (state is SignInValidateState &&
-                                state.emailError.isNotEmpty)
-                            ? state.emailError
-                            : null,
+                        errorText:
+                            (state is SignInValidateState && state.emailError.isNotEmpty) ? state.emailError : null,
                         onChanged: _validateSignInInputs,
                       ),
-                      const SizedBox(
-                        height: spaceBetweenLine12,
+                      const SizedBox(height: spaceBetweenLine16),
+                      const Text(
+                        TextDoc.txtPassword,
+                        style: TextStyle(
+                          fontSize: titleMediumSize,
+                          fontWeight: titleMediumWeight,
+                          color: AppColor.defaultFont,
+                        ),
                       ),
+                      const SizedBox(height: smallSpacing8),
                       AppOutlinedTextField(
                         controller: _passwordController,
                         obscureText: true,
-                        labelText: TextDoc.txtPassword,
-                        errorText: (state is SignInValidateState &&
-                                state.passwordError.isNotEmpty)
+                        errorText: (state is SignInValidateState && state.passwordError.isNotEmpty)
                             ? state.passwordError
                             : null,
                         onChanged: _validateSignInInputs,
@@ -97,23 +108,7 @@ class _SignInViewState extends State<SignInView> {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: smallSpacing8,
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: AppTextButton(
-                    onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const ForgotPasswordPage(),
-                        )),
-                    text: TextDoc.txtForgotPassword,
-                  ),
-                ),
-                const SizedBox(
-                  height: spaceBetweenLine12,
-                ),
+                const SizedBox(height: spaceBetweenLine24),
                 BlocBuilder<SignInBloc, SignInState>(
                   builder: (context, state) {
                     if (state is SignInLoadingState) {
@@ -123,25 +118,38 @@ class _SignInViewState extends State<SignInView> {
                     }
                     return AppFilledButton(
                       text: TextDoc.txtSignIn,
-                      onPressed:
-                          (state is SignInValidateState && !state.forceDisabled)
-                              ? () => context.read<SignInBloc>().add(
-                                  SignInSendEvent(
-                                      email: _emailController.text,
-                                      password: _passwordController.text))
-                              : null,
+                      onPressed: (state is SignInValidateState && !state.forceDisabled)
+                          ? () => context.read<SignInBloc>().add(SignInSendEvent(
+                                email: _emailController.text,
+                                password: _passwordController.text,
+                              ))
+                          : null,
                       minimumSize: const Size.fromHeight(48),
                     );
                   },
                 ),
-                const SizedBox(
-                  height: bigSpacing20,
+                const SizedBox(height: smallSpacing8),
+                AppTextButton(
+                  onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ForgotPasswordPage(),
+                      )),
+                  text: TextDoc.txtForgotPassword,
                 ),
+                const SizedBox(height: spaceBetweenLine16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text(TextDoc.txtHaveNoAccount),
+                    const Text(
+                      TextDoc.txtHaveNoAccount,
+                      style: TextStyle(
+                        fontSize: bodyMediumSize,
+                        fontWeight: bodyMediumWeight,
+                        color: AppColor.defaultFont,
+                      ),
+                    ),
                     AppTextButton(
                       onPressed: () => Navigator.push(
                           context,
