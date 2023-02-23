@@ -55,7 +55,7 @@ class _HistoryViewState extends State<HistoryView> {
                 builder: (context) => AlertDialog(
                       icon: const Icon(
                         Icons.error_outline,
-                        color: error,
+                        color: AppColor.error,
                       ),
                       title: const Text(TextDoc.txtLoadFailed),
                       content: Text(state.message),
@@ -84,28 +84,27 @@ class _HistoryViewState extends State<HistoryView> {
                     delegate: SliverChildBuilderDelegate(
                       childCount: 1,
                       (_, index) => Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: screenAutoPadding16, vertical: 24),
+                        padding: const EdgeInsets.symmetric(horizontal: screenAutoPadding16, vertical: 24),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Card(
-                              color: mainColor2Surface,
+                              color: AppColor.mainColor2Surface,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: screenAutoPadding16,
-                                        vertical: screenAutoPadding16),
+                                        horizontal: screenAutoPadding16, vertical: screenAutoPadding16),
                                     child: Column(
                                       children: [
                                         const Text(
                                           TextDoc.txtTotalCompletedSessions,
                                           style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 18,
-                                              color: defaultFont),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                            color: AppColor.defaultFont,
+                                          ),
                                         ),
                                         const SizedBox(
                                           height: smallSpacing10,
@@ -113,9 +112,7 @@ class _HistoryViewState extends State<HistoryView> {
                                         Text(
                                           '${state.sessionCount}',
                                           style: const TextStyle(
-                                              fontSize: 18,
-                                              color: support,
-                                              fontWeight: FontWeight.bold),
+                                              fontSize: 18, color: AppColor.support, fontWeight: FontWeight.bold),
                                         ),
                                         const SizedBox(
                                           height: smallSpacing10,
@@ -134,15 +131,14 @@ class _HistoryViewState extends State<HistoryView> {
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
-                                color: tertiary,
+                                color: AppColor.tertiary,
                               ),
                             ),
                             state.sessionList.isEmpty
                                 ? const Center(child: Text('No data'))
                                 : ListView.builder(
                                     shrinkWrap: true,
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
+                                    physics: const NeverScrollableScrollPhysics(),
                                     itemCount: state.sessionList.length,
                                     itemBuilder: (_, index) => Card(
                                       elevation: 0,
@@ -152,61 +148,37 @@ class _HistoryViewState extends State<HistoryView> {
                                           Expanded(
                                             flex: 2,
                                             child: CachedNetworkImage(
-                                              imageUrl: state.sessionList[index]
-                                                      .sessionTopic?.imageURL ??
-                                                  '',
+                                              imageUrl: state.sessionList[index].sessionTopic?.imageURL ?? '',
                                               fit: BoxFit.fill,
                                               width: 100,
-                                              progressIndicatorBuilder:
-                                                  (context, url,
-                                                          downloadProgress) =>
-                                                      CircularProgressIndicator(
-                                                value:
-                                                    downloadProgress.progress,
+                                              progressIndicatorBuilder: (context, url, downloadProgress) =>
+                                                  CircularProgressIndicator(
+                                                value: downloadProgress.progress,
                                               ),
-                                              errorWidget:
-                                                  (context, url, error) =>
-                                                      const Text(''),
+                                              errorWidget: (context, url, error) => const Text(''),
                                             ),
                                           ),
                                           Expanded(
                                             flex: 3,
                                             child: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 12.0,
-                                                      vertical: 8.0),
+                                              padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
                                               child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    state
-                                                            .sessionList[index]
-                                                            .sessionTopic
-                                                            ?.name ??
-                                                        '',
-                                                    style: const TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold),
+                                                    state.sessionList[index].sessionTopic?.name ?? '',
+                                                    style: const TextStyle(fontWeight: FontWeight.bold),
                                                   ),
                                                   Text(
-                                                    state
-                                                            .sessionList[index]
-                                                            .sessionTeacher
-                                                            ?.fullName ??
-                                                        '',
+                                                    state.sessionList[index].sessionTeacher?.fullName ?? '',
                                                   ),
                                                   Text(
-                                                    DateFormat(
-                                                            'yyyy-MM-dd hh:mm a')
-                                                        .format(
-                                                      state.sessionList[index]
-                                                              .sessionStartAt ??
-                                                          DateTime.now(),
+                                                    DateFormat('yyyy-MM-dd hh:mm a').format(
+                                                      state.sessionList[index].sessionStartAt ?? DateTime.now(),
                                                     ),
                                                     style: const TextStyle(
-                                                        color: secondary),
+                                                      color: AppColor.secondary,
+                                                    ),
                                                   ),
                                                 ],
                                               ),

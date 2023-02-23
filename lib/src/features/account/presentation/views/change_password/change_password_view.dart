@@ -25,7 +25,7 @@ class ChangePasswordView extends StatelessWidget {
                   builder: (context) => AlertDialog(
                         icon: const Icon(
                           Icons.error_outline,
-                          color: error,
+                          color: AppColor.error,
                         ),
                         title: const Text(TextDoc.txtChangePasswordResult),
                         content: Flexible(
@@ -49,7 +49,7 @@ class ChangePasswordView extends StatelessWidget {
                   builder: (context) => AlertDialog(
                         icon: const Icon(
                           Icons.error_outline,
-                          color: error,
+                          color: AppColor.error,
                         ),
                         title: const Text(TextDoc.txtChangePasswordResult),
                         content: Flexible(
@@ -102,7 +102,7 @@ class ChangePasswordView extends StatelessWidget {
                               border: const OutlineInputBorder(),
                               errorBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: error,
+                                  color: AppColor.error,
                                 ),
                               ),
                             ),
@@ -129,7 +129,7 @@ class ChangePasswordView extends StatelessWidget {
                               border: const OutlineInputBorder(),
                               errorBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
-                                color: error,
+                                color: AppColor.error,
                               )),
                             ),
                             obscureText: true,
@@ -156,7 +156,7 @@ class ChangePasswordView extends StatelessWidget {
                               border: const OutlineInputBorder(),
                               errorBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
-                                color: error,
+                                color: AppColor.error,
                               )),
                             ),
                             obscureText: true,
@@ -173,7 +173,7 @@ class ChangePasswordView extends StatelessWidget {
                                       .add(const ChangePasswordChangeEvent())
                                   : null,
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: secondary,
+                                backgroundColor: AppColor.secondary,
                                 foregroundColor: Colors.white,
                                 minimumSize: const Size.fromHeight(48),
                               ),
