@@ -26,7 +26,7 @@ class TextDoc {
   static const txtHaveNoAccount = 'Have no account?';
   static const txtHaveAnAccount = 'Have an account?';
   static const txtTermsAccept = 'I accept';
-  static const txtSignInIntroduction = 'Sign in your account';
+  static const txtSignInIntroduction = 'Sign in to practice your English speaking skill';
   static const txtSignUpIntroduction = 'Create new account';
   static const txtForgotPasswordIntroduction = 'Enter your email below';
   static const txtForgotPasswordDescription = 'We\'ll send you a link to reset your password';

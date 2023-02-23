@@ -25,7 +25,7 @@ class _AppTextButtonState extends State<AppTextButton> {
   @override
   Widget build(BuildContext context) => widget.icon == null
         ? TextButton(
-            onPressed: widget.onPressed == null ? null : widget.onPressed!,
+            onPressed: widget.onPressed,
             style: ElevatedButton.styleFrom(
               foregroundColor: AppColor.white,
               textStyle: const TextStyle(
@@ -37,12 +37,17 @@ class _AppTextButtonState extends State<AppTextButton> {
             ),
             child: Text(
               widget.text,
+              style: const TextStyle(
+                fontSize: labelLargeSize,
+                fontWeight: labelLargeWeight,
+                color: AppColor.mainColor1,
+              ),
             ),
           )
         : TextButton.icon(
-            onPressed: widget.onPressed == null ? null : widget.onPressed!,
+            onPressed: widget.onPressed,
             style: ElevatedButton.styleFrom(
-              foregroundColor: AppColor.mainColor1,
+              foregroundColor: AppColor.white,
               textStyle: const TextStyle(
                 fontSize: labelLargeSize,
                 fontWeight: labelLargeWeight,
@@ -57,6 +62,11 @@ class _AppTextButtonState extends State<AppTextButton> {
             ),
             label: Text(
               widget.text,
+              style: const TextStyle(
+                fontSize: labelLargeSize,
+                fontWeight: labelLargeWeight,
+                color: AppColor.mainColor1,
+              ),
             ),
           );
 }
