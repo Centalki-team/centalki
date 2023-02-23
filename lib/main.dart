@@ -22,7 +22,7 @@ void main(List<String> args) async {
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
       useMaterial3: true,
-      fontFamily: 'Dongle'
+      fontFamily: 'Dongle',
     ),
     home: const MyWidget(),
   ));
