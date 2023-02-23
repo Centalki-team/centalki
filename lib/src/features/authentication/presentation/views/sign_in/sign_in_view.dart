@@ -10,7 +10,7 @@ import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/text_fields/text_field.dart';
 import '../../../../../../gen/assets.gen.dart';
 import '../../blocs/sign_in_bloc/sign_in_bloc.dart';
-import '../forgot_password/forgot_password_page.dart';
+import '../reset_password/reset_password_page.dart';
 import '../sign_up/sign_up_page.dart';
 
 class SignInView extends StatefulWidget {
@@ -130,7 +130,7 @@ class _SignInViewState extends State<SignInView> {
                   onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const ForgotPasswordPage(),
+                        builder: (context) => const ResetPasswordPage(),
                       )),
                   text: TextDoc.txtForgotPassword,
                 ),

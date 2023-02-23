@@ -110,9 +110,9 @@ class $AssetsIconGen {
 class $AssetsIllustrationGen {
   const $AssetsIllustrationGen();
 
-  /// File path: assets/illustration/forgot-password.svg
-  SvgGenImage get forgotPassword =>
-      const SvgGenImage('assets/illustration/forgot-password.svg');
+  /// File path: assets/illustration/reset-password.svg
+  SvgGenImage get resetPassword =>
+      const SvgGenImage('assets/illustration/reset-password.svg');
 
   /// File path: assets/illustration/sign-in.svg
   SvgGenImage get signIn =>
@@ -123,7 +123,7 @@ class $AssetsIllustrationGen {
       const SvgGenImage('assets/illustration/sign-up.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [forgotPassword, signIn, signUp];
+  List<SvgGenImage> get values => [resetPassword, signIn, signUp];
 }
 
 class $AssetsImagesGen {
