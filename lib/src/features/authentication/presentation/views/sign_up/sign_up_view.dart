@@ -62,12 +62,12 @@ class _SignUpViewState extends State<SignUpView> {
                   TextDoc.txtSignUpIntroduction,
                   textAlign: TextAlign.left,
                   style: TextStyle(
-                    fontSize: headlineSmallSize,
-                    fontWeight: headlineSmallWeight,
+                    fontSize: titleLargeSize,
+                    fontWeight: titleLargeWeight,
                     color: AppColor.defaultFontContainer,
                   ),
                 ),
-                const SizedBox(height: spaceBetweenLine20),
+                const SizedBox(height: spaceBetweenLine16),
                 BlocBuilder<SignUpBloc, SignUpState>(
                   builder: (context, state) => Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -80,14 +80,13 @@ class _SignUpViewState extends State<SignUpView> {
                           color: AppColor.defaultFont,
                         ),
                       ),
-                      const SizedBox(height: smallSpacing8),
                       AppOutlinedTextField(
                         controller: _nameController,
                         errorText:
                             state is SignUpValidateState && state.fullnameError.isNotEmpty ? state.fullnameError : null,
                         onChanged: _validateSignUpInputs,
                       ),
-                      const SizedBox(height: spaceBetweenLine16),
+                      const SizedBox(height: smallSpacing8),
                       const Text(
                         TextDoc.txtEmail,
                         style: TextStyle(
@@ -96,7 +95,6 @@ class _SignUpViewState extends State<SignUpView> {
                           color: AppColor.defaultFont,
                         ),
                       ),
-                      const SizedBox(height: smallSpacing8),
                       AppOutlinedTextField(
                         controller: _emailController,
                         textInputType: TextInputType.emailAddress,
@@ -104,7 +102,7 @@ class _SignUpViewState extends State<SignUpView> {
                             state is SignUpValidateState && state.emailError.isNotEmpty ? state.emailError : null,
                         onChanged: _validateSignUpInputs,
                       ),
-                      const SizedBox(height: spaceBetweenLine16),
+                      const SizedBox(height: smallSpacing8),
                       const Text(
                         TextDoc.txtPassword,
                         style: TextStyle(
@@ -113,7 +111,6 @@ class _SignUpViewState extends State<SignUpView> {
                           color: AppColor.defaultFont,
                         ),
                       ),
-                      const SizedBox(height: smallSpacing8),
                       AppOutlinedTextField(
                         controller: _passwordController,
                         obscureText: true,
@@ -121,7 +118,7 @@ class _SignUpViewState extends State<SignUpView> {
                             state is SignUpValidateState && state.passwordError.isNotEmpty ? state.passwordError : null,
                         onChanged: _validateSignUpInputs,
                       ),
-                      const SizedBox(height: spaceBetweenLine16),
+                      const SizedBox(height: smallSpacing8),
                       const Text(
                         TextDoc.txtRetypePassword,
                         style: TextStyle(
@@ -130,7 +127,6 @@ class _SignUpViewState extends State<SignUpView> {
                           color: AppColor.defaultFont,
                         ),
                       ),
-                      const SizedBox(height: smallSpacing8),
                       AppOutlinedTextField(
                           controller: _retypePasswordController,
                           obscureText: true,
@@ -195,7 +191,7 @@ class _SignUpViewState extends State<SignUpView> {
                     );
                   },
                 ),
-                const SizedBox(height: spaceBetweenLine14),
+                const SizedBox(height: smallSpacing8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
