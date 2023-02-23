@@ -63,7 +63,7 @@ class _SignInViewState extends State<SignInView> {
                     color: AppColor.defaultFontContainer,
                   ),
                 ),
-                const SizedBox(height: spaceBetweenLine20),
+                const SizedBox(height: spaceBetweenLine16),
                 BlocBuilder<SignInBloc, SignInState>(
                   builder: (context, state) => Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -76,7 +76,6 @@ class _SignInViewState extends State<SignInView> {
                           color: AppColor.defaultFont,
                         ),
                       ),
-                      const SizedBox(height: smallSpacing8),
                       AppOutlinedTextField(
                         controller: _emailController,
                         textInputType: TextInputType.emailAddress,
@@ -84,7 +83,7 @@ class _SignInViewState extends State<SignInView> {
                             (state is SignInValidateState && state.emailError.isNotEmpty) ? state.emailError : null,
                         onChanged: _validateSignInInputs,
                       ),
-                      const SizedBox(height: spaceBetweenLine16),
+                      const SizedBox(height: smallSpacing8),
                       const Text(
                         TextDoc.txtPassword,
                         style: TextStyle(
@@ -93,7 +92,6 @@ class _SignInViewState extends State<SignInView> {
                           color: AppColor.defaultFont,
                         ),
                       ),
-                      const SizedBox(height: smallSpacing8),
                       AppOutlinedTextField(
                         controller: _passwordController,
                         obscureText: true,
@@ -134,7 +132,7 @@ class _SignInViewState extends State<SignInView> {
                       )),
                   text: TextDoc.txtForgotPassword,
                 ),
-                const SizedBox(height: spaceBetweenLine16),
+                const SizedBox(height: smallSpacing8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

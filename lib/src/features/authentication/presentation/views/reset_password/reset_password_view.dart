@@ -53,12 +53,12 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                 const Text(
                   TextDoc.txtResetPasswordIntroduction,
                   style: TextStyle(
-                    fontSize: headlineSmallSize,
-                    fontWeight: headlineSmallWeight,
+                    fontSize: titleLargeSize,
+                    fontWeight: titleLargeWeight,
                     color: AppColor.defaultFontContainer,
                   ),
                 ),
-                const SizedBox(height: spaceBetweenLine20),
+                const SizedBox(height: spaceBetweenLine16),
                 BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
                   builder: (context, state) => Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -71,7 +71,6 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                           color: AppColor.defaultFont,
                         ),
                       ),
-                      const SizedBox(height: smallSpacing8),
                       AppOutlinedTextField(
                         controller: _emailController,
                         textInputType: TextInputType.emailAddress,

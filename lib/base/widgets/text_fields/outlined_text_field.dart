@@ -44,9 +44,9 @@ class _AppOutlinedTextFieldState extends State<AppOutlinedTextField> {
         keyboardType: widget.textInputType,
         onChanged: widget.onChanged,
         style: const TextStyle(
-          color: AppColor.defaultFont,
           fontSize: bodyLargeSize,
           fontWeight: bodyLargeWeight,
+          color: AppColor.defaultFont,
         ),
         decoration: InputDecoration(
           labelText: widget.labelText,
@@ -56,10 +56,13 @@ class _AppOutlinedTextFieldState extends State<AppOutlinedTextField> {
             fontWeight: bodyLargeWeight,
           ),
           floatingLabelStyle: TextStyle(
-            color: widget.errorText == null ? AppColor.mainColor1 : AppColor.error,
+            color: widget.errorText == null ? AppColor.mainColor2 : AppColor.error,
           ),
           errorText: widget.errorText,
+          errorMaxLines: 2,
           errorStyle: const TextStyle(
+            fontSize: bodySmallSize,
+            fontWeight: bodySmallWeight,
             color: AppColor.error,
           ),
           icon: widget.icon == null
@@ -76,7 +79,7 @@ class _AppOutlinedTextFieldState extends State<AppOutlinedTextField> {
                   size: 24,
                 ),
           suffixIconColor: widget.suffixIcon == null ? null : AppColor.defaultFont,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           enabledBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(textFieldRadius)),
             borderSide: BorderSide(
