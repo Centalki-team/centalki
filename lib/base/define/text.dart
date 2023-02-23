@@ -28,13 +28,13 @@ class TextDoc {
   static const txtTermsAccept = 'I accept';
   static const txtSignInIntroduction = 'Sign in to practice your English speaking skill';
   static const txtSignUpIntroduction = 'Sign up to discover Centalki';
-  static const txtForgotPasswordIntroduction = 'Enter your email below';
-  static const txtForgotPasswordDescription = 'We\'ll send you a link to reset your password';
+  static const txtResetPasswordIntroduction = 'Enter the email address you used for Centalki';
+  static const txtResetPasswordDescription = 'We\'ll send you a link to reset your password';
   // UI elements
   static const txtSignIn = 'Sign In';
   static const txtSignUp = 'Sign Up';
   static const txtResetPassword = 'Reset Password';
-  static const txtReturnSignIn = 'Return Sign In';
+  static const txtReturnSignIn = 'Return to Sign In';
   static const txtForgotPassword = 'Forgot Password?';
   static const txtTerms = 'Terms & Conditions';
 
