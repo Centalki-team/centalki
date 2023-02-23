@@ -27,7 +27,7 @@ class TextDoc {
   static const txtHaveAnAccount = 'Have an account?';
   static const txtTermsAccept = 'I accept';
   static const txtSignInIntroduction = 'Sign in to practice your English speaking skill';
-  static const txtSignUpIntroduction = 'Create new account';
+  static const txtSignUpIntroduction = 'Sign up to discover Centalki';
   static const txtForgotPasswordIntroduction = 'Enter your email below';
   static const txtForgotPasswordDescription = 'We\'ll send you a link to reset your password';
   // UI elements

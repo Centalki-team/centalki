@@ -76,6 +76,7 @@ class _AppOutlinedTextFieldState extends State<AppOutlinedTextField> {
                   size: 24,
                 ),
           suffixIconColor: widget.suffixIcon == null ? null : AppColor.defaultFont,
+          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           enabledBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(textFieldRadius)),
             borderSide: BorderSide(

@@ -45,6 +45,7 @@ class _SignUpViewState extends State<SignUpView> {
                 content: Text(state.message),
               ),
             );
+            _validateSignUpInputs('');
           }
         },
         child: Scaffold(
@@ -53,64 +54,96 @@ class _SignUpViewState extends State<SignUpView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const SizedBox(height: spaceBetweenLine16),
                 SizedBox(
-                  height: 220,
+                  height: 280,
                   child: Assets.illustration.signUp.svg(),
                 ),
-                const SizedBox(height: spaceBetweenLine20),
                 const Text(
                   TextDoc.txtSignUpIntroduction,
+                  textAlign: TextAlign.left,
                   style: TextStyle(
                     fontSize: headlineSmallSize,
                     fontWeight: headlineSmallWeight,
                     color: AppColor.defaultFontContainer,
                   ),
                 ),
-                const SizedBox(height: spaceBetweenLine18),
+                const SizedBox(height: spaceBetweenLine20),
                 BlocBuilder<SignUpBloc, SignUpState>(
                   builder: (context, state) => Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
+                      const Text(
+                        TextDoc.txtFullname,
+                        style: TextStyle(
+                          fontSize: titleMediumSize,
+                          fontWeight: titleMediumWeight,
+                          color: AppColor.defaultFont,
+                        ),
+                      ),
+                      const SizedBox(height: smallSpacing8),
                       AppOutlinedTextField(
                         controller: _nameController,
-                        labelText: TextDoc.txtFullname,
                         errorText:
                             state is SignUpValidateState && state.fullnameError.isNotEmpty ? state.fullnameError : null,
                         onChanged: _validateSignUpInputs,
                       ),
-                      const SizedBox(height: spaceBetweenLine12),
+                      const SizedBox(height: spaceBetweenLine16),
+                      const Text(
+                        TextDoc.txtEmail,
+                        style: TextStyle(
+                          fontSize: titleMediumSize,
+                          fontWeight: titleMediumWeight,
+                          color: AppColor.defaultFont,
+                        ),
+                      ),
+                      const SizedBox(height: smallSpacing8),
                       AppOutlinedTextField(
                         controller: _emailController,
-                        labelText: TextDoc.txtEmail,
                         textInputType: TextInputType.emailAddress,
                         errorText:
                             state is SignUpValidateState && state.emailError.isNotEmpty ? state.emailError : null,
                         onChanged: _validateSignUpInputs,
                       ),
-                      const SizedBox(height: spaceBetweenLine12),
+                      const SizedBox(height: spaceBetweenLine16),
+                      const Text(
+                        TextDoc.txtPassword,
+                        style: TextStyle(
+                          fontSize: titleMediumSize,
+                          fontWeight: titleMediumWeight,
+                          color: AppColor.defaultFont,
+                        ),
+                      ),
+                      const SizedBox(height: smallSpacing8),
                       AppOutlinedTextField(
                         controller: _passwordController,
-                        labelText: TextDoc.txtPassword,
                         obscureText: true,
                         errorText:
                             state is SignUpValidateState && state.passwordError.isNotEmpty ? state.passwordError : null,
                         onChanged: _validateSignUpInputs,
                       ),
-                      const SizedBox(height: spaceBetweenLine12),
+                      const SizedBox(height: spaceBetweenLine16),
+                      const Text(
+                        TextDoc.txtRetypePassword,
+                        style: TextStyle(
+                          fontSize: titleMediumSize,
+                          fontWeight: titleMediumWeight,
+                          color: AppColor.defaultFont,
+                        ),
+                      ),
+                      const SizedBox(height: smallSpacing8),
                       AppOutlinedTextField(
                           controller: _retypePasswordController,
-                          labelText: TextDoc.txtRetypePassword,
                           obscureText: true,
                           errorText: state is SignUpValidateState && state.retypePasswordError.isNotEmpty
                               ? state.retypePasswordError
                               : null,
                           onChanged: _validateSignUpInputs),
-                      const SizedBox(height: spaceBetweenLine14),
+                      const SizedBox(height: smallSpacing8),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Checkbox(
-                            activeColor: AppColor.mainColor1,
+                            activeColor: AppColor.mainColor2,
                             value: _termsAccepted,
                             onChanged: (value) {
                               setState(() {
@@ -122,25 +155,26 @@ class _SignUpViewState extends State<SignUpView> {
                           ),
                           const Text(
                             TextDoc.txtTermsAccept,
-                            style: TextStyle(fontSize: 14),
-                          ),
+                            style: TextStyle(
+                              fontSize: bodyMediumSize,
+                              fontWeight: bodyMediumWeight,
+                              color: AppColor.defaultFont,
+                            ),                          ),
                           AppTextButton(
                             text: TextDoc.txtTerms,
-                            onPressed: () {
-                              Navigator.push(
+                            onPressed: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => const TermsAndConditions(),
                                 ),
-                              );
-                            },
+                              ),
                           )
                         ],
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(height: spaceBetweenLine14),
+                const SizedBox(height: spaceBetweenLine16),
                 BlocBuilder<SignUpBloc, SignUpState>(
                   builder: (context, state) {
                     if (state is SignUpLoadingState) {
@@ -166,20 +200,19 @@ class _SignUpViewState extends State<SignUpView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text(TextDoc.txtHaveAnAccount),
-                    const SizedBox(width: 4),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text(
-                        TextDoc.txtSignIn,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: AppColor.mainColor1,
-                        ),
+                    const Text(
+                      TextDoc.txtHaveAnAccount,
+                      style: TextStyle(
+                        fontSize: bodyMediumSize,
+                        fontWeight: bodyMediumWeight,
+                        color: AppColor.defaultFont,
                       ),
                     ),
+                    const SizedBox(width: smallSpacing4),
+                    AppTextButton(
+                      text: TextDoc.txtSignIn,
+                      onPressed: () => Navigator.pop(context),
+                    )
                   ],
                 ),
               ],

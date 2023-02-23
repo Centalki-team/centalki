@@ -40,10 +40,7 @@ class _SignInViewState extends State<SignInView> {
                 content: Text(state.message),
               ),
             );
-            context.read<SignInBloc>().add(SignInValidateEvent(
-                  email: _emailController.text,
-                  password: _passwordController.text,
-                ));
+            _validateSignInInputs('');
           }
         },
         listenWhen: (previous, current) => previous != current,
@@ -59,12 +56,12 @@ class _SignInViewState extends State<SignInView> {
                 ),
                 const Text(
                   TextDoc.txtSignInIntroduction,
+                  textAlign: TextAlign.left,
                   style: TextStyle(
                     fontSize: titleLargeSize,
                     fontWeight: titleLargeWeight,
                     color: AppColor.defaultFontContainer,
                   ),
-                  textAlign: TextAlign.left,
                 ),
                 const SizedBox(height: spaceBetweenLine20),
                 BlocBuilder<SignInBloc, SignInState>(
