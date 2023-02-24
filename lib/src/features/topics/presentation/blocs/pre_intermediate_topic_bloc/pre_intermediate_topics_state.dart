@@ -15,3 +15,11 @@ class PreIntermediateTopicsLoadDoneState extends PreIntermediateTopicsState {
 
   final TopicsListEntity topics;
 }
+
+class PreIntermediateTopicsErrorState extends PreIntermediateTopicsState {
+  const PreIntermediateTopicsErrorState({
+    required this.exception,
+  });
+
+  final AppException exception;
+}

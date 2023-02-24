@@ -54,6 +54,7 @@ dependencies:
   flutter_svg: ^1.0.3
   flutter_svg_provider: ^1.0.3
   jitsi_meet: ^4.0.0
+  get_it: ^7.2.0
   
 dependency_overrides:
   permission_handler: "any"
