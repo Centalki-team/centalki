@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../base/define/colors.dart';
+import '../../../../../../base/define/text.dart';
 import '../../../../../../base/widgets/internal_page.dart';
 import '../../blocs/topic_level_bloc/topic_level_bloc.dart';
 import '../intermediate_topics/intermediate_topic_page.dart';
@@ -53,23 +54,23 @@ class _SelectTopicLevelViewState extends State<SelectTopicLevelView> with Single
           onTap: (index) {
             context.read<TopicLevelBloc>().add(TopicLevelChangeTabEvent(desTab: index));
           },
-          tabs: [
+          tabs: const [
             Tab(
               child: Text(
-                'Pre-Intermediate',
-                style: TextStyle(color: colorScheme.primary),
+                TextDoc.txtPreIntermediate,
+                style: TextStyle(color: AppColor.mainColor1),
               ),
             ),
             Tab(
               child: Text(
-                'Intermediate',
-                style: TextStyle(color: colorScheme.primary),
+                TextDoc.txtIntermediate,
+                style: TextStyle(color: AppColor.mainColor1),
               ),
             ),
             Tab(
               child: Text(
-                'Upper-Intermediate',
-                style: TextStyle(color: colorScheme.primary),
+                TextDoc.txtUpperIntermediate,
+                style: TextStyle(color: AppColor.mainColor1),
               ),
             ),
           ],

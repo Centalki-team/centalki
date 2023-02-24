@@ -239,8 +239,8 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                                               gender));
                                     },
                                     style: ElevatedButton.styleFrom(
-                                      backgroundColor: secondary,
-                                      foregroundColor: defaultFont,
+                                      backgroundColor: AppColor.secondary,
+                                      foregroundColor: AppColor.defaultFont,
                                       minimumSize: const Size.fromHeight(48),
                                     ),
                                     child: const Text(TextDoc.txtSaveChanges))

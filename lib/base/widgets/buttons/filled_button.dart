@@ -24,40 +24,42 @@ class AppFilledButton extends StatefulWidget {
 class _AppFilledButtonState extends State<AppFilledButton> {
   @override
   Widget build(BuildContext context) => widget.icon == null
-      ? ElevatedButton(
-          onPressed: widget.onPressed == null ? null : widget.onPressed!,
-          style: ElevatedButton.styleFrom(
-            backgroundColor: colorScheme.primary,
-            foregroundColor: colorScheme.onPrimary,
-            textStyle: const TextStyle(
-              fontSize: labelLargeSize,
-              fontWeight: labelLargeWeight,
-            ),
+      ? FilledButton(
+          onPressed: widget.onPressed,
+          style: FilledButton.styleFrom(
+            backgroundColor: AppColor.mainColor2,
             elevation: 0.0,
-            shadowColor: colorScheme.shadow,
+            shadowColor: AppColor.shadow,
             minimumSize: widget.minimumSize,
           ),
           child: Text(
             widget.text,
+            style: const TextStyle(
+                fontFamily: 'Dongle',
+                fontSize: labelLargeSize,
+                fontWeight: labelLargeWeight,
+                color: AppColor.defaultFont
+            ),
           ),
         )
       : ElevatedButton.icon(
-          onPressed: widget.onPressed == null ? null : widget.onPressed!,
+          onPressed: widget.onPressed,
           style: ElevatedButton.styleFrom(
-            backgroundColor: colorScheme.primary,
-            foregroundColor: colorScheme.onPrimary,
+            backgroundColor: AppColor.white,
+            foregroundColor: AppColor.defaultFont,
             textStyle: const TextStyle(
+              fontFamily: 'Dongle',
               fontSize: labelLargeSize,
               fontWeight: labelLargeWeight,
             ),
             elevation: 0.0,
-            shadowColor: colorScheme.shadow,
+            shadowColor: AppColor.shadow,
             minimumSize: widget.minimumSize,
           ),
           icon: Icon(
             widget.icon!,
             size: iconButtonSize,
-            color: colorScheme.onPrimary,
+            color: AppColor.defaultFont,
           ),
           label: Text(
             widget.text,

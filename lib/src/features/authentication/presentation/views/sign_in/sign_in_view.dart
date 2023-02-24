@@ -4,12 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../base/define/colors.dart';
 import '../../../../../../base/define/dimensions.dart';
+import '../../../../../../base/define/size.dart';
 import '../../../../../../base/define/text.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/text_fields/text_field.dart';
 import '../../../../../../gen/assets.gen.dart';
 import '../../blocs/sign_in_bloc/sign_in_bloc.dart';
-import '../forgot_password/forgot_password_page.dart';
+import '../reset_password/reset_password_page.dart';
 import '../sign_up/sign_up_page.dart';
 
 class SignInView extends StatefulWidget {
@@ -34,9 +35,12 @@ class _SignInViewState extends State<SignInView> {
   Widget build(BuildContext context) => BlocListener<SignInBloc, SignInState>(
         listener: (context, state) {
           if (state is SignInLoadErrorState) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text(state.message),
-            ));
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
+              ),
+            );
+            _validateSignInInputs('');
           }
         },
         listenWhen: (previous, current) => previous != current,
@@ -46,52 +50,52 @@ class _SignInViewState extends State<SignInView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 16),
-                  child: Image.asset(
-                    Assets.illustration.login.path,
-                    width: 200,
-                    height: 200,
-                  ),
+                SizedBox(
+                  height: 280,
+                  child: Assets.illustration.signIn.svg(),
                 ),
-                const SizedBox(
-                  height: spaceBetweenLine12,
-                ),
-                Text(
+                const Text(
                   TextDoc.txtSignInIntroduction,
-                  style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold,
-                    color: colorScheme.onPrimaryContainer,
-                  ),
                   textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: titleLargeSize,
+                    fontWeight: titleLargeWeight,
+                    color: AppColor.defaultFontContainer,
+                  ),
                 ),
-                const SizedBox(
-                  height: spaceBetweenLine20,
-                ),
+                const SizedBox(height: spaceBetweenLine16),
                 BlocBuilder<SignInBloc, SignInState>(
                   builder: (context, state) => Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
+                      const Text(
+                        TextDoc.txtEmail,
+                        style: TextStyle(
+                          fontSize: titleMediumSize,
+                          fontWeight: titleMediumWeight,
+                          color: AppColor.defaultFont,
+                        ),
+                      ),
                       AppOutlinedTextField(
                         controller: _emailController,
                         textInputType: TextInputType.emailAddress,
-                        labelText: TextDoc.txtEmail,
-                        errorText: (state is SignInValidateState &&
-                                state.emailError.isNotEmpty)
-                            ? state.emailError
-                            : null,
+                        errorText:
+                            (state is SignInValidateState && state.emailError.isNotEmpty) ? state.emailError : null,
                         onChanged: _validateSignInInputs,
                       ),
-                      const SizedBox(
-                        height: spaceBetweenLine12,
+                      const SizedBox(height: smallSpacing8),
+                      const Text(
+                        TextDoc.txtPassword,
+                        style: TextStyle(
+                          fontSize: titleMediumSize,
+                          fontWeight: titleMediumWeight,
+                          color: AppColor.defaultFont,
+                        ),
                       ),
                       AppOutlinedTextField(
                         controller: _passwordController,
                         obscureText: true,
-                        labelText: TextDoc.txtPassword,
-                        errorText: (state is SignInValidateState &&
-                                state.passwordError.isNotEmpty)
+                        errorText: (state is SignInValidateState && state.passwordError.isNotEmpty)
                             ? state.passwordError
                             : null,
                         onChanged: _validateSignInInputs,
@@ -99,23 +103,7 @@ class _SignInViewState extends State<SignInView> {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: smallSpacing8,
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: AppTextButton(
-                    onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const ForgotPasswordPage(),
-                        )),
-                    text: TextDoc.txtForgotPassword,
-                  ),
-                ),
-                const SizedBox(
-                  height: spaceBetweenLine12,
-                ),
+                const SizedBox(height: spaceBetweenLine24),
                 BlocBuilder<SignInBloc, SignInState>(
                   builder: (context, state) {
                     if (state is SignInLoadingState) {
@@ -125,25 +113,38 @@ class _SignInViewState extends State<SignInView> {
                     }
                     return AppFilledButton(
                       text: TextDoc.txtSignIn,
-                      onPressed:
-                          (state is SignInValidateState && !state.forceDisabled)
-                              ? () => context.read<SignInBloc>().add(
-                                  SignInSendEvent(
-                                      email: _emailController.text,
-                                      password: _passwordController.text))
-                              : null,
+                      onPressed: (state is SignInValidateState && !state.forceDisabled)
+                          ? () => context.read<SignInBloc>().add(SignInSendEvent(
+                                email: _emailController.text,
+                                password: _passwordController.text,
+                              ))
+                          : null,
                       minimumSize: const Size.fromHeight(48),
                     );
                   },
                 ),
-                const SizedBox(
-                  height: bigSpacing20,
+                const SizedBox(height: smallSpacing8),
+                AppTextButton(
+                  onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ResetPasswordPage(),
+                      )),
+                  text: TextDoc.txtForgotPassword,
                 ),
+                const SizedBox(height: smallSpacing8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text(TextDoc.txtHaveNoAccount),
+                    const Text(
+                      TextDoc.txtHaveNoAccount,
+                      style: TextStyle(
+                        fontSize: bodyMediumSize,
+                        fontWeight: bodyMediumWeight,
+                        color: AppColor.defaultFont,
+                      ),
+                    ),
                     AppTextButton(
                       onPressed: () => Navigator.push(
                           context,

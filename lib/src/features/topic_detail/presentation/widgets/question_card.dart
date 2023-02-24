@@ -17,7 +17,7 @@ class QuestionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
       padding: const EdgeInsets.all(8),
-      color: colorScheme.surface,
+      color: AppColor.white,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -25,17 +25,17 @@ class QuestionCard extends StatelessWidget {
             clipBehavior: Clip.hardEdge,
             width: 40,
             height: 40,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               shape: BoxShape.circle,
-              color: colorScheme.primaryContainer,
+              color: AppColor.container,
             ),
             alignment: Alignment.center,
             child: Text(
               '${index + 1}',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: titleMediumSize,
                 fontWeight: titleMediumWeight,
-                color: colorScheme.onPrimaryContainer,
+                color: AppColor.defaultFontContainer,
               ),
             ),
           ),
@@ -43,10 +43,10 @@ class QuestionCard extends StatelessWidget {
           Expanded(
             child: Text(
               questionContent,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: titleSmallSize,
                 fontWeight: titleSmallWeight,
-                color: colorScheme.onPrimaryContainer,
+                color: AppColor.defaultFontContainer,
               ),
             ),
           ),

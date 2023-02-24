@@ -1,8 +1,8 @@
 import 'dart:ui';
 
-import 'package:centalki/base/define/colors.dart';
 import 'package:flutter/material.dart';
 
+import '../../define/colors.dart';
 import '../../define/common_txt_style.dart';
 import '../common_assets.dart';
 
@@ -59,7 +59,7 @@ class _BottomIndicatorBarState extends State<BottomIndicatorBar> {
       height: BAR_HEIGHT + MediaQuery.of(context).viewPadding.bottom,
       width: width,
       decoration: const BoxDecoration(
-        color: AppColor.bgBottomNav,
+        color: AppColor.background,
         // boxShadow: widget.shadow
         //     ? [
         //         const BoxShadow(color: Colors.black12, blurRadius: 10),
@@ -120,7 +120,7 @@ class _BottomIndicatorBarState extends State<BottomIndicatorBar> {
             ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16.0),
-              color: isSelect ? colorScheme.secondaryContainer : null,
+              color: isSelect ? AppColor.mainColor1Container : null,
             ),
             child: AssetCommon(
               name: item.iconName,
@@ -174,7 +174,7 @@ class BottomIndicatorNavigationBarItem {
   BottomIndicatorNavigationBarItem({
     required this.title,
     required this.iconName,
-    this.backgroundColor = AppColor.bgBottomNav,
+    this.backgroundColor = AppColor.background,
     //required this.onTap,
   });
 }

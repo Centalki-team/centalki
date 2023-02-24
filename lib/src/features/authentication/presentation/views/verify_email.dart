@@ -22,7 +22,7 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
               'Please verify your email\nto activate your account',
               style: TextStyle(
                 fontSize: 22,
-                color: colorScheme.onPrimaryContainer,
+                color: AppColor.defaultFontContainer,
               ),
             ),
             const SizedBox(height: 16),

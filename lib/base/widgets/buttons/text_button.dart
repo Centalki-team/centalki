@@ -23,13 +23,13 @@ class AppTextButton extends StatefulWidget {
 
 class _AppTextButtonState extends State<AppTextButton> {
   @override
-  Widget build(BuildContext context) {
-    return widget.icon == null
+  Widget build(BuildContext context) => widget.icon == null
         ? TextButton(
-            onPressed: widget.onPressed == null ? null : widget.onPressed!,
+            onPressed: widget.onPressed,
             style: ElevatedButton.styleFrom(
-              foregroundColor: colorScheme.primary,
+              foregroundColor: AppColor.white,
               textStyle: const TextStyle(
+                fontFamily: 'Dongle',
                 fontSize: labelLargeSize,
                 fontWeight: labelLargeWeight,
               ),
@@ -38,13 +38,20 @@ class _AppTextButtonState extends State<AppTextButton> {
             ),
             child: Text(
               widget.text,
+              style: const TextStyle(
+                fontFamily: 'Dongle',
+                fontSize: labelLargeSize,
+                fontWeight: labelLargeWeight,
+                color: AppColor.mainColor1,
+              ),
             ),
           )
         : TextButton.icon(
-            onPressed: widget.onPressed == null ? null : widget.onPressed!,
+            onPressed: widget.onPressed,
             style: ElevatedButton.styleFrom(
-              foregroundColor: colorScheme.primary,
+              foregroundColor: AppColor.white,
               textStyle: const TextStyle(
+                fontFamily: 'Dongle',
                 fontSize: labelLargeSize,
                 fontWeight: labelLargeWeight,
               ),
@@ -54,11 +61,16 @@ class _AppTextButtonState extends State<AppTextButton> {
             icon: Icon(
               widget.icon!,
               size: iconButtonSize,
-              color: colorScheme.primary,
+              color: AppColor.mainColor1,
             ),
             label: Text(
               widget.text,
+              style: const TextStyle(
+                fontFamily: 'Dongle',
+                fontSize: labelLargeSize,
+                fontWeight: labelLargeWeight,
+                color: AppColor.mainColor1,
+              ),
             ),
           );
-  }
 }

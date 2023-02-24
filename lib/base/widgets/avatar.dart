@@ -29,7 +29,7 @@ class Avatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => CircleAvatar(
-        backgroundColor: secondary,
+        backgroundColor: AppColor.secondary,
         maxRadius: maxRadius,
         child: CachedNetworkImage(
           fit: BoxFit.fill,

@@ -1,12 +1,11 @@
-import 'package:centalki/src/features/authentication/presentation/views/verify_email.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'firebase_options.dart';
 import 'src/features/authentication/presentation/views/sign_in/sign_in_page.dart';
+import 'src/features/authentication/presentation/views/verify_email.dart';
 import 'src/features/home/presentation/views/home_page.dart';
-import 'src/features/settings/presentation/views/settings_view.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +22,7 @@ void main(List<String> args) async {
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
       useMaterial3: true,
+      fontFamily: 'Dongle',
     ),
     home: const MyWidget(),
   ));

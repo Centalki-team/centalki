@@ -20,21 +20,18 @@ class WalletView extends StatelessWidget {
                 builder: (context) => AlertDialog(
                       icon: const Icon(
                         Icons.error_outline,
-                        color: error,
+                        color: AppColor.error,
                       ),
                       title: const Text(TextDoc.txtLoadFailed),
                       content: Text(state.message),
                       actions: [
-                        TextButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: const Text(TextDoc.txtOk)),
+                        TextButton(onPressed: () => Navigator.pop(context), child: const Text(TextDoc.txtOk)),
                       ],
                     ));
           }
         },
         builder: (context, state) {
-          final currencyFormat =
-              NumberFormat.currency(locale: 'vi_VN', symbol: 'VND');
+          final currencyFormat = NumberFormat.currency(locale: 'vi_VN', symbol: 'VND');
 
           if (state is WalletLoadDoneState) {
             return Scaffold(
@@ -48,13 +45,11 @@ class WalletView extends StatelessWidget {
                         padding: const EdgeInsets.only(right: 8.0),
                         child: IconButton(
                           onPressed: () {
-                            context
-                                .read<WalletBloc>()
-                                .add(const WalletGetMoreEvent());
+                            context.read<WalletBloc>().add(const WalletGetMoreEvent());
                           },
                           icon: const Icon(
                             Icons.add,
-                            color: mainColor1,
+                            color: AppColor.mainColor1,
                           ),
                         ),
                       ),
@@ -63,69 +58,63 @@ class WalletView extends StatelessWidget {
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
                       childCount: 1,
-                          (_, index) =>
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: screenAutoPadding16, vertical: 24),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Card(
-                                    color: mainColor2Surface,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment
-                                          .center,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 8.0,
-                                              horizontal: screenAutoPadding16),
-                                          child: Column(
-                                            children: [
-                                              const Text(
-                                                TextDoc.txtBalance,
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: defaultFont,
-                                                    fontSize: 18),
-                                              ),
-                                              Text(
-                                                currencyFormat.format(state.balanceMoney),
-                                                style: const TextStyle(
-                                                    color: support,
-                                                    fontSize: 18,
-                                                    fontWeight: FontWeight
-                                                        .bold),
-                                              ),
-                                              const Text(TextDoc.txtOr),
-                                              Text(
-                                                '${state.balanceSessions} sessions',
-                                                style: const TextStyle(
-                                                    color: support,
-                                                    fontSize: 18,
-                                                    fontWeight: FontWeight
-                                                        .bold),
-                                              ),
-                                              Text(
-                                                '${TextDoc
-                                                    .txtEachSession} ${currencyFormat
-                                                    .format(state.costPerSession)}${TextDoc
-                                                    .txt30Minutes}',
-                                                style: const TextStyle(
-                                                    fontStyle: FontStyle
-                                                        .italic),
-                                              ),
-                                            ],
+                      (_, index) => Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: screenAutoPadding16, vertical: 24),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Card(
+                                color: AppColor.mainColor2Surface,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 8.0,
+                                        horizontal: screenAutoPadding16,
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          const Text(
+                                            TextDoc.txtBalance,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: AppColor.defaultFont,
+                                              fontSize: 18,
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                          Text(
+                                            currencyFormat.format(state.balanceMoney),
+                                            style: const TextStyle(
+                                              color: AppColor.support,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          const Text(TextDoc.txtOr),
+                                          Text(
+                                            '${state.balanceSessions} sessions',
+                                            style: const TextStyle(
+                                              color: AppColor.support,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          Text(
+                                            '${TextDoc.txtEachSession} ${currencyFormat.format(state.costPerSession)}${TextDoc.txt30Minutes}',
+                                            style: const TextStyle(fontStyle: FontStyle.italic),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(
-                                    height: spaceBetweenLine20,
-                                  ),
-                                  /*const Text(
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(
+                                height: spaceBetweenLine20,
+                              ),
+                              /*const Text(
                                     TextDoc.txtTransactions,
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
@@ -192,10 +181,10 @@ class WalletView extends StatelessWidget {
                                           ),
                                         ),
                                   )*/
-                                ],
-                              ),
-                            ),
+                            ],
                           ),
+                        ),
+                      ),
                     ),
                   ),
                 ],

@@ -31,9 +31,11 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     var signUpButtonDisabled = false;
 
     if (event.fullname.isEmpty) {
-      fullnameError = 'Name cannot be empty';
+      fullnameError = TextDoc.txtFullnameEmpty;
+    } else if (event.fullname.replaceAll(' ', '').length < 3) {
+      fullnameError = TextDoc.txtFullnameTooShort;
     } else if (event.fullname.length > 50) {
-      fullnameError = 'Name cannot exceed 50 characters';
+      fullnameError = TextDoc.txtFullnameTooLong;
     }
 
     if (event.email.isEmpty) {
@@ -45,17 +47,19 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     if (event.password.isEmpty) {
       passwordError = TextDoc.txtPasswordEmpty;
     } else if (event.password.length < 6) {
-      passwordError = 'Password must contain at least 6 characters';
+      passwordError = TextDoc.txtPasswordTooShort;
+    } else if (event.password.length > 100) {
+      passwordError = TextDoc.txtPasswordTooLong;
     }
 
     if (event.retypePassword.isEmpty) {
-      retypePasswordError = 'Please enter your password again';
+      retypePasswordError = TextDoc.txtRetypePasswordEmpty;
     } else if (event.retypePassword != event.password) {
-      retypePasswordError = 'Retyped password mismatched';
+      retypePasswordError = TextDoc.txtRetypePasswordNotMatch;
     }
 
     if (event.isTermsAccepted == false) {
-      termsError = 'Please agree with our Terms & Conditions';
+      termsError = TextDoc.txtTermsNotAgreed;
     }
 
     signUpButtonDisabled = fullnameError.isNotEmpty ||
@@ -90,12 +94,10 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'weak-password':
-          emit(const SignUpErrorState(
-              message: 'The password provided is too weak.'));
+          emit(const SignUpErrorState(message: TextDoc.txtWeakPassword));
           break;
         case 'email-already-in-use':
-          emit(const SignUpErrorState(
-              message: 'Email is used by another account.'));
+          emit(const SignUpErrorState(message: TextDoc.txtEmailUsed));
           break;
         default:
           break;
