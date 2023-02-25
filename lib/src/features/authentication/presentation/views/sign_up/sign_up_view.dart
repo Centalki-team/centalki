@@ -155,15 +155,16 @@ class _SignUpViewState extends State<SignUpView> {
                               fontSize: bodyMediumSize,
                               fontWeight: bodyMediumWeight,
                               color: AppColor.defaultFont,
-                            ),                          ),
+                            ),
+                          ),
                           AppTextButton(
                             text: TextDoc.txtTerms,
                             onPressed: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const TermsAndConditions(),
-                                ),
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const TermsAndConditions(),
                               ),
+                            ),
                           )
                         ],
                       ),
