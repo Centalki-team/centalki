@@ -58,6 +58,10 @@ class $AssetsIconGen {
   SvgGenImage get icRatingStarSelected =>
       const SvgGenImage('assets/icon/ic_rating_star_selected.svg');
 
+  /// File path: assets/icon/ic_search_header.svg
+  SvgGenImage get icSearchHeader =>
+      const SvgGenImage('assets/icon/ic_search_header.svg');
+
   /// File path: assets/icon/ic_send.svg
   SvgGenImage get icSend => const SvgGenImage('assets/icon/ic_send.svg');
 
@@ -96,6 +100,7 @@ class $AssetsIconGen {
         icPaintPalette,
         icRatingStar,
         icRatingStarSelected,
+        icSearchHeader,
         icSend,
         icWarning,
         list,
@@ -280,7 +285,7 @@ class SvgGenImage {
       // colorFilter: colorFilter,
       color: color,
       colorBlendMode: colorBlendMode,
-      clipBehavior: clipBehavior ?? Clip.none,
+      // clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,
     );
   }
