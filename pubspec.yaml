@@ -55,6 +55,7 @@ dependencies:
   flutter_svg_provider: ^1.0.3
   jitsi_meet: ^4.0.0
   get_it: ^7.2.0
+  google_sign_in: '^4.5.1'
   
 dependency_overrides:
   permission_handler: "any"
