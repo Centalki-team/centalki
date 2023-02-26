@@ -16,42 +16,48 @@ class QuestionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-      padding: const EdgeInsets.all(8),
-      color: AppColor.white,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            clipBehavior: Clip.hardEdge,
-            width: 40,
-            height: 40,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppColor.container,
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16.0),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.15),
+              offset: const Offset(1, 1),
+              blurRadius: 4.0,
+              spreadRadius: 0,
             ),
-            alignment: Alignment.center,
-            child: Text(
-              '${index + 1}',
-              style: const TextStyle(
-                fontSize: titleMediumSize,
-                fontWeight: titleMediumWeight,
-                color: AppColor.defaultFontContainer,
+          ],
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: 40,
+              height: 35,
+              alignment: Alignment.center,
+              child: Text(
+                '${index + 1}.',
+                style: const TextStyle(
+                  fontSize: titleMediumSize,
+                  fontWeight: titleMediumWeight,
+                  color: AppColor.defaultFont,
+                ),
               ),
             ),
-          ),
-          const SizedBox(width: smallSpacing10),
-          Expanded(
-            child: Text(
-              questionContent,
-              style: const TextStyle(
-                fontSize: titleSmallSize,
-                fontWeight: titleSmallWeight,
-                color: AppColor.defaultFontContainer,
+            const SizedBox(width: smallSpacing10),
+            Expanded(
+              child: Text(
+                questionContent,
+                style: const TextStyle(
+                  fontSize: titleSmallSize,
+                  fontWeight: titleSmallWeight,
+                  color: AppColor.defaultFont,
+                ),
               ),
             ),
-          ),
-          const SizedBox(width: smallSpacing8),
-        ],
-      ),
-    );
+            const SizedBox(width: smallSpacing8),
+          ],
+        ),
+      );
 }

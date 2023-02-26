@@ -15,97 +15,106 @@ class TopicCard extends StatelessWidget {
   final TopicItemEntity item;
 
   @override
-  Widget build(BuildContext context) => Card(
-      elevation: 1,
-      clipBehavior: Clip.hardEdge,
-      surfaceTintColor: Colors.blue,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(24),
-      ),
-      child: Row(
-        children: [
-          Image.network(
-            item.image ?? '',
-            width: 128,
-            height: 128,
-            fit: BoxFit.cover,
-            errorBuilder: (context, error, stackTrace) => const SizedBox(
-              width: 128,
-              height: 128,
-              child: Icon(
-                Icons.error_outline_rounded,
-                size: 32,
-                color: Colors.red,
-              ),
-            ),
+  Widget build(BuildContext context) => GestureDetector(
+        onTap: () => Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => TopicDetailPage(topicId: item.topicId ?? ''),
           ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(8, 8, 16, 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    item.topicName ?? '',
-                    style: const TextStyle(
-                      fontSize: titleMediumSize,
-                      fontWeight: titleMediumWeight,
-                    ),
+        ),
+        child: Card(
+          elevation: 1,
+          clipBehavior: Clip.hardEdge,
+          surfaceTintColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Image.network(
+                item.image ?? '',
+                width: 150,
+                height: 120,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) => const SizedBox(
+                  width: 150,
+                  height: 120,
+                  child: Icon(
+                    Icons.error_outline_rounded,
+                    size: 32,
+                    color: Colors.red,
                   ),
-                  const SizedBox(height: smallSpacing6),
-                  Text(
-                    item.topicCategory ?? '',
-                    style: const TextStyle(
-                      fontSize: bodySmallSize,
-                      fontWeight: bodySmallWeight,
-                    ),
-                  ),
-                  const SizedBox(height: spaceBetweenLine12),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      TextButton(
-                        onPressed: () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => TopicDetailPage(topicId: item.topicId ?? ''),
-                          ),
-                        ),
-                        child: Row(
-                          children: const [
-                            Icon(
-                              Icons.featured_play_list_rounded,
-                              color: AppColor.mainColor1,
-                              size: 20,
-                            ),
-                            SizedBox(width: smallSpacing6),
-                            Text(
-                              'Detail',
-                              style: TextStyle(color: AppColor.mainColor1),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(width: spaceBetweenLine12),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                            backgroundColor: AppColor.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(32),
-                            )),
-                        onPressed: () {},
-                        child: const Text(
-                          'Talk',
-                          style: TextStyle(color: AppColor.defaultFont),
-                        ),
-                      ),
-                    ],
-                  )
-                ],
+                ),
               ),
-            ),
-          )
-        ],
-      ),
-    );
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        item.topicName ?? '',
+                        style: const TextStyle(
+                          fontSize: bodySmallSize,
+                          fontWeight: bodySmallWeight,
+                          color: AppColor.defaultFont,
+                        ),
+                      ),
+                      Text(
+                        item.topicCategory ?? '',
+                        style: const TextStyle(
+                          fontSize: titleMediumSize,
+                          fontWeight: titleMediumWeight,
+                        ),
+                      ),
+                      //const SizedBox(height: spaceBetweenLine12),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.end,
+                      //   crossAxisAlignment: CrossAxisAlignment.end,
+                      //   children: [
+                      //     TextButton(
+                      //       onPressed: () => Navigator.of(context).push(
+                      //         MaterialPageRoute(
+                      //           builder: (context) =>
+                      //               TopicDetailPage(topicId: item.topicId ?? ''),
+                      //         ),
+                      //       ),
+                      //       child: Row(
+                      //         children: const [
+                      //           Icon(
+                      //             Icons.featured_play_list_rounded,
+                      //             color: AppColor.mainColor1,
+                      //             size: 20,
+                      //           ),
+                      //           SizedBox(width: smallSpacing6),
+                      //           Text(
+                      //             'Detail',
+                      //             style: TextStyle(color: AppColor.mainColor1),
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     ),
+                      //     const SizedBox(width: spaceBetweenLine12),
+                      //     TextButton(
+                      //       style: TextButton.styleFrom(
+                      //           backgroundColor: AppColor.white,
+                      //           shape: RoundedRectangleBorder(
+                      //             borderRadius: BorderRadius.circular(32),
+                      //           )),
+                      //       onPressed: () {},
+                      //       child: const Text(
+                      //         'Talk',
+                      //         style: TextStyle(color: AppColor.defaultFont),
+                      //       ),
+                      //     ),
+                      //   ],
+                      // )
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      );
 }

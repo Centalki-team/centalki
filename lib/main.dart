@@ -7,7 +7,7 @@ import 'di/injection/injection.dart';
 import 'firebase_options.dart';
 import 'src/features/authentication/presentation/views/sign_in/sign_in_page.dart';
 import 'src/features/authentication/presentation/views/verify_email.dart';
-import 'src/features/home/presentation/views/home_page.dart';
+import 'src/features/home/presentation/views/home_view.dart';
 
 void main(List<String> args) async {
   await Injection.inject();
@@ -84,7 +84,7 @@ class _MyWidgetState extends State<MyWidget> {
       case "not_email_verified":
         return const VerifyEmailView();
       case "success":
-        return const HomePage();
+        return const HomeView();
       default:
         return const Center(
           child: Text("Splash screen here!"),
