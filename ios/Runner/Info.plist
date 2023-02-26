@@ -53,5 +53,7 @@
     <string>$(PRODUCT_NAME) needs access to your camera for meetings.</string>
     <key>NSMicrophoneUsageDescription</key>
     <string>$(PRODUCT_NAME) needs access to your microphone for meetings.</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 </dict>
 </plist>
