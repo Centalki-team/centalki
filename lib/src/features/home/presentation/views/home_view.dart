@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../base/define/app_text.dart';
+import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/common_txt_style.dart';
 import '../../../../../base/widgets/bottom_bar/custom_bottom_nav.dart';
-import '../../../../../base/widgets/internal_page.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../account/presentation/views/your_account/your_account_page.dart';
 import '../../../settings/presentation/views/settings_view.dart';
@@ -21,12 +20,14 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView>
     with SingleTickerProviderStateMixin {
+  late int currentIndex;
   late final TabController _tabController;
   final bottomNavList = <BottomIndicatorNavigationBarItem>[];
 
   @override
   void initState() {
     super.initState();
+    currentIndex = 0;
     _tabController = TabController(
       length: 3,
       initialIndex: 0,
@@ -42,82 +43,80 @@ class _HomeViewState extends State<HomeView>
   }
 
   @override
-  Widget build(BuildContext context) => BlocListener<HomeBloc, HomeState>(
-        listener: (context, state) {
-          if (state is HomeChangeTabState) {
-            _tabController.index = state.currentTab;
-          }
-        },
-        listenWhen: (previous, current) =>
-            previous is HomeChangeTabState &&
-            current is HomeChangeTabState &&
-            previous.currentTab != current.currentTab,
-        child: BlocBuilder<HomeBloc, HomeState>(
-          buildWhen: (previous, current) => current is HomeChangeTabState,
-          builder: (context, state) {
-            if (state is HomeChangeTabState) {
-              return Scaffold(
-                body: Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(
-                          20.0, MediaQuery.of(context).padding.top, 20.0, 0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            AppText.appName,
-                            style: CommonTxtStyle.t36XMedium,
-                          ),
-                          Image.asset(
-                            Assets.icon.notifications.path,
-                            width: 32,
-                            height: 32,
-                          ),
-                        ],
+  Widget build(BuildContext context) => Scaffold(
+        backgroundColor: const Color(0xFFF5F5F5),
+        body: Column(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).padding.top,
+            ),
+            Container(
+              height: 64.0,
+              padding: const EdgeInsets.only(
+                left: 16.0,
+                right: 4.0,
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      AppText.appName,
+                      style: CommonTxtStyle.t30Regular.apply(
+                        color: AppColor.defaultFont,
                       ),
                     ),
-                    Expanded(
-                      child: TabBarView(
-                        physics: const NeverScrollableScrollPhysics(),
-                        controller: _tabController,
-                        children: const [
-                          SelectTopicLevelPage(),
-                          YourAccountPage(),
-                          SettingsView(),
-                        ],
-                      ),
+                  ),
+                  const SizedBox(
+                    width: 24.0,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12.0,
                     ),
-                  ],
-                ),
-                bottomNavigationBar: BottomIndicatorBar(
-                  currentIndex: state.currentTab,
-                  onTap: (index) {
-                    context
-                        .read<HomeBloc>()
-                        .add(HomeChangeTabEvent(desTab: index));
-                  },
-                  items: [
-                    BottomIndicatorNavigationBarItem(
-                      iconName: Assets.icon.list.path,
-                      title: AppText.topic,
+                    child: Assets.icon.icSearchHeader.svg(),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12.0,
                     ),
-                    BottomIndicatorNavigationBarItem(
-                      iconName: Assets.icon.account.path,
-                      title: AppText.account,
-                    ),
-                    BottomIndicatorNavigationBarItem(
-                      iconName: Assets.icon.settings.path,
-                      title: AppText.settings,
-                    ),
-                  ],
-                ),
-              );
-            }
-            return const InternalPage(
-              title: 'HomePage',
-            );
+                    child: Assets.icon.icNotiHeader.svg(),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: TabBarView(
+                physics: const NeverScrollableScrollPhysics(),
+                controller: _tabController,
+                children: const [
+                  SelectTopicLevelView(),
+                  YourAccountPage(),
+                  SettingsView(),
+                ],
+              ),
+            ),
+          ],
+        ),
+        bottomNavigationBar: BottomIndicatorBar(
+          currentIndex: currentIndex,
+          onTap: (value) {
+            currentIndex = value;
+            _tabController.animateTo(value);
           },
+          items: [
+            BottomIndicatorNavigationBarItem(
+              iconName: Assets.icon.list.path,
+              title: AppText.topic,
+            ),
+            BottomIndicatorNavigationBarItem(
+              iconName: Assets.icon.account.path,
+              title: AppText.account,
+            ),
+            BottomIndicatorNavigationBarItem(
+              iconName: Assets.icon.settings.path,
+              title: AppText.settings,
+            ),
+          ],
         ),
       );
 }
