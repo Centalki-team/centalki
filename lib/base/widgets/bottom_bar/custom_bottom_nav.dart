@@ -19,7 +19,7 @@ class BottomIndicatorBar extends StatefulWidget {
     required this.onTap,
     required this.items,
     this.activeColor,
-    this.inactiveColor = const Color(0xFFACACAC),
+    this.inactiveColor = const Color(0xFFB0DFFF),
     this.shadow = true,
     this.currentIndex = 0,
   }) : super(key: key);
@@ -29,7 +29,7 @@ class BottomIndicatorBar extends StatefulWidget {
 }
 
 class _BottomIndicatorBarState extends State<BottomIndicatorBar> {
-  static const double BAR_HEIGHT = 65;
+  static const double BAR_HEIGHT = 80;
   static const double INDICATOR_HEIGHT = 2;
 
   List<BottomIndicatorNavigationBarItem> get items => widget.items;
@@ -59,7 +59,7 @@ class _BottomIndicatorBarState extends State<BottomIndicatorBar> {
       height: BAR_HEIGHT + MediaQuery.of(context).viewPadding.bottom,
       width: width,
       decoration: const BoxDecoration(
-        color: AppColor.background,
+        color: AppColor.mainColor1Surface,
         // boxShadow: widget.shadow
         //     ? [
         //         const BoxShadow(color: Colors.black12, blurRadius: 10),
@@ -114,13 +114,14 @@ class _BottomIndicatorBarState extends State<BottomIndicatorBar> {
       Column(
         children: [
           Container(
+            height: 32.0,
             padding: const EdgeInsets.symmetric(
               horizontal: 20.0,
               vertical: 4.0,
             ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16.0),
-              color: isSelect ? AppColor.mainColor1Container : null,
+              color: isSelect ? AppColor.mainColor2Surface : null,
             ),
             child: AssetCommon(
               name: item.iconName,
@@ -132,17 +133,17 @@ class _BottomIndicatorBarState extends State<BottomIndicatorBar> {
             ),
           ),
           const SizedBox(
-            height: 6,
+            height: 4,
           ),
           FittedBox(
             child: Text(
               item.title,
-              style: CommonTxtStyle.t12Medium.apply(
+              style: CommonTxtStyle.t20Regular.apply(
                 // color: isSelect
 
                 //     ? widget.activeColor ?? const Color(0xff0050B3)
                 //     : widget.inactiveColor,),
-                color: Colors.black,
+                color: AppColor.defaultFont,
               ),
               // maxLines: 1,
             ),
@@ -174,7 +175,7 @@ class BottomIndicatorNavigationBarItem {
   BottomIndicatorNavigationBarItem({
     required this.title,
     required this.iconName,
-    this.backgroundColor = AppColor.background,
+    this.backgroundColor = AppColor.mainColor1Surface,
     //required this.onTap,
   });
 }
