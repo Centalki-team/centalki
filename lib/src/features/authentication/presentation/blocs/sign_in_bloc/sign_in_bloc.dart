@@ -1,10 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../../../../base/define/text.dart';
 import '../../../../../../base/temp_dio/dio_client.dart';
+import '../../../../../../firebase_options.dart';
 
 part 'sign_in_event.dart';
 part 'sign_in_state.dart';
@@ -71,7 +73,9 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   void _onSignInWithGoogle(GoogleSignInEvent event, emit) async {
     emit(const SignInLoadingState());
     // Trigger the authentication flow
-    final googleUser = await GoogleSignIn().signIn();
+    final googleUser = await GoogleSignIn(
+            clientId: DefaultFirebaseOptions.currentPlatform.iosClientId)
+        .signIn();
 
     // Obtain the auth details from the request
     final googleAuth = await googleUser?.authentication;
@@ -84,31 +88,25 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     try {
       await FirebaseAuth.instance.signInWithCredential(credential);
       emit(const SignInLoadDoneState());
-    } on DioError catch (_) {}
+    } on DioError catch (_) {
+      emit(const SignInLoadDoneState());
+    }
   }
 
   void _onSignInWithFB(FacebookSignInEvent event, emit) async {
     emit(const SignInLoadingState());
-    var facebookProvider = FacebookAuthProvider();
+    // Trigger the sign-in flow
+    final loginResult = await FacebookAuth.instance.login();
 
-    facebookProvider.addScope('email');
-    facebookProvider.setCustomParameters({
-      'display': 'popup',
-    });
+    // Create a credential from the access token
+    print(loginResult);
+    // Once signed in, return the UserCredential
     try {
-      final credential =
-          await FirebaseAuth.instance.signInWithPopup(facebookProvider);
-      final idToken = await credential.user?.getIdToken();
-      // if (idToken != null) {
-      //   await DioClient.assignRole(idToken);
-      // }
-      if (credential.user!.emailVerified) {
-        // setUpFCM();
-        emit(const SignInLoadDoneState());
-      } else {
-        await credential.user!.sendEmailVerification();
-        emit(const SignInLoadDoneState());
-      }
-    } on DioError catch (_) {}
+      // final facebookAuthCredential =
+      //     FacebookAuthProvider.credential(loginResult.accessToken!.token);
+      // FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+    } on DioError catch (_) {
+      emit(const SignInLoadDoneState());
+    }
   }
 }

@@ -55,5 +55,24 @@
     <string>$(PRODUCT_NAME) needs access to your microphone for meetings.</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.145989393323-aa8m8kqhhjb93opbct6ftl33trmfo8vo</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>
