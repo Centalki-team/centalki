@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../../../../base/define/text.dart';
 import '../../../../../../base/temp_dio/dio_client.dart';
@@ -13,6 +14,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     on<SignInInitEvent>(_onInit);
     on<SignInValidateEvent>(_onValidate);
     on<SignInSendEvent>(_onSignIn);
+    on<GoogleSignInEvent>(_onSignInWithGoogle);
+    on<FacebookSignInEvent>(_onSignInWithFB);
   }
 
   void _onInit(SignInInitEvent event, emit) {}
@@ -63,5 +66,49 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     } on DioError catch (_) {
       emit(const SignInLoadErrorState(message: TextDoc.txtNotValidateRole));
     }
+  }
+
+  void _onSignInWithGoogle(GoogleSignInEvent event, emit) async {
+    emit(const SignInLoadingState());
+    // Trigger the authentication flow
+    final googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final googleAuth = await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+    try {
+      await FirebaseAuth.instance.signInWithCredential(credential);
+      emit(const SignInLoadDoneState());
+    } on DioError catch (_) {}
+  }
+
+  void _onSignInWithFB(FacebookSignInEvent event, emit) async {
+    emit(const SignInLoadingState());
+    var facebookProvider = FacebookAuthProvider();
+
+    facebookProvider.addScope('email');
+    facebookProvider.setCustomParameters({
+      'display': 'popup',
+    });
+    try {
+      final credential =
+          await FirebaseAuth.instance.signInWithPopup(facebookProvider);
+      final idToken = await credential.user?.getIdToken();
+      // if (idToken != null) {
+      //   await DioClient.assignRole(idToken);
+      // }
+      if (credential.user!.emailVerified) {
+        // setUpFCM();
+        emit(const SignInLoadDoneState());
+      } else {
+        await credential.user!.sendEmailVerification();
+        emit(const SignInLoadDoneState());
+      }
+    } on DioError catch (_) {}
   }
 }
