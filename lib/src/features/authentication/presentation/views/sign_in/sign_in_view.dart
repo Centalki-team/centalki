@@ -128,6 +128,7 @@ class _SignInViewState extends State<SignInView> {
                     );
                   },
                 ),
+                const SizedBox(height: spaceBetweenLine24),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
