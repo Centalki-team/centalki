@@ -97,14 +97,10 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     emit(const SignInLoadingState());
     // Trigger the sign-in flow
     final loginResult = await FacebookAuth.instance.login();
-
-    // Create a credential from the access token
-    print(loginResult);
-    // Once signed in, return the UserCredential
     try {
-      // final facebookAuthCredential =
-      //     FacebookAuthProvider.credential(loginResult.accessToken!.token);
-      // FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+      final facebookAuthCredential =
+          FacebookAuthProvider.credential(loginResult.accessToken!.token);
+      FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
     } on DioError catch (_) {
       emit(const SignInLoadDoneState());
     }
