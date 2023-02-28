@@ -55,9 +55,9 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         password: event.password,
       );
       final idToken = await credential.user?.getIdToken();
-      if (idToken != null) {
-        await DioClient.validateRole(idToken);
-      }
+      // if (idToken != null) {
+      //   await DioClient.validateRole(idToken);
+      // }
       emit(const SignInLoadDoneState());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -86,7 +86,12 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       idToken: googleAuth?.idToken,
     );
     try {
-      await FirebaseAuth.instance.signInWithCredential(credential);
+      final userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      final idToken = await userCredential.user?.getIdToken();
+      if (idToken != null) {
+        await DioClient.assignRole(idToken, null);
+      }
       emit(const SignInLoadDoneState());
     } on DioError catch (_) {
       emit(const SignInLoadDoneState());
@@ -100,7 +105,13 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     try {
       final facebookAuthCredential =
           FacebookAuthProvider.credential(loginResult.accessToken!.token);
-      FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+      final userCredential = await FirebaseAuth.instance
+          .signInWithCredential(facebookAuthCredential);
+
+      final idToken = await userCredential.user?.getIdToken();
+      if (idToken != null) {
+        await DioClient.assignRole(idToken, null);
+      }
     } on DioError catch (_) {
       emit(const SignInLoadDoneState());
     }
