@@ -35,3 +35,7 @@ class GoogleSignInEvent extends SignInEvent {
 class FacebookSignInEvent extends SignInEvent {
   const FacebookSignInEvent();
 }
+
+class AppleSignInEvent extends SignInEvent {
+  const AppleSignInEvent();
+}

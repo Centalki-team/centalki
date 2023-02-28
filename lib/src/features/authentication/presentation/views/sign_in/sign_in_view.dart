@@ -1,3 +1,4 @@
+import 'dart:io' show Platform;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -129,6 +130,16 @@ class _SignInViewState extends State<SignInView> {
                   },
                 ),
                 const SizedBox(height: spaceBetweenLine24),
+                const Center(
+                  child: Text(
+                    TextDoc.txtOr,
+                    style: TextStyle(
+                      fontSize: bodyLargeSize,
+                      fontWeight: bodyLargeWeight,
+                      color: AppColor.defaultFont,
+                    ),
+                  ),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -148,7 +159,7 @@ class _SignInViewState extends State<SignInView> {
                         ),
                       ),
                     ),
-                    const SizedBox(width: spaceBetweenLine16),
+                    const SizedBox(width: spaceBetweenLine12),
                     BlocBuilder<SignInBloc, SignInState>(
                       builder: (context, state) => TextButton(
                         onPressed: () => context
@@ -164,6 +175,25 @@ class _SignInViewState extends State<SignInView> {
                         ),
                       ),
                     ),
+                    if (Platform.isIOS) ...[
+                      const SizedBox(width: spaceBetweenLine12),
+                      BlocBuilder<SignInBloc, SignInState>(
+                        builder: (context, state) => TextButton(
+                          onPressed: () => context
+                              .read<SignInBloc>()
+                              .add(const AppleSignInEvent()),
+                          style: TextButton.styleFrom(
+                            shape: const CircleBorder(),
+                          ),
+                          child: Image.asset(
+                            Assets.logo.apple.path,
+                            width: 40,
+                            height: 40,
+                          ),
+                        ),
+                      ),
+                    ] else
+                      ...[],
                   ],
                 ),
                 const SizedBox(height: smallSpacing8),

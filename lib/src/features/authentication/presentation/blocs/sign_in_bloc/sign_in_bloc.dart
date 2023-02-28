@@ -18,6 +18,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     on<SignInSendEvent>(_onSignIn);
     on<GoogleSignInEvent>(_onSignInWithGoogle);
     on<FacebookSignInEvent>(_onSignInWithFB);
+    on<AppleSignInEvent>(_onSignInWithApple);
   }
 
   void _onInit(SignInInitEvent event, emit) {}
@@ -107,6 +108,23 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
           FacebookAuthProvider.credential(loginResult.accessToken!.token);
       final userCredential = await FirebaseAuth.instance
           .signInWithCredential(facebookAuthCredential);
+
+      final idToken = await userCredential.user?.getIdToken();
+      if (idToken != null) {
+        await DioClient.assignRole(idToken, null);
+      }
+    } on DioError catch (_) {
+      emit(const SignInLoadDoneState());
+    }
+  }
+
+  void _onSignInWithApple(AppleSignInEvent event, emit) async {
+    emit(const SignInLoadingState());
+    // Trigger the sign-in flow
+    final appleProvider = AppleAuthProvider();
+    try {
+      final userCredential =
+          await FirebaseAuth.instance.signInWithProvider(appleProvider);
 
       final idToken = await userCredential.user?.getIdToken();
       if (idToken != null) {
