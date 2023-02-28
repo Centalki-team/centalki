@@ -42,7 +42,7 @@ class _HomeViewState extends State<HomeView>
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        backgroundColor: const Color(0xFFF5F5F5),
+        backgroundColor: AppColor.white,
         body: Column(
           children: [
             SizedBox(

@@ -18,15 +18,25 @@ class TopicCard extends StatelessWidget {
   Widget build(BuildContext context) => GestureDetector(
         onTap: () => Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => TopicDetailPage(topicId: item.topicId ?? ''),
+            builder: (context) => TopicDetailPage(
+              topicId: item.topicId ?? '',
+            ),
           ),
         ),
-        child: Card(
-          elevation: 1,
+        child: Container(
+          margin: const EdgeInsets.all(smallSpacing8),
           clipBehavior: Clip.hardEdge,
-          surfaceTintColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+          decoration: BoxDecoration(
+            color: AppColor.white,
+            borderRadius: const BorderRadius.all(Radius.circular(12)),
+            boxShadow: [
+              BoxShadow(
+                color: AppColor.shadow.shade300,
+                spreadRadius: 0,
+                blurRadius: 4.0,
+                offset: const Offset(0, 2),
+              )
+            ]
           ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +58,7 @@ class TopicCard extends StatelessWidget {
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.all(12),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
