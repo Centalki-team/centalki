@@ -190,7 +190,6 @@ class _YourAccountViewState extends State<YourAccountView> {
                                       children: const [
                                         Icon(
                                           Icons.person_outline,
-                                          size: 24,
                                           color: AppColor.defaultFont,
                                         ),
                                         SizedBox(width: spaceBetweenLine16),
@@ -217,21 +216,21 @@ class _YourAccountViewState extends State<YourAccountView> {
                                   child: Container(
                                     padding: const EdgeInsets.all(12),
                                     decoration: BoxDecoration(
-                                        color: AppColor.white,
-                                        borderRadius: const BorderRadius.all(Radius.circular(12)),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: AppColor.shadow.shade300,
-                                            blurRadius: 2.0,
-                                            spreadRadius: 0.0,
-                                            offset: const Offset(0, 1),
-                                          )
-                                        ]),
+                                      color: AppColor.white,
+                                      borderRadius: const BorderRadius.all(Radius.circular(12)),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: AppColor.shadow.shade300,
+                                          blurRadius: 2.0,
+                                          spreadRadius: 0.0,
+                                          offset: const Offset(0, 1),
+                                        )
+                                      ],
+                                    ),
                                     child: Row(
                                       children: const [
                                         Icon(
                                           Icons.wallet,
-                                          size: 24,
                                           color: AppColor.defaultFont,
                                         ),
                                         SizedBox(width: spaceBetweenLine16),
@@ -270,7 +269,6 @@ class _YourAccountViewState extends State<YourAccountView> {
                                       children: const [
                                         Icon(
                                           Icons.history_outlined,
-                                          size: 24,
                                           color: AppColor.defaultFont,
                                         ),
                                         SizedBox(width: spaceBetweenLine16),
@@ -310,7 +308,6 @@ class _YourAccountViewState extends State<YourAccountView> {
                                       children: const [
                                         Icon(
                                           Icons.info_outline_rounded,
-                                          size: 24,
                                           color: AppColor.defaultFont,
                                         ),
                                         SizedBox(width: spaceBetweenLine16),
@@ -348,7 +345,6 @@ class _YourAccountViewState extends State<YourAccountView> {
                                       children: const [
                                         Icon(
                                           Icons.password_outlined,
-                                          size: 24,
                                           color: AppColor.defaultFont,
                                         ),
                                         SizedBox(width: spaceBetweenLine16),
@@ -371,20 +367,37 @@ class _YourAccountViewState extends State<YourAccountView> {
                                         barrierDismissible: false,
                                         context: context,
                                         builder: (context) => AlertDialog(
+                                              backgroundColor: AppColor.white,
+                                              surfaceTintColor: AppColor.white,
                                               title: const Text(
                                                 TextDoc.txtConfirmDeleteAccountTitle,
                                                 style: TextStyle(
+                                                  fontSize: titleLargeSize,
+                                                  fontWeight: titleLargeWeight,
                                                   color: AppColor.error,
                                                 ),
                                               ),
-                                              content: const Text(TextDoc.txtConfirmDeleteAccountContent),
+                                              content: const Text(
+                                                TextDoc.txtConfirmDeleteAccountContent,
+                                                style: TextStyle(
+                                                  fontSize: bodySmallSize,
+                                                  fontWeight: bodySmallWeight,
+                                                  color: AppColor.defaultFont,
+                                                ),
+                                              ),
                                               actions: [
                                                 TextButton(
                                                   onPressed: () => Navigator.pop(context, false),
                                                   style: TextButton.styleFrom(
                                                     foregroundColor: AppColor.mainColor1,
                                                   ),
-                                                  child: const Text(TextDoc.txtCancel),
+                                                  child: const Text(
+                                                    TextDoc.txtCancel,
+                                                    style: TextStyle(
+                                                      fontSize: labelLargeSize,
+                                                      fontWeight: labelLargeWeight,
+                                                    ),
+                                                  ),
                                                 ),
                                                 ElevatedButton(
                                                   onPressed: () => Navigator.pop(context, true),
@@ -392,7 +405,13 @@ class _YourAccountViewState extends State<YourAccountView> {
                                                     backgroundColor: AppColor.error,
                                                     foregroundColor: Colors.white,
                                                   ),
-                                                  child: const Text(TextDoc.txtDeleteAccount),
+                                                  child: const Text(
+                                                    TextDoc.txtDeleteAccount,
+                                                    style: TextStyle(
+                                                      fontSize: labelLargeSize,
+                                                      fontWeight: labelLargeWeight,
+                                                    ),
+                                                  ),
                                                 ),
                                               ],
                                             )).then((value) => value ?? false);
@@ -421,7 +440,6 @@ class _YourAccountViewState extends State<YourAccountView> {
                                       children: const [
                                         Icon(
                                           Icons.person_remove_outlined,
-                                          size: 24,
                                           color: AppColor.error,
                                         ),
                                         SizedBox(width: spaceBetweenLine16),
@@ -439,10 +457,69 @@ class _YourAccountViewState extends State<YourAccountView> {
                                 ),
                                 const SizedBox(height: spaceBetweenLine32),
                                 TextButton(
-                                  onPressed: () => context.read<YourAccountBloc>().add(
-                                        const YourAccountLogOutEvent(),
-                                      ),
+                                  onPressed: () async {
+                                    final confirmedLogout = await showDialog(
+                                        barrierDismissible: false,
+                                        context: context,
+                                        builder: (context) => AlertDialog(
+                                              backgroundColor: AppColor.white,
+                                              surfaceTintColor: AppColor.white,
+                                              title: const Text(
+                                                TextDoc.txtSignOut,
+                                                style: TextStyle(
+                                                  fontSize: titleLargeSize,
+                                                  fontWeight: titleLargeWeight,
+                                                  color: AppColor.error,
+                                                ),
+                                              ),
+                                              content: const Text(
+                                                TextDoc.txtSignOutContent,
+                                                style: TextStyle(
+                                                  fontSize: bodySmallSize,
+                                                  fontWeight: bodySmallWeight,
+                                                  color: AppColor.defaultFont,
+                                                ),
+                                              ),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () => Navigator.pop(context, false),
+                                                  style: TextButton.styleFrom(
+                                                    foregroundColor: AppColor.mainColor1,
+                                                  ),
+                                                  child: const Text(
+                                                    TextDoc.txtCancel,
+                                                    style: TextStyle(
+                                                      fontSize: labelLargeSize,
+                                                      fontWeight: labelLargeWeight,
+                                                    ),
+                                                  ),
+                                                ),
+                                                ElevatedButton(
+                                                  onPressed: () => Navigator.pop(context, true),
+                                                  style: ElevatedButton.styleFrom(
+                                                    backgroundColor: AppColor.error,
+                                                    foregroundColor: Colors.white,
+                                                  ),
+                                                  child: const Text(
+                                                    TextDoc.txtSignOut,
+                                                    style: TextStyle(
+                                                      fontSize: labelLargeSize,
+                                                      fontWeight: labelLargeWeight,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            )).then((value) => value ?? false);
+                                    if (confirmedLogout) {
+                                      if (mounted) {
+                                        context.read<YourAccountBloc>().add(
+                                              const YourAccountLogOutEvent(),
+                                            );
+                                      }
+                                    }
+                                  },
                                   style: TextButton.styleFrom(
+                                    foregroundColor: AppColor.error,
                                     minimumSize: const Size.fromHeight(48.0),
                                     side: const BorderSide(
                                       width: 1.0,
@@ -454,16 +531,13 @@ class _YourAccountViewState extends State<YourAccountView> {
                                     children: const [
                                       Icon(
                                         Icons.logout_outlined,
-                                        size: 24,
-                                        color: AppColor.error,
                                       ),
                                       SizedBox(width: smallSpacing8),
                                       Text(
-                                        TextDoc.txtLogOut,
+                                        TextDoc.txtSignOut,
                                         style: TextStyle(
                                           fontSize: labelLargeSize,
                                           fontWeight: labelLargeWeight,
-                                          color: AppColor.error,
                                         ),
                                       )
                                     ],
