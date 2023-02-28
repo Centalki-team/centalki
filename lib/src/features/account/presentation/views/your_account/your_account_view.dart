@@ -53,6 +53,7 @@ class _YourAccountViewState extends State<YourAccountView> {
               }
               if (state is YourAccountLoadDoneState) {
                 return Scaffold(
+                  backgroundColor: AppColor.white,
                   body: Stack(
                     children: [
                       Column(
@@ -157,7 +158,11 @@ class _YourAccountViewState extends State<YourAccountView> {
                           Expanded(
                             child: ListView(
                               padding: EdgeInsets.fromLTRB(
-                                  screenAutoPadding16, widthView > 400 ? 50 : 80, screenAutoPadding16, 0),
+                                screenAutoPadding16,
+                                widthView > 400 ? 48 : 64,
+                                screenAutoPadding16,
+                                0,
+                              ),
                               children: [
                                 GestureDetector(
                                   onTap: () async {
@@ -167,136 +172,199 @@ class _YourAccountViewState extends State<YourAccountView> {
                                       context.read<YourAccountBloc>().add(const YourAccountLoadEvent());
                                     }
                                   },
-                                  child: Card(
-                                    surfaceTintColor: Colors.white,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        vertical: 8.0,
-                                        horizontal: 16.0,
-                                      ),
-                                      child: Row(
-                                        children: const [
-                                          Icon(
-                                            Icons.person,
-                                            size: 32,
+                                  child: Container(
+                                    padding: const EdgeInsets.all(12),
+                                    decoration: BoxDecoration(
+                                      color: AppColor.white,
+                                      borderRadius: const BorderRadius.all(Radius.circular(12)),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: AppColor.shadow.shade300,
+                                          blurRadius: 2.0,
+                                          spreadRadius: 0.0,
+                                          offset: const Offset(0, 1),
+                                        )
+                                      ],
+                                    ),
+                                    child: Row(
+                                      children: const [
+                                        Icon(
+                                          Icons.person_outline,
+                                          size: 24,
+                                          color: AppColor.defaultFont,
+                                        ),
+                                        SizedBox(width: spaceBetweenLine16),
+                                        Text(
+                                          TextDoc.txtStudentProfile,
+                                          style: TextStyle(
+                                            fontSize: bodyLargeSize,
+                                            fontWeight: bodyLargeWeight,
                                             color: AppColor.defaultFont,
                                           ),
-                                          SizedBox(
-                                            width: 12,
-                                          ),
-                                          Text(
-                                            TextDoc.txtStudentProfile,
-                                            style: TextStyle(fontSize: 16),
-                                          )
-                                        ],
-                                      ),
+                                        )
+                                      ],
                                     ),
                                   ),
                                 ),
+                                const SizedBox(height: spaceBetweenLine12),
                                 GestureDetector(
                                   onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (_) => const WalletPage()));
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (_) => const WalletPage()),
+                                    );
                                   },
-                                  child: Card(
-                                    surfaceTintColor: Colors.white,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                                      child: Row(
-                                        children: const [
-                                          Icon(
-                                            Icons.wallet,
-                                            size: 32,
-                                          ),
-                                          SizedBox(
-                                            width: 12,
-                                          ),
-                                          Text(
-                                            TextDoc.txtWallet,
-                                            style: TextStyle(fontSize: 16),
+                                  child: Container(
+                                    padding: const EdgeInsets.all(12),
+                                    decoration: BoxDecoration(
+                                        color: AppColor.white,
+                                        borderRadius: const BorderRadius.all(Radius.circular(12)),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: AppColor.shadow.shade300,
+                                            blurRadius: 2.0,
+                                            spreadRadius: 0.0,
+                                            offset: const Offset(0, 1),
                                           )
-                                        ],
-                                      ),
+                                        ]),
+                                    child: Row(
+                                      children: const [
+                                        Icon(
+                                          Icons.wallet,
+                                          size: 24,
+                                          color: AppColor.defaultFont,
+                                        ),
+                                        SizedBox(width: spaceBetweenLine16),
+                                        Text(
+                                          TextDoc.txtWallet,
+                                          style: TextStyle(
+                                            fontSize: bodyLargeSize,
+                                            fontWeight: bodyLargeWeight,
+                                            color: AppColor.defaultFont,
+                                          ),
+                                        )
+                                      ],
                                     ),
                                   ),
                                 ),
+                                const SizedBox(height: spaceBetweenLine12),
                                 GestureDetector(
                                   onTap: () {
                                     Navigator.push(context, MaterialPageRoute(builder: (_) => const HistoryPage()));
                                   },
-                                  child: Card(
-                                    surfaceTintColor: Colors.white,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                                      child: Row(
-                                        children: const [
-                                          Icon(
-                                            Icons.history,
-                                            size: 32,
+                                  child: Container(
+                                    padding: const EdgeInsets.all(12),
+                                    decoration: BoxDecoration(
+                                      color: AppColor.white,
+                                      borderRadius: const BorderRadius.all(Radius.circular(12)),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: AppColor.shadow.shade300,
+                                          blurRadius: 2.0,
+                                          spreadRadius: 0.0,
+                                          offset: const Offset(0, 1),
+                                        )
+                                      ],
+                                    ),
+                                    child: Row(
+                                      children: const [
+                                        Icon(
+                                          Icons.history_outlined,
+                                          size: 24,
+                                          color: AppColor.defaultFont,
+                                        ),
+                                        SizedBox(width: spaceBetweenLine16),
+                                        Text(
+                                          TextDoc.txtHistory,
+                                          style: TextStyle(
+                                            fontSize: bodyLargeSize,
+                                            fontWeight: bodyLargeWeight,
+                                            color: AppColor.defaultFont,
                                           ),
-                                          SizedBox(
-                                            width: 12,
-                                          ),
-                                          Text(
-                                            TextDoc.txtHistory,
-                                            style: TextStyle(fontSize: 16),
-                                          )
-                                        ],
-                                      ),
+                                        )
+                                      ],
                                     ),
                                   ),
                                 ),
+                                const SizedBox(height: spaceBetweenLine12),
                                 GestureDetector(
                                   onTap: () {
                                     Navigator.push(context,
                                         MaterialPageRoute(builder: (context) => const AccountInformationPage()));
                                   },
-                                  child: Card(
-                                    surfaceTintColor: Colors.white,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                                      child: Row(
-                                        children: const [
-                                          Icon(
-                                            Icons.info,
-                                            size: 32,
+                                  child: Container(
+                                    padding: const EdgeInsets.all(12),
+                                    decoration: BoxDecoration(
+                                      color: AppColor.white,
+                                      borderRadius: const BorderRadius.all(Radius.circular(12)),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: AppColor.shadow.shade300,
+                                          blurRadius: 2.0,
+                                          spreadRadius: 0.0,
+                                          offset: const Offset(0, 1),
+                                        )
+                                      ],
+                                    ),
+                                    child: Row(
+                                      children: const [
+                                        Icon(
+                                          Icons.info_outline_rounded,
+                                          size: 24,
+                                          color: AppColor.defaultFont,
+                                        ),
+                                        SizedBox(width: spaceBetweenLine16),
+                                        Text(
+                                          TextDoc.txtAccountInformation,
+                                          style: TextStyle(
+                                            fontSize: bodyLargeSize,
+                                            fontWeight: bodyLargeWeight,
+                                            color: AppColor.defaultFont,
                                           ),
-                                          SizedBox(
-                                            width: 12,
-                                          ),
-                                          Text(
-                                            TextDoc.txtAccountInformation,
-                                            style: TextStyle(fontSize: 16),
-                                          )
-                                        ],
-                                      ),
+                                        )
+                                      ],
                                     ),
                                   ),
                                 ),
+                                const SizedBox(height: spaceBetweenLine12),
                                 GestureDetector(
                                   onTap: () => Navigator.push(
                                       context, MaterialPageRoute(builder: (context) => const ChangePasswordPage())),
-                                  child: Card(
-                                    surfaceTintColor: Colors.white,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                                      child: Row(
-                                        children: const [
-                                          Icon(
-                                            Icons.password,
-                                            size: 32,
+                                  child: Container(
+                                    padding: const EdgeInsets.all(12),
+                                    decoration: BoxDecoration(
+                                      color: AppColor.white,
+                                      borderRadius: const BorderRadius.all(Radius.circular(12)),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: AppColor.shadow.shade300,
+                                          blurRadius: 2.0,
+                                          spreadRadius: 0.0,
+                                          offset: const Offset(0, 1),
+                                        )
+                                      ],
+                                    ),
+                                    child: Row(
+                                      children: const [
+                                        Icon(
+                                          Icons.password_outlined,
+                                          size: 24,
+                                          color: AppColor.defaultFont,
+                                        ),
+                                        SizedBox(width: spaceBetweenLine16),
+                                        Text(
+                                          TextDoc.txtChangePassword,
+                                          style: TextStyle(
+                                            fontSize: bodyLargeSize,
+                                            fontWeight: bodyLargeWeight,
+                                            color: AppColor.defaultFont,
                                           ),
-                                          SizedBox(
-                                            width: 12,
-                                          ),
-                                          Text(
-                                            TextDoc.txtChangePassword,
-                                            style: TextStyle(fontSize: 16),
-                                          )
-                                        ],
-                                      ),
+                                        )
+                                      ],
                                     ),
                                   ),
                                 ),
+                                const SizedBox(height: spaceBetweenLine12),
                                 GestureDetector(
                                   onTap: () async {
                                     final confirmedDelete = await showDialog(
@@ -335,43 +403,73 @@ class _YourAccountViewState extends State<YourAccountView> {
                                       }
                                     }
                                   },
-                                  child: Card(
-                                    surfaceTintColor: Colors.white,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                                      child: Row(
-                                        children: const [
-                                          Icon(
-                                            Icons.person_remove,
-                                            size: 32,
+                                  child: Container(
+                                    padding: const EdgeInsets.all(12),
+                                    decoration: BoxDecoration(
+                                      color: AppColor.white,
+                                      borderRadius: const BorderRadius.all(Radius.circular(12)),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: AppColor.shadow.shade300,
+                                          blurRadius: 2.0,
+                                          spreadRadius: 0.0,
+                                          offset: const Offset(0, 1),
+                                        )
+                                      ],
+                                    ),
+                                    child: Row(
+                                      children: const [
+                                        Icon(
+                                          Icons.person_remove_outlined,
+                                          size: 24,
+                                          color: AppColor.error,
+                                        ),
+                                        SizedBox(width: spaceBetweenLine16),
+                                        Text(
+                                          TextDoc.txtDeleteAccount,
+                                          style: TextStyle(
+                                            fontSize: titleMediumSize,
+                                            fontWeight: titleMediumWeight,
                                             color: AppColor.error,
                                           ),
-                                          SizedBox(
-                                            width: 12,
-                                          ),
-                                          Text(
-                                            TextDoc.txtDeleteAccount,
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              color: AppColor.error,
-                                            ),
-                                          )
-                                        ],
-                                      ),
+                                        )
+                                      ],
                                     ),
                                   ),
                                 ),
-                                const SizedBox(
-                                  height: spaceBetweenLine12,
+                                const SizedBox(height: spaceBetweenLine32),
+                                TextButton(
+                                  onPressed: () => context.read<YourAccountBloc>().add(
+                                        const YourAccountLogOutEvent(),
+                                      ),
+                                  style: TextButton.styleFrom(
+                                    minimumSize: const Size.fromHeight(48.0),
+                                    side: const BorderSide(
+                                      width: 1.0,
+                                      color: AppColor.error,
+                                    ),
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: const [
+                                      Icon(
+                                        Icons.logout_outlined,
+                                        size: 24,
+                                        color: AppColor.error,
+                                      ),
+                                      SizedBox(width: smallSpacing8),
+                                      Text(
+                                        TextDoc.txtLogOut,
+                                        style: TextStyle(
+                                          fontSize: labelLargeSize,
+                                          fontWeight: labelLargeWeight,
+                                          color: AppColor.error,
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
-                                AppOutlinedButton(
-                                  onPressed: () {
-                                    context.read<YourAccountBloc>().add(const YourAccountLogOutEvent());
-                                  },
-                                  text: TextDoc.txtLogOut,
-                                  icon: Icons.logout,
-                                  minimumSize: const Size.fromHeight(48),
-                                ),
+                                const SizedBox(height: spaceBetweenLine32),
                               ],
                             ),
                           ),
@@ -396,7 +494,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                               )
                             ]),
                         child: Padding(
-                          padding: const EdgeInsets.all(screenAutoPadding8),
+                          padding: const EdgeInsets.fromLTRB(8, 8, 8, 12),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
