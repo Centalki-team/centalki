@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Centalki</string>
+    <string name="facebook_app_id">954527982132080</string>
+    <string name="fb_login_protocol_scheme">fb954527982132080</string>
+    <string name="facebook_client_token">bac0044f07ee22facb6c8ac83bd74d13</string>
+</resources>
