@@ -41,6 +41,8 @@ class ConnectTeacherBloc
       }
     } else {
       emit(const ConnectTeacherLoadFailureState(TextDoc.txtNotSignIn));
+    }
+     */
   }
 
   void _onCancelButtonPressed(
