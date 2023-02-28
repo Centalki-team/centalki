@@ -1,3 +1,4 @@
+import 'dart:io' show Platform;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -79,8 +80,10 @@ class _SignInViewState extends State<SignInView> {
                       AppOutlinedTextField(
                         controller: _emailController,
                         textInputType: TextInputType.emailAddress,
-                        errorText:
-                            (state is SignInValidateState && state.emailError.isNotEmpty) ? state.emailError : null,
+                        errorText: (state is SignInValidateState &&
+                                state.emailError.isNotEmpty)
+                            ? state.emailError
+                            : null,
                         onChanged: _validateSignInInputs,
                       ),
                       const SizedBox(height: smallSpacing8),
@@ -95,7 +98,8 @@ class _SignInViewState extends State<SignInView> {
                       AppOutlinedTextField(
                         controller: _passwordController,
                         obscureText: true,
-                        errorText: (state is SignInValidateState && state.passwordError.isNotEmpty)
+                        errorText: (state is SignInValidateState &&
+                                state.passwordError.isNotEmpty)
                             ? state.passwordError
                             : null,
                         onChanged: _validateSignInInputs,
@@ -113,15 +117,84 @@ class _SignInViewState extends State<SignInView> {
                     }
                     return AppFilledButton(
                       text: TextDoc.txtSignIn,
-                      onPressed: (state is SignInValidateState && !state.forceDisabled)
-                          ? () => context.read<SignInBloc>().add(SignInSendEvent(
-                                email: _emailController.text,
-                                password: _passwordController.text,
-                              ))
+                      onPressed: (state is SignInValidateState &&
+                              !state.forceDisabled)
+                          ? () =>
+                              context.read<SignInBloc>().add(SignInSendEvent(
+                                    email: _emailController.text,
+                                    password: _passwordController.text,
+                                  ))
                           : null,
                       minimumSize: const Size.fromHeight(48),
                     );
                   },
+                ),
+                const SizedBox(height: spaceBetweenLine24),
+                const Center(
+                  child: Text(
+                    TextDoc.txtOr,
+                    style: TextStyle(
+                      fontSize: bodyLargeSize,
+                      fontWeight: bodyLargeWeight,
+                      color: AppColor.defaultFont,
+                    ),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    BlocBuilder<SignInBloc, SignInState>(
+                      builder: (context, state) => TextButton(
+                        onPressed: () => context
+                            .read<SignInBloc>()
+                            .add(const GoogleSignInEvent()),
+                        style: TextButton.styleFrom(
+                          shape: const CircleBorder(),
+                        ),
+                        child: Image.asset(
+                          Assets.logo.google.path,
+                          width: 40,
+                          height: 40,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: spaceBetweenLine12),
+                    BlocBuilder<SignInBloc, SignInState>(
+                      builder: (context, state) => TextButton(
+                        onPressed: () => context
+                            .read<SignInBloc>()
+                            .add(const FacebookSignInEvent()),
+                        style: TextButton.styleFrom(
+                          shape: const CircleBorder(),
+                        ),
+                        child: Image.asset(
+                          Assets.logo.facebook.path,
+                          width: 40,
+                          height: 40,
+                        ),
+                      ),
+                    ),
+                    if (Platform.isIOS) ...[
+                      const SizedBox(width: spaceBetweenLine12),
+                      BlocBuilder<SignInBloc, SignInState>(
+                        builder: (context, state) => TextButton(
+                          onPressed: () => context
+                              .read<SignInBloc>()
+                              .add(const AppleSignInEvent()),
+                          style: TextButton.styleFrom(
+                            shape: const CircleBorder(),
+                          ),
+                          child: Image.asset(
+                            Assets.logo.apple.path,
+                            width: 40,
+                            height: 40,
+                          ),
+                        ),
+                      ),
+                    ] else
+                      ...[],
+                  ],
                 ),
                 const SizedBox(height: smallSpacing8),
                 AppTextButton(

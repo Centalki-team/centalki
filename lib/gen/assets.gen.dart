@@ -145,6 +145,9 @@ class $AssetsImagesGen {
 class $AssetsLogoGen {
   const $AssetsLogoGen();
 
+  /// File path: assets/logo/apple.png
+  AssetGenImage get apple => const AssetGenImage('assets/logo/apple.png');
+
   /// File path: assets/logo/centalki-background.png
   AssetGenImage get centalkiBackground =>
       const AssetGenImage('assets/logo/centalki-background.png');
@@ -164,7 +167,7 @@ class $AssetsLogoGen {
 
   /// List of all assets
   List<AssetGenImage> get values =>
-      [centalkiBackground, centalkiBanner, centalki, facebook, google];
+      [apple, centalkiBackground, centalkiBanner, centalki, facebook, google];
 }
 
 class Assets {

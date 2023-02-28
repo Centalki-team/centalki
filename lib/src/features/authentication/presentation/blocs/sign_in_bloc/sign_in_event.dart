@@ -27,3 +27,15 @@ class SignInSendEvent extends SignInEvent {
   final String email;
   final String password;
 }
+
+class GoogleSignInEvent extends SignInEvent {
+  const GoogleSignInEvent();
+}
+
+class FacebookSignInEvent extends SignInEvent {
+  const FacebookSignInEvent();
+}
+
+class AppleSignInEvent extends SignInEvent {
+  const AppleSignInEvent();
+}

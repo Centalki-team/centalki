@@ -18,16 +18,16 @@ class DioClient {
 
   static const baseUrl = 'http://api.centalki.com/v1';
 
-  static Future<dynamic> assignRole(String idToken, String displayName) =>
+  static Future<dynamic> assignRole(String idToken, String? displayName) =>
       _dio.post("$baseUrl/auth/assign-role", data: {
         "idToken": idToken,
         "role": "STUDENT",
         "displayName": displayName
       });
 
-  static Future<dynamic> validateRole(String? idToken) =>
-      _dio.post("$baseUrl/auth/validate-role",
-          data: {"idToken": idToken, "role": "STUDENT"});
+  // static Future<dynamic> validateRole(String? idToken) =>
+  //     _dio.post("$baseUrl/auth/validate-role",
+  //         data: {"idToken": idToken, "role": "STUDENT"});
 
   static Future<TopicsListEntity> getTopicList() async {
     final response = await _dio.get(
