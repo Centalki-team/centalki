@@ -19,13 +19,13 @@ class QuestionCard extends StatelessWidget {
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(16.0),
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.15),
-              offset: const Offset(1, 1),
+              color: AppColor.shadow.shade200,
               blurRadius: 4.0,
               spreadRadius: 0,
+              offset: const Offset(0, 2),
             ),
           ],
         ),

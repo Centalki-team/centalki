@@ -16,7 +16,7 @@ class PhraseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -28,39 +28,31 @@ class PhraseCard extends StatelessWidget {
                 color: AppColor.mainColor1,
               ),
             ),
-            const SizedBox(height: smallSpacing1),
             Text(
               phraseEntity.phrasePhonetic ?? 'no phonetic',
               style: const TextStyle(
-                fontSize: titleSmallSize,
-                fontWeight: titleSmallWeight,
+                fontFamily: 'NotoSans',
+                fontSize: bodySmallSize * 0.7,
+                fontWeight: bodySmallWeight,
                 color: AppColor.defaultFont,
               ),
             ),
-            const SizedBox(height: smallSpacing8),
+            const SizedBox(height: smallSpacing4),
             ...phraseEntity.phraseTranslations!.map(
               (e) => Text(
                 e.phraseMeaning ?? 'null meaning',
                 style: const TextStyle(
-                  fontSize: labelLargeSize,
-                  fontWeight: labelLargeWeight,
+                  fontSize: titleMediumSize,
+                  fontWeight: titleMediumWeight,
                 ),
-              ),
-            ),
-            const SizedBox(height: smallSpacing4),
-            const Text(
-              TextDoc.txtTopicPhraseExample,
-              style: TextStyle(
-                fontSize: bodyMediumSize,
-                fontWeight: bodyMediumWeight,
               ),
             ),
             ...phraseEntity.phraseExamples!.map(
               (e) => Text(
                 e.phraseExample ?? 'null example',
                 style: const TextStyle(
-                  fontSize: labelLargeSize,
-                  fontWeight: labelLargeWeight,
+                  fontSize: bodyMediumSize,
+                  fontWeight: bodyMediumWeight,
                 ),
               ),
             ),

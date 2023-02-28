@@ -53,7 +53,7 @@ class TextDoc {
   static const txtTopicDetail = 'Topic Detail';
   static const txtTalk = 'Talk';
   static const txtTopicCategory = 'Category';
-  static const txtTopicLevel = 'LEVEL';
+  static const txtTopicLevel = 'Level';
   static const txtTopicDescription = 'Description';
   static const txtTopicVocab = 'Vocabulary';
   static const txtTopicQuestions = 'Recommended Questions';
