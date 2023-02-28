@@ -137,7 +137,7 @@ class TextDoc {
   static const txtInterestedTopics = 'Interested Topics';
 
   static const txtBalance = 'Balance';
-  static const txtOr = 'or';
+  static const txtOr = 'Or log in with';
   static const txtEachSession = 'each session is';
   static const txt30Minutes = '/30 minutes';
   static const txtTransactions = 'Transactions';
