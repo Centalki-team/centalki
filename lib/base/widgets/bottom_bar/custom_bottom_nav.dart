@@ -29,8 +29,8 @@ class BottomIndicatorBar extends StatefulWidget {
 }
 
 class _BottomIndicatorBarState extends State<BottomIndicatorBar> {
-  static const double BAR_HEIGHT = 80;
-  static const double INDICATOR_HEIGHT = 2;
+  static const double BAR_HEIGHT = 72;
+  static const double INDICATOR_HEIGHT = 8;
 
   List<BottomIndicatorNavigationBarItem> get items => widget.items;
 
@@ -128,7 +128,7 @@ class _BottomIndicatorBarState extends State<BottomIndicatorBar> {
               // color: isSelect
               //     ? widget.activeColor ?? const Color(0xff0050B3)
               //     : widget.inactiveColor,
-              color: Colors.black,
+              color: AppColor.defaultFont,
               size: 24,
             ),
           ),

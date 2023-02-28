@@ -99,7 +99,7 @@ class TextDoc {
       'You are requesting that your account be deleted.\nDeleting the account will:\n   \u{2022} Remove account information and images\n   \u{2022} Remove all messages\n   \u{2022} Unable to restore';
   static const txtDeleteAccount = 'Delete Account';
   static const txtLogOut = 'Log Out';
-  static const txtBalanceSessions = '  Balance sessions';
+  static const txtRemainingSessions = 'Remaining sessions';
   static const txtCompletedSessions = 'Completed sessions';
 
   static const txtFacebook = 'Facebook';
