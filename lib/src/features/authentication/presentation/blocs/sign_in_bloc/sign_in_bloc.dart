@@ -51,14 +51,14 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     emit(const SignInLoadingState());
 
     try {
-      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: event.email,
         password: event.password,
       );
-      final idToken = await credential.user?.getIdToken();
       // if (idToken != null) {
       //   await DioClient.validateRole(idToken);
       // }
+      await DioClient.setDeviceToken();
       emit(const SignInLoadDoneState());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -92,6 +92,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       final idToken = await userCredential.user?.getIdToken();
       if (idToken != null) {
         await DioClient.assignRole(idToken, null);
+        await DioClient.setDeviceToken();
       }
       emit(const SignInLoadDoneState());
     } on DioError catch (_) {
@@ -112,7 +113,9 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       final idToken = await userCredential.user?.getIdToken();
       if (idToken != null) {
         await DioClient.assignRole(idToken, null);
+        await DioClient.setDeviceToken();
       }
+      emit(const SignInLoadDoneState());
     } on DioError catch (_) {
       emit(const SignInLoadDoneState());
     }
@@ -129,6 +132,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       final idToken = await userCredential.user?.getIdToken();
       if (idToken != null) {
         await DioClient.assignRole(idToken, null);
+        await DioClient.setDeviceToken();
       }
     } on DioError catch (_) {
       emit(const SignInLoadDoneState());

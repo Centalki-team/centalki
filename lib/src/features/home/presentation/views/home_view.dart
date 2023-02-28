@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../base/define/app_text.dart';
@@ -22,6 +23,41 @@ class _HomeViewState extends State<HomeView>
   late final TabController _tabController;
   final bottomNavList = <BottomIndicatorNavigationBarItem>[];
 
+  void _handleMessage(RemoteMessage message) {
+    // TODO: Handle message opening
+    if (message.data['type'] == 'chat') {
+      Navigator.pushNamed(
+        context,
+        '/chat',
+        arguments: message,
+      );
+    }
+  }
+
+  Future<void> setupInteractedMessage() async {
+    // Get any messages which caused the application to open from
+    // a terminated state.
+    var initialMessage = await FirebaseMessaging.instance.getInitialMessage();
+
+    // If the message also contains a data property with a "type" of "chat",
+    // navigate to a chat screen
+    if (initialMessage != null) {
+      _handleMessage(initialMessage);
+    }
+
+    // Also handle any interaction when the app is in the background via a
+    // Stream listener
+    FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
+    FirebaseMessaging.onMessage.listen((message) {
+      print('Got a message whilst in the foreground!');
+      print('Message data: ${message.data}');
+
+      if (message.notification != null) {
+        print('Message also contained a notification: ${message.notification}');
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -32,6 +68,7 @@ class _HomeViewState extends State<HomeView>
       vsync: this,
       animationDuration: const Duration(milliseconds: 300),
     );
+    setupInteractedMessage();
   }
 
   @override

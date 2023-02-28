@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 import '../../src/features/account/data/account_datasources/remote_data/model/user_account_model.dart';
 import '../../src/features/account/data/balance_datasources/remote_data/model/balance_model.dart';
@@ -24,6 +26,18 @@ class DioClient {
         "role": "STUDENT",
         "displayName": displayName
       });
+
+  static Future<dynamic> setDeviceToken() async {
+    final token = await FirebaseMessaging.instance.getToken();
+    final idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
+    return _dio.post(
+      "$baseUrl/auth/device-token",
+      data: {"token": token},
+      options: Options(headers: {
+        "Authorization": 'Bearer $idToken',
+      }),
+    );
+  }
 
   // static Future<dynamic> validateRole(String? idToken) =>
   //     _dio.post("$baseUrl/auth/validate-role",
