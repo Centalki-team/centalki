@@ -49,7 +49,7 @@ class DeleteAccountView extends StatelessWidget {
         child: Scaffold(
           body: SingleChildScrollView(
             padding: const EdgeInsets.fromLTRB(
-                screenAutoPadding16, 24.0, screenAutoPadding16, 0),
+                padding16, 24.0, padding16, 0),
             child: Column(
               children: [
                 const Text(

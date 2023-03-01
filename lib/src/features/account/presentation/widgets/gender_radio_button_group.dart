@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../base/define/colors.dart';
+import '../../../../../base/define/size.dart';
 import '../../../../../base/define/text.dart';
 import '../../domain/entities/user_account_entity.dart';
 
 class GenderRadioButtonGroup extends StatefulWidget {
-  const GenderRadioButtonGroup(
-      {Key? key, required this.genderCallback, required this.gender})
-      : super(key: key);
+  const GenderRadioButtonGroup({
+    Key? key,
+    required this.genderCallback,
+    required this.gender,
+  }) : super(key: key);
 
   final void Function(Gender) genderCallback;
   final Gender gender;
@@ -33,9 +37,11 @@ class _GenderRadioButtonGroupState extends State<GenderRadioButtonGroup> {
             return ListView(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
+              padding: const EdgeInsets.all(0.0),
               children: [
                 RadioListTile(
                   value: Gender.male,
+                  activeColor: AppColor.mainColor2,
                   groupValue: selectedGender,
                   onChanged: (value) {
                     setState(() {
@@ -43,10 +49,18 @@ class _GenderRadioButtonGroupState extends State<GenderRadioButtonGroup> {
                     });
                     widget.genderCallback(selectedGender);
                   },
-                  title: const Text(TextDoc.txtMale),
+                  title: const Text(
+                    TextDoc.txtMale,
+                    style: TextStyle(
+                      fontSize: bodyLargeSize,
+                      fontWeight: bodyLargeWeight,
+                      color: AppColor.defaultFont,
+                    ),
+                  ),
                 ),
                 RadioListTile(
                   value: Gender.female,
+                  activeColor: AppColor.mainColor2,
                   groupValue: selectedGender,
                   onChanged: (value) {
                     setState(() {
@@ -54,10 +68,18 @@ class _GenderRadioButtonGroupState extends State<GenderRadioButtonGroup> {
                     });
                     widget.genderCallback(selectedGender);
                   },
-                  title: const Text(TextDoc.txtFemale),
+                  title: const Text(
+                    TextDoc.txtFemale,
+                    style: TextStyle(
+                      fontSize: bodyLargeSize,
+                      fontWeight: bodyLargeWeight,
+                      color: AppColor.defaultFont,
+                    ),
+                  ),
                 ),
                 RadioListTile(
                   value: Gender.others,
+                  activeColor: AppColor.mainColor2,
                   groupValue: selectedGender,
                   onChanged: (value) {
                     setState(() {
@@ -65,7 +87,14 @@ class _GenderRadioButtonGroupState extends State<GenderRadioButtonGroup> {
                     });
                     widget.genderCallback(selectedGender);
                   },
-                  title: const Text(TextDoc.txtOthers),
+                  title: const Text(
+                    TextDoc.txtOthers,
+                    style: TextStyle(
+                      fontSize: bodyLargeSize,
+                      fontWeight: bodyLargeWeight,
+                      color: AppColor.defaultFont,
+                    ),
+                  ),
                 ),
               ],
             );

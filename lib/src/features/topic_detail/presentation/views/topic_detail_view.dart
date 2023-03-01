@@ -32,18 +32,14 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                   right: 16.0,
                   bottom: 24.0,
                 ),
-                child: SafeArea(
-                  top: false,
-                  bottom: false,
-                  child: AppElevatedButton(
-                    text: TextDoc.txtTalk,
-                    minimumSize: const Size.fromHeight(48),
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ConnectTeacherPage(
-                          topicId: state.topicDetail.topicId ?? '',
-                        ),
+                child: AppElevatedButton(
+                  text: TextDoc.txtTalk,
+                  minimumSize: const Size.fromHeight(48),
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ConnectTeacherPage(
+                        topicId: state.topicDetail.topicId ?? '',
                       ),
                     ),
                   ),
@@ -104,7 +100,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                         ),
                       ),
                       child: SingleChildScrollView(
-                        padding: const EdgeInsets.all(screenAutoPadding16),
+                        padding: const EdgeInsets.all(padding16),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [

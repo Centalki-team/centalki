@@ -158,9 +158,9 @@ class _YourAccountViewState extends State<YourAccountView> {
                           Expanded(
                             child: ListView(
                               padding: EdgeInsets.fromLTRB(
-                                screenAutoPadding16,
+                                padding16,
                                 widthView > 400 ? 48 : 64,
-                                screenAutoPadding16,
+                                padding16,
                                 0,
                               ),
                               children: [
@@ -549,9 +549,9 @@ class _YourAccountViewState extends State<YourAccountView> {
                       ),
                       Container(
                         margin: EdgeInsets.fromLTRB(
-                          screenAutoPadding16,
+                          padding16,
                           heightView * 1 / 2 - 30,
-                          screenAutoPadding16,
+                          padding16,
                           0,
                         ),
                         decoration: BoxDecoration(

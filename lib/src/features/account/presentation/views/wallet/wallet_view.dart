@@ -16,22 +16,23 @@ class WalletView extends StatelessWidget {
         listener: (context, state) {
           if (state is WalletLoadFailureState) {
             showDialog(
-                barrierDismissible: false,
-                context: context,
-                builder: (context) => AlertDialog(
-                      icon: const Icon(
-                        Icons.error_outline,
-                        color: AppColor.error,
-                      ),
-                      title: const Text(TextDoc.txtLoadFailed),
-                      content: Text(state.message),
-                      actions: [
-                        TextButton(
-                          onPressed: () => Navigator.pop(context),
-                          child: const Text(TextDoc.txtOk),
-                        ),
-                      ],
-                    ));
+              barrierDismissible: false,
+              context: context,
+              builder: (context) => AlertDialog(
+                icon: const Icon(
+                  Icons.error_outline,
+                  color: AppColor.error,
+                ),
+                title: const Text(TextDoc.txtLoadFailed),
+                content: Text(state.message),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text(TextDoc.txtOk),
+                  ),
+                ],
+              ),
+            );
           }
         },
         builder: (context, state) {
@@ -72,8 +73,8 @@ class WalletView extends StatelessWidget {
                       childCount: 1,
                       (_, index) => Padding(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: screenAutoPadding16,
-                          vertical: screenAutoPadding24,
+                          horizontal: padding16,
+                          vertical: padding24,
                         ),
                         child: SingleChildScrollView(
                           child: Column(
@@ -82,8 +83,8 @@ class WalletView extends StatelessWidget {
                               Container(
                                 width: double.maxFinite,
                                 padding: const EdgeInsets.symmetric(
-                                  vertical: screenAutoPadding8,
-                                  horizontal: screenAutoPadding16,
+                                  vertical: padding8,
+                                  horizontal: padding16,
                                 ),
                                 decoration: const BoxDecoration(
                                   color: AppColor.mainColor2Surface,

@@ -94,15 +94,15 @@ class _HistoryViewState extends State<HistoryView> {
                     delegate: SliverChildBuilderDelegate(
                       childCount: 1,
                       (_, index) => Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: screenAutoPadding16, vertical: 24),
+                        padding: const EdgeInsets.symmetric(horizontal: padding16, vertical: 24),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
                               width: double.maxFinite,
                               padding: const EdgeInsets.symmetric(
-                                vertical: screenAutoPadding8,
-                                horizontal: screenAutoPadding16,
+                                vertical: padding8,
+                                horizontal: padding16,
                               ),
                               decoration: const BoxDecoration(
                                 color: AppColor.mainColor2Surface,

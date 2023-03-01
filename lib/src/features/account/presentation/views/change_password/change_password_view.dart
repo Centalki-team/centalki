@@ -31,54 +31,56 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
             LoadingManager.setLoading(context);
             if (state is ChangePasswordLoadErrorState) {
               await showDialog(
-                  barrierDismissible: false,
-                  context: context,
-                  builder: (context) => AlertDialog(
-                        icon: const Icon(
-                          Icons.error_outline,
-                          color: AppColor.error,
-                        ),
-                        title: const Text(TextDoc.txtChangePasswordResult),
-                        content: Flexible(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(state.message),
-                            ],
-                          ),
-                        ),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: const Text(TextDoc.txtOk),
-                          ),
-                        ],
-                      ));
+                barrierDismissible: false,
+                context: context,
+                builder: (context) => AlertDialog(
+                  icon: const Icon(
+                    Icons.error_outline,
+                    color: AppColor.error,
+                  ),
+                  title: const Text(TextDoc.txtChangePasswordResult),
+                  content: Flexible(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(state.message),
+                      ],
+                    ),
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text(TextDoc.txtOk),
+                    ),
+                  ],
+                ),
+              );
             } else if (state is ChangePasswordLoadDoneState) {
               await showDialog(
-                  barrierDismissible: false,
-                  context: context,
-                  builder: (context) => AlertDialog(
-                        icon: const Icon(
-                          Icons.error_outline,
-                          color: AppColor.error,
-                        ),
-                        title: const Text(TextDoc.txtChangePasswordResult),
-                        content: Flexible(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: const [
-                              Text(TextDoc.txtSuccessfullyChanged),
-                            ],
-                          ),
-                        ),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: const Text(TextDoc.txtOk),
-                          ),
-                        ],
-                      ));
+                barrierDismissible: false,
+                context: context,
+                builder: (context) => AlertDialog(
+                  icon: const Icon(
+                    Icons.error_outline,
+                    color: AppColor.error,
+                  ),
+                  title: const Text(TextDoc.txtChangePasswordResult),
+                  content: Flexible(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: const [
+                        Text(TextDoc.txtSuccessfullyChanged),
+                      ],
+                    ),
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text(TextDoc.txtOk),
+                    ),
+                  ],
+                ),
+              );
             }
           }
         },
@@ -102,7 +104,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                 delegate: SliverChildBuilderDelegate(
                   childCount: 1,
                   (_, index) => Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: screenAutoPadding16, vertical: 24.0),
+                    padding: const EdgeInsets.symmetric(horizontal: padding16, vertical: 24.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
