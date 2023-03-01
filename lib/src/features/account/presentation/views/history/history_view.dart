@@ -74,6 +74,7 @@ class _HistoryViewState extends State<HistoryView> {
         builder: (context, state) {
           if (state is HistoryLoadDoneState) {
             return Scaffold(
+              backgroundColor: AppColor.white,
               body: CustomScrollView(
                 controller: _scrollController,
                 slivers: [
@@ -81,6 +82,7 @@ class _HistoryViewState extends State<HistoryView> {
                     title: const Text(
                       TextDoc.txtHistory,
                       style: TextStyle(
+                        height: 1.0,
                         fontSize: headlineSmallSize,
                         fontWeight: headlineSmallWeight,
                         color: AppColor.defaultFont,
