@@ -26,7 +26,7 @@ class AppConfig {
     AppConfig config;
     //switch env => config by env
     config = AppConfig._(
-      'http://api.centalki.com/v1',
+      'http://localhost:4000/v1',
     );
     AppConfig.value = config;
     AppConfig._created = true;

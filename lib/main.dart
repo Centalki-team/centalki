@@ -13,9 +13,14 @@ void main(List<String> args) async {
   await Injection.inject();
   await configureApp();
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  if (Firebase.apps.isEmpty) {
+    await Firebase.initializeApp(
+      name: 'YourAPP',
+      options: DefaultFirebaseOptions.currentPlatform,
+    ).whenComplete(() {
+      print("completedAppInitialize");
+    });
+  }
   // runApp(
   //   ModularApp(
   //     module: AppModule(),

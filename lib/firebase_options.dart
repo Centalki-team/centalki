@@ -17,15 +17,24 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        return android;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for android - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -43,45 +52,13 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBjkP5XUumQ9e5UOS2_PngOQsmti27D19g',
-    appId: '1:145989393323:web:6910bf23dadd7175d490ee',
-    messagingSenderId: '145989393323',
-    projectId: 'centalki-staging',
-    authDomain: 'centalki-staging.firebaseapp.com',
-    databaseURL: 'https://centalki-staging-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'centalki-staging.appspot.com',
-    measurementId: 'G-P8J84QW1GC',
-  );
-
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCgOSHDrH2IoFVLDzhkhykjdf8Zy7p00uU',
-    appId: '1:145989393323:android:a3fd9e425ea9c941d490ee',
-    messagingSenderId: '145989393323',
-    projectId: 'centalki-staging',
-    databaseURL: 'https://centalki-staging-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'centalki-staging.appspot.com',
-  );
-
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDdAhW7ojsTFiNDDkuwTU3yH_T80FuSVKg',
-    appId: '1:145989393323:ios:f030431d45c62201d490ee',
-    messagingSenderId: '145989393323',
-    projectId: 'centalki-staging',
-    databaseURL: 'https://centalki-staging-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'centalki-staging.appspot.com',
-    iosClientId: '145989393323-aa8m8kqhhjb93opbct6ftl33trmfo8vo.apps.googleusercontent.com',
-    iosBundleId: 'com.example.centalki',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDdAhW7ojsTFiNDDkuwTU3yH_T80FuSVKg',
-    appId: '1:145989393323:ios:f030431d45c62201d490ee',
-    messagingSenderId: '145989393323',
-    projectId: 'centalki-staging',
-    databaseURL: 'https://centalki-staging-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'centalki-staging.appspot.com',
-    iosClientId: '145989393323-aa8m8kqhhjb93opbct6ftl33trmfo8vo.apps.googleusercontent.com',
-    iosBundleId: 'com.example.centalki',
+    apiKey: 'AIzaSyAL52npE514jEMWIlqyyCjvVLK1hv07rHU',
+    appId: '1:450040217669:ios:18d2ff6beddb90fd04a32c',
+    messagingSenderId: '450040217669',
+    projectId: 'centalki',
+    storageBucket: 'centalki.appspot.com',
+    iosClientId: '450040217669-1j183r83ju6tdcb0g9g1sd92a4cg8ajr.apps.googleusercontent.com',
+    iosBundleId: 'com.centalki.student',
   );
 }

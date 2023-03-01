@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>145989393323-aa8m8kqhhjb93opbct6ftl33trmfo8vo.apps.googleusercontent.com</string>
+	<string>450040217669-1j183r83ju6tdcb0g9g1sd92a4cg8ajr.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.145989393323-aa8m8kqhhjb93opbct6ftl33trmfo8vo</string>
+	<string>com.googleusercontent.apps.450040217669-1j183r83ju6tdcb0g9g1sd92a4cg8ajr</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDdAhW7ojsTFiNDDkuwTU3yH_T80FuSVKg</string>
+	<string>AIzaSyAL52npE514jEMWIlqyyCjvVLK1hv07rHU</string>
 	<key>GCM_SENDER_ID</key>
-	<string>145989393323</string>
+	<string>450040217669</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.centalki</string>
+	<string>com.centalki.student</string>
 	<key>PROJECT_ID</key>
-	<string>centalki-staging</string>
+	<string>centalki</string>
 	<key>STORAGE_BUCKET</key>
-	<string>centalki-staging.appspot.com</string>
+	<string>centalki.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:145989393323:ios:f030431d45c62201d490ee</string>
+	<string>1:450040217669:ios:18d2ff6beddb90fd04a32c</string>
 </dict>
 </plist>
