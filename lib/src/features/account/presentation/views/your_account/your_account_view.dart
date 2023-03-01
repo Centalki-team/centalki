@@ -368,7 +368,6 @@ class _YourAccountViewState extends State<YourAccountView> {
                                         context: context,
                                         builder: (context) => AlertDialog(
                                               backgroundColor: AppColor.white,
-                                              surfaceTintColor: AppColor.white,
                                               title: const Text(
                                                 TextDoc.txtConfirmDeleteAccountTitle,
                                                 style: TextStyle(
@@ -463,7 +462,6 @@ class _YourAccountViewState extends State<YourAccountView> {
                                         context: context,
                                         builder: (context) => AlertDialog(
                                               backgroundColor: AppColor.white,
-                                              surfaceTintColor: AppColor.white,
                                               title: const Text(
                                                 TextDoc.txtSignOut,
                                                 style: TextStyle(
