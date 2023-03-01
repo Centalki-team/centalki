@@ -110,7 +110,14 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                 CustomScrollView(
                   slivers: [
                     SliverAppBar.medium(
-                      title: const Text(TextDoc.txtStudentProfile),
+                      title: const Text(
+                        TextDoc.txtStudentProfile,
+                        style: TextStyle(
+                          fontSize: headlineSmallSize,
+                          fontWeight: headlineSmallWeight,
+                          color: AppColor.defaultFont,
+                        ),
+                      ),
                       centerTitle: true,
                     ),
                     SliverList(
@@ -233,13 +240,15 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                         child: AppElevatedButton(
                           onPressed: state is StudentProfileChangedState
                               ? () {
-                                  context.read<StudentProfileBloc>().add(StudentProfileSaveChangesEvent(
-                                        avatarUrl,
-                                        _fullNameController.text,
-                                        _englishNameController.text,
-                                        _bioController.text,
-                                        selectedTopics,
-                                      ));
+                                  context.read<StudentProfileBloc>().add(
+                                        StudentProfileSaveChangesEvent(
+                                          avatarUrl,
+                                          _fullNameController.text,
+                                          _englishNameController.text,
+                                          _bioController.text,
+                                          selectedTopics,
+                                        ),
+                                      );
                                 }
                               : null,
                           minimumSize: const Size.fromHeight(48),

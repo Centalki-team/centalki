@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 import '../../../../../../base/define/colors.dart';
 import '../../../../../../base/define/dimensions.dart';
+import '../../../../../../base/define/size.dart';
 import '../../../../../../base/define/text.dart';
 import '../../blocs/wallet_bloc/wallet_bloc.dart';
 
@@ -25,7 +26,10 @@ class WalletView extends StatelessWidget {
                       title: const Text(TextDoc.txtLoadFailed),
                       content: Text(state.message),
                       actions: [
-                        TextButton(onPressed: () => Navigator.pop(context), child: const Text(TextDoc.txtOk)),
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text(TextDoc.txtOk),
+                        ),
                       ],
                     ));
           }
@@ -35,10 +39,18 @@ class WalletView extends StatelessWidget {
 
           if (state is WalletLoadDoneState) {
             return Scaffold(
+              backgroundColor: AppColor.white,
               body: CustomScrollView(
                 slivers: [
                   SliverAppBar.medium(
-                    title: const Text(TextDoc.txtWallet),
+                    title: const Text(
+                      TextDoc.txtWallet,
+                      style: TextStyle(
+                        fontSize: headlineSmallSize,
+                        fontWeight: headlineSmallWeight,
+                        color: AppColor.defaultFont,
+                      ),
+                    ),
                     centerTitle: true,
                     actions: [
                       Padding(
@@ -49,7 +61,7 @@ class WalletView extends StatelessWidget {
                           },
                           icon: const Icon(
                             Icons.add,
-                            color: AppColor.mainColor1,
+                            color: AppColor.secondary,
                           ),
                         ),
                       ),
@@ -59,53 +71,78 @@ class WalletView extends StatelessWidget {
                     delegate: SliverChildBuilderDelegate(
                       childCount: 1,
                       (_, index) => Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: screenAutoPadding16, vertical: 24),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: screenAutoPadding16,
+                          vertical: screenAutoPadding24,
+                        ),
                         child: SingleChildScrollView(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Card(
-                                color: AppColor.mainColor2Surface,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                              Container(
+                                width: double.maxFinite,
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: screenAutoPadding8,
+                                  horizontal: screenAutoPadding16,
+                                ),
+                                decoration: const BoxDecoration(
+                                  color: AppColor.mainColor2Surface,
+                                  borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                                ),
+                                child: Column(
                                   children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        vertical: 8.0,
-                                        horizontal: screenAutoPadding16,
+                                    const Text(
+                                      TextDoc.txtBalance,
+                                      style: TextStyle(
+                                        fontSize: titleMediumSize,
+                                        fontWeight: titleMediumWeight,
+                                        color: AppColor.defaultFont,
                                       ),
-                                      child: Column(
-                                        children: [
-                                          const Text(
-                                            TextDoc.txtBalance,
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: AppColor.defaultFont,
-                                              fontSize: 18,
-                                            ),
-                                          ),
-                                          Text(
-                                            currencyFormat.format(state.balanceMoney),
-                                            style: const TextStyle(
-                                              color: AppColor.support,
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          const Text(TextDoc.txtOr),
-                                          Text(
-                                            '${state.balanceSessions} sessions',
-                                            style: const TextStyle(
-                                              color: AppColor.support,
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          Text(
-                                            '${TextDoc.txtEachSession} ${currencyFormat.format(state.costPerSession)}${TextDoc.txt30Minutes}',
-                                            style: const TextStyle(fontStyle: FontStyle.italic),
-                                          ),
-                                        ],
+                                    ),
+                                    Text(
+                                      currencyFormat.format(state.balanceMoney),
+                                      style: const TextStyle(
+                                        height: 0.75,
+                                        fontSize: headlineLargeSize,
+                                        fontWeight: headlineLargeWeight,
+                                        color: AppColor.support,
+                                      ),
+                                    ),
+                                    const Text(
+                                      TextDoc.txtOr,
+                                      style: TextStyle(
+                                        fontSize: labelLargeSize,
+                                        fontWeight: labelLargeWeight,
+                                        color: AppColor.defaultFont,
+                                      ),
+                                    ),
+                                    Text(
+                                      '${state.balanceSessions} sessions',
+                                      style: const TextStyle(
+                                        height: 0.75,
+                                        fontSize: headlineLargeSize,
+                                        fontWeight: headlineLargeWeight,
+                                        color: AppColor.support,
+                                      ),
+                                    ),
+                                    const SizedBox(height: spaceBetweenLine12),
+                                    const Text(
+                                      TextDoc.txtEachSessionDuration,
+                                      style: TextStyle(
+                                        height: 0.5,
+                                        fontStyle: FontStyle.italic,
+                                        fontSize: bodySmallSize,
+                                        fontWeight: bodySmallWeight,
+                                        color: AppColor.defaultFont,
+                                      ),
+                                    ),
+                                    Text(
+                                      '${TextDoc.txtEachSessionPrice}${currencyFormat.format(state.costPerSession)}',
+                                      style: const TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                        fontSize: bodySmallSize,
+                                        fontWeight: bodySmallWeight,
+                                        color: AppColor.defaultFont,
                                       ),
                                     ),
                                   ],

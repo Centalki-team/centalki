@@ -132,7 +132,7 @@ class _SignInViewState extends State<SignInView> {
                 const SizedBox(height: spaceBetweenLine24),
                 const Center(
                   child: Text(
-                    TextDoc.txtOr,
+                    TextDoc.txtOrLoginWith,
                     style: TextStyle(
                       fontSize: bodyLargeSize,
                       fontWeight: bodyLargeWeight,
