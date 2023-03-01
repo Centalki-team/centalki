@@ -32,20 +32,16 @@ class QuestionCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: 40,
-              height: 35,
-              alignment: Alignment.center,
-              child: Text(
-                '${index + 1}.',
-                style: const TextStyle(
-                  fontSize: titleMediumSize,
-                  fontWeight: titleMediumWeight,
-                  color: AppColor.defaultFont,
-                ),
+            const SizedBox(width: smallSpacing8),
+            Text(
+              '${index + 1}.',
+              style: const TextStyle(
+                fontSize: titleMediumSize,
+                fontWeight: titleMediumWeight,
+                color: AppColor.defaultFont,
               ),
             ),
-            const SizedBox(width: smallSpacing10),
+            const SizedBox(width: smallSpacing8),
             Expanded(
               child: Text(
                 questionContent,

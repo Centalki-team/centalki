@@ -82,8 +82,8 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                           height: 144 + MediaQuery.of(context).padding.top,
                           child: const Icon(
                             Icons.error_outline_rounded,
-                            size: 32,
-                            color: Colors.red,
+                            size: 40,
+                            color: AppColor.error,
                           ),
                         ),
                       ),
@@ -130,7 +130,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                             ),
                             const SizedBox(height: smallSpacing6),
                             SizedBox(
-                              height: 60.0,
+                              height: 48.0,
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
@@ -151,6 +151,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                           child: Text(
                                             state.topicDetail.topicCategory ?? 'null. This topic is out of this world',
                                             style: const TextStyle(
+                                              height: 0.9,
                                               fontSize: bodySmallSize,
                                               fontWeight: bodySmallWeight,
                                               color: AppColor.defaultFont,
@@ -189,6 +190,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                           child: Text(
                                             state.topicDetail.topicLevel ?? 'null. This topic is for Einstein',
                                             style: const TextStyle(
+                                              height: 0.9,
                                               fontSize: bodySmallSize,
                                               fontWeight: bodySmallWeight,
                                               color: AppColor.defaultFont,
@@ -202,10 +204,11 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                 ],
                               ),
                             ),
-                            const SizedBox(height: spaceBetweenLine16),
+                            const SizedBox(height: spaceBetweenLine20),
                             Text(
                               state.topicDetail.topicDescription ?? 'null. This topic is about nothing',
                               style: const TextStyle(
+                                height: 1.15,
                                 fontSize: bodyLargeSize,
                                 fontWeight: bodyLargeWeight,
                                 color: Colors.black,
@@ -233,7 +236,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                 return PhraseCard(phraseEntity: phrase);
                               },
                               separatorBuilder: (context, index) => const SizedBox(
-                                height: spaceBetweenLine12,
+                                height: spaceBetweenLine20,
                               ),
                             ),
                             const SizedBox(height: spaceBetweenLine16),

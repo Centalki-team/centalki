@@ -16,13 +16,26 @@ class PhraseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: BoxDecoration(
+          color: AppColor.white,
+          borderRadius: const BorderRadius.all(Radius.circular(12.0)),
+          boxShadow: [
+            BoxShadow(
+              color: AppColor.shadow.shade200,
+              blurRadius: 4.0,
+              spreadRadius: 0.0,
+              offset: const Offset(0, 2),
+            )
+          ]
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               phraseEntity.topicPhrase ?? 'null phrase',
               style: const TextStyle(
+                height: 0.9,
                 fontSize: titleMediumSize,
                 fontWeight: titleMediumWeight,
                 color: AppColor.mainColor1,
@@ -32,7 +45,7 @@ class PhraseCard extends StatelessWidget {
               phraseEntity.phrasePhonetic ?? 'no phonetic',
               style: const TextStyle(
                 fontFamily: 'NotoSans',
-                fontSize: bodySmallSize * 0.7,
+                fontSize: bodySmallSize * 0.6,
                 fontWeight: bodySmallWeight,
                 color: AppColor.defaultFont,
               ),
@@ -42,15 +55,18 @@ class PhraseCard extends StatelessWidget {
               (e) => Text(
                 e.phraseMeaning ?? 'null meaning',
                 style: const TextStyle(
+                  height: 0.9,
                   fontSize: titleMediumSize,
                   fontWeight: titleMediumWeight,
                 ),
               ),
             ),
+            const SizedBox(height: smallSpacing2),
             ...phraseEntity.phraseExamples!.map(
               (e) => Text(
                 e.phraseExample ?? 'null example',
                 style: const TextStyle(
+                  height: 0.9,
                   fontSize: bodyMediumSize,
                   fontWeight: bodyMediumWeight,
                 ),
