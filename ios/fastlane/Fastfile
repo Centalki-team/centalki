@@ -1,0 +1,175 @@
+default_platform(:ios)
+
+platform :ios do
+  desc 'IOS Production'
+  lane :ios_production do
+    xcversion(version: "14.1")
+    keychain_password = '123456'
+    keychain_file_name = 'fastlane-ios-build.keychain'
+
+    p12_file_name = 'fastlane-ios-build.p12'
+    decode_file(p12_file_name)
+
+    create_keychain(
+      name: keychain_file_name,
+      password: keychain_password,
+      default_keychain: false,
+      unlock: true,
+      timeout: 3600
+    )
+
+    import_certificate(
+      certificate_path: p12_file_name,
+      certificate_password: ENV['CERTIFICATE_PASSWORD'],
+      keychain_name: keychain_file_name,
+      keychain_password: keychain_password,
+      log_output: true
+    )
+
+
+    @profiles.each { |profile| install_provisioning_profile(path: profile) }
+
+    # update_code_signing_settings(
+    #   use_automatic_signing: false,
+    #   path: ENV['PROJECT_PATH'],
+    #   code_sign_identity: ENV['CODE_SIGNING_IDENTITY'],
+    #   # targets: update_targets
+    #   targets: nil
+    # )
+
+    # if @profiles.length == 1
+    #   update_project_provisioning(
+    #     xcodeproj: ENV['PROJECT_PATH'],
+    #     profile: @profiles[0],
+    #     target_filter: nil
+    #   )
+    # end
+
+    # update_project_team(
+    #   path: ENV['PROJECT_PATH'], teamid: ENV['TEAM_ID'], targets: nil
+    # )
+
+    # project =
+    #   Xcodeproj::Project.open(
+    #     if Pathname(ENV['PROJECT_PATH']).absolute?
+    #       ENV['PROJECT_PATH']
+    #     else
+    #       "../#{ENV['PROJECT_PATH']}"
+    #     end
+    #   )
+    # project.targets.each do |target|
+    #   configuration =
+    #     target.build_configurations.find do |bc|
+    #       bc.name == ENV['CONFIGURATION']
+    #     end
+    #   app_identifier =
+    #     resolve_recursive_build_setting(
+    #       configuration,
+    #       'PRODUCT_BUNDLE_IDENTIFIER'
+    #     )
+    #   configuration.build_settings['PRODUCT_BUNDLE_IDENTIFIER'] = app_identifier
+    # end
+    # project.save
+    clean_build_artifacts
+
+    build_app(
+      workspace: ENV["PROJECT_WORKSPACE"],
+      # project: ENV['PROJECT_PATH'],
+      configuration: ENV['CONFIGURATION'],
+      scheme: ENV['SCHEME'],
+      output_directory: File.dirname(ENV['OUTPUT_PATH']),
+      output_name: File.basename(ENV['OUTPUT_PATH']),
+      clean: true,
+      silent: true,
+      cloned_source_packages_path: nil,
+      export_method: ENV['EXPORT_METHOD'],
+      export_options: {
+        provisioningProfiles: {
+          "com.ripid.staging" => "Ripid Staging Profile",
+        }
+      },
+      skip_profile_detection: nil,
+      sdk: nil,
+      destination: nil,
+      include_bitcode: true
+    )
+
+    delete_keychain(name: keychain_file_name)
+
+    api_key = app_store_connect_api_key(
+      key_id: ENV["KEY_ID"],
+      issuer_id: ENV["ISSUER_ID"],
+      key_filepath: "appstore_connect_private_key.p8",
+      duration: 1200, # optional (maximum 1200)
+      in_house: false # optional but may be required if using match/sigh
+    )
+  
+    upload_to_testflight(
+      api_key: api_key, 
+      ipa: ENV['OUTPUT_PATH'],
+      changelog: "Fastlane vs Testflight",
+      skip_submission: true
+    )
+
+  end
+
+  # https://github.com/CocoaPods/Xcodeproj/issues/505#issuecomment-584699008
+  # Augments config.resolve_build_setting from xcproject
+  # to continue expanding build settings and evaluate modifiers
+  def resolve_recursive_build_setting(config, setting)
+    resolution = config.resolve_build_setting(setting)
+
+    # finds values with one of
+    # $VALUE
+    # $(VALLUE)
+    # $(VALUE:modifier)
+    # ${VALUE}
+    # ${VALUE:modifier}
+    resolution&.gsub(/\$[\(\{]?.+[\)\}]?/) do |raw_value|
+      # strip $() characters
+      unresolved =
+        raw_value.gsub(/[\$\(\)\{\}]/, '')
+
+      # Get the modifiers after the ':' characters
+      name, *modifiers = unresolved.split(':')
+
+      # Expand variable name
+      subresolution = resolve_recursive_build_setting(config, name)
+
+      # Apply modifiers
+      # NOTE: not all cases accounted for
+      #
+      # See http://codeworkshop.net/posts/xcode-build-setting-transformations
+      # for various modifier options
+      modifiers.each do |modifier|
+        case modifier
+        when 'lower'
+          subresolution.downcase!
+        when 'upper'
+          subresolution.upcase!
+        else
+          # Fastlane message
+          UI.error("Unknown modifier: `#{modifier}` in `#{raw_value}")
+        end
+      end
+
+      subresolution
+    end
+  end
+
+  def decode_file(p12_file_name)
+    File.write("../#{p12_file_name}", Base64.decode64(ENV['P12_BASE64']))
+
+    File.write('../appstore_connect_private_key.p8', ENV['APPSTORE_CONNECT_PRIVATE_KEY'])
+    mobileprovision_file_name = "fastlane-ios-build.mobileprovision"
+    @profiles = []
+    ENV['MOBILEPROVISION_BASE64'].split(/\R/).each.with_index(
+        1
+      ) do |profile, index|
+        filename = mobileprovision_file_name
+        puts "creating ../#{filename}"
+        File.write("../#{filename}", Base64.decode64(profile))
+        @profiles.push(filename)
+      end
+  end
+end
