@@ -24,10 +24,7 @@ class DefaultFirebaseOptions {
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for android - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return android;
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
@@ -52,13 +49,24 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyCyh0_RvQnOT-G7tRvBaV_hH8khr1FTm54',
+    appId: '1:450040217669:android:5b70e5ab5df9b77604a32c',
+    messagingSenderId: '450040217669',
+    projectId: 'centalki',
+    databaseURL:
+        'https://centalki-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'centalki.appspot.com',
+  );
+
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyAL52npE514jEMWIlqyyCjvVLK1hv07rHU',
     appId: '1:450040217669:ios:18d2ff6beddb90fd04a32c',
     messagingSenderId: '450040217669',
     projectId: 'centalki',
     storageBucket: 'centalki.appspot.com',
-    iosClientId: '450040217669-1j183r83ju6tdcb0g9g1sd92a4cg8ajr.apps.googleusercontent.com',
+    iosClientId:
+        '450040217669-1j183r83ju6tdcb0g9g1sd92a4cg8ajr.apps.googleusercontent.com',
     iosBundleId: 'com.centalki.student',
   );
 }

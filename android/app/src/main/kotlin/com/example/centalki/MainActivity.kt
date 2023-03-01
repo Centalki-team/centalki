@@ -1,4 +1,4 @@
-package com.example.centalki
+package com.centalki.student
 
 import io.flutter.embedding.android.FlutterActivity
 
