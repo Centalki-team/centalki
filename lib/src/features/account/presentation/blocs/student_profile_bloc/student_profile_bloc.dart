@@ -45,7 +45,7 @@ class StudentProfileBloc
 
   void _onChange(StudentProfileChangeEvent event, emit) {
     emit(const StudentProfileSavingState());
-    emit(const StudentProfileChangeState());
+    emit(const StudentProfileChangedState());
   }
 
   void _onSaveChanges(StudentProfileSaveChangesEvent event, emit) async {

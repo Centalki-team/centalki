@@ -30,6 +30,7 @@ class _AppElevatedButtonState extends State<AppElevatedButton> {
               backgroundColor: AppColor.secondary,
               surfaceTintColor: AppColor.secondary,
               foregroundColor: AppColor.defaultFont,
+              disabledBackgroundColor: AppColor.container,
               textStyle: const TextStyle(
                 fontFamily: 'Dongle',
                 fontSize: labelLargeSize,

@@ -33,20 +33,21 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                   bottom: 24.0,
                 ),
                 child: SafeArea(
-                    top: false,
-                    bottom: false,
-                    child: AppElevatedButton(
-                      text: TextDoc.txtTalk,
-                      minimumSize: const Size.fromHeight(48),
-                      onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ConnectTeacherPage(
-                            topicId: state.topicDetail.topicId ?? '',
-                          ),
+                  top: false,
+                  bottom: false,
+                  child: AppElevatedButton(
+                    text: TextDoc.txtTalk,
+                    minimumSize: const Size.fromHeight(48),
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ConnectTeacherPage(
+                          topicId: state.topicDetail.topicId ?? '',
                         ),
                       ),
-                    )),
+                    ),
+                  ),
+                ),
               );
             }
             return const SizedBox.shrink();

@@ -44,6 +44,6 @@ class StudentProfileSaveFailureState extends StudentProfileState {
   final String message;
 }
 
-class StudentProfileChangeState extends StudentProfileState {
-  const StudentProfileChangeState();
+class StudentProfileChangedState extends StudentProfileState {
+  const StudentProfileChangedState();
 }
