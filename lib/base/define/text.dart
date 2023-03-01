@@ -88,7 +88,7 @@ class TextDoc {
       'Please check your internet connection and try again.';
 
   // Your account
-  static const txtLoadFailed = 'Load failed!';
+  static const txtLoadFailed = 'Failed to load your profile!';
   static const txtStudentProfile = 'Student Profile';
   static const txtWallet = 'Wallet';
   static const txtHistory = 'History';
@@ -106,8 +106,8 @@ class TextDoc {
   static const txtFacebook = 'Facebook';
   static const txtGoogle = 'Google';
   static const txtApple = 'Apple';
-  static const txtSaveFailed = 'Save failed!';
-  static const txtSuccessfullySaved = 'Successfully saved!';
+  static const txtProfileUpdateFailed = 'Failed to update your profile!';
+  static const txtProfileUpdateSuccess = 'Successfully updated your profile!!';
   static const txtPhoneNumberTitle = 'Phone Number';
   static const txtDateOfBirthTitle = 'Date of Birth';
   static const txtGenderTitle = 'Gender';

@@ -74,7 +74,7 @@ class StudentProfileBloc
       }
       emit(const StudentProfileSaveDoneState());
     } on Exception catch (_) {
-      emit(const StudentProfileSaveFailureState(TextDoc.txtSaveFailed));
+      emit(const StudentProfileSaveFailureState(TextDoc.txtProfileUpdateFailed));
     }
   }
 }

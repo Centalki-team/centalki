@@ -27,15 +27,15 @@ class _AppElevatedButtonState extends State<AppElevatedButton> {
         ? ElevatedButton(
             onPressed: widget.onPressed == null ? null : widget.onPressed!,
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppColor.white,
-              foregroundColor: AppColor.secondary,
+              backgroundColor: AppColor.secondary,
+              surfaceTintColor: AppColor.secondary,
+              foregroundColor: AppColor.defaultFont,
               textStyle: const TextStyle(
                 fontFamily: 'Dongle',
                 fontSize: labelLargeSize,
                 fontWeight: labelLargeWeight,
               ),
-              elevation: 1.0,
-              shadowColor: AppColor.shadow,
+              elevation: 5.0,
               minimumSize: widget.minimumSize,
             ),
             child: Text(

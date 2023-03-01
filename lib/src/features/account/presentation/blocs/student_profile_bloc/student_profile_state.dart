@@ -24,8 +24,8 @@ class StudentProfileLoadDoneState extends StudentProfileState {
   final List<TopicItemEntity> topics;
 }
 
-class StudentProfileLoadFailureState extends StudentProfileState {
-  const StudentProfileLoadFailureState(this.message);
+class StudentProfileLoadFailedState extends StudentProfileState {
+  const StudentProfileLoadFailedState(this.message);
 
   final String message;
 }

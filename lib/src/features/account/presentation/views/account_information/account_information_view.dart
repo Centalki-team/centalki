@@ -60,7 +60,7 @@ class _AccountInformationViewState extends State<AccountInformationView> {
             showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
-                      title: const Text(TextDoc.txtSaveFailed),
+                      title: const Text(TextDoc.txtProfileUpdateFailed),
                       content: Text(state.message),
                       actions: [
                         TextButton(
@@ -73,7 +73,7 @@ class _AccountInformationViewState extends State<AccountInformationView> {
             showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
-                      title: const Text(TextDoc.txtSuccessfullySaved),
+                      title: const Text(TextDoc.txtProfileUpdateSuccess),
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.pop(context),

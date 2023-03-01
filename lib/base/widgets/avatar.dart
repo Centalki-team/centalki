@@ -20,7 +20,10 @@ class Avatar extends StatelessWidget {
         result += word[0];
       }
     }
-    return result;
+    if (result.length > 4) {
+      return result.substring(0, 4).toUpperCase();
+    }
+    return result.toUpperCase();
   }
 
   @override

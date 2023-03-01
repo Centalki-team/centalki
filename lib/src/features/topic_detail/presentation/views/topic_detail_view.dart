@@ -5,6 +5,7 @@ import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
 import '../../../../../base/define/text.dart';
+import '../../../../../base/widgets/buttons/button.dart';
 import '../../../connect_teacher/presentation/views/connect_teacher_page.dart';
 import '../blocs/topic_detail_bloc/topic_detail_bloc.dart';
 import '../widgets/phrase_card.dart';
@@ -32,32 +33,20 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                   bottom: 24.0,
                 ),
                 child: SafeArea(
-                  top: false,
-                  bottom: false,
-                  child: ElevatedButton(
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ConnectTeacherPage(
-                          topicId: state.topicDetail.topicId ?? '',
+                    top: false,
+                    bottom: false,
+                    child: AppElevatedButton(
+                      text: TextDoc.txtTalk,
+                      minimumSize: const Size.fromHeight(48),
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ConnectTeacherPage(
+                            topicId: state.topicDetail.topicId ?? '',
+                          ),
                         ),
                       ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      elevation: 5.0,
-                      backgroundColor: AppColor.secondary,
-                      surfaceTintColor: AppColor.secondary,
-                    ),
-                    child: const Text(
-                      TextDoc.txtTalk,
-                      style: TextStyle(
-                        fontSize: labelLargeSize,
-                        fontWeight: labelLargeWeight,
-                        color: AppColor.defaultFont,
-                      ),
-                    ),
-                  ),
-                ),
+                    )),
               );
             }
             return const SizedBox.shrink();
