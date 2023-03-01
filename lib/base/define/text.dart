@@ -120,6 +120,8 @@ class TextDoc {
   static const txtDeleteAccountResult = 'Delete result';
   static const txtReauthenticateAccount = 'Re-authenticate your account';
   static const txtReauthenticate = 'Re-authenticate';
+  static const txtConfirmDeleteAccount = 'Confirm Delete';
+  static const txtEnterPasswordToDelete = 'Please enter your password to continue';
 
   static const txtTotalCompletedSessions = 'Total Completed Sessions';
   static const txtTotalTime = 'Total time is';
