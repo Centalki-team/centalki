@@ -64,7 +64,11 @@ class DefaultFirebaseOptions {
     appId: '1:450040217669:ios:18d2ff6beddb90fd04a32c',
     messagingSenderId: '450040217669',
     projectId: 'centalki',
+    databaseURL:
+        'https://centalki-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'centalki.appspot.com',
+    androidClientId:
+        '450040217669-28066jcifvkef38i27dqt8odac8edquq.apps.googleusercontent.com',
     iosClientId:
         '450040217669-1j183r83ju6tdcb0g9g1sd92a4cg8ajr.apps.googleusercontent.com',
     iosBundleId: 'com.centalki.student',
