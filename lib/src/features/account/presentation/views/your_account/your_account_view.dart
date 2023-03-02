@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../base/define/colors.dart';
-import '../../../../../../base/define/dimensions.dart';
-import '../../../../../../base/define/size.dart';
-import '../../../../../../base/define/text.dart';
+import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/avatar.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../blocs/your_account_bloc/your_account_bloc.dart';

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../base/define/colors.dart';
-import '../../../../../base/define/dimensions.dart';
-import '../../../../../base/define/size.dart';
-import '../../../../../base/define/text.dart';
+import '../../../../../../base/define/styles.dart';
 import '../../domain/entities/topic_detail_entity.dart';
 
 class PhraseCard extends StatelessWidget {

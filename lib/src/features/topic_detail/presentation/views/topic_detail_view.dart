@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../base/define/colors.dart';
-import '../../../../../base/define/dimensions.dart';
-import '../../../../../base/define/size.dart';
-import '../../../../../base/define/text.dart';
+import '../../../../../../base/define/styles.dart';
 import '../../../../../base/widgets/buttons/button.dart';
 import '../../../connect_teacher/presentation/views/connect_teacher_page.dart';
 import '../blocs/topic_detail_bloc/topic_detail_bloc.dart';

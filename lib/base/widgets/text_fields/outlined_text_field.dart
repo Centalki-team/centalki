@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../define/colors.dart';
-import '../../define/dimensions.dart';
-import '../../define/opacity.dart';
-import '../../define/size.dart';
-import '../../define/width.dart';
+import '../../define/styles.dart';
 
 class AppOutlinedTextField extends StatefulWidget {
   const AppOutlinedTextField({
@@ -103,10 +99,7 @@ class _AppOutlinedTextFieldState extends State<AppOutlinedTextField> {
           ),
           errorBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(textFieldRadius)),
-            borderSide: BorderSide(
-              color: AppColor.error,
-              width: errorOutlineWidthTextField / 2
-            ),
+            borderSide: BorderSide(color: AppColor.error, width: errorOutlineWidthTextField / 2),
           ),
           focusedErrorBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(textFieldRadius)),

@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-import '../../../../../../base/define/colors.dart';
-import '../../../../../../base/define/dimensions.dart';
-import '../../../../../../base/define/size.dart';
-import '../../../../../../base/define/text.dart';
+import '../../../../../../base/define/styles.dart';
 import '../../blocs/wallet_bloc/wallet_bloc.dart';
 
 class WalletView extends StatelessWidget {

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../base/define/colors.dart';
-import '../../../../../base/define/dimensions.dart';
-import '../../../../../base/define/size.dart';
+import '../../../../../../base/define/styles.dart';
 import '../../../topic_detail/presentation/views/topic_detail_page.dart';
 import '../../domain/entities/topic_item_entity.dart';
 

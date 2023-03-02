@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../base/define/colors.dart';
-import '../../../../../../base/define/dimensions.dart';
 import '../../../../../../base/define/manager/loading_manager.dart';
-import '../../../../../../base/define/size.dart';
-import '../../../../../../base/define/text.dart';
+import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/text_fields/outlined_text_field.dart';
 import '../../blocs/change_password_bloc/change_password_bloc.dart';

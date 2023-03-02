@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../define/colors.dart';
-import '../../define/size.dart';
+import '../../define/styles.dart';
 
 class AppElevatedButton extends StatefulWidget {
   const AppElevatedButton({
@@ -24,47 +23,47 @@ class AppElevatedButton extends StatefulWidget {
 class _AppElevatedButtonState extends State<AppElevatedButton> {
   @override
   Widget build(BuildContext context) => widget.icon == null
-        ? ElevatedButton(
-            onPressed: widget.onPressed == null ? null : widget.onPressed!,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColor.secondary,
-              surfaceTintColor: AppColor.secondary,
-              foregroundColor: AppColor.defaultFont,
-              disabledBackgroundColor: AppColor.background,
-              disabledForegroundColor: AppColor.shadow,
-              textStyle: const TextStyle(
-                fontFamily: 'Dongle',
-                fontSize: labelLargeSize,
-                fontWeight: labelLargeWeight,
-              ),
-              elevation: 5.0,
-              minimumSize: widget.minimumSize,
+      ? ElevatedButton(
+          onPressed: widget.onPressed == null ? null : widget.onPressed!,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppColor.secondary,
+            surfaceTintColor: AppColor.secondary,
+            foregroundColor: AppColor.defaultFont,
+            disabledBackgroundColor: AppColor.background,
+            disabledForegroundColor: AppColor.shadow,
+            textStyle: const TextStyle(
+              fontFamily: 'Dongle',
+              fontSize: labelLargeSize,
+              fontWeight: labelLargeWeight,
             ),
-            child: Text(
-              widget.text,
+            elevation: 5.0,
+            minimumSize: widget.minimumSize,
+          ),
+          child: Text(
+            widget.text,
+          ),
+        )
+      : ElevatedButton.icon(
+          onPressed: widget.onPressed == null ? null : widget.onPressed!,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppColor.white,
+            foregroundColor: AppColor.secondary,
+            textStyle: const TextStyle(
+              fontFamily: 'Dongle',
+              fontSize: labelLargeSize,
+              fontWeight: labelLargeWeight,
             ),
-          )
-        : ElevatedButton.icon(
-            onPressed: widget.onPressed == null ? null : widget.onPressed!,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColor.white,
-              foregroundColor: AppColor.secondary,
-              textStyle: const TextStyle(
-                fontFamily: 'Dongle',
-                fontSize: labelLargeSize,
-                fontWeight: labelLargeWeight,
-              ),
-              elevation: 1.0,
-              shadowColor: AppColor.shadow,
-              minimumSize: widget.minimumSize,
-            ),
-            icon: Icon(
-              widget.icon!,
-              size: iconButtonSize,
-              color: AppColor.defaultFont,
-            ),
-            label: Text(
-              widget.text,
-            ),
-          );
+            elevation: 1.0,
+            shadowColor: AppColor.shadow,
+            minimumSize: widget.minimumSize,
+          ),
+          icon: Icon(
+            widget.icon!,
+            size: iconButtonSize,
+            color: AppColor.defaultFont,
+          ),
+          label: Text(
+            widget.text,
+          ),
+        );
 }

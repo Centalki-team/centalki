@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../base/define/colors.dart';
-import '../../../../../../base/define/dimensions.dart';
-import '../../../../../../base/define/size.dart';
+import '../../../../../../base/define/styles.dart';
 
 class TermsAndConditions extends StatelessWidget {
   const TermsAndConditions({Key? key}) : super(key: key);
