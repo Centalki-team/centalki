@@ -205,6 +205,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                     MaterialPageRoute(builder: (context) => const AccountInformationPage()),
                                   ),
                                 ),
+                                const SizedBox(height: spaceBetweenLine12),
                                 AccountTile(
                                   icon: Icons.password_outlined,
                                   title: TextDoc.txtChangePassword,

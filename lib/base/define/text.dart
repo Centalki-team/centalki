@@ -146,9 +146,10 @@ class TextDoc {
   static const txtTransactions = 'Transactions';
   static const txtCharged = 'Charged';
 
-  static const txtNewPasswordEmptyWarning = 'New password cannot be empty';
-  static const txtConfirmedPasswordMatchWarning = 'Confirmed password must match the new password';
-  static const txtConfirmedPasswordEmptyWarning = 'Confirmed password cannot be empty';
+  static const txtNewPasswordEmpty = 'New password cannot be empty';
+  static const txtNewPasswordTooShort = 'New password must contain at least 6 characters';
+  static const txtConfirmedPassword = 'Confirmed password must match the new password';
+  static const txtConfirmedPasswordEmpty = 'Confirmed password cannot be empty';
   static const txtChangePasswordError = 'Something went wrong. Please try again later!';
   static const txtUserNotSignIn = 'User does not sign in!';
   static const txtDeleteAccountError = 'Something wrong when delete account!\nTry again after some minutes.';

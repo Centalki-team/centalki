@@ -4,10 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../base/define/text.dart';
 
 part 'change_password_event.dart';
+
 part 'change_password_state.dart';
 
-class ChangePasswordBloc
-    extends Bloc<ChangePasswordEvent, ChangePasswordState> {
+class ChangePasswordBloc extends Bloc<ChangePasswordEvent, ChangePasswordState> {
   ChangePasswordBloc() : super(const ChangePasswordInitState()) {
     on<ChangePasswordSendPasswordEvent>(_onSendPassword);
     on<ChangePasswordSendNewPasswordEvent>(_onSendNewPassword);
@@ -23,38 +23,44 @@ class ChangePasswordBloc
     currentPassword = event.password;
 
     if (currentPassword.isEmpty) {
-      if (newPassword.isEmpty) {
+      if (newPassword.length < 6) {
         if (confirmPassword.isEmpty) {
           emit(const ChangePasswordInvalidInputState());
         } else {
           emit(const ChangePasswordInvalidInputState(
-              passwordError: TextDoc.txtPasswordEmpty,
-              newPasswordError: TextDoc.txtNewPasswordEmptyWarning));
+            passwordError: TextDoc.txtPasswordEmpty,
+            newPasswordError: TextDoc.txtNewPasswordTooShort,
+          ));
         }
       } else {
         if (confirmPassword.isEmpty || confirmPassword != newPassword) {
           emit(const ChangePasswordInvalidInputState(
-              passwordError: TextDoc.txtPasswordEmpty,
-              confirmPasswordError: TextDoc.txtConfirmedPasswordMatchWarning));
+            passwordError: TextDoc.txtPasswordEmpty,
+            confirmPasswordError: TextDoc.txtConfirmedPassword,
+          ));
         } else {
           emit(const ChangePasswordInvalidInputState(
-              passwordError: TextDoc.txtPasswordEmpty));
+            passwordError: TextDoc.txtPasswordEmpty,
+          ));
         }
       }
     } else {
-      if (newPassword.isEmpty) {
+      if (newPassword.length < 6) {
         if (confirmPassword.isEmpty) {
           emit(const ChangePasswordInvalidInputState(
-              newPasswordError: TextDoc.txtNewPasswordEmptyWarning,
-              confirmPasswordError: TextDoc.txtConfirmedPasswordEmptyWarning));
+            newPasswordError: TextDoc.txtNewPasswordTooShort,
+            confirmPasswordError: TextDoc.txtConfirmedPasswordEmpty,
+          ));
         } else {
           emit(const ChangePasswordInvalidInputState(
-              newPasswordError: TextDoc.txtNewPasswordEmptyWarning));
+            newPasswordError: TextDoc.txtNewPasswordTooShort,
+          ));
         }
       } else {
         if (confirmPassword.isEmpty || confirmPassword != newPassword) {
           emit(const ChangePasswordInvalidInputState(
-              confirmPasswordError: TextDoc.txtConfirmedPasswordMatchWarning));
+            confirmPasswordError: TextDoc.txtConfirmedPassword,
+          ));
         } else {
           emit(const ChangePasswordValidInputState());
         }
@@ -66,38 +72,42 @@ class ChangePasswordBloc
     newPassword = event.newPassword;
 
     if (currentPassword.isEmpty) {
-      if (newPassword.isEmpty) {
+      if (newPassword.length < 6) {
         if (confirmPassword.isEmpty) {
           emit(const ChangePasswordInvalidInputState());
         } else {
           emit(const ChangePasswordInvalidInputState(
-              passwordError: TextDoc.txtPasswordEmpty,
-              newPasswordError: TextDoc.txtNewPasswordEmptyWarning));
+            passwordError: TextDoc.txtPasswordEmpty,
+            newPasswordError: TextDoc.txtNewPasswordTooShort,
+          ));
         }
       } else {
         if (confirmPassword.isEmpty || confirmPassword != newPassword) {
           emit(const ChangePasswordInvalidInputState(
-              passwordError: TextDoc.txtPasswordEmpty,
-              confirmPasswordError: TextDoc.txtConfirmedPasswordMatchWarning));
+            passwordError: TextDoc.txtPasswordEmpty,
+            confirmPasswordError: TextDoc.txtConfirmedPassword,
+          ));
         } else {
           emit(const ChangePasswordInvalidInputState(
-              passwordError: TextDoc.txtPasswordEmpty));
+            passwordError: TextDoc.txtPasswordEmpty,
+          ));
         }
       }
     } else {
-      if (newPassword.isEmpty) {
+      if (newPassword.length < 6) {
         if (confirmPassword.isEmpty) {
           emit(const ChangePasswordInvalidInputState(
-              newPasswordError: TextDoc.txtNewPasswordEmptyWarning,
-              confirmPasswordError: TextDoc.txtConfirmedPasswordEmptyWarning));
+            newPasswordError: TextDoc.txtNewPasswordTooShort,
+            confirmPasswordError: TextDoc.txtConfirmedPasswordEmpty,
+          ));
         } else {
           emit(const ChangePasswordInvalidInputState(
-              newPasswordError: TextDoc.txtNewPasswordEmptyWarning));
+            newPasswordError: TextDoc.txtNewPasswordTooShort,
+          ));
         }
       } else {
         if (confirmPassword.isEmpty || confirmPassword != newPassword) {
-          emit(const ChangePasswordInvalidInputState(
-              confirmPasswordError: TextDoc.txtConfirmedPasswordMatchWarning));
+          emit(const ChangePasswordInvalidInputState(confirmPasswordError: TextDoc.txtConfirmedPassword));
         } else {
           emit(const ChangePasswordValidInputState());
         }
@@ -105,43 +115,48 @@ class ChangePasswordBloc
     }
   }
 
-  void _onSendConfirmPassword(
-      ChangePasswordSendConfirmPasswordEvent event, emit) {
+  void _onSendConfirmPassword(ChangePasswordSendConfirmPasswordEvent event, emit) {
     confirmPassword = event.confirmPassword;
 
     if (currentPassword.isEmpty) {
-      if (newPassword.isEmpty) {
+      if (newPassword.length < 6) {
         if (confirmPassword.isEmpty) {
           emit(const ChangePasswordInvalidInputState());
         } else {
           emit(const ChangePasswordInvalidInputState(
-              passwordError: TextDoc.txtPasswordEmpty,
-              newPasswordError: TextDoc.txtNewPasswordEmptyWarning));
+            passwordError: TextDoc.txtPasswordEmpty,
+            newPasswordError: TextDoc.txtNewPasswordTooShort,
+          ));
         }
       } else {
         if (confirmPassword.isEmpty || confirmPassword != newPassword) {
           emit(const ChangePasswordInvalidInputState(
-              passwordError: TextDoc.txtPasswordEmpty,
-              confirmPasswordError: TextDoc.txtConfirmedPasswordMatchWarning));
+            passwordError: TextDoc.txtPasswordEmpty,
+            confirmPasswordError: TextDoc.txtConfirmedPassword,
+          ));
         } else {
           emit(const ChangePasswordInvalidInputState(
-              passwordError: TextDoc.txtPasswordEmpty));
+            passwordError: TextDoc.txtPasswordEmpty,
+          ));
         }
       }
     } else {
-      if (newPassword.isEmpty) {
+      if (newPassword.length < 6) {
         if (confirmPassword.isEmpty) {
           emit(const ChangePasswordInvalidInputState(
-              newPasswordError: TextDoc.txtNewPasswordEmptyWarning,
-              confirmPasswordError: TextDoc.txtConfirmedPasswordEmptyWarning));
+            newPasswordError: TextDoc.txtNewPasswordTooShort,
+            confirmPasswordError: TextDoc.txtConfirmedPasswordEmpty,
+          ));
         } else {
           emit(const ChangePasswordInvalidInputState(
-              newPasswordError: TextDoc.txtNewPasswordEmptyWarning));
+            newPasswordError: TextDoc.txtNewPasswordTooShort,
+          ));
         }
       } else {
         if (confirmPassword.isEmpty || confirmPassword != newPassword) {
           emit(const ChangePasswordInvalidInputState(
-              confirmPasswordError: TextDoc.txtConfirmedPasswordMatchWarning));
+            confirmPasswordError: TextDoc.txtConfirmedPassword,
+          ));
         } else {
           emit(const ChangePasswordValidInputState());
         }
@@ -156,8 +171,7 @@ class ChangePasswordBloc
     if (currentUser != null) {
       try {
         await currentUser.reauthenticateWithCredential(
-            EmailAuthProvider.credential(
-                email: currentUser.email ?? '', password: currentPassword));
+            EmailAuthProvider.credential(email: currentUser.email ?? '', password: currentPassword));
         await currentUser.updatePassword(newPassword);
         emit(const ChangePasswordLoadDoneState());
       } on FirebaseAuthException catch (e) {
