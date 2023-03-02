@@ -8,6 +8,7 @@ import '../../../../../../base/define/text.dart';
 import '../../../../../../base/widgets/avatar.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../blocs/your_account_bloc/your_account_bloc.dart';
+import '../../widgets/account_tile.dart';
 import '../account_information/account_information_page.dart';
 import '../change_password/change_password_page.dart';
 import '../delete_account/delete_account_page.dart';
@@ -164,295 +165,115 @@ class _YourAccountViewState extends State<YourAccountView> {
                                 0,
                               ),
                               children: [
-                                GestureDetector(
+                                AccountTile(
+                                  icon: Icons.person_outline,
+                                  title: TextDoc.txtStudentProfile,
                                   onTap: () async {
                                     await Navigator.push(
-                                        context, MaterialPageRoute(builder: (_) => const StudentProfilePage()));
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (_) => const StudentProfilePage(),
+                                        ));
                                     if (mounted) {
-                                      context.read<YourAccountBloc>().add(const YourAccountLoadEvent());
+                                      context.read<YourAccountBloc>().add(
+                                            const YourAccountLoadEvent(),
+                                          );
                                     }
                                   },
-                                  child: Container(
-                                    padding: const EdgeInsets.all(12),
-                                    decoration: BoxDecoration(
-                                      color: AppColor.white,
-                                      borderRadius: const BorderRadius.all(Radius.circular(12)),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: AppColor.shadow.shade300,
-                                          blurRadius: 2.0,
-                                          spreadRadius: 0.0,
-                                          offset: const Offset(0, 1),
-                                        )
-                                      ],
-                                    ),
-                                    child: Row(
-                                      children: const [
-                                        Icon(
-                                          Icons.person_outline,
-                                          color: AppColor.defaultFont,
-                                        ),
-                                        SizedBox(width: spaceBetweenLine16),
-                                        Text(
-                                          TextDoc.txtStudentProfile,
-                                          style: TextStyle(
-                                            fontSize: bodyLargeSize,
-                                            fontWeight: bodyLargeWeight,
-                                            color: AppColor.defaultFont,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
                                 ),
                                 const SizedBox(height: spaceBetweenLine12),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (_) => const WalletPage()),
-                                    );
-                                  },
-                                  child: Container(
-                                    padding: const EdgeInsets.all(12),
-                                    decoration: BoxDecoration(
-                                      color: AppColor.white,
-                                      borderRadius: const BorderRadius.all(Radius.circular(12)),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: AppColor.shadow.shade300,
-                                          blurRadius: 2.0,
-                                          spreadRadius: 0.0,
-                                          offset: const Offset(0, 1),
-                                        )
-                                      ],
-                                    ),
-                                    child: Row(
-                                      children: const [
-                                        Icon(
-                                          Icons.wallet,
-                                          color: AppColor.defaultFont,
-                                        ),
-                                        SizedBox(width: spaceBetweenLine16),
-                                        Text(
-                                          TextDoc.txtWallet,
-                                          style: TextStyle(
-                                            fontSize: bodyLargeSize,
-                                            fontWeight: bodyLargeWeight,
-                                            color: AppColor.defaultFont,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: spaceBetweenLine12),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (_) => const HistoryPage()));
-                                  },
-                                  child: Container(
-                                    padding: const EdgeInsets.all(12),
-                                    decoration: BoxDecoration(
-                                      color: AppColor.white,
-                                      borderRadius: const BorderRadius.all(Radius.circular(12)),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: AppColor.shadow.shade300,
-                                          blurRadius: 2.0,
-                                          spreadRadius: 0.0,
-                                          offset: const Offset(0, 1),
-                                        )
-                                      ],
-                                    ),
-                                    child: Row(
-                                      children: const [
-                                        Icon(
-                                          Icons.history_outlined,
-                                          color: AppColor.defaultFont,
-                                        ),
-                                        SizedBox(width: spaceBetweenLine16),
-                                        Text(
-                                          TextDoc.txtHistory,
-                                          style: TextStyle(
-                                            fontSize: bodyLargeSize,
-                                            fontWeight: bodyLargeWeight,
-                                            color: AppColor.defaultFont,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: spaceBetweenLine12),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) => const AccountInformationPage()));
-                                  },
-                                  child: Container(
-                                    padding: const EdgeInsets.all(12),
-                                    decoration: BoxDecoration(
-                                      color: AppColor.white,
-                                      borderRadius: const BorderRadius.all(Radius.circular(12)),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: AppColor.shadow.shade300,
-                                          blurRadius: 2.0,
-                                          spreadRadius: 0.0,
-                                          offset: const Offset(0, 1),
-                                        )
-                                      ],
-                                    ),
-                                    child: Row(
-                                      children: const [
-                                        Icon(
-                                          Icons.info_outline_rounded,
-                                          color: AppColor.defaultFont,
-                                        ),
-                                        SizedBox(width: spaceBetweenLine16),
-                                        Text(
-                                          TextDoc.txtAccountInformation,
-                                          style: TextStyle(
-                                            fontSize: bodyLargeSize,
-                                            fontWeight: bodyLargeWeight,
-                                            color: AppColor.defaultFont,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: spaceBetweenLine12),
-                                GestureDetector(
+                                AccountTile(
+                                  icon: Icons.wallet_outlined,
+                                  title: TextDoc.txtWallet,
                                   onTap: () => Navigator.push(
-                                      context, MaterialPageRoute(builder: (context) => const ChangePasswordPage())),
-                                  child: Container(
-                                    padding: const EdgeInsets.all(12),
-                                    decoration: BoxDecoration(
-                                      color: AppColor.white,
-                                      borderRadius: const BorderRadius.all(Radius.circular(12)),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: AppColor.shadow.shade300,
-                                          blurRadius: 2.0,
-                                          spreadRadius: 0.0,
-                                          offset: const Offset(0, 1),
-                                        )
-                                      ],
-                                    ),
-                                    child: Row(
-                                      children: const [
-                                        Icon(
-                                          Icons.password_outlined,
-                                          color: AppColor.defaultFont,
-                                        ),
-                                        SizedBox(width: spaceBetweenLine16),
-                                        Text(
-                                          TextDoc.txtChangePassword,
-                                          style: TextStyle(
-                                            fontSize: bodyLargeSize,
-                                            fontWeight: bodyLargeWeight,
-                                            color: AppColor.defaultFont,
-                                          ),
-                                        )
-                                      ],
-                                    ),
+                                    context,
+                                    MaterialPageRoute(builder: (_) => const WalletPage()),
                                   ),
                                 ),
                                 const SizedBox(height: spaceBetweenLine12),
-                                GestureDetector(
+                                AccountTile(
+                                  icon: Icons.history_outlined,
+                                  title: TextDoc.txtHistory,
+                                  onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (_) => const HistoryPage()),
+                                  ),
+                                ),
+                                const SizedBox(height: spaceBetweenLine12),
+                                AccountTile(
+                                  icon: Icons.manage_accounts_outlined,
+                                  title: TextDoc.txtAccountInformation,
+                                  onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => const AccountInformationPage()),
+                                  ),
+                                ),
+                                AccountTile(
+                                  icon: Icons.password_outlined,
+                                  title: TextDoc.txtChangePassword,
+                                  onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => const ChangePasswordPage()),
+                                  ),
+                                ),
+                                const SizedBox(height: spaceBetweenLine12),
+                                AccountTile(
+                                  icon: Icons.person_remove_outlined,
+                                  title: TextDoc.txtDeleteAccount,
+                                  foregroundColor: AppColor.error,
                                   onTap: () async {
                                     final confirmedDelete = await showDialog(
-                                        barrierDismissible: false,
-                                        context: context,
-                                        builder: (context) => AlertDialog(
-                                              backgroundColor: AppColor.white,
-                                              title: const Text(
-                                                TextDoc.txtConfirmDeleteAccountTitle,
-                                                style: TextStyle(
-                                                  fontSize: titleLargeSize,
-                                                  fontWeight: titleLargeWeight,
-                                                  color: AppColor.error,
-                                                ),
+                                      barrierDismissible: false,
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        backgroundColor: AppColor.white,
+                                        title: const Text(
+                                          TextDoc.txtConfirmDeleteAccountTitle,
+                                          style: TextStyle(
+                                            fontSize: titleLargeSize,
+                                            fontWeight: titleLargeWeight,
+                                            color: AppColor.error,
+                                          ),
+                                        ),
+                                        content: const Text(
+                                          TextDoc.txtConfirmDeleteAccountContent,
+                                          style: TextStyle(
+                                            fontSize: bodySmallSize,
+                                            fontWeight: bodySmallWeight,
+                                            color: AppColor.defaultFont,
+                                          ),
+                                        ),
+                                        actions: [
+                                          AppTextButton(
+                                            text: TextDoc.txtCancel,
+                                            onPressed: () => Navigator.pop(context, false),
+                                          ),
+                                          ElevatedButton(
+                                            onPressed: () => Navigator.pop(context, true),
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor: AppColor.error,
+                                              foregroundColor: Colors.white,
+                                            ),
+                                            child: const Text(
+                                              TextDoc.txtDeleteAccount,
+                                              style: TextStyle(
+                                                fontSize: labelLargeSize,
+                                                fontWeight: labelLargeWeight,
                                               ),
-                                              content: const Text(
-                                                TextDoc.txtConfirmDeleteAccountContent,
-                                                style: TextStyle(
-                                                  fontSize: bodySmallSize,
-                                                  fontWeight: bodySmallWeight,
-                                                  color: AppColor.defaultFont,
-                                                ),
-                                              ),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () => Navigator.pop(context, false),
-                                                  style: TextButton.styleFrom(
-                                                    foregroundColor: AppColor.mainColor1,
-                                                  ),
-                                                  child: const Text(
-                                                    TextDoc.txtCancel,
-                                                    style: TextStyle(
-                                                      fontSize: labelLargeSize,
-                                                      fontWeight: labelLargeWeight,
-                                                    ),
-                                                  ),
-                                                ),
-                                                ElevatedButton(
-                                                  onPressed: () => Navigator.pop(context, true),
-                                                  style: ElevatedButton.styleFrom(
-                                                    backgroundColor: AppColor.error,
-                                                    foregroundColor: Colors.white,
-                                                  ),
-                                                  child: const Text(
-                                                    TextDoc.txtDeleteAccount,
-                                                    style: TextStyle(
-                                                      fontSize: labelLargeSize,
-                                                      fontWeight: labelLargeWeight,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            )).then((value) => value ?? false);
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ).then((value) => value ?? false);
                                     if (confirmedDelete) {
                                       if (mounted) {
-                                        Navigator.push(context,
-                                            MaterialPageRoute(builder: (context) => const DeleteAccountPage()));
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(builder: (context) => const DeleteAccountPage()),
+                                        );
                                       }
                                     }
                                   },
-                                  child: Container(
-                                    padding: const EdgeInsets.all(12),
-                                    decoration: BoxDecoration(
-                                      color: AppColor.white,
-                                      borderRadius: const BorderRadius.all(Radius.circular(12)),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: AppColor.shadow.shade300,
-                                          blurRadius: 2.0,
-                                          spreadRadius: 0.0,
-                                          offset: const Offset(0, 1),
-                                        )
-                                      ],
-                                    ),
-                                    child: Row(
-                                      children: const [
-                                        Icon(
-                                          Icons.person_remove_outlined,
-                                          color: AppColor.error,
-                                        ),
-                                        SizedBox(width: spaceBetweenLine16),
-                                        Text(
-                                          TextDoc.txtDeleteAccount,
-                                          style: TextStyle(
-                                            fontSize: titleMediumSize,
-                                            fontWeight: titleMediumWeight,
-                                            color: AppColor.error,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
                                 ),
                                 const SizedBox(height: spaceBetweenLine32),
                                 TextButton(
