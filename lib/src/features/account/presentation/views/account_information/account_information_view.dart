@@ -216,6 +216,40 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                                         initialDate: DateTime.parse(dateOfBirthController.text),
                                         firstDate: DateTime(1900),
                                         lastDate: DateTime.now(),
+                                        builder: (context, child) => Theme(
+                                          data: Theme.of(context).copyWith(
+                                            textTheme: const TextTheme(
+                                              headline5: TextStyle(
+                                                fontFamily: 'NotoSans',
+                                              ),
+                                              // Selected Date landscape
+                                              headline6: TextStyle(
+                                                fontFamily: 'NotoSans',
+                                              ),
+                                              // Selected Date portrait
+                                              overline: TextStyle(
+                                                fontFamily: 'NotoSans',
+                                              ),
+                                              // Title - SELECT DATE
+                                              bodyText1: TextStyle(
+                                                fontFamily: 'NotoSans',
+                                              ),
+                                              // Year gridview picker
+                                              subtitle1: TextStyle(
+                                                fontFamily: 'NotoSans',
+                                              ),
+                                              // Date input
+                                              subtitle2: TextStyle(
+                                                fontFamily: 'NotoSans',
+                                              ),
+                                              // Month/Year picker
+                                              caption: TextStyle(
+                                                fontFamily: 'NotoSans',
+                                              ), // days
+                                            ),
+                                          ),
+                                          child: child!,
+                                        ),
                                       );
                                       if (datePicked != null) {
                                         if (mounted) {
