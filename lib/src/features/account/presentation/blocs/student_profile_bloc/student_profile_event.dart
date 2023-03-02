@@ -9,12 +9,25 @@ class StudentProfileInitEvent extends StudentProfileEvent {
 }
 
 class StudentProfileChangeEvent extends StudentProfileEvent {
-  const StudentProfileChangeEvent();
+  const StudentProfileChangeEvent(
+    this.fullName,
+    this.englishName,
+    this.bio,
+  );
+
+  final String fullName;
+  final String englishName;
+  final String bio;
 }
 
 class StudentProfileSaveChangesEvent extends StudentProfileEvent {
-  const StudentProfileSaveChangesEvent(this.avatarUrl, this.fullName,
-      this.englishName, this.bio, this.selectedInterestedTopics);
+  const StudentProfileSaveChangesEvent(
+    this.avatarUrl,
+    this.fullName,
+    this.englishName,
+    this.bio,
+    this.selectedInterestedTopics,
+  );
 
   final String avatarUrl;
   final String fullName;

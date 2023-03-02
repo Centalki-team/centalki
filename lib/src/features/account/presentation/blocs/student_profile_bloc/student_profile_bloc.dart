@@ -40,8 +40,41 @@ class StudentProfileBloc extends Bloc<StudentProfileEvent, StudentProfileState> 
   }
 
   void _onChange(StudentProfileChangeEvent event, emit) {
-    emit(const StudentProfileSavingState());
-    emit(const StudentProfileChangedState());
+    // emit(const StudentProfileSavingState());
+
+    var fullnameError = '';
+    var englishNameError = '';
+    var bioError = '';
+    var saveButtonDisabled = false;
+
+    if (event.fullName.isEmpty) {
+      fullnameError = TextDoc.txtFullnameEmpty;
+    } else if (event.fullName.replaceAll(' ', '').length < 3) {
+      fullnameError = TextDoc.txtFullnameTooShort;
+    } else if (event.fullName.length > 50) {
+      fullnameError = TextDoc.txtFullnameTooLong;
+    }
+
+    if (event.englishName.isNotEmpty) {
+      if (event.englishName.replaceAll(' ', '').length < 3) {
+        englishNameError = TextDoc.txtEngNameTooShort;
+      } else if (event.englishName.length > 50) {
+        englishNameError = TextDoc.txtEngNameTooLong;
+      }
+    }
+
+    if (event.bio.length > 200) {
+      bioError = TextDoc.txtBioTooLong;
+    }
+
+    saveButtonDisabled = fullnameError.isNotEmpty || englishNameError.isNotEmpty || bioError.isNotEmpty;
+
+    emit(StudentProfileChangedState(
+      fullnameError: fullnameError,
+      englishNameError: englishNameError,
+      bioError: bioError,
+      forceDisabled: saveButtonDisabled,
+    ));
   }
 
   void _onSaveChanges(StudentProfileSaveChangesEvent event, emit) async {

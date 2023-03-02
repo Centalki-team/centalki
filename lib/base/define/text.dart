@@ -6,6 +6,9 @@ class TextDoc {
   static const txtFullnameEmpty = 'Fullname cannot be empty';
   static const txtFullnameTooShort = 'Name must contain at least 3 non-whitespace characters';
   static const txtFullnameTooLong = 'Name cannot exceed 50 characters';
+  static const txtEngNameTooShort = 'English name must contain at least 3 non-whitespace characters';
+  static const txtEngNameTooLong = 'English name cannot exceed 50 characters';
+  static const txtBioTooLong = 'Your biography cannot exceed 200 characters';
   static const txtPasswordEmpty = 'Password cannot be empty';
   static const txtPasswordTooShort = 'Password must contain at least 6 characters';
   static const txtPasswordTooLong = 'Password cannot exceed 100 characters';
