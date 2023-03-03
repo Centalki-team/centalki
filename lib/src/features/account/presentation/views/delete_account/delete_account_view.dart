@@ -98,7 +98,7 @@ class _DeleteAccountViewState extends State<DeleteAccountView> {
                                 ),
                           ),
                         ),
-                        const SizedBox(height: spaceBetweenLine24),
+                        const SizedBox(height: spacing24),
                         BlocBuilder<DeleteAccountBloc, DeleteAccountState>(
                           builder: (context, state) => AppElevatedButton(
                             text: TextDoc.txtConfirmDeleteAccount,
@@ -110,7 +110,7 @@ class _DeleteAccountViewState extends State<DeleteAccountView> {
                                 : null,
                           ),
                         ),
-                        const SizedBox(height: smallSpacing8),
+                        const SizedBox(height: spacing8),
                         AppTextButton(
                           text: TextDoc.txtCancel,
                           minimumSize: const Size.fromHeight(48),

@@ -39,7 +39,7 @@ class AccountTile extends StatelessWidget {
                 icon,
                 color: foregroundColor ?? AppColor.defaultFont,
               ),
-              const SizedBox(width: spaceBetweenLine16),
+              const SizedBox(width: spacing16),
               Text(
                 title,
                 style: TextStyle(

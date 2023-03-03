@@ -111,7 +111,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: smallSpacing6),
+                            const SizedBox(height: spacing6),
                             SizedBox(
                               height: 48.0,
                               child: Row(
@@ -145,7 +145,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                       ],
                                     ),
                                   ),
-                                  const SizedBox(width: smallSpacing10),
+                                  const SizedBox(width: spacing10),
                                   const DecoratedBox(
                                     decoration: BoxDecoration(
                                       color: AppColor.container,
@@ -155,7 +155,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                       width: 1.0,
                                     ),
                                   ),
-                                  const SizedBox(width: smallSpacing10),
+                                  const SizedBox(width: spacing10),
                                   Expanded(
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -187,7 +187,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                 ],
                               ),
                             ),
-                            const SizedBox(height: spaceBetweenLine20),
+                            const SizedBox(height: spacing20),
                             Text(
                               state.topicDetail.topicDescription ?? 'null. This topic is about nothing',
                               style: const TextStyle(
@@ -197,7 +197,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                 color: Colors.black,
                               ),
                             ),
-                            const SizedBox(height: spaceBetweenLine16),
+                            const SizedBox(height: spacing16),
                             const Text(
                               TextDoc.txtTopicVocab,
                               style: TextStyle(
@@ -219,10 +219,10 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                 return PhraseCard(phraseEntity: phrase);
                               },
                               separatorBuilder: (context, index) => const SizedBox(
-                                height: spaceBetweenLine20,
+                                height: spacing20,
                               ),
                             ),
-                            const SizedBox(height: spaceBetweenLine16),
+                            const SizedBox(height: spacing16),
                             const Text(
                               TextDoc.txtTopicQuestions,
                               style: TextStyle(
@@ -231,7 +231,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                 color: AppColor.tertiary,
                               ),
                             ),
-                            const SizedBox(height: smallSpacing8),
+                            const SizedBox(height: spacing8),
                             ListView.separated(
                               physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
@@ -245,7 +245,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                 );
                               },
                               separatorBuilder: (context, index) => const SizedBox(
-                                height: spaceBetweenLine16,
+                                height: spacing16,
                               ),
                             )
                           ],

@@ -30,7 +30,7 @@ class QuestionCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(width: smallSpacing8),
+            const SizedBox(width: spacing8),
             Text(
               '${index + 1}.',
               style: const TextStyle(
@@ -39,7 +39,7 @@ class QuestionCard extends StatelessWidget {
                 color: AppColor.defaultFont,
               ),
             ),
-            const SizedBox(width: smallSpacing8),
+            const SizedBox(width: spacing8),
             Expanded(
               child: Text(
                 questionContent,
@@ -50,7 +50,7 @@ class QuestionCard extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: smallSpacing8),
+            const SizedBox(width: spacing8),
           ],
         ),
       );

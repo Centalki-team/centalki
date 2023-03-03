@@ -140,7 +140,7 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                         fullName: fullName,
                                       ),
                                     ),
-                                    const SizedBox(height: spaceBetweenLine16),
+                                    const SizedBox(height: spacing16),
                                     const Text(
                                       TextDoc.txtFullNameTitle,
                                       style: TextStyle(
@@ -156,7 +156,7 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                           ? state.fullnameError
                                           : null,
                                     ),
-                                    const SizedBox(height: spaceBetweenLine16),
+                                    const SizedBox(height: spacing16),
                                     const Text(
                                       TextDoc.txtEnglishNameTitle,
                                       style: TextStyle(
@@ -173,7 +173,7 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                               ? state.englishNameError
                                               : null,
                                     ),
-                                    const SizedBox(height: spaceBetweenLine16),
+                                    const SizedBox(height: spacing16),
                                     const Text(
                                       TextDoc.txtBioTitle,
                                       style: TextStyle(
@@ -190,7 +190,7 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                           ? state.bioError
                                           : null,
                                     ),
-                                    const SizedBox(height: spaceBetweenLine16),
+                                    const SizedBox(height: spacing16),
                                     const Text(
                                       TextDoc.txtInterestedTopics,
                                       style: TextStyle(

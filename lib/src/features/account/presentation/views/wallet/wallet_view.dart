@@ -123,7 +123,7 @@ class WalletView extends StatelessWidget {
                                         color: AppColor.support,
                                       ),
                                     ),
-                                    const SizedBox(height: spaceBetweenLine12),
+                                    const SizedBox(height: spacing12),
                                     const Text(
                                       TextDoc.txtEachSessionDuration,
                                       style: TextStyle(
@@ -147,7 +147,7 @@ class WalletView extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(
-                                height: spaceBetweenLine20,
+                                height: spacing20,
                               ),
                               /*const Text(
                                     TextDoc.txtTransactions,

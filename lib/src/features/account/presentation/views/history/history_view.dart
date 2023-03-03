@@ -126,7 +126,7 @@ class _HistoryViewState extends State<HistoryView> {
                                 ],
                               ),
                             ),
-                            const SizedBox(height: spaceBetweenLine24),
+                            const SizedBox(height: spacing24),
                             const Text(
                               TextDoc.txtSessions,
                               style: TextStyle(

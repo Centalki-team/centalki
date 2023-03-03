@@ -47,7 +47,7 @@ class PhraseCard extends StatelessWidget {
                 color: AppColor.defaultFont,
               ),
             ),
-            const SizedBox(height: smallSpacing4),
+            const SizedBox(height: spacing4),
             ...phraseEntity.phraseTranslations!.map(
               (e) => Text(
                 e.phraseMeaning ?? 'null meaning',
@@ -58,7 +58,7 @@ class PhraseCard extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: smallSpacing2),
+            const SizedBox(height: spacing2),
             ...phraseEntity.phraseExamples!.map(
               (e) => Text(
                 e.phraseExample ?? 'null example',

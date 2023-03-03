@@ -123,7 +123,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                                 ),
                           ),
                         ),
-                        const SizedBox(height: spaceBetweenLine16),
+                        const SizedBox(height: spacing16),
                         const Text(
                           TextDoc.txtNewPassword,
                           style: TextStyle(
@@ -142,7 +142,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                                 ),
                           ),
                         ),
-                        const SizedBox(height: spaceBetweenLine12),
+                        const SizedBox(height: spacing12),
                         const Text(
                           TextDoc.txtConfirmPassword,
                           style: TextStyle(
@@ -161,7 +161,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                                 ),
                           ),
                         ),
-                        const SizedBox(height: spaceBetweenLine24),
+                        const SizedBox(height: spacing24),
                         BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
                           builder: (context, state) => AppElevatedButton(
                             text: TextDoc.txtChangePassword,

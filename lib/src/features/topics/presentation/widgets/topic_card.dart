@@ -22,7 +22,7 @@ class TopicCard extends StatelessWidget {
           ),
         ),
         child: Container(
-          margin: const EdgeInsets.all(smallSpacing8),
+          margin: const EdgeInsets.all(spacing8),
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
             color: AppColor.white,

@@ -61,7 +61,7 @@ class _SignInViewState extends State<SignInView> {
                     color: AppColor.defaultFontContainer,
                   ),
                 ),
-                const SizedBox(height: spaceBetweenLine16),
+                const SizedBox(height: spacing16),
                 BlocBuilder<SignInBloc, SignInState>(
                   builder: (context, state) => Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -83,7 +83,7 @@ class _SignInViewState extends State<SignInView> {
                             : null,
                         onChanged: _validateSignInInputs,
                       ),
-                      const SizedBox(height: smallSpacing8),
+                      const SizedBox(height: spacing8),
                       const Text(
                         TextDoc.txtPassword,
                         style: TextStyle(
@@ -104,7 +104,7 @@ class _SignInViewState extends State<SignInView> {
                     ],
                   ),
                 ),
-                const SizedBox(height: spaceBetweenLine24),
+                const SizedBox(height: spacing24),
                 BlocBuilder<SignInBloc, SignInState>(
                   builder: (context, state) {
                     if (state is SignInLoadingState) {
@@ -126,7 +126,7 @@ class _SignInViewState extends State<SignInView> {
                     );
                   },
                 ),
-                const SizedBox(height: spaceBetweenLine24),
+                const SizedBox(height: spacing24),
                 const Center(
                   child: Text(
                     TextDoc.txtOrLoginWith,
@@ -156,7 +156,7 @@ class _SignInViewState extends State<SignInView> {
                         ),
                       ),
                     ),
-                    const SizedBox(width: spaceBetweenLine12),
+                    const SizedBox(width: spacing12),
                     BlocBuilder<SignInBloc, SignInState>(
                       builder: (context, state) => TextButton(
                         onPressed: () => context
@@ -173,7 +173,7 @@ class _SignInViewState extends State<SignInView> {
                       ),
                     ),
                     if (Platform.isIOS) ...[
-                      const SizedBox(width: spaceBetweenLine12),
+                      const SizedBox(width: spacing12),
                       BlocBuilder<SignInBloc, SignInState>(
                         builder: (context, state) => TextButton(
                           onPressed: () => context
@@ -193,7 +193,7 @@ class _SignInViewState extends State<SignInView> {
                       ...[],
                   ],
                 ),
-                const SizedBox(height: smallSpacing8),
+                const SizedBox(height: spacing8),
                 AppTextButton(
                   onPressed: () => Navigator.push(
                       context,
@@ -202,7 +202,7 @@ class _SignInViewState extends State<SignInView> {
                       )),
                   text: TextDoc.txtForgotPassword,
                 ),
-                const SizedBox(height: smallSpacing8),
+                const SizedBox(height: spacing8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

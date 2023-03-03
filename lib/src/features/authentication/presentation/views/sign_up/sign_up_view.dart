@@ -64,7 +64,7 @@ class _SignUpViewState extends State<SignUpView> {
                     color: AppColor.defaultFontContainer,
                   ),
                 ),
-                const SizedBox(height: spaceBetweenLine16),
+                const SizedBox(height: spacing16),
                 BlocBuilder<SignUpBloc, SignUpState>(
                   builder: (context, state) => Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -83,7 +83,7 @@ class _SignUpViewState extends State<SignUpView> {
                             state is SignUpValidateState && state.fullnameError.isNotEmpty ? state.fullnameError : null,
                         onChanged: _validateSignUpInputs,
                       ),
-                      const SizedBox(height: smallSpacing8),
+                      const SizedBox(height: spacing8),
                       const Text(
                         TextDoc.txtEmail,
                         style: TextStyle(
@@ -99,7 +99,7 @@ class _SignUpViewState extends State<SignUpView> {
                             state is SignUpValidateState && state.emailError.isNotEmpty ? state.emailError : null,
                         onChanged: _validateSignUpInputs,
                       ),
-                      const SizedBox(height: smallSpacing8),
+                      const SizedBox(height: spacing8),
                       const Text(
                         TextDoc.txtPassword,
                         style: TextStyle(
@@ -115,7 +115,7 @@ class _SignUpViewState extends State<SignUpView> {
                             state is SignUpValidateState && state.passwordError.isNotEmpty ? state.passwordError : null,
                         onChanged: _validateSignUpInputs,
                       ),
-                      const SizedBox(height: smallSpacing8),
+                      const SizedBox(height: spacing8),
                       const Text(
                         TextDoc.txtRetypePassword,
                         style: TextStyle(
@@ -131,7 +131,7 @@ class _SignUpViewState extends State<SignUpView> {
                               ? state.retypePasswordError
                               : null,
                           onChanged: _validateSignUpInputs),
-                      const SizedBox(height: smallSpacing8),
+                      const SizedBox(height: spacing8),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -168,7 +168,7 @@ class _SignUpViewState extends State<SignUpView> {
                     ],
                   ),
                 ),
-                const SizedBox(height: spaceBetweenLine16),
+                const SizedBox(height: spacing16),
                 BlocBuilder<SignUpBloc, SignUpState>(
                   builder: (context, state) {
                     if (state is SignUpLoadingState) {
@@ -189,7 +189,7 @@ class _SignUpViewState extends State<SignUpView> {
                     );
                   },
                 ),
-                const SizedBox(height: smallSpacing8),
+                const SizedBox(height: spacing8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -202,7 +202,7 @@ class _SignUpViewState extends State<SignUpView> {
                         color: AppColor.defaultFont,
                       ),
                     ),
-                    const SizedBox(width: smallSpacing4),
+                    const SizedBox(width: spacing4),
                     AppTextButton(
                       text: TextDoc.txtSignIn,
                       onPressed: () => Navigator.pop(context),

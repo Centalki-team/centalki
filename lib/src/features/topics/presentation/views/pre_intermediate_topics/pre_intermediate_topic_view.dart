@@ -23,7 +23,7 @@ class _PreIntermediateTopicViewState extends State<PreIntermediateTopicView> {
             child: ListView.separated(
               padding: const EdgeInsets.only(top: 16),
               itemCount: state.topics.topics!.length,
-              separatorBuilder: (context, index) => const SizedBox(height: smallSpacing8),
+              separatorBuilder: (context, index) => const SizedBox(height: spacing8),
               itemBuilder: (context, index) => TopicCard(
                   item: state.topics.topics![index],
                 ),
