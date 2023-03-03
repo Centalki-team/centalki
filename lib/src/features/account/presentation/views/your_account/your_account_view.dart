@@ -111,7 +111,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                               maxRadius: heightView / 8,
                                             ),
                                             const SizedBox(
-                                              height: spaceBetweenLine18,
+                                              height: spacing18,
                                             ),
                                             Text(
                                               state.account.fullName ?? '',
@@ -136,7 +136,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                                 maxRadius: heightView / 8,
                                               ),
                                               const SizedBox(
-                                                width: spaceBetweenLine18,
+                                                width: spacing18,
                                               ),
                                               Text(
                                                 state.account.fullName ?? '',
@@ -178,7 +178,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                     }
                                   },
                                 ),
-                                const SizedBox(height: spaceBetweenLine12),
+                                const SizedBox(height: spacing12),
                                 AccountTile(
                                   icon: Icons.wallet_outlined,
                                   title: TextDoc.txtWallet,
@@ -187,7 +187,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                     MaterialPageRoute(builder: (_) => const WalletPage()),
                                   ),
                                 ),
-                                const SizedBox(height: spaceBetweenLine12),
+                                const SizedBox(height: spacing12),
                                 AccountTile(
                                   icon: Icons.history_outlined,
                                   title: TextDoc.txtHistory,
@@ -196,7 +196,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                     MaterialPageRoute(builder: (_) => const HistoryPage()),
                                   ),
                                 ),
-                                const SizedBox(height: spaceBetweenLine12),
+                                const SizedBox(height: spacing12),
                                 AccountTile(
                                   icon: Icons.manage_accounts_outlined,
                                   title: TextDoc.txtAccountInformation,
@@ -205,7 +205,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                     MaterialPageRoute(builder: (context) => const AccountInformationPage()),
                                   ),
                                 ),
-                                const SizedBox(height: spaceBetweenLine12),
+                                const SizedBox(height: spacing12),
                                 AccountTile(
                                   icon: Icons.password_outlined,
                                   title: TextDoc.txtChangePassword,
@@ -214,7 +214,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                     MaterialPageRoute(builder: (context) => const ChangePasswordPage()),
                                   ),
                                 ),
-                                const SizedBox(height: spaceBetweenLine12),
+                                const SizedBox(height: spacing12),
                                 AccountTile(
                                   icon: Icons.person_remove_outlined,
                                   title: TextDoc.txtDeleteAccount,
@@ -273,7 +273,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                     }
                                   },
                                 ),
-                                const SizedBox(height: spaceBetweenLine32),
+                                const SizedBox(height: spacing32),
                                 TextButton(
                                   onPressed: () async {
                                     final confirmedLogout = await showDialog(
@@ -349,7 +349,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                       Icon(
                                         Icons.logout_outlined,
                                       ),
-                                      SizedBox(width: smallSpacing8),
+                                      SizedBox(width: spacing8),
                                       Text(
                                         TextDoc.txtSignOut,
                                         style: TextStyle(
@@ -360,7 +360,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                     ],
                                   ),
                                 ),
-                                const SizedBox(height: spaceBetweenLine32),
+                                const SizedBox(height: spacing32),
                               ],
                             ),
                           ),
@@ -415,13 +415,13 @@ class _YourAccountViewState extends State<YourAccountView> {
                                   ],
                                 ),
                               ),
-                              const SizedBox(width: spaceBetweenLine16),
+                              const SizedBox(width: spacing16),
                               Container(
                                 width: 1,
                                 height: 48,
                                 color: AppColor.container,
                               ),
-                              const SizedBox(width: spaceBetweenLine16),
+                              const SizedBox(width: spacing16),
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,

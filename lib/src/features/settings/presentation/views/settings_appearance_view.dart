@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../base/define/app_text.dart';
+import '../../../../../base/define/styles.dart';
 import '../widgets/setting_switch_row.dart';
 
 class SettingsAppearance extends StatelessWidget {
@@ -16,19 +16,21 @@ class SettingsAppearance extends StatelessWidget {
             onTap: Navigator.of(context).pop,
             child: const Icon(
               Icons.arrow_back,
-              color: Color(0xFF43474E),
+              color: AppColor.defaultFont,
             ),
           ),
-          title: Row(children: const [
-            Text(
-              AppText.txtAppearance,
-              style: TextStyle(
-                fontSize: 22.0,
-                height: 28.0,
-                color: Color(0xFF1A1C1E),
+          title: Row(
+            children: const [
+              Text(
+                TextDoc.txtAppearance,
+                style: TextStyle(
+                  fontSize: headlineSmallSize,
+                  fontWeight: headlineSmallWeight,
+                  color: AppColor.defaultFont,
+                ),
               ),
-            ),
-          ]),
+            ],
+          ),
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -40,13 +42,14 @@ class SettingsAppearance extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: const [
                 SizedBox(
-                  height: 4.0,
+                  height: spacing4,
                 ),
                 Text(
-                  AppText.txtApplicationTheme,
+                  TextDoc.txtApplicationTheme,
                   style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 22.0,
+                    fontSize: titleMediumSize,
+                    fontWeight: titleMediumWeight,
+                    color: AppColor.defaultFont,
                   ),
                 ),
                 Padding(
@@ -55,7 +58,7 @@ class SettingsAppearance extends StatelessWidget {
                     vertical: 16.0,
                   ),
                   child: SettingSwitchRow(
-                    title: AppText.txtDarkMode,
+                    title: TextDoc.txtDarkMode,
                   ),
                 ),
               ],

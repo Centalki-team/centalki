@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../base/define/app_text.dart';
-import '../../../../../gen/assets.gen.dart';
-import '../widgets/content_row.dart';
+import '../../../../../base/define/styles.dart';
+import '../widgets/setting_tile.dart';
 import 'settings_about_view.dart';
 import 'settings_appearance_view.dart';
 import 'settings_feedback_view.dart';
@@ -22,57 +21,49 @@ class SettingsView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              ContentRow(
-                icon: Assets.icon.icNoti,
-                title: AppText.txtNotification,
+              SettingTile(
+                icon: Icons.notifications_outlined,
+                title: TextDoc.txtNotification,
                 onClick: () => Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => const SettingsNotification(),
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 16.0,
-              ),
-              ContentRow(
-                icon: Assets.icon.icPaintPalette,
-                title: AppText.txtAppearance,
+              const SizedBox(height: spacing16),
+              SettingTile(
+                icon: Icons.brush_outlined,
+                title: TextDoc.txtAppearance,
                 onClick: () => Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => const SettingsAppearance(),
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 16.0,
-              ),
-              ContentRow(
-                icon: Assets.icon.icLanguage,
-                title: AppText.txtLanguage,
+              const SizedBox(height: spacing16),
+              SettingTile(
+                icon: Icons.language_outlined,
+                title: TextDoc.txtLanguage,
                 onClick: () => Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => const SettingsLanguage(),
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 16.0,
-              ),
-              ContentRow(
-                icon: Assets.icon.icFeedback,
-                title: AppText.txtGiveFeedback,
+              const SizedBox(height: spacing16),
+              SettingTile(
+                icon: Icons.feedback_outlined,
+                title: TextDoc.txtGiveFeedback,
                 onClick: () => Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => const SettingsFeedbackView(),
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 16.0,
-              ),
-              ContentRow(
-                icon: Assets.icon.icWarning,
-                title: AppText.txtAbout,
+              const SizedBox(height: spacing16),
+              SettingTile(
+                icon: Icons.info_outline,
+                title: TextDoc.txtAbout,
                 onClick: () => Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => const SettingsAboutView(),

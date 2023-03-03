@@ -1,5 +1,5 @@
 class TextDoc {
-  // Authentication
+  // AUTHENTICATION
   // Validation error messages
   static const txtEmailEmpty = 'Email address cannot be empty';
   static const txtEmailInvalidFormat = 'Invalid email format';
@@ -44,13 +44,13 @@ class TextDoc {
   static const txtForgotPassword = 'Forgot Password?';
   static const txtTerms = 'Terms & Conditions';
 
-  // Topic
+  // TOPIC
   static const txtElementary = 'Elementary';
   static const txtPreIntermediate = 'Pre-Intermediate';
   static const txtIntermediate = 'Intermediate';
   static const txtUpperIntermediate = 'Upper-Intermediate';
 
-  // Topic Detail
+  // TOPIC DETAIL
   static const txtTopicDetail = 'Topic Detail';
   static const txtTalk = 'Talk';
   static const txtTopicCategory = 'Category';
@@ -60,7 +60,7 @@ class TextDoc {
   static const txtTopicQuestions = 'Recommended Questions';
   static const txtTopicPhraseExample = 'Example';
 
-  // Connect teacher
+  // CONNECT TEACHER
   static const txtCancel = 'Cancel';
   static const txtYes = 'Yes';
   static const txtNo = 'No';
@@ -85,58 +85,58 @@ class TextDoc {
   static const txtNotTeacherAvailableContent = 'You can try again after 5 minutes';
   static const txtInternetConnection = 'Please check your internet connection and try again.';
 
-  // Your account
+  // YOUR ACCOUNT
   static const txtLoadFailed = 'Failed to load your profile!';
   static const txtStudentProfile = 'Student Profile';
   static const txtWallet = 'Wallet';
   static const txtHistory = 'History';
   static const txtAccountInformation = 'Account Information';
   static const txtChangePassword = 'Change Password';
-  static const txtConfirmDeleteAccountTitle = 'Delete your account?';
-  static const txtConfirmDeleteAccountContent =
-      'You are requesting that your account be deleted.\nDeleting the account will:\n   \u{2022} Remove account information and images\n   \u{2022} Remove all messages\n   \u{2022} Unable to restore';
   static const txtDeleteAccount = 'Delete Account';
   static const txtSignOut = 'Sign Out';
   static const txtSignOutContent = 'Are you sure to sign out of the current account?';
   static const txtRemainingSessions = 'Remaining sessions';
   static const txtCompletedSessions = 'Completed sessions';
 
+  // Account - Profile
+  static const txtProfileUpdateFailed = 'Failed to update your profile!';
+  static const txtProfileUpdateSuccess = 'Successfully updated your profile!!';
+  static const txtSaveChanges = 'Save Changes';
+  static const txtFullNameTitle = 'Full Name';
+  static const txtEnglishNameTitle = 'English Name';
+  static const txtBioTitle = 'Bio';
+  static const txtInterestedTopics = 'Interested Topics';
+
+  // Account - Info
   static const txtFacebook = 'Facebook';
   static const txtGoogle = 'Google';
   static const txtApple = 'Apple';
-  static const txtProfileUpdateFailed = 'Failed to update your profile!';
-  static const txtProfileUpdateSuccess = 'Successfully updated your profile!!';
   static const txtPhoneNumberTitle = 'Phone Number';
   static const txtDateOfBirthTitle = 'Date of Birth';
   static const txtGenderTitle = 'Gender';
   static const txtConnectionsTitle = 'Connections';
   static const txtConnected = 'Connected';
   static const txtPaymentMethodTitle = 'Payment Method';
-  static const txtSaveChanges = 'Save Changes';
 
-  static const txtChangePasswordResult = 'Change password result';
-  static const txtSuccessfullyChanged = 'Successfully changed!';
-  static const txtCurrentPassword = 'Current password';
-  static const txtNewPassword = 'New password';
-  static const txtConfirmPassword = 'Confirm password';
-
+  // Account - Delete Account
   static const txtDeleteAccountResult = 'Delete result';
   static const txtReauthenticateAccount = 'Re-authenticate your account';
   static const txtReauthenticate = 'Re-authenticate';
   static const txtConfirmDeleteAccount = 'Confirm Delete';
   static const txtEnterPasswordToDelete = 'Please enter your password to continue';
+  static const txtConfirmDeleteAccountTitle = 'Delete your account?';
+  static const txtConfirmDeleteAccountContent =
+      'You are requesting that your account be deleted.\nDeleting the account will:\n   \u{2022} Remove account information and images\n   \u{2022} Remove all messages\n   \u{2022} Unable to restore';
+  static const txtDeleteAccountError = 'Something wrong when delete account!\nTry again after some minutes.';
 
+  // Account - History
   static const txtTotalCompletedSessions = 'Total Completed Sessions';
   static const txtTotalTime = 'Total time is';
   static const txtHours = 'hours';
   static const txtMinutes = 'minutes';
   static const txtSessions = 'Sessions';
 
-  static const txtFullNameTitle = 'Full Name';
-  static const txtEnglishNameTitle = 'English Name';
-  static const txtBioTitle = 'Bio';
-  static const txtInterestedTopics = 'Interested Topics';
-
+  // Account - Wallet
   static const txtBalance = 'Balance';
   static const txtOrLoginWith = 'Or log in with';
   static const txtOr = 'or';
@@ -146,15 +146,46 @@ class TextDoc {
   static const txtTransactions = 'Transactions';
   static const txtCharged = 'Charged';
 
+  // Account - Change Password
   static const txtNewPasswordEmpty = 'New password cannot be empty';
   static const txtNewPasswordTooShort = 'New password must contain at least 6 characters';
   static const txtConfirmedPassword = 'Confirmed password must match the new password';
   static const txtConfirmedPasswordEmpty = 'Confirmed password cannot be empty';
   static const txtChangePasswordError = 'Something went wrong. Please try again later!';
   static const txtUserNotSignIn = 'User does not sign in!';
-  static const txtDeleteAccountError = 'Something wrong when delete account!\nTry again after some minutes.';
+  static const txtChangePasswordResult = 'Change password result';
+  static const txtSuccessfullyChanged = 'Successfully changed!';
+  static const txtCurrentPassword = 'Current password';
+  static const txtNewPassword = 'New password';
+  static const txtConfirmPassword = 'Confirm password';
 
   static const txtMale = 'Male';
   static const txtFemale = 'Female';
   static const txtOthers = 'Others';
+
+  // SETTINGS
+  static const txtNotification = 'Notification';
+  static const txtAppearance = 'Appearance';
+  static const txtLanguage = 'Language';
+  static const txtGiveFeedback = 'Give Feedback';
+  static const txtAbout = 'About';
+  static const txtApplicationTheme = 'Application Theme';
+  static const txtDarkMode = 'Dark Mode';
+  static const txtNotifyMeAbout = 'Notify me about';
+  static const txtDealsAndDiscounts = 'Deals and Discounts';
+  static const txtNewTopics = 'New Topics';
+  static const txtNewTeachers = 'New Teachers';
+  static const txtSounds = 'Sounds';
+  static const txtVibrations = 'Vibrations';
+  static const txtEnglish = 'English';
+  static const txtVietnamese = 'Tiếng Việt';
+  static const txtRateOurApp = 'Rate Our App';
+  static const txtPleaseTellUsWatUThink = 'Please tell us what you think';
+  static const txtSend = 'Send';
+  static const txtCentalkiTitle = 'centalki';
+  static const txtCentalkiDescription = 'Practice English speaking with foreign teachers';
+  static const txtCentalkiSource =
+      'Developed by Centalki Team\n2023, All Rights Reserved\nContact: centalki.dev@gmail.com';
+  static const txtCentalkiVersion = 'Version 0.4.0';
+  static const txtLastUpdated = 'Last updated: Mar 03, 2023';
 }

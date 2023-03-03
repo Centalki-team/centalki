@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../base/define/app_text.dart';
+import '../../../../../base/define/styles.dart';
 import '../widgets/setting_switch_row.dart';
 
 class SettingsNotification extends StatelessWidget {
@@ -10,25 +11,27 @@ class SettingsNotification extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: const Color(0xFFFDFCFF),
+          backgroundColor: AppColor.white,
           automaticallyImplyLeading: false,
           leading: GestureDetector(
             onTap: Navigator.of(context).pop,
             child: const Icon(
               Icons.arrow_back,
-              color: Color(0xFF43474E),
+              color: AppColor.defaultFont,
             ),
           ),
-          title: Row(children: const [
-            Text(
-              AppText.txtNotification,
-              style: TextStyle(
-                fontSize: 22.0,
-                height: 28.0,
-                color: Color(0xFF1A1C1E),
+          title: Row(
+            children: const [
+              Text(
+              TextDoc.txtNotification,
+                style: TextStyle(
+                  fontSize: headlineSmallSize,
+                  fontWeight: headlineSmallWeight,
+                  color: AppColor.defaultFont,
+                ),
               ),
-            ),
-          ]),
+            ],
+          ),
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -39,14 +42,13 @@ class SettingsNotification extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: const [
-                SizedBox(
-                  height: 4.0,
-                ),
+                SizedBox(height: spacing4),
                 Text(
-                  AppText.txtNotifyMeAbout,
+                  TextDoc.txtNotifyMeAbout,
                   style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 22.0,
+                    fontSize: titleMediumSize,
+                    fontWeight: titleMediumWeight,
+                    color: AppColor.defaultFont,
                   ),
                 ),
                 Padding(
@@ -55,7 +57,7 @@ class SettingsNotification extends StatelessWidget {
                     vertical: 16.0,
                   ),
                   child: SettingSwitchRow(
-                    title: AppText.txtDealsAndDiscounts,
+                    title: TextDoc.txtDealsAndDiscounts,
                   ),
                 ),
                 Padding(
@@ -64,7 +66,7 @@ class SettingsNotification extends StatelessWidget {
                     vertical: 16.0,
                   ),
                   child: SettingSwitchRow(
-                    title: AppText.txtNewTopics,
+                    title: TextDoc.txtNewTopics,
                   ),
                 ),
                 Padding(
@@ -73,7 +75,7 @@ class SettingsNotification extends StatelessWidget {
                     vertical: 16.0,
                   ),
                   child: SettingSwitchRow(
-                    title: AppText.txtNewTeachers,
+                    title: TextDoc.txtNewTeachers,
                   ),
                 ),
                 Padding(
@@ -97,7 +99,7 @@ class SettingsNotification extends StatelessWidget {
                     vertical: 16.0,
                   ),
                   child: SettingSwitchRow(
-                    title: AppText.txtSounds,
+                    title: TextDoc.txtSounds,
                   ),
                 ),
                 Padding(
@@ -106,7 +108,7 @@ class SettingsNotification extends StatelessWidget {
                     vertical: 16.0,
                   ),
                   child: SettingSwitchRow(
-                    title: AppText.txtVibrations,
+                    title: TextDoc.txtVibrations,
                   ),
                 ),
               ],

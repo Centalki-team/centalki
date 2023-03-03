@@ -155,7 +155,7 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: spaceBetweenLine16),
+                              const SizedBox(height: spacing16),
                               /*const Text(
                             TextDoc.txtPhoneNumberTitle,
                             style: TextStyle(fontWeight: FontWeight.bold),
@@ -192,14 +192,14 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                                     vertical: 12,
                                   ),
                                   enabledBorder: const OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(textFieldRadius)),
+                                    borderRadius: BorderRadius.all(Radius.circular(radius8)),
                                     borderSide: BorderSide(
                                       color: AppColor.container,
                                       width: enabledOutlineWidthTextField,
                                     ),
                                   ),
                                   focusedBorder: const OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(textFieldRadius)),
+                                    borderRadius: BorderRadius.all(Radius.circular(radius8)),
                                     borderSide: BorderSide(
                                       color: AppColor.container,
                                       width: enabledOutlineWidthTextField,
@@ -263,7 +263,7 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: spaceBetweenLine16),
+                              const SizedBox(height: spacing16),
                               const Text(
                                 TextDoc.txtGenderTitle,
                                 style: TextStyle(
@@ -286,7 +286,7 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                                   );
                                 },
                               ),
-                              const SizedBox(height: spaceBetweenLine16),
+                              const SizedBox(height: spacing16),
                               /*const Text(
                                 TextDoc.txtConnectionsTitle,
                                 style: TextStyle(fontWeight: FontWeight.bold),
