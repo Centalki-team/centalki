@@ -12,4 +12,7 @@ class FontFamily {
 
   /// Font family: Dongle
   static const String dongle = 'Dongle';
+
+  /// Font family: NotoSans
+  static const String notoSans = 'NotoSans';
 }

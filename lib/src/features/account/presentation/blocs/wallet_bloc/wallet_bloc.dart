@@ -29,5 +29,6 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
     }
   }
 
-  void _onGetMore(WalletGetMoreEvent event, emit) {}
+  void _onGetMore(WalletGetMoreEvent event, emit) =>
+      emit(const WalletGetMoreState());
 }

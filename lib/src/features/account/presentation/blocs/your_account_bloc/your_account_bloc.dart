@@ -23,11 +23,9 @@ class YourAccountBloc extends Bloc<YourAccountEvent, YourAccountState> {
   void _onLoad(YourAccountLoadEvent event, emit) async {
     emit(const YourAccountLoadingState());
     try {
-      // final userProfile = await FirebaseAuth.instance.currentUser
-      //     ?.getIdToken()
-      //     .then(DioClient.getUserInformation);
-      //FIXME: CHANGE BACK TO REMOTE DATA
-      final userProfile = await getAccountLocalDataUseCase(null);
+      final userProfile = await FirebaseAuth.instance.currentUser
+          ?.getIdToken()
+          .then(DioClient.getUserInformation);
       emit(YourAccountLoadDoneState(userProfile ?? const UserAccountEntity()));
     } on Exception catch (e) {
       emit(YourAccountLoadErrorState(e.toString()));

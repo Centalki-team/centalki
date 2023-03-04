@@ -19,37 +19,15 @@ class StudentProfileBloc
   }
 
   late final List<TopicItemEntity> topicList;
-  final GetAccountLocalDataUseCase getAccountLocalDataUseCase =
-      const GetAccountLocalDataUseCase();
 
   void _onInit(StudentProfileInitEvent event, emit) async {
     emit(const StudentProfileLoadingState());
     try {
-      //FIXME: CHANGE BACK TO REMOTE DATA
-      // final studentProfile = await FirebaseAuth.instance.currentUser
-      //     ?.getIdToken()
-      //     .then(DioClient.getUserInformation);
-      final studentProfile = await getAccountLocalDataUseCase(null);
-      // final topics = await DioClient.getTopicList();
-      // topicList = topics.topics ?? [];
-      topicList = const <TopicItemEntity>[
-        TopicItemEntity(
-          topicId: 'GTQD3b84dBIq3eoUICIF',
-          topicName: 'Movies',
-        ),
-        TopicItemEntity(
-          topicId: 'YZ5P40c74WjxRcREqDcf',
-          topicName: 'Clothes',
-        ),
-        TopicItemEntity(
-          topicId: 'b6OzPzzZAMPLPXzkRLQV',
-          topicName: 'Weekend activities',
-        ),
-        TopicItemEntity(
-          topicId: 'jHQt2luGgCaPWezywraV',
-          topicName: 'Food',
-        ),
-      ];
+      final studentProfile = await FirebaseAuth.instance.currentUser
+          ?.getIdToken()
+          .then(DioClient.getUserInformation);
+      final topics = await DioClient.getTopicList();
+      topicList = topics.topics ?? [];
       var selectedInterestedTopics = List.generate(
           topicList.length,
           (index) =>
@@ -61,12 +39,7 @@ class StudentProfileBloc
         studentProfile?.fullName ?? '',
         studentProfile?.userProfile?.accountEnglishName ?? '',
         studentProfile?.userProfile?.accountBio ?? '',
-        [
-          true,
-          false,
-          true,
-          false,
-        ],
+        selectedInterestedTopics,
         topicList,
       ));
     } on Exception catch (_) {}

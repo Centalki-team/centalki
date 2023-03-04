@@ -165,9 +165,29 @@ class $AssetsLogoGen {
   /// File path: assets/logo/google.png
   AssetGenImage get google => const AssetGenImage('assets/logo/google.png');
 
+  /// File path: assets/logo/logo_credit_card.svg
+  SvgGenImage get logoCreditCard =>
+      const SvgGenImage('assets/logo/logo_credit_card.svg');
+
+  /// File path: assets/logo/logo_momo.svg
+  SvgGenImage get logoMomo => const SvgGenImage('assets/logo/logo_momo.svg');
+
+  /// File path: assets/logo/logo_paypal.svg
+  SvgGenImage get logoPaypal =>
+      const SvgGenImage('assets/logo/logo_paypal.svg');
+
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [apple, centalkiBackground, centalkiBanner, centalki, facebook, google];
+  List<dynamic> get values => [
+        apple,
+        centalkiBackground,
+        centalkiBanner,
+        centalki,
+        facebook,
+        google,
+        logoCreditCard,
+        logoMomo,
+        logoPaypal
+      ];
 }
 
 class Assets {
@@ -285,10 +305,10 @@ class SvgGenImage {
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
       theme: theme,
-      // colorFilter: colorFilter,
+      //colorFilter: colorFilter,
       color: color,
       colorBlendMode: colorBlendMode,
-      // clipBehavior: clipBehavior,
+      //clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,
     );
   }

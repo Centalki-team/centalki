@@ -56,6 +56,8 @@ dependencies:
   get_it: ^7.2.0
   google_sign_in: ^6.0.1
   flutter_facebook_auth: ^5.0.7
+  image_picker: ^0.8.6+4
+  qr_flutter: ^4.0.0
   
 dependency_overrides:
   permission_handler: "any"
