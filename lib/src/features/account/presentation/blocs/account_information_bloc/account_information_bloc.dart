@@ -54,7 +54,8 @@ class AccountInformationBloc
         throw Exception();
       }
     } on Exception catch (_) {
-      emit(const AccountInformationSaveFailureState(TextDoc.txtProfileUpdateFailed));
+      emit(const AccountInformationSaveFailureState(
+          TextDoc.txtProfileUpdateFailed));
     }
   }
 

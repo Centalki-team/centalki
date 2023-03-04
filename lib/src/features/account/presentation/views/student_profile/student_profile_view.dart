@@ -8,6 +8,7 @@ import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/text_fields/outlined_text_field.dart';
 import '../../../../topics/domain/entities/topic_item_entity.dart';
 import '../../blocs/student_profile_bloc/student_profile_bloc.dart';
+import '../../widgets/custom_checkbox_tile_item.dart';
 
 class StudentProfileView extends StatefulWidget {
   const StudentProfileView({Key? key}) : super(key: key);
@@ -43,9 +44,11 @@ class _StudentProfileViewState extends State<StudentProfileView> {
               : 10;
 
   @override
-  Widget build(BuildContext context) => BlocListener<StudentProfileBloc, StudentProfileState>(
+  Widget build(BuildContext context) =>
+      BlocListener<StudentProfileBloc, StudentProfileState>(
         listener: (context, state) {
-          if (state is StudentProfileSavingState || state is StudentProfileLoadingState) {
+          if (state is StudentProfileSavingState ||
+              state is StudentProfileLoadingState) {
             LoadingManager.setLoading(context, loading: true);
           } else {
             LoadingManager.setLoading(context);
@@ -128,7 +131,8 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                           (_, index) => Padding(
                             padding: const EdgeInsets.fromLTRB(16, 16, 16, 80),
                             child: SingleChildScrollView(
-                              child: BlocBuilder<StudentProfileBloc, StudentProfileState>(
+                              child: BlocBuilder<StudentProfileBloc,
+                                  StudentProfileState>(
                                 builder: (context, state) => Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisSize: MainAxisSize.min,
@@ -152,9 +156,11 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                     AppOutlinedTextField(
                                       controller: _fullNameController,
                                       onChanged: _validateStudentProfile,
-                                      errorText: state is StudentProfileChangedState && state.fullnameError.isNotEmpty
-                                          ? state.fullnameError
-                                          : null,
+                                      errorText:
+                                          state is StudentProfileChangedState &&
+                                                  state.fullnameError.isNotEmpty
+                                              ? state.fullnameError
+                                              : null,
                                     ),
                                     const SizedBox(height: spacing16),
                                     const Text(
@@ -169,7 +175,9 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                       controller: _englishNameController,
                                       onChanged: _validateStudentProfile,
                                       errorText:
-                                          state is StudentProfileChangedState && state.englishNameError.isNotEmpty
+                                          state is StudentProfileChangedState &&
+                                                  state.englishNameError
+                                                      .isNotEmpty
                                               ? state.englishNameError
                                               : null,
                                     ),
@@ -186,9 +194,11 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                       controller: _bioController,
                                       maxLines: 3,
                                       onChanged: _validateStudentProfile,
-                                      errorText: state is StudentProfileChangedState && state.bioError.isNotEmpty
-                                          ? state.bioError
-                                          : null,
+                                      errorText:
+                                          state is StudentProfileChangedState &&
+                                                  state.bioError.isNotEmpty
+                                              ? state.bioError
+                                              : null,
                                     ),
                                     const SizedBox(height: spacing16),
                                     const Text(
@@ -199,33 +209,53 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                         color: AppColor.defaultFont,
                                       ),
                                     ),
-                                    BlocBuilder<StudentProfileBloc, StudentProfileState>(
-                                      builder: (context, state) => GridView.builder(
-                                        padding: const EdgeInsets.all(0),
+                                    BlocBuilder<StudentProfileBloc,
+                                        StudentProfileState>(
+                                      builder: (context, state) =>
+                                          GridView.builder(
+                                        padding: EdgeInsets.zero,
                                         shrinkWrap: true,
-                                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                        gridDelegate:
+                                            SliverGridDelegateWithFixedCrossAxisCount(
+                                          mainAxisSpacing: 16.0,
+                                          crossAxisSpacing: 16.0,
                                           crossAxisCount: 2,
-                                          childAspectRatio: _getTopicsAspectRatio(widthView),
+                                          childAspectRatio:
+                                              _getTopicsAspectRatio(widthView),
                                         ),
-                                        physics: const NeverScrollableScrollPhysics(),
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
                                         itemCount: topics.length,
-                                        itemBuilder: (_, index) => CheckboxListTile(
+                                        itemBuilder: (_, index) =>
+                                            //     CheckboxListTile(
+                                            //   value: selectedTopics[index],
+                                            //   activeColor: AppColor.mainColor2,
+                                            //   onChanged: (value) {
+                                            //     selectedTopics[index] =
+                                            //         value ?? false;
+                                            //     _validateStudentProfile('');
+                                            //   },
+                                            //   title: Text(
+                                            //     '${index + 1}. ${topics[index].topicName}',
+                                            //     style: const TextStyle(
+                                            //       fontSize: bodyLargeSize,
+                                            //       fontWeight: bodyLargeWeight,
+                                            //       color: AppColor.defaultFont,
+                                            //     ),
+                                            //   ),
+                                            // ),
+                                            CustomCheckboxTile(
+                                          title: topics[index].topicName ?? '',
                                           value: selectedTopics[index],
-                                          activeColor: AppColor.mainColor2,
                                           onChanged: (value) {
-                                            selectedTopics[index] = value ?? false;
+                                            selectedTopics[index] = value;
                                             _validateStudentProfile('');
                                           },
-                                          title: Text(
-                                            '${index + 1}. ${topics[index].topicName}',
-                                            style: const TextStyle(
-                                              fontSize: bodyLargeSize,
-                                              fontWeight: bodyLargeWeight,
-                                              color: AppColor.defaultFont,
-                                            ),
-                                          ),
                                         ),
                                       ),
+                                    ),
+                                    const SizedBox(
+                                      height: 32.0,
                                     ),
                                   ],
                                 ),
@@ -247,7 +277,8 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                         ),
                         color: AppColor.white,
                         child: AppElevatedButton(
-                          onPressed: state is StudentProfileChangedState && state.forceDisabled == false
+                          onPressed: state is StudentProfileChangedState &&
+                                  state.forceDisabled == false
                               ? () {
                                   context.read<StudentProfileBloc>().add(
                                         StudentProfileSaveChangesEvent(
