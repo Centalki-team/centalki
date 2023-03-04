@@ -7,9 +7,7 @@ class RepositoriesModule extends DIModule {
   @override
   Future<void> provides() async {
     getIt
-      ..registerLazySingleton<TopicRemoteDatasource>(
-        TopicRemoteDatasource.new,
-      )
+      ..registerLazySingleton<TopicRemoteDatasource>(TopicRemoteDatasource.new)
       ..registerLazySingleton<TopicRepository>(TopicRepositoryImpl.new);
   }
 }

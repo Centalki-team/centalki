@@ -28,7 +28,8 @@ class _YourAccountViewState extends State<YourAccountView> {
             final heightView = constraint.maxHeight;
             final widthView = constraint.maxWidth;
 
-            return BlocConsumer<YourAccountBloc, YourAccountState>(listener: (context, state) {
+            return BlocConsumer<YourAccountBloc, YourAccountState>(
+                listener: (context, state) {
               if (state is YourAccountLoadErrorState) {
                 showDialog(
                     context: context,
@@ -58,7 +59,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                         children: [
                           Container(
                             width: double.maxFinite,
-                            height: heightView / 2,
+                            height: heightView / 3,
                             color: AppColor.mainColor2,
                             child: Stack(
                               children: [
@@ -66,7 +67,8 @@ class _YourAccountViewState extends State<YourAccountView> {
                                   left: -50,
                                   bottom: 50,
                                   child: RotationTransition(
-                                    turns: const AlwaysStoppedAnimation(45 / 360),
+                                    turns:
+                                        const AlwaysStoppedAnimation(45 / 360),
                                     child: ClipRect(
                                       child: Container(
                                         color: AppColor.support,
@@ -84,7 +86,8 @@ class _YourAccountViewState extends State<YourAccountView> {
                                     width: 60,
                                     decoration: const BoxDecoration(
                                       color: AppColor.mainColor2Surface,
-                                      borderRadius: BorderRadius.all(Radius.circular(48.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(48.0)),
                                     ),
                                   ),
                                 ),
@@ -96,22 +99,26 @@ class _YourAccountViewState extends State<YourAccountView> {
                                     width: 100,
                                     decoration: const BoxDecoration(
                                       color: AppColor.error,
-                                      borderRadius: BorderRadius.all(Radius.circular(48.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(48.0)),
                                     ),
                                   ),
                                 ),
-                                orientation == Orientation.portrait || heightView > 400
+                                orientation == Orientation.portrait ||
+                                        heightView > 400
                                     ? Center(
                                         child: Column(
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             Avatar(
-                                              avatarUrl: state.account.avatarUrl ?? '',
-                                              fullName: state.account.fullName ?? '',
-                                              maxRadius: heightView / 8,
+                                              avatarUrl:
+                                                  state.account.avatarUrl ?? '',
+                                              fullName:
+                                                  state.account.fullName ?? '',
+                                              maxRadius: heightView / 10,
                                             ),
                                             const SizedBox(
-                                              height: spacing18,
+                                              height: spacing10,
                                             ),
                                             Text(
                                               state.account.fullName ?? '',
@@ -121,18 +128,26 @@ class _YourAccountViewState extends State<YourAccountView> {
                                                 color: AppColor.defaultFont,
                                               ),
                                             ),
+                                            const SizedBox(
+                                              height: spacing10,
+                                            ),
                                           ],
                                         ),
                                       )
                                     : SizedBox(
-                                        height: heightView / 2 - 30,
+                                        height: heightView / 3 - 30,
                                         child: Center(
                                           child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
                                               Avatar(
-                                                avatarUrl: state.account.avatarUrl ?? '',
-                                                fullName: state.account.fullName ?? '',
+                                                avatarUrl:
+                                                    state.account.avatarUrl ??
+                                                        '',
+                                                fullName:
+                                                    state.account.fullName ??
+                                                        '',
                                                 maxRadius: heightView / 8,
                                               ),
                                               const SizedBox(
@@ -169,7 +184,8 @@ class _YourAccountViewState extends State<YourAccountView> {
                                     await Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (_) => const StudentProfilePage(),
+                                          builder: (_) =>
+                                              const StudentProfilePage(),
                                         ));
                                     if (mounted) {
                                       context.read<YourAccountBloc>().add(
@@ -184,7 +200,8 @@ class _YourAccountViewState extends State<YourAccountView> {
                                   title: TextDoc.txtWallet,
                                   onTap: () => Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (_) => const WalletPage()),
+                                    MaterialPageRoute(
+                                        builder: (_) => const WalletPage()),
                                   ),
                                 ),
                                 const SizedBox(height: spacing12),
@@ -193,7 +210,8 @@ class _YourAccountViewState extends State<YourAccountView> {
                                   title: TextDoc.txtHistory,
                                   onTap: () => Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (_) => const HistoryPage()),
+                                    MaterialPageRoute(
+                                        builder: (_) => const HistoryPage()),
                                   ),
                                 ),
                                 const SizedBox(height: spacing12),
@@ -202,7 +220,9 @@ class _YourAccountViewState extends State<YourAccountView> {
                                   title: TextDoc.txtAccountInformation,
                                   onTap: () => Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => const AccountInformationPage()),
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const AccountInformationPage()),
                                   ),
                                 ),
                                 const SizedBox(height: spacing12),
@@ -211,7 +231,9 @@ class _YourAccountViewState extends State<YourAccountView> {
                                   title: TextDoc.txtChangePassword,
                                   onTap: () => Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => const ChangePasswordPage()),
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ChangePasswordPage()),
                                   ),
                                 ),
                                 const SizedBox(height: spacing12),
@@ -234,7 +256,8 @@ class _YourAccountViewState extends State<YourAccountView> {
                                           ),
                                         ),
                                         content: const Text(
-                                          TextDoc.txtConfirmDeleteAccountContent,
+                                          TextDoc
+                                              .txtConfirmDeleteAccountContent,
                                           style: TextStyle(
                                             fontSize: bodySmallSize,
                                             fontWeight: bodySmallWeight,
@@ -244,10 +267,12 @@ class _YourAccountViewState extends State<YourAccountView> {
                                         actions: [
                                           AppTextButton(
                                             text: TextDoc.txtCancel,
-                                            onPressed: () => Navigator.pop(context, false),
+                                            onPressed: () =>
+                                                Navigator.pop(context, false),
                                           ),
                                           ElevatedButton(
-                                            onPressed: () => Navigator.pop(context, true),
+                                            onPressed: () =>
+                                                Navigator.pop(context, true),
                                             style: ElevatedButton.styleFrom(
                                               backgroundColor: AppColor.error,
                                               foregroundColor: Colors.white,
@@ -267,7 +292,9 @@ class _YourAccountViewState extends State<YourAccountView> {
                                       if (mounted) {
                                         Navigator.push(
                                           context,
-                                          MaterialPageRoute(builder: (context) => const DeleteAccountPage()),
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const DeleteAccountPage()),
                                         );
                                       }
                                     }
@@ -299,29 +326,39 @@ class _YourAccountViewState extends State<YourAccountView> {
                                               ),
                                               actions: [
                                                 TextButton(
-                                                  onPressed: () => Navigator.pop(context, false),
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          context, false),
                                                   style: TextButton.styleFrom(
-                                                    foregroundColor: AppColor.mainColor1,
+                                                    foregroundColor:
+                                                        AppColor.mainColor1,
                                                   ),
                                                   child: const Text(
                                                     TextDoc.txtCancel,
                                                     style: TextStyle(
                                                       fontSize: labelLargeSize,
-                                                      fontWeight: labelLargeWeight,
+                                                      fontWeight:
+                                                          labelLargeWeight,
                                                     ),
                                                   ),
                                                 ),
                                                 ElevatedButton(
-                                                  onPressed: () => Navigator.pop(context, true),
-                                                  style: ElevatedButton.styleFrom(
-                                                    backgroundColor: AppColor.error,
-                                                    foregroundColor: Colors.white,
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          context, true),
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    backgroundColor:
+                                                        AppColor.error,
+                                                    foregroundColor:
+                                                        Colors.white,
                                                   ),
                                                   child: const Text(
                                                     TextDoc.txtSignOut,
                                                     style: TextStyle(
                                                       fontSize: labelLargeSize,
-                                                      fontWeight: labelLargeWeight,
+                                                      fontWeight:
+                                                          labelLargeWeight,
                                                     ),
                                                   ),
                                                 ),
@@ -343,9 +380,9 @@ class _YourAccountViewState extends State<YourAccountView> {
                                       color: AppColor.error,
                                     ),
                                   ),
-                                  child: Row(
+                                  child: const Row(
                                     mainAxisSize: MainAxisSize.min,
-                                    children: const [
+                                    children: [
                                       Icon(
                                         Icons.logout_outlined,
                                       ),
@@ -369,12 +406,13 @@ class _YourAccountViewState extends State<YourAccountView> {
                       Container(
                         margin: EdgeInsets.fromLTRB(
                           padding16,
-                          heightView * 1 / 2 - 30,
+                          heightView * 1 / 3 - 30,
                           padding16,
                           0,
                         ),
                         decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.all(Radius.circular(12.0)),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(12.0)),
                             color: AppColor.white,
                             boxShadow: [
                               BoxShadow(

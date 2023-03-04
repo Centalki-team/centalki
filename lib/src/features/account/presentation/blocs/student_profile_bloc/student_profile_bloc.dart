@@ -4,12 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../base/define/text.dart';
 import '../../../../../../base/temp_dio/dio_client.dart';
 import '../../../../topics/domain/entities/topic_item_entity.dart';
+import '../../../domain/usecases/get_account_local_data_usecase.dart';
 
 part 'student_profile_event.dart';
 
 part 'student_profile_state.dart';
 
-class StudentProfileBloc extends Bloc<StudentProfileEvent, StudentProfileState> {
+class StudentProfileBloc
+    extends Bloc<StudentProfileEvent, StudentProfileState> {
   StudentProfileBloc() : super(const StudentProfileInitState()) {
     on<StudentProfileInitEvent>(_onInit);
     on<StudentProfileChangeEvent>(_onChange);
@@ -17,24 +19,55 @@ class StudentProfileBloc extends Bloc<StudentProfileEvent, StudentProfileState> 
   }
 
   late final List<TopicItemEntity> topicList;
+  final GetAccountLocalDataUseCase getAccountLocalDataUseCase =
+      const GetAccountLocalDataUseCase();
 
   void _onInit(StudentProfileInitEvent event, emit) async {
     emit(const StudentProfileLoadingState());
     try {
-      final studentProfile = await FirebaseAuth.instance.currentUser?.getIdToken().then(DioClient.getUserInformation);
-      final topics = await DioClient.getTopicList();
-      topicList = topics.topics ?? [];
+      //FIXME: CHANGE BACK TO REMOTE DATA
+      // final studentProfile = await FirebaseAuth.instance.currentUser
+      //     ?.getIdToken()
+      //     .then(DioClient.getUserInformation);
+      final studentProfile = await getAccountLocalDataUseCase(null);
+      // final topics = await DioClient.getTopicList();
+      // topicList = topics.topics ?? [];
+      topicList = const <TopicItemEntity>[
+        TopicItemEntity(
+          topicId: 'GTQD3b84dBIq3eoUICIF',
+          topicName: 'Movies',
+        ),
+        TopicItemEntity(
+          topicId: 'YZ5P40c74WjxRcREqDcf',
+          topicName: 'Clothes',
+        ),
+        TopicItemEntity(
+          topicId: 'b6OzPzzZAMPLPXzkRLQV',
+          topicName: 'Weekend activities',
+        ),
+        TopicItemEntity(
+          topicId: 'jHQt2luGgCaPWezywraV',
+          topicName: 'Food',
+        ),
+      ];
       var selectedInterestedTopics = List.generate(
           topicList.length,
           (index) =>
-              studentProfile?.userProfile?.accountInterestedTopicIds?.contains(topicList[index].topicId) ?? false);
+              studentProfile?.userProfile?.accountInterestedTopicIds
+                  ?.contains(topicList[index].topicId) ??
+              false);
       emit(StudentProfileLoadDoneState(
         studentProfile?.avatarUrl ?? '',
         studentProfile?.fullName ?? '',
         studentProfile?.userProfile?.accountEnglishName ?? '',
         studentProfile?.userProfile?.accountBio ?? '',
-        selectedInterestedTopics,
-        topics.topics ?? [],
+        [
+          true,
+          false,
+          true,
+          false,
+        ],
+        topicList,
       ));
     } on Exception catch (_) {}
   }
@@ -67,7 +100,9 @@ class StudentProfileBloc extends Bloc<StudentProfileEvent, StudentProfileState> 
       bioError = TextDoc.txtBioTooLong;
     }
 
-    saveButtonDisabled = fullnameError.isNotEmpty || englishNameError.isNotEmpty || bioError.isNotEmpty;
+    saveButtonDisabled = fullnameError.isNotEmpty ||
+        englishNameError.isNotEmpty ||
+        bioError.isNotEmpty;
 
     emit(StudentProfileChangedState(
       fullnameError: fullnameError,
@@ -92,7 +127,8 @@ class StudentProfileBloc extends Bloc<StudentProfileEvent, StudentProfileState> 
       "bio": event.bio,
     });
     try {
-      final idToken = await FirebaseAuth.instance.currentUser?.getIdToken() ?? '';
+      final idToken =
+          await FirebaseAuth.instance.currentUser?.getIdToken() ?? '';
       final isSuccess = await DioClient.updateUserInformation(
         updateInformation,
         idToken,

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../base/temp_dio/dio_client.dart';
 import '../../../domain/entities/user_account_entity.dart';
+import '../../../domain/usecases/get_account_local_data_usecase.dart';
 
 part 'your_account_event.dart';
 part 'your_account_state.dart';
@@ -14,14 +15,19 @@ class YourAccountBloc extends Bloc<YourAccountEvent, YourAccountState> {
     on<YourAccountLogOutEvent>(_onLogOut);
   }
 
+  final GetAccountLocalDataUseCase getAccountLocalDataUseCase =
+      const GetAccountLocalDataUseCase();
+
   void _onInit(YourAccountInitEvent event, emit) {}
 
   void _onLoad(YourAccountLoadEvent event, emit) async {
     emit(const YourAccountLoadingState());
     try {
-      final userProfile = await FirebaseAuth.instance.currentUser
-          ?.getIdToken()
-          .then(DioClient.getUserInformation);
+      // final userProfile = await FirebaseAuth.instance.currentUser
+      //     ?.getIdToken()
+      //     .then(DioClient.getUserInformation);
+      //FIXME: CHANGE BACK TO REMOTE DATA
+      final userProfile = await getAccountLocalDataUseCase(null);
       emit(YourAccountLoadDoneState(userProfile ?? const UserAccountEntity()));
     } on Exception catch (e) {
       emit(YourAccountLoadErrorState(e.toString()));
