@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../base/define/app_text.dart';
-import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/common_txt_style.dart';
+import '../../../../../base/define/styles.dart';
 import '../../../../../base/widgets/bottom_bar/custom_bottom_nav.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../account/presentation/views/your_account/your_account_page.dart';
@@ -42,7 +42,7 @@ class _HomeViewState extends State<HomeView>
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        backgroundColor: const Color(0xFFF5F5F5),
+        backgroundColor: AppColor.white,
         body: Column(
           children: [
             SizedBox(

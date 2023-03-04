@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-import '../../../../../../base/define/colors.dart';
-import '../../../../../../base/define/dimensions.dart';
-import '../../../../../../base/define/text.dart';
+import '../../../../../../base/define/styles.dart';
 import '../../blocs/history_bloc/history_bloc.dart';
 
 class HistoryView extends StatefulWidget {
@@ -73,76 +71,88 @@ class _HistoryViewState extends State<HistoryView> {
         builder: (context, state) {
           if (state is HistoryLoadDoneState) {
             return Scaffold(
+              backgroundColor: AppColor.white,
               body: CustomScrollView(
                 controller: _scrollController,
                 slivers: [
                   SliverAppBar.medium(
-                    title: const Text(TextDoc.txtHistory),
+                    title: const Text(
+                      TextDoc.txtHistory,
+                      style: TextStyle(
+                        height: 1.0,
+                        fontSize: headlineSmallSize,
+                        fontWeight: headlineSmallWeight,
+                        color: AppColor.defaultFont,
+                      ),
+                    ),
                     centerTitle: true,
                   ),
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
                       childCount: 1,
                       (_, index) => Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: screenAutoPadding16, vertical: 24),
+                        padding: const EdgeInsets.symmetric(horizontal: padding16, vertical: 24),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Card(
-                              color: AppColor.mainColor2Surface,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                            Container(
+                              width: double.maxFinite,
+                              padding: const EdgeInsets.symmetric(
+                                vertical: padding8,
+                                horizontal: padding16,
+                              ),
+                              decoration: const BoxDecoration(
+                                color: AppColor.mainColor2Surface,
+                                borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                              ),
+                              child: Column(
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: screenAutoPadding16, vertical: screenAutoPadding16),
-                                    child: Column(
-                                      children: [
-                                        const Text(
-                                          TextDoc.txtTotalCompletedSessions,
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18,
-                                            color: AppColor.defaultFont,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: smallSpacing10,
-                                        ),
-                                        Text(
-                                          '${state.sessionCount}',
-                                          style: const TextStyle(
-                                              fontSize: 18, color: AppColor.support, fontWeight: FontWeight.bold),
-                                        ),
-                                        const SizedBox(
-                                          height: smallSpacing10,
-                                        ),
-                                      ],
+                                  const Text(
+                                    TextDoc.txtTotalCompletedSessions,
+                                    style: TextStyle(
+                                      fontSize: titleMediumSize,
+                                      fontWeight: titleMediumWeight,
+                                      color: AppColor.defaultFont,
+                                    ),
+                                  ),
+                                  Text(
+                                    '${state.sessionCount}',
+                                    style: const TextStyle(
+                                      fontSize: headlineLargeSize,
+                                      fontWeight: headlineLargeWeight,
+                                      color: AppColor.support,
                                     ),
                                   ),
                                 ],
                               ),
                             ),
-                            const SizedBox(
-                              height: spaceBetweenLine20,
-                            ),
+                            const SizedBox(height: spacing24),
                             const Text(
                               TextDoc.txtSessions,
                               style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
+                                fontSize: titleMediumSize,
+                                fontWeight: titleMediumWeight,
                                 color: AppColor.tertiary,
                               ),
                             ),
                             state.sessionList.isEmpty
-                                ? const Center(child: Text('No data'))
+                                ? const Center(
+                                    child: Text(
+                                      'No data',
+                                      style: TextStyle(
+                                        fontSize: bodyLargeSize,
+                                        fontWeight: bodyLargeWeight,
+                                        color: AppColor.defaultFont,
+                                      ),
+                                    ),
+                                  )
                                 : ListView.builder(
                                     shrinkWrap: true,
                                     physics: const NeverScrollableScrollPhysics(),
                                     itemCount: state.sessionList.length,
                                     itemBuilder: (_, index) => Card(
                                       elevation: 0,
-                                      clipBehavior: Clip.antiAlias,
+                                      clipBehavior: Clip.hardEdge,
                                       child: Row(
                                         children: [
                                           Expanded(

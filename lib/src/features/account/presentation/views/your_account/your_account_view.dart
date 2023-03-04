@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../base/define/colors.dart';
-import '../../../../../../base/define/dimensions.dart';
-import '../../../../../../base/define/text.dart';
+import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/avatar.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../blocs/your_account_bloc/your_account_bloc.dart';
+import '../../widgets/account_tile.dart';
 import '../account_information/account_information_page.dart';
 import '../change_password/change_password_page.dart';
 import '../delete_account/delete_account_page.dart';
@@ -29,8 +28,7 @@ class _YourAccountViewState extends State<YourAccountView> {
             final heightView = constraint.maxHeight;
             final widthView = constraint.maxWidth;
 
-            return BlocConsumer<YourAccountBloc, YourAccountState>(
-                listener: (context, state) {
+            return BlocConsumer<YourAccountBloc, YourAccountState>(listener: (context, state) {
               if (state is YourAccountLoadErrorState) {
                 showDialog(
                     context: context,
@@ -53,6 +51,7 @@ class _YourAccountViewState extends State<YourAccountView> {
               }
               if (state is YourAccountLoadDoneState) {
                 return Scaffold(
+                  backgroundColor: AppColor.white,
                   body: Stack(
                     children: [
                       Column(
@@ -67,8 +66,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                   left: -50,
                                   bottom: 50,
                                   child: RotationTransition(
-                                    turns:
-                                        const AlwaysStoppedAnimation(45 / 360),
+                                    turns: const AlwaysStoppedAnimation(45 / 360),
                                     child: ClipRect(
                                       child: Container(
                                         color: AppColor.support,
@@ -84,9 +82,9 @@ class _YourAccountViewState extends State<YourAccountView> {
                                   child: Container(
                                     height: 60,
                                     width: 60,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       color: AppColor.mainColor2Surface,
-                                      borderRadius: BorderRadius.circular(48),
+                                      borderRadius: BorderRadius.all(Radius.circular(48.0)),
                                     ),
                                   ),
                                 ),
@@ -96,32 +94,32 @@ class _YourAccountViewState extends State<YourAccountView> {
                                   child: Container(
                                     height: 100,
                                     width: 100,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       color: AppColor.error,
-                                      borderRadius: BorderRadius.circular(48),
+                                      borderRadius: BorderRadius.all(Radius.circular(48.0)),
                                     ),
                                   ),
                                 ),
-                                orientation == Orientation.portrait ||
-                                        heightView > 400
+                                orientation == Orientation.portrait || heightView > 400
                                     ? Center(
                                         child: Column(
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             Avatar(
-                                              avatarUrl:
-                                                  state.account.avatarUrl ?? '',
-                                              fullName:
-                                                  state.account.fullName ?? '',
+                                              avatarUrl: state.account.avatarUrl ?? '',
+                                              fullName: state.account.fullName ?? '',
                                               maxRadius: heightView / 8,
                                             ),
                                             const SizedBox(
-                                              height: spaceBetweenLine18,
+                                              height: spacing18,
                                             ),
                                             Text(
                                               state.account.fullName ?? '',
-                                              style:
-                                                  const TextStyle(fontSize: 20),
+                                              style: const TextStyle(
+                                                fontSize: titleMediumSize,
+                                                fontWeight: titleMediumWeight,
+                                                color: AppColor.defaultFont,
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -130,25 +128,23 @@ class _YourAccountViewState extends State<YourAccountView> {
                                         height: heightView / 2 - 30,
                                         child: Center(
                                           child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
                                               Avatar(
-                                                avatarUrl:
-                                                    state.account.avatarUrl ??
-                                                        '',
-                                                fullName:
-                                                    state.account.fullName ??
-                                                        '',
+                                                avatarUrl: state.account.avatarUrl ?? '',
+                                                fullName: state.account.fullName ?? '',
                                                 maxRadius: heightView / 8,
                                               ),
                                               const SizedBox(
-                                                width: spaceBetweenLine18,
+                                                width: spacing18,
                                               ),
                                               Text(
                                                 state.account.fullName ?? '',
                                                 style: const TextStyle(
-                                                    fontSize: 20),
+                                                  fontSize: titleMediumSize,
+                                                  fontWeight: titleMediumWeight,
+                                                  color: AppColor.defaultFont,
+                                                ),
                                               ),
                                             ],
                                           ),
@@ -160,274 +156,236 @@ class _YourAccountViewState extends State<YourAccountView> {
                           Expanded(
                             child: ListView(
                               padding: EdgeInsets.fromLTRB(
-                                  screenAutoPadding16,
-                                  widthView > 400 ? 50 : 80,
-                                  screenAutoPadding16,
-                                  0),
+                                padding16,
+                                widthView > 400 ? 48 : 64,
+                                padding16,
+                                0,
+                              ),
                               children: [
-                                GestureDetector(
+                                AccountTile(
+                                  icon: Icons.person_outline,
+                                  title: TextDoc.txtStudentProfile,
                                   onTap: () async {
                                     await Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (_) =>
-                                                const StudentProfilePage()));
+                                          builder: (_) => const StudentProfilePage(),
+                                        ));
                                     if (mounted) {
-                                      context.read<YourAccountBloc>().add(const YourAccountLoadEvent());
+                                      context.read<YourAccountBloc>().add(
+                                            const YourAccountLoadEvent(),
+                                          );
                                     }
                                   },
-                                  child: Card(
-                                    surfaceTintColor: Colors.white,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0, horizontal: 16.0),
-                                      child: Row(
-                                        children: const [
-                                          Icon(
-                                            Icons.person,
-                                            size: 32,
-                                          ),
-                                          SizedBox(
-                                            width: 12,
-                                          ),
-                                          Text(
-                                            TextDoc.txtStudentProfile,
-                                            style:
-                                                TextStyle(fontSize: 16),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
                                 ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (_) =>
-                                                const WalletPage()));
-                                  },
-                                  child: Card(
-                                    surfaceTintColor: Colors.white,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0, horizontal: 16.0),
-                                      child: Row(
-                                        children: const [
-                                          Icon(
-                                            Icons.wallet,
-                                            size: 32,
-                                          ),
-                                          SizedBox(
-                                            width: 12,
-                                          ),
-                                          Text(
-                                            TextDoc.txtWallet,
-                                            style:
-                                                TextStyle(fontSize: 16),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (_) =>
-                                                const HistoryPage()));
-                                  },
-                                  child: Card(
-                                    surfaceTintColor: Colors.white,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0, horizontal: 16.0),
-                                      child: Row(
-                                        children: const [
-                                          Icon(
-                                            Icons.history,
-                                            size: 32,
-                                          ),
-                                          SizedBox(
-                                            width: 12,
-                                          ),
-                                          Text(
-                                            TextDoc.txtHistory,
-                                            style:
-                                                TextStyle(fontSize: 16),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const AccountInformationPage()));
-                                  },
-                                  child: Card(
-                                    surfaceTintColor: Colors.white,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0, horizontal: 16.0),
-                                      child: Row(
-                                        children: const [
-                                          Icon(
-                                            Icons.info,
-                                            size: 32,
-                                          ),
-                                          SizedBox(
-                                            width: 12,
-                                          ),
-                                          Text(
-                                            TextDoc.txtAccountInformation,
-                                            style:
-                                                TextStyle(fontSize: 16),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                GestureDetector(
+                                const SizedBox(height: spacing12),
+                                AccountTile(
+                                  icon: Icons.wallet_outlined,
+                                  title: TextDoc.txtWallet,
                                   onTap: () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const ChangePasswordPage())),
-                                  child: Card(
-                                    surfaceTintColor: Colors.white,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0, horizontal: 16.0),
-                                      child: Row(
-                                        children: const [
-                                          Icon(
-                                            Icons.password,
-                                            size: 32,
-                                          ),
-                                          SizedBox(
-                                            width: 12,
-                                          ),
-                                          Text(
-                                            TextDoc.txtChangePassword,
-                                            style:
-                                                TextStyle(fontSize: 16),
-                                          )
-                                        ],
-                                      ),
-                                    ),
+                                    context,
+                                    MaterialPageRoute(builder: (_) => const WalletPage()),
                                   ),
                                 ),
-                                GestureDetector(
+                                const SizedBox(height: spacing12),
+                                AccountTile(
+                                  icon: Icons.history_outlined,
+                                  title: TextDoc.txtHistory,
+                                  onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (_) => const HistoryPage()),
+                                  ),
+                                ),
+                                const SizedBox(height: spacing12),
+                                AccountTile(
+                                  icon: Icons.manage_accounts_outlined,
+                                  title: TextDoc.txtAccountInformation,
+                                  onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => const AccountInformationPage()),
+                                  ),
+                                ),
+                                const SizedBox(height: spacing12),
+                                AccountTile(
+                                  icon: Icons.password_outlined,
+                                  title: TextDoc.txtChangePassword,
+                                  onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => const ChangePasswordPage()),
+                                  ),
+                                ),
+                                const SizedBox(height: spacing12),
+                                AccountTile(
+                                  icon: Icons.person_remove_outlined,
+                                  title: TextDoc.txtDeleteAccount,
+                                  foregroundColor: AppColor.error,
                                   onTap: () async {
                                     final confirmedDelete = await showDialog(
-                                        barrierDismissible: false,
-                                        context: context,
-                                        builder: (context) => AlertDialog(
-                                              title: const Text(
-                                                TextDoc
-                                                    .txtConfirmDeleteAccountTitle,
-                                                style: TextStyle(
-                                                    color: AppColor.error,),
+                                      barrierDismissible: false,
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        backgroundColor: AppColor.white,
+                                        title: const Text(
+                                          TextDoc.txtConfirmDeleteAccountTitle,
+                                          style: TextStyle(
+                                            fontSize: titleLargeSize,
+                                            fontWeight: titleLargeWeight,
+                                            color: AppColor.error,
+                                          ),
+                                        ),
+                                        content: const Text(
+                                          TextDoc.txtConfirmDeleteAccountContent,
+                                          style: TextStyle(
+                                            fontSize: bodySmallSize,
+                                            fontWeight: bodySmallWeight,
+                                            color: AppColor.defaultFont,
+                                          ),
+                                        ),
+                                        actions: [
+                                          AppTextButton(
+                                            text: TextDoc.txtCancel,
+                                            onPressed: () => Navigator.pop(context, false),
+                                          ),
+                                          ElevatedButton(
+                                            onPressed: () => Navigator.pop(context, true),
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor: AppColor.error,
+                                              foregroundColor: Colors.white,
+                                            ),
+                                            child: const Text(
+                                              TextDoc.txtDeleteAccount,
+                                              style: TextStyle(
+                                                fontSize: labelLargeSize,
+                                                fontWeight: labelLargeWeight,
                                               ),
-                                              content: const Text(TextDoc
-                                                  .txtConfirmDeleteAccountContent),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          context, false),
-                                                  style: TextButton.styleFrom(
-                                                    foregroundColor: AppColor.mainColor1,
-                                                  ),
-                                                  child:
-                                                      const Text(TextDoc.txtCancel),
-                                                ),
-                                                ElevatedButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          context, true),
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                    backgroundColor: AppColor.error,
-                                                    foregroundColor:
-                                                        Colors.white,
-                                                  ),
-                                                  child: const Text(
-                                                      TextDoc.txtDeleteAccount),
-                                                ),
-                                              ],
-                                            )).then((value) => value ?? false);
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ).then((value) => value ?? false);
                                     if (confirmedDelete) {
                                       if (mounted) {
                                         Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const DeleteAccountPage()));
+                                          context,
+                                          MaterialPageRoute(builder: (context) => const DeleteAccountPage()),
+                                        );
                                       }
                                     }
                                   },
-                                  child: Card(
-                                    surfaceTintColor: Colors.white,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0, horizontal: 16.0),
-                                      child: Row(
-                                        children: const [
-                                          Icon(
-                                            Icons.person_remove,
-                                            size: 32,
-                                            color: AppColor.error,
-                                          ),
-                                          SizedBox(
-                                            width: 12,
-                                          ),
-                                          Text(
-                                            TextDoc.txtDeleteAccount,
-                                            style: TextStyle(
-                                                fontSize: 16, color: AppColor.error,),
-                                          )
-                                        ],
-                                      ),
+                                ),
+                                const SizedBox(height: spacing32),
+                                TextButton(
+                                  onPressed: () async {
+                                    final confirmedLogout = await showDialog(
+                                        barrierDismissible: false,
+                                        context: context,
+                                        builder: (context) => AlertDialog(
+                                              backgroundColor: AppColor.white,
+                                              title: const Text(
+                                                TextDoc.txtSignOut,
+                                                style: TextStyle(
+                                                  fontSize: titleLargeSize,
+                                                  fontWeight: titleLargeWeight,
+                                                  color: AppColor.error,
+                                                ),
+                                              ),
+                                              content: const Text(
+                                                TextDoc.txtSignOutContent,
+                                                style: TextStyle(
+                                                  fontSize: bodySmallSize,
+                                                  fontWeight: bodySmallWeight,
+                                                  color: AppColor.defaultFont,
+                                                ),
+                                              ),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () => Navigator.pop(context, false),
+                                                  style: TextButton.styleFrom(
+                                                    foregroundColor: AppColor.mainColor1,
+                                                  ),
+                                                  child: const Text(
+                                                    TextDoc.txtCancel,
+                                                    style: TextStyle(
+                                                      fontSize: labelLargeSize,
+                                                      fontWeight: labelLargeWeight,
+                                                    ),
+                                                  ),
+                                                ),
+                                                ElevatedButton(
+                                                  onPressed: () => Navigator.pop(context, true),
+                                                  style: ElevatedButton.styleFrom(
+                                                    backgroundColor: AppColor.error,
+                                                    foregroundColor: Colors.white,
+                                                  ),
+                                                  child: const Text(
+                                                    TextDoc.txtSignOut,
+                                                    style: TextStyle(
+                                                      fontSize: labelLargeSize,
+                                                      fontWeight: labelLargeWeight,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            )).then((value) => value ?? false);
+                                    if (confirmedLogout) {
+                                      if (mounted) {
+                                        context.read<YourAccountBloc>().add(
+                                              const YourAccountLogOutEvent(),
+                                            );
+                                      }
+                                    }
+                                  },
+                                  style: TextButton.styleFrom(
+                                    foregroundColor: AppColor.error,
+                                    minimumSize: const Size.fromHeight(48.0),
+                                    side: const BorderSide(
+                                      width: 1.0,
+                                      color: AppColor.error,
                                     ),
                                   ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: const [
+                                      Icon(
+                                        Icons.logout_outlined,
+                                      ),
+                                      SizedBox(width: spacing8),
+                                      Text(
+                                        TextDoc.txtSignOut,
+                                        style: TextStyle(
+                                          fontSize: labelLargeSize,
+                                          fontWeight: labelLargeWeight,
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
-                                const SizedBox(
-                                  height: spaceBetweenLine12,
-                                ),
-                                AppOutlinedButton(
-                                  onPressed: () {
-                                    context
-                                        .read<YourAccountBloc>()
-                                        .add(const YourAccountLogOutEvent());
-                                  },
-                                  text: TextDoc.txtLogOut,
-                                  icon: Icons.logout,
-                                  minimumSize: const Size.fromHeight(48),
-                                ),
+                                const SizedBox(height: spacing32),
                               ],
                             ),
                           ),
                         ],
                       ),
                       Container(
-                        margin: EdgeInsets.fromLTRB(screenAutoPadding16,
-                            heightView * 1 / 2 - 30, screenAutoPadding16, 0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: Colors.white,
+                        margin: EdgeInsets.fromLTRB(
+                          padding16,
+                          heightView * 1 / 2 - 30,
+                          padding16,
+                          0,
                         ),
+                        decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.all(Radius.circular(12.0)),
+                            color: AppColor.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: AppColor.shadow.shade300,
+                                blurRadius: 4.0,
+                                spreadRadius: 0.0,
+                                offset: const Offset(0, 2),
+                              )
+                            ]),
                         child: Padding(
-                          padding: const EdgeInsets.all(screenAutoPadding16),
+                          padding: const EdgeInsets.fromLTRB(8, 8, 8, 12),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -437,28 +395,33 @@ class _YourAccountViewState extends State<YourAccountView> {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     const Text(
-                                      TextDoc.txtBalanceSessions,
+                                      TextDoc.txtRemainingSessions,
                                       textAlign: TextAlign.end,
                                       style: TextStyle(
-                                          fontWeight: FontWeight.bold),
+                                        fontSize: titleSmallSize,
+                                        fontWeight: titleSmallWeight,
+                                        color: AppColor.shadow,
+                                      ),
                                     ),
                                     Text(
                                       '${(state.account.userProfile?.accountBalance ?? 0) ~/ (state.account.userProfile?.currentCostPerSession ?? 1)}',
+                                      style: const TextStyle(
+                                        height: 0.75,
+                                        fontSize: bodyLargeSize,
+                                        fontWeight: bodyLargeWeight,
+                                        color: AppColor.defaultFont,
+                                      ),
                                     ),
                                   ],
                                 ),
                               ),
-                              const SizedBox(
-                                width: 16,
-                              ),
+                              const SizedBox(width: spacing16),
                               Container(
-                                width: 2,
-                                height: 40,
-                                color: AppColor.background,
+                                width: 1,
+                                height: 48,
+                                color: AppColor.container,
                               ),
-                              const SizedBox(
-                                width: 16,
-                              ),
+                              const SizedBox(width: spacing16),
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -467,10 +430,20 @@ class _YourAccountViewState extends State<YourAccountView> {
                                     const Text(
                                       TextDoc.txtCompletedSessions,
                                       style: TextStyle(
-                                          fontWeight: FontWeight.bold),
+                                        fontSize: titleSmallSize,
+                                        fontWeight: titleSmallWeight,
+                                        color: AppColor.shadow,
+                                      ),
                                     ),
                                     Text(
-                                        '${state.account.accountCompletedSessions ?? 0}'),
+                                      '${state.account.accountCompletedSessions ?? 0}',
+                                      style: const TextStyle(
+                                        height: 0.75,
+                                        fontSize: bodyLargeSize,
+                                        fontWeight: bodyLargeWeight,
+                                        color: AppColor.defaultFont,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),

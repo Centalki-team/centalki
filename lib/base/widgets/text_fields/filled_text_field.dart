@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../define/colors.dart';
-import '../../define/opacity.dart';
-import '../../define/size.dart';
-import '../../define/width.dart';
+import '../../define/styles.dart';
 
 class AppFilledTextField extends StatefulWidget {
   const AppFilledTextField({

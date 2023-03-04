@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../base/define/colors.dart';
-import '../../../../../base/define/dimensions.dart';
-import '../../../../../base/define/size.dart';
-import '../../../../../base/define/text.dart';
+import '../../../../../../base/define/styles.dart';
+import '../../../../../base/widgets/buttons/button.dart';
 import '../../../connect_teacher/presentation/views/connect_teacher_page.dart';
 import '../blocs/topic_detail_bloc/topic_detail_bloc.dart';
 import '../widgets/phrase_card.dart';
@@ -29,28 +27,16 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                 padding: const EdgeInsets.only(
                   left: 16.0,
                   right: 16.0,
-                  bottom: 22.0,
+                  bottom: 24.0,
                 ),
-                child: SafeArea(
-                  top: false,
-                  child: ElevatedButton(
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ConnectTeacherPage(
-                          topicId: state.topicDetail.topicId ?? '',
-                        ),
-                      ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColor.secondary,
-                    ),
-                    child: const Text(
-                      TextDoc.txtTalk,
-                      style: TextStyle(
-                        fontSize: labelLargeSize,
-                        fontWeight: labelLargeWeight,
-                        color: AppColor.defaultFont,
+                child: AppElevatedButton(
+                  text: TextDoc.txtTalk,
+                  minimumSize: const Size.fromHeight(48),
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ConnectTeacherPage(
+                        topicId: state.topicDetail.topicId ?? '',
                       ),
                     ),
                   ),
@@ -79,16 +65,15 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                           height: 144 + MediaQuery.of(context).padding.top,
                           child: const Icon(
                             Icons.error_outline_rounded,
-                            size: 32,
-                            color: Colors.red,
+                            size: 40,
+                            color: AppColor.error,
                           ),
                         ),
                       ),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(
-                        top: MediaQuery.of(context).padding.top),
+                    padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
                     child: IconButton(
                       padding: EdgeInsets.zero,
                       constraints: const BoxConstraints(),
@@ -112,33 +97,30 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                         ),
                       ),
                       child: SingleChildScrollView(
-                        padding: const EdgeInsets.all(screenAutoPadding16),
+                        padding: const EdgeInsets.all(padding16),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             Align(
                               alignment: Alignment.center,
                               child: Text(
-                                state.topicDetail.topicName ??
-                                    'null name. Someone must be joking here',
+                                state.topicDetail.topicName ?? 'null name. Someone must be joking here',
                                 style: const TextStyle(
                                   fontSize: headlineSmallSize,
                                   fontWeight: headlineSmallWeight,
                                 ),
                               ),
                             ),
-                            const SizedBox(height: smallSpacing6),
+                            const SizedBox(height: spacing6),
                             SizedBox(
-                              height: 60.0,
+                              height: 48.0,
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   Expanded(
                                     child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment: CrossAxisAlignment.end,
                                       children: [
                                         const Text(
                                           TextDoc.txtTopicCategory,
@@ -150,9 +132,9 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                         ),
                                         Expanded(
                                           child: Text(
-                                            state.topicDetail.topicCategory ??
-                                                'null. This topic is out of this world',
+                                            state.topicDetail.topicCategory ?? 'null. This topic is out of this world',
                                             style: const TextStyle(
+                                              height: 0.9,
                                               fontSize: bodySmallSize,
                                               fontWeight: bodySmallWeight,
                                               color: AppColor.defaultFont,
@@ -163,9 +145,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                       ],
                                     ),
                                   ),
-                                  const SizedBox(
-                                    width: smallSpacing6,
-                                  ),
+                                  const SizedBox(width: spacing10),
                                   const DecoratedBox(
                                     decoration: BoxDecoration(
                                       color: AppColor.container,
@@ -175,15 +155,11 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                       width: 1.0,
                                     ),
                                   ),
-                                  const SizedBox(
-                                    width: smallSpacing6,
-                                  ),
+                                  const SizedBox(width: spacing10),
                                   Expanded(
                                     child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         const Text(
                                           TextDoc.txtTopicLevel,
@@ -195,10 +171,9 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                         ),
                                         Expanded(
                                           child: Text(
-                                            (state.topicDetail.topicLevel ??
-                                                    'null. This topic is for Einstein')
-                                                .toUpperCase(),
+                                            state.topicDetail.topicLevel ?? 'null. This topic is for Einstein',
                                             style: const TextStyle(
+                                              height: 0.9,
                                               fontSize: bodySmallSize,
                                               fontWeight: bodySmallWeight,
                                               color: AppColor.defaultFont,
@@ -212,62 +187,65 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                 ],
                               ),
                             ),
-                            const SizedBox(height: spaceBetweenLine14),
+                            const SizedBox(height: spacing20),
                             Text(
-                              state.topicDetail.topicDescription ??
-                                  'null. This topic is about nothing',
+                              state.topicDetail.topicDescription ?? 'null. This topic is about nothing',
                               style: const TextStyle(
+                                height: 1.15,
                                 fontSize: bodyLargeSize,
                                 fontWeight: bodyLargeWeight,
                                 color: Colors.black,
                               ),
                             ),
+                            const SizedBox(height: spacing16),
                             const Text(
                               TextDoc.txtTopicVocab,
                               style: TextStyle(
                                 fontSize: titleLargeSize,
-                                fontWeight: FontWeight.w600,
-                                color: AppColor.tertiary,
-                              ),
-                            ),
-                            ListView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              itemCount: state.topicDetail.topicPhrases?.length,
-                              itemBuilder: (context, index) {
-                                final phrase =
-                                    state.topicDetail.topicPhrases?[index];
-                                if (phrase == null) {
-                                  return const Text('Null Phrase');
-                                }
-                                return PhraseCard(phraseEntity: phrase);
-                              },
-                            ),
-                            const Text(
-                              TextDoc.txtTopicQuestions,
-                              style: TextStyle(
-                                fontSize: titleLargeSize,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.bold,
                                 color: AppColor.tertiary,
                               ),
                             ),
                             ListView.separated(
                               physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
-                              itemCount:
-                                  state.topicDetail.topicQuestions?.length ?? 0,
+                              padding: const EdgeInsets.all(0.0),
+                              itemCount: state.topicDetail.topicPhrases?.length ?? 0,
                               itemBuilder: (context, index) {
-                                final questionContent = state.topicDetail
-                                    .topicQuestions?[index].questionContent;
+                                final phrase = state.topicDetail.topicPhrases?[index];
+                                if (phrase == null) {
+                                  return const Text('Null Phrase');
+                                }
+                                return PhraseCard(phraseEntity: phrase);
+                              },
+                              separatorBuilder: (context, index) => const SizedBox(
+                                height: spacing20,
+                              ),
+                            ),
+                            const SizedBox(height: spacing16),
+                            const Text(
+                              TextDoc.txtTopicQuestions,
+                              style: TextStyle(
+                                fontSize: titleLargeSize,
+                                fontWeight: FontWeight.bold,
+                                color: AppColor.tertiary,
+                              ),
+                            ),
+                            const SizedBox(height: spacing8),
+                            ListView.separated(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              padding: const EdgeInsets.all(0.0),
+                              itemCount: state.topicDetail.topicQuestions?.length ?? 0,
+                              itemBuilder: (context, index) {
+                                final questionContent = state.topicDetail.topicQuestions?[index].questionContent;
                                 return QuestionCard(
                                   index: index,
-                                  questionContent:
-                                      questionContent ?? 'null question',
+                                  questionContent: questionContent ?? 'null question',
                                 );
                               },
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(
-                                height: spaceBetweenLine12,
+                              separatorBuilder: (context, index) => const SizedBox(
+                                height: spacing16,
                               ),
                             )
                           ],

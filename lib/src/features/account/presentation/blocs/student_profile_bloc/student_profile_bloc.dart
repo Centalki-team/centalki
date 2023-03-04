@@ -6,10 +6,10 @@ import '../../../../../../base/temp_dio/dio_client.dart';
 import '../../../../topics/domain/entities/topic_item_entity.dart';
 
 part 'student_profile_event.dart';
+
 part 'student_profile_state.dart';
 
-class StudentProfileBloc
-    extends Bloc<StudentProfileEvent, StudentProfileState> {
+class StudentProfileBloc extends Bloc<StudentProfileEvent, StudentProfileState> {
   StudentProfileBloc() : super(const StudentProfileInitState()) {
     on<StudentProfileInitEvent>(_onInit);
     on<StudentProfileChangeEvent>(_onChange);
@@ -21,17 +21,13 @@ class StudentProfileBloc
   void _onInit(StudentProfileInitEvent event, emit) async {
     emit(const StudentProfileLoadingState());
     try {
-      final studentProfile = await FirebaseAuth.instance.currentUser
-          ?.getIdToken()
-          .then(DioClient.getUserInformation);
+      final studentProfile = await FirebaseAuth.instance.currentUser?.getIdToken().then(DioClient.getUserInformation);
       final topics = await DioClient.getTopicList();
       topicList = topics.topics ?? [];
       var selectedInterestedTopics = List.generate(
           topicList.length,
           (index) =>
-              studentProfile?.userProfile?.accountInterestedTopicIds
-                  ?.contains(topicList[index].topicId) ??
-              false);
+              studentProfile?.userProfile?.accountInterestedTopicIds?.contains(topicList[index].topicId) ?? false);
       emit(StudentProfileLoadDoneState(
         studentProfile?.avatarUrl ?? '',
         studentProfile?.fullName ?? '',
@@ -44,8 +40,41 @@ class StudentProfileBloc
   }
 
   void _onChange(StudentProfileChangeEvent event, emit) {
-    emit(const StudentProfileSavingState());
-    emit(const StudentProfileChangeState());
+    // emit(const StudentProfileSavingState());
+
+    var fullnameError = '';
+    var englishNameError = '';
+    var bioError = '';
+    var saveButtonDisabled = false;
+
+    if (event.fullName.isEmpty) {
+      fullnameError = TextDoc.txtFullnameEmpty;
+    } else if (event.fullName.replaceAll(' ', '').length < 3) {
+      fullnameError = TextDoc.txtFullnameTooShort;
+    } else if (event.fullName.length > 50) {
+      fullnameError = TextDoc.txtFullnameTooLong;
+    }
+
+    if (event.englishName.isNotEmpty) {
+      if (event.englishName.replaceAll(' ', '').length < 3) {
+        englishNameError = TextDoc.txtEngNameTooShort;
+      } else if (event.englishName.length > 50) {
+        englishNameError = TextDoc.txtEngNameTooLong;
+      }
+    }
+
+    if (event.bio.length > 200) {
+      bioError = TextDoc.txtBioTooLong;
+    }
+
+    saveButtonDisabled = fullnameError.isNotEmpty || englishNameError.isNotEmpty || bioError.isNotEmpty;
+
+    emit(StudentProfileChangedState(
+      fullnameError: fullnameError,
+      englishNameError: englishNameError,
+      bioError: bioError,
+      forceDisabled: saveButtonDisabled,
+    ));
   }
 
   void _onSaveChanges(StudentProfileSaveChangesEvent event, emit) async {
@@ -63,18 +92,23 @@ class StudentProfileBloc
       "bio": event.bio,
     });
     try {
-      final idToken =
-          await FirebaseAuth.instance.currentUser?.getIdToken() ?? '';
-      final isSuccess =
-          await DioClient.updateUserInformation(updateInformation, idToken);
-      final isUpdated =
-          await DioClient.updateInterestedTopics(selectedTopicIds, idToken);
+      final idToken = await FirebaseAuth.instance.currentUser?.getIdToken() ?? '';
+      final isSuccess = await DioClient.updateUserInformation(
+        updateInformation,
+        idToken,
+      );
+      final isUpdated = await DioClient.updateInterestedTopics(
+        selectedTopicIds,
+        idToken,
+      );
       if (!isSuccess && !isUpdated) {
         throw Exception();
       }
       emit(const StudentProfileSaveDoneState());
     } on Exception catch (_) {
-      emit(const StudentProfileSaveFailureState(TextDoc.txtSaveFailed));
+      emit(const StudentProfileSaveFailureState(
+        TextDoc.txtProfileUpdateFailed,
+      ));
     }
   }
 }

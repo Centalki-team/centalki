@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../base/define/colors.dart';
-import '../../../../../base/define/dimensions.dart';
-import '../../../../../base/define/size.dart';
+import '../../../../../../base/define/styles.dart';
 
 class QuestionCard extends StatelessWidget {
   const QuestionCard({
@@ -19,33 +17,29 @@ class QuestionCard extends StatelessWidget {
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(16.0),
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.15),
-              offset: const Offset(1, 1),
+              color: AppColor.shadow.shade200,
               blurRadius: 4.0,
               spreadRadius: 0,
+              offset: const Offset(0, 2),
             ),
           ],
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: 40,
-              height: 35,
-              alignment: Alignment.center,
-              child: Text(
-                '${index + 1}.',
-                style: const TextStyle(
-                  fontSize: titleMediumSize,
-                  fontWeight: titleMediumWeight,
-                  color: AppColor.defaultFont,
-                ),
+            const SizedBox(width: spacing8),
+            Text(
+              '${index + 1}.',
+              style: const TextStyle(
+                fontSize: titleMediumSize,
+                fontWeight: titleMediumWeight,
+                color: AppColor.defaultFont,
               ),
             ),
-            const SizedBox(width: smallSpacing10),
+            const SizedBox(width: spacing8),
             Expanded(
               child: Text(
                 questionContent,
@@ -56,7 +50,7 @@ class QuestionCard extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: smallSpacing8),
+            const SizedBox(width: spacing8),
           ],
         ),
       );

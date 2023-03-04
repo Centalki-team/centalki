@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../base/define/colors.dart';
-import '../../../../../base/define/dimensions.dart';
-import '../../../../../base/define/size.dart';
-import '../../../../../base/define/text.dart';
+import '../../../../../../base/define/styles.dart';
 import '../../domain/entities/topic_detail_entity.dart';
 
 class PhraseCard extends StatelessWidget {
@@ -16,51 +13,59 @@ class PhraseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: BoxDecoration(
+          color: AppColor.white,
+          borderRadius: const BorderRadius.all(Radius.circular(12.0)),
+          boxShadow: [
+            BoxShadow(
+              color: AppColor.shadow.shade200,
+              blurRadius: 4.0,
+              spreadRadius: 0.0,
+              offset: const Offset(0, 2),
+            )
+          ]
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               phraseEntity.topicPhrase ?? 'null phrase',
               style: const TextStyle(
+                height: 0.9,
                 fontSize: titleMediumSize,
                 fontWeight: titleMediumWeight,
                 color: AppColor.mainColor1,
               ),
             ),
-            const SizedBox(height: smallSpacing1),
             Text(
               phraseEntity.phrasePhonetic ?? 'no phonetic',
               style: const TextStyle(
-                fontSize: titleSmallSize,
-                fontWeight: titleSmallWeight,
+                fontFamily: 'NotoSans',
+                fontSize: bodySmallSize * 0.6,
+                fontWeight: bodySmallWeight,
                 color: AppColor.defaultFont,
               ),
             ),
-            const SizedBox(height: smallSpacing8),
+            const SizedBox(height: spacing4),
             ...phraseEntity.phraseTranslations!.map(
               (e) => Text(
                 e.phraseMeaning ?? 'null meaning',
                 style: const TextStyle(
-                  fontSize: labelLargeSize,
-                  fontWeight: labelLargeWeight,
+                  height: 0.9,
+                  fontSize: titleMediumSize,
+                  fontWeight: titleMediumWeight,
                 ),
               ),
             ),
-            const SizedBox(height: smallSpacing4),
-            const Text(
-              TextDoc.txtTopicPhraseExample,
-              style: TextStyle(
-                fontSize: bodyMediumSize,
-                fontWeight: bodyMediumWeight,
-              ),
-            ),
+            const SizedBox(height: spacing2),
             ...phraseEntity.phraseExamples!.map(
               (e) => Text(
                 e.phraseExample ?? 'null example',
                 style: const TextStyle(
-                  fontSize: labelLargeSize,
-                  fontWeight: labelLargeWeight,
+                  height: 0.9,
+                  fontSize: bodyMediumSize,
+                  fontWeight: bodyMediumWeight,
                 ),
               ),
             ),

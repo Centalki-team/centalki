@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../define/colors.dart';
-import '../../define/size.dart';
+import '../../define/styles.dart';
 
 class AppTextButton extends StatefulWidget {
   const AppTextButton({

@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../base/define/colors.dart';
-import '../../../../../../base/define/dimensions.dart';
 import '../../../../../../base/define/manager/loading_manager.dart';
-import '../../../../../../base/define/size.dart';
-import '../../../../../../base/define/text.dart';
+import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/text_fields/text_field.dart';
 import '../../../../../../gen/assets.gen.dart';
@@ -58,7 +55,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                     color: AppColor.defaultFontContainer,
                   ),
                 ),
-                const SizedBox(height: spaceBetweenLine16),
+                const SizedBox(height: spacing16),
                 BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
                   builder: (context, state) => Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -80,7 +77,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                         onChanged: (value) =>
                             context.read<ResetPasswordBloc>().add(ResetPasswordValidateEvent(email: value)),
                       ),
-                      const SizedBox(height: spaceBetweenLine24),
+                      const SizedBox(height: spacing24),
                       AppFilledButton(
                         text: TextDoc.txtResetPassword,
                         onPressed: (state is ResetPasswordValidateState && !state.forceDisabled)
@@ -93,13 +90,13 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                     ],
                   ),
                 ),
-                const SizedBox(height: smallSpacing8),
+                const SizedBox(height: spacing8),
                 AppTextButton(
                   text: TextDoc.txtReturnSignIn,
                   onPressed: () => Navigator.pop(context),
                   minimumSize: const Size.fromHeight(48),
                 ),
-                const SizedBox(height: spaceBetweenLine16),
+                const SizedBox(height: spacing16),
               ],
             ),
           ),

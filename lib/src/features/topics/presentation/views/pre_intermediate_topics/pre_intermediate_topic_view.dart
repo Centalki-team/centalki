@@ -19,11 +19,11 @@ class _PreIntermediateTopicViewState extends State<PreIntermediateTopicView> {
       builder: (context, state) {
         if (state is PreIntermediateTopicsLoadDoneState) {
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: screenAutoPadding16),
+            padding: const EdgeInsets.symmetric(horizontal: padding16),
             child: ListView.separated(
               padding: const EdgeInsets.only(top: 16),
               itemCount: state.topics.topics!.length,
-              separatorBuilder: (context, index) => const SizedBox(height: smallSpacing8),
+              separatorBuilder: (context, index) => const SizedBox(height: spacing8),
               itemBuilder: (context, index) => TopicCard(
                   item: state.topics.topics![index],
                 ),

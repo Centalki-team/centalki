@@ -23,8 +23,11 @@ class ChangePasswordLoadErrorState extends ChangePasswordState {
 }
 
 class ChangePasswordInvalidInputState extends ChangePasswordState {
-  const ChangePasswordInvalidInputState(
-      {this.passwordError, this.newPasswordError, this.confirmPasswordError});
+  const ChangePasswordInvalidInputState({
+    this.passwordError,
+    this.newPasswordError,
+    this.confirmPasswordError,
+  });
 
   final String? passwordError;
   final String? newPasswordError;

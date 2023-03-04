@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../base/define/styles.dart';
 import 'radio_row.dart';
 
 class VerticalRadioGroup extends StatefulWidget {
@@ -26,8 +27,7 @@ class _VerticalRadioGroupState extends State<VerticalRadioGroup> {
   @override
   void initState() {
     super.initState();
-    currentValue = widget.initValue ??
-        (widget.dataList.isNotEmpty ? widget.dataList[0] : null);
+    currentValue = widget.initValue ?? (widget.dataList.isNotEmpty ? widget.dataList[0] : null);
   }
 
   @override
@@ -43,8 +43,8 @@ class _VerticalRadioGroupState extends State<VerticalRadioGroup> {
             ...widget.dataList.map(
               (e) => Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 28.0,
-                  vertical: 16.0,
+                  horizontal: padding16,
+                  vertical: padding4,
                 ),
                 child: RadioRow(
                   title: e,

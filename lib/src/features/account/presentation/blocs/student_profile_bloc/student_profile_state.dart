@@ -13,8 +13,8 @@ class StudentProfileLoadingState extends StudentProfileState {
 }
 
 class StudentProfileLoadDoneState extends StudentProfileState {
-  const StudentProfileLoadDoneState(this.avatarUrl, this.fullName,
-      this.englishName, this.bio, this.selectedInterestedTopicIds, this.topics);
+  const StudentProfileLoadDoneState(
+      this.avatarUrl, this.fullName, this.englishName, this.bio, this.selectedInterestedTopicIds, this.topics);
 
   final String avatarUrl;
   final String fullName;
@@ -24,8 +24,8 @@ class StudentProfileLoadDoneState extends StudentProfileState {
   final List<TopicItemEntity> topics;
 }
 
-class StudentProfileLoadFailureState extends StudentProfileState {
-  const StudentProfileLoadFailureState(this.message);
+class StudentProfileLoadFailedState extends StudentProfileState {
+  const StudentProfileLoadFailedState(this.message);
 
   final String message;
 }
@@ -44,6 +44,16 @@ class StudentProfileSaveFailureState extends StudentProfileState {
   final String message;
 }
 
-class StudentProfileChangeState extends StudentProfileState {
-  const StudentProfileChangeState();
+class StudentProfileChangedState extends StudentProfileState {
+  const StudentProfileChangedState({
+    required this.fullnameError,
+    required this.englishNameError,
+    required this.bioError,
+    required this.forceDisabled,
+  });
+
+  final String fullnameError;
+  final String englishNameError;
+  final String bioError;
+  final bool forceDisabled;
 }

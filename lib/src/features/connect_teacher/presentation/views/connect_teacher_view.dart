@@ -249,7 +249,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                                         child: const Text(TextDoc.txtNo),
                                       ),
                                     ),
-                                    const SizedBox(width: smallSpacing10),
+                                    const SizedBox(width: spacing10),
                                     Expanded(
                                       child: TextButton(
                                         style: TextButton.styleFrom(

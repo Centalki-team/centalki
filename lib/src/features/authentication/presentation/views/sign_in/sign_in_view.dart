@@ -3,10 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../base/define/colors.dart';
-import '../../../../../../base/define/dimensions.dart';
-import '../../../../../../base/define/size.dart';
-import '../../../../../../base/define/text.dart';
+import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/text_fields/text_field.dart';
 import '../../../../../../gen/assets.gen.dart';
@@ -64,7 +61,7 @@ class _SignInViewState extends State<SignInView> {
                     color: AppColor.defaultFontContainer,
                   ),
                 ),
-                const SizedBox(height: spaceBetweenLine16),
+                const SizedBox(height: spacing16),
                 BlocBuilder<SignInBloc, SignInState>(
                   builder: (context, state) => Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -86,7 +83,7 @@ class _SignInViewState extends State<SignInView> {
                             : null,
                         onChanged: _validateSignInInputs,
                       ),
-                      const SizedBox(height: smallSpacing8),
+                      const SizedBox(height: spacing8),
                       const Text(
                         TextDoc.txtPassword,
                         style: TextStyle(
@@ -107,7 +104,7 @@ class _SignInViewState extends State<SignInView> {
                     ],
                   ),
                 ),
-                const SizedBox(height: spaceBetweenLine24),
+                const SizedBox(height: spacing24),
                 BlocBuilder<SignInBloc, SignInState>(
                   builder: (context, state) {
                     if (state is SignInLoadingState) {
@@ -129,10 +126,10 @@ class _SignInViewState extends State<SignInView> {
                     );
                   },
                 ),
-                const SizedBox(height: spaceBetweenLine24),
+                const SizedBox(height: spacing24),
                 const Center(
                   child: Text(
-                    TextDoc.txtOr,
+                    TextDoc.txtOrLoginWith,
                     style: TextStyle(
                       fontSize: bodyLargeSize,
                       fontWeight: bodyLargeWeight,
@@ -159,7 +156,7 @@ class _SignInViewState extends State<SignInView> {
                         ),
                       ),
                     ),
-                    const SizedBox(width: spaceBetweenLine12),
+                    const SizedBox(width: spacing12),
                     BlocBuilder<SignInBloc, SignInState>(
                       builder: (context, state) => TextButton(
                         onPressed: () => context
@@ -176,7 +173,7 @@ class _SignInViewState extends State<SignInView> {
                       ),
                     ),
                     if (Platform.isIOS) ...[
-                      const SizedBox(width: spaceBetweenLine12),
+                      const SizedBox(width: spacing12),
                       BlocBuilder<SignInBloc, SignInState>(
                         builder: (context, state) => TextButton(
                           onPressed: () => context
@@ -196,7 +193,7 @@ class _SignInViewState extends State<SignInView> {
                       ...[],
                   ],
                 ),
-                const SizedBox(height: smallSpacing8),
+                const SizedBox(height: spacing8),
                 AppTextButton(
                   onPressed: () => Navigator.push(
                       context,
@@ -205,7 +202,7 @@ class _SignInViewState extends State<SignInView> {
                       )),
                   text: TextDoc.txtForgotPassword,
                 ),
-                const SizedBox(height: smallSpacing8),
+                const SizedBox(height: spacing8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

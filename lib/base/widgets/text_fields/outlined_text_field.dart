@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../define/colors.dart';
-import '../../define/dimensions.dart';
-import '../../define/opacity.dart';
-import '../../define/size.dart';
-import '../../define/width.dart';
+import '../../define/styles.dart';
 
 class AppOutlinedTextField extends StatefulWidget {
   const AppOutlinedTextField({
@@ -81,35 +77,32 @@ class _AppOutlinedTextFieldState extends State<AppOutlinedTextField> {
           suffixIconColor: widget.suffixIcon == null ? null : AppColor.defaultFont,
           contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           enabledBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(textFieldRadius)),
+            borderRadius: BorderRadius.all(Radius.circular(radius8)),
             borderSide: BorderSide(
               color: AppColor.container,
               width: enabledOutlineWidthTextField,
             ),
           ),
           disabledBorder: OutlineInputBorder(
-            borderRadius: const BorderRadius.all(Radius.circular(textFieldRadius)),
+            borderRadius: const BorderRadius.all(Radius.circular(radius8)),
             borderSide: BorderSide(
               color: AppColor.background.withOpacity(disabledOutlineOpacityOutlinedTextField),
               width: disabledOutlineWidthTextField,
             ),
           ),
           focusedBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(textFieldRadius)),
+            borderRadius: BorderRadius.all(Radius.circular(radius8)),
             borderSide: BorderSide(
               color: AppColor.mainColor2,
               width: focusedOutlineWidthTextField,
             ),
           ),
           errorBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(textFieldRadius)),
-            borderSide: BorderSide(
-              color: AppColor.error,
-              width: errorOutlineWidthTextField / 2
-            ),
+            borderRadius: BorderRadius.all(Radius.circular(radius8)),
+            borderSide: BorderSide(color: AppColor.error, width: errorOutlineWidthTextField / 2),
           ),
           focusedErrorBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(textFieldRadius)),
+            borderRadius: BorderRadius.all(Radius.circular(radius8)),
             borderSide: BorderSide(
               color: AppColor.error,
               width: errorOutlineWidthTextField,
