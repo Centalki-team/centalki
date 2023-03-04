@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'config/main_config.dart';
 import 'di/injection/injection.dart';
@@ -13,6 +14,8 @@ void main(List<String> args) async {
   await Injection.inject();
   await configureApp();
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   if (Firebase.apps.isEmpty) {
     await Firebase.initializeApp(
       name: 'YourAPP',

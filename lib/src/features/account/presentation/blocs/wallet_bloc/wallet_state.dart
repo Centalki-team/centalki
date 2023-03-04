@@ -24,3 +24,7 @@ class WalletLoadFailureState extends WalletState {
 
   final String message;
 }
+
+class WalletGetMoreState extends WalletState {
+  const WalletGetMoreState();
+}

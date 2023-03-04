@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../../base/define/styles.dart';
+import '../../../../payment/presentation/views/payment_page.dart';
 import '../../blocs/wallet_bloc/wallet_bloc.dart';
 
 class WalletView extends StatelessWidget {
@@ -10,7 +11,7 @@ class WalletView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocConsumer<WalletBloc, WalletState>(
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state is WalletLoadFailureState) {
             showDialog(
               barrierDismissible: false,
@@ -30,10 +31,18 @@ class WalletView extends StatelessWidget {
                 ],
               ),
             );
+          } else if (state is WalletGetMoreState) {
+            final result = await Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const PaymentPage(),
+              ),
+            );
+            context.read<WalletBloc>().add(const WalletInitEvent());
           }
         },
         builder: (context, state) {
-          final currencyFormat = NumberFormat.currency(locale: 'vi_VN', symbol: 'VND');
+          final currencyFormat =
+              NumberFormat.currency(locale: 'vi_VN', symbol: 'VND');
 
           if (state is WalletLoadDoneState) {
             return Scaffold(
@@ -55,7 +64,9 @@ class WalletView extends StatelessWidget {
                         padding: const EdgeInsets.only(right: 8.0),
                         child: IconButton(
                           onPressed: () {
-                            context.read<WalletBloc>().add(const WalletGetMoreEvent());
+                            context
+                                .read<WalletBloc>()
+                                .add(const WalletGetMoreEvent());
                           },
                           icon: const Icon(
                             Icons.add,
@@ -85,7 +96,8 @@ class WalletView extends StatelessWidget {
                                 ),
                                 decoration: const BoxDecoration(
                                   color: AppColor.mainColor2Surface,
-                                  borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(12.0)),
                                 ),
                                 child: Column(
                                   children: [
