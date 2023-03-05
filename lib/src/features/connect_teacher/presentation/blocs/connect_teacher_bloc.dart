@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../base/define/text.dart';
 import '../../../../../base/temp_dio/dio_client.dart';
+import '../../domain/entities/session_schedule_entity.dart';
 
 part 'connect_teacher_event.dart';
 part 'connect_teacher_state.dart';
@@ -21,7 +22,6 @@ class ConnectTeacherBloc
 
   String sessionId = '';
   late final String topicId;
-  bool isCancel = false;
 
   void _onInit(ConnectTeacherInit event, emit) async {
     emit(const ConnectTeacherLoadingState(TextDoc.txtFindTeacher));
@@ -45,7 +45,6 @@ class ConnectTeacherBloc
 
   void _onCancelButtonPressed(
       ConnectTeacherCancelButtonPressed event, emit) async {
-    isCancel = true;
     await FirebaseDatabase.instance
         .ref("session-schedule/$sessionId/status")
         .onValue
@@ -70,12 +69,6 @@ class ConnectTeacherBloc
             emit(const ConnectTeacherFindDoneState(TextDoc.txtConnectedTeacher));
             add(const ConnectTeacherConnectRoom());
             break;
-          case 'CANCELLED':
-            await events.listen((event) {}).cancel();
-            if (!isCancel) {
-              emit(const ConnectTeacherCancelState(isTeacherCancelled: true));
-            }
-            break;
           case 'TIME_OUT':
             await events.listen((event) {}).cancel();
             await DioClient.cancelSessionSchedule(sessionId);
@@ -92,20 +85,22 @@ class ConnectTeacherBloc
   }
 
   void _onConnectRoom(ConnectTeacherConnectRoom event, emit) async {
-    var teacherName = '';
+    String? teacherName;
+    SessionScheduleEntity? session;
     try {
       final sessionsResponse = await DioClient.getPickedUpSessionListOfStudent(
           FirebaseAuth.instance.currentUser!.uid, 'PICKED_UP');
       sessionsResponse.sessions?.forEach((element) {
         if (element.sessionId == sessionId) {
-          teacherName = element.sessionTeacher?.fullName ?? '';
+          teacherName = element.sessionTeacher?.fullName;
+          session = element;
         }
       });
-      if (teacherName.isNotEmpty) {
+      if (teacherName != null) {
         emit(ConnectTeacherConnectingRoomState(
             '${TextDoc.txtConnectedTeacher}$teacherName${TextDoc.txtLaunchSession}'));
         await Future.delayed(const Duration(seconds: 3));
-        emit(const ConnectTeacherConnectDoneState());
+        emit(ConnectTeacherConnectDoneState(session!));
       } else {
         emit(const ConnectTeacherConnectErrorState(
             TextDoc.txtNotTeacherAvailableContent));

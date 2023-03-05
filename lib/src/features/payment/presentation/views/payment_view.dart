@@ -8,7 +8,6 @@ import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
 import '../../../../../base/define/text.dart';
 import '../../../../../base/widgets/buttons/button.dart';
-import '../../../../../base/widgets/buttons/elevated_button.dart';
 import '../../domain/entities/payment_method_entity.dart';
 import '../blocs/payment_bloc/payment_bloc.dart';
 import '../widgets/payment_selection_group.dart';

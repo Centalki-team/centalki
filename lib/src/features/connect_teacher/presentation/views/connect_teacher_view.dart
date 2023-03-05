@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/text.dart';
 import '../../../../../base/widgets/buttons/button.dart';
+import '../../../meeting/presentation/views/meeting_page.dart';
 import '../blocs/connect_teacher_bloc.dart';
+import '../widgets/warning_dialog_content.dart';
 import '../widgets/wave.dart';
 
 class ConnectTeacherView extends StatefulWidget {
@@ -22,7 +25,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
     final pContext = context;
 
     return BlocConsumer<ConnectTeacherBloc, ConnectTeacherState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state is ConnectTeacherLoadDoneState) {
           context
               .read<ConnectTeacherBloc>()
@@ -31,13 +34,9 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
           showDialog(
             context: context,
             barrierDismissible: false,
-            builder: (context) => AlertDialog(
-              icon: const Icon(
-                Icons.warning_amber_outlined,
-                color: Colors.redAccent,
-              ),
-              title: const Text('Create session failed!'),
-              content: Text(state.message),
+            builder: (context) => WarningDialogContent(
+              title: 'Create session failed!',
+              content: state.message,
               actions: [
                 TextButton(
                   onPressed: () {
@@ -51,50 +50,13 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
           );
         } else if (state is ConnectTeacherFindFailureState) {
           showDialog(
-              context: context,
-              barrierDismissible: false,
-              builder: (context) => AlertDialog(
-                  icon: const Icon(
-                    Icons.warning_amber_outlined,
-                    color: Colors.redAccent,
-                  ),
-                  title: const Text('Find teacher failed!'),
-                  content: Text(state.message),
-                  actions: (state.message == TextDoc.txtInternetConnection)
-                      ? [
-                          AppFilledButton(
-                            text: TextDoc.txtTryAgain,
-                            onPressed: () {
-                              pContext
-                                  .read<ConnectTeacherBloc>()
-                                  .add(ConnectTeacherTryInternetConnect());
-                            },
-                          )
-                        ]
-                      : [
-                          // state.failureType == ConnectFailure.NOT_FOUND_TEACHER
-                          AppFilledButton(
-                            text: TextDoc.txtGoBack,
-                            onPressed: () {
-                              Navigator.pop(context);
-                              Navigator.pop(context);
-                            },
-                          )
-                        ]));
-        } else if (state is ConnectTeacherConnectDoneState) {
-          Navigator.pop(context);
-        } else if (state is ConnectTeacherConnectErrorState) {
-          showDialog(
-              context: context,
-              barrierDismissible: false,
-              builder: (context) => AlertDialog(
-                      icon: const Icon(
-                        Icons.warning_amber_outlined,
-                        color: Colors.redAccent,
-                      ),
-                      title: const Text('Connect room failed!'),
-                      content: Text(state.message),
-                      actions: [
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => WarningDialogContent(
+                title: 'Find teacher failed!',
+                content: state.message,
+                actions: (state.message == TextDoc.txtInternetConnection)
+                    ? [
                         AppFilledButton(
                           text: TextDoc.txtTryAgain,
                           onPressed: () {
@@ -103,64 +65,75 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                                 .add(ConnectTeacherTryInternetConnect());
                           },
                         )
-                      ]));
-        } else if (state is ConnectTeacherCancelState) {
-          if (state.isTeacherCancelled) {
-            showDialog(
-                context: context,
-                barrierDismissible: false,
-                builder: (context) => AlertDialog(
-                      icon: const Icon(
-                        Icons.warning_amber_outlined,
-                        color: Colors.redAccent,
-                      ),
-                      title: const Text(
-                        TextDoc.txtCancelledTitle,
-                      ),
-                      content: const Text(TextDoc.txtCancelledContent),
-                      actions: [
+                      ]
+                    : [
+                        // state.failureType == ConnectFailure.NOT_FOUND_TEACHER
                         AppFilledButton(
-                            text: TextDoc.txtConnect,
-                            onPressed: () => pContext
-                                .read<ConnectTeacherBloc>()
-                                .add(ConnectTeacherFindOtherTeacher())),
-                        AppOutlinedButton(
-                          text: TextDoc.txtBack,
-                          onPressed: () {
-                            Navigator.pop(context);
-                            Navigator.pop(context);
-                          },
-                        ),
-                      ],
-                    ));
-          } else {
-            showDialog(
-                context: context,
-                barrierDismissible: false,
-                builder: (context) => AlertDialog(
-                      icon: const Icon(
-                        Icons.check,
-                        color: Colors.green,
-                      ),
-                      title: const Text(
-                        TextDoc.txtSuccessfullyCancel,
-                      ),
-                      actions: [
-                        AppFilledButton(
-                          text: TextDoc.txtOk,
-                          minimumSize: const Size.fromHeight(40),
+                          text: TextDoc.txtGoBack,
                           onPressed: () {
                             Navigator.pop(context);
                             Navigator.pop(context);
                           },
                         )
-                      ],
-                    ));
+                      ]),
+          );
+        } else if (state is ConnectTeacherConnectDoneState) {
+          await Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const MeetingPage(),
+                  settings: RouteSettings(
+                    arguments: state.session,
+                  )));
+          if (mounted) {
+            Navigator.pop(context);
           }
+        } else if (state is ConnectTeacherConnectErrorState) {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => WarningDialogContent(
+              title: 'Connect room failed!',
+              content: state.message,
+              actions: [
+                AppFilledButton(
+                  text: TextDoc.txtTryAgain,
+                  onPressed: () {
+                    pContext
+                        .read<ConnectTeacherBloc>()
+                        .add(ConnectTeacherTryInternetConnect());
+                  },
+                )
+              ],
+            ),
+          );
+        } else if (state is ConnectTeacherCancelState) {
+          showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (context) => AlertDialog(
+                    icon: const Icon(
+                      Icons.check,
+                      color: AppColor.support,
+                    ),
+                    title: const Text(
+                      TextDoc.txtSuccessfullyCancel,
+                    ),
+                    actions: [
+                      AppFilledButton(
+                        text: TextDoc.txtOk,
+                        minimumSize: const Size.fromHeight(40),
+                        onPressed: () {
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                        },
+                      )
+                    ],
+                  ));
         }
       },
       builder: (context, state) => Material(
-        color: const Color(0xffFFD033),
+        color: AppColor.mainColor2,
         child: SizedBox(
           height: height,
           width: -width,
@@ -183,15 +156,15 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                   colors: state is ConnectTeacherLoadingState ||
                           state is ConnectTeacherFindingTeacherState ||
                           state is ConnectTeacherInitState
-                      ? [const Color(0xffFF8811)]
+                      ? [AppColor.secondary]
                       : (state is ConnectTeacherLoadFailureState ||
                               state is ConnectTeacherConnectErrorState ||
                               state is ConnectTeacherFindFailureState ||
                               state is ConnectTeacherCancelState)
-                          ? [const Color(0xFFFD6363)]
+                          ? [AppColor.error]
                           : state is ConnectTeacherConnectingRoomState
-                              ? [const Color(0xff55C885)]
-                              : [const Color(0xff3AAFFF)],
+                              ? [AppColor.support]
+                              : [AppColor.mainColor1],
                   pick: state is ConnectTeacherConnectingRoomState ? 0 : 24,
                   amount: 12,
                 ),
@@ -240,27 +213,18 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                                 Row(
                                   children: [
                                     Expanded(
-                                      child: TextButton(
-                                        style: TextButton.styleFrom(
-                                            side: const BorderSide(
-                                                color: Colors.grey)),
+                                      child: AppElevatedButton(
                                         onPressed: () =>
                                             Navigator.pop(context, false),
-                                        child: const Text(TextDoc.txtNo),
+                                        text: TextDoc.txtNo,
                                       ),
                                     ),
                                     const SizedBox(width: spacing10),
                                     Expanded(
-                                      child: TextButton(
-                                        style: TextButton.styleFrom(
-                                            backgroundColor: Colors.blue),
+                                      child: AppTextButton(
                                         onPressed: () =>
                                             Navigator.pop(context, true),
-                                        child: const Text(
-                                          TextDoc.txtYes,
-                                          style: TextStyle(
-                                              color: Colors.white),
-                                        ),
+                                        text: TextDoc.txtYes,
                                       ),
                                     ),
                                   ],
@@ -276,11 +240,10 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                           }
                         },
                         icon: const Icon(Icons.close_rounded,
-                            color: Colors.redAccent),
+                            color: AppColor.error),
                         label: const Text(
                           TextDoc.txtCancel,
-                          style: TextStyle(
-                              fontSize: 18, color: Colors.redAccent),
+                          style: TextStyle(fontSize: 18, color: AppColor.error),
                         ),
                       ),
               )

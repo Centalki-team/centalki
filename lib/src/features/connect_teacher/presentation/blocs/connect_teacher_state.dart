@@ -43,7 +43,9 @@ class ConnectTeacherConnectingRoomState extends ConnectTeacherState {
 }
 
 class ConnectTeacherConnectDoneState extends ConnectTeacherState {
-  const ConnectTeacherConnectDoneState() : super();
+  const ConnectTeacherConnectDoneState(this.session) : super();
+
+  final SessionScheduleEntity session;
 }
 
 class ConnectTeacherConnectErrorState extends ConnectTeacherState {
@@ -52,9 +54,7 @@ class ConnectTeacherConnectErrorState extends ConnectTeacherState {
 }
 
 class ConnectTeacherCancelState extends ConnectTeacherState {
-  const ConnectTeacherCancelState({this.isTeacherCancelled = false});
-
-  final bool isTeacherCancelled;
+  const ConnectTeacherCancelState();
 }
 
 //update Init -> Loading -> LoadDone -> Finding -> FindDone -> Connecting -> ConnectDone -> join meet
