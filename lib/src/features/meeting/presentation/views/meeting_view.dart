@@ -7,7 +7,12 @@ class MeetingView extends StatelessWidget {
   const MeetingView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => BlocBuilder<MeetingBloc, MeetingState>(
+  Widget build(BuildContext context) => BlocConsumer<MeetingBloc, MeetingState>(
+        listener: (context, state) {
+          if (state is MeetingEndState) {
+            Navigator.pop(context);
+          }
+        },
         builder: (context, state) => const Scaffold(
           body: Center(
             child: Text('Meeting page'),

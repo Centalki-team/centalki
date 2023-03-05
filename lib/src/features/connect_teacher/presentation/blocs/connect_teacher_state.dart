@@ -43,7 +43,9 @@ class ConnectTeacherConnectingRoomState extends ConnectTeacherState {
 }
 
 class ConnectTeacherConnectDoneState extends ConnectTeacherState {
-  const ConnectTeacherConnectDoneState() : super();
+  const ConnectTeacherConnectDoneState(this.session) : super();
+
+  final SessionScheduleEntity session;
 }
 
 class ConnectTeacherConnectErrorState extends ConnectTeacherState {

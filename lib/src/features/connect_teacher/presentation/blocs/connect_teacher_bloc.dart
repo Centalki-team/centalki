@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../base/define/text.dart';
 import '../../../../../base/temp_dio/dio_client.dart';
+import '../../domain/entities/session_schedule_entity.dart';
 
 part 'connect_teacher_event.dart';
 part 'connect_teacher_state.dart';
@@ -84,20 +85,22 @@ class ConnectTeacherBloc
   }
 
   void _onConnectRoom(ConnectTeacherConnectRoom event, emit) async {
-    var teacherName = '';
+    String? teacherName;
+    SessionScheduleEntity? session;
     try {
       final sessionsResponse = await DioClient.getPickedUpSessionListOfStudent(
           FirebaseAuth.instance.currentUser!.uid, 'PICKED_UP');
       sessionsResponse.sessions?.forEach((element) {
         if (element.sessionId == sessionId) {
-          teacherName = element.sessionTeacher?.fullName ?? '';
+          teacherName = element.sessionTeacher?.fullName;
+          session = element;
         }
       });
-      if (teacherName.isNotEmpty) {
+      if (teacherName != null) {
         emit(ConnectTeacherConnectingRoomState(
             '${TextDoc.txtConnectedTeacher}$teacherName${TextDoc.txtLaunchSession}'));
         await Future.delayed(const Duration(seconds: 3));
-        emit(const ConnectTeacherConnectDoneState());
+        emit(ConnectTeacherConnectDoneState(session!));
       } else {
         emit(const ConnectTeacherConnectErrorState(
             TextDoc.txtNotTeacherAvailableContent));

@@ -25,7 +25,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
     final pContext = context;
 
     return BlocConsumer<ConnectTeacherBloc, ConnectTeacherState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state is ConnectTeacherLoadDoneState) {
           context
               .read<ConnectTeacherBloc>()
@@ -78,8 +78,16 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                       ]),
           );
         } else if (state is ConnectTeacherConnectDoneState) {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const MeetingPage()));
+          await Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const MeetingPage(),
+                  settings: RouteSettings(
+                    arguments: state.session,
+                  )));
+          if (mounted) {
+            Navigator.pop(context);
+          }
         } else if (state is ConnectTeacherConnectErrorState) {
           showDialog(
             context: context,
