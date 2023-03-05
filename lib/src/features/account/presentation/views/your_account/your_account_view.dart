@@ -380,9 +380,9 @@ class _YourAccountViewState extends State<YourAccountView> {
                                       color: AppColor.error,
                                     ),
                                   ),
-                                  child: const Row(
+                                  child: Row(
                                     mainAxisSize: MainAxisSize.min,
-                                    children: [
+                                    children: const [
                                       Icon(
                                         Icons.logout_outlined,
                                       ),

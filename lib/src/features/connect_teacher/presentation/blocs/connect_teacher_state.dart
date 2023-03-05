@@ -52,9 +52,7 @@ class ConnectTeacherConnectErrorState extends ConnectTeacherState {
 }
 
 class ConnectTeacherCancelState extends ConnectTeacherState {
-  const ConnectTeacherCancelState({this.isTeacherCancelled = false});
-
-  final bool isTeacherCancelled;
+  const ConnectTeacherCancelState();
 }
 
 //update Init -> Loading -> LoadDone -> Finding -> FindDone -> Connecting -> ConnectDone -> join meet

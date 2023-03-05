@@ -21,7 +21,6 @@ class ConnectTeacherBloc
 
   String sessionId = '';
   late final String topicId;
-  bool isCancel = false;
 
   void _onInit(ConnectTeacherInit event, emit) async {
     emit(const ConnectTeacherLoadingState(TextDoc.txtFindTeacher));
@@ -45,7 +44,6 @@ class ConnectTeacherBloc
 
   void _onCancelButtonPressed(
       ConnectTeacherCancelButtonPressed event, emit) async {
-    isCancel = true;
     await FirebaseDatabase.instance
         .ref("session-schedule/$sessionId/status")
         .onValue
@@ -69,12 +67,6 @@ class ConnectTeacherBloc
           case 'PICKED_UP':
             emit(const ConnectTeacherFindDoneState(TextDoc.txtConnectedTeacher));
             add(const ConnectTeacherConnectRoom());
-            break;
-          case 'CANCELLED':
-            await events.listen((event) {}).cancel();
-            if (!isCancel) {
-              emit(const ConnectTeacherCancelState(isTeacherCancelled: true));
-            }
             break;
           case 'TIME_OUT':
             await events.listen((event) {}).cancel();
