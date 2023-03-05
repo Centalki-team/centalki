@@ -58,6 +58,7 @@ dependencies:
   flutter_facebook_auth: ^5.0.7
   image_picker: ^0.8.6+4
   qr_flutter: ^4.0.0
+  jitsi_meet_wrapper: ^0.0.6
   
 dependency_overrides:
   permission_handler: "any"
