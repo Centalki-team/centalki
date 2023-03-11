@@ -1,12 +1,11 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
 import '../../../../../base/define/text.dart';
-import '../../domain/entities/image_with_size_entity.dart';
+// import '../../domain/entities/image_with_size_entity.dart';
 
 class CameraAndImagePickerPopUp extends StatelessWidget {
   const CameraAndImagePickerPopUp({
@@ -15,8 +14,8 @@ class CameraAndImagePickerPopUp extends StatelessWidget {
     this.imagePickerAction,
   }) : super(key: key);
 
-  final ImageWithSizeEntity Function()? takeAPictureButtonAction;
-  final ImageWithSizeEntity Function(File image)? imagePickerAction;
+  final Function()? takeAPictureButtonAction;
+  final Function(XFile image)? imagePickerAction;
 
   @override
   Widget build(BuildContext context) => Dialog(
@@ -66,9 +65,11 @@ class CameraAndImagePickerPopUp extends StatelessWidget {
                     width: double.infinity,
                     child: TextButton(
                       onPressed: () async {
-                        // final image = await PickMultiImageController()
-                        //     .getMultiImageFromGallery(imageCount: 7);
-                        // imagePickerAction.call(image);
+                        final image = await ImagePicker()
+                            .pickImage(source: ImageSource.gallery);
+                        if (image != null) {
+                          imagePickerAction?.call(image);
+                        }
                       },
                       style: TextButton.styleFrom(
                         backgroundColor: AppColor.white,

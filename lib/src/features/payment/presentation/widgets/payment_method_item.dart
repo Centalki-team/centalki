@@ -29,6 +29,7 @@ class PaymentMethodItem extends StatelessWidget {
           color: isSelected ? AppColor.mainColor2 : AppColor.background,
         ),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             paymentMethodEntity.methodType.methodLogo.svg(
               height: 48.0,

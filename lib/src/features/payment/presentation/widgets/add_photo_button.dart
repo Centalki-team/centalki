@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../../../base/define/colors.dart';
 import '../../domain/entities/image_with_size_entity.dart';
@@ -12,15 +15,15 @@ class AddPhotoButton extends StatefulWidget {
     required this.onTap,
   });
 
-  final ImageWithSizeEntity? initValue;
-  final Function(ImageWithSizeEntity) onTap;
+  final XFile? initValue;
+  final Function(XFile?) onTap;
 
   @override
   State<AddPhotoButton> createState() => _AddPhotoButtonState();
 }
 
 class _AddPhotoButtonState extends State<AddPhotoButton> {
-  ImageWithSizeEntity? curValue;
+  XFile? curValue;
 
   @override
   void initState() {
@@ -64,32 +67,37 @@ class _AddPhotoButtonState extends State<AddPhotoButton> {
           ),
         )
       : RemovablePicture(
-          imagePath: curValue!.imgFile.path,
-          onRemove: () => setState(
-            () => curValue = null,
-          ),
+          imagePath: curValue!.path,
+          onRemove: () {
+            setState(
+              () => curValue = null,
+            );
+            widget.onTap(curValue);
+          },
         );
 
-  Future<ImageWithSizeEntity?> imagePickerPopUp(BuildContext context) async =>
-      showDialog<ImageWithSizeEntity>(
-        context: context,
-        builder: (context) => const CameraAndImagePickerPopUp(
-            // takeAPictureButtonAction: () {
-            //   // final result = await Modular.to
-            //   //     .pushNamed(CameraRoute.root.camera.fullRoute, arguments: 7);
-            //   // if (result != null) {
-            //   //   if ((result as List<ImageWithSizeEntity>).isNotEmpty) {
-            //   //     for (var e in result) {
-            //   //       print('========> e: ${e.fileSize}');
-            //   //     }
-            //   //   }
-            //   // }
-            // },
-            // imagePickerAction: (images) {
-            //   // for (var image in images) {
-            //   //   print("=====> ${image.path}");
-            //   // }
-            // },
-            ),
-      );
+  Future<XFile?> imagePickerPopUp(BuildContext context) async {
+    final selectedImage = await showDialog<XFile>(
+      context: context,
+      builder: (context) => CameraAndImagePickerPopUp(
+        takeAPictureButtonAction: () async {
+          // final result = await Modular.to
+          //     .pushNamed(CameraRoute.root.camera.fullRoute, arguments: 7);
+          // if (result != null) {
+          //   if ((result as List<ImageWithSizeEntity>).isNotEmpty) {
+          //     for (var e in result) {
+          //       print('========> e: ${e.fileSize}');
+          //     }
+          //   }
+          // }
+          final image =
+              await ImagePicker().pickImage(source: ImageSource.camera);
+          if (!mounted) return;
+          Navigator.of(context).pop(image);
+        },
+        imagePickerAction: (image) => Navigator.of(context).pop(image),
+      ),
+    );
+    return selectedImage;
+  }
 }
