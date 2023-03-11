@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,7 +9,7 @@ class PaymentPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocProvider<PaymentBloc>(
-        create: (context) => PaymentBloc()..add(const PaymentValidateEvent()),
+        create: (context) => PaymentBloc(),
         child: const PaymentView(),
       );
 }

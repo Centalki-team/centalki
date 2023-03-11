@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
@@ -10,6 +11,7 @@ import '../../../../../base/define/text.dart';
 import '../../../../../base/widgets/buttons/button.dart';
 import '../../domain/entities/payment_method_entity.dart';
 import '../blocs/payment_bloc/payment_bloc.dart';
+import '../widgets/add_photo_button.dart';
 import '../widgets/payment_selection_group.dart';
 
 class PaymentView extends StatefulWidget {
@@ -38,12 +40,13 @@ class _PaymentViewState extends State<PaymentView> {
     ),
   ];
   late ValueNotifier<PaymentMethodEntity> selectedPaymentMethod;
+  late ValueNotifier<XFile?> paymentBill;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     selectedPaymentMethod = ValueNotifier<PaymentMethodEntity>(methods[0]);
+    paymentBill = ValueNotifier<XFile?>(null);
   }
 
   @override
@@ -52,28 +55,36 @@ class _PaymentViewState extends State<PaymentView> {
         NumberFormat.currency(locale: 'vi_VN', symbol: 'VND');
     return Scaffold(
       backgroundColor: AppColor.white,
-      bottomNavigationBar: BlocBuilder<PaymentBloc, PaymentState>(
-        buildWhen: (previous, current) =>
-            current != previous && current is PaymentValidateState,
-        builder: (context, state) {
-          if (state is PaymentValidateState) {
-            return Padding(
-              padding: const EdgeInsets.only(
-                left: 16.0,
-                right: 16.0,
-              ),
-              child: SafeArea(
-                top: false,
-                child: AppFilledButton(
-                  text: TextDoc.txtUpload,
-                  minimumSize: const Size.fromHeight(48),
-                  onPressed: () {},
+      bottomNavigationBar: Material(
+        elevation: 10.0,
+        borderRadius: const BorderRadius.only(
+          topRight: Radius.circular(20.0),
+          topLeft: Radius.circular(20.0),
+        ),
+        child: ValueListenableBuilder(
+          valueListenable: paymentBill,
+          builder: (_, value, __) {
+            if (value != null) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 14.0,
+                  horizontal: 16.0,
                 ),
-              ),
-            );
-          }
-          return const SizedBox.shrink();
-        },
+                child: Material(
+                  child: SafeArea(
+                    top: false,
+                    child: AppFilledButton(
+                      text: TextDoc.txtUpload,
+                      minimumSize: const Size.fromHeight(48),
+                      onPressed: () {},
+                    ),
+                  ),
+                ),
+              );
+            }
+            return const SizedBox.shrink();
+          },
+        ),
       ),
       body: CustomScrollView(
         slivers: [
@@ -84,6 +95,7 @@ class _PaymentViewState extends State<PaymentView> {
                 fontSize: headlineSmallSize,
                 fontWeight: headlineSmallWeight,
                 color: AppColor.defaultFont,
+                height: 32 / 34,
               ),
             ),
             centerTitle: true,
@@ -113,7 +125,7 @@ class _PaymentViewState extends State<PaymentView> {
                         height: spacing12,
                       ),
                       SizedBox(
-                        height: 104.0,
+                        height: 106.0,
                         child: PaymentSelectionGroup(
                           initValue: selectedPaymentMethod.value,
                           methodsList: methods,
@@ -208,6 +220,17 @@ class _PaymentViewState extends State<PaymentView> {
                           color: Colors.black,
                           height: 1.0,
                         ),
+                      ),
+                      const SizedBox(
+                        height: spacing8,
+                      ),
+                      AddPhotoButton(
+                        onTap: (image) {
+                          paymentBill.value = image;
+                        },
+                      ),
+                      const SizedBox(
+                        height: spacing16,
                       ),
                     ],
                   ),
