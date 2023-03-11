@@ -217,4 +217,6 @@ class TextDoc {
   static const txtPaymentBillUpload =
       'Upload your bill so that we can verify your payment';
   static const txtUpload = 'Upload';
+  static const txtChooseFromLibrary = 'Choose from Gallery';
+  static const txtTakeAPic = 'Using Camera';
 }

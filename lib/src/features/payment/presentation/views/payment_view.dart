@@ -11,6 +11,7 @@ import '../../../../../base/widgets/buttons/button.dart';
 import '../../../../../base/widgets/buttons/elevated_button.dart';
 import '../../domain/entities/payment_method_entity.dart';
 import '../blocs/payment_bloc/payment_bloc.dart';
+import '../widgets/add_photo_button.dart';
 import '../widgets/payment_selection_group.dart';
 
 class PaymentView extends StatefulWidget {
@@ -85,6 +86,7 @@ class _PaymentViewState extends State<PaymentView> {
                 fontSize: headlineSmallSize,
                 fontWeight: headlineSmallWeight,
                 color: AppColor.defaultFont,
+                height: 32 / 34,
               ),
             ),
             centerTitle: true,
@@ -209,6 +211,15 @@ class _PaymentViewState extends State<PaymentView> {
                           color: Colors.black,
                           height: 1.0,
                         ),
+                      ),
+                      const SizedBox(
+                        height: spacing8,
+                      ),
+                      AddPhotoButton(
+                        onTap: (image) {},
+                      ),
+                      const SizedBox(
+                        height: spacing16,
                       ),
                     ],
                   ),

@@ -31,6 +31,10 @@ class $AssetsIconGen {
   /// File path: assets/icon/chat.png
   AssetGenImage get chat => const AssetGenImage('assets/icon/chat.png');
 
+  /// File path: assets/icon/ic_clear_circle.svg
+  SvgGenImage get icClearCircle =>
+      const SvgGenImage('assets/icon/ic_clear_circle.svg');
+
   /// File path: assets/icon/ic_feedback.svg
   SvgGenImage get icFeedback =>
       const SvgGenImage('assets/icon/ic_feedback.svg');
@@ -93,6 +97,7 @@ class $AssetsIconGen {
   List<dynamic> get values => [
         account,
         chat,
+        icClearCircle,
         icFeedback,
         icLanguage,
         icNoti,
