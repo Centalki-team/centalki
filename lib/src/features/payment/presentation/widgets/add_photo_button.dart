@@ -38,6 +38,7 @@ class _AddPhotoButtonState extends State<AddPhotoButton> {
           onTap: () async {
             final image = await imagePickerPopUp(context);
             if (image != null) {
+              // TODO: Nhờ idol dev tiếp
               final url = await uploadFile(image);
               widget.onTap.call(image);
               setState(() {
