@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../../base/define/styles.dart';
+import '../../../../../../base/widgets/toast/app_toast.dart';
 import '../../../../payment/presentation/views/payment_page.dart';
 import '../../blocs/wallet_bloc/wallet_bloc.dart';
 
@@ -31,14 +32,17 @@ class WalletView extends StatelessWidget {
                 ],
               ),
             );
-          } else if (state is WalletGetMoreState) {
-            final result = await Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const PaymentPage(),
-              ),
-            );
-            context.read<WalletBloc>().add(const WalletInitEvent());
           }
+          // } else if (state is WalletGetMoreState) {
+          //   // final result = await Navigator.of(context).push(
+          //   //   MaterialPageRoute(
+          //   //     builder: (context) => const PaymentPage(),
+          //   //   ),
+          //   // );
+          //   if (!context.mounted) {
+          //     context.read<WalletBloc>().add(const WalletInitEvent());
+          //   }
+          // }
         },
         builder: (context, state) {
           final currencyFormat =
@@ -63,10 +67,39 @@ class WalletView extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(right: 8.0),
                         child: IconButton(
-                          onPressed: () {
-                            context
-                                .read<WalletBloc>()
-                                .add(const WalletGetMoreEvent());
+                          onPressed: () async {
+                            // context
+                            //     .read<WalletBloc>()
+                            //     .add(const WalletGetMoreEvent());
+                            final result = await Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const PaymentPage(),
+                              ),
+                            );
+                            if (context.mounted) {
+                              context
+                                  .read<WalletBloc>()
+                                  .add(const WalletInitEvent());
+                              if (result != null) {
+                                AppToast(
+                                  mode: result
+                                      ? AppToastMode.confirm
+                                      : AppToastMode.error,
+                                  duration: const Duration(seconds: 3),
+                                  bottomOffset: 8.0,
+                                  message: Text(
+                                    result
+                                        ? 'Buy More Sessions payment created receipt successfully'
+                                        : 'Something went wrong. Please try again later...',
+                                    style: const TextStyle(
+                                      fontSize: 13.0,
+                                      fontWeight: FontWeight.w600,
+                                      color: AppColor.white,
+                                    ),
+                                  ),
+                                ).show(context);
+                              }
+                            }
                           },
                           icon: const Icon(
                             Icons.add,
