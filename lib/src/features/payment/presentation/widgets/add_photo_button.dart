@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../../base/define/colors.dart';
+import '../../../../../base/helpers/upload-file.dart';
 import '../../domain/entities/image_with_size_entity.dart';
 import 'camera_image_picker_bottom_sheet.dart';
 import 'removable_picture.dart';
@@ -37,6 +38,8 @@ class _AddPhotoButtonState extends State<AddPhotoButton> {
           onTap: () async {
             final image = await imagePickerPopUp(context);
             if (image != null) {
+              // TODO: Nhờ idol dev tiếp
+              final url = await uploadFile(image);
               widget.onTap.call(image);
               setState(() {
                 curValue = image;

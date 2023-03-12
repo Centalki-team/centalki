@@ -59,6 +59,7 @@ dependencies:
   image_picker: ^0.8.6+4
   qr_flutter: ^4.0.0
   jitsi_meet_wrapper: ^0.0.6
+  firebase_storage: ^11.0.15
   
 dependency_overrides:
   permission_handler: "any"
