@@ -56,7 +56,7 @@ linter:
     empty_constructor_bodies: true
     unnecessary_new: true
     unnecessary_const: true
-    avoid_catches_without_on_clauses: true
+    # avoid_catches_without_on_clauses: true
     avoid_catching_errors: true
     use_rethrow_when_possible: true
     use_to_and_as_if_applicable: true

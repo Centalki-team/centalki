@@ -35,6 +35,10 @@ class $AssetsIconGen {
   SvgGenImage get icClearCircle =>
       const SvgGenImage('assets/icon/ic_clear_circle.svg');
 
+  /// File path: assets/icon/ic_error_toast.svg
+  SvgGenImage get icErrorToast =>
+      const SvgGenImage('assets/icon/ic_error_toast.svg');
+
   /// File path: assets/icon/ic_feedback.svg
   SvgGenImage get icFeedback =>
       const SvgGenImage('assets/icon/ic_feedback.svg');
@@ -93,11 +97,19 @@ class $AssetsIconGen {
   /// File path: assets/icon/wallet.png
   AssetGenImage get wallet => const AssetGenImage('assets/icon/wallet.png');
 
+  /// File path: assets/icon/white_exclamation.svg
+  SvgGenImage get whiteExclamation =>
+      const SvgGenImage('assets/icon/white_exclamation.svg');
+
+  /// File path: assets/icon/white_tick.svg
+  SvgGenImage get whiteTick => const SvgGenImage('assets/icon/white_tick.svg');
+
   /// List of all assets
   List<dynamic> get values => [
         account,
         chat,
         icClearCircle,
+        icErrorToast,
         icFeedback,
         icLanguage,
         icNoti,
@@ -113,7 +125,9 @@ class $AssetsIconGen {
         radioSelected,
         radioUnselected,
         settings,
-        wallet
+        wallet,
+        whiteExclamation,
+        whiteTick
       ];
 }
 
