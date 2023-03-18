@@ -25,17 +25,16 @@ class TopicCard extends StatelessWidget {
           margin: const EdgeInsets.all(spacing8),
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
-            color: AppColor.white,
-            borderRadius: const BorderRadius.all(Radius.circular(12)),
-            boxShadow: [
-              BoxShadow(
-                color: AppColor.shadow.shade300,
-                spreadRadius: 0,
-                blurRadius: 4.0,
-                offset: const Offset(0, 2),
-              )
-            ]
-          ),
+              color: AppColor.white,
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColor.shadow.shade300,
+                  spreadRadius: 0,
+                  blurRadius: 4.0,
+                  offset: const Offset(0, 2),
+                )
+              ]),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -61,7 +60,7 @@ class TopicCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        item.topicName ?? '',
+                        item.topicCategory ?? '',
                         style: const TextStyle(
                           fontSize: bodySmallSize,
                           fontWeight: bodySmallWeight,
@@ -69,7 +68,7 @@ class TopicCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        item.topicCategory ?? '',
+                        item.topicName ?? '',
                         style: const TextStyle(
                           fontSize: titleMediumSize,
                           fontWeight: titleMediumWeight,
