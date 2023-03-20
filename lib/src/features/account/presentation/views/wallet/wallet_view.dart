@@ -7,9 +7,14 @@ import '../../../../../../base/widgets/toast/app_toast.dart';
 import '../../../../payment/presentation/views/payment_page.dart';
 import '../../blocs/wallet_bloc/wallet_bloc.dart';
 
-class WalletView extends StatelessWidget {
+class WalletView extends StatefulWidget {
   const WalletView({Key? key}) : super(key: key);
 
+  @override
+  State<WalletView> createState() => _WalletViewState();
+}
+
+class _WalletViewState extends State<WalletView> {
   @override
   Widget build(BuildContext context) => BlocConsumer<WalletBloc, WalletState>(
         listener: (context, state) async {
@@ -76,7 +81,7 @@ class WalletView extends StatelessWidget {
                                 builder: (context) => const PaymentPage(),
                               ),
                             );
-                            if (context.mounted) {
+                            if (mounted) {
                               context
                                   .read<WalletBloc>()
                                   .add(const WalletInitEvent());
