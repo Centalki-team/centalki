@@ -31,7 +31,10 @@ class HistoryMetaModel extends HistoryMetaEntity {
     this.size,
     this.completedSession,
   }) : super(
+          historyHasNextPage: hasNextPage,
+          historyHasPrevPage: hasPrevPage,
           historyPage: page,
+          historyPageSize: size,
           completedSessionCount: completedSession,
         );
 

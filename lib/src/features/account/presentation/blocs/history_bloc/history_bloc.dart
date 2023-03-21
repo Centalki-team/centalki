@@ -24,9 +24,12 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
       final completedSessions =
           await DioClient.getCompletedSessions(idToken: _idToken);
       emit(HistoryLoadDoneState(
-          completedSessions.historyMeta?.historyPage ?? 1,
-          completedSessions.historyMeta?.completedSessionCount ?? 0,
-          completedSessions.historySessions ?? []));
+        completedSessions.historyMeta?.historyPage ?? 1,
+        completedSessions.historyMeta?.completedSessionCount ?? 0,
+        completedSessions.historySessions ?? [],
+        hasReachMax:
+            !(completedSessions.historyMeta?.historyHasNextPage ?? false),
+      ));
     } on Exception catch (_) {
       emit(const HistoryLoadFailureState(TextDoc.txtLoadFailed));
     }
@@ -37,20 +40,14 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
       var currentSessions = state.sessionList;
       var moreSessions = await DioClient.getCompletedSessions(
           idToken: _idToken, page: state.currentPage + 1);
-      if (moreSessions.historySessions?.isEmpty ?? true) {
-        emit(HistoryLoadDoneState(
-          state.currentPage,
-          state.sessionCount,
-          currentSessions,
-          hasReachMax: true,
-        ));
-      } else {
-        var currentMoreSessions =
-            List<SessionScheduleEntity>.of(currentSessions)
-              ..addAll(moreSessions.historySessions!.reversed);
-        emit(HistoryLoadDoneState(
-            state.currentPage + 1, state.sessionCount, currentMoreSessions));
-      }
+      var currentMoreSessions = List<SessionScheduleEntity>.of(currentSessions)
+        ..addAll(moreSessions.historySessions!);
+      emit(HistoryLoadDoneState(
+        state.currentPage + 1,
+        state.totalCompletedSessionCount,
+        currentMoreSessions,
+        hasReachMax: !(moreSessions.historyMeta?.historyHasNextPage ?? false),
+      ));
     } on Exception catch (_) {
       emit(const HistoryLoadFailureState(TextDoc.txtLoadFailed));
     }

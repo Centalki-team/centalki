@@ -3,12 +3,12 @@ part of 'history_bloc.dart';
 abstract class HistoryState extends Equatable {
   const HistoryState({
     this.currentPage = 1,
-    this.sessionCount = 0,
+    this.totalCompletedSessionCount = 0,
     this.sessionList = const [],
   });
 
   final int currentPage;
-  final int sessionCount;
+  final int totalCompletedSessionCount;
   final List<SessionScheduleEntity> sessionList;
 
   @override
@@ -33,7 +33,7 @@ class HistoryLoadDoneState extends HistoryState {
   const HistoryLoadDoneState(
       int page, int count, List<SessionScheduleEntity> sessionList,
       {this.hasReachMax = false})
-      : super(currentPage: page, sessionCount: count, sessionList: sessionList);
+      : super(currentPage: page, totalCompletedSessionCount: count, sessionList: sessionList);
 
   final bool hasReachMax;
 

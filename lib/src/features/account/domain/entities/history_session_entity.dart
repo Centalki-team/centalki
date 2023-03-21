@@ -12,10 +12,16 @@ class HistorySessionEntity {
 
 class HistoryMetaEntity {
   const HistoryMetaEntity({
+    this.historyHasNextPage,
+    this.historyHasPrevPage,
     this.historyPage,
+    this.historyPageSize,
     this.completedSessionCount,
   });
 
+  final bool? historyHasNextPage;
+  final bool? historyHasPrevPage;
   final int? historyPage;
+  final int? historyPageSize;
   final int? completedSessionCount;
 }
