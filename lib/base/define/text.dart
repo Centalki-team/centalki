@@ -147,6 +147,8 @@ class TextDoc {
   static const txtHours = 'hours';
   static const txtMinutes = 'minutes';
   static const txtSessions = 'Sessions';
+  static const txtNoData = 'No data';
+  static const txtTapToLoadMoreSessions = 'Tap to load more sessions';
 
   // Account - Wallet
   static const txtBalance = 'Balance';

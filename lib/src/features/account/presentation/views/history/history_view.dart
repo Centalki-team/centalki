@@ -14,35 +14,6 @@ class HistoryView extends StatefulWidget {
 }
 
 class _HistoryViewState extends State<HistoryView> {
-  final _scrollController = ScrollController();
-
-  @override
-  void initState() {
-    _scrollController.addListener(_onScroll);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _scrollController
-      ..removeListener(_onScroll)
-      ..dispose();
-    super.dispose();
-  }
-
-  void _onScroll() {
-    if (_isBottom) {
-      context.read<HistoryBloc>().add(const HistoryLoadMoreEvent());
-    }
-  }
-
-  bool get _isBottom {
-    if (!_scrollController.hasClients) return false;
-    final maxScroll = _scrollController.position.maxScrollExtent;
-    final currentScroll = _scrollController.offset;
-    return currentScroll >= (maxScroll * 0.9);
-  }
-
   @override
   Widget build(BuildContext context) => BlocConsumer<HistoryBloc, HistoryState>(
         listener: (context, state) {
@@ -73,7 +44,6 @@ class _HistoryViewState extends State<HistoryView> {
             return Scaffold(
               backgroundColor: AppColor.white,
               body: CustomScrollView(
-                controller: _scrollController,
                 slivers: [
                   SliverAppBar.medium(
                     title: const Text(
@@ -91,7 +61,8 @@ class _HistoryViewState extends State<HistoryView> {
                     delegate: SliverChildBuilderDelegate(
                       childCount: 1,
                       (_, index) => Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: padding16, vertical: 24),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: padding16, vertical: 24),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -103,7 +74,8 @@ class _HistoryViewState extends State<HistoryView> {
                               ),
                               decoration: const BoxDecoration(
                                 color: AppColor.mainColor2Surface,
-                                borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(12.0)),
                               ),
                               child: Column(
                                 children: [
@@ -116,7 +88,7 @@ class _HistoryViewState extends State<HistoryView> {
                                     ),
                                   ),
                                   Text(
-                                    '${state.sessionCount}',
+                                    '${state.totalCompletedSessionCount}',
                                     style: const TextStyle(
                                       fontSize: headlineLargeSize,
                                       fontWeight: headlineLargeWeight,
@@ -138,7 +110,7 @@ class _HistoryViewState extends State<HistoryView> {
                             state.sessionList.isEmpty
                                 ? const Center(
                                     child: Text(
-                                      'No data',
+                                      TextDoc.txtNoData,
                                       style: TextStyle(
                                         fontSize: bodyLargeSize,
                                         fontWeight: bodyLargeWeight,
@@ -146,57 +118,142 @@ class _HistoryViewState extends State<HistoryView> {
                                       ),
                                     ),
                                   )
-                                : ListView.builder(
+                                : ListView.separated(
                                     shrinkWrap: true,
-                                    physics: const NeverScrollableScrollPhysics(),
-                                    itemCount: state.sessionList.length,
-                                    itemBuilder: (_, index) => Card(
-                                      elevation: 0,
-                                      clipBehavior: Clip.hardEdge,
-                                      child: Row(
-                                        children: [
-                                          Expanded(
-                                            flex: 2,
-                                            child: CachedNetworkImage(
-                                              imageUrl: state.sessionList[index].sessionTopic?.imageURL ?? '',
-                                              fit: BoxFit.fill,
-                                              width: 100,
-                                              progressIndicatorBuilder: (context, url, downloadProgress) =>
-                                                  CircularProgressIndicator(
-                                                value: downloadProgress.progress,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    separatorBuilder: (_, index) =>
+                                        const SizedBox(height: spacing16),
+                                    itemCount: state.hasReachMax
+                                        ? state.sessionList.length
+                                        : state.sessionList.length + 1,
+                                    itemBuilder: (_, index) => index ==
+                                            state.sessionList.length
+                                        ? Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              InkWell(
+                                                onTap: () {
+                                                  context.read<HistoryBloc>().add(
+                                                      const HistoryLoadMoreEvent());
+                                                },
+                                                child:
+                                                    const CircularProgressIndicator(),
                                               ),
-                                              errorWidget: (context, url, error) => const Text(''),
+                                              const SizedBox(
+                                                height: spacing8,
+                                              ),
+                                              const Text(
+                                                TextDoc
+                                                    .txtTapToLoadMoreSessions,
+                                                style: TextStyle(
+                                                  fontSize: bodyLargeSize,
+                                                  fontWeight: bodyLargeWeight,
+                                                  color: AppColor.shadow,
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        : Card(
+                                            clipBehavior: Clip.hardEdge,
+                                            child: Row(
+                                              children: [
+                                                Expanded(
+                                                  flex: 2,
+                                                  child: CachedNetworkImage(
+                                                    imageUrl: state
+                                                            .sessionList[index]
+                                                            .sessionTopic
+                                                            ?.imageURL ??
+                                                        '',
+                                                    fit: BoxFit.fill,
+                                                    width: 100,
+                                                    height: 160,
+                                                    progressIndicatorBuilder: (context,
+                                                            url,
+                                                            downloadProgress) =>
+                                                        CircularProgressIndicator(
+                                                      value: downloadProgress
+                                                          .progress,
+                                                    ),
+                                                    errorWidget:
+                                                        (context, url, error) =>
+                                                            const Text(''),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  flex: 3,
+                                                  child: Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 12.0,
+                                                        vertical: 8.0),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          state
+                                                                  .sessionList[
+                                                                      index]
+                                                                  .sessionTopic
+                                                                  ?.name ??
+                                                              '',
+                                                          style:
+                                                              const TextStyle(
+                                                            fontWeight:
+                                                                titleMediumWeight,
+                                                            fontSize:
+                                                                titleMediumSize,
+                                                            color: AppColor
+                                                                .defaultFont,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          state
+                                                                  .sessionList[
+                                                                      index]
+                                                                  .sessionTeacher
+                                                                  ?.fullName ??
+                                                              '',
+                                                          style:
+                                                              const TextStyle(
+                                                            fontSize:
+                                                                bodyLargeSize,
+                                                            fontWeight:
+                                                                bodyLargeWeight,
+                                                            color: AppColor
+                                                                .defaultFont,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          DateFormat(
+                                                                  'yyyy-MM-dd hh:mm a')
+                                                              .format(
+                                                            state
+                                                                    .sessionList[
+                                                                        index]
+                                                                    .sessionStartAt ??
+                                                                DateTime.now(),
+                                                          ),
+                                                          style:
+                                                              const TextStyle(
+                                                            color: AppColor
+                                                                .secondary,
+                                                            fontWeight:
+                                                                bodyLargeWeight,
+                                                            fontSize:
+                                                                bodyLargeSize,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                          Expanded(
-                                            flex: 3,
-                                            child: Padding(
-                                              padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
-                                              child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    state.sessionList[index].sessionTopic?.name ?? '',
-                                                    style: const TextStyle(fontWeight: FontWeight.bold),
-                                                  ),
-                                                  Text(
-                                                    state.sessionList[index].sessionTeacher?.fullName ?? '',
-                                                  ),
-                                                  Text(
-                                                    DateFormat('yyyy-MM-dd hh:mm a').format(
-                                                      state.sessionList[index].sessionStartAt ?? DateTime.now(),
-                                                    ),
-                                                    style: const TextStyle(
-                                                      color: AppColor.secondary,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
                                   ),
                           ],
                         ),

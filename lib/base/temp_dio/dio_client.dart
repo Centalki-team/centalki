@@ -16,7 +16,7 @@ import '../../src/features/topics/domain/entities/topic_item_entity.dart';
 class DioClient {
   static final Dio _dio = Dio();
 
-  static const baseUrl = 'http://api.centalki.com/v1';
+  static const baseUrl = 'https://api.centalki.com/v1';
 
   static Future<dynamic> assignRole(String idToken, String? displayName) =>
       _dio.post("$baseUrl/auth/assign-role", data: {
