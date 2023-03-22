@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app requires access for Photo Library usage.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>This app requires access to the camera.</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -68,12 +64,21 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs access to the camera for meetings.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs access to the microphone for meetings.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app requires access for Photo Library usage.</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs access to the Calendars for meeting schedules.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>fetch</string>
+		<string>audio</string>
 		<string>remote-notification</string>
+		<string>voip</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
@@ -94,16 +99,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSCameraUsageDescription</key>
-    <string>$(PRODUCT_NAME) needs access to the camera for meetings.</string>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>$(PRODUCT_NAME) needs access to the microphone for meetings.</string>
-    <key>UIBackgroundModes</key>
-    <array>
-    	<string>audio</string>
-    	<string>voip</string>
-    </array>
-    <key>UIViewControllerBasedStatusBarAppearance</key>
-    <false/>
 </dict>
 </plist>
