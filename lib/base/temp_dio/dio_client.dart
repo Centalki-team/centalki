@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 
 import '../../src/features/account/data/account_datasources/remote_data/model/user_account_model.dart';
@@ -12,6 +14,17 @@ import '../../src/features/topic_detail/data/datasources/topics_datasource/remot
 import '../../src/features/topic_detail/domain/entities/topic_detail_entity.dart';
 import '../../src/features/topics/data/datasources/topics_datasource/remote_data/model/topic_model.dart';
 import '../../src/features/topics/domain/entities/topic_item_entity.dart';
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) => super
+      .createHttpClient(context)
+    ..badCertificateCallback = ((X509Certificate cert, String host, int port) {
+      final isValidHost =
+          ["api.centalki.com"].contains(host); // <-- allow only hosts in array
+      return isValidHost;
+    });
+}
 
 class DioClient {
   static final Dio _dio = Dio();
