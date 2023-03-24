@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../../../base/gateway/exception/app_exception.dart';
+import '../../../../../../base/helpers/upload-file.dart';
 import '../../../../../../di/di_module.dart';
 import '../../../domain/repositories/payment_repository.dart';
 import '../../../domain/usecases/create_payment_receipt_usecase.dart';
@@ -18,7 +19,7 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
   PaymentBloc() : super(const PaymentInitState()) {
     on<PaymentValidateEvent>(_onValidate);
     on<PaymentUploadImageEvent>(_onUploadImage);
-    on<PaymentUploadPresignedUrlEvent>(_uploadFilePresignedUrl);
+    //on<PaymentUploadPresignedUrlEvent>(_uploadFilePresignedUrl);
     on<PaymentCreateReceiptEvent>(_onCreatePaymentReceipt);
   }
 
@@ -50,40 +51,41 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
     );
   }
 
-  _uploadFilePresignedUrl(PaymentUploadPresignedUrlEvent event, emit) async {
-    final formData = FormData.fromMap({
-      'file': await MultipartFile.fromFile(event.img.path),
-    });
+  // _uploadFilePresignedUrl(PaymentUploadPresignedUrlEvent event, emit) async {
+  //   final formData = FormData.fromMap({
+  //     'file': await MultipartFile.fromFile(event.img.path),
+  //   });
 
-    try {
-      final response = await Dio().put(event.url, data: formData);
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        add(PaymentCreateReceiptEvent(
-          imgUrl: event.url,
-        ));
-      }
-    } catch (e) {
-      emit(const PaymentLoadingState(showLoading: false));
-      emit(PaymentErrorState(
-        exception: AppException(
-          error: e,
-        ),
-        displayMessage: "Lỗi lấy link upload ảnh",
-      ));
-    }
+  //   try {
+  //     final response = await Dio().put(event.url, data: formData);
+  //     if (response.statusCode == 200 || response.statusCode == 201) {
+  //       add(PaymentCreateReceiptEvent(
+  //         imgUrl: event.url,
+  //       ));
+  //     }
+  //   } catch (e) {
+  //     emit(const PaymentLoadingState(showLoading: false));
+  //     emit(PaymentErrorState(
+  //       exception: AppException(
+  //         error: e,
+  //       ),
+  //       displayMessage: "Lỗi lấy link upload ảnh",
+  //     ));
+  //   }
 
-    // if (response.statusCode == 200 || response.statusCode == 201) {
-    //   emit(PaymentUploadPresignedUrlSuccess(
-    //     uploadedUrl: event.url,
-    //   ));
-    // } else {
+  //   // if (response.statusCode == 200 || response.statusCode == 201) {
+  //   //   emit(PaymentUploadPresignedUrlSuccess(
+  //   //     uploadedUrl: event.url,
+  //   //   ));
+  //   // } else {
 
-    // }
-  }
+  //   // }
+  // }
 
   _onCreatePaymentReceipt(PaymentCreateReceiptEvent event, emit) async {
+    final url = await uploadFile(event.img);
     final createReceiptRes = await _paymentCreateReceiptUseCase(
-        CreatePaymentReceiptParams(imageURLs: [event.imgUrl]));
+        CreatePaymentReceiptParams(imageURLs: [url]));
     createReceiptRes.fold(
       (l) => emit(PaymentCreateReceiptErrorState(
           exception: l,
