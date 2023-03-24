@@ -15,8 +15,6 @@ class PaymentCreateReceiptUseCase
 
   @override
   Future<Either<AppException, bool>> execute(
-      CreatePaymentReceiptParams params) {
-    // TODO: implement execute
-    throw UnimplementedError();
-  }
+          CreatePaymentReceiptParams params) =>
+      paymentRepository.createReceipt(params.toJson());
 }
