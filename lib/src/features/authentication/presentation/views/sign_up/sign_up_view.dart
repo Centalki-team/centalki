@@ -70,7 +70,7 @@ class _SignUpViewState extends State<SignUpView> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       const Text(
-                        TextDoc.txtFullname,
+                        TextDoc.txtFullName,
                         style: TextStyle(
                           fontSize: titleMediumSize,
                           fontWeight: titleMediumWeight,

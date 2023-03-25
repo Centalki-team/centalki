@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../../base/define/styles.dart';
+import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
 import '../../../../../../base/widgets/toast/app_toast.dart';
 import '../../../../payment/presentation/views/payment_page.dart';
 import '../../blocs/wallet_bloc/wallet_bloc.dart';
@@ -22,19 +23,9 @@ class _WalletViewState extends State<WalletView> {
             showDialog(
               barrierDismissible: false,
               context: context,
-              builder: (context) => AlertDialog(
-                icon: const Icon(
-                  Icons.error_outline,
-                  color: AppColor.error,
-                ),
-                title: const Text(TextDoc.txtLoadFailed),
-                content: Text(state.message),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: const Text(TextDoc.txtOk),
-                  ),
-                ],
+              builder: (context) => ErrorDialogContent(
+                title: TextDoc.txtLoadFailed,
+                content: state.message,
               ),
             );
           }
@@ -97,8 +88,8 @@ class _WalletViewState extends State<WalletView> {
                                         ? 'Buy More Sessions payment created receipt successfully'
                                         : 'Something went wrong. Please try again later...',
                                     style: const TextStyle(
-                                      fontSize: 13.0,
-                                      fontWeight: FontWeight.w600,
+                                      fontSize: bodyLargeSize,
+                                      fontWeight: bodyLargeWeight,
                                       color: AppColor.white,
                                     ),
                                   ),

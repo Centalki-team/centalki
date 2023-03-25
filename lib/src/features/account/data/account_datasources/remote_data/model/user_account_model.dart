@@ -16,7 +16,7 @@ class UserAccountModel extends UserAccountEntity {
     this.emailVerified,
     this.phoneNumber,
     this.displayName,
-    this.photoUrl,
+    this.photoURL,
     this.disabled,
     this.metadata,
     this.providerData,
@@ -24,7 +24,7 @@ class UserAccountModel extends UserAccountEntity {
   }) : super(
           accountEmail: email,
           fullName: displayName,
-          avatarUrl: photoUrl,
+          avatarUrl: photoURL,
           accountPhoneNumber: phoneNumber,
           userProfile: profile,
           accountCompletedSessions: completedSession,
@@ -38,7 +38,7 @@ class UserAccountModel extends UserAccountEntity {
   final bool? emailVerified;
   final String? phoneNumber;
   final String? displayName;
-  final String? photoUrl;
+  final String? photoURL;
   final bool? disabled;
   final UserMetadataModel? metadata;
   final List<UserProviderDataModel>? providerData;

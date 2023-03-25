@@ -5,6 +5,8 @@ import '../../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/avatar.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
+import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
+import '../../../../../../base/widgets/dialog/success_dialog_content.dart';
 import '../../../../../../base/widgets/text_fields/outlined_text_field.dart';
 import '../../../../topics/domain/entities/topic_item_entity.dart';
 import '../../blocs/student_profile_bloc/student_profile_bloc.dart';
@@ -24,7 +26,7 @@ class _StudentProfileViewState extends State<StudentProfileView> {
 
   var avatarUrl = '';
   var fullName = '';
-  var selectedTopics = <bool>[];
+  var selectedTopics = <String>[];
   var topics = <TopicItemEntity>[];
 
   void _validateStudentProfile(String value) {
@@ -58,49 +60,37 @@ class _StudentProfileViewState extends State<StudentProfileView> {
               _bioController.text = state.bio;
               avatarUrl = state.avatarUrl;
               fullName = state.fullName;
+              selectedTopics.clear();
               selectedTopics = state.selectedInterestedTopicIds.toList();
               topics = state.topics;
             } else if (state is StudentProfileLoadFailedState) {
               showDialog(
                 context: context,
-                builder: (context) => AlertDialog(
-                  title: const Text(TextDoc.txtLoadFailed),
-                  content: Text(state.message),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: const Text(TextDoc.txtOk),
-                    )
-                  ],
+                builder: (context) => ErrorDialogContent(
+                  title: TextDoc.txtLoadFailed,
+                  content: state.message,
                 ),
               );
             } else if (state is StudentProfileSaveFailureState) {
               showDialog(
                 context: context,
-                builder: (context) => AlertDialog(
-                  title: const Text(TextDoc.txtProfileUpdateFailed),
-                  content: Text(state.message),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: const Text(TextDoc.txtOk),
-                    )
-                  ],
+                builder: (context) => ErrorDialogContent(
+                  title: TextDoc.txtProfileUpdateFailed,
+                  content: state.message,
                 ),
               );
             } else if (state is StudentProfileSaveDoneState) {
               showDialog(
                 context: context,
-                builder: (context) => AlertDialog(
-                  title: const Text(TextDoc.txtProfileUpdateSuccess),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: const Text(TextDoc.txtOk),
-                    )
-                  ],
+                builder: (context) => const SuccessDialogContent(
+                  title: TextDoc.txtProfileUpdateSuccess,
                 ),
               );
+            } else if (state is StudentProfileChangedState) {
+              if (state.avatarUrl != null &&
+                  (state.avatarUrl?.isNotEmpty ?? false)) {
+                avatarUrl = state.avatarUrl!;
+              }
             }
           }
         },
@@ -121,6 +111,7 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                             fontSize: headlineSmallSize,
                             fontWeight: headlineSmallWeight,
                             color: AppColor.defaultFont,
+                            height: 1,
                           ),
                         ),
                         centerTitle: true,
@@ -137,11 +128,45 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
+                                    BlocBuilder<StudentProfileBloc,
+                                        StudentProfileState>(
+                                      builder: (context, state) => Center(
+                                        child: Avatar(
+                                          avatarUrl: avatarUrl,
+                                          maxRadius: 80,
+                                          fullName: fullName,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(height: spacing8),
+                                    BlocBuilder<StudentProfileBloc,
+                                            StudentProfileState>(
+                                        builder: (context, state) {
+                                      if (state is StudentProfileChangedState) {
+                                        if (state.avatarException.isEmpty) {
+                                          return Container();
+                                        }
+                                        return Center(
+                                          child: Text(
+                                            state.avatarException,
+                                            style: const TextStyle(
+                                              fontSize: bodyLargeSize,
+                                              fontWeight: bodyLargeWeight,
+                                              color: AppColor.error,
+                                              height: 1,
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      return Container();
+                                    }),
                                     Center(
-                                      child: Avatar(
-                                        avatarUrl: avatarUrl,
-                                        maxRadius: 80,
-                                        fullName: fullName,
+                                      child: AppTextButton(
+                                        text: TextDoc.txtChangeAvatar,
+                                        onPressed: () {
+                                          context.read<StudentProfileBloc>().add(
+                                              const StudentProfileChangeAvatarEvent());
+                                        },
                                       ),
                                     ),
                                     const SizedBox(height: spacing16),
@@ -158,8 +183,8 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                       onChanged: _validateStudentProfile,
                                       errorText:
                                           state is StudentProfileChangedState &&
-                                                  state.fullnameError.isNotEmpty
-                                              ? state.fullnameError
+                                                  state.fullNameError.isNotEmpty
+                                              ? state.fullNameError
                                               : null,
                                     ),
                                     const SizedBox(height: spacing16),
@@ -227,28 +252,16 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                             const NeverScrollableScrollPhysics(),
                                         itemCount: topics.length,
                                         itemBuilder: (_, index) =>
-                                            //     CheckboxListTile(
-                                            //   value: selectedTopics[index],
-                                            //   activeColor: AppColor.mainColor2,
-                                            //   onChanged: (value) {
-                                            //     selectedTopics[index] =
-                                            //         value ?? false;
-                                            //     _validateStudentProfile('');
-                                            //   },
-                                            //   title: Text(
-                                            //     '${index + 1}. ${topics[index].topicName}',
-                                            //     style: const TextStyle(
-                                            //       fontSize: bodyLargeSize,
-                                            //       fontWeight: bodyLargeWeight,
-                                            //       color: AppColor.defaultFont,
-                                            //     ),
-                                            //   ),
-                                            // ),
                                             CustomCheckboxTile(
                                           title: topics[index].topicName ?? '',
-                                          value: selectedTopics[index],
+                                          value: selectedTopics
+                                              .contains(topics[index].topicId),
                                           onChanged: (value) {
-                                            selectedTopics[index] = value;
+                                            value
+                                                ? selectedTopics
+                                                    .add(topics[index].topicId!)
+                                                : selectedTopics.remove(
+                                                    topics[index].topicId!);
                                             _validateStudentProfile('');
                                           },
                                         ),

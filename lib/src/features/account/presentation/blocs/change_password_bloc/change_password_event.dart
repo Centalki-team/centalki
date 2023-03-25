@@ -5,20 +5,14 @@ abstract class ChangePasswordEvent {
 }
 
 class ChangePasswordSendPasswordEvent extends ChangePasswordEvent {
-  const ChangePasswordSendPasswordEvent(this.password);
+  const ChangePasswordSendPasswordEvent(
+      this.password,
+      this.newPassword,
+      this.confirmPassword,
+      );
 
   final String password;
-}
-
-class ChangePasswordSendNewPasswordEvent extends ChangePasswordEvent {
-  const ChangePasswordSendNewPasswordEvent(this.newPassword);
-
   final String newPassword;
-}
-
-class ChangePasswordSendConfirmPasswordEvent extends ChangePasswordEvent {
-  const ChangePasswordSendConfirmPasswordEvent(this.confirmPassword);
-
   final String confirmPassword;
 }
 

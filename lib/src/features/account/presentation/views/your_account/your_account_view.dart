@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/avatar.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
+import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
 import '../../blocs/your_account_bloc/your_account_bloc.dart';
 import '../../widgets/account_tile.dart';
 import '../account_information/account_information_page.dart';
@@ -26,21 +27,17 @@ class _YourAccountViewState extends State<YourAccountView> {
         builder: (context, orientation) => LayoutBuilder(
           builder: (context, constraint) {
             final heightView = constraint.maxHeight;
-            final widthView = constraint.maxWidth;
 
             return BlocConsumer<YourAccountBloc, YourAccountState>(
                 listener: (context, state) {
               if (state is YourAccountLoadErrorState) {
                 showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                          icon: const Icon(
-                            Icons.error_outline,
-                            color: AppColor.error,
-                          ),
-                          title: const Text(TextDoc.txtLoadFailed),
-                          content: Text(state.message),
-                        ));
+                  context: context,
+                  builder: (context) => ErrorDialogContent(
+                    title: TextDoc.txtLoadFailed,
+                    content: state.message,
+                  ),
+                );
               }
             }, builder: (context, state) {
               if (state is YourAccountLoadingState) {
@@ -118,7 +115,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                               maxRadius: heightView / 10,
                                             ),
                                             const SizedBox(
-                                              height: spacing10,
+                                              height: spacing4,
                                             ),
                                             Text(
                                               state.account.fullName ?? '',
@@ -170,12 +167,8 @@ class _YourAccountViewState extends State<YourAccountView> {
                           ),
                           Expanded(
                             child: ListView(
-                              padding: EdgeInsets.fromLTRB(
-                                padding16,
-                                widthView > 400 ? 48 : 64,
-                                padding16,
-                                0,
-                              ),
+                              padding: const EdgeInsets.fromLTRB(
+                                  padding16, 60, padding16, 0),
                               children: [
                                 AccountTile(
                                   icon: Icons.person_outline,

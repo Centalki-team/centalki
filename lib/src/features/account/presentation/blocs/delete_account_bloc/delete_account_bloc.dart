@@ -19,8 +19,8 @@ class DeleteAccountBloc extends Bloc<DeleteAccountEvent, DeleteAccountState> {
 
   void _onChangePassword(DeleteAccountChangePasswordEvent event, emit) {
     password = event.password;
-    if (password.isEmpty) {
-      emit(const DeleteAccountPasswordInvalidState(TextDoc.txtPasswordEmpty));
+    if (password.length > 100) {
+      emit(const DeleteAccountPasswordInvalidState(TextDoc.txtPasswordTooLong));
     } else {
       emit(const DeleteAccountPasswordValidState());
     }
@@ -32,9 +32,27 @@ class DeleteAccountBloc extends Bloc<DeleteAccountEvent, DeleteAccountState> {
     try {
       final currentUser = FirebaseAuth.instance.currentUser;
       if (currentUser != null) {
-        await currentUser.reauthenticateWithCredential(
-            EmailAuthProvider.credential(
-                email: currentUser.email ?? '', password: password));
+        for (var element in currentUser.providerData) {
+          switch (element.providerId) {
+            case 'password':
+              await currentUser.reauthenticateWithCredential(
+                  EmailAuthProvider.credential(
+                      email: currentUser.email ?? '', password: password));
+              break;
+            case 'google.com':
+            case 'facebook.com':
+              if (DateTime
+                  .now()
+                  .difference(currentUser.metadata.lastSignInTime!)
+                  .inDays >
+                  7) {
+                throw FirebaseAuthException(
+                    code: '', message: TextDoc.txtSignInAgainToDelete);
+              }
+              break;
+            default:
+          }
+        }
 
         await currentUser
             .delete()

@@ -3,13 +3,16 @@ class TextDoc {
   // Validation error messages
   static const txtEmailEmpty = 'Email address cannot be empty';
   static const txtEmailInvalidFormat = 'Invalid email format';
-  static const txtFullnameEmpty = 'Fullname cannot be empty';
-  static const txtFullnameTooShort =
-      'Name must contain at least 3 non-whitespace characters';
-  static const txtFullnameTooLong = 'Name cannot exceed 50 characters';
+  static const txtFullNameEmpty = 'Full name cannot be empty';
+  static const txtFullNameTooShort =
+      'Name must contain at least 2 non-whitespace characters';
+  static const txtFullNameTooLong = 'Name cannot exceed 50 characters';
+  static const txtFullNameOnlyCharacters = 'Full name just contains characters';
   static const txtEngNameTooShort =
-      'English name must contain at least 3 non-whitespace characters';
+      'English name must contain at least 2 non-whitespace characters';
   static const txtEngNameTooLong = 'English name cannot exceed 50 characters';
+  static const txtEngNameOnlyCharacters =
+      'English name just contains characters';
   static const txtBioTooLong = 'Your biography cannot exceed 200 characters';
   static const txtPasswordEmpty = 'Password cannot be empty';
   static const txtPasswordTooShort =
@@ -29,7 +32,7 @@ class TextDoc {
   // Prompts
   static const txtEmail = 'Email';
   static const txtPassword = 'Password';
-  static const txtFullname = 'Fullname';
+  static const txtFullName = 'Full name';
   static const txtRetypePassword = 'Retype Password';
   static const txtHaveNoAccount = 'Have no account?';
   static const txtHaveAnAccount = 'Have an account?';
@@ -116,6 +119,9 @@ class TextDoc {
   static const txtEnglishNameTitle = 'English Name';
   static const txtBioTitle = 'Bio';
   static const txtInterestedTopics = 'Interested Topics';
+  static const txtChangeAvatar = 'Change Avatar';
+  static const txtFileNotSupported = 'File is not supported';
+  static const txtFileMaximumPerFile = "The maximum size per file is 2MB.";
 
   // Account - Info
   static const txtFacebook = 'Facebook';
@@ -140,6 +146,7 @@ class TextDoc {
       'You are requesting that your account be deleted.\nDeleting the account will:\n   \u{2022} Remove account information and images\n   \u{2022} Remove all messages\n   \u{2022} Unable to restore';
   static const txtDeleteAccountError =
       'Something wrong when delete account!\nTry again after some minutes.';
+  static const txtSignInAgainToDelete = 'Please sign in again to delete your account';
 
   // Account - History
   static const txtTotalCompletedSessions = 'Total Completed Sessions';
@@ -162,12 +169,18 @@ class TextDoc {
   static const txtCharged = 'Charged';
 
   // Account - Change Password
-  static const txtNewPasswordEmpty = 'New password cannot be empty';
+  static const txtNewPasswordEmptyWarning = 'New password cannot be empty';
   static const txtNewPasswordTooShort =
       'New password must contain at least 6 characters';
+  static const txtNewPasswordTooLong =
+      'New password cannot exceed 100 characters';
   static const txtConfirmedPassword =
       'Confirmed password must match the new password';
-  static const txtConfirmedPasswordEmpty = 'Confirmed password cannot be empty';
+  static const txtConfirmedPasswordEmptyWarning = 'Confirmed password cannot be empty';
+  static const txtConfirmedPasswordTooLong =
+      'Confirm password cannot exceed 100 characters';
+  static const txtConfirmedPasswordMatchWarning =
+      'Confirm password must match the new password';
   static const txtChangePasswordError =
       'Something went wrong. Please try again later!';
   static const txtUserNotSignIn = 'User does not sign in!';
@@ -176,6 +189,7 @@ class TextDoc {
   static const txtCurrentPassword = 'Current password';
   static const txtNewPassword = 'New password';
   static const txtConfirmPassword = 'Confirm password';
+  static const txtThirdPartyChangePassword = 'This feature does not work with accounts signed in with third-party';
 
   static const txtMale = 'Male';
   static const txtFemale = 'Female';

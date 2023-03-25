@@ -31,11 +31,11 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     var signUpButtonDisabled = false;
 
     if (event.fullname.isEmpty) {
-      fullnameError = TextDoc.txtFullnameEmpty;
-    } else if (event.fullname.replaceAll(' ', '').length < 3) {
-      fullnameError = TextDoc.txtFullnameTooShort;
+      fullnameError = TextDoc.txtFullNameEmpty;
+    } else if (event.fullname.replaceAll(' ', '').length < 2) {
+      fullnameError = TextDoc.txtFullNameTooShort;
     } else if (event.fullname.length > 50) {
-      fullnameError = TextDoc.txtFullnameTooLong;
+      fullnameError = TextDoc.txtFullNameTooLong;
     }
 
     if (event.email.isEmpty) {

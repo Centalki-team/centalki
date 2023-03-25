@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../../../../base/temp_dio/dio_client.dart';
 import '../../../domain/entities/user_account_entity.dart';
@@ -27,12 +28,14 @@ class YourAccountBloc extends Bloc<YourAccountEvent, YourAccountState> {
           ?.getIdToken()
           .then(DioClient.getUserInformation);
       emit(YourAccountLoadDoneState(userProfile ?? const UserAccountEntity()));
-    } on Exception catch (e) {
-      emit(YourAccountLoadErrorState(e.toString()));
+    } on Exception catch (_) {
+      emit(const YourAccountLoadErrorState('Không thể tải thông tin tài khoản'));
     }
   }
 
   void _onLogOut(YourAccountLogOutEvent event, emit) async {
+    var googleAccount = GoogleSignIn();
+    googleAccount.signOut();
     await FirebaseAuth.instance.signOut();
   }
 }
