@@ -104,7 +104,7 @@ class _PaymentViewState extends State<PaymentView> {
                         minimumSize: const Size.fromHeight(48),
                         onPressed: () => context
                             .read<PaymentBloc>()
-                            .add(PaymentUploadImageEvent(
+                            .add(PaymentCreateReceiptEvent(
                               img: value,
                             )),
                       ),

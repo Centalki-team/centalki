@@ -28,8 +28,8 @@ class PaymentUploadPresignedUrlEvent extends PaymentEvent {
 
 class PaymentCreateReceiptEvent extends PaymentEvent {
   const PaymentCreateReceiptEvent({
-    required this.imgUrl,
+    required this.img,
   });
 
-  final String imgUrl;
+  final XFile img;
 }
