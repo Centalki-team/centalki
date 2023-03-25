@@ -11,7 +11,8 @@ class TextDoc {
   static const txtEngNameTooShort =
       'English name must contain at least 2 non-whitespace characters';
   static const txtEngNameTooLong = 'English name cannot exceed 50 characters';
-  static const txtEngNameOnlyCharacters = 'English name just contains characters';
+  static const txtEngNameOnlyCharacters =
+      'English name just contains characters';
   static const txtBioTooLong = 'Your biography cannot exceed 200 characters';
   static const txtPasswordEmpty = 'Password cannot be empty';
   static const txtPasswordTooShort =
@@ -167,12 +168,18 @@ class TextDoc {
   static const txtCharged = 'Charged';
 
   // Account - Change Password
-  static const txtNewPasswordEmpty = 'New password cannot be empty';
+  static const txtNewPasswordEmptyWarning = 'New password cannot be empty';
   static const txtNewPasswordTooShort =
       'New password must contain at least 6 characters';
+  static const txtNewPasswordTooLong =
+      'New password cannot exceed 100 characters';
   static const txtConfirmedPassword =
       'Confirmed password must match the new password';
-  static const txtConfirmedPasswordEmpty = 'Confirmed password cannot be empty';
+  static const txtConfirmedPasswordEmptyWarning = 'Confirmed password cannot be empty';
+  static const txtConfirmedPasswordTooLong =
+      'Confirm password cannot exceed 100 characters';
+  static const txtConfirmedPasswordMatchWarning =
+      'Confirm password must match the new password';
   static const txtChangePasswordError =
       'Something went wrong. Please try again later!';
   static const txtUserNotSignIn = 'User does not sign in!';
@@ -181,6 +188,7 @@ class TextDoc {
   static const txtCurrentPassword = 'Current password';
   static const txtNewPassword = 'New password';
   static const txtConfirmPassword = 'Confirm password';
+  static const txtThirdPartyChangePassword = 'This feature does not work with accounts signed in with third-party';
 
   static const txtMale = 'Male';
   static const txtFemale = 'Female';
