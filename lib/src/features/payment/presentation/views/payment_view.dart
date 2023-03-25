@@ -67,8 +67,8 @@ class _PaymentViewState extends State<PaymentView> {
             message: Text(
               state.displayMessage ?? state.exception.displayMessage,
               style: const TextStyle(
-                fontSize: 13.0,
-                fontWeight: FontWeight.w600,
+                fontSize: bodyLargeSize,
+                fontWeight: bodyLargeWeight,
                 color: AppColor.white,
               ),
             ),

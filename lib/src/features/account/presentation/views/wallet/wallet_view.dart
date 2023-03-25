@@ -97,8 +97,8 @@ class _WalletViewState extends State<WalletView> {
                                         ? 'Buy More Sessions payment created receipt successfully'
                                         : 'Something went wrong. Please try again later...',
                                     style: const TextStyle(
-                                      fontSize: 13.0,
-                                      fontWeight: FontWeight.w600,
+                                      fontSize: bodyLargeSize,
+                                      fontWeight: bodyLargeWeight,
                                       color: AppColor.white,
                                     ),
                                   ),
