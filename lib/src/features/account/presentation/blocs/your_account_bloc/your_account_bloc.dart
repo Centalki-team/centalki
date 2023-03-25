@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../../../../base/temp_dio/dio_client.dart';
 import '../../../domain/entities/user_account_entity.dart';
@@ -33,6 +34,8 @@ class YourAccountBloc extends Bloc<YourAccountEvent, YourAccountState> {
   }
 
   void _onLogOut(YourAccountLogOutEvent event, emit) async {
+    var googleAccount = GoogleSignIn();
+    googleAccount.signOut();
     await FirebaseAuth.instance.signOut();
   }
 }

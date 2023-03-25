@@ -146,6 +146,7 @@ class TextDoc {
       'You are requesting that your account be deleted.\nDeleting the account will:\n   \u{2022} Remove account information and images\n   \u{2022} Remove all messages\n   \u{2022} Unable to restore';
   static const txtDeleteAccountError =
       'Something wrong when delete account!\nTry again after some minutes.';
+  static const txtSignInAgainToDelete = 'Please sign in again to delete your account';
 
   // Account - History
   static const txtTotalCompletedSessions = 'Total Completed Sessions';

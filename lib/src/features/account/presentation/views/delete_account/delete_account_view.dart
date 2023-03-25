@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
+import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
 import '../../../../../../base/widgets/text_fields/outlined_text_field.dart';
 import '../../blocs/delete_account_bloc/delete_account_bloc.dart';
 
@@ -18,37 +19,22 @@ class _DeleteAccountViewState extends State<DeleteAccountView> {
   final _controller = TextEditingController();
 
   @override
-  Widget build(BuildContext context) => BlocListener<DeleteAccountBloc, DeleteAccountState>(
+  Widget build(BuildContext context) =>
+      BlocListener<DeleteAccountBloc, DeleteAccountState>(
         listener: (context, state) async {
           if (state is DeleteAccountLoadingState) {
             LoadingManager.setLoading(context, loading: true);
           } else {
             LoadingManager.setLoading(context);
             if (state is DeleteAccountLoadDoneState) {
+              Navigator.pop(context);
             } else if (state is DeleteAccountLoadErrorState) {
               await showDialog(
                 barrierDismissible: false,
                 context: context,
-                builder: (context) => AlertDialog(
-                  icon: const Icon(
-                    Icons.error_outline,
-                    color: AppColor.error,
-                  ),
-                  title: const Text(TextDoc.txtDeleteAccountResult),
-                  content: Flexible(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(state.message),
-                      ],
-                    ),
-                  ),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: const Text(TextDoc.txtOk),
-                    ),
-                  ],
+                builder: (context) => ErrorDialogContent(
+                  title: TextDoc.txtDeleteAccountResult,
+                  content: state.message,
                 ),
               );
             }
@@ -92,10 +78,14 @@ class _DeleteAccountViewState extends State<DeleteAccountView> {
                           builder: (context, state) => AppOutlinedTextField(
                             controller: _controller,
                             obscureText: true,
-                            errorText: state is DeleteAccountPasswordInvalidState ? state.message : null,
-                            onChanged: (value) => context.read<DeleteAccountBloc>().add(
-                                  DeleteAccountChangePasswordEvent(value),
-                                ),
+                            errorText:
+                                state is DeleteAccountPasswordInvalidState
+                                    ? state.message
+                                    : null,
+                            onChanged: (value) =>
+                                context.read<DeleteAccountBloc>().add(
+                                      DeleteAccountChangePasswordEvent(value),
+                                    ),
                           ),
                         ),
                         const SizedBox(height: spacing24),
