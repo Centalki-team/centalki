@@ -96,9 +96,18 @@ class StudentProfileBloc
 
   void _onSaveChanges(StudentProfileSaveChangesEvent event, emit) async {
     emit(const StudentProfileSavingState());
+
+    var setSelected = event.selectedInterestedTopics.toSet();
+    var setCurrent =
+        (user.userProfile?.accountInterestedTopicIds ?? []).toSet();
+    var updateInterestedTopics =
+        setSelected.difference(setCurrent).isNotEmpty ||
+            setCurrent.difference(setSelected).isNotEmpty;
+
     if (event.fullName != user.fullName ||
         event.englishName != user.userProfile?.accountEnglishName ||
         event.bio != user.userProfile?.accountBio ||
+        updateInterestedTopics ||
         (event.avatarUrl.isNotEmpty && event.avatarUrl != user.avatarUrl)) {
       final updateInformation = Map<String, dynamic>.from({
         "displayName": event.fullName,

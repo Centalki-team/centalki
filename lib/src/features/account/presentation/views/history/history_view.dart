@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../../base/define/styles.dart';
+import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
 import '../../blocs/history_bloc/history_bloc.dart';
 
 class HistoryView extends StatefulWidget {
@@ -19,24 +20,13 @@ class _HistoryViewState extends State<HistoryView> {
         listener: (context, state) {
           if (state is HistoryLoadFailureState) {
             showDialog(
-                barrierDismissible: false,
-                context: context,
-                builder: (context) => AlertDialog(
-                      icon: const Icon(
-                        Icons.error_outline,
-                        color: AppColor.error,
-                      ),
-                      title: const Text(TextDoc.txtLoadFailed),
-                      content: Text(state.message),
-                      actions: [
-                        TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                              Navigator.pop(context);
-                            },
-                            child: const Text(TextDoc.txtOk)),
-                      ],
-                    ));
+              barrierDismissible: false,
+              context: context,
+              builder: (context) => ErrorDialogContent(
+                title: TextDoc.txtLoadFailed,
+                content: state.message,
+              ),
+            );
           }
         },
         builder: (context, state) {

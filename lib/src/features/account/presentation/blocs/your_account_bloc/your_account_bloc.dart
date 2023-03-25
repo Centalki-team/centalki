@@ -28,8 +28,8 @@ class YourAccountBloc extends Bloc<YourAccountEvent, YourAccountState> {
           ?.getIdToken()
           .then(DioClient.getUserInformation);
       emit(YourAccountLoadDoneState(userProfile ?? const UserAccountEntity()));
-    } on Exception catch (e) {
-      emit(YourAccountLoadErrorState(e.toString()));
+    } on Exception catch (_) {
+      emit(const YourAccountLoadErrorState('Không thể tải thông tin tài khoản'));
     }
   }
 

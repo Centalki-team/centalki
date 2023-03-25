@@ -5,6 +5,8 @@ import 'package:intl/intl.dart';
 import '../../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
+import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
+import '../../../../../../base/widgets/dialog/success_dialog_content.dart';
 import '../../../domain/entities/user_account_entity.dart';
 import '../../blocs/account_information_bloc/account_information_bloc.dart';
 import '../../widgets/gender_radio_button_group.dart';
@@ -19,14 +21,18 @@ class AccountInformationView extends StatefulWidget {
 class _AccountInformationViewState extends State<AccountInformationView> {
   final emailController = TextEditingController();
 
-  //final phoneController = TextEditingController();
   final dateOfBirthController = TextEditingController();
-  final nameConnections = [TextDoc.txtFacebook, TextDoc.txtGoogle, TextDoc.txtApple];
+  final nameConnections = [
+    TextDoc.txtFacebook,
+    TextDoc.txtGoogle,
+    TextDoc.txtApple
+  ];
   var gender = Gender.male;
   var connections = [false, true, false];
 
   @override
-  Widget build(BuildContext context) => BlocListener<AccountInformationBloc, AccountInformationState>(
+  Widget build(BuildContext context) =>
+      BlocListener<AccountInformationBloc, AccountInformationState>(
         listener: (context, state) {
           if (state is AccountInformationSavingState) {
             LoadingManager.setLoading(context, loading: true);
@@ -34,66 +40,30 @@ class _AccountInformationViewState extends State<AccountInformationView> {
             LoadingManager.setLoading(context);
             if (state is AccountInformationLoadDoneState) {
               emailController.text = state.email;
-              //phoneController.text = state.phoneNumber;
-              dateOfBirthController.text = DateFormat('yyyy-MM-dd').format(state.dateOfBirth);
+              dateOfBirthController.text =
+                  DateFormat('yyyy-MM-dd').format(state.dateOfBirth);
               gender = state.gender;
             } else if (state is AccountInformationLoadFailureState) {
               showDialog(
                 context: context,
-                builder: (context) => AlertDialog(
-                  title: const Text(TextDoc.txtLoadFailed),
-                  content: Text(state.message),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: const Text(
-                        TextDoc.txtOk,
-                        style: TextStyle(
-                          fontSize: labelLargeSize,
-                          fontWeight: labelLargeWeight,
-                        ),
-                      ),
-                    )
-                  ],
+                builder: (context) => ErrorDialogContent(
+                  title: TextDoc.txtLoadFailed,
+                  content: state.message,
                 ),
               );
             } else if (state is AccountInformationSaveFailureState) {
               showDialog(
                 context: context,
-                builder: (context) => AlertDialog(
-                  title: const Text(TextDoc.txtProfileUpdateFailed),
-                  content: Text(state.message),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: const Text(
-                        TextDoc.txtOk,
-                        style: TextStyle(
-                          fontSize: labelLargeSize,
-                          fontWeight: labelLargeWeight,
-                        ),
-                      ),
-                    )
-                  ],
+                builder: (context) => ErrorDialogContent(
+                  title: TextDoc.txtProfileUpdateFailed,
+                  content: state.message,
                 ),
               );
             } else if (state is AccountInformationSaveDoneState) {
               showDialog(
                 context: context,
-                builder: (context) => AlertDialog(
-                  title: const Text(TextDoc.txtProfileUpdateSuccess),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: const Text(
-                        TextDoc.txtOk,
-                        style: TextStyle(
-                          fontSize: labelLargeSize,
-                          fontWeight: labelLargeWeight,
-                        ),
-                      ),
-                    )
-                  ],
+                builder: (context) => const SuccessDialogContent(
+                  title: TextDoc.txtProfileUpdateSuccess,
                 ),
               );
             }
@@ -147,7 +117,8 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                                     vertical: 12,
                                   ),
                                   disabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(12.0)),
                                     borderSide: BorderSide(
                                       color: AppColor.background,
                                       width: 2,
@@ -192,14 +163,16 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                                     vertical: 12,
                                   ),
                                   enabledBorder: const OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(radius8)),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(radius8)),
                                     borderSide: BorderSide(
                                       color: AppColor.container,
                                       width: enabledOutlineWidthTextField,
                                     ),
                                   ),
                                   focusedBorder: const OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(radius8)),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(radius8)),
                                     borderSide: BorderSide(
                                       color: AppColor.container,
                                       width: enabledOutlineWidthTextField,
@@ -209,7 +182,8 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                                     onPressed: () async {
                                       final datePicked = await showDatePicker(
                                         context: context,
-                                        initialDate: DateTime.parse(dateOfBirthController.text),
+                                        initialDate: DateTime.parse(
+                                            dateOfBirthController.text),
                                         firstDate: DateTime(1900),
                                         lastDate: DateTime.now(),
                                         builder: (context, child) => Theme(
@@ -249,10 +223,14 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                                       );
                                       if (datePicked != null) {
                                         if (mounted) {
-                                          context.read<AccountInformationBloc>().add(
+                                          context
+                                              .read<AccountInformationBloc>()
+                                              .add(
                                                 const AccountInformationChangeEvent(),
                                               );
-                                          dateOfBirthController.text = DateFormat('yyyy-MM-dd').format(datePicked);
+                                          dateOfBirthController.text =
+                                              DateFormat('yyyy-MM-dd')
+                                                  .format(datePicked);
                                         }
                                       }
                                     },
@@ -272,7 +250,8 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                                   color: AppColor.defaultFont,
                                 ),
                               ),
-                              BlocBuilder<AccountInformationBloc, AccountInformationState>(
+                              BlocBuilder<AccountInformationBloc,
+                                  AccountInformationState>(
                                 builder: (context, state) {
                                   if (state is AccountInformationLoadingState) {
                                     return Container();
@@ -281,7 +260,8 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                                     gender: gender,
                                     genderCallback: (selectedValue) {
                                       gender = selectedValue;
-                                      context.read<AccountInformationBloc>().add(const AccountInformationChangeEvent());
+                                      context.read<AccountInformationBloc>().add(
+                                          const AccountInformationChangeEvent());
                                     },
                                   );
                                 },
