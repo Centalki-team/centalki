@@ -33,5 +33,9 @@ class StudentProfileSaveChangesEvent extends StudentProfileEvent {
   final String fullName;
   final String englishName;
   final String bio;
-  final List<bool> selectedInterestedTopics;
+  final List<String> selectedInterestedTopics;
+}
+
+class StudentProfileChangeAvatarEvent extends StudentProfileEvent {
+  const StudentProfileChangeAvatarEvent();
 }
