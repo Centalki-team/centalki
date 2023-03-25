@@ -20,7 +20,7 @@ UserAccountModel _$UserAccountModelFromJson(Map<String, dynamic> json) =>
       emailVerified: json['emailVerified'] as bool?,
       phoneNumber: json['phoneNumber'] as String?,
       displayName: json['displayName'] as String?,
-      photoUrl: json['photoUrl'] as String?,
+      photoURL: json['photoURL'] as String?,
       disabled: json['disabled'] as bool?,
       metadata: json['metadata'] == null
           ? null

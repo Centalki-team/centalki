@@ -26,7 +26,6 @@ class _YourAccountViewState extends State<YourAccountView> {
         builder: (context, orientation) => LayoutBuilder(
           builder: (context, constraint) {
             final heightView = constraint.maxHeight;
-            final widthView = constraint.maxWidth;
 
             return BlocConsumer<YourAccountBloc, YourAccountState>(
                 listener: (context, state) {
@@ -118,7 +117,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                               maxRadius: heightView / 10,
                                             ),
                                             const SizedBox(
-                                              height: spacing10,
+                                              height: spacing4,
                                             ),
                                             Text(
                                               state.account.fullName ?? '',
@@ -170,11 +169,11 @@ class _YourAccountViewState extends State<YourAccountView> {
                           ),
                           Expanded(
                             child: ListView(
-                              padding: EdgeInsets.fromLTRB(
+                              padding: const EdgeInsets.fromLTRB(
                                 padding16,
-                                widthView > 400 ? 48 : 64,
+                                60,
                                 padding16,
-                                0,
+                                0
                               ),
                               children: [
                                 AccountTile(
