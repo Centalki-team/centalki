@@ -33,3 +33,7 @@ class PaymentCreateReceiptEvent extends PaymentEvent {
 
   final XFile img;
 }
+
+class PaymentLoadPaymentMethodsEvent extends PaymentEvent {
+  const PaymentLoadPaymentMethodsEvent();
+}

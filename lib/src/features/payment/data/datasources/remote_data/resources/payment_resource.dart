@@ -7,3 +7,7 @@ class PaymentGetPresignedUrlResource extends Resource {
 class PaymentCreateReceiptResource extends Resource {
   const PaymentCreateReceiptResource() : super('/transaction/payment-receipt');
 }
+
+class PaymentInfoResource extends Resource {
+  const PaymentInfoResource() : super('/transaction/payment-info');
+}

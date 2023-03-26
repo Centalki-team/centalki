@@ -6,8 +6,10 @@ import 'package:image_picker/image_picker.dart';
 import '../../../../../../base/gateway/exception/app_exception.dart';
 import '../../../../../../base/helpers/upload-file.dart';
 import '../../../../../../di/di_module.dart';
+import '../../../domain/entities/payment_method_entity.dart';
 import '../../../domain/repositories/payment_repository.dart';
 import '../../../domain/usecases/create_payment_receipt_usecase.dart';
+import '../../../domain/usecases/get_payment_methods_usecase.dart';
 import '../../../domain/usecases/get_presigned_url_usecase.dart';
 import '../../../domain/usecases/params/create_payment_receipt_params.dart';
 import '../../../domain/usecases/params/get_presigned_url_params.dart';
@@ -21,6 +23,7 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
     on<PaymentUploadImageEvent>(_onUploadImage);
     //on<PaymentUploadPresignedUrlEvent>(_uploadFilePresignedUrl);
     on<PaymentCreateReceiptEvent>(_onCreatePaymentReceipt);
+    on<PaymentLoadPaymentMethodsEvent>(_onLoadPaymentMethods);
   }
 
   final PaymentGetPresignedUrlUseCase _paymentGetPresignedUrlUseCase =
@@ -29,6 +32,10 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
   );
   final PaymentCreateReceiptUseCase _paymentCreateReceiptUseCase =
       PaymentCreateReceiptUseCase(
+    paymentRepository: getIt.get<PaymentRepository>(),
+  );
+  final GetPaymentMethodsUseCase _getPaymentMethodsUseCase =
+      GetPaymentMethodsUseCase(
     paymentRepository: getIt.get<PaymentRepository>(),
   );
 
@@ -92,6 +99,43 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
           displayMessage:
               "Lỗi tạo hóa đơn chuyển khoản, vui lòng thử lại sau..")),
       (r) => emit(const PaymentCreateReceiptDoneState()),
+    );
+  }
+
+  _onLoadPaymentMethods(PaymentLoadPaymentMethodsEvent event, emit) async {
+    final methods = await _getPaymentMethodsUseCase(null);
+    methods.fold(
+      (l) => emit(PaymentErrorState(
+        exception: l,
+      )),
+      (r) {
+        var methodsList = <PaymentMethodEntity>[];
+        if (r.momo != null) {
+          methodsList.add(PaymentMethodEntity(
+            methodName: 'MoMo',
+            methodType: PaymentMethodEnum.momo,
+            methodCode: r.momo!.transferCode,
+            accountHolder: r.momo!.accountHolder,
+            phoneNumber: r.momo!.phoneNumber,
+          ));
+        }
+        if (r.banking != null) {
+          methodsList.add(PaymentMethodEntity(
+            methodName: 'Banking',
+            methodType: PaymentMethodEnum.credit,
+            accountHolder: r.banking!.accountHolder,
+            accountNumber: r.banking!.accountNumber,
+            phoneNumber: r.banking!.bank,
+            bankName: r.banking!.bank,
+          ));
+        }
+        emit(
+          PaymentLoadPaymentMethodsDoneState(
+            paymentMethodInfoEntity: r,
+            methodsList: methodsList,
+          ),
+        );
+      },
     );
   }
 }

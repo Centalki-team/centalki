@@ -2,10 +2,11 @@ import 'package:dartz/dartz.dart';
 
 import '../../../../../base/gateway/exception/app_exception.dart';
 import '../../../../../di/di_module.dart';
+import '../../domain/entities/payment_method_entity.dart';
 import '../../domain/entities/payment_presigned_url.dart';
 import '../../domain/repositories/payment_repository.dart';
 import '../datasources/remote_data/payment_remote_datasource.dart';
-import '../datasources/remote_data/payment_remtoe_datasource_auth_required.dart';
+import '../datasources/remote_data/payment_remote_datasource_auth_required.dart';
 
 class PaymentRepositoryImpl extends PaymentRepository {
   PaymentRepositoryImpl();
@@ -42,6 +43,23 @@ class PaymentRepositoryImpl extends PaymentRepository {
       if (!result) {
         return const Left(AppException());
       }
+      return Right(result);
+    } on AppException catch (s) {
+      return Left(s);
+    } catch (err) {
+      return Left(
+        AppException(
+          error: err,
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<AppException, PaymentMethodInfoEntity>>
+      getPaymentMethods() async {
+    try {
+      final result = await paymentRemoteDatasource.getPaymentMethods();
       return Right(result);
     } on AppException catch (s) {
       return Left(s);

@@ -24,31 +24,31 @@ class PaymentView extends StatefulWidget {
 }
 
 class _PaymentViewState extends State<PaymentView> {
-  final methods = const <PaymentMethodEntity>[
-    PaymentMethodEntity(
-      methodName: 'MoMo',
-      methodId: 'MomoMethod',
-      methodType: PaymentMethodEnum.momo,
-    ),
-    PaymentMethodEntity(
-      methodName: 'Banking',
-      methodId: 'BankingMethod',
-      methodType: PaymentMethodEnum.credit,
-    ),
-    PaymentMethodEntity(
-      methodName: 'Paypal',
-      methodId: 'PaypalMethod',
-      methodType: PaymentMethodEnum.paypal,
-    ),
-  ];
-  late ValueNotifier<PaymentMethodEntity> selectedPaymentMethod;
+  // final methods = const <PaymentMethodEntity>[
+  //   PaymentMethodEntity(
+  //     methodName: 'MoMo',
+  //     methodId: 'MomoMethod',
+  //     methodType: PaymentMethodEnum.momo,
+  //   ),
+  //   PaymentMethodEntity(
+  //     methodName: 'Banking',
+  //     methodId: 'BankingMethod',
+  //     methodType: PaymentMethodEnum.credit,
+  //   ),
+  //   PaymentMethodEntity(
+  //     methodName: 'Paypal',
+  //     methodId: 'PaypalMethod',
+  //     methodType: PaymentMethodEnum.paypal,
+  //   ),
+  // ];
+  late ValueNotifier<PaymentMethodEntity?> selectedPaymentMethod;
   late ValueNotifier<XFile?> paymentBill;
 
   @override
   void initState() {
-    super.initState();
-    selectedPaymentMethod = ValueNotifier<PaymentMethodEntity>(methods[0]);
+    selectedPaymentMethod = ValueNotifier<PaymentMethodEntity?>(null);
     paymentBill = ValueNotifier<XFile?>(null);
+    super.initState();
   }
 
   @override
@@ -154,14 +154,25 @@ class _PaymentViewState extends State<PaymentView> {
                         const SizedBox(
                           height: spacing12,
                         ),
-                        SizedBox(
-                          height: 106.0,
-                          child: PaymentSelectionGroup(
-                            initValue: selectedPaymentMethod.value,
-                            methodsList: methods,
-                            onChanged: (value) =>
-                                selectedPaymentMethod.value = value,
-                          ),
+                        BlocBuilder<PaymentBloc, PaymentState>(
+                          buildWhen: (previous, current) =>
+                              current != previous &&
+                              current is PaymentLoadPaymentMethodsDoneState,
+                          builder: (context, state) {
+                            if (state is PaymentLoadPaymentMethodsDoneState &&
+                                state.methodsList.isNotEmpty) {
+                              return SizedBox(
+                                height: 106.0,
+                                child: PaymentSelectionGroup(
+                                  initValue: selectedPaymentMethod.value,
+                                  methodsList: state.methodsList,
+                                  onChanged: (value) =>
+                                      selectedPaymentMethod.value = value,
+                                ),
+                              );
+                            }
+                            return const SizedBox.shrink();
+                          },
                         ),
                         const SizedBox(
                           height: spacing16,
@@ -182,10 +193,28 @@ class _PaymentViewState extends State<PaymentView> {
                           alignment: Alignment.topCenter,
                           child: ValueListenableBuilder(
                             valueListenable: selectedPaymentMethod,
-                            builder: (_, value, __) => QrImage(
-                              data: value.methodId,
-                              size: 160.0,
-                            ),
+                            builder: (_, value, __) {
+                              if (value == null) {
+                                return const SizedBox.shrink();
+                              }
+                              return value.methodCode != null &&
+                                      value.methodCode!.isNotEmpty
+                                  ? QrImage(
+                                      data: value.methodCode!,
+                                      size: 160.0,
+                                    )
+                                  : Center(
+                                      child: Text(
+                                        'Bank: ${value.bankName}\nAccount Holder: ${value.accountHolder}\nAccount Number: ${value.accountNumber}',
+                                        style: const TextStyle(
+                                          fontSize: bodySmallSize,
+                                          fontWeight: bodySmallWeight,
+                                          color: AppColor.defaultFont,
+                                          height: 16 / 20,
+                                        ),
+                                      ),
+                                    );
+                            },
                           ),
                         ),
                         const SizedBox(
