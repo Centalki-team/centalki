@@ -4,7 +4,7 @@ import '../../../../../base/define/styles.dart';
 import '../widgets/setting_tile.dart';
 import 'settings_about_view.dart';
 import 'settings_appearance_view.dart';
-import 'settings_feedback_view.dart';
+import 'settings_feedback/settings_feedback_page.dart';
 import 'settings_language_view.dart';
 import 'settings_notification_view.dart';
 
@@ -56,7 +56,7 @@ class SettingsView extends StatelessWidget {
                 title: TextDoc.txtGiveFeedback,
                 onClick: () => Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const SettingsFeedbackView(),
+                    builder: (context) => const SettingsFeedbackPage(),
                   ),
                 ),
               ),
