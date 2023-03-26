@@ -28,3 +28,16 @@ openssl base64 < .env  | tr -d '\n' | tee .env.base64.txt
 
 # Base64 to 
 echo $ENV_BASE64 | base64 --decode >> .env.decode
+
+# Config Android 
+## File key.properties
+```
+storePassword=123456
+keyPassword=123456
+keyAlias=upload
+storeFile=upload-keystore.jks
+```
+## Build script
+```
+flutter build appbundle
+```
