@@ -232,6 +232,7 @@ class TextDoc {
   static const txtSuccessFeedback = 'Send feedback successfully';
   static const txtSuccess = 'Success';
   static const txtLoadFail = 'Load failed';
+  static const txtFeedbackTooLong = 'Feedback cannot exceed 500 characters';
 
   //Payment - Buy more sessions
   static const txtBuyMoreSessions = 'Buy More Sessions';
