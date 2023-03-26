@@ -9,7 +9,8 @@ class PaymentPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocProvider<PaymentBloc>(
-        create: (context) => PaymentBloc(),
+        create: (context) =>
+            PaymentBloc()..add(const PaymentLoadPaymentMethodsEvent()),
         child: const PaymentView(),
       );
 }

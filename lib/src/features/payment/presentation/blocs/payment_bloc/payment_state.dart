@@ -70,6 +70,22 @@ class PaymentCreateReceiptDoneState extends PaymentState {
   const PaymentCreateReceiptDoneState();
 }
 
+class PaymentLoadPaymentMethodsDoneState extends PaymentState {
+  const PaymentLoadPaymentMethodsDoneState({
+    required this.paymentMethodInfoEntity,
+    required this.methodsList,
+  });
+
+  final PaymentMethodInfoEntity paymentMethodInfoEntity;
+  final List<PaymentMethodEntity> methodsList;
+
+  @override
+  List<Object?> get props => [
+        paymentMethodInfoEntity,
+        methodsList,
+      ];
+}
+
 class PaymentCreateReceiptErrorState extends PaymentState {
   const PaymentCreateReceiptErrorState({
     required this.exception,
