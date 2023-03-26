@@ -146,7 +146,8 @@ class TextDoc {
       'You are requesting that your account be deleted.\nDeleting the account will:\n   \u{2022} Remove account information and images\n   \u{2022} Remove all messages\n   \u{2022} Unable to restore';
   static const txtDeleteAccountError =
       'Something wrong when delete account!\nTry again after some minutes.';
-  static const txtSignInAgainToDelete = 'Please sign in again to delete your account';
+  static const txtSignInAgainToDelete =
+      'Please sign in again to delete your account';
 
   // Account - History
   static const txtTotalCompletedSessions = 'Total Completed Sessions';
@@ -176,7 +177,8 @@ class TextDoc {
       'New password cannot exceed 100 characters';
   static const txtConfirmedPassword =
       'Confirmed password must match the new password';
-  static const txtConfirmedPasswordEmptyWarning = 'Confirmed password cannot be empty';
+  static const txtConfirmedPasswordEmptyWarning =
+      'Confirmed password cannot be empty';
   static const txtConfirmedPasswordTooLong =
       'Confirm password cannot exceed 100 characters';
   static const txtConfirmedPasswordMatchWarning =
@@ -189,7 +191,8 @@ class TextDoc {
   static const txtCurrentPassword = 'Current password';
   static const txtNewPassword = 'New password';
   static const txtConfirmPassword = 'Confirm password';
-  static const txtThirdPartyChangePassword = 'This feature does not work with accounts signed in with third-party';
+  static const txtThirdPartyChangePassword =
+      'This feature does not work with accounts signed in with third-party';
 
   static const txtMale = 'Male';
   static const txtFemale = 'Female';
@@ -221,6 +224,14 @@ class TextDoc {
       'Developed by Centalki Team\n2023, All Rights Reserved\nContact: centalki.dev@gmail.com';
   static const txtCentalkiVersion = 'Version 0.4.0';
   static const txtLastUpdated = 'Last updated: Mar 03, 2023';
+
+  // Feedback
+  // Validation error messages
+  static const txtRatingEmpty = 'Rating cannot be empty';
+  static const txtFeedbackEmpty = 'Feedback cannot be empty';
+  static const txtSuccessFeedback = 'Send feedback successfully';
+  static const txtSuccess = 'Success';
+  static const txtLoadFail = 'Load failed';
 
   //Payment - Buy more sessions
   static const txtBuyMoreSessions = 'Buy More Sessions';
