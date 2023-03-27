@@ -30,8 +30,12 @@ class SettingsFeedbackBloc
 
     if (event.rating == 0) {
       ratingError = TextDoc.txtRatingEmpty;
-    } else if (event.feedback.isEmpty) {
+    }
+
+    if (event.feedback.isEmpty) {
       feedbackError = TextDoc.txtFeedbackEmpty;
+    } else if (event.feedback.length > 500) {
+      feedbackError = TextDoc.txtFeedbackTooLong;
     }
 
     emit(SettingsFeedbackValidateState(
