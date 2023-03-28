@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -33,46 +34,49 @@ class Avatar extends StatelessWidget {
     return result.toUpperCase();
   }
 
-  bool _checkLocalAvatar(String avatar) => avatar.contains('/data');
+  bool _checkLocalAvatar(String avatar) =>
+      avatar.toLowerCase().contains('/data');
 
   @override
-  Widget build(BuildContext context) => Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(maxRadius),
-          border: Border.all(
-            color: Colors.white,
-          ),
+  Widget build(BuildContext context) {
+    log(avatarUrl);
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(maxRadius),
+        border: Border.all(
+          color: Colors.white,
         ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(maxRadius),
-          child: _checkLocalAvatar(avatarUrl)
-              ? CircleAvatar(
-                  radius: maxRadius,
-                  foregroundImage: FileImage(
-                    File(avatarUrl),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(maxRadius),
+        child: _checkLocalAvatar(avatarUrl)
+            ? CircleAvatar(
+                radius: maxRadius,
+                foregroundImage: FileImage(
+                  File(avatarUrl),
+                ),
+              )
+            : CircleAvatar(
+                radius: maxRadius,
+                child: CachedNetworkImage(
+                  fit: BoxFit.fill,
+                  imageUrl: avatarUrl,
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      CircularProgressIndicator(
+                    value: downloadProgress.progress,
                   ),
-                )
-              : CircleAvatar(
-                  radius: maxRadius,
-                  child: CachedNetworkImage(
-                    fit: BoxFit.fill,
-                    imageUrl: avatarUrl,
-                    progressIndicatorBuilder:
-                        (context, url, downloadProgress) =>
-                            CircularProgressIndicator(
-                      value: downloadProgress.progress,
-                    ),
-                    errorWidget: (context, url, error) => Text(
-                      _getUserDefaultAvatar(fullName),
-                      style: const TextStyle(
-                        letterSpacing: 1,
-                        fontSize: headlineLargeSize,
-                        fontWeight: FontWeight.w500,
-                        color: AppColor.white,
-                      ),
+                  errorWidget: (context, url, error) => Text(
+                    _getUserDefaultAvatar(fullName),
+                    style: const TextStyle(
+                      letterSpacing: 1,
+                      fontSize: headlineLargeSize,
+                      fontWeight: FontWeight.w500,
+                      color: AppColor.white,
                     ),
                   ),
                 ),
-        ),
-      );
+              ),
+      ),
+    );
+  }
 }

@@ -1,7 +1,10 @@
 part of 'student_profile_bloc.dart';
 
-abstract class StudentProfileState {
+abstract class StudentProfileState extends Equatable {
   const StudentProfileState();
+
+  @override
+  List<Object?> get props => [];
 }
 
 class StudentProfileInitState extends StudentProfileState {
@@ -9,7 +12,16 @@ class StudentProfileInitState extends StudentProfileState {
 }
 
 class StudentProfileLoadingState extends StudentProfileState {
-  const StudentProfileLoadingState();
+  const StudentProfileLoadingState({
+    this.showLoading = true,
+  });
+
+  final bool showLoading;
+
+  @override
+  List<Object?> get props => [
+        showLoading,
+      ];
 }
 
 class StudentProfileLoadDoneState extends StudentProfileState {
@@ -28,12 +40,27 @@ class StudentProfileLoadDoneState extends StudentProfileState {
   final String bio;
   final List<String> selectedInterestedTopicIds;
   final List<TopicItemEntity> topics;
+
+  @override
+  List<Object?> get props => [
+        avatarUrl,
+        fullName,
+        englishName,
+        bio,
+        selectedInterestedTopicIds,
+        topics,
+      ];
 }
 
 class StudentProfileLoadFailedState extends StudentProfileState {
   const StudentProfileLoadFailedState(this.message);
 
   final String message;
+
+  @override
+  List<Object?> get props => [
+        message,
+      ];
 }
 
 class StudentProfileSavingState extends StudentProfileState {
@@ -48,6 +75,11 @@ class StudentProfileSaveFailureState extends StudentProfileState {
   const StudentProfileSaveFailureState(this.message);
 
   final String message;
+
+  @override
+  List<Object?> get props => [
+        message,
+      ];
 }
 
 class StudentProfileChangedState extends StudentProfileState {
@@ -66,4 +98,14 @@ class StudentProfileChangedState extends StudentProfileState {
   final String englishNameError;
   final String bioError;
   final bool forceDisabled;
+
+  @override
+  List<Object?> get props => [
+        avatarUrl,
+        avatarException,
+        fullNameError,
+        englishNameError,
+        bioError,
+        forceDisabled,
+      ];
 }

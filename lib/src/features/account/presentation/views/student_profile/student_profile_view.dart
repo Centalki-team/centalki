@@ -51,6 +51,9 @@ class _StudentProfileViewState extends State<StudentProfileView> {
         listener: (context, state) {
           if (state is StudentProfileSavingState ||
               state is StudentProfileLoadingState) {
+            if (state is StudentProfileLoadingState) {
+              LoadingManager.setLoading(context, loading: false);
+            }
             LoadingManager.setLoading(context, loading: true);
           } else {
             LoadingManager.setLoading(context);
@@ -130,6 +133,8 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                   children: [
                                     BlocBuilder<StudentProfileBloc,
                                         StudentProfileState>(
+                                      buildWhen: (previous, current) =>
+                                          current is StudentProfileChangedState,
                                       builder: (context, state) => Center(
                                         child: Avatar(
                                           avatarUrl: avatarUrl,
@@ -141,25 +146,29 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                     const SizedBox(height: spacing8),
                                     BlocBuilder<StudentProfileBloc,
                                             StudentProfileState>(
+                                        buildWhen: (previous, current) =>
+                                            current
+                                                is StudentProfileChangedState,
                                         builder: (context, state) {
-                                      if (state is StudentProfileChangedState) {
-                                        if (state.avatarException.isEmpty) {
+                                          if (state
+                                              is StudentProfileChangedState) {
+                                            if (state.avatarException.isEmpty) {
+                                              return Container();
+                                            }
+                                            return Center(
+                                              child: Text(
+                                                state.avatarException,
+                                                style: const TextStyle(
+                                                  fontSize: bodyLargeSize,
+                                                  fontWeight: bodyLargeWeight,
+                                                  color: AppColor.error,
+                                                  height: 1,
+                                                ),
+                                              ),
+                                            );
+                                          }
                                           return Container();
-                                        }
-                                        return Center(
-                                          child: Text(
-                                            state.avatarException,
-                                            style: const TextStyle(
-                                              fontSize: bodyLargeSize,
-                                              fontWeight: bodyLargeWeight,
-                                              color: AppColor.error,
-                                              height: 1,
-                                            ),
-                                          ),
-                                        );
-                                      }
-                                      return Container();
-                                    }),
+                                        }),
                                     Center(
                                       child: AppTextButton(
                                         text: TextDoc.txtChangeAvatar,

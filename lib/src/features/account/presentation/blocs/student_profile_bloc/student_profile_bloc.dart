@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,7 +49,9 @@ class StudentProfileBloc
         selectedInterestedTopics,
         topics.topics ?? [],
       ));
-    } on Exception catch (_) {}
+    } on Exception catch (_) {
+      emit(const StudentProfileLoadingState(showLoading: false));
+    }
   }
 
   void _onChange(StudentProfileChangeEvent event, emit) {
