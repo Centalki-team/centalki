@@ -28,6 +28,8 @@ class TextDoc {
   static const txtWrongPassword = 'Wrong password!';
   static const txtWeakPassword = 'The password provided is too weak!';
   static const txtNotValidateRole = 'Cannot verify role!';
+  static const txtSignInCanceled = 'Sign in canceled!';
+  static const txtSignInFailed = 'Sign in failed!';
 
   // Prompts
   static const txtEmail = 'Email';

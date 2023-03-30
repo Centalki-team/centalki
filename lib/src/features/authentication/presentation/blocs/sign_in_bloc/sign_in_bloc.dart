@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -55,7 +56,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         email: event.email,
         password: event.password,
       );
-      final idToken = await credential.user?.getIdToken();
+      // final idToken = await credential.user?.getIdToken();
       // if (idToken != null) {
       //   await DioClient.validateRole(idToken);
       // }
@@ -65,6 +66,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         emit(const SignInLoadErrorState(message: TextDoc.txtUserNotFound));
       } else if (e.code == 'wrong-password') {
         emit(const SignInLoadErrorState(message: TextDoc.txtWrongPassword));
+      } else {
+        emit(const SignInLoadErrorState(message: TextDoc.txtSignInCanceled));
       }
     } on DioError catch (_) {
       emit(const SignInLoadErrorState(message: TextDoc.txtNotValidateRole));
@@ -73,20 +76,25 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
 
   void _onSignInWithGoogle(GoogleSignInEvent event, emit) async {
     emit(const SignInLoadingState());
-    // Trigger the authentication flow
-    final googleUser = await GoogleSignIn(
-            clientId: DefaultFirebaseOptions.currentPlatform.iosClientId)
-        .signIn();
-
-    // Obtain the auth details from the request
-    final googleAuth = await googleUser?.authentication;
-
-    // Create a new credential
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
-    );
     try {
+      // Trigger the authentication flow
+      final googleUser = await GoogleSignIn(
+              clientId: DefaultFirebaseOptions.currentPlatform.iosClientId)
+          .signIn();
+
+      // Obtain the auth details from the request
+      final googleAuth = await googleUser?.authentication;
+
+      if (googleAuth == null) {
+        emit(const SignInLoadErrorState(message: TextDoc.txtSignInCanceled));
+        return;
+      }
+
+      // Create a new credential
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
       final userCredential =
           await FirebaseAuth.instance.signInWithCredential(credential);
       final idToken = await userCredential.user?.getIdToken();
@@ -94,6 +102,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         await DioClient.assignRole(idToken, null);
       }
       emit(const SignInLoadDoneState());
+    } on PlatformException catch (_) {
+      emit(const SignInLoadErrorState(message: TextDoc.txtSignInFailed));
     } on DioError catch (_) {
       emit(const SignInLoadDoneState());
     }
@@ -101,9 +111,18 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
 
   void _onSignInWithFB(FacebookSignInEvent event, emit) async {
     emit(const SignInLoadingState());
-    // Trigger the sign-in flow
-    final loginResult = await FacebookAuth.instance.login();
     try {
+      // Trigger the sign-in flow
+      final loginResult = await FacebookAuth.instance.login();
+      if (loginResult.status == LoginStatus.cancelled) {
+        emit(const SignInLoadErrorState(message: TextDoc.txtSignInCanceled));
+        return;
+      }
+      if (loginResult.status == LoginStatus.failed) {
+        emit(const SignInLoadErrorState(message: TextDoc.txtSignInFailed));
+        return;
+      }
+
       final facebookAuthCredential =
           FacebookAuthProvider.credential(loginResult.accessToken!.token);
       final userCredential = await FirebaseAuth.instance
@@ -113,6 +132,9 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       if (idToken != null) {
         await DioClient.assignRole(idToken, null);
       }
+      emit(const SignInLoadDoneState());
+    } on FirebaseAuthException catch (_) {
+      emit(const SignInLoadErrorState(message: TextDoc.txtSignInFailed));
     } on DioError catch (_) {
       emit(const SignInLoadDoneState());
     }
@@ -121,15 +143,16 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   void _onSignInWithApple(AppleSignInEvent event, emit) async {
     emit(const SignInLoadingState());
     // Trigger the sign-in flow
-    final appleProvider = AppleAuthProvider();
     try {
+      final appleProvider = AppleAuthProvider();
       final userCredential =
           await FirebaseAuth.instance.signInWithProvider(appleProvider);
-
       final idToken = await userCredential.user?.getIdToken();
       if (idToken != null) {
         await DioClient.assignRole(idToken, null);
       }
+    } on FirebaseAuthException catch (_) {
+      emit(const SignInLoadErrorState(message: TextDoc.txtSignInCanceled));
     } on DioError catch (_) {
       emit(const SignInLoadDoneState());
     }

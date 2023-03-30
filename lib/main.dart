@@ -69,7 +69,7 @@ class _MyWidgetState extends State<MyWidget> {
         });
       } else {
         print('User is signed in!');
-        if (!user.emailVerified) {
+        if (!user.emailVerified && user.providerData.isEmpty) {
           user.sendEmailVerification();
           setState(() {
             _status = "not_email_verified";
