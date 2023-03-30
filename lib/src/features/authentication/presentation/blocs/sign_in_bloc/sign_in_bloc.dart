@@ -67,7 +67,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       } else if (e.code == 'wrong-password') {
         emit(const SignInLoadErrorState(message: TextDoc.txtWrongPassword));
       } else {
-        emit(const SignInLoadErrorState(message: TextDoc.txtSignInCanceled));
+        emit(const SignInLoadErrorState(message: TextDoc.txtSignInFailed));
       }
     } on DioError catch (_) {
       emit(const SignInLoadErrorState(message: TextDoc.txtNotValidateRole));
