@@ -10,6 +10,10 @@ class MeetingInitEvent extends MeetingEvent {
   final SessionScheduleEntity session;
 }
 
+class MeetingLoadEvent extends MeetingEvent {
+  const MeetingLoadEvent();
+}
+
 class MeetingJoinRoomEvent extends MeetingEvent {
   const MeetingJoinRoomEvent();
 }

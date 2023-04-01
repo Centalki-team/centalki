@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jitsi_meet_wrapper/jitsi_meet_wrapper.dart';
@@ -16,6 +17,7 @@ part 'meeting_state.dart';
 class MeetingBloc extends Bloc<MeetingEvent, MeetingState> {
   MeetingBloc() : super(const MeetingInitState()) {
     on<MeetingInitEvent>(_onInit);
+    on<MeetingLoadEvent>(_onLoad);
     on<MeetingJoinRoomEvent>(_onJoinRoom);
     on<MeetingExitRoomEvent>(_onExitRoom);
     on<MeetingOccurErrorEvent>(_onOccurError);
@@ -24,14 +26,39 @@ class MeetingBloc extends Bloc<MeetingEvent, MeetingState> {
   }
 
   late final SessionScheduleEntity session;
+  late DatabaseReference statusSessionRef;
   final CreateEventTrackingUseCase createEventTrackingUseCase =
       CreateEventTrackingUseCase(
     eventTrackingRepository: getIt.get<EventTrackingRepository>(),
   );
 
+  @override
+  Future<void> close() {
+    statusSessionRef.onValue.listen((event) {}).cancel();
+    return super.close();
+  }
+
   void _onInit(MeetingInitEvent event, emit) async {
     session = event.session;
+    statusSessionRef = FirebaseDatabase.instance.ref("session-schedule/${session.sessionId}/status");
+    final events = statusSessionRef.onValue;
+    var currentStatus = '';
+    await for (var e in events) {
+      currentStatus = e.snapshot.value.toString();
+      switch (currentStatus) {
+        case 'PICKED_UP':
+          add(const MeetingLoadEvent());
+          break;
+        case 'COMPLETED':
+        case 'CANCELLED':
+          JitsiMeetWrapper.hangUp();
+          add(const MeetingExitRoomEvent());
+          break;
+      }
+    }
+  }
 
+  void _onLoad(MeetingLoadEvent event, emit) async {
     var featureFlags = <FeatureFlag, bool>{
       FeatureFlag.isWelcomePageEnabled: false,
       FeatureFlag.isAddPeopleEnabled: false,
@@ -46,14 +73,38 @@ class MeetingBloc extends Bloc<MeetingEvent, MeetingState> {
     }
 
     var options = JitsiMeetingOptions(
-      roomNameOrUrl: event.session.sessionId!,
+      roomNameOrUrl: session.sessionId!,
       serverUrl: 'https://meet.jit.si/',
       subject:
-          'Meeting room of ${event.session.sessionStudent?.fullName ?? 'student'} and ${event.session.sessionTeacher?.fullName ?? 'teacher'}',
-      userDisplayName: event.session.sessionStudent?.fullName ?? 'Student',
+      'Meeting room of ${session.sessionStudent?.fullName ?? 'student'} and ${session.sessionTeacher?.fullName ?? 'teacher'}',
+      userDisplayName: session.sessionStudent?.fullName ?? 'Student',
       isAudioMuted: true,
       isVideoMuted: true,
       featureFlags: featureFlags,
+      configOverrides: {
+        "hideEmailInSettings": true,
+        "hiddenPremeetingButtons": ['invite'],
+        "toolbarButtons": [
+          'camera',
+          'chat',
+          'fullscreen',
+          'hangup',
+          'help',
+          'microphone',
+          'participants-pane',
+          'raisehand',
+          'recording',
+          'select-background',
+          'whiteboard',
+        ],
+        "disableInviteFunctions": true,
+        "remoteVideoMenu": {
+          "disableKick": true,
+        },
+        "breakoutRooms": {
+          "hideAddRoomButton": true,
+        },
+      }
     );
 
     var listeners = JitsiMeetingListener(
