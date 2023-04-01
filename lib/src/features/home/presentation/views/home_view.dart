@@ -64,21 +64,21 @@ class _HomeViewState extends State<HomeView>
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    width: 24.0,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12.0,
-                    ),
-                    child: Assets.icon.icSearchHeader.svg(),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12.0,
-                    ),
-                    child: Assets.icon.icNotiHeader.svg(),
-                  ),
+                  // const SizedBox(
+                  //   width: 24.0,
+                  // ),
+                  // Padding(
+                  //   padding: const EdgeInsets.symmetric(
+                  //     horizontal: 12.0,
+                  //   ),
+                  //   child: Assets.icon.icSearchHeader.svg(),
+                  // ),
+                  // Padding(
+                  //   padding: const EdgeInsets.symmetric(
+                  //     horizontal: 12.0,
+                  //   ),
+                  //   child: Assets.icon.icNotiHeader.svg(),
+                  // ),
                 ],
               ),
             ),
