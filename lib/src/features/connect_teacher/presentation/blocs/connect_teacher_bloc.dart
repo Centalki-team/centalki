@@ -22,6 +22,13 @@ class ConnectTeacherBloc
 
   String sessionId = '';
   late final String topicId;
+  late DatabaseReference statusSessionRef;
+
+  @override
+  Future<void> close() {
+    statusSessionRef.onValue.listen((event) {}).cancel();
+    return super.close();
+  }
 
   void _onInit(ConnectTeacherInit event, emit) async {
     emit(const ConnectTeacherLoadingState(TextDoc.txtFindTeacher));
@@ -45,11 +52,6 @@ class ConnectTeacherBloc
 
   void _onCancelButtonPressed(
       ConnectTeacherCancelButtonPressed event, emit) async {
-    await FirebaseDatabase.instance
-        .ref("session-schedule/$sessionId/status")
-        .onValue
-        .listen((event) {})
-        .cancel();
     await DioClient.cancelSessionSchedule(sessionId);
     emit(const ConnectTeacherCancelState());
   }
@@ -59,19 +61,18 @@ class ConnectTeacherBloc
 
     try {
       var currentStatus = '';
-      final events = FirebaseDatabase.instance
-          .ref("session-schedule/$sessionId/status")
-          .onValue;
+      statusSessionRef =
+          FirebaseDatabase.instance.ref("session-schedule/$sessionId/status");
+      final events = statusSessionRef.onValue;
       await for (var status in events) {
         currentStatus = status.snapshot.value.toString();
         switch (currentStatus) {
           case 'PICKED_UP':
-            emit(const ConnectTeacherFindDoneState(TextDoc.txtConnectedTeacher));
+            emit(
+                const ConnectTeacherFindDoneState(TextDoc.txtConnectedTeacher));
             add(const ConnectTeacherConnectRoom());
             break;
           case 'TIME_OUT':
-            await events.listen((event) {}).cancel();
-            await DioClient.cancelSessionSchedule(sessionId);
             emit(const ConnectTeacherFindFailureState(
                 TextDoc.txtNotTeacherAvailableContent));
             break;
