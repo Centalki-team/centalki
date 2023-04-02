@@ -43,6 +43,8 @@ class _SignUpViewState extends State<SignUpView> {
               ),
             );
             _validateSignUpInputs('');
+          } else if (state is SignUpSuccessState) {
+            Navigator.of(context).pop();
           }
         },
         child: Scaffold(
@@ -79,8 +81,10 @@ class _SignUpViewState extends State<SignUpView> {
                       ),
                       AppOutlinedTextField(
                         controller: _nameController,
-                        errorText:
-                            state is SignUpValidateState && state.fullnameError.isNotEmpty ? state.fullnameError : null,
+                        errorText: state is SignUpValidateState &&
+                                state.fullnameError.isNotEmpty
+                            ? state.fullnameError
+                            : null,
                         onChanged: _validateSignUpInputs,
                       ),
                       const SizedBox(height: spacing8),
@@ -95,8 +99,10 @@ class _SignUpViewState extends State<SignUpView> {
                       AppOutlinedTextField(
                         controller: _emailController,
                         textInputType: TextInputType.emailAddress,
-                        errorText:
-                            state is SignUpValidateState && state.emailError.isNotEmpty ? state.emailError : null,
+                        errorText: state is SignUpValidateState &&
+                                state.emailError.isNotEmpty
+                            ? state.emailError
+                            : null,
                         onChanged: _validateSignUpInputs,
                       ),
                       const SizedBox(height: spacing8),
@@ -111,8 +117,10 @@ class _SignUpViewState extends State<SignUpView> {
                       AppOutlinedTextField(
                         controller: _passwordController,
                         obscureText: true,
-                        errorText:
-                            state is SignUpValidateState && state.passwordError.isNotEmpty ? state.passwordError : null,
+                        errorText: state is SignUpValidateState &&
+                                state.passwordError.isNotEmpty
+                            ? state.passwordError
+                            : null,
                         onChanged: _validateSignUpInputs,
                       ),
                       const SizedBox(height: spacing8),
@@ -127,7 +135,8 @@ class _SignUpViewState extends State<SignUpView> {
                       AppOutlinedTextField(
                           controller: _retypePasswordController,
                           obscureText: true,
-                          errorText: state is SignUpValidateState && state.retypePasswordError.isNotEmpty
+                          errorText: state is SignUpValidateState &&
+                                  state.retypePasswordError.isNotEmpty
                               ? state.retypePasswordError
                               : null,
                           onChanged: _validateSignUpInputs),
@@ -159,7 +168,8 @@ class _SignUpViewState extends State<SignUpView> {
                             onPressed: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const TermsAndConditions(),
+                                builder: (context) =>
+                                    const TermsAndConditions(),
                               ),
                             ),
                           )
@@ -179,12 +189,14 @@ class _SignUpViewState extends State<SignUpView> {
                     return AppFilledButton(
                       text: TextDoc.txtSignUp,
                       minimumSize: const Size.fromHeight(48),
-                      onPressed: state is SignUpValidateState && state.forceDisabled == false
-                          ? () => context.read<SignUpBloc>().add(SignUpSubmitEvent(
-                                fullname: _nameController.text,
-                                email: _emailController.text,
-                                password: _passwordController.text,
-                              ))
+                      onPressed: state is SignUpValidateState &&
+                              state.forceDisabled == false
+                          ? () =>
+                              context.read<SignUpBloc>().add(SignUpSubmitEvent(
+                                    fullname: _nameController.text,
+                                    email: _emailController.text,
+                                    password: _passwordController.text,
+                                  ))
                           : null,
                     );
                   },
