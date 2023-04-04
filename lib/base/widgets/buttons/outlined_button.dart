@@ -9,12 +9,16 @@ class AppOutlinedButton extends StatefulWidget {
     required this.text,
     this.icon,
     this.minimumSize,
+    this.textColor,
+    this.iconColor,
   }) : super(key: key);
 
   final void Function()? onPressed;
   final String text;
   final IconData? icon;
   final Size? minimumSize;
+  final Color? textColor;
+  final Color? iconColor;
 
   @override
   State<AppOutlinedButton> createState() => _AppOutlinedButtonState();
@@ -23,50 +27,51 @@ class AppOutlinedButton extends StatefulWidget {
 class _AppOutlinedButtonState extends State<AppOutlinedButton> {
   @override
   Widget build(BuildContext context) => widget.icon == null
-        ? OutlinedButton(
-            onPressed: widget.onPressed == null ? null : widget.onPressed!,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColor.white,
-              textStyle: const TextStyle(
-                fontFamily: 'Dongle',
-                fontSize: labelLargeSize,
-                fontWeight: labelLargeWeight,
-              ),
-              elevation: 0.0,
-              shadowColor: AppColor.shadow,
-              side: const BorderSide(
-                color: AppColor.shadow,
-              ),
-              minimumSize: widget.minimumSize,
+      ? OutlinedButton(
+          onPressed: widget.onPressed == null ? null : widget.onPressed!,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppColor.white,
+            textStyle: TextStyle(
+              fontFamily: 'Dongle',
+              fontSize: labelLargeSize,
+              fontWeight: labelLargeWeight,
+              color: widget.textColor,
             ),
-            child: Text(
-              widget.text,
+            elevation: 0.0,
+            shadowColor: AppColor.shadow,
+            side: const BorderSide(
+              color: AppColor.container,
             ),
-          )
-        : OutlinedButton.icon(
-            onPressed: widget.onPressed == null ? null : widget.onPressed!,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColor.white,
-              foregroundColor: AppColor.mainColor1,
-              textStyle: const TextStyle(
-                fontFamily: 'Dongle',
-                fontSize: labelLargeSize,
-                fontWeight: labelLargeWeight,
-              ),
-              elevation: 0.0,
-              shadowColor: AppColor.shadow,
-              side: const BorderSide(
-                color: AppColor.shadow,
-              ),
-              minimumSize: widget.minimumSize,
+            minimumSize: widget.minimumSize,
+          ),
+          child: Text(
+            widget.text,
+          ),
+        )
+      : OutlinedButton.icon(
+          onPressed: widget.onPressed == null ? null : widget.onPressed!,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppColor.white,
+            foregroundColor: AppColor.mainColor1,
+            elevation: 0.0,
+            shadowColor: AppColor.shadow,
+            side: const BorderSide(
+              color: AppColor.container,
             ),
-            icon: Icon(
-              widget.icon!,
-              size: iconButtonSize,
-              color: AppColor.mainColor1,
+            minimumSize: widget.minimumSize,
+          ),
+          icon: Icon(
+            widget.icon!,
+            size: iconButtonSize,
+            color: widget.iconColor ?? AppColor.mainColor1,
+          ),
+          label: Text(
+            widget.text,
+            style: TextStyle(
+              fontSize: labelLargeSize,
+              fontWeight: labelLargeWeight,
+              color: widget.textColor,
             ),
-            label: Text(
-              widget.text,
-            ),
-          );
+          ),
+        );
 }
