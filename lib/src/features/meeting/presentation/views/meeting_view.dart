@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../report_meeting/presentation/views/report_meeting_view.dart';
 import '../blocs/meeting_bloc.dart';
 import 'hang_up_meeting_view.dart';
 
@@ -19,7 +20,10 @@ class _MeetingViewState extends State<MeetingView> {
             await Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const HangUpMeetingView()));
+                    builder: (context) => const HangUpMeetingView(),
+                    settings: RouteSettings(
+                      arguments: ScreenArguments(state.teacherId),
+                    )));
             if (mounted) {
               Navigator.pop(context);
             }

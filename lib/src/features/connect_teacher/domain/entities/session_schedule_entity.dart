@@ -42,9 +42,8 @@ class SessionScheduleEntity {
 }
 
 class SessionScheduleUserEntity {
-  const SessionScheduleUserEntity({
-    this.fullName,
-  });
+  const SessionScheduleUserEntity({this.fullName, this.id});
 
   final String? fullName;
+  final String? id;
 }
