@@ -1,7 +1,9 @@
 import 'dart:io';
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -21,7 +23,7 @@ void main(List<String> args) async {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   if (Firebase.apps.isEmpty) {
     await Firebase.initializeApp(
-      name: 'YourAPP',
+      name: 'Centalki',
       options: DefaultFirebaseOptions.currentPlatform,
     ).whenComplete(() {
       print("completedAppInitialize");
@@ -35,6 +37,8 @@ void main(List<String> args) async {
   //     child: const MyApp(),
   //   ),
   // );
+  var analytics = FirebaseAnalytics.instance;
+
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
@@ -42,6 +46,11 @@ void main(List<String> args) async {
       fontFamily: 'Dongle',
     ),
     home: const MyWidget(),
+    navigatorObservers: kDebugMode
+        ? []
+        : [
+            FirebaseAnalyticsObserver(analytics: analytics),
+          ],
   ));
 }
 
@@ -86,6 +95,10 @@ class _MyWidgetState extends State<MyWidget> {
             _status = "success";
           });
         }
+      }
+
+      if (user?.uid != null) {
+        FirebaseAnalytics.instance.setUserId(id: user?.uid);
       }
     });
     super.initState();
