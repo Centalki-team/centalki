@@ -100,7 +100,7 @@ class ConnectTeacherBloc
       if (teacherName != null) {
         emit(ConnectTeacherConnectingRoomState(
             '${TextDoc.txtConnectedTeacher}$teacherName${TextDoc.txtLaunchSession}'));
-        await Future.delayed(const Duration(seconds: 3));
+        await Future.delayed(const Duration(seconds: 1));
         emit(ConnectTeacherConnectDoneState(session!));
       } else {
         emit(const ConnectTeacherConnectErrorState(

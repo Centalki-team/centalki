@@ -72,7 +72,10 @@ class SessionScheduleUserModel extends SessionScheduleUserEntity {
     this.displayName,
     this.metadata,
     this.uid,
-  }) : super(fullName: displayName, id: uid);
+  }) : super(
+          fullName: displayName,
+          id: uid,
+        );
 
   final String? tokensValidAfterTime;
   final List<ProviderDataModel>? providerData;
