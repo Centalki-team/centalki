@@ -74,6 +74,7 @@ class SessionScheduleUserModel extends SessionScheduleUserEntity {
     this.uid,
   }) : super(
           fullName: displayName,
+          id: uid,
         );
 
   final String? tokensValidAfterTime;

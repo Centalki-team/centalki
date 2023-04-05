@@ -5,6 +5,9 @@ import '../../src/features/payment/data/datasources/remote_data/payment_remote_d
 import '../../src/features/payment/data/datasources/remote_data/payment_remote_datasource_auth_required.dart';
 import '../../src/features/payment/data/repositories/payment_repository_impl.dart';
 import '../../src/features/payment/domain/repositories/payment_repository.dart';
+import '../../src/features/report_meeting/data/datasources/report_meeting_datasource/remote_data/report_meeting_remote_datasource.dart';
+import '../../src/features/report_meeting/data/repositories/report_meeting_repository_impl.dart';
+import '../../src/features/report_meeting/domain/repositories/report_meeting_repository.dart';
 import '../../src/features/settings/data/datasources/remote_data/feedback_remote_datasource.dart';
 import '../../src/features/settings/data/repositories/feedback_repository_impl.dart';
 import '../../src/features/settings/domain/repositories/feedback_repository.dart';
@@ -28,13 +31,21 @@ class RepositoriesModule extends DIModule {
       ..registerLazySingleton<FeedbackRemoteDatasource>(
         FeedbackRemoteDatasource.new,
       )
+      ..registerLazySingleton<ReportMeetingRemoteDatasource>(
+        ReportMeetingRemoteDatasource.new,
+      )
       //Repositories
       ..registerLazySingleton<TopicRepository>(TopicRepositoryImpl.new)
       ..registerLazySingleton<EventTrackingRepository>(
           EventTrackingRepositoryImpl.new)
-      ..registerLazySingleton<PaymentRepository>(PaymentRepositoryImpl.new)
+      ..registerLazySingleton<PaymentRepository>(
+        PaymentRepositoryImpl.new,
+      )
       ..registerLazySingleton<FeedbackRepository>(
         FeedbackRepositoryImpl.new,
+      )
+      ..registerLazySingleton<ReportMeetingRepository>(
+        ReportMeetingRepositoryImpl.new,
       );
   }
 }

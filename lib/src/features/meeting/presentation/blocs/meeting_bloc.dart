@@ -40,7 +40,8 @@ class MeetingBloc extends Bloc<MeetingEvent, MeetingState> {
 
   void _onInit(MeetingInitEvent event, emit) async {
     session = event.session;
-    statusSessionRef = FirebaseDatabase.instance.ref("session-schedule/${session.sessionId}/status");
+    statusSessionRef = FirebaseDatabase.instance
+        .ref("session-schedule/${session.sessionId}/status");
     final events = statusSessionRef.onValue;
     var currentStatus = '';
     await for (var e in events) {
@@ -73,39 +74,38 @@ class MeetingBloc extends Bloc<MeetingEvent, MeetingState> {
     }
 
     var options = JitsiMeetingOptions(
-      roomNameOrUrl: session.sessionId!,
-      serverUrl: 'https://meet.jit.si/',
-      subject:
-      'Meeting room of ${session.sessionStudent?.fullName ?? 'student'} and ${session.sessionTeacher?.fullName ?? 'teacher'}',
-      userDisplayName: session.sessionStudent?.fullName ?? 'Student',
-      isAudioMuted: true,
-      isVideoMuted: true,
-      featureFlags: featureFlags,
-      configOverrides: {
-        "hideEmailInSettings": true,
-        "hiddenPremeetingButtons": ['invite'],
-        "toolbarButtons": [
-          'camera',
-          'chat',
-          'fullscreen',
-          'hangup',
-          'help',
-          'microphone',
-          'participants-pane',
-          'raisehand',
-          'recording',
-          'select-background',
-          'whiteboard',
-        ],
-        "disableInviteFunctions": true,
-        "remoteVideoMenu": {
-          "disableKick": true,
-        },
-        "breakoutRooms": {
-          "hideAddRoomButton": true,
-        },
-      }
-    );
+        roomNameOrUrl: session.sessionId!,
+        serverUrl: 'https://meet.jit.si/',
+        subject:
+            'Meeting room of ${session.sessionStudent?.fullName ?? 'student'} and ${session.sessionTeacher?.fullName ?? 'teacher'}',
+        userDisplayName: session.sessionStudent?.fullName ?? 'Student',
+        isAudioMuted: true,
+        isVideoMuted: true,
+        featureFlags: featureFlags,
+        configOverrides: {
+          "hideEmailInSettings": true,
+          "hiddenPremeetingButtons": ['invite'],
+          "toolbarButtons": [
+            'camera',
+            'chat',
+            'fullscreen',
+            'hangup',
+            'help',
+            'microphone',
+            'participants-pane',
+            'raisehand',
+            'recording',
+            'select-background',
+            'whiteboard',
+          ],
+          "disableInviteFunctions": true,
+          "remoteVideoMenu": {
+            "disableKick": true,
+          },
+          "breakoutRooms": {
+            "hideAddRoomButton": true,
+          },
+        });
 
     var listeners = JitsiMeetingListener(
       onConferenceJoined: (url) async {
@@ -146,7 +146,7 @@ class MeetingBloc extends Bloc<MeetingEvent, MeetingState> {
             'Student ${session.sessionStudent?.fullName ?? 'unknown name'} exited room.',
       ),
     );
-    emit(const MeetingEndState());
+    emit(MeetingEndState(session.sessionTeacher?.id));
   }
 
   void _onOccurError(MeetingOccurErrorEvent event, emit) async {

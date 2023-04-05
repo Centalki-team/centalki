@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../src/features/account/data/account_datasources/remote_data/model/user_account_model.dart';
 import '../../src/features/account/data/balance_datasources/remote_data/model/balance_model.dart';
@@ -151,5 +152,24 @@ class DioClient {
         data: {"interestedTopicIds": topicIds},
         options: Options(headers: {"Authorization": idToken}));
     return response.statusCode == 200;
+  }
+
+  static Future<dynamic> reportTeacher(
+      {String? reportedId, List<String>? summary, String? detail}) async {
+    final idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
+    return await _dio.post("$baseUrl/reporting",
+        data: {"reportedId": reportedId, "summary": summary, "detail": detail},
+        options: Options(headers: {"Authorization": idToken}));
+  }
+
+  static Future<dynamic> blockTeacher({
+    required String? blockedId,
+  }) async {
+    final idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
+    return await _dio.post("$baseUrl/blocking",
+        data: {
+          "blockedId": blockedId,
+        },
+        options: Options(headers: {"Authorization": idToken}));
   }
 }

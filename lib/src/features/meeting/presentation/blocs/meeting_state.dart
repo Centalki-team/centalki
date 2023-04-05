@@ -9,5 +9,7 @@ class MeetingInitState extends MeetingState {
 }
 
 class MeetingEndState extends MeetingState {
-  const MeetingEndState();
+  const MeetingEndState(this.teacherId);
+
+  final String? teacherId;
 }

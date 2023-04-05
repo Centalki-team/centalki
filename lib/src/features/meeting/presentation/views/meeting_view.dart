@@ -1,22 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../report_meeting/presentation/views/report_meeting_view.dart';
 import '../blocs/meeting_bloc.dart';
+import 'hang_up_meeting_view.dart';
 
-class MeetingView extends StatelessWidget {
+class MeetingView extends StatefulWidget {
   const MeetingView({Key? key}) : super(key: key);
 
   @override
+  State<MeetingView> createState() => _MeetingViewState();
+}
+
+class _MeetingViewState extends State<MeetingView> {
+  @override
   Widget build(BuildContext context) => BlocConsumer<MeetingBloc, MeetingState>(
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state is MeetingEndState) {
-            Navigator.pop(context);
+            await Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const HangUpMeetingView(),
+                    settings: RouteSettings(
+                      arguments: ScreenArguments(state.teacherId),
+                    )));
+            if (mounted) {
+              Navigator.pop(context);
+            }
           }
         },
         builder: (context, state) => const Scaffold(
-          body: Center(
-            child: Text('Meeting page'),
-          ),
+          body: Center(),
         ),
       );
 }
