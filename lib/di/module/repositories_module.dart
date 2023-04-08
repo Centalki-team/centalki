@@ -1,3 +1,7 @@
+import '../../base/define/storage/storage_gateway.dart';
+import '../../src/features/introduction/data/datasources/local_data/intro_local_datasource.dart';
+import '../../src/features/introduction/data/repositories/app_intro_repository_impl.dart';
+import '../../src/features/introduction/domain/repositories/app_intro_repository.dart';
 import '../../src/features/meeting/data/datasources/event_datasource/remote_data/event_remote_datasource.dart';
 import '../../src/features/meeting/data/repositories/event_repository_impl.dart';
 import '../../src/features/meeting/domain/repositories/event_repository.dart';
@@ -34,6 +38,11 @@ class RepositoriesModule extends DIModule {
       ..registerLazySingleton<ReportMeetingRemoteDatasource>(
         ReportMeetingRemoteDatasource.new,
       )
+      ..registerLazySingleton<IntroLocalDatasource>(
+        () => IntroLocalDatasource(
+          storageGateway: StorageGateway.defaultGateway(),
+        ),
+      )
       //Repositories
       ..registerLazySingleton<TopicRepository>(TopicRepositoryImpl.new)
       ..registerLazySingleton<EventTrackingRepository>(
@@ -46,6 +55,7 @@ class RepositoriesModule extends DIModule {
       )
       ..registerLazySingleton<ReportMeetingRepository>(
         ReportMeetingRepositoryImpl.new,
-      );
+      )
+      ..registerLazySingleton<AppIntroRepository>(AppIntroRepositoryImpl.new);
   }
 }

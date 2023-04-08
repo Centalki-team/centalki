@@ -1,32 +1,34 @@
 class AppText {
-  static String get topic => 'Topic';
+  static String topic = 'Topic';
 
-  static String get account => 'Account';
+  static String account = 'Account';
 
-  static String get settings => 'Settings';
+  static String settings = 'Settings';
 
-  static String get appName => 'Centalki';
+  static String appName = 'Centalki';
 
   // Authentication
-  static String get txtEmailEmptyWarning => 'E-mail address cannot be empty';
-  static String get txtEmailInvalidFormatWarning => 'Invalid email format';
-  static String get txtPasswordEmptyWarning => 'Password cannot be empty';
-  static String get txtUserNotFound => 'No user found for that email!';
-  static String get txtWrongPassword =>
-      'Wrong password provided for that user.';
-  static String get txtNotValidateRole => 'Cannot verify role!';
-  static String get txtSignInIntroduction => 'Sign in your account';
-  static String get txtEmail => 'Email';
-  static String get txtPassword => 'Password';
-  static String get txtForgotPassword => 'Forgot Password?';
-  static String get txtSignIn => 'Sign In';
-  static String get txtNotAccount => 'Don\'t have an account?';
-  static String get txtSignUp => 'Sign Up';
-  static String get txtForgotPasswordIntroduction =>
+  static String txtEmailEmptyWarning = 'E-mail address cannot be empty';
+  static String txtEmailInvalidFormatWarning = 'Invalid email format';
+  static String txtPasswordEmptyWarning = 'Password cannot be empty';
+  static String txtUserNotFound = 'No user found for that email!';
+  static String txtWrongPassword = 'Wrong password provided for that user.';
+  static String txtNotValidateRole = 'Cannot verify role!';
+  static String txtSignInIntroduction = 'Sign in your account';
+  static String txtEmail = 'Email';
+  static String txtPassword = 'Password';
+  static String txtForgotPassword = 'Forgot Password?';
+  static String txtSignIn = 'Sign In';
+  static String txtNotAccount = 'Don\'t have an account?';
+  static String txtSignUp = 'Sign Up';
+  static String txtForgotPasswordIntroduction =
       'Your email used to sign in Centalki';
-  static String get txtResetPassword => 'Reset Password';
-  static String get txtReturnSignIn => 'Return Sign In';
-  static String get txtWelcomeSignIn => 'Speak English Everyday';
-  static String get txtWelcomeForgotPassword =>
+  static String txtResetPassword = 'Reset Password';
+  static String txtReturnSignIn = 'Return Sign In';
+  static String txtWelcomeSignIn = 'Speak English Everyday';
+  static String txtWelcomeForgotPassword =
       'Connect and share your English knowledge';
+
+  // introduction
+  static String txtGetStarted = 'Get Started';
 }
