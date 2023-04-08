@@ -153,12 +153,25 @@ class $AssetsIllustrationGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/intro_first.svg
+  SvgGenImage get introFirst =>
+      const SvgGenImage('assets/images/intro_first.svg');
+
+  /// File path: assets/images/intro_second.svg
+  SvgGenImage get introSecond =>
+      const SvgGenImage('assets/images/intro_second.svg');
+
+  /// File path: assets/images/intro_third.svg
+  SvgGenImage get introThird =>
+      const SvgGenImage('assets/images/intro_third.svg');
+
   /// File path: assets/images/temp_all_topic.png
   AssetGenImage get tempAllTopic =>
       const AssetGenImage('assets/images/temp_all_topic.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [tempAllTopic];
+  List<dynamic> get values =>
+      [introFirst, introSecond, introThird, tempAllTopic];
 }
 
 class $AssetsLogoGen {
@@ -324,10 +337,10 @@ class SvgGenImage {
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
       theme: theme,
-      //colorFilter: colorFilter,
+      // colorFilter: colorFilter,
       color: color,
       colorBlendMode: colorBlendMode,
-      //clipBehavior: clipBehavior,
+      // clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,
     );
   }

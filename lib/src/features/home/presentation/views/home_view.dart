@@ -4,8 +4,12 @@ import '../../../../../base/define/app_text.dart';
 import '../../../../../base/define/common_txt_style.dart';
 import '../../../../../base/define/styles.dart';
 import '../../../../../base/widgets/bottom_bar/custom_bottom_nav.dart';
+import '../../../../../di/di_module.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../account/presentation/views/your_account/your_account_page.dart';
+import '../../../introduction/domain/repositories/app_intro_repository.dart';
+import '../../../introduction/domain/usecases/get_status_app_intro_usecase.dart';
+import '../../../introduction/presentation/views/app_intro_page.dart';
 import '../../../settings/presentation/views/settings_view.dart';
 import '../../../topics/presentation/views/select_topic_level/select_topic_level_view.dart';
 
@@ -24,7 +28,6 @@ class _HomeViewState extends State<HomeView>
 
   @override
   void initState() {
-    super.initState();
     currentIndex = 0;
     _tabController = TabController(
       length: 3,
@@ -32,6 +35,22 @@ class _HomeViewState extends State<HomeView>
       vsync: this,
       animationDuration: const Duration(milliseconds: 300),
     );
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _checkToShowAppIntro();
+    });
+  }
+
+  _checkToShowAppIntro() async {
+    final check = await GetStatusAppIntroUseCase(
+            appIntroRepository: getIt.get<AppIntroRepository>())
+        .execute(null);
+    if (!check) {
+      if (mounted) {
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const AppIntroPage()));
+      }
+    }
   }
 
   @override

@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'base/define/storage/storage_gateway.dart';
 import 'base/temp_dio/dio_client.dart';
 import 'config/main_config.dart';
 import 'di/injection/injection.dart';
@@ -29,6 +30,8 @@ void main(List<String> args) async {
       print("completedAppInitialize");
     });
   }
+
+  await StorageGateway.init();
 
   HttpOverrides.global = MyHttpOverrides();
   // runApp(
