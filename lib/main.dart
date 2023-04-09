@@ -10,11 +10,15 @@ import 'package:flutter/services.dart';
 import 'base/define/storage/storage_gateway.dart';
 import 'base/temp_dio/dio_client.dart';
 import 'config/main_config.dart';
+import 'di/di_module.dart';
 import 'di/injection/injection.dart';
 import 'firebase_options.dart';
 import 'src/features/authentication/presentation/views/sign_in/sign_in_page.dart';
 import 'src/features/authentication/presentation/views/verify_email.dart';
 import 'src/features/home/presentation/views/home_view.dart';
+import 'src/features/introduction/domain/repositories/app_intro_repository.dart';
+import 'src/features/introduction/domain/usecases/get_status_app_intro_usecase.dart';
+import 'src/features/introduction/presentation/views/app_intro_page.dart';
 
 void main(List<String> args) async {
   await Injection.inject();
@@ -66,12 +70,27 @@ class MyWidget extends StatefulWidget {
 
 class _MyWidgetState extends State<MyWidget> {
   String _status = 'loading';
+
+  _checkToShowAppIntro() async {
+    final check = await GetStatusAppIntroUseCase(
+            appIntroRepository: getIt.get<AppIntroRepository>())
+        .execute(null);
+    if (!check) {
+      if (mounted) {
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const AppIntroPage()));
+      }
+    }
+  }
+
   @override
   void initState() {
+    _checkToShowAppIntro();
     // Right after the listener has been registered.
     // When a user is signed in.
     // When the current user is signed out.
     // When there is a change in the current user's token.
+    super.initState();
     FirebaseAuth.instance.currentUser?.reload();
     FirebaseAuth.instance.idTokenChanges().listen((user) {
       if (user == null) {
@@ -104,7 +123,6 @@ class _MyWidgetState extends State<MyWidget> {
         FirebaseAnalytics.instance.setUserId(id: user?.uid);
       }
     });
-    super.initState();
   }
 
   @override

@@ -36,21 +36,6 @@ class _HomeViewState extends State<HomeView>
       animationDuration: const Duration(milliseconds: 300),
     );
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      _checkToShowAppIntro();
-    });
-  }
-
-  _checkToShowAppIntro() async {
-    final check = await GetStatusAppIntroUseCase(
-            appIntroRepository: getIt.get<AppIntroRepository>())
-        .execute(null);
-    if (!check) {
-      if (mounted) {
-        Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const AppIntroPage()));
-      }
-    }
   }
 
   @override
