@@ -8,7 +8,7 @@ class SignUpPage extends StatelessWidget {
   const SignUpPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => BlocProvider(
+  Widget build(BuildContext context) => BlocProvider<SignUpBloc>(
         create: (context) => SignUpBloc(),
         child: const SignUpView(),
       );

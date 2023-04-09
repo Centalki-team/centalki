@@ -337,10 +337,10 @@ class SvgGenImage {
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
       theme: theme,
-      // colorFilter: colorFilter,
+      //colorFilter: colorFilter,
       color: color,
       colorBlendMode: colorBlendMode,
-      // clipBehavior: clipBehavior,
+      //clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,
     );
   }

@@ -48,6 +48,7 @@ class TextDoc {
   // UI elements
   static const txtSignIn = 'Sign In';
   static const txtSignUp = 'Sign Up';
+  static const txtNext = 'Next';
   static const txtResetPassword = 'Reset Password';
   static const txtReturnSignIn = 'Return to Sign In';
   static const txtForgotPassword = 'Forgot Password?';
@@ -247,4 +248,9 @@ class TextDoc {
   static const txtUpload = 'Upload';
   static const txtChooseFromLibrary = 'Choose from Gallery';
   static const txtTakeAPic = 'Using Camera';
+
+  //Self Review
+  static const txtSelfReviewTitle = 'Please tell us your current English level';
+  static const txtSelfReviewContent =
+      'This information will enable us to guide you better and recommend suitable contents for you';
 }
