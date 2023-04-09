@@ -100,6 +100,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
           emit(const SignUpErrorState(message: TextDoc.txtEmailUsed));
           break;
         default:
+          emit(SignUpErrorState(message: e.message ?? "Something went wrong!"));
           break;
       }
     } on DioError catch (_) {

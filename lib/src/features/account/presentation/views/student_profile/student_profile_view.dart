@@ -297,7 +297,7 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                           right: 16.0,
                           bottom: 24.0,
                         ),
-                        color: AppColor.white,
+                        color: Colors.transparent,
                         child: AppElevatedButton(
                           onPressed: state is StudentProfileChangedState &&
                                   state.forceDisabled == false
