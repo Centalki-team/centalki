@@ -1,11 +1,27 @@
 part of 'pre_intermediate_topics_bloc.dart';
 
-abstract class PreIntermediateTopicsState {
+abstract class PreIntermediateTopicsState extends Equatable {
   const PreIntermediateTopicsState();
+
+  @override
+  List<Object?> get props => [];
 }
 
 class TopicsInitState extends PreIntermediateTopicsState {
   const TopicsInitState();
+}
+
+class PreIntermediateTopicsLoadingState extends PreIntermediateTopicsState {
+  const PreIntermediateTopicsLoadingState({
+    this.showLoading = true,
+  });
+
+  final bool showLoading;
+
+  @override
+  List<Object?> get props => [
+        showLoading,
+      ];
 }
 
 class PreIntermediateTopicsLoadDoneState extends PreIntermediateTopicsState {
@@ -13,7 +29,12 @@ class PreIntermediateTopicsLoadDoneState extends PreIntermediateTopicsState {
     required this.topics,
   });
 
-  final TopicsListEntity topics;
+  final List<TopicItemEntity> topics;
+
+  @override
+  List<Object?> get props => [
+        topics,
+      ];
 }
 
 class PreIntermediateTopicsErrorState extends PreIntermediateTopicsState {
@@ -22,4 +43,9 @@ class PreIntermediateTopicsErrorState extends PreIntermediateTopicsState {
   });
 
   final AppException exception;
+
+  @override
+  List<Object?> get props => [
+        exception,
+      ];
 }

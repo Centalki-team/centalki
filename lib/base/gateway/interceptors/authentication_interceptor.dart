@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -11,8 +13,9 @@ class AuthInterceptor extends Interceptor {
       RequestOptions options, RequestInterceptorHandler handler) async {
     options.headers['Accept'] = 'application/json';
     final session = await FirebaseAuth.instance.currentUser?.getIdToken();
+    log(session ?? 'no token found');
     options.headers[accessToken] = 'Bearer $session';
-    options.headers['CustomerToken'] = session;
+    //options.headers['CustomerToken'] = session;
     super.onRequest(options, handler);
   }
 }

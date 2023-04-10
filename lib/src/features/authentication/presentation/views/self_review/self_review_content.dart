@@ -30,6 +30,12 @@ class _SelfReviewContentState extends State<SelfReviewContent> {
   ValueNotifier<SelfLevelEntity?> selectedLevel = ValueNotifier(null);
 
   @override
+  void initState() {
+    context.read<SelfReviewBloc>().add(const SelfReviewGetLevelsEvent());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) => MultiBlocListener(
         listeners: [
           BlocListener<SelfReviewBloc, SelfReviewState>(
@@ -60,7 +66,26 @@ class _SelfReviewContentState extends State<SelfReviewContent> {
                   ),
                 );
               } else if (state is SignUpSuccessState) {
+                context.read<SignUpBloc>().add(
+                    SignUpUpdateInitialLevel(initLevel: selectedLevel.value!));
+              } else if (state is SetInitialLevelDoneState ||
+                  state is SetInitialLevelErrorState) {
                 Navigator.popUntil(context, (route) => route.isFirst);
+                if (state is SetInitialLevelErrorState) {
+                  AppToast(
+                    mode: AppToastMode.error,
+                    duration: const Duration(seconds: 3),
+                    bottomOffset: 8.0,
+                    message: Text(
+                      state.exception.displayMessage,
+                      style: const TextStyle(
+                        fontSize: bodyLargeSize,
+                        fontWeight: bodyLargeWeight,
+                        color: AppColor.white,
+                      ),
+                    ),
+                  ).show(context);
+                }
               }
             },
           ),
@@ -107,8 +132,10 @@ class _SelfReviewContentState extends State<SelfReviewContent> {
                           ),
                           BlocBuilder<SelfReviewBloc, SelfReviewState>(
                               buildWhen: (previous, current) =>
-                                  current is SelfReviewGetLevelsDoneState ||
-                                  current is SelfReviewGetLevelsLoadingState,
+                                  current != previous &&
+                                  (current is SelfReviewGetLevelsDoneState ||
+                                      current
+                                          is SelfReviewGetLevelsLoadingState),
                               builder: (context, state) {
                                 if (state is SelfReviewGetLevelsDoneState) {
                                   var levels = state.levels;

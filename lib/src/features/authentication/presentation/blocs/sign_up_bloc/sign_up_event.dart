@@ -35,3 +35,11 @@ class SignUpSubmitEvent extends SignUpEvent {
   final String email;
   final String password;
 }
+
+class SignUpUpdateInitialLevel extends SignUpEvent {
+  const SignUpUpdateInitialLevel({
+    required this.initLevel,
+  });
+
+  final SelfLevelEntity initLevel;
+}

@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../base/gateway/exception/app_exception.dart';
@@ -28,7 +31,9 @@ class PreIntermediateTopicsBloc
   }
 
   void _onLoad(PreIntermediateTopicsLoadEvent event, emit) async {
+    emit(const PreIntermediateTopicsLoadingState());
     final topics = await getTopicsUseCase(null);
+    emit(const PreIntermediateTopicsLoadingState(showLoading: false));
     topics.fold(
       (l) => emit(
         PreIntermediateTopicsErrorState(

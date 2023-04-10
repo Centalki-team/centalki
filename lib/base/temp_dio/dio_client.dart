@@ -43,11 +43,13 @@ class DioClient {
   //     _dio.post("$baseUrl/auth/validate-role",
   //         data: {"idToken": idToken, "role": "STUDENT"});
 
-  static Future<TopicsListEntity> getTopicList() async {
+  static Future<List<TopicItemEntity>> getTopicList() async {
     final response = await _dio.get(
       "$baseUrl/topic",
     );
-    return TopicsListBaseModel.fromJson(response.data);
+    return (response.data['data'] as List)
+        .map((e) => TopicItemBaseModel.fromJson(e as Map<String, dynamic>))
+        .toList();
   }
 
   static Future<TopicDetailEntity> getTopicDetailById(String topicId) async {

@@ -18,7 +18,7 @@ class SelfReviewRepositoryImpl extends SelfReviewRepository {
       final result = await _selfReviewRemoteDatasource.getLevelLists();
       return Right(result);
     } on AppException catch (s) {
-      return Left(AppException(error: s));
+      return Left(s);
     } catch (e) {
       return Left(AppException(error: e));
     }

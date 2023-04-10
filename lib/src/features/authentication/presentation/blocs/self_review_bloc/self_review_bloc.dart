@@ -7,6 +7,7 @@ import '../../../data/datasources/remote_data/self_review_remote_datasrc/models/
 import '../../../domain/entities/self_review/self_level_entity.dart';
 import '../../../domain/repositories/self_review_repo/self_review_repository.dart';
 import '../../../domain/usecases/self_review_usecases/get_levels_usecase.dart';
+import '../../../domain/usecases/sign_up_usecase/params/set_initial_level_params.dart';
 
 part 'self_review_event.dart';
 part 'self_review_state.dart';
@@ -22,16 +23,17 @@ class SelfReviewBloc extends Bloc<SelfReviewEvent, SelfReviewState> {
   _onGetLevels(SelfReviewGetLevelsEvent event, emit) async {
     emit(const SelfReviewGetLevelsLoadingState());
     final res = await _getLevelsUseCase(null);
-    await emit(const SelfReviewGetLevelsLoadingState(showLoading: false));
+    emit(const SelfReviewGetLevelsLoadingState(showLoading: false));
     res.fold(
       (l) => emit(SelfReviewErrorState(
         exception: l,
       )),
       (r) => emit(SelfReviewGetLevelsDoneState(
         levels: r
-          ..add(
-              const SelfLevelModel('', '', "I don't know which level I am at"))
-          ..add(const SelfLevelModel('', '', "I prefer not to tell")),
+          ..add(const SelfLevelModel('', '', "I don't know which level I am at",
+              LevelTypeEnum.unknown))
+          ..add(const SelfLevelModel(
+              '', '', "I prefer not to tell", LevelTypeEnum.notShare)),
       )),
     );
   }

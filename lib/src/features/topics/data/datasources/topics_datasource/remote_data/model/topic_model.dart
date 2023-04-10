@@ -5,23 +5,6 @@ import '../../../../../domain/entities/topic_item_entity.dart';
 part 'topic_model.g.dart';
 
 @JsonSerializable()
-class TopicsListBaseModel extends TopicsListEntity {
-  const TopicsListBaseModel({
-    this.data,
-  }) : super(
-          topics: data,
-        );
-
-  @JsonKey(defaultValue: [])
-  final List<TopicItemBaseModel>? data;
-
-  static TopicsListBaseModel fromJson(Map<String, dynamic> json) =>
-      _$TopicsListBaseModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$TopicsListBaseModelToJson(this);
-}
-
-@JsonSerializable()
 class TopicItemBaseModel extends TopicItemEntity {
   TopicItemBaseModel({
     this.id,

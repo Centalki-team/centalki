@@ -9,10 +9,7 @@ class PreIntermediateTopicPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocProvider(
-      create: (context) => PreIntermediateTopicsBloc()
-        ..add(
-          const PreIntermediateTopicsLoadEvent(),
-        ),
-      child: const PreIntermediateTopicView(),
-    );
+        create: (context) => PreIntermediateTopicsBloc(),
+        child: const PreIntermediateTopicView(),
+      );
 }
