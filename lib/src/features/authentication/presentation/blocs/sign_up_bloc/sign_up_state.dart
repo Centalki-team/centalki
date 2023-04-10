@@ -12,7 +12,16 @@ class SignUpInitState extends SignUpState {
 }
 
 class SignUpLoadingState extends SignUpState {
-  const SignUpLoadingState();
+  const SignUpLoadingState({
+    this.showLoading = true,
+  });
+
+  final bool showLoading;
+
+  @override
+  List<Object?> get props => [
+        showLoading,
+      ];
 }
 
 class SignUpSuccessState extends SignUpState {

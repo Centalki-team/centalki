@@ -42,7 +42,7 @@ class PreIntermediateTopicsBloc
       ),
       (r) => emit(
         PreIntermediateTopicsLoadDoneState(
-          topics: r,
+          topics: r.topics ?? [],
         ),
       ),
     );

@@ -6,6 +6,21 @@ part of 'topic_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+TopicsListBaseModel _$TopicsListBaseModelFromJson(Map<String, dynamic> json) =>
+    TopicsListBaseModel(
+      data: (json['data'] as List<dynamic>?)
+              ?.map(
+                  (e) => TopicItemBaseModel.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$TopicsListBaseModelToJson(
+        TopicsListBaseModel instance) =>
+    <String, dynamic>{
+      'data': instance.data,
+    };
+
 TopicItemBaseModel _$TopicItemBaseModelFromJson(Map<String, dynamic> json) =>
     TopicItemBaseModel(
       id: json['id'] as String?,

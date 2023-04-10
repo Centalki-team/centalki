@@ -1,3 +1,11 @@
+class TopicsListEntity {
+  const TopicsListEntity({
+    this.topics = const [],
+  });
+
+  final List<TopicItemEntity>? topics;
+}
+
 class TopicItemEntity {
   const TopicItemEntity({
     this.topicId = '',
