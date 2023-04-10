@@ -91,7 +91,6 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
 
   void _onSubmit(SignUpSubmitEvent event, emit) async {
     emit(const SignUpLoadingState());
-
     try {
       final credential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -126,6 +125,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       initialLevelType: event.initLevel.levelType,
     ));
     emit(const SetInitLevelLoadingState(showLoading: false));
+    emit(const SignUpLoadingState(showLoading: false));
     res.fold(
       (l) => emit(SetInitialLevelErrorState(
         exception: l,

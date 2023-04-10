@@ -4,5 +4,5 @@ import '../../../../../base/gateway/exception/app_exception.dart';
 import '../entities/topic_item_entity.dart';
 
 abstract class TopicRepository {
-  Future<Either<AppException, List<TopicItemEntity>>> getTopics();
+  Future<Either<AppException, TopicsListEntity>> getTopics();
 }

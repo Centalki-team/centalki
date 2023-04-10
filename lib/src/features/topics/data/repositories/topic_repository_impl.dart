@@ -13,7 +13,7 @@ class TopicRepositoryImpl extends TopicRepository {
       getIt.get<TopicRemoteDatasource>();
 
   @override
-  Future<Either<AppException, List<TopicItemEntity>>> getTopics() async {
+  Future<Either<AppException, TopicsListEntity>> getTopics() async {
     try {
       final result = await topicRemoteDatasource.getTopics();
       return Right(result);

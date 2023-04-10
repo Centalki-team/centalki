@@ -159,15 +159,28 @@ class _SelfReviewContentState extends State<SelfReviewContent> {
                           const SizedBox(
                             height: spacing40,
                           ),
-                          ValueListenableBuilder<SelfLevelEntity?>(
-                              valueListenable: selectedLevel,
-                              builder: (_, value, __) => AppFilledButton(
-                                    text: AppText.txtSignUp,
-                                    minimumSize: const Size.fromHeight(40),
-                                    onPressed: selectedLevel.value != null
-                                        ? () => widget.onSignUp.call()
-                                        : null,
-                                  )),
+                          BlocBuilder<SignUpBloc, SignUpState>(
+                            buildWhen: (previous, current) =>
+                                current != previous &&
+                                current is SignUpLoadingState,
+                            builder: (context, state) {
+                              if (state is SignUpLoadingState &&
+                                  state.showLoading) {
+                                return const Center(
+                                  child: CupertinoActivityIndicator(),
+                                );
+                              }
+                              return ValueListenableBuilder<SelfLevelEntity?>(
+                                  valueListenable: selectedLevel,
+                                  builder: (_, value, __) => AppFilledButton(
+                                        text: AppText.txtSignUp,
+                                        minimumSize: const Size.fromHeight(40),
+                                        onPressed: selectedLevel.value != null
+                                            ? () => widget.onSignUp.call()
+                                            : null,
+                                      ));
+                            },
+                          ),
                           const SizedBox(
                             height: spacing8,
                           ),

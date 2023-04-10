@@ -6,7 +6,7 @@ import '../entities/topic_item_entity.dart';
 import '../repositories/topic_repository.dart';
 
 class GetTopicsUseCase
-    with UseCase<void, Either<AppException, List<TopicItemEntity>>> {
+    with UseCase<void, Either<AppException, TopicsListEntity>> {
   const GetTopicsUseCase({
     required this.topicRepository,
   });
@@ -14,6 +14,6 @@ class GetTopicsUseCase
   final TopicRepository topicRepository;
 
   @override
-  Future<Either<AppException, List<TopicItemEntity>>> execute(void params) =>
+  Future<Either<AppException, TopicsListEntity>> execute(void params) =>
       topicRepository.getTopics();
 }
