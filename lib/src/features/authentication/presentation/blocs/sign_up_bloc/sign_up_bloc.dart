@@ -1,9 +1,16 @@
 import 'package:dio/dio.dart';
+import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../base/define/text.dart';
+import '../../../../../../base/gateway/exception/app_exception.dart';
 import '../../../../../../base/temp_dio/dio_client.dart';
+import '../../../../../../di/di_module.dart';
+import '../../../domain/entities/self_review/self_level_entity.dart';
+import '../../../domain/repositories/sign_up_repo/sign_up_repository.dart';
+import '../../../domain/usecases/sign_up_usecase/params/set_initial_level_params.dart';
+import '../../../domain/usecases/sign_up_usecase/set_initial_level_usecase.dart';
 
 part 'sign_up_event.dart';
 
@@ -14,7 +21,11 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     on<SignUpInitEvent>(_onInit);
     on<SignUpValidateEvent>(_onValidate);
     on<SignUpSubmitEvent>(_onSubmit);
+    on<SignUpUpdateInitialLevel>(_onUpdateInitLevel);
   }
+
+  final SetInitialLevelUseCase _setInitialLevelUseCase =
+      SetInitialLevelUseCase(signUpRepository: getIt.get<SignUpRepository>());
 
   void _onInit(SignUpInitEvent event, emit) {}
 
@@ -87,7 +98,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         email: event.email.trim(),
         password: event.password.trim(),
       );
-      credential.user
+      await credential.user
           ?.getIdToken()
           .then((id) => DioClient.assignRole(id, event.fullname));
       emit(const SignUpSuccessState());
@@ -106,5 +117,20 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     } on DioError catch (_) {
       emit(const SignUpErrorState(message: TextDoc.txtNotValidateRole));
     }
+  }
+
+  _onUpdateInitLevel(SignUpUpdateInitialLevel event, emit) async {
+    emit(const SetInitLevelLoadingState());
+    final res = await _setInitialLevelUseCase(SetInitialLevelUseCaseParams(
+      initialLevelId: event.initLevel.id.isNotEmpty ? event.initLevel.id : null,
+      initialLevelType: event.initLevel.levelType,
+    ));
+    emit(const SetInitLevelLoadingState(showLoading: false));
+    res.fold(
+      (l) => emit(SetInitialLevelErrorState(
+        exception: l,
+      )),
+      (r) => emit(const SetInitialLevelDoneState()),
+    );
   }
 }

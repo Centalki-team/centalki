@@ -14,8 +14,7 @@ class SelfReviewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocProvider<SelfReviewBloc>(
-        create: (context) =>
-            SelfReviewBloc()..add(const SelfReviewGetLevelsEvent()),
+        create: (context) => SelfReviewBloc(),
         child: SelfReviewContent(
           onSignUp: onSignUp,
         ),

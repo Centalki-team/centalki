@@ -1,5 +1,3 @@
-import 'package:dio/dio.dart';
-
 import '../../../../../../../base/gateway/api_gateway.base.dart';
 import '../../../../../../../config/app_config.dart';
 import 'model/topic_model.dart';
@@ -13,11 +11,13 @@ class TopicRemoteDatasource {
     apiType: ApiType.public,
   );
 
-  Future<TopicsListBaseModel> getTopics() async {
+  Future<List<TopicItemBaseModel>> getTopics() async {
     final response = await apiGateway.execute(
       resource: const TopicResource(),
       method: HTTPMethod.get,
     );
-    return TopicsListBaseModel.fromJson(response.data);
+    return (response.data['data'] as List)
+        .map((e) => TopicItemBaseModel.fromJson(Map<String, dynamic>.from(e)))
+        .toList();
   }
 }

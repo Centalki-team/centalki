@@ -47,7 +47,7 @@ class StudentProfileBloc
         user.userProfile?.accountEnglishName ?? '',
         user.userProfile?.accountBio ?? '',
         selectedInterestedTopics,
-        topics.topics ?? [],
+        topics,
       ));
     } on Exception catch (_) {
       emit(const StudentProfileLoadingState(showLoading: false));

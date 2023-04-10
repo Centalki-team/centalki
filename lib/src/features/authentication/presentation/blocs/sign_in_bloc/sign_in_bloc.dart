@@ -113,6 +113,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       if (idToken != null) {
         await DioClient.assignRole(idToken, null);
       }
+      emit(const SignInLoadDoneState());
     } on DioError catch (_) {
       emit(const SignInLoadDoneState());
     }
@@ -129,9 +130,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       final idToken = await userCredential.user?.getIdToken();
       if (idToken != null) {
         await DioClient.assignRole(idToken, null);
-      } else {
-        emit(const SignInLoadDoneState());
       }
+      emit(const SignInLoadDoneState());
     } catch (_) {
       emit(const SignInLoadDoneState());
     }

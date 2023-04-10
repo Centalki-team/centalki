@@ -67,12 +67,12 @@ class ApiGateway {
   final ApiType apiType;
   //final TokenLocalDatasource _tokenLocalDatasource;
   final List<Interceptor>? interceptors;
-  final aliceInterceptor = Alice(
-    showInspectorOnShake: true,
-    darkTheme: false,
-    showNotification: true,
-    //navigatorKey: NavigationBase.navKey,
-  ).getDioInterceptor();
+  // final aliceInterceptor = Alice(
+  //   showInspectorOnShake: true,
+  //   darkTheme: false,
+  //   showNotification: true,
+  //   //navigatorKey: NavigationBase.navKey,
+  // ).getDioInterceptor();
 
   late Dio _dioInstance;
 
@@ -97,24 +97,24 @@ class ApiGateway {
       case ApiType.public:
         if (interceptors == null) {
           _dioInstance.interceptors.addAll([
+            DefaultErrorHandlerInterceptor(),
             DefaultResponseHandlerInterceptor(),
-            DefaultErrorHandlerInterceptor()
           ]);
         }
-        _dioInstance.interceptors.addAll([
-          aliceInterceptor,
-        ]);
+        // _dioInstance.interceptors.addAll([
+        //   aliceInterceptor,
+        // ]);
         break;
       case ApiType.user:
         if (interceptors == null) {
           _dioInstance.interceptors.addAll([
-            DefaultResponseHandlerInterceptor(),
+            //DefaultResponseHandlerInterceptor(),
             DefaultErrorHandlerInterceptor()
           ]);
         }
         _dioInstance.interceptors.addAll([
           AuthInterceptor(),
-          aliceInterceptor,
+          //aliceInterceptor,
           //RefreshTokenInterceptor(_dioInstance, _tokenLocalDatasource),
         ]);
         break;
@@ -129,17 +129,16 @@ class ApiGateway {
     Function(int, int)? onSendProgress,
     Function(int, int)? onReceivedProgress,
     Options? options,
-  }) {
-    return _dioInstance.fetch(RequestOptions(
-      method: method.mapToString,
-      baseUrl: endpoint,
-      path: resource.path,
-      queryParameters: params,
-      data: data,
-      onSendProgress: onSendProgress,
-      onReceiveProgress: onReceivedProgress,
-    ));
-  }
+  }) =>
+      _dioInstance.fetch(RequestOptions(
+        method: method.mapToString,
+        baseUrl: endpoint,
+        path: resource.path,
+        queryParameters: params,
+        data: data,
+        onSendProgress: onSendProgress,
+        onReceiveProgress: onReceivedProgress,
+      ));
 
   Future<Response> execute({
     required Resource resource,

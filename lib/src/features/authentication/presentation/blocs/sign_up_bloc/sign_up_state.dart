@@ -1,7 +1,10 @@
 part of 'sign_up_bloc.dart';
 
-abstract class SignUpState {
+abstract class SignUpState extends Equatable {
   const SignUpState();
+
+  @override
+  List<Object?> get props => [];
 }
 
 class SignUpInitState extends SignUpState {
@@ -22,6 +25,11 @@ class SignUpErrorState extends SignUpState {
   });
 
   final String message;
+
+  @override
+  List<Object?> get props => [
+        message,
+      ];
 }
 
 class SignUpValidateState extends SignUpState {
@@ -40,4 +48,44 @@ class SignUpValidateState extends SignUpState {
   final String retypePasswordError;
   final String termsError;
   final bool forceDisabled;
+
+  @override
+  List<Object?> get props => [
+        fullnameError,
+        emailError,
+        passwordError,
+        retypePasswordError,
+        termsError,
+        forceDisabled,
+      ];
+}
+
+class SetInitLevelLoadingState extends SignUpState {
+  const SetInitLevelLoadingState({
+    this.showLoading = true,
+  });
+
+  final bool showLoading;
+
+  @override
+  List<Object?> get props => [
+        showLoading,
+      ];
+}
+
+class SetInitialLevelDoneState extends SignUpState {
+  const SetInitialLevelDoneState();
+}
+
+class SetInitialLevelErrorState extends SignUpState {
+  const SetInitialLevelErrorState({
+    required this.exception,
+  });
+
+  final AppException exception;
+
+  @override
+  List<Object?> get props => [
+        exception,
+      ];
 }

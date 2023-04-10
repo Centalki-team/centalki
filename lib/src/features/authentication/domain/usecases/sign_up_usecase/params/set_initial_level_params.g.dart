@@ -1,18 +1,17 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'self_level_model.dart';
+part of 'set_initial_level_params.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-SelfLevelModel _$SelfLevelModelFromJson(Map<String, dynamic> json) =>
-    SelfLevelModel(
-      json['id'] as String?,
-      json['code'] as String?,
-      json['name'] as String?,
-      $enumDecodeNullable(_$LevelTypeEnumEnumMap, json['typeForEntity']),
-    );
+Map<String, dynamic> _$SetInitialLevelUseCaseParamsToJson(
+        SetInitialLevelUseCaseParams instance) =>
+    <String, dynamic>{
+      'initialLevelId': instance.initialLevelId,
+      'initialLevelType': _$LevelTypeEnumEnumMap[instance.initialLevelType]!,
+    };
 
 const _$LevelTypeEnumEnumMap = {
   LevelTypeEnum.specific: 'SPECIFIC',
