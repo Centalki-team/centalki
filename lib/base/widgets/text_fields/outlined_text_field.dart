@@ -7,18 +7,19 @@ class AppOutlinedTextField extends StatefulWidget {
     Key? key,
     required this.controller,
     this.textInputType,
-    this.obscureText,
+    this.obscureText = false,
     this.labelText,
     this.errorText,
     this.icon,
     this.suffixIcon,
     this.onChanged,
     this.maxLines = 1,
-  }) : super(key: key);
+  })  : assert(!(obscureText && suffixIcon != null)),
+        super(key: key);
 
   final TextEditingController controller;
   final TextInputType? textInputType;
-  final bool? obscureText;
+  final bool obscureText;
   final String? labelText;
   final String? errorText;
   final IconData? icon;
@@ -31,11 +32,19 @@ class AppOutlinedTextField extends StatefulWidget {
 }
 
 class _AppOutlinedTextFieldState extends State<AppOutlinedTextField> {
+  late bool _obscureText;
+
+  @override
+  void initState() {
+    _obscureText = widget.obscureText;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) => TextField(
         maxLines: widget.maxLines,
         controller: widget.controller,
-        obscureText: widget.obscureText ?? false,
+        obscureText: _obscureText,
         cursorColor: AppColor.mainColor2,
         keyboardType: widget.textInputType,
         onChanged: widget.onChanged,
@@ -47,12 +56,15 @@ class _AppOutlinedTextFieldState extends State<AppOutlinedTextField> {
         decoration: InputDecoration(
           labelText: widget.labelText,
           labelStyle: TextStyle(
-            color: widget.errorText == null ? AppColor.defaultFont : AppColor.error,
+            color: widget.errorText == null
+                ? AppColor.defaultFont
+                : AppColor.error,
             fontSize: bodyLargeSize,
             fontWeight: bodyLargeWeight,
           ),
           floatingLabelStyle: TextStyle(
-            color: widget.errorText == null ? AppColor.mainColor2 : AppColor.error,
+            color:
+                widget.errorText == null ? AppColor.mainColor2 : AppColor.error,
           ),
           errorText: widget.errorText,
           errorMaxLines: 2,
@@ -68,14 +80,29 @@ class _AppOutlinedTextFieldState extends State<AppOutlinedTextField> {
                   size: 24,
                 ),
           iconColor: widget.icon == null ? null : AppColor.defaultFont,
-          suffixIcon: widget.suffixIcon == null
-              ? null
-              : Icon(
-                  widget.suffixIcon!,
-                  size: 24,
-                ),
-          suffixIconColor: widget.suffixIcon == null ? null : AppColor.defaultFont,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          suffixIcon: widget.obscureText
+              ? GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _obscureText = !_obscureText;
+                    });
+                  },
+                  child: Icon(
+                    _obscureText ? Icons.visibility : Icons.visibility_off,
+                    size: 24,
+                    color: const Color(0xFF9D9DAD),
+                  ),
+                )
+              : (widget.suffixIcon == null
+                  ? null
+                  : Icon(
+                      widget.suffixIcon!,
+                      size: 24,
+                    )),
+          suffixIconColor:
+              widget.suffixIcon == null ? null : AppColor.defaultFont,
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           enabledBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(radius8)),
             borderSide: BorderSide(
@@ -86,7 +113,8 @@ class _AppOutlinedTextFieldState extends State<AppOutlinedTextField> {
           disabledBorder: OutlineInputBorder(
             borderRadius: const BorderRadius.all(Radius.circular(radius8)),
             borderSide: BorderSide(
-              color: AppColor.background.withOpacity(disabledOutlineOpacityOutlinedTextField),
+              color: AppColor.background
+                  .withOpacity(disabledOutlineOpacityOutlinedTextField),
               width: disabledOutlineWidthTextField,
             ),
           ),
@@ -99,7 +127,8 @@ class _AppOutlinedTextFieldState extends State<AppOutlinedTextField> {
           ),
           errorBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(radius8)),
-            borderSide: BorderSide(color: AppColor.error, width: errorOutlineWidthTextField / 2),
+            borderSide: BorderSide(
+                color: AppColor.error, width: errorOutlineWidthTextField / 2),
           ),
           focusedErrorBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(radius8)),
