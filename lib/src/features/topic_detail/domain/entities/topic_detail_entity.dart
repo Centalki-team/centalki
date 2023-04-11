@@ -21,9 +21,10 @@ class TopicDetailEntity {
 }
 
 class TopicQuestionEntity {
-  const TopicQuestionEntity({this.questionContent});
+  const TopicQuestionEntity({this.questionContent, this.topicAnswers});
 
   final String? questionContent;
+  final List<QuestionAnswerEntity>? topicAnswers;
 }
 
 class TopicPhraseEntity {
@@ -38,6 +39,12 @@ class TopicPhraseEntity {
   final String? phrasePhonetic;
   final List<PhraseTranslationEntity>? phraseTranslations;
   final List<PhraseExampleEntity>? phraseExamples;
+}
+
+class QuestionAnswerEntity {
+  const QuestionAnswerEntity({this.questionAnswer});
+
+  final String? questionAnswer;
 }
 
 class PhraseExampleEntity {

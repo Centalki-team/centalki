@@ -73,7 +73,8 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+                    padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).padding.top),
                     child: IconButton(
                       padding: EdgeInsets.zero,
                       constraints: const BoxConstraints(),
@@ -104,7 +105,8 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                             Align(
                               alignment: Alignment.center,
                               child: Text(
-                                state.topicDetail.topicName ?? 'null name. Someone must be joking here',
+                                state.topicDetail.topicName ??
+                                    'null name. Someone must be joking here',
                                 style: const TextStyle(
                                   fontSize: headlineSmallSize,
                                   fontWeight: headlineSmallWeight,
@@ -119,8 +121,10 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                 children: [
                                   Expanded(
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
                                       children: [
                                         const Text(
                                           TextDoc.txtTopicCategory,
@@ -132,7 +136,8 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                         ),
                                         Expanded(
                                           child: Text(
-                                            state.topicDetail.topicCategory ?? 'null. This topic is out of this world',
+                                            state.topicDetail.topicCategory ??
+                                                'null. This topic is out of this world',
                                             style: const TextStyle(
                                               height: 0.9,
                                               fontSize: bodySmallSize,
@@ -158,8 +163,10 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                   const SizedBox(width: spacing10),
                                   Expanded(
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         const Text(
                                           TextDoc.txtTopicLevel,
@@ -171,7 +178,8 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                         ),
                                         Expanded(
                                           child: Text(
-                                            state.topicDetail.topicLevel ?? 'null. This topic is for Einstein',
+                                            state.topicDetail.topicLevel ??
+                                                'null. This topic is for Einstein',
                                             style: const TextStyle(
                                               height: 0.9,
                                               fontSize: bodySmallSize,
@@ -189,7 +197,8 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                             ),
                             const SizedBox(height: spacing20),
                             Text(
-                              state.topicDetail.topicDescription ?? 'null. This topic is about nothing',
+                              state.topicDetail.topicDescription ??
+                                  'null. This topic is about nothing',
                               style: const TextStyle(
                                 height: 1.15,
                                 fontSize: bodyLargeSize,
@@ -210,15 +219,18 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                               physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               padding: const EdgeInsets.all(0.0),
-                              itemCount: state.topicDetail.topicPhrases?.length ?? 0,
+                              itemCount:
+                                  state.topicDetail.topicPhrases?.length ?? 0,
                               itemBuilder: (context, index) {
-                                final phrase = state.topicDetail.topicPhrases?[index];
+                                final phrase =
+                                    state.topicDetail.topicPhrases?[index];
                                 if (phrase == null) {
                                   return const Text('Null Phrase');
                                 }
                                 return PhraseCard(phraseEntity: phrase);
                               },
-                              separatorBuilder: (context, index) => const SizedBox(
+                              separatorBuilder: (context, index) =>
+                                  const SizedBox(
                                 height: spacing20,
                               ),
                             ),
@@ -236,15 +248,22 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                               physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               padding: const EdgeInsets.all(0.0),
-                              itemCount: state.topicDetail.topicQuestions?.length ?? 0,
+                              itemCount:
+                                  state.topicDetail.topicQuestions?.length ?? 0,
                               itemBuilder: (context, index) {
-                                final questionContent = state.topicDetail.topicQuestions?[index].questionContent;
+                                final questionContent = state.topicDetail
+                                    .topicQuestions?[index].questionContent;
+                                final answers = state.topicDetail
+                                    .topicQuestions?[index].topicAnswers;
                                 return QuestionCard(
                                   index: index,
-                                  questionContent: questionContent ?? 'null question',
+                                  questionContent:
+                                      questionContent ?? 'null question',
+                                  answers: answers ?? [],
                                 );
                               },
-                              separatorBuilder: (context, index) => const SizedBox(
+                              separatorBuilder: (context, index) =>
+                                  const SizedBox(
                                 height: spacing16,
                               ),
                             )

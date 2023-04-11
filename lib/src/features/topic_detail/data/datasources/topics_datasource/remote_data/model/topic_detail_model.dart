@@ -81,17 +81,33 @@ class TopicQuestionModel extends TopicQuestionEntity {
   const TopicQuestionModel({
     this.id,
     this.question,
+    this.answers,
     this.topicId,
-  }) : super(questionContent: question);
+  }) : super(questionContent: question, topicAnswers: answers);
 
   final String? id;
   final String? question;
+  final List<QuestionAnswerModel>? answers;
   final String? topicId;
 
   factory TopicQuestionModel.fromJson(Map<String, dynamic> json) =>
       _$TopicQuestionModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$TopicQuestionModelToJson(this);
+}
+
+@JsonSerializable()
+class QuestionAnswerModel extends QuestionAnswerEntity {
+  QuestionAnswerModel({
+    this.answer,
+  }) : super(questionAnswer: answer);
+
+  final String? answer;
+
+  factory QuestionAnswerModel.fromJson(Map<String, dynamic> json) =>
+      _$QuestionAnswerModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$QuestionAnswerModelToJson(this);
 }
 
 @JsonSerializable()

@@ -69,6 +69,7 @@ class TextDoc {
   static const txtTopicVocab = 'Vocabulary';
   static const txtTopicQuestions = 'Recommended Questions';
   static const txtTopicPhraseExample = 'Example';
+  static const txtTopicAnswers = 'Answers';
 
   // CONNECT TEACHER
   static const txtCancel = 'Cancel';
