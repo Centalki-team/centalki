@@ -254,4 +254,10 @@ class TextDoc {
   static const txtSelfReviewTitle = 'Please tell us your current English level';
   static const txtSelfReviewContent =
       'This information will enable us to guide you better and recommend suitable contents for you';
+
+  // Remove favorite
+  static const txtRemove = "Remove";
+  static const txtConfirmRemoveFavoriteTitle = "Remove from Favorite";
+  static const txtConfirmRemoveFavoriteContent =
+      "Are you sure to remove this from your favorite topics? You can still add them back later.";
 }

@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../../base/define/styles.dart';
 import '../../../../../base/temp_dio/dio_client.dart';
+import '../../../../../base/widgets/buttons/text_button.dart';
 import '../../../topic_detail/presentation/views/topic_detail_page.dart';
 import '../../domain/entities/topic_item_entity.dart';
 
@@ -142,10 +143,61 @@ class _TopicCardState extends State<TopicCard> {
               Container(
                 margin: const EdgeInsets.only(top: spacing12, right: spacing12),
                 child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      isFavorite = !isFavorite;
-                    });
+                  onTap: () async {
+                    if (isFavorite) {
+                      final confirmedRemove = await showDialog(
+                        barrierDismissible: false,
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          backgroundColor: AppColor.white,
+                          title: const Text(
+                            TextDoc.txtConfirmRemoveFavoriteTitle,
+                            style: TextStyle(
+                              fontSize: titleLargeSize,
+                              fontWeight: titleLargeWeight,
+                              color: AppColor.defaultFont,
+                            ),
+                          ),
+                          content: const Text(
+                            TextDoc.txtConfirmRemoveFavoriteContent,
+                            style: TextStyle(
+                              fontSize: bodySmallSize,
+                              fontWeight: bodySmallWeight,
+                              color: AppColor.defaultFont,
+                            ),
+                          ),
+                          actions: [
+                            AppTextButton(
+                              text: TextDoc.txtCancel,
+                              onPressed: () => Navigator.pop(context, false),
+                            ),
+                            ElevatedButton(
+                              onPressed: () => Navigator.pop(context, true),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColor.error,
+                                foregroundColor: Colors.white,
+                              ),
+                              child: const Text(
+                                TextDoc.txtRemove,
+                                style: TextStyle(
+                                  fontSize: labelLargeSize,
+                                  fontWeight: labelLargeWeight,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ).then((value) => value ?? false);
+                      if (confirmedRemove) {
+                        setState(() {
+                          isFavorite = false;
+                        });
+                      }
+                    } else {
+                      setState(() {
+                        isFavorite = true;
+                      });
+                    }
                   },
                   child: !isFavorite
                       ? SvgPicture.asset(
