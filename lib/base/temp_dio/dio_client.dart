@@ -50,10 +50,10 @@ class DioClient {
     return TopicsListBaseModel.fromJson(response.data);
   }
 
-  static Future<TopicDetailEntity> getTopicDetailById(String topicId) async {
-    final response = await _dio.get(
-      "$baseUrl/topic/$topicId",
-    );
+  static Future<TopicDetailEntity> getTopicDetailById(
+      String topicId, String idToken) async {
+    final response = await _dio.get("$baseUrl/topic/$topicId",
+        options: Options(headers: {'Authorization': idToken}));
 
     if (response.statusCode != 200) {
       throw Exception(

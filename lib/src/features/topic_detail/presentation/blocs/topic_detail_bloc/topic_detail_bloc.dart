@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,10 +20,15 @@ class TopicDetailBloc extends Bloc<TopicDetailEvent, TopicDetailState> {
 
   void _onLoad(TopicDetailLoadEvent event, emit) async {
     try {
-      final topicDetail = await DioClient.getTopicDetailById(event.topicId);
+      final topicDetail = await FirebaseAuth.instance.currentUser
+              ?.getIdToken()
+              .then((token) =>
+                  DioClient.getTopicDetailById(event.topicId, token)) ??
+          const TopicDetailEntity();
       emit(TopicDetailLoadDoneState(topicDetail: topicDetail));
     } on Exception catch (e) {
-      emit(TopicDetailLoadFailedState(errorMessage: e.toString().substring(11)));
+      emit(
+          TopicDetailLoadFailedState(errorMessage: e.toString().substring(11)));
     }
   }
 }
