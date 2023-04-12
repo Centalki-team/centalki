@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../../base/define/styles.dart';
 import '../../../../../base/widgets/buttons/button.dart';
@@ -16,6 +17,8 @@ class TopicDetailView extends StatefulWidget {
 }
 
 class _TopicDetailViewState extends State<TopicDetailView> {
+  bool isFavorite = false;
+
   @override
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: Colors.white,
@@ -29,17 +32,53 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                   right: 16.0,
                   bottom: 24.0,
                 ),
-                child: AppElevatedButton(
-                  text: TextDoc.txtTalk,
-                  minimumSize: const Size.fromHeight(48),
-                  onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ConnectTeacherPage(
-                        topicId: state.topicDetail.topicId ?? '',
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: AppElevatedButton(
+                        text: TextDoc.txtTalk,
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ConnectTeacherPage(
+                              topicId: state.topicDetail.topicId ?? '',
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    Container(
+                      width: 40,
+                      height: 40,
+                      margin: const EdgeInsets.only(left: spacing8),
+                      padding: const EdgeInsets.all(padding8),
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(radius12)),
+                        border: Border.all(
+                            width: isFavorite ? 2.0 : 1.0,
+                            color: isFavorite
+                                ? const Color(0xFFFF6363)
+                                : const Color(0xFF9D9DAD)),
+                      ),
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            isFavorite = !isFavorite;
+                          });
+                        },
+                        child: !isFavorite
+                            ? SvgPicture.asset(
+                                "assets/icon/ic_heart.svg",
+                                color: const Color(0xFF9D9DAD),
+                              )
+                            : SvgPicture.asset(
+                                "assets/icon/ic_heart_fill.svg",
+                                color: const Color(0xFFFF6363),
+                              ),
+                      ),
+                    ),
+                  ],
                 ),
               );
             }
