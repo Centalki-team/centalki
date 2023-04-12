@@ -1,23 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../../base/define/styles.dart';
+import '../../../../../base/temp_dio/dio_client.dart';
 import '../../../topic_detail/presentation/views/topic_detail_page.dart';
 import '../../domain/entities/topic_item_entity.dart';
 
-class TopicCard extends StatelessWidget {
+class TopicCard extends StatefulWidget {
   const TopicCard({
     Key? key,
     required this.item,
+    required this.isFavorite,
   }) : super(key: key);
 
   final TopicItemEntity item;
+  final bool isFavorite;
+
+  @override
+  State<TopicCard> createState() => _TopicCardState();
+}
+
+class _TopicCardState extends State<TopicCard> {
+  bool isFavorite = false;
+
+  @override
+  void initState() {
+    setState(() {
+      isFavorite = widget.isFavorite;
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) => GestureDetector(
         onTap: () => Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => TopicDetailPage(
-              topicId: item.topicId ?? '',
+              topicId: widget.item.topicId ?? '',
             ),
           ),
         ),
@@ -39,7 +58,7 @@ class TopicCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image.network(
-                item.image ?? '',
+                widget.item.image ?? '',
                 width: 150,
                 height: 120,
                 fit: BoxFit.cover,
@@ -60,7 +79,7 @@ class TopicCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        item.topicCategory ?? '',
+                        widget.item.topicCategory ?? '',
                         style: const TextStyle(
                           fontSize: bodySmallSize,
                           fontWeight: bodySmallWeight,
@@ -68,7 +87,7 @@ class TopicCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        item.topicName ?? '',
+                        widget.item.topicName ?? '',
                         style: const TextStyle(
                           fontSize: titleMediumSize,
                           fontWeight: titleMediumWeight,
@@ -119,7 +138,30 @@ class TopicCard extends StatelessWidget {
                     ],
                   ),
                 ),
-              )
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: spacing12, right: spacing12),
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      isFavorite = !isFavorite;
+                    });
+                  },
+                  child: !isFavorite
+                      ? SvgPicture.asset(
+                          "assets/icon/ic_heart.svg",
+                          width: 30,
+                          height: 30,
+                          color: const Color(0xFF9D9DAD),
+                        )
+                      : SvgPicture.asset(
+                          "assets/icon/ic_heart_fill.svg",
+                          width: 30,
+                          height: 30,
+                          color: const Color(0xFFFF6363),
+                        ),
+                ),
+              ),
             ],
           ),
         ),

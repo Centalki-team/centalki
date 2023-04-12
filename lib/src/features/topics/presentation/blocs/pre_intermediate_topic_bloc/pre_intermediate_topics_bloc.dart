@@ -1,11 +1,13 @@
 import 'dart:math';
 
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../base/gateway/exception/app_exception.dart';
 import '../../../../../../base/temp_dio/dio_client.dart';
 import '../../../../../../di/di_module.dart';
+import '../../../../account/domain/entities/user_account_entity.dart';
 import '../../../domain/entities/topic_item_entity.dart';
 import '../../../domain/repositories/topic_repository.dart';
 import '../../../domain/usecases/get_topics_usecase.dart';
@@ -31,6 +33,12 @@ class PreIntermediateTopicsBloc
   }
 
   void _onLoad(PreIntermediateTopicsLoadEvent event, emit) async {
+    final user = await FirebaseAuth.instance.currentUser
+            ?.getIdToken()
+            .then(DioClient.getUserInformation) ??
+        const UserAccountEntity();
+    var selectedInterestedTopics =
+        (user.userProfile?.accountInterestedTopicIds ?? []).toList();
     emit(const PreIntermediateTopicsLoadingState());
     final topics = await getTopicsUseCase(null);
     emit(const PreIntermediateTopicsLoadingState(showLoading: false));
@@ -43,6 +51,7 @@ class PreIntermediateTopicsBloc
       (r) => emit(
         PreIntermediateTopicsLoadDoneState(
           topics: r.topics ?? [],
+          interestedTopics: selectedInterestedTopics,
         ),
       ),
     );

@@ -54,6 +54,8 @@ class _PreIntermediateTopicViewState extends State<PreIntermediateTopicView> {
                       const SizedBox(height: spacing8),
                   itemBuilder: (context, index) => TopicCard(
                     item: state.topics[index],
+                    isFavorite: state.interestedTopics
+                        .contains(state.topics[index].topicId),
                   ),
                 ),
               );

@@ -27,9 +27,11 @@ class PreIntermediateTopicsLoadingState extends PreIntermediateTopicsState {
 class PreIntermediateTopicsLoadDoneState extends PreIntermediateTopicsState {
   const PreIntermediateTopicsLoadDoneState({
     required this.topics,
+    required this.interestedTopics,
   });
 
   final List<TopicItemEntity> topics;
+  final List<String> interestedTopics;
 
   @override
   List<Object?> get props => [
