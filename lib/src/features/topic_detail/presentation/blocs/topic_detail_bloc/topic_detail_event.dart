@@ -14,3 +14,15 @@ class TopicDetailLoadEvent extends TopicDetailEvent {
 
   final String topicId;
 }
+
+class TopicDetailAddFavoriteEvent extends TopicDetailEvent {
+  const TopicDetailAddFavoriteEvent({required this.topicId});
+
+  final String topicId;
+}
+
+class TopicDetailRemoveFavoriteEvent extends TopicDetailEvent {
+  const TopicDetailRemoveFavoriteEvent({required this.topicId});
+
+  final String topicId;
+}

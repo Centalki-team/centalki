@@ -64,7 +64,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                       child: GestureDetector(
                         onTap: () async {
                           if (isFavorite) {
-                            final confirmedRemove = await showDialog(
+                            await showDialog(
                               barrierDismissible: false,
                               context: context,
                               builder: (context) => AlertDialog(
@@ -92,8 +92,17 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                         Navigator.pop(context, false),
                                   ),
                                   ElevatedButton(
-                                    onPressed: () =>
-                                        Navigator.pop(context, true),
+                                    onPressed: () => {
+                                      context
+                                          .read<TopicDetailBloc>()
+                                          .add(TopicDetailRemoveFavoriteEvent(
+                                            topicId:
+                                                state.topicDetail.topicId ?? '',
+                                          )),
+                                      setState(() {
+                                        isFavorite = false;
+                                      }),
+                                    },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: AppColor.error,
                                       foregroundColor: Colors.white,
@@ -109,12 +118,12 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                 ],
                               ),
                             ).then((value) => value ?? false);
-                            if (confirmedRemove) {
-                              setState(() {
-                                isFavorite = false;
-                              });
-                            }
                           } else {
+                            context
+                                .read<TopicDetailBloc>()
+                                .add(TopicDetailAddFavoriteEvent(
+                                  topicId: state.topicDetail.topicId ?? '',
+                                ));
                             setState(() {
                               isFavorite = true;
                             });
