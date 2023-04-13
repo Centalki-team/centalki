@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../../base/define/styles.dart';
@@ -6,6 +7,7 @@ import '../../../../../base/temp_dio/dio_client.dart';
 import '../../../../../base/widgets/buttons/text_button.dart';
 import '../../../topic_detail/presentation/views/topic_detail_page.dart';
 import '../../domain/entities/topic_item_entity.dart';
+import '../blocs/pre_intermediate_topic_bloc/pre_intermediate_topics_bloc.dart';
 
 class TopicCard extends StatefulWidget {
   const TopicCard({
@@ -142,76 +144,87 @@ class _TopicCardState extends State<TopicCard> {
               ),
               Container(
                 margin: const EdgeInsets.only(top: spacing12, right: spacing12),
-                child: GestureDetector(
-                  onTap: () async {
-                    if (isFavorite) {
-                      final confirmedRemove = await showDialog(
-                        barrierDismissible: false,
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          backgroundColor: AppColor.white,
-                          title: const Text(
-                            TextDoc.txtConfirmRemoveFavoriteTitle,
-                            style: TextStyle(
-                              fontSize: titleLargeSize,
-                              fontWeight: titleLargeWeight,
-                              color: AppColor.defaultFont,
-                            ),
-                          ),
-                          content: const Text(
-                            TextDoc.txtConfirmRemoveFavoriteContent,
-                            style: TextStyle(
-                              fontSize: bodySmallSize,
-                              fontWeight: bodySmallWeight,
-                              color: AppColor.defaultFont,
-                            ),
-                          ),
-                          actions: [
-                            AppTextButton(
-                              text: TextDoc.txtCancel,
-                              onPressed: () => Navigator.pop(context, false),
-                            ),
-                            ElevatedButton(
-                              onPressed: () => Navigator.pop(context, true),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColor.error,
-                                foregroundColor: Colors.white,
+                child: BlocBuilder<PreIntermediateTopicsBloc,
+                    PreIntermediateTopicsState>(
+                  builder: (context, state) => GestureDetector(
+                    onTap: () async {
+                      if (isFavorite) {
+                        await showDialog(
+                          barrierDismissible: false,
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            backgroundColor: AppColor.white,
+                            title: const Text(
+                              TextDoc.txtConfirmRemoveFavoriteTitle,
+                              style: TextStyle(
+                                fontSize: titleLargeSize,
+                                fontWeight: titleLargeWeight,
+                                color: AppColor.defaultFont,
                               ),
-                              child: const Text(
-                                TextDoc.txtRemove,
-                                style: TextStyle(
-                                  fontSize: labelLargeSize,
-                                  fontWeight: labelLargeWeight,
+                            ),
+                            content: const Text(
+                              TextDoc.txtConfirmRemoveFavoriteContent,
+                              style: TextStyle(
+                                fontSize: bodySmallSize,
+                                fontWeight: bodySmallWeight,
+                                color: AppColor.defaultFont,
+                              ),
+                            ),
+                            actions: [
+                              AppTextButton(
+                                text: TextDoc.txtCancel,
+                                onPressed: () => Navigator.pop(context, false),
+                              ),
+                              ElevatedButton(
+                                onPressed: () => {
+                                  context.read<PreIntermediateTopicsBloc>().add(
+                                          PreIntermediateTopicsRemoveFavoriteEvent(
+                                        id: widget.item.topicId ?? '',
+                                      )),
+                                  setState(() {
+                                    isFavorite = false;
+                                  }),
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: AppColor.error,
+                                  foregroundColor: Colors.white,
+                                ),
+                                child: const Text(
+                                  TextDoc.txtRemove,
+                                  style: TextStyle(
+                                    fontSize: labelLargeSize,
+                                    fontWeight: labelLargeWeight,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ).then((value) => value ?? false);
-                      if (confirmedRemove) {
+                            ],
+                          ),
+                        ).then((value) => value ?? false);
+                      } else {
+                        context
+                            .read<PreIntermediateTopicsBloc>()
+                            .add(PreIntermediateTopicsAddFavoriteEvent(
+                              topicId: widget.item.topicId ?? '',
+                            ));
                         setState(() {
-                          isFavorite = false;
+                          isFavorite = true;
                         });
                       }
-                    } else {
-                      setState(() {
-                        isFavorite = true;
-                      });
-                    }
-                  },
-                  child: !isFavorite
-                      ? SvgPicture.asset(
-                          "assets/icon/ic_heart.svg",
-                          width: 30,
-                          height: 30,
-                          color: const Color(0xFF9D9DAD),
-                        )
-                      : SvgPicture.asset(
-                          "assets/icon/ic_heart_fill.svg",
-                          width: 30,
-                          height: 30,
-                          color: const Color(0xFFFF6363),
-                        ),
+                    },
+                    child: !isFavorite
+                        ? SvgPicture.asset(
+                            "assets/icon/ic_heart.svg",
+                            width: 30,
+                            height: 30,
+                            color: const Color(0xFF9D9DAD),
+                          )
+                        : SvgPicture.asset(
+                            "assets/icon/ic_heart_fill.svg",
+                            width: 30,
+                            height: 30,
+                            color: const Color(0xFFFF6363),
+                          ),
+                  ),
                 ),
               ),
             ],

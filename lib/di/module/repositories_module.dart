@@ -5,6 +5,9 @@ import '../../src/features/authentication/data/repositories/self_review_repo_imp
 import '../../src/features/authentication/data/repositories/sign_up_repo_impl/sign_up_repo_impl.dart';
 import '../../src/features/authentication/domain/repositories/self_review_repo/self_review_repository.dart';
 import '../../src/features/authentication/domain/repositories/sign_up_repo/sign_up_repository.dart';
+import '../../src/features/bookmark/topic/data/datasources/remote_data/bookmark_topic_remote_datasource.dart';
+import '../../src/features/bookmark/topic/data/repositories/bookmark_topic_repository_impl.dart';
+import '../../src/features/bookmark/topic/domain/repositories/bookmark_topic_repository.dart';
 import '../../src/features/introduction/data/datasources/local_data/intro_local_datasource.dart';
 import '../../src/features/introduction/data/repositories/app_intro_repository_impl.dart';
 import '../../src/features/introduction/domain/repositories/app_intro_repository.dart';
@@ -53,6 +56,8 @@ class RepositoriesModule extends DIModule {
           SelfReviewRemoteDatasource.new)
       ..registerLazySingleton<SignUpRemoteDatasource>(
           SignUpRemoteDatasource.new)
+      ..registerLazySingleton<BookmarkTopicRemoteDatasource>(
+          BookmarkTopicRemoteDatasource.new)
       //Repositories
       ..registerLazySingleton<TopicRepository>(TopicRepositoryImpl.new)
       ..registerLazySingleton<EventTrackingRepository>(
@@ -69,6 +74,8 @@ class RepositoriesModule extends DIModule {
       ..registerLazySingleton<AppIntroRepository>(AppIntroRepositoryImpl.new)
       ..registerLazySingleton<SelfReviewRepository>(
           SelfReviewRepositoryImpl.new)
-      ..registerLazySingleton<SignUpRepository>(SignUpRepositoryImpl.new);
+      ..registerLazySingleton<SignUpRepository>(SignUpRepositoryImpl.new)
+      ..registerLazySingleton<BookmarkTopicRepository>(
+          BookmarkTopicRepositoryImpl.new);
   }
 }
