@@ -4,8 +4,8 @@ abstract class VocabsEvent {
   const VocabsEvent();
 }
 
-class VocabsLoadEvent extends VocabsEvent {
-  const VocabsLoadEvent();
+class VocabsBookmarkedLoadEvent extends VocabsEvent {
+  const VocabsBookmarkedLoadEvent();
 }
 
 class VocabsRemoveBookmarkEvent extends VocabsEvent {

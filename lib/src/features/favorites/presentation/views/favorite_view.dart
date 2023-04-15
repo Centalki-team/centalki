@@ -8,6 +8,7 @@ import '../../../../../base/define/size.dart';
 import '../../../../../base/define/text.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/tab_indicator/tab_indicator.dart';
+import '../../../vocabularies/presentation/views/vocabs_page.dart';
 
 class FavoriteView extends StatefulWidget {
   const FavoriteView({super.key});
@@ -138,21 +139,15 @@ class _FavoriteViewState extends State<FavoriteView>
             child: TabBarView(
               controller: _tabController,
               physics: const NeverScrollableScrollPhysics(),
-              children: [
-                const Center(
+              children: const [
+                Center(
                   child: Text(
-                    'Elementary Topic(s) Goes Here\nWorks In Progress...',
+                    'Favorite Topic(s) Goes Here\nWorks In Progress...',
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 16),
                   ),
                 ),
-                const Center(
-                  child: Text(
-                    'Elementary Topic(s) Goes Here\nWorks In Progress...',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ),
+                VocabsPage(),
               ],
             ),
           ),

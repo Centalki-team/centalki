@@ -46,6 +46,13 @@ class $AssetsIconGen {
   SvgGenImage get icFeedback =>
       const SvgGenImage('assets/icon/ic_feedback.svg');
 
+  /// File path: assets/icon/ic_heart.svg
+  SvgGenImage get icHeart => const SvgGenImage('assets/icon/ic_heart.svg');
+
+  /// File path: assets/icon/ic_heart_fill.svg
+  SvgGenImage get icHeartFill =>
+      const SvgGenImage('assets/icon/ic_heart_fill.svg');
+
   /// File path: assets/icon/ic_language.svg
   SvgGenImage get icLanguage =>
       const SvgGenImage('assets/icon/ic_language.svg');
@@ -115,6 +122,8 @@ class $AssetsIconGen {
         icClearCircle,
         icErrorToast,
         icFeedback,
+        icHeart,
+        icHeartFill,
         icLanguage,
         icNoti,
         icNotiHeader,
