@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../../../../../../base/helpers/time_helper.dart';
 import '../../../../../domain/entities/topic_detail_entity.dart';
 
 part 'topic_detail_model.g.dart';
@@ -105,11 +106,14 @@ class TopicPhraseModel extends TopicPhraseEntity {
     this.phrase,
     this.updatedAt,
     this.createdAt,
+    this.topicPharseBookmark,
   }) : super(
+          topicPhraseId: id,
           topicPhrase: phrase,
           phrasePhonetic: phonetic,
           phraseTranslations: translations,
           phraseExamples: examples,
+          bookmark: topicPharseBookmark,
         );
 
   final String? id;
@@ -120,6 +124,8 @@ class TopicPhraseModel extends TopicPhraseEntity {
   final String? phrase;
   final String? updatedAt;
   final String? createdAt;
+  @JsonKey(name: 'bookmark')
+  final TopicPhraseBookmarkModel? topicPharseBookmark;
 
   factory TopicPhraseModel.fromJson(Map<String, dynamic> json) =>
       _$TopicPhraseModelFromJson(json);
@@ -128,8 +134,31 @@ class TopicPhraseModel extends TopicPhraseEntity {
 }
 
 @JsonSerializable()
+class TopicPhraseBookmarkModel extends TopicPhraseBookmarkEntity {
+  const TopicPhraseBookmarkModel({
+    String? id,
+    String? phraseId,
+    String? userId,
+    this.createdAt,
+  }) : super(
+          id: id,
+          phraseId: phraseId,
+          userId: userId,
+          createdAtTime: createdAt,
+        );
+
+  @JsonKey(fromJson: DateTimeHelper.stringToTime3Nullable)
+  final DateTime? createdAt;
+
+  factory TopicPhraseBookmarkModel.fromJson(Map<String, dynamic> json) =>
+      _$TopicPhraseBookmarkModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TopicPhraseBookmarkModelToJson(this);
+}
+
+@JsonSerializable()
 class PhraseExampleModel extends PhraseExampleEntity {
-  PhraseExampleModel({
+  const PhraseExampleModel({
     this.sentence,
   }) : super(phraseExample: sentence);
 
@@ -143,7 +172,7 @@ class PhraseExampleModel extends PhraseExampleEntity {
 
 @JsonSerializable()
 class PhraseTranslationModel extends PhraseTranslationEntity {
-  PhraseTranslationModel({
+  const PhraseTranslationModel({
     this.meaning,
   }) : super(phraseMeaning: meaning);
 

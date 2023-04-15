@@ -92,7 +92,7 @@ class _MyWidgetState extends State<MyWidget> {
     // When there is a change in the current user's token.
     super.initState();
     FirebaseAuth.instance.currentUser?.reload();
-    FirebaseAuth.instance.idTokenChanges().listen((user) {
+    FirebaseAuth.instance.idTokenChanges().listen((user) async {
       if (user == null) {
         print('User is currently signed out!');
         setState(() {
@@ -100,7 +100,8 @@ class _MyWidgetState extends State<MyWidget> {
         });
       } else {
         print('User is signed in!');
-        print(user.providerData);
+        var idToken = await user.getIdToken();
+        print(idToken);
         if (user.providerData[0].providerId.contains('password')) {
           if (!user.emailVerified) {
             user.sendEmailVerification();

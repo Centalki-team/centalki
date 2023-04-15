@@ -97,8 +97,8 @@ class ApiGateway {
       case ApiType.public:
         if (interceptors == null) {
           _dioInstance.interceptors.addAll([
-            DefaultErrorHandlerInterceptor(),
             DefaultResponseHandlerInterceptor(),
+            DefaultErrorHandlerInterceptor(),
           ]);
         }
         // _dioInstance.interceptors.addAll([
@@ -106,13 +106,15 @@ class ApiGateway {
         // ]);
         break;
       case ApiType.user:
-        if (interceptors == null) {
-          _dioInstance.interceptors.addAll([
-            //DefaultResponseHandlerInterceptor(),
-            DefaultErrorHandlerInterceptor()
-          ]);
-        }
+        // if (interceptors == null) {
+        //   _dioInstance.interceptors.addAll([
+        //     //DefaultResponseHandlerInterceptor(),
+        //     DefaultErrorHandlerInterceptor()
+        //   ]);
+        // }
         _dioInstance.interceptors.addAll([
+          DefaultResponseHandlerInterceptor(),
+          DefaultErrorHandlerInterceptor(),
           AuthInterceptor(),
           //aliceInterceptor,
           //RefreshTokenInterceptor(_dioInstance, _tokenLocalDatasource),

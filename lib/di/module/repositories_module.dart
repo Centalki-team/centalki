@@ -5,6 +5,9 @@ import '../../src/features/authentication/data/repositories/self_review_repo_imp
 import '../../src/features/authentication/data/repositories/sign_up_repo_impl/sign_up_repo_impl.dart';
 import '../../src/features/authentication/domain/repositories/self_review_repo/self_review_repository.dart';
 import '../../src/features/authentication/domain/repositories/sign_up_repo/sign_up_repository.dart';
+import '../../src/features/bookmark/data/datasources/bookmark_datasrc/remote_data/bookmark_remote_datasrc.dart';
+import '../../src/features/bookmark/data/repositories/bookmark_repository_impl.dart';
+import '../../src/features/bookmark/domain/repositories/bookmark_repository.dart';
 import '../../src/features/introduction/data/datasources/local_data/intro_local_datasource.dart';
 import '../../src/features/introduction/data/repositories/app_intro_repository_impl.dart';
 import '../../src/features/introduction/domain/repositories/app_intro_repository.dart';
@@ -21,6 +24,9 @@ import '../../src/features/report_meeting/domain/repositories/report_meeting_rep
 import '../../src/features/settings/data/datasources/remote_data/feedback_remote_datasource.dart';
 import '../../src/features/settings/data/repositories/feedback_repository_impl.dart';
 import '../../src/features/settings/domain/repositories/feedback_repository.dart';
+import '../../src/features/topic_detail/data/datasources/topics_datasource/remote_data/topic_detail_remote_datasource.dart';
+import '../../src/features/topic_detail/data/repositories/topic_detail_repository_impl.dart';
+import '../../src/features/topic_detail/domain/repositories/topic_detail_repository.dart';
 import '../../src/features/topics/data/datasources/topics_datasource/remote_data/topics_remote_datasource.dart';
 import '../../src/features/topics/data/repositories/topic_repository_impl.dart';
 import '../../src/features/topics/domain/repositories/topic_repository.dart';
@@ -32,6 +38,8 @@ class RepositoriesModule extends DIModule {
     getIt
       //Datasources
       ..registerLazySingleton<TopicRemoteDatasource>(TopicRemoteDatasource.new)
+      ..registerLazySingleton<TopicDetailRemoteDatasource>(
+          TopicDetailRemoteDatasource.new)
       ..registerLazySingleton<EventTrackingRemoteDatasource>(
           EventTrackingRemoteDatasource.new)
       ..registerLazySingleton<PaymentRemoteDatasource>(
@@ -53,8 +61,12 @@ class RepositoriesModule extends DIModule {
           SelfReviewRemoteDatasource.new)
       ..registerLazySingleton<SignUpRemoteDatasource>(
           SignUpRemoteDatasource.new)
+      ..registerLazySingleton<BookmarkRemoteDatasource>(
+          BookmarkRemoteDatasource.new)
       //Repositories
       ..registerLazySingleton<TopicRepository>(TopicRepositoryImpl.new)
+      ..registerLazySingleton<TopicDetailRepository>(
+          TopicDetailRepositoryImpl.new)
       ..registerLazySingleton<EventTrackingRepository>(
           EventTrackingRepositoryImpl.new)
       ..registerLazySingleton<PaymentRepository>(
@@ -69,6 +81,7 @@ class RepositoriesModule extends DIModule {
       ..registerLazySingleton<AppIntroRepository>(AppIntroRepositoryImpl.new)
       ..registerLazySingleton<SelfReviewRepository>(
           SelfReviewRepositoryImpl.new)
-      ..registerLazySingleton<SignUpRepository>(SignUpRepositoryImpl.new);
+      ..registerLazySingleton<SignUpRepository>(SignUpRepositoryImpl.new)
+      ..registerLazySingleton<BookmarkRepository>(BookmarkRepositoryImpl.new);
   }
 }

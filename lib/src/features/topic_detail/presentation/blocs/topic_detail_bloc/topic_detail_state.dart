@@ -1,8 +1,10 @@
 part of 'topic_detail_bloc.dart';
 
-@immutable
-abstract class TopicDetailState {
+abstract class TopicDetailState extends Equatable {
   const TopicDetailState();
+
+  @override
+  List<Object?> get props => [];
 }
 
 class TopicDetailInitState extends TopicDetailState {
@@ -15,12 +17,86 @@ class TopicDetailLoadDoneState extends TopicDetailState {
   });
 
   final TopicDetailEntity topicDetail;
+
+  @override
+  List<Object?> get props => [
+        topicDetail,
+      ];
 }
 
 class TopicDetailLoadFailedState extends TopicDetailState {
   const TopicDetailLoadFailedState({
-    required this.errorMessage,
+    required this.exception,
+    required this.emitTime,
   });
 
-  final String errorMessage;
+  final AppException exception;
+  final DateTime emitTime;
+
+  @override
+  List<Object?> get props => [
+        exception,
+        emitTime,
+      ];
+}
+
+class TopicPhraseCreateBookmarkSuccessState extends TopicDetailState {
+  const TopicPhraseCreateBookmarkSuccessState({
+    required this.phraseId,
+    required this.emitTime,
+  });
+
+  final String phraseId;
+  final DateTime emitTime;
+
+  @override
+  List<Object?> get props => [
+        phraseId,
+        emitTime,
+      ];
+}
+
+class TopicPhraseRemoveBookmarkSuccessState extends TopicDetailState {
+  const TopicPhraseRemoveBookmarkSuccessState({
+    required this.phraseId,
+    required this.emitTime,
+  });
+
+  final String phraseId;
+  final DateTime emitTime;
+
+  @override
+  List<Object?> get props => [
+        phraseId,
+        emitTime,
+      ];
+}
+
+class TopicPhraseBookmarkAdjustFailedState extends TopicDetailState {
+  const TopicPhraseBookmarkAdjustFailedState({
+    required this.exception,
+    required this.emitTime,
+  });
+
+  final AppException exception;
+  final DateTime emitTime;
+
+  @override
+  List<Object?> get props => [
+        exception,
+        emitTime,
+      ];
+}
+
+class TopicDetailLoadingState extends TopicDetailState {
+  const TopicDetailLoadingState({
+    this.showLoading = true,
+  });
+
+  final bool showLoading;
+
+  @override
+  List<Object?> get props => [
+        showLoading,
+      ];
 }
