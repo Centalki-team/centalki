@@ -58,16 +58,16 @@ class TopicPhraseCreateBookmarkSuccessState extends TopicDetailState {
 
 class TopicPhraseRemoveBookmarkSuccessState extends TopicDetailState {
   const TopicPhraseRemoveBookmarkSuccessState({
-    required this.phraseId,
+    required this.bookmarkId,
     required this.emitTime,
   });
 
-  final String phraseId;
+  final String bookmarkId;
   final DateTime emitTime;
 
   @override
   List<Object?> get props => [
-        phraseId,
+        bookmarkId,
         emitTime,
       ];
 }
