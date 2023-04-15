@@ -27,6 +27,10 @@ TopicDetailModel _$TopicDetailModelFromJson(Map<String, dynamic> json) =>
       phrases: (json['phrases'] as List<dynamic>?)
           ?.map((e) => TopicPhraseModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      topicBookmark: json['topicBookmark'] == null
+          ? null
+          : BookmarkTopicModel.fromJson(
+              json['topicBookmark'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$TopicDetailModelToJson(TopicDetailModel instance) =>
@@ -41,6 +45,7 @@ Map<String, dynamic> _$TopicDetailModelToJson(TopicDetailModel instance) =>
       'category': instance.category,
       'questions': instance.questions,
       'phrases': instance.phrases,
+      'topicBookmark': instance.topicBookmark,
     };
 
 TopicLevelModel _$TopicLevelModelFromJson(Map<String, dynamic> json) =>
@@ -73,6 +78,9 @@ TopicQuestionModel _$TopicQuestionModelFromJson(Map<String, dynamic> json) =>
     TopicQuestionModel(
       id: json['id'] as String?,
       question: json['question'] as String?,
+      answers: (json['answers'] as List<dynamic>?)
+          ?.map((e) => QuestionAnswerModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
       topicId: json['topicId'] as String?,
     );
 
@@ -80,7 +88,19 @@ Map<String, dynamic> _$TopicQuestionModelToJson(TopicQuestionModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'question': instance.question,
+      'answers': instance.answers,
       'topicId': instance.topicId,
+    };
+
+QuestionAnswerModel _$QuestionAnswerModelFromJson(Map<String, dynamic> json) =>
+    QuestionAnswerModel(
+      answer: json['answer'] as String?,
+    );
+
+Map<String, dynamic> _$QuestionAnswerModelToJson(
+        QuestionAnswerModel instance) =>
+    <String, dynamic>{
+      'answer': instance.answer,
     };
 
 TopicPhraseModel _$TopicPhraseModelFromJson(Map<String, dynamic> json) =>

@@ -49,3 +49,13 @@ class PreIntermediateTopicsErrorState extends PreIntermediateTopicsState {
         exception,
       ];
 }
+
+class PreIntermediateTopicsAddFavoriteDoneState
+    extends PreIntermediateTopicsState {
+  const PreIntermediateTopicsAddFavoriteDoneState();
+}
+
+class PreIntermediateTopicsRemoveFavoriteDoneState
+    extends PreIntermediateTopicsState {
+  const PreIntermediateTopicsRemoveFavoriteDoneState();
+}

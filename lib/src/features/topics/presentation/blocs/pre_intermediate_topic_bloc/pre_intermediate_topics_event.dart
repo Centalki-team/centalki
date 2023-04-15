@@ -11,3 +11,16 @@ class PreIntermediateTopicsInitEvent extends PreIntermediateTopicsEvent {
 class PreIntermediateTopicsLoadEvent extends PreIntermediateTopicsEvent {
   const PreIntermediateTopicsLoadEvent();
 }
+
+class PreIntermediateTopicsAddFavoriteEvent extends PreIntermediateTopicsEvent {
+  const PreIntermediateTopicsAddFavoriteEvent({required this.topicId});
+
+  final String topicId;
+}
+
+class PreIntermediateTopicsRemoveFavoriteEvent
+    extends PreIntermediateTopicsEvent {
+  const PreIntermediateTopicsRemoveFavoriteEvent({required this.id});
+
+  final String id;
+}

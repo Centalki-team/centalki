@@ -30,3 +30,15 @@ class TopicDetailPhraseRemoveBookmarkEvent extends TopicDetailEvent {
 
   final String bookmarkId;
 }
+
+class TopicDetailAddFavoriteEvent extends TopicDetailEvent {
+  const TopicDetailAddFavoriteEvent({required this.topicId});
+
+  final String topicId;
+}
+
+class TopicDetailRemoveFavoriteEvent extends TopicDetailEvent {
+  const TopicDetailRemoveFavoriteEvent({required this.id});
+
+  final String id;
+}

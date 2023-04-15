@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../../../../../../../base/helpers/time_helper.dart';
+import '../../../../../../bookmark/topic/data/datasources/remote_data/model/bookmark_topic_model.dart';
 import '../../../../../domain/entities/topic_detail_entity.dart';
 
 part 'topic_detail_model.g.dart';
@@ -18,6 +19,7 @@ class TopicDetailModel extends TopicDetailEntity {
     this.category,
     this.questions,
     this.phrases,
+    this.topicBookmark,
   }) : super(
           topicId: id,
           topicName: name,
@@ -27,6 +29,7 @@ class TopicDetailModel extends TopicDetailEntity {
           topicCategory: category?.name,
           topicQuestions: questions,
           topicPhrases: phrases,
+          bookmark: topicBookmark,
         );
 
   final String? id;
@@ -39,6 +42,7 @@ class TopicDetailModel extends TopicDetailEntity {
   final TopicCategoryModel? category;
   final List<TopicQuestionModel>? questions;
   final List<TopicPhraseModel>? phrases;
+  final BookmarkTopicModel? topicBookmark;
 
   factory TopicDetailModel.fromJson(Map<String, dynamic> json) =>
       _$TopicDetailModelFromJson(json);
@@ -82,17 +86,33 @@ class TopicQuestionModel extends TopicQuestionEntity {
   const TopicQuestionModel({
     this.id,
     this.question,
+    this.answers,
     this.topicId,
-  }) : super(questionContent: question);
+  }) : super(questionContent: question, topicAnswers: answers);
 
   final String? id;
   final String? question;
+  final List<QuestionAnswerModel>? answers;
   final String? topicId;
 
   factory TopicQuestionModel.fromJson(Map<String, dynamic> json) =>
       _$TopicQuestionModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$TopicQuestionModelToJson(this);
+}
+
+@JsonSerializable()
+class QuestionAnswerModel extends QuestionAnswerEntity {
+  QuestionAnswerModel({
+    this.answer,
+  }) : super(questionAnswer: answer);
+
+  final String? answer;
+
+  factory QuestionAnswerModel.fromJson(Map<String, dynamic> json) =>
+      _$QuestionAnswerModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$QuestionAnswerModelToJson(this);
 }
 
 @JsonSerializable()

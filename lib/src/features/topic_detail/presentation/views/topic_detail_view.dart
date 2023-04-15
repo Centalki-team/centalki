@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../../base/define/styles.dart';
 import '../../../../../base/define/manager/loading_manager.dart';
@@ -93,6 +93,38 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                 ),
               ),
             ).show(context);
+          } else if (state is TopicDetailAddFavoriteDoneState) {
+            AppToast(
+              duration: const Duration(seconds: 3),
+              bottomOffset: 8.0,
+              message: const Text(
+                TextDoc.txtAddFavoriteSuccess,
+                style: TextStyle(
+                  fontSize: bodyLargeSize,
+                  fontWeight: bodyLargeWeight,
+                  color: AppColor.white,
+                ),
+              ),
+            ).show(context);
+            context
+                .read<TopicDetailBloc>()
+                .add(TopicDetailLoadEvent(topicId: widget.topicId));
+          } else if (state is TopicDetailRemoveFavoriteDoneState) {
+            AppToast(
+              duration: const Duration(seconds: 3),
+              bottomOffset: 8.0,
+              message: const Text(
+                TextDoc.txtRemoveFavoriteSuccess,
+                style: TextStyle(
+                  fontSize: bodyLargeSize,
+                  fontWeight: bodyLargeWeight,
+                  color: AppColor.white,
+                ),
+              ),
+            ).show(context);
+            context
+                .read<TopicDetailBloc>()
+                .add(TopicDetailLoadEvent(topicId: widget.topicId));
           }
         },
         child: Scaffold(
@@ -108,17 +140,116 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                     right: 16.0,
                     bottom: 24.0,
                   ),
-                  child: AppElevatedButton(
-                    text: TextDoc.txtTalk,
-                    minimumSize: const Size.fromHeight(48),
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ConnectTeacherPage(
-                          topicId: state.topicDetail.topicId ?? '',
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: AppElevatedButton(
+                          text: TextDoc.txtTalk,
+                          onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ConnectTeacherPage(
+                                topicId: state.topicDetail.topicId ?? '',
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                      Container(
+                        width: 40,
+                        height: 40,
+                        margin: const EdgeInsets.only(left: spacing8),
+                        padding: const EdgeInsets.all(padding8),
+                        decoration: BoxDecoration(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(radius12)),
+                          border: Border.all(
+                              width: state.topicDetail.bookmark != null
+                                  ? 2.0
+                                  : 1.0,
+                              color: state.topicDetail.bookmark != null
+                                  ? const Color(0xFFFF6363)
+                                  : const Color(0xFF9D9DAD)),
+                        ),
+                        child: GestureDetector(
+                          onTap: () async {
+                            if (state.topicDetail.bookmark != null) {
+                              await showDialog(
+                                barrierDismissible: false,
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  backgroundColor: AppColor.white,
+                                  title: const Text(
+                                    TextDoc.txtConfirmRemoveFavoriteTitle,
+                                    style: TextStyle(
+                                      fontSize: titleLargeSize,
+                                      fontWeight: titleLargeWeight,
+                                      color: AppColor.defaultFont,
+                                    ),
+                                  ),
+                                  content: const Text(
+                                    TextDoc.txtConfirmRemoveFavoriteContent,
+                                    style: TextStyle(
+                                      fontSize: bodySmallSize,
+                                      fontWeight: bodySmallWeight,
+                                      color: AppColor.defaultFont,
+                                    ),
+                                  ),
+                                  actions: [
+                                    AppTextButton(
+                                      text: TextDoc.txtCancel,
+                                      onPressed: () =>
+                                          Navigator.pop(context, false),
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () =>
+                                          Navigator.pop(context, true),
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: AppColor.error,
+                                        foregroundColor: Colors.white,
+                                      ),
+                                      child: const Text(
+                                        TextDoc.txtRemove,
+                                        style: TextStyle(
+                                          fontSize: labelLargeSize,
+                                          fontWeight: labelLargeWeight,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ).then((confirmRemoved) => {
+                                    if (confirmRemoved)
+                                      {
+                                        context
+                                            .read<TopicDetailBloc>()
+                                            .add(TopicDetailRemoveFavoriteEvent(
+                                              id: state.topicDetail.bookmark
+                                                      ?.bookmarkId ??
+                                                  '',
+                                            )),
+                                      }
+                                  });
+                            } else {
+                              context
+                                  .read<TopicDetailBloc>()
+                                  .add(TopicDetailAddFavoriteEvent(
+                                    topicId: widget.topicId,
+                                  ));
+                            }
+                          },
+                          child: state.topicDetail.bookmark == null
+                              ? SvgPicture.asset(
+                                  "assets/icon/ic_heart.svg",
+                                  color: const Color(0xFF9D9DAD),
+                                )
+                              : SvgPicture.asset(
+                                  "assets/icon/ic_heart_fill.svg",
+                                  color: const Color(0xFFFF6363),
+                                ),
+                        ),
+                      ),
+                    ],
                   ),
                 );
               }
@@ -338,10 +469,13 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                 itemBuilder: (context, index) {
                                   final questionContent = state.topicDetail
                                       .topicQuestions?[index].questionContent;
+                                  final answers = state.topicDetail
+                                      .topicQuestions?[index].topicAnswers;
                                   return QuestionCard(
                                     index: index,
                                     questionContent:
                                         questionContent ?? 'null question',
+                                    answers: answers ?? [],
                                   );
                                 },
                                 separatorBuilder: (context, index) =>

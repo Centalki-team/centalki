@@ -8,12 +8,15 @@ import '../../../../bookmark/domain/repositories/bookmark_repository.dart';
 import '../../../../bookmark/domain/usecases/create_topic_phrase_bookmark_usecase.dart';
 import '../../../../bookmark/domain/usecases/delete_topic_phrase_bookmark_usecase.dart';
 import '../../../../bookmark/domain/usecases/params/create_topic_phrase_bookmark_params.dart';
+import '../../../../bookmark/topic/domain/repositories/bookmark_topic_repository.dart';
+import '../../../../bookmark/topic/domain/usecases/create_bookmark_topic_usecase.dart';
+import '../../../../bookmark/topic/domain/usecases/delete_bookmark_topic_usecase.dart';
+import '../../../../bookmark/topic/domain/usecases/params/create_bookmark_topic_params.dart';
 import '../../../domain/entities/topic_detail_entity.dart';
 import '../../../domain/repositories/topic_detail_repository.dart';
 import '../../../domain/usecases/get_topic_detail_usecase.dart';
 
 part 'topic_detail_event.dart';
-
 part 'topic_detail_state.dart';
 
 class TopicDetailBloc extends Bloc<TopicDetailEvent, TopicDetailState> {
@@ -22,6 +25,8 @@ class TopicDetailBloc extends Bloc<TopicDetailEvent, TopicDetailState> {
     on<TopicDetailLoadEvent>(_onLoad);
     on<TopicDetailPhraseCreateBookmarkEvent>(_onCreateTopicPhraseBookmark);
     on<TopicDetailPhraseRemoveBookmarkEvent>(_onRemoveTopicPhraseBookmark);
+    on<TopicDetailAddFavoriteEvent>(_onAddFavorite);
+    on<TopicDetailRemoveFavoriteEvent>(_onRemoveFavorite);
     add(const TopicDetailInitEvent());
   }
 
@@ -31,6 +36,16 @@ class TopicDetailBloc extends Bloc<TopicDetailEvent, TopicDetailState> {
       bookmarkRepository: getIt.get<BookmarkRepository>());
   final _deleteTopicPhraseBookmarkUseCase = DeleteTopicPhraseBookmarkUseCase(
       bookmarkRepository: getIt.get<BookmarkRepository>());
+
+  final CreateBookmarkTopicUseCase createBookmarkTopicUseCase =
+      CreateBookmarkTopicUseCase(
+    bookmarkTopicRepository: getIt.get<BookmarkTopicRepository>(),
+  );
+
+  final DeleteBookmarkTopicUseCase deleteBookmarkTopicUseCase =
+      DeleteBookmarkTopicUseCase(
+    bookmarkTopicRepository: getIt.get<BookmarkTopicRepository>(),
+  );
 
   void _onInit(TopicDetailInitEvent event, emit) {}
 
@@ -95,6 +110,41 @@ class TopicDetailBloc extends Bloc<TopicDetailEvent, TopicDetailState> {
           bookmarkId: event.bookmarkId,
           emitTime: DateTime.now(),
         ),
+      ),
+    );
+  }
+
+  void _onAddFavorite(TopicDetailAddFavoriteEvent event, emit) async {
+    emit(const TopicDetailLoadingState());
+    final result = await createBookmarkTopicUseCase(
+        CreateBookmarkTopicParams(topicId: event.topicId));
+    emit(const TopicDetailLoadingState(showLoading: false));
+    result.fold(
+      (l) => emit(
+        TopicDetailLoadFailedState(
+          exception: l,
+          emitTime: DateTime.now(),
+        ),
+      ),
+      (r) => emit(
+        const TopicDetailAddFavoriteDoneState(),
+      ),
+    );
+  }
+
+  void _onRemoveFavorite(TopicDetailRemoveFavoriteEvent event, emit) async {
+    emit(const TopicDetailLoadingState());
+    final result = await deleteBookmarkTopicUseCase(event.id);
+    emit(const TopicDetailLoadingState(showLoading: false));
+    result.fold(
+      (l) => emit(
+        TopicDetailLoadFailedState(
+          exception: l,
+          emitTime: DateTime.now(),
+        ),
+      ),
+      (r) => emit(
+        const TopicDetailRemoveFavoriteDoneState(),
       ),
     );
   }

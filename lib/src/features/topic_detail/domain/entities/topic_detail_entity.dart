@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import '../../../bookmark/topic/domain/entities/bookmark_topic_entity.dart';
+
 class TopicDetailEntity extends Equatable {
   const TopicDetailEntity({
     this.topicId,
@@ -10,6 +12,7 @@ class TopicDetailEntity extends Equatable {
     this.topicCategory,
     this.topicQuestions,
     this.topicPhrases,
+    this.bookmark,
   });
 
   final String? topicId;
@@ -20,6 +23,7 @@ class TopicDetailEntity extends Equatable {
   final String? topicCategory;
   final List<TopicQuestionEntity>? topicQuestions;
   final List<TopicPhraseEntity>? topicPhrases;
+  final BookmarkTopicEntity? bookmark;
 
   @override
   List<Object?> get props => [
@@ -31,11 +35,12 @@ class TopicDetailEntity extends Equatable {
         topicCategory,
         topicQuestions,
         topicPhrases,
+        bookmark,
       ];
 }
 
 class TopicQuestionEntity extends Equatable {
-  const TopicQuestionEntity({this.questionContent});
+  const TopicQuestionEntity({this.questionContent, this.topicAnswers});
 
   final String? questionContent;
 
@@ -43,6 +48,7 @@ class TopicQuestionEntity extends Equatable {
   List<Object?> get props => [
         questionContent,
       ];
+  final List<QuestionAnswerEntity>? topicAnswers;
 }
 
 class TopicPhraseEntity extends Equatable {
@@ -71,6 +77,12 @@ class TopicPhraseEntity extends Equatable {
         phraseExamples,
         bookmark,
       ];
+}
+
+class QuestionAnswerEntity {
+  const QuestionAnswerEntity({this.questionAnswer});
+
+  final String? questionAnswer;
 }
 
 class PhraseExampleEntity extends Equatable {

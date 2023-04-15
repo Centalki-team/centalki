@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../../base/define/styles.dart';
+import '../../../../../base/widgets/buttons/text_button.dart';
 import '../../../topic_detail/presentation/views/topic_detail_page.dart';
 import '../../domain/entities/topic_item_entity.dart';
+import '../blocs/pre_intermediate_topic_bloc/pre_intermediate_topics_bloc.dart';
 
-class TopicCard extends StatelessWidget {
+class TopicCard extends StatefulWidget {
   const TopicCard({
     Key? key,
     required this.item,
@@ -13,11 +17,16 @@ class TopicCard extends StatelessWidget {
   final TopicItemEntity item;
 
   @override
+  State<TopicCard> createState() => _TopicCardState();
+}
+
+class _TopicCardState extends State<TopicCard> {
+  @override
   Widget build(BuildContext context) => GestureDetector(
         onTap: () => Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => TopicDetailPage(
-              topicId: item.topicId ?? '',
+              topicId: widget.item.topicId ?? '',
             ),
           ),
         ),
@@ -39,7 +48,7 @@ class TopicCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image.network(
-                item.image ?? '',
+                widget.item.image ?? '',
                 width: 150,
                 height: 120,
                 fit: BoxFit.cover,
@@ -60,7 +69,7 @@ class TopicCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        item.topicCategory ?? '',
+                        widget.item.topicCategory ?? '',
                         style: const TextStyle(
                           fontSize: bodySmallSize,
                           fontWeight: bodySmallWeight,
@@ -68,58 +77,100 @@ class TopicCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        item.topicName ?? '',
+                        widget.item.topicName ?? '',
                         style: const TextStyle(
                           fontSize: titleMediumSize,
                           fontWeight: titleMediumWeight,
                         ),
                       ),
-                      //const SizedBox(height: spaceBetweenLine12),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.end,
-                      //   crossAxisAlignment: CrossAxisAlignment.end,
-                      //   children: [
-                      //     TextButton(
-                      //       onPressed: () => Navigator.of(context).push(
-                      //         MaterialPageRoute(
-                      //           builder: (context) =>
-                      //               TopicDetailPage(topicId: item.topicId ?? ''),
-                      //         ),
-                      //       ),
-                      //       child: Row(
-                      //         children: const [
-                      //           Icon(
-                      //             Icons.featured_play_list_rounded,
-                      //             color: AppColor.mainColor1,
-                      //             size: 20,
-                      //           ),
-                      //           SizedBox(width: smallSpacing6),
-                      //           Text(
-                      //             'Detail',
-                      //             style: TextStyle(color: AppColor.mainColor1),
-                      //           ),
-                      //         ],
-                      //       ),
-                      //     ),
-                      //     const SizedBox(width: spaceBetweenLine12),
-                      //     TextButton(
-                      //       style: TextButton.styleFrom(
-                      //           backgroundColor: AppColor.white,
-                      //           shape: RoundedRectangleBorder(
-                      //             borderRadius: BorderRadius.circular(32),
-                      //           )),
-                      //       onPressed: () {},
-                      //       child: const Text(
-                      //         'Talk',
-                      //         style: TextStyle(color: AppColor.defaultFont),
-                      //       ),
-                      //     ),
-                      //   ],
-                      // )
                     ],
                   ),
                 ),
-              )
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: spacing12, right: spacing12),
+                child: BlocBuilder<PreIntermediateTopicsBloc,
+                    PreIntermediateTopicsState>(
+                  builder: (context, state) => GestureDetector(
+                    onTap: () async {
+                      if (widget.item.topicBookmark != null) {
+                        await showDialog(
+                          barrierDismissible: false,
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            backgroundColor: AppColor.white,
+                            title: const Text(
+                              TextDoc.txtConfirmRemoveFavoriteTitle,
+                              style: TextStyle(
+                                fontSize: titleLargeSize,
+                                fontWeight: titleLargeWeight,
+                                color: AppColor.defaultFont,
+                              ),
+                            ),
+                            content: const Text(
+                              TextDoc.txtConfirmRemoveFavoriteContent,
+                              style: TextStyle(
+                                fontSize: bodySmallSize,
+                                fontWeight: bodySmallWeight,
+                                color: AppColor.defaultFont,
+                              ),
+                            ),
+                            actions: [
+                              AppTextButton(
+                                text: TextDoc.txtCancel,
+                                onPressed: () => Navigator.pop(context, false),
+                              ),
+                              ElevatedButton(
+                                onPressed: () => Navigator.pop(context, true),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: AppColor.error,
+                                  foregroundColor: Colors.white,
+                                ),
+                                child: const Text(
+                                  TextDoc.txtRemove,
+                                  style: TextStyle(
+                                    fontSize: labelLargeSize,
+                                    fontWeight: labelLargeWeight,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ).then((confirmRemoved) => {
+                              if (confirmRemoved)
+                                {
+                                  context.read<PreIntermediateTopicsBloc>().add(
+                                          PreIntermediateTopicsRemoveFavoriteEvent(
+                                        id: widget.item.topicBookmark
+                                                ?.bookmarkId ??
+                                            '',
+                                      )),
+                                }
+                            });
+                      } else {
+                        context
+                            .read<PreIntermediateTopicsBloc>()
+                            .add(PreIntermediateTopicsAddFavoriteEvent(
+                              topicId: widget.item.topicId ?? '',
+                            ));
+                      }
+                    },
+                    child: widget.item.topicBookmark == null
+                        ? SvgPicture.asset(
+                            "assets/icon/ic_heart.svg",
+                            width: 30,
+                            height: 30,
+                            color: const Color(0xFF9D9DAD),
+                          )
+                        : SvgPicture.asset(
+                            "assets/icon/ic_heart_fill.svg",
+                            width: 30,
+                            height: 30,
+                            color: const Color(0xFFFF6363),
+                          ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

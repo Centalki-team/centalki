@@ -69,6 +69,7 @@ class TextDoc {
   static const txtTopicVocab = 'Vocabulary';
   static const txtTopicQuestions = 'Recommended Questions';
   static const txtTopicPhraseExample = 'Example';
+  static const txtTopicAnswers = 'Answers';
 
   // CONNECT TEACHER
   static const txtCancel = 'Cancel';
@@ -253,4 +254,14 @@ class TextDoc {
   static const txtSelfReviewTitle = 'Please tell us your current English level';
   static const txtSelfReviewContent =
       'This information will enable us to guide you better and recommend suitable contents for you';
+
+  // Add favorite
+  static const txtAddFavoriteSuccess = 'Add favorite topic successfully!';
+
+  // Remove favorite
+  static const txtRemove = "Remove";
+  static const txtConfirmRemoveFavoriteTitle = "Remove from Favorite";
+  static const txtConfirmRemoveFavoriteContent =
+      "Are you sure to remove this from your favorite topics? You can still add them back later.";
+  static const txtRemoveFavoriteSuccess = 'Remove favorite topic successfully!';
 }
