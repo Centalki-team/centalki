@@ -267,4 +267,6 @@ class TextDoc {
   //Favorites
   static const txtTopicsTab = 'Topics';
   static const txtVocabsTab = 'Vocabularies';
+  static const txtFavoriteTopicsEmpty =
+      'You haven\'t added any favorite topics yet.\nAdd some interesting topics now.';
 }

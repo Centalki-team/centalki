@@ -14,8 +14,7 @@ BookmarkTopicModel _$BookmarkTopicModelFromJson(Map<String, dynamic> json) =>
       userId: json['userId'] as String?,
       topic: json['topic'] == null
           ? null
-          : BookmarkTopicBaseModel.fromJson(
-              json['topic'] as Map<String, dynamic>),
+          : TopicDetailModel.fromJson(json['topic'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$BookmarkTopicModelToJson(BookmarkTopicModel instance) =>
@@ -25,18 +24,4 @@ Map<String, dynamic> _$BookmarkTopicModelToJson(BookmarkTopicModel instance) =>
       'topicId': instance.topicId,
       'userId': instance.userId,
       'topic': instance.topic,
-    };
-
-BookmarkTopicBaseModel _$BookmarkTopicBaseModelFromJson(
-        Map<String, dynamic> json) =>
-    BookmarkTopicBaseModel(
-      data: json['data'] == null
-          ? null
-          : TopicDetailModel.fromJson(json['data'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$BookmarkTopicBaseModelToJson(
-        BookmarkTopicBaseModel instance) =>
-    <String, dynamic>{
-      'data': instance.data,
     };

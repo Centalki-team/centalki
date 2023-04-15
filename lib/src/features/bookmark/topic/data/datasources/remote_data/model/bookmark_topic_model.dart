@@ -25,26 +25,10 @@ class BookmarkTopicModel extends BookmarkTopicEntity {
   final String? createdAt;
   final String? topicId;
   final String? userId;
-  final BookmarkTopicBaseModel? topic;
+  final TopicDetailModel? topic;
 
   factory BookmarkTopicModel.fromJson(Map<String, dynamic> json) =>
       _$BookmarkTopicModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$BookmarkTopicModelToJson(this);
-}
-
-@JsonSerializable()
-class BookmarkTopicBaseModel extends BookmarkTopicBaseEntity {
-  BookmarkTopicBaseModel({
-    this.data,
-  }) : super(
-          topic: data,
-        );
-
-  final TopicDetailModel? data;
-
-  factory BookmarkTopicBaseModel.fromJson(Map<String, dynamic> json) =>
-      _$BookmarkTopicBaseModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$BookmarkTopicBaseModelToJson(this);
 }
