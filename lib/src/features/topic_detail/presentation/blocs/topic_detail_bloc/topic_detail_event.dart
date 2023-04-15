@@ -15,6 +15,22 @@ class TopicDetailLoadEvent extends TopicDetailEvent {
   final String topicId;
 }
 
+class TopicDetailPhraseCreateBookmarkEvent extends TopicDetailEvent {
+  const TopicDetailPhraseCreateBookmarkEvent({
+    required this.phraseId,
+  });
+
+  final String phraseId;
+}
+
+class TopicDetailPhraseRemoveBookmarkEvent extends TopicDetailEvent {
+  const TopicDetailPhraseRemoveBookmarkEvent({
+    required this.phraseId,
+  });
+
+  final String phraseId;
+}
+
 class TopicDetailAddFavoriteEvent extends TopicDetailEvent {
   const TopicDetailAddFavoriteEvent({required this.topicId});
 

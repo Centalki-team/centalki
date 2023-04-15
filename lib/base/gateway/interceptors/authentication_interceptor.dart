@@ -12,9 +12,9 @@ class AuthInterceptor extends Interceptor {
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
     options.headers['Accept'] = 'application/json';
-    final session = await FirebaseAuth.instance.currentUser?.getIdToken();
-    log(session ?? 'no token found');
-    options.headers[accessToken] = 'Bearer $session';
+    final session = await FirebaseAuth.instance.currentUser?.getIdTokenResult();
+    log(session?.token ?? 'no token found');
+    options.headers[accessToken] = 'Bearer ${session?.token ?? ''}';
     //options.headers['CustomerToken'] = session;
     super.onRequest(options, handler);
   }

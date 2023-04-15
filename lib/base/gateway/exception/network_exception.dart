@@ -23,13 +23,12 @@ class NetworkException extends AppException<DioError> {
         );
 
   static NetworkException tokenNotFound(
-      {DioError? error, StackTrace? stackTrace, String? url}) {
-    return NetworkException(
-        errorCode: NetworkErrorCode.unauthenticated,
-        error: error,
-        stackTrace: stackTrace,
-        url: url,
-        displayTitle: 'Unauthenticated',
-        displayMessage: 'Đăng nhập hết hạn hoặc không tìm thấy ');
-  }
+          {DioError? error, StackTrace? stackTrace, String? url}) =>
+      NetworkException(
+          errorCode: NetworkErrorCode.unauthenticated,
+          error: error,
+          stackTrace: stackTrace,
+          url: url,
+          displayTitle: 'Unauthenticated',
+          displayMessage: 'Đăng nhập hết hạn hoặc không tìm thấy ');
 }
