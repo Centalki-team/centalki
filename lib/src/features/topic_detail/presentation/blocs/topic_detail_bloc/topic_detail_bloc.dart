@@ -78,10 +78,10 @@ class TopicDetailBloc extends Bloc<TopicDetailEvent, TopicDetailState> {
 
   _onRemoveTopicPhraseBookmark(
       TopicDetailPhraseRemoveBookmarkEvent event, emit) async {
-    if (event.phraseId.isEmpty) return;
+    if (event.bookmarkId.isEmpty) return;
 
     emit(const TopicDetailLoadingState());
-    final res = await _deleteTopicPhraseBookmarkUseCase(event.phraseId);
+    final res = await _deleteTopicPhraseBookmarkUseCase(event.bookmarkId);
     emit(const TopicDetailLoadingState(showLoading: false));
     res.fold(
       (l) => emit(
@@ -92,7 +92,7 @@ class TopicDetailBloc extends Bloc<TopicDetailEvent, TopicDetailState> {
       ),
       (r) => emit(
         TopicPhraseRemoveBookmarkSuccessState(
-          phraseId: event.phraseId,
+          bookmarkId: event.bookmarkId,
           emitTime: DateTime.now(),
         ),
       ),

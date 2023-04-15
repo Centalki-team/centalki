@@ -48,16 +48,19 @@ class PhraseCard extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    if (phraseEntity.topicPhraseId != null &&
-                        phraseEntity.topicPhraseId!.isNotEmpty) {
-                      if (phraseEntity.bookmark == null) {
+                    if (phraseEntity.bookmark == null) {
+                      if (phraseEntity.topicPhraseId != null &&
+                          phraseEntity.topicPhraseId!.isNotEmpty) {
                         context.read<TopicDetailBloc>().add(
                             TopicDetailPhraseCreateBookmarkEvent(
                                 phraseId: phraseEntity.topicPhraseId!));
-                      } else {
+                      }
+                    } else {
+                      if (phraseEntity.bookmark!.id != null &&
+                          phraseEntity.bookmark!.id!.isNotEmpty) {
                         context.read<TopicDetailBloc>().add(
                             TopicDetailPhraseRemoveBookmarkEvent(
-                                phraseId: phraseEntity.topicPhraseId!));
+                                bookmarkId: phraseEntity.bookmark!.id!));
                       }
                     }
                   },
