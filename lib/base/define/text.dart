@@ -255,9 +255,13 @@ class TextDoc {
   static const txtSelfReviewContent =
       'This information will enable us to guide you better and recommend suitable contents for you';
 
+  // Add favorite
+  static const txtAddFavoriteSuccess = 'Add favorite topic successfully!';
+
   // Remove favorite
   static const txtRemove = "Remove";
   static const txtConfirmRemoveFavoriteTitle = "Remove from Favorite";
   static const txtConfirmRemoveFavoriteContent =
       "Are you sure to remove this from your favorite topics? You can still add them back later.";
+  static const txtRemoveFavoriteSuccess = 'Remove favorite topic successfully!';
 }

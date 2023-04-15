@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../../../../bookmark/topic/data/datasources/remote_data/model/bookmark_topic_model.dart';
 import '../../../../../domain/entities/topic_item_entity.dart';
 
 part 'topic_model.g.dart';
@@ -31,7 +32,13 @@ class TopicItemBaseModel extends TopicItemEntity {
     this.name,
     this.levelId,
     this.category,
-  }) : super(topicId: id, image: imageUrl, topicName: name, topicCategory: category?.name);
+    this.bookmark,
+  }) : super(
+            topicId: id,
+            image: imageUrl,
+            topicName: name,
+            topicCategory: category?.name,
+            topicBookmark: bookmark);
 
   final String? id;
   final String? categoryId;
@@ -41,6 +48,7 @@ class TopicItemBaseModel extends TopicItemEntity {
   final String? name;
   final String? levelId;
   final CategoryBaseModel? category;
+  final BookmarkTopicModel? bookmark;
 
   static TopicItemBaseModel fromJson(Map<String, dynamic> json) =>
       _$TopicItemBaseModelFromJson(json);

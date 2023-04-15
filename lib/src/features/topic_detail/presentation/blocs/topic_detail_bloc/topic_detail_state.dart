@@ -100,3 +100,11 @@ class TopicDetailLoadingState extends TopicDetailState {
         showLoading,
       ];
 }
+
+class TopicDetailAddFavoriteDoneState extends TopicDetailState {
+  const TopicDetailAddFavoriteDoneState();
+}
+
+class TopicDetailRemoveFavoriteDoneState extends TopicDetailState {
+  const TopicDetailRemoveFavoriteDoneState();
+}

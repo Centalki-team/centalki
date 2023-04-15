@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../base/define/colors.dart';
 import '../../../../../../base/define/dimensions.dart';
 import '../../../../../../base/define/size.dart';
+import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/toast/app_toast.dart';
 import '../../blocs/pre_intermediate_topic_bloc/pre_intermediate_topics_bloc.dart';
 import '../../widgets/topic_card.dart';
@@ -35,6 +36,38 @@ class _PreIntermediateTopicViewState extends State<PreIntermediateTopicView> {
                 ),
               ),
             ).show(context);
+          } else if (state is PreIntermediateTopicsAddFavoriteDoneState) {
+            AppToast(
+              duration: const Duration(seconds: 3),
+              bottomOffset: 8.0,
+              message: const Text(
+                TextDoc.txtAddFavoriteSuccess,
+                style: TextStyle(
+                  fontSize: bodyLargeSize,
+                  fontWeight: bodyLargeWeight,
+                  color: AppColor.white,
+                ),
+              ),
+            ).show(context);
+            context
+                .read<PreIntermediateTopicsBloc>()
+                .add(const PreIntermediateTopicsLoadEvent());
+          } else if (state is PreIntermediateTopicsRemoveFavoriteDoneState) {
+            AppToast(
+              duration: const Duration(seconds: 3),
+              bottomOffset: 8.0,
+              message: const Text(
+                TextDoc.txtRemoveFavoriteSuccess,
+                style: TextStyle(
+                  fontSize: bodyLargeSize,
+                  fontWeight: bodyLargeWeight,
+                  color: AppColor.white,
+                ),
+              ),
+            ).show(context);
+            context
+                .read<PreIntermediateTopicsBloc>()
+                .add(const PreIntermediateTopicsLoadEvent());
           }
         },
         child:
@@ -54,8 +87,6 @@ class _PreIntermediateTopicViewState extends State<PreIntermediateTopicView> {
                       const SizedBox(height: spacing8),
                   itemBuilder: (context, index) => TopicCard(
                     item: state.topics[index],
-                    isFavorite: state.interestedTopics
-                        .contains(state.topics[index].topicId),
                   ),
                 ),
               );

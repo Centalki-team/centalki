@@ -30,11 +30,10 @@ class BookmarkTopicRemoteDatasource {
         .toList();
   }
 
-  Future<bool> deleteBookmarkTopic(Map<String, dynamic> params) async {
+  Future<bool> deleteBookmarkTopic(String bookmarkId) async {
     final response = await apiGateway.execute(
-      resource: const BookmarkTopicResource(),
+      resource: DeleteBookmarkTopicResource(bookmarkId),
       method: HTTPMethod.delete,
-      params: params,
     );
     return response.statusCode == 200;
   }

@@ -38,7 +38,7 @@ class TopicDetailAddFavoriteEvent extends TopicDetailEvent {
 }
 
 class TopicDetailRemoveFavoriteEvent extends TopicDetailEvent {
-  const TopicDetailRemoveFavoriteEvent({required this.topicId});
+  const TopicDetailRemoveFavoriteEvent({required this.id});
 
-  final String topicId;
+  final String id;
 }

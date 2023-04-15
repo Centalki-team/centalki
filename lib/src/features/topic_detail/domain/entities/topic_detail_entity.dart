@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import '../../../bookmark/topic/domain/entities/bookmark_topic_entity.dart';
+
 class TopicDetailEntity extends Equatable {
   const TopicDetailEntity({
     this.topicId,
@@ -10,6 +12,7 @@ class TopicDetailEntity extends Equatable {
     this.topicCategory,
     this.topicQuestions,
     this.topicPhrases,
+    this.bookmark,
   });
 
   final String? topicId;
@@ -20,6 +23,7 @@ class TopicDetailEntity extends Equatable {
   final String? topicCategory;
   final List<TopicQuestionEntity>? topicQuestions;
   final List<TopicPhraseEntity>? topicPhrases;
+  final BookmarkTopicEntity? bookmark;
 
   @override
   List<Object?> get props => [
@@ -31,6 +35,7 @@ class TopicDetailEntity extends Equatable {
         topicCategory,
         topicQuestions,
         topicPhrases,
+        bookmark,
       ];
 }
 

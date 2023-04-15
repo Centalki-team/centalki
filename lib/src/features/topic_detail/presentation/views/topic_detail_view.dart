@@ -24,8 +24,6 @@ class TopicDetailView extends StatefulWidget {
 }
 
 class _TopicDetailViewState extends State<TopicDetailView> {
-  bool isFavorite = false;
-
   @override
   Widget build(BuildContext context) =>
       BlocListener<TopicDetailBloc, TopicDetailState>(
@@ -79,6 +77,38 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                 ),
               ),
             ).show(context);
+          } else if (state is TopicDetailAddFavoriteDoneState) {
+            AppToast(
+              duration: const Duration(seconds: 3),
+              bottomOffset: 8.0,
+              message: const Text(
+                TextDoc.txtAddFavoriteSuccess,
+                style: TextStyle(
+                  fontSize: bodyLargeSize,
+                  fontWeight: bodyLargeWeight,
+                  color: AppColor.white,
+                ),
+              ),
+            ).show(context);
+            context
+                .read<TopicDetailBloc>()
+                .add(TopicDetailLoadEvent(topicId: widget.topicId));
+          } else if (state is TopicDetailRemoveFavoriteDoneState) {
+            AppToast(
+              duration: const Duration(seconds: 3),
+              bottomOffset: 8.0,
+              message: const Text(
+                TextDoc.txtRemoveFavoriteSuccess,
+                style: TextStyle(
+                  fontSize: bodyLargeSize,
+                  fontWeight: bodyLargeWeight,
+                  color: AppColor.white,
+                ),
+              ),
+            ).show(context);
+            context
+                .read<TopicDetailBloc>()
+                .add(TopicDetailLoadEvent(topicId: widget.topicId));
           }
         },
         child: Scaffold(
@@ -118,14 +148,16 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(radius12)),
                           border: Border.all(
-                              width: isFavorite ? 2.0 : 1.0,
-                              color: isFavorite
+                              width: state.topicDetail.bookmark != null
+                                  ? 2.0
+                                  : 1.0,
+                              color: state.topicDetail.bookmark != null
                                   ? const Color(0xFFFF6363)
                                   : const Color(0xFF9D9DAD)),
                         ),
                         child: GestureDetector(
                           onTap: () async {
-                            if (isFavorite) {
+                            if (state.topicDetail.bookmark != null) {
                               await showDialog(
                                 barrierDismissible: false,
                                 context: context,
@@ -154,18 +186,8 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                           Navigator.pop(context, false),
                                     ),
                                     ElevatedButton(
-                                      onPressed: () => {
-                                        context
-                                            .read<TopicDetailBloc>()
-                                            .add(TopicDetailRemoveFavoriteEvent(
-                                              topicId:
-                                                  state.topicDetail.topicId ??
-                                                      '',
-                                            )),
-                                        setState(() {
-                                          isFavorite = false;
-                                        }),
-                                      },
+                                      onPressed: () =>
+                                          Navigator.pop(context, true),
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: AppColor.error,
                                         foregroundColor: Colors.white,
@@ -180,19 +202,27 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                     ),
                                   ],
                                 ),
-                              ).then((value) => value ?? false);
+                              ).then((confirmRemoved) => {
+                                    if (confirmRemoved)
+                                      {
+                                        context
+                                            .read<TopicDetailBloc>()
+                                            .add(TopicDetailRemoveFavoriteEvent(
+                                              id: state.topicDetail.bookmark
+                                                      ?.bookmarkId ??
+                                                  '',
+                                            )),
+                                      }
+                                  });
                             } else {
                               context
                                   .read<TopicDetailBloc>()
                                   .add(TopicDetailAddFavoriteEvent(
-                                    topicId: state.topicDetail.topicId ?? '',
+                                    topicId: widget.topicId,
                                   ));
-                              setState(() {
-                                isFavorite = true;
-                              });
                             }
                           },
-                          child: !isFavorite
+                          child: state.topicDetail.bookmark == null
                               ? SvgPicture.asset(
                                   "assets/icon/ic_heart.svg",
                                   color: const Color(0xFF9D9DAD),

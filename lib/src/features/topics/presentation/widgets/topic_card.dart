@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../../base/define/styles.dart';
-import '../../../../../base/temp_dio/dio_client.dart';
 import '../../../../../base/widgets/buttons/text_button.dart';
 import '../../../topic_detail/presentation/views/topic_detail_page.dart';
 import '../../domain/entities/topic_item_entity.dart';
@@ -13,27 +12,15 @@ class TopicCard extends StatefulWidget {
   const TopicCard({
     Key? key,
     required this.item,
-    required this.isFavorite,
   }) : super(key: key);
 
   final TopicItemEntity item;
-  final bool isFavorite;
 
   @override
   State<TopicCard> createState() => _TopicCardState();
 }
 
 class _TopicCardState extends State<TopicCard> {
-  bool isFavorite = false;
-
-  @override
-  void initState() {
-    setState(() {
-      isFavorite = widget.isFavorite;
-    });
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) => GestureDetector(
         onTap: () => Navigator.of(context).push(
@@ -96,48 +83,6 @@ class _TopicCardState extends State<TopicCard> {
                           fontWeight: titleMediumWeight,
                         ),
                       ),
-                      //const SizedBox(height: spaceBetweenLine12),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.end,
-                      //   crossAxisAlignment: CrossAxisAlignment.end,
-                      //   children: [
-                      //     TextButton(
-                      //       onPressed: () => Navigator.of(context).push(
-                      //         MaterialPageRoute(
-                      //           builder: (context) =>
-                      //               TopicDetailPage(topicId: item.topicId ?? ''),
-                      //         ),
-                      //       ),
-                      //       child: Row(
-                      //         children: const [
-                      //           Icon(
-                      //             Icons.featured_play_list_rounded,
-                      //             color: AppColor.mainColor1,
-                      //             size: 20,
-                      //           ),
-                      //           SizedBox(width: smallSpacing6),
-                      //           Text(
-                      //             'Detail',
-                      //             style: TextStyle(color: AppColor.mainColor1),
-                      //           ),
-                      //         ],
-                      //       ),
-                      //     ),
-                      //     const SizedBox(width: spaceBetweenLine12),
-                      //     TextButton(
-                      //       style: TextButton.styleFrom(
-                      //           backgroundColor: AppColor.white,
-                      //           shape: RoundedRectangleBorder(
-                      //             borderRadius: BorderRadius.circular(32),
-                      //           )),
-                      //       onPressed: () {},
-                      //       child: const Text(
-                      //         'Talk',
-                      //         style: TextStyle(color: AppColor.defaultFont),
-                      //       ),
-                      //     ),
-                      //   ],
-                      // )
                     ],
                   ),
                 ),
@@ -148,7 +93,7 @@ class _TopicCardState extends State<TopicCard> {
                     PreIntermediateTopicsState>(
                   builder: (context, state) => GestureDetector(
                     onTap: () async {
-                      if (isFavorite) {
+                      if (widget.item.topicBookmark != null) {
                         await showDialog(
                           barrierDismissible: false,
                           context: context,
@@ -176,15 +121,7 @@ class _TopicCardState extends State<TopicCard> {
                                 onPressed: () => Navigator.pop(context, false),
                               ),
                               ElevatedButton(
-                                onPressed: () => {
-                                  context.read<PreIntermediateTopicsBloc>().add(
-                                          PreIntermediateTopicsRemoveFavoriteEvent(
-                                        id: widget.item.topicId ?? '',
-                                      )),
-                                  setState(() {
-                                    isFavorite = false;
-                                  }),
-                                },
+                                onPressed: () => Navigator.pop(context, true),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: AppColor.error,
                                   foregroundColor: Colors.white,
@@ -199,19 +136,26 @@ class _TopicCardState extends State<TopicCard> {
                               ),
                             ],
                           ),
-                        ).then((value) => value ?? false);
+                        ).then((confirmRemoved) => {
+                              if (confirmRemoved)
+                                {
+                                  context.read<PreIntermediateTopicsBloc>().add(
+                                          PreIntermediateTopicsRemoveFavoriteEvent(
+                                        id: widget.item.topicBookmark
+                                                ?.bookmarkId ??
+                                            '',
+                                      )),
+                                }
+                            });
                       } else {
                         context
                             .read<PreIntermediateTopicsBloc>()
                             .add(PreIntermediateTopicsAddFavoriteEvent(
                               topicId: widget.item.topicId ?? '',
                             ));
-                        setState(() {
-                          isFavorite = true;
-                        });
                       }
                     },
-                    child: !isFavorite
+                    child: widget.item.topicBookmark == null
                         ? SvgPicture.asset(
                             "assets/icon/ic_heart.svg",
                             width: 30,

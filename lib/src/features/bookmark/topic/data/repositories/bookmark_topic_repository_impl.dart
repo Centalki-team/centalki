@@ -50,8 +50,7 @@ class BookmarkTopicRepositoryImpl extends BookmarkTopicRepository {
   }
 
   @override
-  Future<Either<AppException, bool>> deleteBookmarkTopic(
-      Map<String, dynamic> params) async {
+  Future<Either<AppException, bool>> deleteBookmarkTopic(String params) async {
     try {
       final result =
           await bookmarkTopicRemoteDatasource.deleteBookmarkTopic(params);

@@ -33,6 +33,10 @@ TopicItemBaseModel _$TopicItemBaseModelFromJson(Map<String, dynamic> json) =>
           ? null
           : CategoryBaseModel.fromJson(
               json['category'] as Map<String, dynamic>),
+      bookmark: json['bookmark'] == null
+          ? null
+          : BookmarkTopicModel.fromJson(
+              json['bookmark'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$TopicItemBaseModelToJson(TopicItemBaseModel instance) =>
@@ -44,6 +48,7 @@ Map<String, dynamic> _$TopicItemBaseModelToJson(TopicItemBaseModel instance) =>
       'name': instance.name,
       'levelId': instance.levelId,
       'category': instance.category,
+      'bookmark': instance.bookmark,
     };
 
 CategoryBaseModel _$CategoryBaseModelFromJson(Map<String, dynamic> json) =>

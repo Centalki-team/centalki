@@ -12,7 +12,6 @@ import '../../../../bookmark/topic/domain/repositories/bookmark_topic_repository
 import '../../../../bookmark/topic/domain/usecases/create_bookmark_topic_usecase.dart';
 import '../../../../bookmark/topic/domain/usecases/delete_bookmark_topic_usecase.dart';
 import '../../../../bookmark/topic/domain/usecases/params/create_bookmark_topic_params.dart';
-import '../../../../bookmark/topic/domain/usecases/params/delete_bookmark_topic_params.dart';
 import '../../../domain/entities/topic_detail_entity.dart';
 import '../../../domain/repositories/topic_detail_repository.dart';
 import '../../../domain/usecases/get_topic_detail_usecase.dart';
@@ -116,28 +115,37 @@ class TopicDetailBloc extends Bloc<TopicDetailEvent, TopicDetailState> {
   }
 
   void _onAddFavorite(TopicDetailAddFavoriteEvent event, emit) async {
+    emit(const TopicDetailLoadingState());
     final result = await createBookmarkTopicUseCase(
         CreateBookmarkTopicParams(topicId: event.topicId));
+    emit(const TopicDetailLoadingState(showLoading: false));
     result.fold(
-        (l) => emit(
-              TopicDetailLoadFailedState(
-                exception: l,
-                emitTime: DateTime.now(),
-              ),
-            ),
-        (r) => {});
+      (l) => emit(
+        TopicDetailLoadFailedState(
+          exception: l,
+          emitTime: DateTime.now(),
+        ),
+      ),
+      (r) => emit(
+        const TopicDetailAddFavoriteDoneState(),
+      ),
+    );
   }
 
   void _onRemoveFavorite(TopicDetailRemoveFavoriteEvent event, emit) async {
-    final result = await deleteBookmarkTopicUseCase(
-        DeleteBookmarkTopicParams(id: event.topicId));
+    emit(const TopicDetailLoadingState());
+    final result = await deleteBookmarkTopicUseCase(event.id);
+    emit(const TopicDetailLoadingState(showLoading: false));
     result.fold(
-        (l) => emit(
-              TopicDetailLoadFailedState(
-                exception: l,
-                emitTime: DateTime.now(),
-              ),
-            ),
-        (r) => {});
+      (l) => emit(
+        TopicDetailLoadFailedState(
+          exception: l,
+          emitTime: DateTime.now(),
+        ),
+      ),
+      (r) => emit(
+        const TopicDetailRemoveFavoriteDoneState(),
+      ),
+    );
   }
 }
