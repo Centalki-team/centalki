@@ -31,6 +31,9 @@ class $AssetsIconGen {
   /// File path: assets/icon/chat.png
   AssetGenImage get chat => const AssetGenImage('assets/icon/chat.png');
 
+  /// File path: assets/icon/favorite.png
+  AssetGenImage get favorite => const AssetGenImage('assets/icon/favorite.png');
+
   /// File path: assets/icon/ic_clear_circle.svg
   SvgGenImage get icClearCircle =>
       const SvgGenImage('assets/icon/ic_clear_circle.svg');
@@ -108,6 +111,7 @@ class $AssetsIconGen {
   List<dynamic> get values => [
         account,
         chat,
+        favorite,
         icClearCircle,
         icErrorToast,
         icFeedback,
@@ -337,10 +341,10 @@ class SvgGenImage {
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
       theme: theme,
-      //colorFilter: colorFilter,
+      // colorFilter: colorFilter,
       color: color,
       colorBlendMode: colorBlendMode,
-      //clipBehavior: clipBehavior,
+      // clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,
     );
   }

@@ -1,6 +1,8 @@
 class AppText {
   static String topic = 'Topic';
 
+  static String favorite = 'Favorite';
+
   static String account = 'Account';
 
   static String settings = 'Settings';

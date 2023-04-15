@@ -19,6 +19,7 @@ import 'src/features/home/presentation/views/home_view.dart';
 import 'src/features/introduction/domain/repositories/app_intro_repository.dart';
 import 'src/features/introduction/domain/usecases/get_status_app_intro_usecase.dart';
 import 'src/features/introduction/presentation/views/app_intro_page.dart';
+import 'src/features/splash/presentation/views/splash_screen.dart';
 
 void main(List<String> args) async {
   await Injection.inject();
@@ -131,9 +132,7 @@ class _MyWidgetState extends State<MyWidget> {
     print(_status);
     switch (_status) {
       case "loading":
-        return const Center(
-          child: Text("Splash screen here!"),
-        );
+        return const SplashScreen();
       case "not_auth":
         return const SignInPage();
       case "not_email_verified":
@@ -141,9 +140,7 @@ class _MyWidgetState extends State<MyWidget> {
       case "success":
         return const HomeView();
       default:
-        return const Center(
-          child: Text("Splash screen here!"),
-        );
+        return const SplashScreen();
     }
   }
 }

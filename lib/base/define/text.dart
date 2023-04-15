@@ -264,4 +264,7 @@ class TextDoc {
   static const txtConfirmRemoveFavoriteContent =
       "Are you sure to remove this from your favorite topics? You can still add them back later.";
   static const txtRemoveFavoriteSuccess = 'Remove favorite topic successfully!';
+  //Favorites
+  static const txtTopicsTab = 'Topics';
+  static const txtVocabsTab = 'Vocabularies';
 }
