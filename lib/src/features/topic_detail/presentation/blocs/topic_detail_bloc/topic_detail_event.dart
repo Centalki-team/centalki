@@ -25,10 +25,10 @@ class TopicDetailPhraseCreateBookmarkEvent extends TopicDetailEvent {
 
 class TopicDetailPhraseRemoveBookmarkEvent extends TopicDetailEvent {
   const TopicDetailPhraseRemoveBookmarkEvent({
-    required this.phraseId,
+    required this.bookmarkId,
   });
 
-  final String phraseId;
+  final String bookmarkId;
 }
 
 class TopicDetailAddFavoriteEvent extends TopicDetailEvent {

@@ -49,6 +49,22 @@ class _TopicDetailViewState extends State<TopicDetailView> {
             context.read<TopicDetailBloc>().add(TopicDetailLoadEvent(
                   topicId: widget.topicId,
                 ));
+          } else if (state is TopicPhraseRemoveBookmarkSuccessState) {
+            AppToast(
+              duration: const Duration(seconds: 3),
+              bottomOffset: 8.0,
+              message: const Text(
+                'Remove bookmark successfully!',
+                style: TextStyle(
+                  fontSize: bodyLargeSize,
+                  fontWeight: bodyLargeWeight,
+                  color: AppColor.white,
+                ),
+              ),
+            ).show(context);
+            context.read<TopicDetailBloc>().add(TopicDetailLoadEvent(
+                  topicId: widget.topicId,
+                ));
           } else if (state is TopicDetailLoadFailedState) {
             AppToast(
               mode: AppToastMode.error,
