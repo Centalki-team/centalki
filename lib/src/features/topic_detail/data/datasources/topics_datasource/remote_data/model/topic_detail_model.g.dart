@@ -98,6 +98,10 @@ TopicPhraseModel _$TopicPhraseModelFromJson(Map<String, dynamic> json) =>
       phrase: json['phrase'] as String?,
       updatedAt: json['updatedAt'] as String?,
       createdAt: json['createdAt'] as String?,
+      topicPharseBookmark: json['bookmark'] == null
+          ? null
+          : TopicPhraseBookmarkModel.fromJson(
+              json['bookmark'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$TopicPhraseModelToJson(TopicPhraseModel instance) =>
@@ -110,6 +114,26 @@ Map<String, dynamic> _$TopicPhraseModelToJson(TopicPhraseModel instance) =>
       'phrase': instance.phrase,
       'updatedAt': instance.updatedAt,
       'createdAt': instance.createdAt,
+      'bookmark': instance.topicPharseBookmark,
+    };
+
+TopicPhraseBookmarkModel _$TopicPhraseBookmarkModelFromJson(
+        Map<String, dynamic> json) =>
+    TopicPhraseBookmarkModel(
+      id: json['id'] as String?,
+      phraseId: json['phraseId'] as String?,
+      userId: json['userId'] as String?,
+      createdAt:
+          DateTimeHelper.stringToTime3Nullable(json['createdAt'] as String?),
+    );
+
+Map<String, dynamic> _$TopicPhraseBookmarkModelToJson(
+        TopicPhraseBookmarkModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'phraseId': instance.phraseId,
+      'userId': instance.userId,
+      'createdAt': instance.createdAt?.toIso8601String(),
     };
 
 PhraseExampleModel _$PhraseExampleModelFromJson(Map<String, dynamic> json) =>

@@ -8,7 +8,7 @@ class TopicRemoteDatasource {
 
   final ApiGateway apiGateway = ApiGateway(
     AppConfig.value.baseUrl,
-    apiType: ApiType.public,
+    apiType: ApiType.user,
   );
 
   Future<TopicsListBaseModel> getTopics() async {

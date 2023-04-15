@@ -11,10 +11,12 @@ class TopicDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocProvider(
-      create: (context) => TopicDetailBloc()
-        ..add(TopicDetailLoadEvent(
+        create: (context) => TopicDetailBloc()
+          ..add(TopicDetailLoadEvent(
+            topicId: topicId,
+          )),
+        child: TopicDetailView(
           topicId: topicId,
-        )),
-      child: const TopicDetailView(),
-    );
+        ),
+      );
 }
