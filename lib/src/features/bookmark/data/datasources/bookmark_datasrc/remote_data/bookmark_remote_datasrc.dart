@@ -1,6 +1,7 @@
 import '../../../../../../../base/gateway/api_gateway.base.dart';
 import '../../../../../../../config/app_config.dart';
 import '../../../../../../shared/extensions.dart';
+import 'model/bookmark_phrase_item_model.dart';
 import 'model/bookmark_phrase_model.dart';
 import 'resource/bookmark_phrase_resources.dart';
 
@@ -28,5 +29,15 @@ class BookmarkRemoteDatasource {
       method: HTTPMethod.delete,
     );
     return response.isOk;
+  }
+
+  Future<List<BookmarkVocabsItemModel>> getUserBookmarkVocabs() async {
+    final response = await _apiGateway.execute(
+      resource: const GetUserPhraseBookmarksResource(),
+      method: HTTPMethod.get,
+    );
+    return (response.data as List<dynamic>)
+        .map((e) => BookmarkVocabsItemModel.fromJson(e as Map<String, dynamic>))
+        .toList();
   }
 }

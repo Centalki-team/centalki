@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../../base/define/app_text.dart';
+import '../../../../../../base/define/common_txt_style.dart';
 import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/avatar.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
@@ -54,6 +56,43 @@ class _YourAccountViewState extends State<YourAccountView> {
                     children: [
                       Column(
                         children: [
+                          SizedBox(
+                            height: MediaQuery.of(context).padding.top,
+                          ),
+                          Container(
+                            height: 64.0,
+                            padding: const EdgeInsets.only(
+                              left: 16.0,
+                              right: 4.0,
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    AppText.appName,
+                                    style: CommonTxtStyle.t30Regular.apply(
+                                      color: AppColor.defaultFont,
+                                    ),
+                                  ),
+                                ),
+                                // const SizedBox(
+                                //   width: 24.0,
+                                // ),
+                                // Padding(
+                                //   padding: const EdgeInsets.symmetric(
+                                //     horizontal: 12.0,
+                                //   ),
+                                //   child: Assets.icon.icSearchHeader.svg(),
+                                // ),
+                                // Padding(
+                                //   padding: const EdgeInsets.symmetric(
+                                //     horizontal: 12.0,
+                                //   ),
+                                //   child: Assets.icon.icNotiHeader.svg(),
+                                // ),
+                              ],
+                            ),
+                          ),
                           Container(
                             width: double.maxFinite,
                             height: heightView / 3,
@@ -399,7 +438,10 @@ class _YourAccountViewState extends State<YourAccountView> {
                       Container(
                         margin: EdgeInsets.fromLTRB(
                           padding16,
-                          heightView * 1 / 3 - 30,
+                          heightView * 1 / 3 -
+                              30 +
+                              MediaQuery.of(context).padding.top +
+                              64.0,
                           padding16,
                           0,
                         ),

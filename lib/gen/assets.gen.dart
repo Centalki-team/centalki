@@ -31,6 +31,9 @@ class $AssetsIconGen {
   /// File path: assets/icon/chat.png
   AssetGenImage get chat => const AssetGenImage('assets/icon/chat.png');
 
+  /// File path: assets/icon/favorite.png
+  AssetGenImage get favorite => const AssetGenImage('assets/icon/favorite.png');
+
   /// File path: assets/icon/ic_clear_circle.svg
   SvgGenImage get icClearCircle =>
       const SvgGenImage('assets/icon/ic_clear_circle.svg');
@@ -42,6 +45,13 @@ class $AssetsIconGen {
   /// File path: assets/icon/ic_feedback.svg
   SvgGenImage get icFeedback =>
       const SvgGenImage('assets/icon/ic_feedback.svg');
+
+  /// File path: assets/icon/ic_heart.svg
+  SvgGenImage get icHeart => const SvgGenImage('assets/icon/ic_heart.svg');
+
+  /// File path: assets/icon/ic_heart_fill.svg
+  SvgGenImage get icHeartFill =>
+      const SvgGenImage('assets/icon/ic_heart_fill.svg');
 
   /// File path: assets/icon/ic_language.svg
   SvgGenImage get icLanguage =>
@@ -108,9 +118,12 @@ class $AssetsIconGen {
   List<dynamic> get values => [
         account,
         chat,
+        favorite,
         icClearCircle,
         icErrorToast,
         icFeedback,
+        icHeart,
+        icHeartFill,
         icLanguage,
         icNoti,
         icNotiHeader,
@@ -337,10 +350,10 @@ class SvgGenImage {
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
       theme: theme,
-      //colorFilter: colorFilter,
+      // colorFilter: colorFilter,
       color: color,
       colorBlendMode: colorBlendMode,
-      //clipBehavior: clipBehavior,
+      // clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,
     );
   }
