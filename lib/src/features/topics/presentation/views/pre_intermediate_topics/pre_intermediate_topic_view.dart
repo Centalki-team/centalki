@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../base/define/colors.dart';
-import '../../../../../../base/define/dimensions.dart';
-import '../../../../../../base/define/size.dart';
 import '../../../../../../base/define/styles.dart';
+import '../../../../../../base/widgets/buttons/text_button.dart';
 import '../../../../../../base/widgets/toast/app_toast.dart';
 import '../../blocs/pre_intermediate_topic_bloc/pre_intermediate_topics_bloc.dart';
 import '../../widgets/topic_card.dart';
@@ -87,6 +85,69 @@ class _PreIntermediateTopicViewState extends State<PreIntermediateTopicView> {
                       const SizedBox(height: spacing8),
                   itemBuilder: (context, index) => TopicCard(
                     item: state.topics[index],
+                    onTap: () async {
+                      if (state.topics[index].topicBookmark != null) {
+                        await showDialog(
+                          barrierDismissible: false,
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            backgroundColor: AppColor.white,
+                            title: const Text(
+                              TextDoc.txtConfirmRemoveFavoriteTitle,
+                              style: TextStyle(
+                                fontSize: titleLargeSize,
+                                fontWeight: titleLargeWeight,
+                                color: AppColor.defaultFont,
+                              ),
+                            ),
+                            content: const Text(
+                              TextDoc.txtConfirmRemoveFavoriteContent,
+                              style: TextStyle(
+                                fontSize: bodySmallSize,
+                                fontWeight: bodySmallWeight,
+                                color: AppColor.defaultFont,
+                              ),
+                            ),
+                            actions: [
+                              AppTextButton(
+                                text: TextDoc.txtCancel,
+                                onPressed: () => Navigator.pop(context, false),
+                              ),
+                              ElevatedButton(
+                                onPressed: () => Navigator.pop(context, true),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: AppColor.error,
+                                  foregroundColor: Colors.white,
+                                ),
+                                child: const Text(
+                                  TextDoc.txtRemove,
+                                  style: TextStyle(
+                                    fontSize: labelLargeSize,
+                                    fontWeight: labelLargeWeight,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ).then((confirmRemoved) => {
+                              if (confirmRemoved)
+                                {
+                                  context.read<PreIntermediateTopicsBloc>().add(
+                                          PreIntermediateTopicsRemoveFavoriteEvent(
+                                        id: state.topics[index].topicBookmark
+                                                ?.bookmarkId ??
+                                            '',
+                                      )),
+                                }
+                            });
+                      } else {
+                        context
+                            .read<PreIntermediateTopicsBloc>()
+                            .add(PreIntermediateTopicsAddFavoriteEvent(
+                              topicId: state.topics[index].topicId ?? '',
+                            ));
+                      }
+                    },
                   ),
                 ),
               );

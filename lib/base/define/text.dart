@@ -59,6 +59,7 @@ class TextDoc {
   static const txtPreIntermediate = 'Pre-Intermediate';
   static const txtIntermediate = 'Intermediate';
   static const txtUpperIntermediate = 'Upper-Intermediate';
+  static const txtSearchError = 'Topics name cannot exceed 100 characters';
 
   // TOPIC DETAIL
   static const txtTopicDetail = 'Topic Detail';
@@ -70,6 +71,13 @@ class TextDoc {
   static const txtTopicQuestions = 'Recommended Questions';
   static const txtTopicPhraseExample = 'Example';
   static const txtTopicAnswers = 'Answers';
+
+  // TOPIC SEARCH
+  static const txtNoResultFound = 'No Result Found';
+  static const txtSearchSr =
+      'Sorry! We could not find any topic that matches your search criteria.';
+  static const txtSearchPlsTryAgain =
+      'Please consider trying again with different keywords.';
 
   // CONNECT TEACHER
   static const txtCancel = 'Cancel';

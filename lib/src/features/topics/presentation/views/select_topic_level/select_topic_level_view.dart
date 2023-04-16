@@ -7,6 +7,7 @@ import '../../../../../../base/define/size.dart';
 import '../../../../../../base/define/text.dart';
 import '../../../../../../gen/assets.gen.dart';
 import '../../../../../shared/widgets/tab_indicator/tab_indicator.dart';
+import '../../../../search_topics/presentation/views/search_topics_page.dart';
 import '../elementary_topics/elementary_topics_view.dart';
 import '../intermediate_topics/intermediate_topic_page.dart';
 import '../pre_intermediate_topics/pre_intermediate_topic_page.dart';
@@ -67,7 +68,12 @@ class _SelectTopicLevelViewState extends State<SelectTopicLevelView>
                   width: 24.0,
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SearchTopicsPage(),
+                    ),
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 12.0,

@@ -65,15 +65,15 @@ class _FavoriteViewState extends State<FavoriteView>
                 const SizedBox(
                   width: 24.0,
                 ),
-                GestureDetector(
-                  onTap: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12.0,
-                    ),
-                    child: Assets.icon.icSearchHeader.svg(),
-                  ),
-                ),
+                // GestureDetector(
+                //   onTap: () {},
+                //   child: Padding(
+                //     padding: const EdgeInsets.symmetric(
+                //       horizontal: 12.0,
+                //     ),
+                //     child: Assets.icon.icSearchHeader.svg(),
+                //   ),
+                // ),
                 // Padding(
                 //   padding: const EdgeInsets.symmetric(
                 //     horizontal: 12.0,
