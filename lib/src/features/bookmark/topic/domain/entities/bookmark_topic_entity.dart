@@ -13,11 +13,5 @@ class BookmarkTopicEntity {
   final String? bookmarkCreatedAt;
   final String? bookmarkTopicId;
   final String? bookmarkUserId;
-  final BookmarkTopicBaseEntity? bookmarkTopic;
-}
-
-class BookmarkTopicBaseEntity {
-  const BookmarkTopicBaseEntity({this.topic});
-
-  final TopicDetailEntity? topic;
+  final TopicDetailEntity? bookmarkTopic;
 }
