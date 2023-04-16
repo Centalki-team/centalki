@@ -12,9 +12,11 @@ class TopicCard extends StatefulWidget {
   const TopicCard({
     Key? key,
     required this.item,
+    required this.onTap,
   }) : super(key: key);
 
   final TopicItemEntity item;
+  final Function() onTap;
 
   @override
   State<TopicCard> createState() => _TopicCardState();
@@ -89,86 +91,23 @@ class _TopicCardState extends State<TopicCard> {
               ),
               Container(
                 margin: const EdgeInsets.only(top: spacing12, right: spacing12),
-                child: BlocBuilder<PreIntermediateTopicsBloc,
-                    PreIntermediateTopicsState>(
-                  builder: (context, state) => GestureDetector(
-                    onTap: () async {
-                      if (widget.item.topicBookmark != null) {
-                        await showDialog(
-                          barrierDismissible: false,
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            backgroundColor: AppColor.white,
-                            title: const Text(
-                              TextDoc.txtConfirmRemoveFavoriteTitle,
-                              style: TextStyle(
-                                fontSize: titleLargeSize,
-                                fontWeight: titleLargeWeight,
-                                color: AppColor.defaultFont,
-                              ),
-                            ),
-                            content: const Text(
-                              TextDoc.txtConfirmRemoveFavoriteContent,
-                              style: TextStyle(
-                                fontSize: bodySmallSize,
-                                fontWeight: bodySmallWeight,
-                                color: AppColor.defaultFont,
-                              ),
-                            ),
-                            actions: [
-                              AppTextButton(
-                                text: TextDoc.txtCancel,
-                                onPressed: () => Navigator.pop(context, false),
-                              ),
-                              ElevatedButton(
-                                onPressed: () => Navigator.pop(context, true),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: AppColor.error,
-                                  foregroundColor: Colors.white,
-                                ),
-                                child: const Text(
-                                  TextDoc.txtRemove,
-                                  style: TextStyle(
-                                    fontSize: labelLargeSize,
-                                    fontWeight: labelLargeWeight,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ).then((confirmRemoved) => {
-                              if (confirmRemoved)
-                                {
-                                  context.read<PreIntermediateTopicsBloc>().add(
-                                          PreIntermediateTopicsRemoveFavoriteEvent(
-                                        id: widget.item.topicBookmark
-                                                ?.bookmarkId ??
-                                            '',
-                                      )),
-                                }
-                            });
-                      } else {
-                        context
-                            .read<PreIntermediateTopicsBloc>()
-                            .add(PreIntermediateTopicsAddFavoriteEvent(
-                              topicId: widget.item.topicId ?? '',
-                            ));
-                      }
-                    },
-                    child: widget.item.topicBookmark == null
-                        ? SvgPicture.asset(
-                            "assets/icon/ic_heart.svg",
-                            width: 30,
-                            height: 30,
-                            color: const Color(0xFF9D9DAD),
-                          )
-                        : SvgPicture.asset(
-                            "assets/icon/ic_heart_fill.svg",
-                            width: 30,
-                            height: 30,
-                            color: const Color(0xFFFF6363),
-                          ),
-                  ),
+                child: GestureDetector(
+                  onTap: () async {
+                    widget.onTap.call();
+                  },
+                  child: widget.item.topicBookmark == null
+                      ? SvgPicture.asset(
+                          "assets/icon/ic_heart.svg",
+                          width: 30,
+                          height: 30,
+                          color: const Color(0xFF9D9DAD),
+                        )
+                      : SvgPicture.asset(
+                          "assets/icon/ic_heart_fill.svg",
+                          width: 30,
+                          height: 30,
+                          color: const Color(0xFFFF6363),
+                        ),
                 ),
               ),
             ],
