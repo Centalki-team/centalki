@@ -50,6 +50,7 @@ class _SearchTopicsViewState extends State<SearchTopicsView> {
                 onPressed: () => Navigator.maybePop(context),
               ),
               backgroundColor: Colors.white,
+              scrolledUnderElevation: 0.0,
               centerTitle: false,
               titleSpacing: 0.0,
               toolbarHeight: 60.0,
