@@ -733,16 +733,16 @@ packages:
   jitsi_meet_wrapper:
     dependency: "direct main"
     description:
-      name: jitsi_meet_wrapper
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "jitsi_meet_wrapper/jitsi_meet_wrapper"
+      relative: true
+    source: path
     version: "0.0.6"
   jitsi_meet_wrapper_platform_interface:
-    dependency: transitive
+    dependency: "direct main"
     description:
-      name: jitsi_meet_wrapper_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "jitsi_meet_wrapper/jitsi_meet_wrapper_platform_interface"
+      relative: true
+    source: path
     version: "0.0.4"
   js:
     dependency: transitive
