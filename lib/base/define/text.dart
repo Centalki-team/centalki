@@ -272,9 +272,20 @@ class TextDoc {
   static const txtConfirmRemoveFavoriteContent =
       "Are you sure to remove this from your favorite topics? You can still add them back later.";
   static const txtRemoveFavoriteSuccess = 'Remove favorite topic successfully!';
-  //Favorites
+  // Favorites
   static const txtTopicsTab = 'Topics';
   static const txtVocabsTab = 'Vocabularies';
   static const txtFavoriteTopicsEmpty =
       'You haven\'t added any favorite topics yet.\nAdd some interesting topics now.';
+
+  // Session completed
+  static const txtCongrats = 'Congrats!';
+  static const txtSessionCompletedBody =
+      'You have completed a 30-minute session.\nKeep up your good work!';
+  static const txtSessionCompletedAskForFeedback =
+      'What are your thoughts on the teacher?';
+  static const txtSessionCompletedFeedbackBtn = 'Feedback for Teacher Now';
+  static const txtDoItLater = 'I will do it later';
+  static const txtSessionCompletedAskForReport = 'Any issue while studying?';
+  static const txtSessionCompletedReportBtn = 'Report';
 }
