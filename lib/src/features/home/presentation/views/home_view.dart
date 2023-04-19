@@ -8,6 +8,7 @@ import '../../../account/presentation/views/your_account/your_account_page.dart'
 import '../../../favorites/presentation/views/favorite_view.dart';
 import '../../../settings/presentation/views/settings_view.dart';
 import '../../../topics/presentation/views/select_topic_level/select_topic_level_view.dart';
+import '../widgets/custom_bot_nav_bar_item.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -18,13 +19,12 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView>
     with SingleTickerProviderStateMixin {
-  late int currentIndex;
+  ValueNotifier<int> currentIndex = ValueNotifier(0);
   late final TabController _tabController;
   final bottomNavList = <BottomIndicatorNavigationBarItem>[];
 
   @override
   void initState() {
-    currentIndex = 0;
     _tabController = TabController(
       length: 4,
       initialIndex: 0,
@@ -96,30 +96,103 @@ class _HomeViewState extends State<HomeView>
             ),
           ],
         ),
-        bottomNavigationBar: BottomIndicatorBar(
-          currentIndex: currentIndex,
-          onTap: (value) {
-            currentIndex = value;
-            _tabController.animateTo(value);
-          },
-          items: [
-            BottomIndicatorNavigationBarItem(
-              iconName: Assets.icon.list.path,
-              title: AppText.topic,
+        // bottomNavigationBar: BottomIndicatorBar(
+        //   currentIndex: currentIndex,
+        //   onTap: (value) {
+        //     currentIndex = value;
+        //     _tabController.animateTo(value);
+        //   },
+        //   items: [
+        //     BottomIndicatorNavigationBarItem(
+        //       iconName: Assets.icon.list.path,
+        //       title: AppText.topic,
+        //     ),
+        //     BottomIndicatorNavigationBarItem(
+        //       iconName: Assets.icon.favorite.path,
+        //       title: AppText.favorite,
+        //     ),
+        //     BottomIndicatorNavigationBarItem(
+        //       iconName: Assets.icon.account.path,
+        //       title: AppText.account,
+        //     ),
+        //     BottomIndicatorNavigationBarItem(
+        //       iconName: Assets.icon.settings.path,
+        //       title: AppText.settings,
+        //     ),
+        //   ],
+        // ),
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: AppColor.shadow.withOpacity(0.5),
+                blurRadius: 8.0,
+              )
+            ],
+          ),
+          child: ValueListenableBuilder(
+            valueListenable: currentIndex,
+            builder: (_, value, __) => BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              currentIndex: value,
+              backgroundColor: Colors.white,
+              onTap: (newValue) {
+                currentIndex.value = newValue;
+                _tabController.animateTo(newValue);
+              },
+              selectedItemColor: AppColor.mainColor1,
+              selectedLabelStyle: const TextStyle(
+                fontSize: labelLargeSize,
+                fontWeight: labelLargeWeight,
+              ),
+              unselectedItemColor: AppColor.shadow,
+              unselectedLabelStyle: const TextStyle(
+                fontSize: bodyMediumSize,
+                fontWeight: bodyMediumWeight,
+              ),
+              items: <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Assets.icon.dashboard.image(
+                    width: 24.0,
+                    height: 24,
+                  ),
+                  activeIcon: Assets.icon.dashboard.image(
+                    width: 24.0,
+                    height: 24,
+                    color: AppColor.mainColor1,
+                  ),
+                  label: AppText.topic,
+                ),
+                BottomNavigationBarItem(
+                  icon: Assets.icon.favorite.image(
+                    width: 24.0,
+                    height: 24,
+                  ),
+                  activeIcon: Assets.icon.favorite.image(
+                      width: 24.0, height: 24, color: AppColor.mainColor1),
+                  label: AppText.favorite,
+                ),
+                BottomNavigationBarItem(
+                  icon: Assets.icon.account.image(
+                    width: 24.0,
+                    height: 24,
+                  ),
+                  activeIcon: Assets.icon.account.image(
+                      width: 24.0, height: 24, color: AppColor.mainColor1),
+                  label: AppText.account,
+                ),
+                BottomNavigationBarItem(
+                  icon: Assets.icon.settings.image(
+                    width: 24.0,
+                    height: 24,
+                  ),
+                  activeIcon: Assets.icon.settings.image(
+                      width: 24.0, height: 24, color: AppColor.mainColor1),
+                  label: AppText.settings,
+                ),
+              ],
             ),
-            BottomIndicatorNavigationBarItem(
-              iconName: Assets.icon.favorite.path,
-              title: AppText.favorite,
-            ),
-            BottomIndicatorNavigationBarItem(
-              iconName: Assets.icon.account.path,
-              title: AppText.account,
-            ),
-            BottomIndicatorNavigationBarItem(
-              iconName: Assets.icon.settings.path,
-              title: AppText.settings,
-            ),
-          ],
+          ),
         ),
       );
 }

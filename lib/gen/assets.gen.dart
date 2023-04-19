@@ -31,6 +31,10 @@ class $AssetsIconGen {
   /// File path: assets/icon/chat.png
   AssetGenImage get chat => const AssetGenImage('assets/icon/chat.png');
 
+  /// File path: assets/icon/dashboard.png
+  AssetGenImage get dashboard =>
+      const AssetGenImage('assets/icon/dashboard.png');
+
   /// File path: assets/icon/favorite.png
   AssetGenImage get favorite => const AssetGenImage('assets/icon/favorite.png');
 
@@ -118,6 +122,7 @@ class $AssetsIconGen {
   List<dynamic> get values => [
         account,
         chat,
+        dashboard,
         favorite,
         icClearCircle,
         icErrorToast,
