@@ -45,6 +45,7 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
   // ignore: prefer_expression_function_bodies
   Widget build(BuildContext context) {
     // final args = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
+    // print(args.teacherId);
 
     return BlocListener<SessionGiveFeedbackBloc, SessionGiveFeedbackState>(
       listener: (context, state) async {
@@ -82,7 +83,11 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
               backgroundColor: AppColor.white,
               automaticallyImplyLeading: false,
               leading: GestureDetector(
-                onTap: Navigator.of(context).pop,
+                onTap: (() {
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                }),
                 child: const Icon(
                   Icons.arrow_back,
                   color: AppColor.defaultFont,

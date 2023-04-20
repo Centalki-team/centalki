@@ -6,6 +6,7 @@ import '../../../../../base/widgets/buttons/text_button.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../report_meeting/presentation/views/report_meeting_page.dart';
 import '../../../report_meeting/presentation/views/report_meeting_view.dart';
+import 'session_give_feedback/session_give_feedback_page.dart';
 
 class SessionCompletedView extends StatelessWidget {
   const SessionCompletedView({super.key});
@@ -63,8 +64,14 @@ class SessionCompletedView extends StatelessWidget {
               height: spacing8,
             ),
             AppElevatedButton(
-                text: TextDoc.txtSessionCompletedFeedbackBtn,
-                onPressed: () => {}),
+              text: TextDoc.txtSessionCompletedFeedbackBtn,
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => const SessionGiveFeedbackPage(),
+                    settings: RouteSettings(arguments: args)),
+              ),
+            ),
             AppTextButton(
               onPressed: () => {
                 Navigator.pop(context),
