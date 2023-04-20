@@ -288,4 +288,26 @@ class TextDoc {
   static const txtDoItLater = 'I will do it later';
   static const txtSessionCompletedAskForReport = 'Any issue while studying?';
   static const txtSessionCompletedReportBtn = 'Report';
+
+  // Session feedback
+  static const txtSessionFeedback = 'Session Feedback';
+  static const txtRating = 'Rating';
+  static const txtSatisfiedDesciptionLabel =
+      'What did the teacher make you satisfied with?';
+  static const txtNotSatisfiedDesciptionLabel =
+      'What did the teacher make you not satisfied with?';
+  static const txtDescriptionLabel = 'Description';
+  static const txtSatisfiedDescriptionHint =
+      'It would be nice if you could tell teacher more about what made your experiences good.';
+  static const txtNotSatisfiedDescriptionHint =
+      'It would be nice if you could tell teacher more about what made your experiences not good.';
+  static const txtSuggetionsLabel = 'Suggestions for Teacher';
+  static const txtSuggetionsHint =
+      'Teachers are always welcomed to hear any suggestion that you believe will improve your overall experiences for future sessions.';
+  static const txtSatisfiedChipNotEmpty = 'Please choose at least one option';
+  static const txtDescriptionNotEmpty = 'Description cannot be empty';
+  static const txtDescriptionTooLong =
+      'Description cannot exceed 500 characters';
+  static const txtSuggestionsTooLong =
+      'Suggestions cannot exceed 500 characters';
 }

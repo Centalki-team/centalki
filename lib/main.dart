@@ -20,7 +20,7 @@ import 'src/features/introduction/domain/repositories/app_intro_repository.dart'
 import 'src/features/introduction/domain/usecases/get_status_app_intro_usecase.dart';
 import 'src/features/introduction/presentation/views/app_intro_page.dart';
 import 'src/features/session_feedback/presentation/views/session_completed_view.dart';
-import 'src/features/session_feedback/presentation/views/session_give_feedback_view.dart';
+import 'src/features/session_feedback/presentation/views/session_give_feedback/session_give_feedback_page.dart';
 import 'src/features/splash/presentation/views/splash_screen.dart';
 
 void main(List<String> args) async {
@@ -141,7 +141,7 @@ class _MyWidgetState extends State<MyWidget> {
         return const VerifyEmailView();
       case "success":
         // return const HomeView();
-        return const SessionGiveFeedbackView();
+        return const SessionGiveFeedbackPage();
       default:
         return const SplashScreen();
     }
