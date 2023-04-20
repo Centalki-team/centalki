@@ -21,6 +21,7 @@ import 'src/features/introduction/domain/usecases/get_status_app_intro_usecase.d
 import 'src/features/introduction/presentation/views/app_intro_page.dart';
 import 'src/features/session_feedback/presentation/views/session_completed_view.dart';
 import 'src/features/session_feedback/presentation/views/session_give_feedback/session_give_feedback_page.dart';
+import 'src/features/session_view_feedback/presentation/views/session_view_feedback_view.dart';
 import 'src/features/splash/presentation/views/splash_screen.dart';
 
 void main(List<String> args) async {
@@ -141,7 +142,7 @@ class _MyWidgetState extends State<MyWidget> {
         return const VerifyEmailView();
       case "success":
         // return const HomeView();
-        return const SessionGiveFeedbackPage();
+        return const SessionViewFeedbackView();
       default:
         return const SplashScreen();
     }

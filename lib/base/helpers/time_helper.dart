@@ -5,6 +5,7 @@ class DateTimeHelper {
   static final _formatTime2 = DateFormat('dd-MM-yyyy');
   static final _formatTime3 = DateFormat("yyyy-MM-dd'T'HH:mm:ss");
   static final _formatTime4 = DateFormat('dd/MM/yyyy');
+  static final _formatTime5 = DateFormat('hh:mm a MMMM dd, yyyy');
 
   /// yyyy-MM-dd HH:mm:ss
   static String timeToString1(DateTime time) => _formatTime1.format(time);
@@ -17,6 +18,9 @@ class DateTimeHelper {
 
   /// dd/MM/yyyy
   static String timeToString4(DateTime time) => _formatTime4.format(time);
+
+  /// hh:mm:ss a MMM/dd/yyyy
+  static String timeToString5(DateTime time) => _formatTime5.format(time);
 
   /// yyyy-MM-dd HH:mm:ss
   static DateTime stringToTime1(String time) => _formatTime1.parse(time);
@@ -32,8 +36,8 @@ class DateTimeHelper {
 
   static bool isTheSameDay(DateTime date1, DateTime date2) =>
       date1.day == date2.day &&
-          date1.month == date2.month &&
-          date1.year == date2.year;
+      date1.month == date2.month &&
+      date1.year == date2.year;
 
   static String getDayOfWeekVi(int dayOfWeek) {
     switch (dayOfWeek) {
