@@ -9,6 +9,7 @@ class AppOutlinedTextField extends StatefulWidget {
     this.textInputType,
     this.obscureText = false,
     this.labelText,
+    this.hintText,
     this.errorText,
     this.icon,
     this.suffixIcon,
@@ -21,6 +22,7 @@ class AppOutlinedTextField extends StatefulWidget {
   final TextInputType? textInputType;
   final bool obscureText;
   final String? labelText;
+  final String? hintText;
   final String? errorText;
   final IconData? icon;
   final IconData? suffixIcon;
@@ -54,6 +56,13 @@ class _AppOutlinedTextFieldState extends State<AppOutlinedTextField> {
           color: AppColor.defaultFont,
         ),
         decoration: InputDecoration(
+          hintText: widget.hintText,
+          hintStyle: const TextStyle(
+            color: AppColor.shadow,
+            fontSize: bodyLargeSize,
+            fontWeight: bodyLargeWeight,
+            height: 1,
+          ),
           labelText: widget.labelText,
           labelStyle: TextStyle(
             color: widget.errorText == null

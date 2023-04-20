@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../base/define/styles.dart';
-import '../../../../../base/temp_dio/dio_client.dart';
 import '../../../../../base/widgets/buttons/button.dart';
 import '../../../../../base/widgets/dialog/error_dialog_content.dart';
 import '../../../../../base/widgets/dialog/success_dialog_content.dart';
