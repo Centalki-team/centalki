@@ -15,7 +15,6 @@ import 'di/injection/injection.dart';
 import 'firebase_options.dart';
 import 'src/features/authentication/presentation/views/sign_in/sign_in_page.dart';
 import 'src/features/authentication/presentation/views/verify_email.dart';
-import 'src/features/history_detail/presentation/views/history_detail_page.dart';
 import 'src/features/home/presentation/views/home_view.dart';
 import 'src/features/introduction/domain/repositories/app_intro_repository.dart';
 import 'src/features/introduction/domain/usecases/get_status_app_intro_usecase.dart';
@@ -140,7 +139,6 @@ class _MyWidgetState extends State<MyWidget> {
         return const VerifyEmailView();
       case "success":
         return const HomeView();
-      // return const HistoryDetailPage();
       default:
         return const SplashScreen();
     }
