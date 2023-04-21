@@ -30,6 +30,7 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
         hasReachMax:
             !(completedSessions.historyMeta?.historyHasNextPage ?? false),
       ));
+      // print(completedSessions.historySessions![0].sessionId);
     } on Exception catch (_) {
       emit(const HistoryLoadFailureState(TextDoc.txtLoadFailed));
     }

@@ -41,6 +41,10 @@ SessionScheduleModel _$SessionScheduleModelFromJson(
           $enumDecodeNullable(_$SessionScheduleStatusEnumMap, json['status']),
       createdAt:
           DateTimeHelper.stringToTime3Nullable(json['createdAt'] as String?),
+      feedback: json['feedback'] == null
+          ? null
+          : SessionFeedbackModel.fromJson(
+              json['feedback'] as Map<String, dynamic>),
     );
 
 const _$SessionScheduleStatusEnumMap = {
@@ -81,4 +85,47 @@ MetadataModel _$MetadataModelFromJson(Map<String, dynamic> json) =>
       lastRefreshTime: json['lastRefreshTime'] as String?,
       lastSignInTime: json['lastSignInTime'] as String?,
       creationTime: json['creationTime'] as String?,
+    );
+
+SessionFeedbackModel _$SessionFeedbackModelFromJson(
+        Map<String, dynamic> json) =>
+    SessionFeedbackModel(
+      teacher: json['teacher'] == null
+          ? null
+          : SessionFeedbackTeacherModel.fromJson(
+              json['teacher'] as Map<String, dynamic>),
+      student: json['student'] == null
+          ? null
+          : SessionFeedbackStudentModel.fromJson(
+              json['student'] as Map<String, dynamic>),
+    );
+
+SessionFeedbackTeacherModel _$SessionFeedbackTeacherModelFromJson(
+        Map<String, dynamic> json) =>
+    SessionFeedbackTeacherModel(
+      sessionId: json['sessionId'] as String,
+      rating: (json['rating'] as num).toDouble(),
+      satisfiedWith: (json['satisfiedWith'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      notSatisfiedWith: (json['notSatisfiedWith'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      description: json['description'] as String?,
+      notSatisfiedDetail: json['notSatisfiedDetail'] as String?,
+      suggestForTeacher: json['suggestForTeacher'] as String?,
+    );
+
+SessionFeedbackStudentModel _$SessionFeedbackStudentModelFromJson(
+        Map<String, dynamic> json) =>
+    SessionFeedbackStudentModel(
+      id: json['id'] as String?,
+      vocabularies: (json['vocabularies'] as num?)?.toDouble(),
+      grammar: (json['grammar'] as num?)?.toDouble(),
+      pronunciation: (json['pronunciation'] as num?)?.toDouble(),
+      idea: (json['idea'] as num?)?.toDouble(),
+      fluency: (json['fluency'] as num?)?.toDouble(),
+      description: json['description'] as String?,
+      sessionId: json['sessionId'] as String?,
+      suggest: json['suggest'] as String?,
     );

@@ -39,7 +39,7 @@ class ConnectTeacherBloc
         final studentId = FirebaseAuth.instance.currentUser?.uid ?? '';
         final sessionSchedule =
             await DioClient.createNewSessionSchedule(studentId, topicId);
-        sessionId = sessionSchedule.sessionId ?? '';
+        sessionId = sessionSchedule.sessionId;
         emit(const ConnectTeacherLoadDoneState(TextDoc.txtFindTeacher));
       } on Exception catch (e) {
         var message = e.toString().split("Exception: ")[1];
