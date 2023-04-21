@@ -23,16 +23,16 @@ class DateTimeHelper {
   static String timeToString5(DateTime time) => _formatTime5.format(time);
 
   /// yyyy-MM-dd HH:mm:ss
-  static DateTime stringToTime1(String time) => _formatTime1.parse(time);
+  static DateTime stringToTime1(String time) => _formatTime1.parse(time, true);
 
   /// dd-MM-yyyy
-  static DateTime stringToTime2(String time) => _formatTime2.parse(time);
+  static DateTime stringToTime2(String time) => _formatTime2.parse(time, true);
 
   /// yyyy-MM-dd'T'HH:mm:ss.SSSSSSS
-  static DateTime stringToTime3(String time) => _formatTime3.parse(time);
+  static DateTime stringToTime3(String time) => _formatTime3.parse(time, true);
 
   static DateTime? stringToTime3Nullable(String? time) =>
-      time != null ? _formatTime3.parse(time) : null;
+      time != null ? _formatTime3.parse(time, true) : null;
 
   static bool isTheSameDay(DateTime date1, DateTime date2) =>
       date1.day == date2.day &&

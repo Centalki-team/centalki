@@ -142,7 +142,7 @@ class _MyWidgetState extends State<MyWidget> {
         return const VerifyEmailView();
       case "success":
         return const HomeView();
-      // return const SessionGiveFeedbackPage();
+      // return const SessionViewFeedbackView();
       default:
         return const SplashScreen();
     }

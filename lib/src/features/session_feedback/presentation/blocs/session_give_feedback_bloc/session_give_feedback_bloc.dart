@@ -110,7 +110,6 @@ class SessionGiveFeedbackBloc
 
   void _onSendSessionFeedback(SessionGiveFeedbackSendEvent event, emit) async {
     emit(const SessionGiveFeedbackSendingState());
-    print(event.sessionId);
 
     final res = await createSessionFeedbackUseCase(CreateSessionFeedbackParams(
       sessionId: event.sessionId,

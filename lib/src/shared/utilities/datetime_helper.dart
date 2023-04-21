@@ -32,7 +32,7 @@ class AppDateTimeHelper {
 
   static DateTime stringToTime(String time) {
     final dateFormat = DateFormat(_formatTime1);
-    return dateFormat.parse(time);
+    return dateFormat.parse(time, true);
   }
 
   static String timeToStringHHmm(DateTime? time) {
@@ -54,7 +54,7 @@ class AppDateTimeHelper {
   static DateTime? stringToTimeHHmmDDmmYYYY(String? time) {
     if (time != null && time.isNotEmpty) {
       final dateFormat = DateFormat(_formatTimeHhMmDdMmYyyy);
-      return dateFormat.parse(time);
+      return dateFormat.parse(time, true);
     }
     return null;
   }
@@ -70,7 +70,7 @@ class AppDateTimeHelper {
   static DateTime? stringToTimeIso8601(String? time) {
     if (time != null && time.isNotEmpty) {
       final dateFormat = DateFormat(_formatTimeIso8601);
-      return dateFormat.parse(time);
+      return dateFormat.parse(time, true);
     }
     return null;
   }
@@ -99,15 +99,15 @@ class AppDateTimeHelper {
   static String timeToString6(DateTime time) => _formatTime6.format(time);
 
   /// dd-MM-yyyy
-  static DateTime stringToTime2(String time) => _formatTime2.parse(time);
+  static DateTime stringToTime2(String time) => _formatTime2.parse(time, true);
 
   /// yyyy-MM-dd'T'HH:mm:ss
-  static DateTime stringToTime3(String time) => _formatTime3.parse(time);
+  static DateTime stringToTime3(String time) => _formatTime3.parse(time, true);
 
-  static DateTime stringToTime6(String time) => _formatTime6.parse(time);
+  static DateTime stringToTime6(String time) => _formatTime6.parse(time, true);
 
   static DateTime? stringToTime3Nullable(String? time) =>
-      time != null ? _formatTime3.parse(time) : null;
+      time != null ? _formatTime3.parse(time, true) : null;
 
   static bool isTheSameDay(DateTime date1, DateTime date2) =>
       date1.day == date2.day &&

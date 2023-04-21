@@ -224,7 +224,8 @@ class _HistoryViewState extends State<HistoryView> {
                                                             state
                                                                     .sessionList[
                                                                         index]
-                                                                    .sessionStartAt ??
+                                                                    .sessionStartAt
+                                                                    ?.toLocal() ??
                                                                 DateTime.now(),
                                                           ),
                                                           style:
