@@ -141,8 +141,8 @@ class _MyWidgetState extends State<MyWidget> {
       case "not_email_verified":
         return const VerifyEmailView();
       case "success":
-        // return const HomeView();
-        return const SessionGiveFeedbackPage();
+        return const HomeView();
+      // return const SessionGiveFeedbackPage();
       default:
         return const SplashScreen();
     }

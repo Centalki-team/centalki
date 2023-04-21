@@ -25,7 +25,7 @@ class SessionScheduleListEntity {
 
 class SessionScheduleEntity {
   const SessionScheduleEntity({
-    this.sessionId,
+    required this.sessionId,
     this.sessionTopic,
     this.sessionStudent,
     this.sessionTeacher,
@@ -33,7 +33,7 @@ class SessionScheduleEntity {
     this.sessionStartAt,
   });
 
-  final String? sessionId;
+  final String sessionId;
   final TopicDetailModel? sessionTopic;
   final SessionScheduleUserEntity? sessionStudent;
   final SessionScheduleUserEntity? sessionTeacher;

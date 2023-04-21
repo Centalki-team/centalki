@@ -22,7 +22,7 @@ class SessionScheduleListModel extends SessionScheduleListEntity {
 @JsonSerializable(createToJson: false)
 class SessionScheduleModel extends SessionScheduleEntity {
   SessionScheduleModel({
-    this.id,
+    required this.id,
     this.studentId,
     this.student,
     this.topicId,
@@ -42,7 +42,7 @@ class SessionScheduleModel extends SessionScheduleEntity {
           sessionStartAt: startAt,
         );
 
-  final String? id;
+  final String id;
   final String? studentId;
   final SessionScheduleUserModel? student;
   final String? topicId;

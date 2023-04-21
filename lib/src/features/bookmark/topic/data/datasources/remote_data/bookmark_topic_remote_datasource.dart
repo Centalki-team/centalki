@@ -1,5 +1,6 @@
 import '../../../../../../../base/gateway/api_gateway.base.dart';
 import '../../../../../../../config/app_config.dart';
+import '../../../../../../shared/extensions.dart';
 import 'model/bookmark_topic_model.dart';
 import 'resources/bookmark_topic_resource.dart';
 
@@ -17,7 +18,7 @@ class BookmarkTopicRemoteDatasource {
       method: HTTPMethod.post,
       data: params,
     );
-    return response.statusCode == 200 || response.statusCode == 201;
+    return response.isOk;
   }
 
   Future<List<BookmarkTopicModel>> getBookmarkTopics() async {
@@ -35,6 +36,6 @@ class BookmarkTopicRemoteDatasource {
       resource: DeleteBookmarkTopicResource(bookmarkId),
       method: HTTPMethod.delete,
     );
-    return response.statusCode == 200;
+    return response.isOk;
   }
 }

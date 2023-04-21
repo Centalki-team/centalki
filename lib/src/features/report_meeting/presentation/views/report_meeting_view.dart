@@ -11,7 +11,8 @@ import '../blocs/report_meeting_bloc.dart';
 
 class ScreenArguments {
   final String? teacherId;
-  ScreenArguments(this.teacherId);
+  final String sessionId;
+  ScreenArguments(this.teacherId, this.sessionId);
 }
 
 class ReportMeetingView extends StatefulWidget {

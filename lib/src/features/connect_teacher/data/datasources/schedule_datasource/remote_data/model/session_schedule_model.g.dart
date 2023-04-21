@@ -19,7 +19,7 @@ SessionScheduleListModel _$SessionScheduleListModelFromJson(
 SessionScheduleModel _$SessionScheduleModelFromJson(
         Map<String, dynamic> json) =>
     SessionScheduleModel(
-      id: json['id'] as String?,
+      id: json['id'] as String,
       studentId: json['studentId'] as String?,
       student: json['student'] == null
           ? null

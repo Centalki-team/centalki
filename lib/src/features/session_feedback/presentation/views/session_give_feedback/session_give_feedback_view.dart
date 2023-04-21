@@ -25,28 +25,12 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
   final satisfiedDescriptionController = TextEditingController();
   final notSatisfiedDescriptionController = TextEditingController();
   final suggestionsController = TextEditingController();
-
-  // final satisfiedProblems = <String>[
-  //   "Teacher was nice",
-  //   "Teacher was patient",
-  //   "Teacher was knowledgeable",
-  //   "Others"
-  // ];
-  // final notSatisfiedProblems = <String>[
-  //   "Teacher spoke too fast",
-  //   "Teacher spoke too low",
-  //   "Teacher pronounced not clearly",
-  //   "Teacher used too many advanced words",
-  //   "Others"
-  // ];
   final List<String> selectedSatisfied = [];
   final List<String> selectedNotSatisfied = [];
 
   @override
-  // ignore: prefer_expression_function_bodies
   Widget build(BuildContext context) {
-    // final args = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
-    // print(args.teacherId);
+    final args = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
 
     return BlocListener<SessionGiveFeedbackBloc, SessionGiveFeedbackState>(
       listener: (context, state) async {
@@ -58,17 +42,19 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
             await showDialog(
               context: context,
               builder: (context) => const SuccessDialogContent(
-                title: 'Send successfully',
+                title: 'Send feedback successfully',
               ),
             );
             if (mounted) {
+              Navigator.pop(context);
+              Navigator.pop(context);
               Navigator.pop(context);
             }
           } else if (state is SessionGiveFeedbackSendErrorState) {
             await showDialog(
               context: context,
               builder: (context) => ErrorDialogContent(
-                title: 'Send failed',
+                title: 'Send feedback failed',
                 content: state.exception.displayMessage,
               ),
             );
@@ -546,18 +532,20 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                       onPressed: (state is SessionGiveFeedbackValidateState &&
                               !state.forceDisabled)
                           ? () async {
-                              print(selectedSatisfied);
-                              print(selectedNotSatisfied);
-                              print(satisfiedDescriptionController.text);
-                              print(notSatisfiedDescriptionController.text);
-                              print(suggestionsController.text);
-                              // context.read<SessionGiveFeedbackBloc>().add(
-                              //       SessionGiveFeedbackLoadEvent(
-                              //         teacherId: args.teacherId ?? '',
-                              //         problems: summary,
-                              //         description: descriptionController.text,
-                              //       ),
-                              //     );
+                              context.read<SessionGiveFeedbackBloc>().add(
+                                    SessionGiveFeedbackSendEvent(
+                                      sessionId: args.sessionId,
+                                      rating: ratingValue,
+                                      summarySatisfied: selectedSatisfied,
+                                      summaryNotSatisfied: selectedNotSatisfied,
+                                      satisfiedDescription:
+                                          satisfiedDescriptionController.text,
+                                      notSatisfiedDescription:
+                                          notSatisfiedDescriptionController
+                                              .text,
+                                      suggestions: suggestionsController.text,
+                                    ),
+                                  );
                             }
                           : null,
                       text: TextDoc.txtSend,

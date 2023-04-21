@@ -5,7 +5,9 @@ import '../../../../../../base/gateway/exception/app_exception.dart';
 import '../../../../../../di/di_module.dart';
 import '../../../domain/entities/session_feedback_content_entity.dart';
 import '../../../domain/repositories/session_feedback_repository.dart';
+import '../../../domain/usecases/create_session_feedback_usecase.dart';
 import '../../../domain/usecases/get_session_feedback_content_usecase.dart';
+import '../../../domain/usecases/params/create_session_feedback_params.dart';
 
 part 'session_give_feedback_event.dart';
 part 'session_give_feedback_state.dart';
@@ -16,12 +18,17 @@ class SessionGiveFeedbackBloc
     on<SessionGiveFeedbackInitEvent>(_onInit);
     on<SessionGiveFeedbackLoadEvent>(_onLoad);
     on<SessionGiveFeedbackValidateEvent>(_onValidate);
-    on<SessionGiveFeedbackSendEvent>(_onSessionGiveFeedback);
+    on<SessionGiveFeedbackSendEvent>(_onSendSessionFeedback);
     add(const SessionGiveFeedbackInitEvent());
   }
 
   final GetSessionFeedbackContentUseCase getSessionFeedbackContentUseCase =
       GetSessionFeedbackContentUseCase(
+    sessionFeedbackRepository: getIt.get<SessionFeedbackRepository>(),
+  );
+
+  final CreateSessionFeedbackUseCase createSessionFeedbackUseCase =
+      CreateSessionFeedbackUseCase(
     sessionFeedbackRepository: getIt.get<SessionFeedbackRepository>(),
   );
 
@@ -101,22 +108,28 @@ class SessionGiveFeedbackBloc
             suggestionsError.isNotEmpty));
   }
 
-  void _onSessionGiveFeedback(SessionGiveFeedbackSendEvent event, emit) async {
-    // emit(const SessionGiveFeedbackLoadingState());
-    // final feedback = Map<String, dynamic>.from(
-    //     {"rating": event.rating, "text": event.feedback});
+  void _onSendSessionFeedback(SessionGiveFeedbackSendEvent event, emit) async {
+    emit(const SessionGiveFeedbackSendingState());
+    print(event.sessionId);
 
-    // final isCreated =
-    //     await createFeedbackUseCase(CreateFeedbackParams(feedback: feedback));
-    // isCreated.fold(
-    //   (l) => emit(
-    //     SessionGiveFeedbackLoadErrorState(
-    //       l,
-    //     ),
-    //   ),
-    //   (r) => emit(
-    //     const SessionGiveFeedbackLoadDoneState(),
-    //   ),
-    // );
+    final res = await createSessionFeedbackUseCase(CreateSessionFeedbackParams(
+      sessionId: event.sessionId,
+      rating: event.rating,
+      satisfiedWith: event.summarySatisfied,
+      notSatisfiedWith: event.summaryNotSatisfied,
+      description: event.satisfiedDescription,
+      notSatisfiedDetail: event.notSatisfiedDescription,
+      suggestForTeacher: event.suggestions,
+    ));
+    res.fold(
+      (l) => emit(
+        SessionGiveFeedbackSendErrorState(
+          exception: l,
+        ),
+      ),
+      (r) => emit(
+        const SessionGiveFeedbackSendDoneState(),
+      ),
+    );
   }
 }

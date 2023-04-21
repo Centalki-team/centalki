@@ -30,4 +30,23 @@ class SessionFeedbackRepositoryImpl extends SessionFeedbackRepository {
       );
     }
   }
+
+  @override
+  Future<Either<AppException, bool>> createStudentSessionFeedback(
+      Map<String, dynamic> params) async {
+    try {
+      final result = await sessionFeedbackRemoteDatasource
+          .createStudentSessionFeedback(params);
+      return Right(result);
+    } on AppException catch (e) {
+      return Left(e);
+    } catch (s) {
+      return Left(
+        AppException(
+          error: s,
+          displayMessage: 'Gửi feedback không thành công',
+        ),
+      );
+    }
+  }
 }

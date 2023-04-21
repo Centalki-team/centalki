@@ -32,6 +32,7 @@ class SessionGiveFeedbackValidateEvent extends SessionGiveFeedbackEvent {
 
 class SessionGiveFeedbackSendEvent extends SessionGiveFeedbackEvent {
   const SessionGiveFeedbackSendEvent({
+    required this.sessionId,
     required this.rating,
     required this.satisfiedDescription,
     required this.notSatisfiedDescription,
@@ -40,6 +41,7 @@ class SessionGiveFeedbackSendEvent extends SessionGiveFeedbackEvent {
     required this.summaryNotSatisfied,
   });
 
+  final String sessionId;
   final double rating;
   final String satisfiedDescription;
   final String notSatisfiedDescription;

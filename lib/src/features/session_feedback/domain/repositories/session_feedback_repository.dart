@@ -6,4 +6,6 @@ import '../entities/session_feedback_content_entity.dart';
 abstract class SessionFeedbackRepository {
   Future<Either<AppException, SessionFeedbackContentEntity>>
       getSessionFeedbackContent();
+  Future<Either<AppException, bool>> createStudentSessionFeedback(
+      Map<String, dynamic> params);
 }
