@@ -8,6 +8,30 @@ class SessionGiveFeedbackInitState extends SessionGiveFeedbackState {
   const SessionGiveFeedbackInitState();
 }
 
+class SessionGiveFeedbackLoadingState extends SessionGiveFeedbackState {
+  const SessionGiveFeedbackLoadingState({
+    this.showLoading = true,
+  });
+
+  final bool showLoading;
+}
+
+class SessionGiveFeedbackLoadDoneState extends SessionGiveFeedbackState {
+  const SessionGiveFeedbackLoadDoneState({
+    required this.contents,
+  });
+
+  final SessionFeedbackContentEntity contents;
+}
+
+class SessionGiveFeedbackLoadFailedState extends SessionGiveFeedbackState {
+  const SessionGiveFeedbackLoadFailedState({
+    required this.exception,
+  });
+
+  final AppException exception;
+}
+
 class SessionGiveFeedbackSendingState extends SessionGiveFeedbackState {
   const SessionGiveFeedbackSendingState();
 }
@@ -17,7 +41,9 @@ class SessionGiveFeedbackSendDoneState extends SessionGiveFeedbackState {
 }
 
 class SessionGiveFeedbackSendErrorState extends SessionGiveFeedbackState {
-  const SessionGiveFeedbackSendErrorState(this.exception);
+  const SessionGiveFeedbackSendErrorState({
+    required this.exception,
+  });
 
   final AppException exception;
 }

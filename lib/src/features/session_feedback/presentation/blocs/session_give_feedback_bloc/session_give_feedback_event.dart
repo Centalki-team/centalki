@@ -8,22 +8,26 @@ class SessionGiveFeedbackInitEvent extends SessionGiveFeedbackEvent {
   const SessionGiveFeedbackInitEvent();
 }
 
+class SessionGiveFeedbackLoadEvent extends SessionGiveFeedbackEvent {
+  const SessionGiveFeedbackLoadEvent();
+}
+
 class SessionGiveFeedbackValidateEvent extends SessionGiveFeedbackEvent {
   const SessionGiveFeedbackValidateEvent({
     required this.rating,
     required this.satisfiedDescription,
     required this.notSatisfiedDescription,
     required this.suggestions,
-    required this.selectedSatisfied,
-    required this.selectedNotSatisfied,
+    required this.summarySatisfied,
+    required this.summaryNotSatisfied,
   });
 
   final double rating;
   final String satisfiedDescription;
   final String notSatisfiedDescription;
   final String suggestions;
-  final List<bool> selectedSatisfied;
-  final List<bool> selectedNotSatisfied;
+  final List<String> summarySatisfied;
+  final List<String> summaryNotSatisfied;
 }
 
 class SessionGiveFeedbackSendEvent extends SessionGiveFeedbackEvent {

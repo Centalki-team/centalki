@@ -2,6 +2,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../base/define/text.dart';
 import '../../../../../../base/gateway/exception/app_exception.dart';
+import '../../../../../../di/di_module.dart';
+import '../../../domain/entities/session_feedback_content_entity.dart';
+import '../../../domain/repositories/session_feedback_repository.dart';
+import '../../../domain/usecases/get_session_feedback_content_usecase.dart';
 
 part 'session_give_feedback_event.dart';
 part 'session_give_feedback_state.dart';
@@ -10,11 +14,39 @@ class SessionGiveFeedbackBloc
     extends Bloc<SessionGiveFeedbackEvent, SessionGiveFeedbackState> {
   SessionGiveFeedbackBloc() : super(const SessionGiveFeedbackInitState()) {
     on<SessionGiveFeedbackInitEvent>(_onInit);
+    on<SessionGiveFeedbackLoadEvent>(_onLoad);
     on<SessionGiveFeedbackValidateEvent>(_onValidate);
     on<SessionGiveFeedbackSendEvent>(_onSessionGiveFeedback);
+    add(const SessionGiveFeedbackInitEvent());
   }
 
-  void _onInit(SessionGiveFeedbackInitEvent event, emit) {}
+  final GetSessionFeedbackContentUseCase getSessionFeedbackContentUseCase =
+      GetSessionFeedbackContentUseCase(
+    sessionFeedbackRepository: getIt.get<SessionFeedbackRepository>(),
+  );
+
+  void _onInit(SessionGiveFeedbackInitEvent event, emit) {
+    add(const SessionGiveFeedbackLoadEvent());
+  }
+
+  void _onLoad(SessionGiveFeedbackLoadEvent event, emit) async {
+    emit(const SessionGiveFeedbackLoadingState());
+
+    final contents = await getSessionFeedbackContentUseCase(null);
+    emit(const SessionGiveFeedbackLoadingState(showLoading: false));
+    contents.fold(
+      (l) => emit(
+        SessionGiveFeedbackLoadFailedState(
+          exception: l,
+        ),
+      ),
+      (r) => emit(
+        SessionGiveFeedbackLoadDoneState(
+          contents: r,
+        ),
+      ),
+    );
+  }
 
   void _onValidate(SessionGiveFeedbackValidateEvent event, emit) {
     var ratingError = '';
@@ -28,12 +60,18 @@ class SessionGiveFeedbackBloc
       ratingError = TextDoc.txtRatingEmpty;
     }
 
-    if (!event.selectedSatisfied.contains(true)) {
+    if (event.summarySatisfied.isEmpty) {
       satisfiedChipError = TextDoc.txtSatisfiedChipNotEmpty;
+    } else if (event.summarySatisfied.contains('Others') &&
+        event.satisfiedDescription.isEmpty) {
+      satisfiedDescriptionError = TextDoc.txtDescriptionNotEmpty;
     }
 
-    if (!event.selectedNotSatisfied.contains(true)) {
+    if (event.summaryNotSatisfied.isEmpty) {
       notSatisfiedChipError = TextDoc.txtSatisfiedChipNotEmpty;
+    } else if (event.summaryNotSatisfied.contains('Others') &&
+        event.notSatisfiedDescription.isEmpty) {
+      notSatisfiedDescriptionError = TextDoc.txtDescriptionNotEmpty;
     }
 
     if (event.satisfiedDescription.length > 500) {

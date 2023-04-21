@@ -27,6 +27,9 @@ import '../../src/features/report_meeting/domain/repositories/report_meeting_rep
 import '../../src/features/search_topics/data/datasources/search_topics_datasrc/remote_data/search_topics_remote_datasrc.dart';
 import '../../src/features/search_topics/data/repositories/search_topics_repository_impl.dart';
 import '../../src/features/search_topics/domain/repositories/search_topics_repository.dart';
+import '../../src/features/session_feedback/data/datasources/remote_data/session_feedback_remote_datasource.dart';
+import '../../src/features/session_feedback/data/repositories/session_feedback_repository_impl.dart';
+import '../../src/features/session_feedback/domain/repositories/session_feedback_repository.dart';
 import '../../src/features/settings/data/datasources/remote_data/feedback_remote_datasource.dart';
 import '../../src/features/settings/data/repositories/feedback_repository_impl.dart';
 import '../../src/features/settings/domain/repositories/feedback_repository.dart';
@@ -73,6 +76,8 @@ class RepositoriesModule extends DIModule {
           BookmarkTopicRemoteDatasource.new)
       ..registerLazySingleton<SearchTopicsRemoteDatasource>(
           SearchTopicsRemoteDatasource.new)
+      ..registerLazySingleton<SessionFeedbackRemoteDatasource>(
+          SessionFeedbackRemoteDatasource.new)
       //Repositories
       ..registerLazySingleton<TopicRepository>(TopicRepositoryImpl.new)
       ..registerLazySingleton<TopicDetailRepository>(
@@ -96,6 +101,8 @@ class RepositoriesModule extends DIModule {
       ..registerLazySingleton<BookmarkTopicRepository>(
           BookmarkTopicRepositoryImpl.new)
       ..registerLazySingleton<SearchTopicsRepository>(
-          SearchTopicsRepositoryImpl.new);
+          SearchTopicsRepositoryImpl.new)
+      ..registerLazySingleton<SessionFeedbackRepository>(
+          SessionFeedbackRepositoryImpl.new);
   }
 }

@@ -8,8 +8,9 @@ import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
 import '../../../../../../base/widgets/dialog/success_dialog_content.dart';
 import '../../../../../../base/widgets/text_fields/outlined_text_field.dart';
+import '../../../../../../base/widgets/toast/app_toast.dart';
 import '../../../../report_meeting/presentation/views/report_meeting_view.dart';
-import '../../../blocs/session_give_feedback_bloc/session_give_feedback_bloc.dart';
+import '../../blocs/session_give_feedback_bloc/session_give_feedback_bloc.dart';
 
 class SessionGiveFeedbackView extends StatefulWidget {
   const SessionGiveFeedbackView({Key? key}) : super(key: key);
@@ -25,21 +26,21 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
   final notSatisfiedDescriptionController = TextEditingController();
   final suggestionsController = TextEditingController();
 
-  final satisfiedProblems = <String>[
-    "Teacher was nice",
-    "Teacher was patient",
-    "Teacher was knowledgeable",
-    "Others"
-  ];
-  final notSatisfiedProblems = <String>[
-    "Teacher spoke too fast",
-    "Teacher spoke too low",
-    "Teacher pronounced not clearly",
-    "Teacher used too many advanced words",
-    "Others"
-  ];
-  var selectedSatisfied = <bool>[false, false, false, false];
-  var selectedNotSatisfied = <bool>[false, false, false, false, false];
+  // final satisfiedProblems = <String>[
+  //   "Teacher was nice",
+  //   "Teacher was patient",
+  //   "Teacher was knowledgeable",
+  //   "Others"
+  // ];
+  // final notSatisfiedProblems = <String>[
+  //   "Teacher spoke too fast",
+  //   "Teacher spoke too low",
+  //   "Teacher pronounced not clearly",
+  //   "Teacher used too many advanced words",
+  //   "Others"
+  // ];
+  final List<String> selectedSatisfied = [];
+  final List<String> selectedNotSatisfied = [];
 
   @override
   // ignore: prefer_expression_function_bodies
@@ -76,432 +77,498 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
       },
       child: Scaffold(
         backgroundColor: AppColor.white,
-        body: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              pinned: true,
-              backgroundColor: AppColor.white,
-              automaticallyImplyLeading: false,
-              leading: GestureDetector(
-                onTap: (() {
-                  Navigator.pop(context);
-                  Navigator.pop(context);
-                  Navigator.pop(context);
-                }),
-                child: const Icon(
-                  Icons.arrow_back,
-                  color: AppColor.defaultFont,
-                ),
-              ),
-              title: Row(
-                children: const [
-                  Text(
-                    TextDoc.txtSessionFeedback,
-                    style: TextStyle(
-                      fontSize: headlineSmallSize,
-                      fontWeight: headlineSmallWeight,
-                      color: AppColor.defaultFont,
+        body: BlocBuilder<SessionGiveFeedbackBloc, SessionGiveFeedbackState>(
+          buildWhen: (previous, current) =>
+              current != previous &&
+              current is SessionGiveFeedbackLoadDoneState,
+          builder: (context, state) {
+            if (state is SessionGiveFeedbackLoadDoneState) {
+              final satisfiedProblems = state.contents.positiveContents
+                  ?.map((e) => e.contentTitle ?? '')
+                  .toList();
+              final notSatisfiedProblems = state.contents.negativeContents
+                  ?.map((e) => e.contentTitle ?? '')
+                  .toList();
+
+              return CustomScrollView(
+                slivers: [
+                  SliverAppBar(
+                    pinned: true,
+                    backgroundColor: AppColor.white,
+                    automaticallyImplyLeading: false,
+                    leading: GestureDetector(
+                      onTap: (() {
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                      }),
+                      child: const Icon(
+                        Icons.arrow_back,
+                        color: AppColor.defaultFont,
+                      ),
+                    ),
+                    title: Row(
+                      children: const [
+                        Text(
+                          TextDoc.txtSessionFeedback,
+                          style: TextStyle(
+                            fontSize: headlineSmallSize,
+                            fontWeight: headlineSmallWeight,
+                            color: AppColor.defaultFont,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      childCount: 1,
+                      (context, index) => Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: spacing16,
+                          vertical: spacing8,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: spacing8),
+                            const Text(
+                              TextDoc.txtRating,
+                              style: TextStyle(
+                                fontSize: titleMediumSize,
+                                fontWeight: titleMediumWeight,
+                                color: AppColor.defaultFont,
+                              ),
+                            ),
+                            const SizedBox(height: spacing16),
+                            Center(
+                              child: BlocBuilder<SessionGiveFeedbackBloc,
+                                  SessionGiveFeedbackState>(
+                                builder: (context, state) => Column(
+                                  children: [
+                                    RatingBar(
+                                      ratingWidget: RatingWidget(
+                                        empty: const Icon(
+                                          Icons.star,
+                                          color: AppColor.background,
+                                        ),
+                                        half: const Icon(
+                                          Icons.star_half,
+                                          color: AppColor.mainColor2,
+                                        ),
+                                        full: const Icon(
+                                          Icons.star,
+                                          color: AppColor.mainColor2,
+                                        ),
+                                      ),
+                                      onRatingUpdate: (value) {
+                                        ratingValue = value;
+                                        context
+                                            .read<SessionGiveFeedbackBloc>()
+                                            .add(
+                                                SessionGiveFeedbackValidateEvent(
+                                              rating: ratingValue,
+                                              satisfiedDescription:
+                                                  satisfiedDescriptionController
+                                                      .text,
+                                              notSatisfiedDescription:
+                                                  notSatisfiedDescriptionController
+                                                      .text,
+                                              summarySatisfied:
+                                                  selectedSatisfied,
+                                              summaryNotSatisfied:
+                                                  selectedNotSatisfied,
+                                              suggestions:
+                                                  suggestionsController.text,
+                                            ));
+                                      },
+                                      itemPadding: const EdgeInsets.symmetric(
+                                        horizontal: padding12,
+                                      ),
+                                    ),
+                                    (state is SessionGiveFeedbackValidateState &&
+                                            state.ratingError.isNotEmpty)
+                                        ? Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: Text(
+                                              state.ratingError,
+                                              style: const TextStyle(
+                                                fontSize: bodySmallSize,
+                                                fontWeight: bodySmallWeight,
+                                                color: AppColor.error,
+                                              ),
+                                            ),
+                                          )
+                                        : Container(),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: spacing16),
+                            const Text(
+                              TextDoc.txtSatisfiedDesciptionLabel,
+                              style: TextStyle(
+                                fontSize: titleMediumSize,
+                                fontWeight: titleMediumWeight,
+                                color: AppColor.defaultFont,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: spacing8,
+                            ),
+                            BlocBuilder<SessionGiveFeedbackBloc,
+                                SessionGiveFeedbackState>(
+                              builder: ((context, state) => Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Wrap(
+                                        spacing: spacing16,
+                                        runSpacing: spacing8,
+                                        children: satisfiedProblems!
+                                            .map((e) => FilterChip(
+                                                label: Text(e),
+                                                labelStyle: const TextStyle(
+                                                  fontSize: bodyLargeSize,
+                                                  fontWeight: bodyLargeWeight,
+                                                  color: AppColor.defaultFont,
+                                                ),
+                                                checkmarkColor:
+                                                    AppColor.defaultFont,
+                                                selectedColor:
+                                                    AppColor.mainColor2Surface,
+                                                selected: selectedSatisfied
+                                                    .contains(e),
+                                                onSelected: (_) {
+                                                  setState(() {
+                                                    if (selectedSatisfied
+                                                        .contains(e)) {
+                                                      selectedSatisfied
+                                                          .remove(e);
+                                                    } else {
+                                                      selectedSatisfied.add(e);
+                                                    }
+                                                  });
+                                                  context
+                                                      .read<
+                                                          SessionGiveFeedbackBloc>()
+                                                      .add(
+                                                          SessionGiveFeedbackValidateEvent(
+                                                        rating: ratingValue,
+                                                        satisfiedDescription:
+                                                            satisfiedDescriptionController
+                                                                .text,
+                                                        notSatisfiedDescription:
+                                                            notSatisfiedDescriptionController
+                                                                .text,
+                                                        summarySatisfied:
+                                                            selectedSatisfied,
+                                                        summaryNotSatisfied:
+                                                            selectedNotSatisfied,
+                                                        suggestions:
+                                                            suggestionsController
+                                                                .text,
+                                                      ));
+                                                }))
+                                            .toList(),
+                                      ),
+                                      (state is SessionGiveFeedbackValidateState &&
+                                              state.satisfiedChipError
+                                                  .isNotEmpty)
+                                          ? Text(
+                                              state.satisfiedChipError,
+                                              style: const TextStyle(
+                                                fontSize: bodySmallSize,
+                                                fontWeight: bodySmallWeight,
+                                                color: AppColor.error,
+                                              ),
+                                            )
+                                          : Container(),
+                                    ],
+                                  )),
+                            ),
+                            const SizedBox(
+                              height: spacing16,
+                            ),
+                            const Text(
+                              TextDoc.txtDescriptionLabel,
+                              style: TextStyle(
+                                fontSize: titleMediumSize,
+                                fontWeight: titleMediumWeight,
+                                color: AppColor.defaultFont,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: spacing8,
+                            ),
+                            BlocBuilder<SessionGiveFeedbackBloc,
+                                SessionGiveFeedbackState>(
+                              builder: (context, state) => AppOutlinedTextField(
+                                hintText: TextDoc.txtSatisfiedDescriptionHint,
+                                controller: satisfiedDescriptionController,
+                                maxLines: 5,
+                                errorText:
+                                    (state is SessionGiveFeedbackValidateState &&
+                                            state.satisfiedDescriptionError
+                                                .isNotEmpty)
+                                        ? state.satisfiedDescriptionError
+                                        : null,
+                                onChanged: (_) => context
+                                    .read<SessionGiveFeedbackBloc>()
+                                    .add(SessionGiveFeedbackValidateEvent(
+                                      rating: ratingValue,
+                                      satisfiedDescription:
+                                          satisfiedDescriptionController.text,
+                                      notSatisfiedDescription:
+                                          notSatisfiedDescriptionController
+                                              .text,
+                                      summarySatisfied: selectedSatisfied,
+                                      summaryNotSatisfied: selectedNotSatisfied,
+                                      suggestions: suggestionsController.text,
+                                    )),
+                              ),
+                            ),
+                            const SizedBox(height: spacing16),
+                            const Text(
+                              TextDoc.txtNotSatisfiedDesciptionLabel,
+                              style: TextStyle(
+                                fontSize: titleMediumSize,
+                                fontWeight: titleMediumWeight,
+                                color: AppColor.defaultFont,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: spacing8,
+                            ),
+                            BlocBuilder<SessionGiveFeedbackBloc,
+                                SessionGiveFeedbackState>(
+                              builder: ((context, state) => Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Wrap(
+                                        spacing: spacing16,
+                                        runSpacing: spacing8,
+                                        children: notSatisfiedProblems!
+                                            .map((e) => FilterChip(
+                                                label: Text(e),
+                                                labelStyle: const TextStyle(
+                                                  fontSize: bodyLargeSize,
+                                                  fontWeight: bodyLargeWeight,
+                                                  color: AppColor.defaultFont,
+                                                ),
+                                                checkmarkColor:
+                                                    AppColor.defaultFont,
+                                                selectedColor:
+                                                    AppColor.mainColor2Surface,
+                                                selected: selectedNotSatisfied
+                                                    .contains(e),
+                                                onSelected: (_) {
+                                                  setState(() {
+                                                    if (selectedNotSatisfied
+                                                        .contains(e)) {
+                                                      selectedNotSatisfied
+                                                          .remove(e);
+                                                    } else {
+                                                      selectedNotSatisfied
+                                                          .add(e);
+                                                    }
+                                                  });
+                                                  context
+                                                      .read<
+                                                          SessionGiveFeedbackBloc>()
+                                                      .add(
+                                                          SessionGiveFeedbackValidateEvent(
+                                                        rating: ratingValue,
+                                                        satisfiedDescription:
+                                                            satisfiedDescriptionController
+                                                                .text,
+                                                        notSatisfiedDescription:
+                                                            notSatisfiedDescriptionController
+                                                                .text,
+                                                        summarySatisfied:
+                                                            selectedSatisfied,
+                                                        summaryNotSatisfied:
+                                                            selectedNotSatisfied,
+                                                        suggestions:
+                                                            suggestionsController
+                                                                .text,
+                                                      ));
+                                                }))
+                                            .toList(),
+                                      ),
+                                      (state is SessionGiveFeedbackValidateState &&
+                                              state.notSatisfiedChipError
+                                                  .isNotEmpty)
+                                          ? Text(
+                                              state.notSatisfiedChipError,
+                                              style: const TextStyle(
+                                                fontSize: bodySmallSize,
+                                                fontWeight: bodySmallWeight,
+                                                color: AppColor.error,
+                                              ),
+                                            )
+                                          : Container(),
+                                    ],
+                                  )),
+                            ),
+                            const SizedBox(
+                              height: spacing16,
+                            ),
+                            const Text(
+                              TextDoc.txtDescriptionLabel,
+                              style: TextStyle(
+                                fontSize: titleMediumSize,
+                                fontWeight: titleMediumWeight,
+                                color: AppColor.defaultFont,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: spacing8,
+                            ),
+                            BlocBuilder<SessionGiveFeedbackBloc,
+                                SessionGiveFeedbackState>(
+                              builder: (context, state) => AppOutlinedTextField(
+                                hintText:
+                                    TextDoc.txtNotSatisfiedDescriptionHint,
+                                controller: notSatisfiedDescriptionController,
+                                maxLines: 5,
+                                errorText:
+                                    (state is SessionGiveFeedbackValidateState &&
+                                            state.notSatisfiedDescriptionError
+                                                .isNotEmpty)
+                                        ? state.notSatisfiedDescriptionError
+                                        : null,
+                                onChanged: (_) => context
+                                    .read<SessionGiveFeedbackBloc>()
+                                    .add(SessionGiveFeedbackValidateEvent(
+                                      rating: ratingValue,
+                                      satisfiedDescription:
+                                          satisfiedDescriptionController.text,
+                                      notSatisfiedDescription:
+                                          notSatisfiedDescriptionController
+                                              .text,
+                                      summarySatisfied: selectedSatisfied,
+                                      summaryNotSatisfied: selectedNotSatisfied,
+                                      suggestions: suggestionsController.text,
+                                    )),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: spacing16,
+                            ),
+                            const Text(
+                              TextDoc.txtSuggetionsLabel,
+                              style: TextStyle(
+                                fontSize: titleMediumSize,
+                                fontWeight: titleMediumWeight,
+                                color: AppColor.defaultFont,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: spacing8,
+                            ),
+                            BlocBuilder<SessionGiveFeedbackBloc,
+                                SessionGiveFeedbackState>(
+                              builder: (context, state) => AppOutlinedTextField(
+                                hintText: TextDoc.txtSuggetionsHint,
+                                controller: suggestionsController,
+                                maxLines: 5,
+                                errorText:
+                                    (state is SessionGiveFeedbackValidateState &&
+                                            state.suggestionsError.isNotEmpty)
+                                        ? state.suggestionsError
+                                        : null,
+                                onChanged: (_) => context
+                                    .read<SessionGiveFeedbackBloc>()
+                                    .add(SessionGiveFeedbackValidateEvent(
+                                      rating: ratingValue,
+                                      satisfiedDescription:
+                                          satisfiedDescriptionController.text,
+                                      notSatisfiedDescription:
+                                          notSatisfiedDescriptionController
+                                              .text,
+                                      summarySatisfied: selectedSatisfied,
+                                      summaryNotSatisfied: selectedNotSatisfied,
+                                      suggestions: suggestionsController.text,
+                                    )),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: spacing12,
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ],
-              ),
-            ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                childCount: 1,
-                (context, index) => Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: spacing16,
-                    vertical: spacing8,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: spacing8),
-                      const Text(
-                        TextDoc.txtRating,
-                        style: TextStyle(
-                          fontSize: titleMediumSize,
-                          fontWeight: titleMediumWeight,
-                          color: AppColor.defaultFont,
-                        ),
-                      ),
-                      const SizedBox(height: spacing16),
-                      Center(
-                        child: BlocBuilder<SessionGiveFeedbackBloc,
-                            SessionGiveFeedbackState>(
-                          builder: (context, state) => Column(
-                            children: [
-                              RatingBar(
-                                ratingWidget: RatingWidget(
-                                  empty: const Icon(
-                                    Icons.star,
-                                    color: AppColor.background,
-                                  ),
-                                  half: const Icon(
-                                    Icons.star_half,
-                                    color: AppColor.mainColor2,
-                                  ),
-                                  full: const Icon(
-                                    Icons.star,
-                                    color: AppColor.mainColor2,
-                                  ),
-                                ),
-                                onRatingUpdate: (value) {
-                                  ratingValue = value;
-                                  context
-                                      .read<SessionGiveFeedbackBloc>()
-                                      .add(SessionGiveFeedbackValidateEvent(
-                                        rating: ratingValue,
-                                        satisfiedDescription:
-                                            satisfiedDescriptionController.text,
-                                        notSatisfiedDescription:
-                                            notSatisfiedDescriptionController
-                                                .text,
-                                        selectedSatisfied: selectedSatisfied,
-                                        selectedNotSatisfied:
-                                            selectedNotSatisfied,
-                                        suggestions: suggestionsController.text,
-                                      ));
-                                },
-                                itemPadding: const EdgeInsets.symmetric(
-                                  horizontal: padding12,
-                                ),
-                              ),
-                              (state is SessionGiveFeedbackValidateState &&
-                                      state.ratingError.isNotEmpty)
-                                  ? Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text(
-                                        state.ratingError,
-                                        style: const TextStyle(
-                                          fontSize: bodySmallSize,
-                                          fontWeight: bodySmallWeight,
-                                          color: AppColor.error,
-                                        ),
-                                      ),
-                                    )
-                                  : Container(),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: spacing16),
-                      const Text(
-                        TextDoc.txtSatisfiedDesciptionLabel,
-                        style: TextStyle(
-                          fontSize: titleMediumSize,
-                          fontWeight: titleMediumWeight,
-                          color: AppColor.defaultFont,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: spacing8,
-                      ),
-                      BlocBuilder<SessionGiveFeedbackBloc,
-                          SessionGiveFeedbackState>(
-                        builder: ((context, state) => Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Wrap(
-                                  spacing: spacing16,
-                                  runSpacing: spacing8,
-                                  children: satisfiedProblems
-                                      .map((e) => FilterChip(
-                                          label: Text(e),
-                                          labelStyle: const TextStyle(
-                                            fontSize: bodyLargeSize,
-                                            fontWeight: bodyLargeWeight,
-                                            color: AppColor.defaultFont,
-                                          ),
-                                          checkmarkColor: AppColor.defaultFont,
-                                          selectedColor:
-                                              AppColor.mainColor2Surface,
-                                          selected: selectedSatisfied[
-                                              satisfiedProblems.indexOf(e)],
-                                          onSelected: (value) {
-                                            setState(() {
-                                              selectedSatisfied[
-                                                  satisfiedProblems
-                                                      .indexOf(e)] = value;
-                                            });
-                                            context
-                                                .read<SessionGiveFeedbackBloc>()
-                                                .add(
-                                                    SessionGiveFeedbackValidateEvent(
-                                                  rating: ratingValue,
-                                                  satisfiedDescription:
-                                                      satisfiedDescriptionController
-                                                          .text,
-                                                  notSatisfiedDescription:
-                                                      notSatisfiedDescriptionController
-                                                          .text,
-                                                  selectedSatisfied:
-                                                      selectedSatisfied,
-                                                  selectedNotSatisfied:
-                                                      selectedNotSatisfied,
-                                                  suggestions:
-                                                      suggestionsController
-                                                          .text,
-                                                ));
-                                          }))
-                                      .toList(),
-                                ),
-                                (state is SessionGiveFeedbackValidateState &&
-                                        state.satisfiedChipError.isNotEmpty)
-                                    ? Text(
-                                        state.satisfiedChipError,
-                                        style: const TextStyle(
-                                          fontSize: bodySmallSize,
-                                          fontWeight: bodySmallWeight,
-                                          color: AppColor.error,
-                                        ),
-                                      )
-                                    : Container(),
-                              ],
-                            )),
-                      ),
-                      const SizedBox(
-                        height: spacing16,
-                      ),
-                      const Text(
-                        TextDoc.txtDescriptionLabel,
-                        style: TextStyle(
-                          fontSize: titleMediumSize,
-                          fontWeight: titleMediumWeight,
-                          color: AppColor.defaultFont,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: spacing8,
-                      ),
-                      BlocBuilder<SessionGiveFeedbackBloc,
-                          SessionGiveFeedbackState>(
-                        builder: (context, state) => AppOutlinedTextField(
-                          hintText: TextDoc.txtSatisfiedDescriptionHint,
-                          controller: satisfiedDescriptionController,
-                          maxLines: 5,
-                          errorText: (state
-                                      is SessionGiveFeedbackValidateState &&
-                                  state.satisfiedDescriptionError.isNotEmpty)
-                              ? state.satisfiedDescriptionError
-                              : null,
-                          onChanged: (_) => context
-                              .read<SessionGiveFeedbackBloc>()
-                              .add(SessionGiveFeedbackValidateEvent(
-                                rating: ratingValue,
-                                satisfiedDescription:
-                                    satisfiedDescriptionController.text,
-                                notSatisfiedDescription:
-                                    notSatisfiedDescriptionController.text,
-                                selectedSatisfied: selectedSatisfied,
-                                selectedNotSatisfied: selectedNotSatisfied,
-                                suggestions: suggestionsController.text,
-                              )),
-                        ),
-                      ),
-                      const SizedBox(height: spacing16),
-                      const Text(
-                        TextDoc.txtNotSatisfiedDesciptionLabel,
-                        style: TextStyle(
-                          fontSize: titleMediumSize,
-                          fontWeight: titleMediumWeight,
-                          color: AppColor.defaultFont,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: spacing8,
-                      ),
-                      BlocBuilder<SessionGiveFeedbackBloc,
-                          SessionGiveFeedbackState>(
-                        builder: ((context, state) => Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Wrap(
-                                  spacing: spacing16,
-                                  runSpacing: spacing8,
-                                  children: notSatisfiedProblems
-                                      .map((e) => FilterChip(
-                                          label: Text(e),
-                                          labelStyle: const TextStyle(
-                                            fontSize: bodyLargeSize,
-                                            fontWeight: bodyLargeWeight,
-                                            color: AppColor.defaultFont,
-                                          ),
-                                          checkmarkColor: AppColor.defaultFont,
-                                          selectedColor:
-                                              AppColor.mainColor2Surface,
-                                          selected: selectedNotSatisfied[
-                                              notSatisfiedProblems.indexOf(e)],
-                                          onSelected: (value) {
-                                            setState(() {
-                                              selectedNotSatisfied[
-                                                  notSatisfiedProblems
-                                                      .indexOf(e)] = value;
-                                            });
-                                            context
-                                                .read<SessionGiveFeedbackBloc>()
-                                                .add(
-                                                    SessionGiveFeedbackValidateEvent(
-                                                  rating: ratingValue,
-                                                  satisfiedDescription:
-                                                      satisfiedDescriptionController
-                                                          .text,
-                                                  notSatisfiedDescription:
-                                                      notSatisfiedDescriptionController
-                                                          .text,
-                                                  selectedSatisfied:
-                                                      selectedSatisfied,
-                                                  selectedNotSatisfied:
-                                                      selectedNotSatisfied,
-                                                  suggestions:
-                                                      suggestionsController
-                                                          .text,
-                                                ));
-                                          }))
-                                      .toList(),
-                                ),
-                                (state is SessionGiveFeedbackValidateState &&
-                                        state.notSatisfiedChipError.isNotEmpty)
-                                    ? Text(
-                                        state.notSatisfiedChipError,
-                                        style: const TextStyle(
-                                          fontSize: bodySmallSize,
-                                          fontWeight: bodySmallWeight,
-                                          color: AppColor.error,
-                                        ),
-                                      )
-                                    : Container(),
-                              ],
-                            )),
-                      ),
-                      const SizedBox(
-                        height: spacing16,
-                      ),
-                      const Text(
-                        TextDoc.txtDescriptionLabel,
-                        style: TextStyle(
-                          fontSize: titleMediumSize,
-                          fontWeight: titleMediumWeight,
-                          color: AppColor.defaultFont,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: spacing8,
-                      ),
-                      BlocBuilder<SessionGiveFeedbackBloc,
-                          SessionGiveFeedbackState>(
-                        builder: (context, state) => AppOutlinedTextField(
-                          hintText: TextDoc.txtNotSatisfiedDescriptionHint,
-                          controller: notSatisfiedDescriptionController,
-                          maxLines: 5,
-                          errorText: (state
-                                      is SessionGiveFeedbackValidateState &&
-                                  state.notSatisfiedDescriptionError.isNotEmpty)
-                              ? state.notSatisfiedDescriptionError
-                              : null,
-                          onChanged: (_) => context
-                              .read<SessionGiveFeedbackBloc>()
-                              .add(SessionGiveFeedbackValidateEvent(
-                                rating: ratingValue,
-                                satisfiedDescription:
-                                    satisfiedDescriptionController.text,
-                                notSatisfiedDescription:
-                                    notSatisfiedDescriptionController.text,
-                                selectedSatisfied: selectedSatisfied,
-                                selectedNotSatisfied: selectedNotSatisfied,
-                                suggestions: suggestionsController.text,
-                              )),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: spacing16,
-                      ),
-                      const Text(
-                        TextDoc.txtSuggetionsLabel,
-                        style: TextStyle(
-                          fontSize: titleMediumSize,
-                          fontWeight: titleMediumWeight,
-                          color: AppColor.defaultFont,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: spacing8,
-                      ),
-                      BlocBuilder<SessionGiveFeedbackBloc,
-                          SessionGiveFeedbackState>(
-                        builder: (context, state) => AppOutlinedTextField(
-                          hintText: TextDoc.txtSuggetionsHint,
-                          controller: suggestionsController,
-                          maxLines: 5,
-                          errorText:
-                              (state is SessionGiveFeedbackValidateState &&
-                                      state.suggestionsError.isNotEmpty)
-                                  ? state.suggestionsError
-                                  : null,
-                          onChanged: (_) => context
-                              .read<SessionGiveFeedbackBloc>()
-                              .add(SessionGiveFeedbackValidateEvent(
-                                rating: ratingValue,
-                                satisfiedDescription:
-                                    satisfiedDescriptionController.text,
-                                notSatisfiedDescription:
-                                    notSatisfiedDescriptionController.text,
-                                selectedSatisfied: selectedSatisfied,
-                                selectedNotSatisfied: selectedNotSatisfied,
-                                suggestions: suggestionsController.text,
-                              )),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: spacing12,
-                      ),
-                    ],
+              );
+            } else if (state is SessionGiveFeedbackLoadFailedState) {
+              AppToast(
+                mode: AppToastMode.error,
+                duration: const Duration(seconds: 3),
+                bottomOffset: 8.0,
+                message: Text(
+                  state.exception.displayMessage,
+                  style: const TextStyle(
+                    fontSize: bodyLargeSize,
+                    fontWeight: bodyLargeWeight,
+                    color: AppColor.white,
                   ),
                 ),
-              ),
-            ),
-          ],
+              ).show(context);
+              return const SizedBox.shrink();
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
         ),
-        bottomNavigationBar: BottomAppBar(
-          child: Padding(
-            padding: const EdgeInsets.only(
-              left: 16.0,
-              right: 16.0,
-              bottom: 24.0,
-            ),
-            child:
-                BlocBuilder<SessionGiveFeedbackBloc, SessionGiveFeedbackState>(
-              builder: (context, state) => AppFilledButton(
-                onPressed: (state is SessionGiveFeedbackValidateState &&
-                        !state.forceDisabled)
-                    ? () async {
-                        var summarySatisfied = <String>[];
-                        var summaryNotSatisfied = <String>[];
-                        for (var i = 0; i < selectedSatisfied.length; i++) {
-                          if (selectedSatisfied[i]) {
-                            summarySatisfied.add(satisfiedProblems[i]);
-                          }
-                        }
-                        for (var i = 0; i < selectedNotSatisfied.length; i++) {
-                          if (selectedNotSatisfied[i]) {
-                            summaryNotSatisfied.add(notSatisfiedProblems[i]);
-                          }
-                        }
-                        // context.read<SessionGiveFeedbackBloc>().add(
-                        //       SessionGiveFeedbackLoadEvent(
-                        //         teacherId: args.teacherId ?? '',
-                        //         problems: summary,
-                        //         description: descriptionController.text,
-                        //       ),
-                        //     );
-                      }
-                    : null,
-                text: TextDoc.txtSend,
-                minimumSize: const Size.fromHeight(48),
-              ),
-            ),
-          ),
+        bottomNavigationBar:
+            BlocBuilder<SessionGiveFeedbackBloc, SessionGiveFeedbackState>(
+          buildWhen: (previous, current) =>
+              current != previous &&
+              current is SessionGiveFeedbackLoadDoneState,
+          builder: (context, state) {
+            if (state is SessionGiveFeedbackLoadDoneState) {
+              return BottomAppBar(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    left: 16.0,
+                    right: 16.0,
+                    bottom: 24.0,
+                  ),
+                  child: BlocBuilder<SessionGiveFeedbackBloc,
+                      SessionGiveFeedbackState>(
+                    builder: (context, state) => AppFilledButton(
+                      onPressed: (state is SessionGiveFeedbackValidateState &&
+                              !state.forceDisabled)
+                          ? () async {
+                              print(selectedSatisfied);
+                              print(selectedNotSatisfied);
+                              print(satisfiedDescriptionController.text);
+                              print(notSatisfiedDescriptionController.text);
+                              print(suggestionsController.text);
+                              // context.read<SessionGiveFeedbackBloc>().add(
+                              //       SessionGiveFeedbackLoadEvent(
+                              //         teacherId: args.teacherId ?? '',
+                              //         problems: summary,
+                              //         description: descriptionController.text,
+                              //       ),
+                              //     );
+                            }
+                          : null,
+                      text: TextDoc.txtSend,
+                      minimumSize: const Size.fromHeight(48),
+                    ),
+                  ),
+                ),
+              );
+            }
+            return const SizedBox.shrink();
+          },
         ),
       ),
     );
