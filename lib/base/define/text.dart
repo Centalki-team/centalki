@@ -237,8 +237,8 @@ class TextDoc {
 
   // Feedback
   // Validation error messages
-  static const txtRatingEmpty = 'Rating cannot be empty';
-  static const txtFeedbackEmpty = 'Feedback cannot be empty';
+  static const txtRatingEmptyError = 'Rating cannot be empty';
+  static const txtFeedbackEmptyError = 'Feedback cannot be empty';
   static const txtSuccessFeedback = 'Send feedback successfully';
   static const txtSuccess = 'Success';
   static const txtLoadFail = 'Load failed';
@@ -272,9 +272,58 @@ class TextDoc {
   static const txtConfirmRemoveFavoriteContent =
       "Are you sure to remove this from your favorite topics? You can still add them back later.";
   static const txtRemoveFavoriteSuccess = 'Remove favorite topic successfully!';
-  //Favorites
+  // Favorites
   static const txtTopicsTab = 'Topics';
   static const txtVocabsTab = 'Vocabularies';
   static const txtFavoriteTopicsEmpty =
       'You haven\'t added any favorite topics yet.\nAdd some interesting topics now.';
+
+  // Session completed
+  static const txtCongrats = 'Congrats!';
+  static const txtSessionCompletedBody =
+      'You have completed a 30-minute session.\nKeep up your good work!';
+  static const txtSessionCompletedAskForFeedback =
+      'What are your thoughts on the teacher?';
+  static const txtSessionCompletedFeedbackBtn = 'Feedback for Teacher Now';
+  static const txtDoItLater = 'I will do it later';
+  static const txtSessionCompletedAskForReport = 'Any issue while studying?';
+  static const txtSessionCompletedReportBtn = 'Report';
+
+  // Session feedback
+  static const txtSessionFeedback = 'Session Feedback';
+  static const txtRating = 'Rating';
+  static const txtSatisfiedDesciptionLabel =
+      'What did the teacher make you satisfied with?';
+  static const txtNotSatisfiedDesciptionLabel =
+      'What did the teacher make you not satisfied with?';
+  static const txtDescriptionLabel = 'Description';
+  static const txtSatisfiedDescriptionHint =
+      'It would be nice if you could tell teacher more about what made your experiences good.';
+  static const txtNotSatisfiedDescriptionHint =
+      'It would be nice if you could tell teacher more about what made your experiences not good.';
+  static const txtSuggetionsLabel = 'Suggestions for Teacher';
+  static const txtSuggetionsHint =
+      'Teachers are always welcomed to hear any suggestion that you believe will improve your overall experiences for future sessions.';
+  static const txtSatisfiedChipNotEmpty = 'Please choose at least one option';
+  static const txtDescriptionNotEmpty = 'Description cannot be empty';
+  static const txtDescriptionTooLong =
+      'Description cannot exceed 500 characters';
+  static const txtSuggestionsTooLong =
+      'Suggestions cannot exceed 500 characters';
+  static const txtSendFeedbackSuccess = 'Send feedback successfully';
+  static const txtSendFeedbackFailed = 'Send feedback failed';
+
+  // History detail
+  static const txtFeedbackForTeacherBtn = 'Feedback for Teacher';
+  static const txtRatingFromTeacher = 'Rating from Teacher';
+  static const txtFeedbackFromTeacher = 'Feedback from Teacher';
+  static const txtPronunciation = 'Pronunciation';
+  static const txtVocabularies = 'Vocabularies';
+  static const txtGrammar = 'Grammar';
+  static const txtIdea = 'Idea';
+  static const txtFluency = 'Fluency';
+  static const txtSuggestions = 'Suggestions';
+  static const txtFeedbackEmptyHeadline = 'No Feedback Yet';
+  static const txtFeedbackEmptyContent =
+      'You will receive a notification right after the teacher provides feedback.';
 }

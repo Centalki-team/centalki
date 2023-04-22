@@ -74,7 +74,7 @@ class MeetingBloc extends Bloc<MeetingEvent, MeetingState> {
     }
 
     var options = JitsiMeetingOptions(
-        roomNameOrUrl: session.sessionId!,
+        roomNameOrUrl: session.sessionId,
         serverUrl: 'https://meet.jit.si/',
         subject:
             'Meeting room of ${session.sessionStudent?.fullName ?? 'student'} and ${session.sessionTeacher?.fullName ?? 'teacher'}',
@@ -131,7 +131,7 @@ class MeetingBloc extends Bloc<MeetingEvent, MeetingState> {
   void _onJoinRoom(MeetingJoinRoomEvent event, emit) async {
     final result = await createEventTrackingUseCase.execute(
       CreateEventTrackingParams(
-        sessionId: session.sessionId!,
+        sessionId: session.sessionId,
         event:
             'Student ${session.sessionStudent?.fullName ?? 'unknown name'} joined room.',
       ),
@@ -141,18 +141,18 @@ class MeetingBloc extends Bloc<MeetingEvent, MeetingState> {
   void _onExitRoom(MeetingExitRoomEvent event, emit) async {
     final result = await createEventTrackingUseCase.execute(
       CreateEventTrackingParams(
-        sessionId: session.sessionId!,
+        sessionId: session.sessionId,
         event:
             'Student ${session.sessionStudent?.fullName ?? 'unknown name'} exited room.',
       ),
     );
-    emit(MeetingEndState(session.sessionTeacher?.id));
+    emit(MeetingEndState(session.sessionTeacher?.id, session.sessionId));
   }
 
   void _onOccurError(MeetingOccurErrorEvent event, emit) async {
     final result = await createEventTrackingUseCase.execute(
       CreateEventTrackingParams(
-        sessionId: session.sessionId!,
+        sessionId: session.sessionId,
         event:
             'Occur error in Student ${session.sessionStudent?.fullName ?? 'unknown name'}.',
       ),
@@ -162,7 +162,7 @@ class MeetingBloc extends Bloc<MeetingEvent, MeetingState> {
   void _onParticipantJoined(MeetingParticipantJoinedEvent event, emit) async {
     final result = await createEventTrackingUseCase.execute(
       CreateEventTrackingParams(
-        sessionId: session.sessionId!,
+        sessionId: session.sessionId,
         event:
             'Teacher ${session.sessionTeacher?.fullName ?? 'unknown name'} joined room.',
       ),
@@ -172,7 +172,7 @@ class MeetingBloc extends Bloc<MeetingEvent, MeetingState> {
   void _onParticipantLeft(MeetingParticipantLeftEvent event, emit) async {
     final result = await createEventTrackingUseCase.execute(
       CreateEventTrackingParams(
-        sessionId: session.sessionId!,
+        sessionId: session.sessionId,
         event:
             'Teacher ${session.sessionTeacher?.fullName ?? 'unknown name'} exited room.',
       ),

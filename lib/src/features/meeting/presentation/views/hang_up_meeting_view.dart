@@ -5,6 +5,7 @@ import '../../../../../base/temp_dio/dio_client.dart';
 import '../../../../../base/widgets/buttons/button.dart';
 import '../../../report_meeting/presentation/views/report_meeting_page.dart';
 import '../../../report_meeting/presentation/views/report_meeting_view.dart';
+import '../../../session_feedback/presentation/views/session_completed_view.dart';
 
 class HangUpMeetingView extends StatefulWidget {
   const HangUpMeetingView({Key? key}) : super(key: key);
@@ -82,7 +83,13 @@ class _HangUpMeetingViewState extends State<HangUpMeetingView> {
               const SizedBox(height: spacing8),
               AppOutlinedButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SessionCompletedView(),
+                      settings: RouteSettings(arguments: args),
+                    ),
+                  );
                 },
                 text: 'Done',
                 textColor: AppColor.support,

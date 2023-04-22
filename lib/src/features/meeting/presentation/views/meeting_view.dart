@@ -22,7 +22,8 @@ class _MeetingViewState extends State<MeetingView> {
                 MaterialPageRoute(
                     builder: (context) => const HangUpMeetingView(),
                     settings: RouteSettings(
-                      arguments: ScreenArguments(state.teacherId),
+                      arguments:
+                          ScreenArguments(state.teacherId, state.sessionId),
                     )));
             if (mounted) {
               Navigator.pop(context);

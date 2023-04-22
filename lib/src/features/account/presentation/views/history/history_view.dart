@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 
 import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
+import '../../../../history_detail/presentation/views/history_detail_page.dart';
 import '../../blocs/history_bloc/history_bloc.dart';
 
 class HistoryView extends StatefulWidget {
@@ -144,104 +145,121 @@ class _HistoryViewState extends State<HistoryView> {
                                               ),
                                             ],
                                           )
-                                        : Card(
-                                            clipBehavior: Clip.hardEdge,
-                                            child: Row(
-                                              children: [
-                                                Expanded(
-                                                  flex: 2,
-                                                  child: CachedNetworkImage(
-                                                    imageUrl: state
-                                                            .sessionList[index]
-                                                            .sessionTopic
-                                                            ?.imageURL ??
-                                                        '',
-                                                    fit: BoxFit.fill,
-                                                    width: 100,
-                                                    height: 160,
-                                                    progressIndicatorBuilder: (context,
-                                                            url,
-                                                            downloadProgress) =>
-                                                        CircularProgressIndicator(
-                                                      value: downloadProgress
-                                                          .progress,
-                                                    ),
-                                                    errorWidget:
-                                                        (context, url, error) =>
-                                                            const Text(''),
+                                        : GestureDetector(
+                                            onTap: () => {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      HistoryDetailPage(
+                                                    session: state
+                                                        .sessionList[index],
                                                   ),
                                                 ),
-                                                Expanded(
-                                                  flex: 3,
-                                                  child: Padding(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        horizontal: 12.0,
-                                                        vertical: 8.0),
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          state
-                                                                  .sessionList[
-                                                                      index]
-                                                                  .sessionTopic
-                                                                  ?.name ??
-                                                              '',
-                                                          style:
-                                                              const TextStyle(
-                                                            fontWeight:
-                                                                titleMediumWeight,
-                                                            fontSize:
-                                                                titleMediumSize,
-                                                            color: AppColor
-                                                                .defaultFont,
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          state
-                                                                  .sessionList[
-                                                                      index]
-                                                                  .sessionTeacher
-                                                                  ?.fullName ??
-                                                              '',
-                                                          style:
-                                                              const TextStyle(
-                                                            fontSize:
-                                                                bodyLargeSize,
-                                                            fontWeight:
-                                                                bodyLargeWeight,
-                                                            color: AppColor
-                                                                .defaultFont,
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          DateFormat(
-                                                                  'yyyy-MM-dd hh:mm a')
-                                                              .format(
+                                              ),
+                                            },
+                                            child: Card(
+                                              clipBehavior: Clip.hardEdge,
+                                              child: Row(
+                                                children: [
+                                                  Expanded(
+                                                    flex: 2,
+                                                    child: CachedNetworkImage(
+                                                      imageUrl: state
+                                                              .sessionList[
+                                                                  index]
+                                                              .sessionTopic
+                                                              ?.imageURL ??
+                                                          '',
+                                                      fit: BoxFit.fill,
+                                                      width: 100,
+                                                      height: 160,
+                                                      progressIndicatorBuilder:
+                                                          (context, url,
+                                                                  downloadProgress) =>
+                                                              CircularProgressIndicator(
+                                                        value: downloadProgress
+                                                            .progress,
+                                                      ),
+                                                      errorWidget: (context,
+                                                              url, error) =>
+                                                          const Text(''),
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    flex: 3,
+                                                    child: Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 12.0,
+                                                          vertical: 8.0),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
                                                             state
                                                                     .sessionList[
                                                                         index]
-                                                                    .sessionStartAt ??
-                                                                DateTime.now(),
+                                                                    .sessionTopic
+                                                                    ?.name ??
+                                                                '',
+                                                            style:
+                                                                const TextStyle(
+                                                              fontWeight:
+                                                                  titleMediumWeight,
+                                                              fontSize:
+                                                                  titleMediumSize,
+                                                              color: AppColor
+                                                                  .defaultFont,
+                                                            ),
                                                           ),
-                                                          style:
-                                                              const TextStyle(
-                                                            color: AppColor
-                                                                .secondary,
-                                                            fontWeight:
-                                                                bodyLargeWeight,
-                                                            fontSize:
-                                                                bodyLargeSize,
+                                                          Text(
+                                                            state
+                                                                    .sessionList[
+                                                                        index]
+                                                                    .sessionTeacher
+                                                                    ?.fullName ??
+                                                                '',
+                                                            style:
+                                                                const TextStyle(
+                                                              fontSize:
+                                                                  bodyLargeSize,
+                                                              fontWeight:
+                                                                  bodyLargeWeight,
+                                                              color: AppColor
+                                                                  .defaultFont,
+                                                            ),
                                                           ),
-                                                        ),
-                                                      ],
+                                                          Text(
+                                                            DateFormat(
+                                                                    'yyyy-MM-dd hh:mm a')
+                                                                .format(
+                                                              state
+                                                                      .sessionList[
+                                                                          index]
+                                                                      .sessionStartAt
+                                                                      ?.toLocal() ??
+                                                                  DateTime
+                                                                      .now(),
+                                                            ),
+                                                            style:
+                                                                const TextStyle(
+                                                              color: AppColor
+                                                                  .secondary,
+                                                              fontWeight:
+                                                                  bodyLargeWeight,
+                                                              fontSize:
+                                                                  bodyLargeSize,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
                                           ),
                                   ),

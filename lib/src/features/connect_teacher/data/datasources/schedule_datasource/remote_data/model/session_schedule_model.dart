@@ -22,7 +22,7 @@ class SessionScheduleListModel extends SessionScheduleListEntity {
 @JsonSerializable(createToJson: false)
 class SessionScheduleModel extends SessionScheduleEntity {
   SessionScheduleModel({
-    this.id,
+    required this.id,
     this.studentId,
     this.student,
     this.topicId,
@@ -33,6 +33,7 @@ class SessionScheduleModel extends SessionScheduleEntity {
     this.pickedUpAt,
     this.status,
     this.createdAt,
+    this.feedback,
   }) : super(
           sessionId: id,
           sessionTopic: topic,
@@ -40,9 +41,10 @@ class SessionScheduleModel extends SessionScheduleEntity {
           sessionTeacher: teacher,
           sessionStatus: status,
           sessionStartAt: startAt,
+          sessionFeedback: feedback,
         );
 
-  final String? id;
+  final String id;
   final String? studentId;
   final SessionScheduleUserModel? student;
   final String? topicId;
@@ -56,6 +58,7 @@ class SessionScheduleModel extends SessionScheduleEntity {
   final SessionScheduleStatus? status;
   @JsonKey(name: 'createdAt', fromJson: DateTimeHelper.stringToTime3Nullable)
   final DateTime? createdAt;
+  final SessionFeedbackModel? feedback;
 
   factory SessionScheduleModel.fromJson(Map<String, dynamic> json) =>
       _$SessionScheduleModelFromJson(json);
@@ -122,4 +125,84 @@ class MetadataModel {
 
   factory MetadataModel.fromJson(Map<String, dynamic> json) =>
       _$MetadataModelFromJson(json);
+}
+
+@JsonSerializable(createToJson: false)
+class SessionFeedbackModel extends SessionFeedbackEntity {
+  const SessionFeedbackModel({this.teacher, this.student})
+      : super(feedbackTeacher: teacher, feedbackStudent: student);
+
+  final SessionFeedbackTeacherModel? teacher;
+  final SessionFeedbackStudentModel? student;
+
+  factory SessionFeedbackModel.fromJson(Map<String, dynamic> json) =>
+      _$SessionFeedbackModelFromJson(json);
+}
+
+@JsonSerializable(createToJson: false)
+class SessionFeedbackTeacherModel extends SessionFeedbackTeacherEntity {
+  const SessionFeedbackTeacherModel({
+    required this.sessionId,
+    required this.rating,
+    required this.satisfiedWith,
+    required this.notSatisfiedWith,
+    this.description,
+    this.notSatisfiedDetail,
+    this.suggestForTeacher,
+  }) : super(
+            id: sessionId,
+            sessionRating: rating,
+            summarySatisfied: satisfiedWith,
+            summaryNotSatisfied: notSatisfiedWith,
+            satisfiedDescription: description,
+            notSatisfiedDescription: notSatisfiedDetail);
+
+  final String sessionId;
+  final double rating;
+  final List<String> satisfiedWith;
+  final List<String> notSatisfiedWith;
+  final String? description;
+  final String? notSatisfiedDetail;
+  final String? suggestForTeacher;
+
+  factory SessionFeedbackTeacherModel.fromJson(Map<String, dynamic> json) =>
+      _$SessionFeedbackTeacherModelFromJson(json);
+}
+
+@JsonSerializable(createToJson: false)
+class SessionFeedbackStudentModel extends SessionFeedbackStudentEntity {
+  const SessionFeedbackStudentModel({
+    this.id,
+    this.vocabularies,
+    this.grammar,
+    this.pronunciation,
+    this.idea,
+    this.fluency,
+    this.description,
+    this.sessionId,
+    this.suggest,
+  }) : super(
+          feedbackId: id,
+          feedbackVocabularies: vocabularies,
+          feedbackGrammar: grammar,
+          feedbackPronunciation: pronunciation,
+          feedbackIdea: idea,
+          feedbackFluency: fluency,
+          feedbackDescription: description,
+          feedbackSessionId: sessionId,
+          suggestions: suggest,
+        );
+
+  final String? id;
+  final double? vocabularies;
+  final double? grammar;
+  final double? pronunciation;
+  final double? idea;
+  final double? fluency;
+  final String? description;
+  final String? sessionId;
+  final String? suggest;
+
+  factory SessionFeedbackStudentModel.fromJson(Map<String, dynamic> json) =>
+      _$SessionFeedbackStudentModelFromJson(json);
 }

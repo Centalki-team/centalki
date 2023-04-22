@@ -152,6 +152,10 @@ class $AssetsIconGen {
 class $AssetsIllustrationGen {
   const $AssetsIllustrationGen();
 
+  /// File path: assets/illustration/congrats.svg
+  SvgGenImage get congrats =>
+      const SvgGenImage('assets/illustration/congrats.svg');
+
   /// File path: assets/illustration/reset-password.svg
   SvgGenImage get resetPassword =>
       const SvgGenImage('assets/illustration/reset-password.svg');
@@ -165,7 +169,7 @@ class $AssetsIllustrationGen {
       const SvgGenImage('assets/illustration/sign-up.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [resetPassword, signIn, signUp];
+  List<SvgGenImage> get values => [congrats, resetPassword, signIn, signUp];
 }
 
 class $AssetsImagesGen {
