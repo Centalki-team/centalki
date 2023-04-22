@@ -326,4 +326,17 @@ class TextDoc {
   static const txtFeedbackEmptyHeadline = 'No Feedback Yet';
   static const txtFeedbackEmptyContent =
       'You will receive a notification right after the teacher provides feedback.';
+  // Topic - Review
+  static const txtTopicFeedback = 'Topic Feedback';
+  static const txtBackBtn = 'Back';
+  static const txtNextBtn = 'Next';
+  static const txtSendBtn = 'Send';
+  static const txtNotFinishFeedback = 'Unfinished Feedback Submission';
+  static const txtNotFinishFeedbackContent =
+      'Are you sure you want to exit and return to the previous screen? Your feedbacks are invaluable to us.';
+  static const txtFeedbackSuccess = 'Feedback Sent Successfully';
+  static const txtFeedbackSuccessContent =
+      'We are deeply appreciated the efforts you took to help us further improve our contents.\nWe always look forward to hearing more ideas from you.';
+  static const txtStayBtn = 'Stay';
+  static const txtExitBtn = 'Exit';
 }
