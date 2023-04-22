@@ -64,19 +64,19 @@ class SessionGiveFeedbackBloc
     var suggestionsError = '';
 
     if (event.rating == 0) {
-      ratingError = TextDoc.txtRatingEmpty;
+      ratingError = TextDoc.txtRatingEmptyError;
     }
 
     if (event.summarySatisfied.isEmpty) {
       satisfiedChipError = TextDoc.txtSatisfiedChipNotEmpty;
-    } else if (event.summarySatisfied.contains('Others') &&
+    } else if (event.summarySatisfied.contains('OTHERS') &&
         event.satisfiedDescription.isEmpty) {
       satisfiedDescriptionError = TextDoc.txtDescriptionNotEmpty;
     }
 
     if (event.summaryNotSatisfied.isEmpty) {
       notSatisfiedChipError = TextDoc.txtSatisfiedChipNotEmpty;
-    } else if (event.summaryNotSatisfied.contains('Others') &&
+    } else if (event.summaryNotSatisfied.contains('OTHERS') &&
         event.notSatisfiedDescription.isEmpty) {
       notSatisfiedDescriptionError = TextDoc.txtDescriptionNotEmpty;
     }

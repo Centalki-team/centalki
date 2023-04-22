@@ -237,8 +237,8 @@ class TextDoc {
 
   // Feedback
   // Validation error messages
-  static const txtRatingEmpty = 'Rating cannot be empty';
-  static const txtFeedbackEmpty = 'Feedback cannot be empty';
+  static const txtRatingEmptyError = 'Rating cannot be empty';
+  static const txtFeedbackEmptyError = 'Feedback cannot be empty';
   static const txtSuccessFeedback = 'Send feedback successfully';
   static const txtSuccess = 'Success';
   static const txtLoadFail = 'Load failed';
@@ -310,4 +310,20 @@ class TextDoc {
       'Description cannot exceed 500 characters';
   static const txtSuggestionsTooLong =
       'Suggestions cannot exceed 500 characters';
+  static const txtSendFeedbackSuccess = 'Send feedback successfully';
+  static const txtSendFeedbackFailed = 'Send feedback failed';
+
+  // History detail
+  static const txtFeedbackForTeacherBtn = 'Feedback for Teacher';
+  static const txtRatingFromTeacher = 'Rating from Teacher';
+  static const txtFeedbackFromTeacher = 'Feedback from Teacher';
+  static const txtPronunciation = 'Pronunciation';
+  static const txtVocabularies = 'Vocabularies';
+  static const txtGrammar = 'Grammar';
+  static const txtIdea = 'Idea';
+  static const txtFluency = 'Fluency';
+  static const txtSuggestions = 'Suggestions';
+  static const txtFeedbackEmptyHeadline = 'No Feedback Yet';
+  static const txtFeedbackEmptyContent =
+      'You will receive a notification right after the teacher provides feedback.';
 }

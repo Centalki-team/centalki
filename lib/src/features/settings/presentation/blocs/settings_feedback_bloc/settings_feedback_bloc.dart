@@ -29,11 +29,11 @@ class SettingsFeedbackBloc
     var feedbackError = '';
 
     if (event.rating == 0) {
-      ratingError = TextDoc.txtRatingEmpty;
+      ratingError = TextDoc.txtRatingEmptyError;
     }
 
     if (event.feedback.isEmpty) {
-      feedbackError = TextDoc.txtFeedbackEmpty;
+      feedbackError = TextDoc.txtFeedbackEmptyError;
     } else if (event.feedback.length > 500) {
       feedbackError = TextDoc.txtFeedbackTooLong;
     }

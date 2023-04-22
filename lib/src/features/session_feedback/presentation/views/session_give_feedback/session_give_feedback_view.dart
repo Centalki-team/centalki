@@ -42,7 +42,7 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
             await showDialog(
               context: context,
               builder: (context) => const SuccessDialogContent(
-                title: 'Send feedback successfully',
+                title: TextDoc.txtSendFeedbackSuccess,
               ),
             );
             if (mounted) {
@@ -54,7 +54,7 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
             await showDialog(
               context: context,
               builder: (context) => ErrorDialogContent(
-                title: 'Send feedback failed',
+                title: TextDoc.txtSendFeedbackFailed,
                 content: state.exception.displayMessage,
               ),
             );
@@ -69,12 +69,8 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
               current is SessionGiveFeedbackLoadDoneState,
           builder: (context, state) {
             if (state is SessionGiveFeedbackLoadDoneState) {
-              final satisfiedProblems = state.contents.positiveContents
-                  ?.map((e) => e.contentTitle ?? '')
-                  .toList();
-              final notSatisfiedProblems = state.contents.negativeContents
-                  ?.map((e) => e.contentTitle ?? '')
-                  .toList();
+              final satisfiedProblems = state.contents.positiveContents;
+              final notSatisfiedProblems = state.contents.negativeContents;
 
               return CustomScrollView(
                 slivers: [
@@ -213,7 +209,7 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                                         runSpacing: spacing8,
                                         children: satisfiedProblems!
                                             .map((e) => FilterChip(
-                                                label: Text(e),
+                                                label: Text(e.contentTitle!),
                                                 labelStyle: const TextStyle(
                                                   fontSize: bodyLargeSize,
                                                   fontWeight: bodyLargeWeight,
@@ -224,15 +220,17 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                                                 selectedColor:
                                                     AppColor.mainColor2Surface,
                                                 selected: selectedSatisfied
-                                                    .contains(e),
+                                                    .contains(e.contentKey),
                                                 onSelected: (_) {
                                                   setState(() {
                                                     if (selectedSatisfied
-                                                        .contains(e)) {
+                                                        .contains(
+                                                            e.contentKey)) {
                                                       selectedSatisfied
-                                                          .remove(e);
+                                                          .remove(e.contentKey);
                                                     } else {
-                                                      selectedSatisfied.add(e);
+                                                      selectedSatisfied
+                                                          .add(e.contentKey!);
                                                     }
                                                   });
                                                   context
@@ -337,7 +335,7 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                                         runSpacing: spacing8,
                                         children: notSatisfiedProblems!
                                             .map((e) => FilterChip(
-                                                label: Text(e),
+                                                label: Text(e.contentTitle!),
                                                 labelStyle: const TextStyle(
                                                   fontSize: bodyLargeSize,
                                                   fontWeight: bodyLargeWeight,
@@ -348,16 +346,17 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                                                 selectedColor:
                                                     AppColor.mainColor2Surface,
                                                 selected: selectedNotSatisfied
-                                                    .contains(e),
+                                                    .contains(e.contentKey),
                                                 onSelected: (_) {
                                                   setState(() {
                                                     if (selectedNotSatisfied
-                                                        .contains(e)) {
+                                                        .contains(
+                                                            e.contentKey)) {
                                                       selectedNotSatisfied
-                                                          .remove(e);
+                                                          .remove(e.contentKey);
                                                     } else {
                                                       selectedNotSatisfied
-                                                          .add(e);
+                                                          .add(e.contentKey!);
                                                     }
                                                   });
                                                   context

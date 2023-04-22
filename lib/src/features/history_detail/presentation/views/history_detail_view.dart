@@ -47,7 +47,7 @@ class _HistoryDetailViewState extends State<HistoryDetailView> {
                           ),
                         ),
                       },
-                      text: 'Feedback for Teacher',
+                      text: TextDoc.txtFeedbackForTeacherBtn,
                       minimumSize: const Size.fromHeight(48),
                     ),
                   ),
@@ -145,8 +145,8 @@ class _HistoryDetailViewState extends State<HistoryDetailView> {
                     const SizedBox(height: spacing16),
                     Text(
                       widget.session.sessionFeedback?.feedbackStudent != null
-                          ? 'Rating from Teacher'
-                          : 'Feedback from Teacher',
+                          ? TextDoc.txtRatingFromTeacher
+                          : TextDoc.txtFeedbackFromTeacher,
                       style: const TextStyle(
                         height: 1.15,
                         fontSize: titleMediumSize,
@@ -164,7 +164,7 @@ class _HistoryDetailViewState extends State<HistoryDetailView> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text(
-                                    'Pronunciation',
+                                    TextDoc.txtPronunciation,
                                     style: TextStyle(
                                       height: 1.5,
                                       fontSize: bodyLargeSize,
@@ -207,7 +207,7 @@ class _HistoryDetailViewState extends State<HistoryDetailView> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text(
-                                    'Vocabularies',
+                                    TextDoc.txtVocabularies,
                                     style: TextStyle(
                                       height: 1.5,
                                       fontSize: bodyLargeSize,
@@ -250,7 +250,7 @@ class _HistoryDetailViewState extends State<HistoryDetailView> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text(
-                                    'Grammar',
+                                    TextDoc.txtGrammar,
                                     style: TextStyle(
                                       height: 1.5,
                                       fontSize: bodyLargeSize,
@@ -293,7 +293,7 @@ class _HistoryDetailViewState extends State<HistoryDetailView> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text(
-                                    'Idea',
+                                    TextDoc.txtIdea,
                                     style: TextStyle(
                                       height: 1.5,
                                       fontSize: bodyLargeSize,
@@ -336,7 +336,7 @@ class _HistoryDetailViewState extends State<HistoryDetailView> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text(
-                                    'Fluency',
+                                    TextDoc.txtFluency,
                                     style: TextStyle(
                                       height: 1.5,
                                       fontSize: bodyLargeSize,
@@ -376,7 +376,7 @@ class _HistoryDetailViewState extends State<HistoryDetailView> {
                               ),
                               const SizedBox(height: spacing24),
                               const Text(
-                                'Description',
+                                TextDoc.txtDescriptionLabel,
                                 style: TextStyle(
                                   height: 1.15,
                                   fontSize: titleMediumSize,
@@ -398,7 +398,7 @@ class _HistoryDetailViewState extends State<HistoryDetailView> {
                               ),
                               const SizedBox(height: spacing24),
                               const Text(
-                                'Suggestions',
+                                TextDoc.txtSuggestions,
                                 style: TextStyle(
                                   height: 1.15,
                                   fontSize: titleMediumSize,
@@ -423,7 +423,7 @@ class _HistoryDetailViewState extends State<HistoryDetailView> {
                         : Column(
                             children: const [
                               Text(
-                                'No Feedback Yet',
+                                TextDoc.txtFeedbackEmptyHeadline,
                                 style: TextStyle(
                                   height: 1.15,
                                   fontSize: titleMediumSize,
@@ -433,7 +433,7 @@ class _HistoryDetailViewState extends State<HistoryDetailView> {
                               ),
                               SizedBox(height: spacing8),
                               Text(
-                                'You will receive a notification right after the teacher provides feedback.',
+                                TextDoc.txtFeedbackEmptyContent,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   height: 1.15,
