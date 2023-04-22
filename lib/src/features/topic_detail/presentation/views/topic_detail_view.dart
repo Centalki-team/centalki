@@ -7,6 +7,7 @@ import '../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../base/widgets/buttons/button.dart';
 import '../../../../../base/widgets/toast/app_toast.dart';
 import '../../../connect_teacher/presentation/views/connect_teacher_page.dart';
+import '../../../topic_review/presentation/views/topic_review_page.dart';
 import '../blocs/topic_detail_bloc/topic_detail_bloc.dart';
 import '../widgets/phrase_card.dart';
 import '../widgets/question_card.dart';
@@ -247,6 +248,32 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                   "assets/icon/ic_heart_fill.svg",
                                   color: const Color(0xFFFF6363),
                                 ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TopicReviewPage(
+                              topicId: widget.topicId,
+                            ),
+                          ),
+                        ),
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                            left: padding8,
+                          ),
+                          padding: const EdgeInsets.all(padding8),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12.0),
+                            border: Border.all(
+                              color: AppColor.shadow,
+                            ),
+                          ),
+                          child: const Icon(
+                            Icons.feedback_outlined,
+                            color: AppColor.shadow,
+                          ),
                         ),
                       ),
                     ],
