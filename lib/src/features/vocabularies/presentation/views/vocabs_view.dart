@@ -7,6 +7,7 @@ import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../base/define/size.dart';
 import '../../../../../base/widgets/toast/app_toast.dart';
+import '../../../vocabularies_learning/presentation/views/vocab_learning_page.dart';
 import '../blocs/vocabs_bloc/vocabs_bloc.dart';
 import '../widgets/vocabs_card.dart';
 
@@ -59,32 +60,61 @@ class _VocabsViewState extends State<VocabsView> {
             ).show(context);
           }
         },
-        child: BlocBuilder<VocabsBloc, VocabsState>(
-          buildWhen: (previous, current) =>
-              current is VocabsBookmarkedLoadDoneState ||
-              current is VocabsLoadingState,
-          builder: (context, state) {
-            if (state is VocabsBookmarkedLoadDoneState) {
-              return ListView.separated(
-                padding: const EdgeInsets.symmetric(
-                  vertical: spacing24,
-                ),
-                itemBuilder: (context, index) =>
-                    VocabCard(item: state.vocabsList[index]),
-                separatorBuilder: (_, __) => const SizedBox(
-                  height: spacing16,
-                ),
-                itemCount: state.vocabsList.length,
-              );
-            } else if (state is VocabsLoadingState) {
-              if (!state.showOverlay) {
-                return const Center(
-                  child: CupertinoActivityIndicator(),
+        child: Scaffold(
+          backgroundColor: AppColor.white,
+          body: BlocBuilder<VocabsBloc, VocabsState>(
+            buildWhen: (previous, current) =>
+                current is VocabsBookmarkedLoadDoneState ||
+                current is VocabsLoadingState,
+            builder: (context, state) {
+              if (state is VocabsBookmarkedLoadDoneState) {
+                return ListView.separated(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: spacing24,
+                  ),
+                  itemBuilder: (context, index) =>
+                      VocabCard(item: state.vocabsList[index]),
+                  separatorBuilder: (_, __) => const SizedBox(
+                    height: spacing16,
+                  ),
+                  itemCount: state.vocabsList.length,
+                );
+              } else if (state is VocabsLoadingState) {
+                if (!state.showOverlay) {
+                  return const Center(
+                    child: CupertinoActivityIndicator(),
+                  );
+                }
+              }
+              return const SizedBox.shrink();
+            },
+          ),
+          floatingActionButton: BlocBuilder<VocabsBloc, VocabsState>(
+            buildWhen: (previous, current) =>
+                current is VocabsBookmarkedLoadDoneState,
+            builder: (context, state) {
+              if (state is VocabsBookmarkedLoadDoneState &&
+                  state.vocabsList.isNotEmpty) {
+                return FloatingActionButton(
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => VocabLearningPage(
+                        vocabsList: state.vocabsList,
+                      ),
+                    ),
+                  ),
+                  shape: const CircleBorder(),
+                  backgroundColor: AppColor.secondary,
+                  child: const Icon(
+                    Icons.local_library_outlined,
+                    color: AppColor.white,
+                  ),
                 );
               }
-            }
-            return const SizedBox.shrink();
-          },
+              return const SizedBox.shrink();
+            },
+          ),
         ),
       );
 }

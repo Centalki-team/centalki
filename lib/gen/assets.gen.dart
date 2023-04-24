@@ -175,6 +175,10 @@ class $AssetsIllustrationGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/img_firework.png
+  AssetGenImage get imgFirework =>
+      const AssetGenImage('assets/images/img_firework.png');
+
   /// File path: assets/images/intro_first.svg
   SvgGenImage get introFirst =>
       const SvgGenImage('assets/images/intro_first.svg');
@@ -193,7 +197,7 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<dynamic> get values =>
-      [introFirst, introSecond, introThird, tempAllTopic];
+      [imgFirework, introFirst, introSecond, introThird, tempAllTopic];
 }
 
 class $AssetsLogoGen {
