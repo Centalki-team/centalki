@@ -339,4 +339,19 @@ class TextDoc {
       'We are deeply appreciated the efforts you took to help us further improve our contents.\nWe always look forward to hearing more ideas from you.';
   static const txtStayBtn = 'Stay';
   static const txtExitBtn = 'Exit';
+
+  // Vocab - Learning
+  static const txtVocabLearningSuggestion =
+      'This feature works better with\nat least 10 saved phrases.';
+  static const txtStartBtn = 'Start';
+  static const txtCompleteRemind =
+      'You have completed studying 5 phrases.\nTry to maintain this every day.';
+  static const txtEndBtn = 'End';
+  static const txtCompleteBtn = 'Complete';
+  static const txtEndProgress = 'End progress';
+  static const txtEndProgressContent =
+      'Are you sure to finish to learn vocabularies?';
+  static const txtStillWantToLearnMore = 'Still want to learn more?';
+  static const txtOfCourse = 'Of course';
+  static const txtThatEnoughForToday = 'That is enough for today';
 }

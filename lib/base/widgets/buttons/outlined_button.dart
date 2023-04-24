@@ -11,6 +11,7 @@ class AppOutlinedButton extends StatefulWidget {
     this.minimumSize,
     this.textColor,
     this.iconColor,
+    this.outlineColor,
   }) : super(key: key);
 
   final void Function()? onPressed;
@@ -19,6 +20,7 @@ class AppOutlinedButton extends StatefulWidget {
   final Size? minimumSize;
   final Color? textColor;
   final Color? iconColor;
+  final Color? outlineColor;
 
   @override
   State<AppOutlinedButton> createState() => _AppOutlinedButtonState();
@@ -39,13 +41,18 @@ class _AppOutlinedButtonState extends State<AppOutlinedButton> {
             ),
             elevation: 0.0,
             shadowColor: AppColor.shadow,
-            side: const BorderSide(
-              color: AppColor.container,
+            side: BorderSide(
+              color: widget.outlineColor ?? AppColor.container,
             ),
             minimumSize: widget.minimumSize,
           ),
           child: Text(
             widget.text,
+            style: TextStyle(
+              fontSize: labelLargeSize,
+              fontWeight: labelLargeWeight,
+              color: widget.textColor,
+            ),
           ),
         )
       : OutlinedButton.icon(
@@ -55,8 +62,8 @@ class _AppOutlinedButtonState extends State<AppOutlinedButton> {
             foregroundColor: AppColor.mainColor1,
             elevation: 0.0,
             shadowColor: AppColor.shadow,
-            side: const BorderSide(
-              color: AppColor.container,
+            side: BorderSide(
+              color: widget.outlineColor ?? AppColor.container,
             ),
             minimumSize: widget.minimumSize,
           ),
