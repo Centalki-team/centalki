@@ -363,4 +363,29 @@ class TextDoc {
   static const txtToday = 'Today';
   static const txtThisWeek = 'This week';
   static const txtPrevious = 'Previous Notifications';
+
+  // Topic suggestion
+  static const txtTopicSuggestion = 'Topic Suggestion';
+  static const txtSubjectLabel = 'Subject and Category';
+  static const txtSubjectSubTitle =
+      'You can give us general ideas of the topics you wish to be available. It\'s best to suggest 1 idea every time, so that we can manage them more efficiently.';
+  static const txtSubjectHint =
+      'e.g. I want a topic about extracurricular activities in college and university, pros and cons of fast food, studying abroad, etc.';
+  static const txtLevelLabel = 'Level and Difficulty';
+  static const txtLevelSubTitle =
+      'You could provide us the desired difficulty of the topics you wish for';
+  static const txtDescriptionAndRequirementsLabel =
+      'Description and Specific Requirements';
+  static const txtDescriptionAndRequirementsSubTitle =
+      'We are thankful if you could share with us the details, preferences, and other specific ideas for the topic';
+  static const txtDescriptionAndRequirementsHint =
+      'The topic explores the pros and cons of fast food, providing insight into the potential benefits and drawbacks of this popular food choice.';
+  static const txtSubjectNotEmpty = 'Subject and Category cannot be empty';
+  static const txtSubjectTooLong =
+      'Subject and Category cannot exceed 200 characters';
+  static const txtDescriptionAndRequirementsTooLong =
+      'Description and Specific Requirements cannot exceed 500 characters';
+  static const txtSendTopicSuggestionSuccess =
+      'Topic suggestion sent successfully.';
+  static const txtSendTopicSuggestionFailed = 'Topic suggestion sent failed.';
 }
