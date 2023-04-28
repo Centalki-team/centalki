@@ -1,5 +1,6 @@
 import '../../../../../../../base/gateway/api_gateway.base.dart';
 import '../../../../../../../config/app_config.dart';
+import '../../../../../../shared/extensions.dart';
 import 'models/noti_list_item_model.dart';
 import 'models/noti_list_response_model.dart';
 import 'resources/noti_resource.dart';
@@ -32,5 +33,21 @@ class NotiRemoteDatasource {
       method: HTTPMethod.put,
     );
     return NotiListItemModel.fromJson(response.data);
+  }
+
+  Future<bool> markAllNotiAsRead() async {
+    final response = await _apiGatewayUser.execute(
+      resource: const NotificationMarkAllReadResource(),
+      method: HTTPMethod.put,
+    );
+    return response.isOk;
+  }
+
+  Future<bool> markAllNotiAsUnread() async {
+    final response = await _apiGatewayUser.execute(
+      resource: const NotificationMarkAllUnreadResource(),
+      method: HTTPMethod.put,
+    );
+    return response.isOk;
   }
 }

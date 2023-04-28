@@ -9,7 +9,17 @@ class NotiListLoadDataEvent extends NotiListEvent {
 }
 
 class NotiListMarkReadSingleEvent extends NotiListEvent {
-  const NotiListMarkReadSingleEvent({required this.notiId,});
+  const NotiListMarkReadSingleEvent({
+    required this.notiId,
+  });
 
   final String notiId;
+}
+
+class NotiListMarkAllReadEvent extends NotiListEvent {
+  const NotiListMarkAllReadEvent();
+}
+
+class NotiListMarkAllUnreadEvent extends NotiListEvent {
+  const NotiListMarkAllUnreadEvent();
 }
