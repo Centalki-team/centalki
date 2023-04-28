@@ -65,6 +65,8 @@ dependencies:
   shared_preferences: ^2.1.0
   flutter_secure_storage: ^8.0.0
   carousel_slider: ^4.2.1
+  firebase_messaging: ^14.4.1
+  timeago: ^3.4.0
   
 dependency_overrides:
   permission_handler: "any"

@@ -7,6 +7,7 @@ import '../../../../../../base/define/size.dart';
 import '../../../../../../base/define/text.dart';
 import '../../../../../../gen/assets.gen.dart';
 import '../../../../../shared/widgets/tab_indicator/tab_indicator.dart';
+import '../../../../notifications/presentation/views/noti_list_page.dart';
 import '../../../../search_topics/presentation/views/search_topics_page.dart';
 import '../elementary_topics/elementary_topics_view.dart';
 import '../intermediate_topics/intermediate_topic_page.dart';
@@ -81,12 +82,20 @@ class _SelectTopicLevelViewState extends State<SelectTopicLevelView>
                     child: Assets.icon.icSearchHeader.svg(),
                   ),
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(
-                //     horizontal: 12.0,
-                //   ),
-                //   child: Assets.icon.icNotiHeader.svg(),
-                // ),
+                GestureDetector(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const NotiListPage(),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12.0,
+                    ),
+                    child: Assets.icon.icNotiHeader.svg(),
+                  ),
+                ),
               ],
             ),
           ),
