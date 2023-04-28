@@ -354,4 +354,13 @@ class TextDoc {
   static const txtStillWantToLearnMore = 'Still want to learn more?';
   static const txtOfCourse = 'Of course';
   static const txtThatEnoughForToday = 'That is enough for today';
+
+  // Notifications
+  static const txtNotifications = 'Notifications';
+  static const txtNoNotiToShow = 'No Notifications To Show';
+  static const txtNotiWillUpdateRemind =
+      'This screen will update whenever there is something new for you.';
+  static const txtToday = 'Today';
+  static const txtThisWeek = 'This week';
+  static const txtPrevious = 'Previous Notifications';
 }

@@ -68,6 +68,14 @@ class $AssetsIconGen {
   SvgGenImage get icNotiHeader =>
       const SvgGenImage('assets/icon/ic_noti_header.svg');
 
+  /// File path: assets/icon/ic_noti_read.png
+  AssetGenImage get icNotiRead =>
+      const AssetGenImage('assets/icon/ic_noti_read.png');
+
+  /// File path: assets/icon/ic_noti_unread.png
+  AssetGenImage get icNotiUnread =>
+      const AssetGenImage('assets/icon/ic_noti_unread.png');
+
   /// File path: assets/icon/ic_paint_palette.svg
   SvgGenImage get icPaintPalette =>
       const SvgGenImage('assets/icon/ic_paint_palette.svg');
@@ -132,6 +140,8 @@ class $AssetsIconGen {
         icLanguage,
         icNoti,
         icNotiHeader,
+        icNotiRead,
+        icNotiUnread,
         icPaintPalette,
         icRatingStar,
         icRatingStarSelected,

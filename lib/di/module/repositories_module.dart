@@ -17,6 +17,9 @@ import '../../src/features/introduction/domain/repositories/app_intro_repository
 import '../../src/features/meeting/data/datasources/event_datasource/remote_data/event_remote_datasource.dart';
 import '../../src/features/meeting/data/repositories/event_repository_impl.dart';
 import '../../src/features/meeting/domain/repositories/event_repository.dart';
+import '../../src/features/notifications/data/datasources/noti_datasrc/remote_data/noti_remote_datasrc.dart';
+import '../../src/features/notifications/data/repositories/noti_list_repository_impl.dart';
+import '../../src/features/notifications/domain/repositories/noti_list_repository.dart';
 import '../../src/features/payment/data/datasources/remote_data/payment_remote_datasource.dart';
 import '../../src/features/payment/data/datasources/remote_data/payment_remote_datasource_auth_required.dart';
 import '../../src/features/payment/data/repositories/payment_repository_impl.dart';
@@ -83,6 +86,7 @@ class RepositoriesModule extends DIModule {
           SessionFeedbackRemoteDatasource.new)
       ..registerLazySingleton<TopicReviewPageContentsRemoteDatasrc>(
           TopicReviewPageContentsRemoteDatasrc.new)
+      ..registerLazySingleton<NotiRemoteDatasource>(NotiRemoteDatasource.new)
       //Repositories
       ..registerLazySingleton<TopicRepository>(TopicRepositoryImpl.new)
       ..registerLazySingleton<TopicDetailRepository>(
@@ -110,6 +114,7 @@ class RepositoriesModule extends DIModule {
       ..registerLazySingleton<SessionFeedbackRepository>(
           SessionFeedbackRepositoryImpl.new)
       ..registerLazySingleton<TopicReviewPagesRepository>(
-          TopicReviewPagesRepositoryImpl.new);
+          TopicReviewPagesRepositoryImpl.new)
+      ..registerLazySingleton<NotiListRepository>(NotiListRepositoryImpl.new);
   }
 }
