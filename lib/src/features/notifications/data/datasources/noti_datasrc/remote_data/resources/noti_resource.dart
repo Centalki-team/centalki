@@ -10,6 +10,11 @@ class NotificationMarkAllReadResource extends Resource {
       : super('/notification/mark-all-seen');
 }
 
+class NotificationMarkAllUnreadResource extends Resource {
+  const NotificationMarkAllUnreadResource()
+      : super('/notification/mark-all-unseen');
+}
+
 class NotificationListResource extends Resource {
   const NotificationListResource() : super('/notification');
 }

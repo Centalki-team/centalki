@@ -9,4 +9,6 @@ abstract class NotiListRepository {
       Map<String, dynamic> params);
   Future<Either<AppException, NotiListItemEntity>> markSingleNotiAsRead(
       String params);
+  Future<Either<AppException, bool>> markAllNotiAsRead();
+  Future<Either<AppException, bool>> markAllNotiAsUnread();
 }

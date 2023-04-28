@@ -6,8 +6,10 @@ import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../base/define/size.dart';
 import '../../../../../base/define/text.dart';
+import '../../../settings/presentation/views/settings_notification_view.dart';
 import '../../domain/entities/noti_list_item_entity.dart';
 import '../blocs/noti_list_bloc/noti_list_bloc.dart';
+import '../widgets/noti_bottom_modal.dart';
 import '../widgets/noti_list.dart';
 
 class NotiListView extends StatefulWidget {
@@ -19,6 +21,44 @@ class NotiListView extends StatefulWidget {
 
 class _NotiListViewState extends State<NotiListView> {
   var selectedNotiList = <NotiListItemEntity>[];
+
+  _showNotiExternalOptions() async {
+    final result = await showModalBottomSheet(
+      context: context,
+      backgroundColor: AppColor.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(24.0),
+          topRight: Radius.circular(24.0),
+        ),
+      ),
+      builder: (context) => const NotiModalBottomSheet(),
+    );
+    if (result != null) {
+      switch (result) {
+        case 0:
+          if (mounted) {
+            context.read<NotiListBloc>().add(const NotiListMarkAllReadEvent());
+          }
+          break;
+        case 1:
+          // TODO: api mark all unread
+          // if (mounted) {
+          //   context.read<NotiListBloc>().add(const NotiListMarkAllUnreadEvent());
+          // }
+          break;
+        case 2:
+          if (mounted) {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const SettingsNotification(),
+              ),
+            );
+          }
+          break;
+      }
+    }
+  }
 
   _markAsRead(NotiListItemEntity item) {
     if (!selectedNotiList.contains(item)) {
@@ -64,7 +104,7 @@ class _NotiListViewState extends State<NotiListView> {
                 centerTitle: true,
                 actions: [
                   IconButton(
-                    onPressed: () {},
+                    onPressed: _showNotiExternalOptions,
                     icon: const Icon(
                       Icons.more_vert_rounded,
                       color: AppColor.mainColor1,
@@ -82,8 +122,12 @@ class _NotiListViewState extends State<NotiListView> {
                       if (state is NotiListLoadDoneState) {
                         if (state.notiListResponseEntity.data.isEmpty) {
                           return Column(
+                            mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: const [
+                              SizedBox(
+                                height: 100,
+                              ),
                               Icon(
                                 Icons.notifications_none_outlined,
                                 color: AppColor.shadow,

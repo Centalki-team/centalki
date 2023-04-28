@@ -7,6 +7,8 @@ import '../../../domain/entities/noti_list_item_entity.dart';
 import '../../../domain/entities/noti_list_response_entity.dart';
 import '../../../domain/repositories/noti_list_repository.dart';
 import '../../../domain/usecases/get_noti_list_usecase.dart';
+import '../../../domain/usecases/mark_all_noti_as_read_usecase.dart';
+import '../../../domain/usecases/mark_all_noti_as_unread_usecase.dart';
 import '../../../domain/usecases/mark_single_noti_as_read_usecase.dart';
 import '../../../domain/usecases/params/get_noti_list_param.dart';
 
@@ -17,11 +19,17 @@ class NotiListBloc extends Bloc<NotiListEvent, NotiListState> {
   NotiListBloc() : super(const NotiListInitState()) {
     on<NotiListLoadDataEvent>(_onLoadNotiList);
     on<NotiListMarkReadSingleEvent>(_onMarkSingleNotiAsRead);
+    on<NotiListMarkAllReadEvent>(_onMarkAllRead);
+    on<NotiListMarkAllUnreadEvent>(_onMarkAllAsUnread);
   }
 
   final _getNotiListUseCase =
       GetNotiListUseCase(notiListRepository: getIt.get<NotiListRepository>());
   final _markSingleNotiAsReadUseCase = MarkSingleNotiAsReadUseCase(
+      notiListRepository: getIt.get<NotiListRepository>());
+  final _markAllReadUseCase = MarkAllNotiAsReadUseCase(
+      notiListRepository: getIt.get<NotiListRepository>());
+  final _markAllAsUnreadUseCase = MarkAllNotiAsUnreadUseCase(
       notiListRepository: getIt.get<NotiListRepository>());
 
   _onLoadNotiList(NotiListLoadDataEvent event, emit) async {
@@ -91,6 +99,36 @@ class NotiListBloc extends Bloc<NotiListEvent, NotiListState> {
           emitTime: DateTime.now(),
         ),
       ),
+    );
+  }
+
+  _onMarkAllRead(NotiListMarkAllReadEvent event, emit) async {
+    emit(const NotiListLoadingState(isOverlay: true));
+    final result = await _markAllReadUseCase(null);
+    emit(const NotiListLoadingState(showLoading: false));
+    result.fold(
+      (l) => emit(
+        NotiListErrorState(
+          exception: l,
+          emitTime: DateTime.now(),
+        ),
+      ),
+      (r) => add(const NotiListLoadDataEvent()),
+    );
+  }
+
+  _onMarkAllAsUnread(NotiListMarkAllUnreadEvent event, emit) async {
+    emit(const NotiListLoadingState(isOverlay: true));
+    final result = await _markAllAsUnreadUseCase(null);
+    emit(const NotiListLoadingState(showLoading: false));
+    result.fold(
+      (l) => emit(
+        NotiListErrorState(
+          exception: l,
+          emitTime: DateTime.now(),
+        ),
+      ),
+      (r) => add(const NotiListLoadDataEvent()),
     );
   }
 }
