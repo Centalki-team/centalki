@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../base/define/styles.dart';
+import '../../../../../base/widgets/buttons/button.dart';
+import '../../../../../base/widgets/buttons/outlined_button.dart';
 import '../../../../../base/widgets/toast/app_toast.dart';
 import '../../../../shared/widgets/textfields/search_txt_field.dart';
+import '../../../topic_suggestion/presentation/views/topic_suggestion_page.dart';
 import '../../../topics/presentation/widgets/topic_card.dart';
 import '../blocs/search_topics_bloc/search_topics_bloc.dart';
 
@@ -123,38 +126,74 @@ class _SearchTopicsViewState extends State<SearchTopicsView> {
                             itemCount: state.topicsListEntity.topics!.length,
                           );
                         } else {
-                          return Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: const [
-                              SizedBox(
-                                height: 72.0,
-                                width: double.infinity,
-                              ),
-                              Text(
-                                TextDoc.txtNoResultFound,
-                                style: TextStyle(
-                                  fontSize: titleLargeSize,
-                                  fontWeight: titleLargeWeight,
-                                  color: AppColor.defaultFont,
+                          return SingleChildScrollView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const SizedBox(
+                                  height: 72.0,
+                                  width: double.infinity,
                                 ),
-                                textAlign: TextAlign.center,
-                              ),
-                              SizedBox(
-                                height: 38.0,
-                              ),
-                              SizedBox(
-                                width: 271.0,
-                                child: Text(
-                                  '${TextDoc.txtSearchSr}\n\n${TextDoc.txtSearchPlsTryAgain}',
+                                const Text(
+                                  TextDoc.txtNoResultFound,
                                   style: TextStyle(
-                                    fontSize: bodyMediumSize,
-                                    fontWeight: bodyMediumWeight,
-                                    color: AppColor.shadow,
+                                    fontSize: titleLargeSize,
+                                    fontWeight: titleLargeWeight,
+                                    color: AppColor.defaultFont,
                                   ),
                                   textAlign: TextAlign.center,
                                 ),
-                              ),
-                            ],
+                                const SizedBox(
+                                  height: 38.0,
+                                ),
+                                const SizedBox(
+                                  width: 271.0,
+                                  child: Text(
+                                    '${TextDoc.txtSearchSr}\n\n${TextDoc.txtSearchPlsTryAgain}',
+                                    style: TextStyle(
+                                      fontSize: bodyMediumSize,
+                                      fontWeight: bodyMediumWeight,
+                                      color: AppColor.shadow,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 160,
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 56),
+                                  child: Text(
+                                    TextDoc.txtSearchSuggestTopic,
+                                    style: TextStyle(
+                                      fontSize: bodySmallSize,
+                                      fontWeight: bodySmallWeight,
+                                      color: AppColor.shadow,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: spacing24,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 110),
+                                  child: AppFilledButton(
+                                    onPressed: () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                const TopicSuggestionPage())),
+                                    text: TextDoc.txtSuggestTopicBtn,
+                                    minimumSize: const Size.fromHeight(48),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: spacing24,
+                                ),
+                              ],
+                            ),
                           );
                         }
                       } else if (state is SearchTopicsLoadingState &&

@@ -78,6 +78,9 @@ class TextDoc {
       'Sorry! We could not find any topic that matches your search criteria.';
   static const txtSearchPlsTryAgain =
       'Please consider trying again with different keywords.';
+  static const txtSearchSuggestTopic =
+      'It is possible that the topics you are looking for are not yet available in our system.';
+  static const txtSuggestTopicBtn = 'Suggest Topic';
 
   // CONNECT TEACHER
   static const txtCancel = 'Cancel';
@@ -385,7 +388,10 @@ class TextDoc {
       'Subject and Category cannot exceed 200 characters';
   static const txtDescriptionAndRequirementsTooLong =
       'Description and Specific Requirements cannot exceed 500 characters';
-  static const txtSendTopicSuggestionSuccess =
-      'Topic suggestion sent successfully.';
-  static const txtSendTopicSuggestionFailed = 'Topic suggestion sent failed.';
+  static const txtNotFinishTopicSuggest = 'Unfinished Topic Suggestion';
+  static const txtNotFinishTopicSuggestContent =
+      'Are you sure you want to exit and return to the previous screen? Your suggestions are invaluable to us.';
+  static const txtSendTopicSuggestSuccess = 'Suggestion Sent Successfully';
+  static const txtSendTopicSuggestSuccessContent =
+      'We are deeply appreciated the efforts you took to help us further improve our contents.\nWe always look forward to hearing more ideas from you.';
 }

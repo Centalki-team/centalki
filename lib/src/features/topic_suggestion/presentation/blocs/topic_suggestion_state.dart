@@ -19,7 +19,7 @@ class TopicSuggestionLoadingState extends TopicSuggestionState {
 class TopicSuggestionLoadDoneState extends TopicSuggestionState {
   const TopicSuggestionLoadDoneState({required this.contents});
 
-  final List<String> contents;
+  final List<TopicSuggestionContentEntity> contents;
 }
 
 class TopicSuggestionLoadFailedState extends TopicSuggestionState {

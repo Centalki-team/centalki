@@ -16,22 +16,20 @@ class TopicSuggestionValidateEvent extends TopicSuggestionEvent {
   const TopicSuggestionValidateEvent({
     required this.subjectAndCategory,
     required this.descriptionAndRequirements,
-    required this.summaryLevel,
   });
 
   final String subjectAndCategory;
   final String descriptionAndRequirements;
-  final List<String> summaryLevel;
 }
 
 class TopicSuggestionSendEvent extends TopicSuggestionEvent {
   const TopicSuggestionSendEvent({
     required this.subjectAndCategory,
-    required this.descriptionAndRequirements,
-    required this.summaryLevel,
+    this.descriptionAndRequirements,
+    this.selectedLevel,
   });
 
   final String subjectAndCategory;
-  final String descriptionAndRequirements;
-  final List<String> summaryLevel;
+  final String? descriptionAndRequirements;
+  final String? selectedLevel;
 }

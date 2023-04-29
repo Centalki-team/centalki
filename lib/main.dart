@@ -20,7 +20,6 @@ import 'src/features/introduction/domain/repositories/app_intro_repository.dart'
 import 'src/features/introduction/domain/usecases/get_status_app_intro_usecase.dart';
 import 'src/features/introduction/presentation/views/app_intro_page.dart';
 import 'src/features/splash/presentation/views/splash_screen.dart';
-import 'src/features/topic_suggestion/presentation/views/topic_suggestion_page.dart';
 
 void main(List<String> args) async {
   await Injection.inject();
@@ -139,8 +138,7 @@ class _MyWidgetState extends State<MyWidget> {
       case "not_email_verified":
         return const VerifyEmailView();
       case "success":
-        // return const HomeView();
-        return const TopicSuggestionPage();
+        return const HomeView();
       default:
         return const SplashScreen();
     }
