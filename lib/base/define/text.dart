@@ -382,7 +382,7 @@ class TextDoc {
   static const txtDescriptionAndRequirementsSubTitle =
       'We are thankful if you could share with us the details, preferences, and other specific ideas for the topic';
   static const txtDescriptionAndRequirementsHint =
-      'The topic explores the pros and cons of fast food, providing insight into the potential benefits and drawbacks of this popular food choice.';
+      'e.g. explores the pros and cons of fast food, examining both sides of the debate and providing insight into the potential benefits and drawbacks of this popular food choice.';
   static const txtSubjectNotEmpty = 'Subject and Category cannot be empty';
   static const txtSubjectTooLong =
       'Subject and Category cannot exceed 200 characters';
