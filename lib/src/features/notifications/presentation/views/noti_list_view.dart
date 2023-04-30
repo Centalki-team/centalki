@@ -42,10 +42,11 @@ class _NotiListViewState extends State<NotiListView> {
           }
           break;
         case 1:
-          // TODO: api mark all unread
-          // if (mounted) {
-          //   context.read<NotiListBloc>().add(const NotiListMarkAllUnreadEvent());
-          // }
+          if (mounted) {
+            context
+                .read<NotiListBloc>()
+                .add(const NotiListMarkAllUnreadEvent());
+          }
           break;
         case 2:
           if (mounted) {
@@ -56,6 +57,8 @@ class _NotiListViewState extends State<NotiListView> {
             );
           }
           break;
+        default:
+          return;
       }
     }
   }

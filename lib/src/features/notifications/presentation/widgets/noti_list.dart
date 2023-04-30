@@ -32,7 +32,7 @@ class NotiList extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(
                 spacing16,
-                spacing16,
+                spacing24,
                 spacing16,
                 spacing8,
               ),
@@ -46,9 +46,11 @@ class NotiList extends StatelessWidget {
                 ),
               ),
             ),
-            ListView.builder(
+            ListView.separated(
               shrinkWrap: true,
-              padding: EdgeInsets.zero,
+              padding: const EdgeInsets.symmetric(
+                horizontal: spacing16,
+              ),
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (ctx, index) => NotiItemCard(
                 notiListItemEntity: notiList[index],
@@ -58,6 +60,9 @@ class NotiList extends StatelessWidget {
                 markAsRead: markAsRead,
               ),
               itemCount: notiList.length,
+              separatorBuilder: (ctx, index) => const SizedBox(
+                height: spacing8,
+              ),
             ),
           ],
         );
