@@ -50,10 +50,10 @@ class NotiListBloc extends Bloc<NotiListEvent, NotiListState> {
         var thisWeekList = <NotiListItemEntity>[];
         var previousList = <NotiListItemEntity>[];
         var nowDate = DateTime.now();
-        var startWeekDate = DateTime(
-            nowDate.year, nowDate.month, nowDate.day - nowDate.weekday % 7);
+        var startWeekDate = DateTime(nowDate.year, nowDate.month,
+            nowDate.day - (nowDate.weekday % 7 - 1));
         var endWeekDate = DateTime(
-            nowDate.year, nowDate.month, nowDate.day - (nowDate.weekday - 1));
+            startWeekDate.year, startWeekDate.month, startWeekDate.day + 6);
         var indexStep = 0;
         for (indexStep; indexStep < r.data.length; indexStep++) {
           if (nowDate
