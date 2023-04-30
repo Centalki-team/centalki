@@ -78,6 +78,9 @@ class TextDoc {
       'Sorry! We could not find any topic that matches your search criteria.';
   static const txtSearchPlsTryAgain =
       'Please consider trying again with different keywords.';
+  static const txtSearchSuggestTopic =
+      'It is possible that the topics you are looking for are not yet available in our system.';
+  static const txtSuggestTopicBtn = 'Suggest Topic';
 
   // CONNECT TEACHER
   static const txtCancel = 'Cancel';
@@ -363,4 +366,32 @@ class TextDoc {
   static const txtToday = 'Today';
   static const txtThisWeek = 'This week';
   static const txtPrevious = 'Previous Notifications';
+
+  // Topic suggestion
+  static const txtTopicSuggestion = 'Topic Suggestion';
+  static const txtSubjectLabel = 'Subject and Category';
+  static const txtSubjectSubTitle =
+      'You can give us general ideas of the topics you wish to be available. It\'s best to suggest 1 idea every time, so that we can manage them more efficiently.';
+  static const txtSubjectHint =
+      'e.g. I want a topic about extracurricular activities in college and university, pros and cons of fast food, studying abroad, etc.';
+  static const txtLevelLabel = 'Level and Difficulty';
+  static const txtLevelSubTitle =
+      'You could provide us the desired difficulty of the topics you wish for';
+  static const txtDescriptionAndRequirementsLabel =
+      'Description and Specific Requirements';
+  static const txtDescriptionAndRequirementsSubTitle =
+      'We are thankful if you could share with us the details, preferences, and other specific ideas for the topic';
+  static const txtDescriptionAndRequirementsHint =
+      'e.g. explores the pros and cons of fast food, examining both sides of the debate and providing insight into the potential benefits and drawbacks of this popular food choice.';
+  static const txtSubjectNotEmpty = 'Subject and Category cannot be empty';
+  static const txtSubjectTooLong =
+      'Subject and Category cannot exceed 200 characters';
+  static const txtDescriptionAndRequirementsTooLong =
+      'Description and Specific Requirements cannot exceed 500 characters';
+  static const txtNotFinishTopicSuggest = 'Unfinished Topic Suggestion';
+  static const txtNotFinishTopicSuggestContent =
+      'Are you sure you want to exit and return to the previous screen? Your suggestions are invaluable to us.';
+  static const txtSendTopicSuggestSuccess = 'Suggestion Sent Successfully';
+  static const txtSendTopicSuggestSuccessContent =
+      'We are deeply appreciated the efforts you took to help us further improve our contents.\nWe always look forward to hearing more ideas from you.';
 }

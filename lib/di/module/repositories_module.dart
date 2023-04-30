@@ -42,6 +42,10 @@ import '../../src/features/topic_detail/domain/repositories/topic_detail_reposit
 import '../../src/features/topic_review/data/datasources/topic_review_page_content/remote_data/topic_review_page_content_remote_datasrc.dart';
 import '../../src/features/topic_review/data/repositories/topic_review_pages_repository_impl.dart';
 import '../../src/features/topic_review/domain/repositories/topic_review_pages_repository.dart';
+import '../../src/features/topic_suggestion/data/datasources/local_data/topic_suggestion_content_local_datasource.dart';
+import '../../src/features/topic_suggestion/data/datasources/remote_data/topic_suggestion_remote_datasource.dart';
+import '../../src/features/topic_suggestion/data/repositories/topic_suggestion_repository_impl.dart';
+import '../../src/features/topic_suggestion/domain/repositories/topic_suggestion_repository.dart';
 import '../../src/features/topics/data/datasources/topics_datasource/remote_data/topics_remote_datasource.dart';
 import '../../src/features/topics/data/repositories/topic_repository_impl.dart';
 import '../../src/features/topics/domain/repositories/topic_repository.dart';
@@ -87,6 +91,10 @@ class RepositoriesModule extends DIModule {
       ..registerLazySingleton<TopicReviewPageContentsRemoteDatasrc>(
           TopicReviewPageContentsRemoteDatasrc.new)
       ..registerLazySingleton<NotiRemoteDatasource>(NotiRemoteDatasource.new)
+      ..registerLazySingleton<TopicSuggestionContentLocalDataSource>(
+          TopicSuggestionContentLocalDataSource.new)
+      ..registerLazySingleton<TopicSuggestionRemoteDatasrc>(
+          TopicSuggestionRemoteDatasrc.new)
       //Repositories
       ..registerLazySingleton<TopicRepository>(TopicRepositoryImpl.new)
       ..registerLazySingleton<TopicDetailRepository>(
@@ -115,6 +123,8 @@ class RepositoriesModule extends DIModule {
           SessionFeedbackRepositoryImpl.new)
       ..registerLazySingleton<TopicReviewPagesRepository>(
           TopicReviewPagesRepositoryImpl.new)
-      ..registerLazySingleton<NotiListRepository>(NotiListRepositoryImpl.new);
+      ..registerLazySingleton<NotiListRepository>(NotiListRepositoryImpl.new)
+      ..registerLazySingleton<TopicSuggestionRepository>(
+          TopicSuggestionRepositoryImpl.new);
   }
 }
