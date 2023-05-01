@@ -70,7 +70,8 @@ class _VocabsViewState extends State<VocabsView> {
               if (state is VocabsBookmarkedLoadDoneState) {
                 return ListView.separated(
                   padding: const EdgeInsets.symmetric(
-                    vertical: spacing24,
+                    vertical: padding24,
+                    horizontal: padding16,
                   ),
                   itemBuilder: (context, index) =>
                       VocabCard(item: state.vocabsList[index]),
