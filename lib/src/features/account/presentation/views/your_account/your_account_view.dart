@@ -7,6 +7,8 @@ import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/avatar.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
+import '../../../../../../gen/assets.gen.dart';
+import '../../../../notifications/presentation/views/noti_list_page.dart';
 import '../../blocs/your_account_bloc/your_account_bloc.dart';
 import '../../widgets/account_tile.dart';
 import '../account_information/account_information_page.dart';
@@ -78,18 +80,21 @@ class _YourAccountViewState extends State<YourAccountView> {
                                 // const SizedBox(
                                 //   width: 24.0,
                                 // ),
-                                // Padding(
-                                //   padding: const EdgeInsets.symmetric(
-                                //     horizontal: 12.0,
-                                //   ),
-                                //   child: Assets.icon.icSearchHeader.svg(),
-                                // ),
-                                // Padding(
-                                //   padding: const EdgeInsets.symmetric(
-                                //     horizontal: 12.0,
-                                //   ),
-                                //   child: Assets.icon.icNotiHeader.svg(),
-                                // ),
+                                GestureDetector(
+                                  onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const NotiListPage(),
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 12.0,
+                                    ),
+                                    child: Assets.icon.icNotiHeader.svg(),
+                                  ),
+                                ),
                               ],
                             ),
                           ),
