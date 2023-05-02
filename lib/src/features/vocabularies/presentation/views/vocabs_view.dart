@@ -6,10 +6,13 @@ import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../base/define/size.dart';
+import '../../../../../base/define/text.dart';
 import '../../../../../base/widgets/toast/app_toast.dart';
+import '../../../bookmark/domain/entities/bookmark_phrase_item_entity.dart';
 import '../../../vocabularies_learning/presentation/views/vocab_learning_page.dart';
 import '../blocs/vocabs_bloc/vocabs_bloc.dart';
 import '../widgets/vocabs_card.dart';
+import 'vocabs_empty_view.dart';
 
 class VocabsView extends StatefulWidget {
   const VocabsView({super.key});
@@ -19,6 +22,70 @@ class VocabsView extends StatefulWidget {
 }
 
 class _VocabsViewState extends State<VocabsView> {
+  _showConfirmRemoveSavedVocab(BookmarkVocabsItemEntity item) async {
+    final result = await showDialog(
+      //barrierDismissible: false,
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: AppColor.white,
+        title: const Text(
+          TextDoc.txtConfirmRemoveSavedTitle,
+          style: TextStyle(
+            fontSize: titleMediumSize,
+            fontWeight: titleMediumWeight,
+            color: AppColor.defaultFont,
+            height: 1.0,
+          ),
+        ),
+        content: const Text(
+          TextDoc.txtConfirmRemoveSavedContent,
+          style: TextStyle(
+            fontSize: bodyLargeSize,
+            fontWeight: bodyLargeWeight,
+            color: AppColor.defaultFont,
+            height: 1.0,
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            style: TextButton.styleFrom(
+              foregroundColor: AppColor.mainColor1,
+            ),
+            child: const Text(
+              TextDoc.txtCancel,
+              style: TextStyle(
+                fontSize: labelLargeSize,
+                fontWeight: labelLargeWeight,
+              ),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(context, true),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColor.error,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text(
+              TextDoc.txtRemove,
+              style: TextStyle(
+                fontSize: labelLargeSize,
+                fontWeight: labelLargeWeight,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+    if (result == true) {
+      if (mounted) {
+        context
+            .read<VocabsBloc>()
+            .add(VocabsRemoveBookmarkEvent(bookmarkId: item.id!));
+      }
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -68,13 +135,18 @@ class _VocabsViewState extends State<VocabsView> {
                 current is VocabsLoadingState,
             builder: (context, state) {
               if (state is VocabsBookmarkedLoadDoneState) {
+                if (state.vocabsList.isEmpty) {
+                  return const VocabsEmptyView();
+                }
                 return ListView.separated(
                   padding: const EdgeInsets.symmetric(
                     vertical: padding24,
                     horizontal: padding16,
                   ),
-                  itemBuilder: (context, index) =>
-                      VocabCard(item: state.vocabsList[index]),
+                  itemBuilder: (context, index) => VocabCard(
+                    item: state.vocabsList[index],
+                    onRemoveSaved: _showConfirmRemoveSavedVocab,
+                  ),
                   separatorBuilder: (_, __) => const SizedBox(
                     height: spacing16,
                   ),

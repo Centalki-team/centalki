@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../../base/define/app_text.dart';
 import '../../../../../base/define/common_txt_style.dart';
 import '../../../../../base/define/styles.dart';
+import '../../../../../gen/assets.gen.dart';
+import '../../../notifications/presentation/views/noti_list_page.dart';
 import '../widgets/setting_tile.dart';
 import 'settings_about_view.dart';
 import 'settings_appearance_view.dart';
@@ -44,12 +46,20 @@ class SettingsView extends StatelessWidget {
                 //   ),
                 //   child: Assets.icon.icSearchHeader.svg(),
                 // ),
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(
-                //     horizontal: 12.0,
-                //   ),
-                //   child: Assets.icon.icNotiHeader.svg(),
-                // ),
+                GestureDetector(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const NotiListPage(),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12.0,
+                    ),
+                    child: Assets.icon.icNotiHeader.svg(),
+                  ),
+                ),
               ],
             ),
           ),

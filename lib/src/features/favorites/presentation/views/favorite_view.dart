@@ -9,6 +9,7 @@ import '../../../../../base/define/text.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/tab_indicator/tab_indicator.dart';
 import '../../../favorite_topics/presentation/views/favorite_topics_page.dart';
+import '../../../notifications/presentation/views/noti_list_page.dart';
 import '../../../vocabularies/presentation/views/vocabs_page.dart';
 
 class FavoriteView extends StatefulWidget {
@@ -74,12 +75,20 @@ class _FavoriteViewState extends State<FavoriteView>
                 //     child: Assets.icon.icSearchHeader.svg(),
                 //   ),
                 // ),
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(
-                //     horizontal: 12.0,
-                //   ),
-                //   child: Assets.icon.icNotiHeader.svg(),
-                // ),
+                GestureDetector(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const NotiListPage(),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12.0,
+                    ),
+                    child: Assets.icon.icNotiHeader.svg(),
+                  ),
+                ),
               ],
             ),
           ),
@@ -95,29 +104,37 @@ class _FavoriteViewState extends State<FavoriteView>
             labelColor: AppColor.secondary,
             unselectedLabelColor: AppColor.defaultFontContainer,
             controller: _tabController,
-            isScrollable: true,
-            // physics: const NeverScrollableScrollPhysics(),
             onTap: (index) {
               currentIndex = index;
               _tabController.animateTo(index);
             },
-            tabs: const [
+            tabs: [
               Tab(
-                child: Text(
-                  TextDoc.txtTopicsTab,
-                  style: TextStyle(
-                    fontSize: titleSmallSize,
-                    fontWeight: titleSmallWeight,
-                  ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text(
+                      TextDoc.txtTopicsTab,
+                      style: TextStyle(
+                        fontSize: titleSmallSize,
+                        fontWeight: titleSmallWeight,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Tab(
-                child: Text(
-                  TextDoc.txtVocabsTab,
-                  style: TextStyle(
-                    fontSize: titleSmallSize,
-                    fontWeight: titleSmallWeight,
-                  ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text(
+                      TextDoc.txtVocabsTab,
+                      style: TextStyle(
+                        fontSize: titleSmallSize,
+                        fontWeight: titleSmallWeight,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],

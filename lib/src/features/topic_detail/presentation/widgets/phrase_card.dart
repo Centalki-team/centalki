@@ -9,9 +9,11 @@ class PhraseCard extends StatelessWidget {
   const PhraseCard({
     Key? key,
     required this.phraseEntity,
+    this.onRemovePhraseBookmark,
   }) : super(key: key);
 
   final TopicPhraseEntity phraseEntity;
+  final Function(TopicPhraseEntity)? onRemovePhraseBookmark;
 
   @override
   Widget build(BuildContext context) => Theme(
@@ -72,9 +74,7 @@ class PhraseCard extends StatelessWidget {
                           } else {
                             if (phraseEntity.bookmark!.id != null &&
                                 phraseEntity.bookmark!.id!.isNotEmpty) {
-                              context.read<TopicDetailBloc>().add(
-                                  TopicDetailPhraseRemoveBookmarkEvent(
-                                      bookmarkId: phraseEntity.bookmark!.id!));
+                              onRemovePhraseBookmark?.call(phraseEntity);
                             }
                           }
                         },

@@ -8,6 +8,7 @@ import '../../../../../base/widgets/buttons/button.dart';
 import '../../../../../base/widgets/toast/app_toast.dart';
 import '../../../connect_teacher/presentation/views/connect_teacher_page.dart';
 import '../../../topic_review/presentation/views/topic_review_page.dart';
+import '../../domain/entities/topic_detail_entity.dart';
 import '../blocs/topic_detail_bloc/topic_detail_bloc.dart';
 import '../widgets/phrase_card.dart';
 import '../widgets/question_card.dart';
@@ -25,6 +26,70 @@ class TopicDetailView extends StatefulWidget {
 }
 
 class _TopicDetailViewState extends State<TopicDetailView> {
+  _showConfirmRemoveSavedPhrase(TopicPhraseEntity item) async {
+    final result = await showDialog(
+      //barrierDismissible: false,
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: AppColor.white,
+        title: const Text(
+          TextDoc.txtConfirmRemoveSavedTitle,
+          style: TextStyle(
+            fontSize: titleMediumSize,
+            fontWeight: titleMediumWeight,
+            color: AppColor.defaultFont,
+            height: 1.0,
+          ),
+        ),
+        content: const Text(
+          TextDoc.txtConfirmRemoveSavedContent,
+          style: TextStyle(
+            fontSize: bodyLargeSize,
+            fontWeight: bodyLargeWeight,
+            color: AppColor.defaultFont,
+            height: 1.0,
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            style: TextButton.styleFrom(
+              foregroundColor: AppColor.mainColor1,
+            ),
+            child: const Text(
+              TextDoc.txtCancel,
+              style: TextStyle(
+                fontSize: labelLargeSize,
+                fontWeight: labelLargeWeight,
+              ),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(context, true),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColor.error,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text(
+              TextDoc.txtRemove,
+              style: TextStyle(
+                fontSize: labelLargeSize,
+                fontWeight: labelLargeWeight,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+    if (result == true) {
+      if (mounted) {
+        context.read<TopicDetailBloc>().add(
+                                  TopicDetailPhraseRemoveBookmarkEvent(
+                                      bookmarkId: item.bookmark!.id!));
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) =>
       BlocListener<TopicDetailBloc, TopicDetailState>(
@@ -469,6 +534,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                   }
                                   return PhraseCard(
                                     phraseEntity: phrase,
+                                    onRemovePhraseBookmark: _showConfirmRemoveSavedPhrase,
                                   );
                                 },
                                 separatorBuilder: (context, index) =>

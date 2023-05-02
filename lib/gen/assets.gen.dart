@@ -42,6 +42,10 @@ class $AssetsIconGen {
   SvgGenImage get icClearCircle =>
       const SvgGenImage('assets/icon/ic_clear_circle.svg');
 
+  /// File path: assets/icon/ic_empty_vocabs.png
+  AssetGenImage get icEmptyVocabs =>
+      const AssetGenImage('assets/icon/ic_empty_vocabs.png');
+
   /// File path: assets/icon/ic_error_toast.svg
   SvgGenImage get icErrorToast =>
       const SvgGenImage('assets/icon/ic_error_toast.svg');
@@ -133,6 +137,7 @@ class $AssetsIconGen {
         dashboard,
         favorite,
         icClearCircle,
+        icEmptyVocabs,
         icErrorToast,
         icFeedback,
         icHeart,

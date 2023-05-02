@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
 import '../../../bookmark/domain/entities/bookmark_phrase_item_entity.dart';
-import '../blocs/vocabs_bloc/vocabs_bloc.dart';
 
 class VocabCard extends StatelessWidget {
   const VocabCard({
     Key? key,
     required this.item,
+    this.onRemoveSaved,
   }) : super(key: key);
 
   final BookmarkVocabsItemEntity item;
+  final Function(BookmarkVocabsItemEntity)? onRemoveSaved;
 
   @override
   Widget build(BuildContext context) => Theme(
@@ -65,9 +65,7 @@ class VocabCard extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           if (item.id != null && item.id!.isNotEmpty) {
-                            context.read<VocabsBloc>().add(
-                                VocabsRemoveBookmarkEvent(
-                                    bookmarkId: item.id!));
+                            onRemoveSaved?.call(item);
                           }
                         },
                         child: const Icon(

@@ -275,11 +275,18 @@ class TextDoc {
   static const txtConfirmRemoveFavoriteContent =
       "Are you sure to remove this from your favorite topics? You can still add them back later.";
   static const txtRemoveFavoriteSuccess = 'Remove favorite topic successfully!';
+  static const txtConfirmRemoveSavedTitle = 'Remove from Saved';
+  static const txtConfirmRemoveSavedContent =
+      'Are you sure to remove this from your saved vocabularies? You can still add them back later.';
+
   // Favorites
   static const txtTopicsTab = 'Topics';
   static const txtVocabsTab = 'Vocabularies';
   static const txtFavoriteTopicsEmpty =
       'You haven\'t added any favorite topics yet.\nAdd some interesting topics now.';
+  static const txtNoFavoriteVocabsTitle = 'You Have Not Saved Any Phrases';
+  static const txtNoFavoriteVocabsContent =
+      'Explore our topics contents and tap the bookmark icon to save any word or phrase you want to learn.';
 
   // Session completed
   static const txtCongrats = 'Congrats!';
