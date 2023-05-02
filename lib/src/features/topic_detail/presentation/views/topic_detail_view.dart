@@ -84,8 +84,8 @@ class _TopicDetailViewState extends State<TopicDetailView> {
     if (result == true) {
       if (mounted) {
         context.read<TopicDetailBloc>().add(
-                                  TopicDetailPhraseRemoveBookmarkEvent(
-                                      bookmarkId: item.bookmark!.id!));
+            TopicDetailPhraseRemoveBookmarkEvent(
+                bookmarkId: item.bookmark!.id!));
       }
     }
   }
@@ -415,6 +415,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                     fontSize: headlineSmallSize,
                                     fontWeight: headlineSmallWeight,
                                   ),
+                                  textAlign: TextAlign.center,
                                 ),
                               ),
                               const SizedBox(height: spacing6),
@@ -534,7 +535,8 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                   }
                                   return PhraseCard(
                                     phraseEntity: phrase,
-                                    onRemovePhraseBookmark: _showConfirmRemoveSavedPhrase,
+                                    onRemovePhraseBookmark:
+                                        _showConfirmRemoveSavedPhrase,
                                   );
                                 },
                                 separatorBuilder: (context, index) =>
