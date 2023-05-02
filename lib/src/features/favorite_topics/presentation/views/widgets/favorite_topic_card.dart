@@ -111,8 +111,8 @@ class _FavoriteTopicCardState extends State<FavoriteTopicCard> {
                                     title: const Text(
                                       TextDoc.txtConfirmRemoveFavoriteTitle,
                                       style: TextStyle(
-                                        fontSize: titleLargeSize,
-                                        fontWeight: titleLargeWeight,
+                                        fontSize: titleMediumSize,
+                                        fontWeight: titleMediumWeight,
                                         color: AppColor.defaultFont,
                                       ),
                                     ),
