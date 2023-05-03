@@ -11,10 +11,11 @@ class TopicRemoteDatasource {
     apiType: ApiType.user,
   );
 
-  Future<TopicsListBaseModel> getTopics() async {
+  Future<TopicsListBaseModel> getTopics(Map<String, dynamic> params) async {
     final response = await apiGateway.execute(
       resource: const TopicResource(),
       method: HTTPMethod.get,
+      params: params,
     );
     return TopicsListBaseModel.fromJson(response.data);
   }

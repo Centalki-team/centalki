@@ -9,7 +9,7 @@ import '../../../../../../gen/assets.gen.dart';
 import '../../../../../shared/widgets/tab_indicator/tab_indicator.dart';
 import '../../../../notifications/presentation/views/noti_list_page.dart';
 import '../../../../search_topics/presentation/views/search_topics_page.dart';
-import '../elementary_topics/elementary_topics_view.dart';
+import '../elementary_topics/elementary_topics_page.dart';
 import '../intermediate_topics/intermediate_topic_page.dart';
 import '../pre_intermediate_topics/pre_intermediate_topic_page.dart';
 import '../upper_intermediate_topics/upper_intermediate_topic_page.dart';
@@ -31,7 +31,7 @@ class _SelectTopicLevelViewState extends State<SelectTopicLevelView>
     super.initState();
     currentIndex = 0;
     _tabController = TabController(
-      length: 4,
+      length: 3,
       vsync: this,
       initialIndex: 0,
     );
@@ -115,15 +115,15 @@ class _SelectTopicLevelViewState extends State<SelectTopicLevelView>
               _tabController.animateTo(index);
             },
             tabs: const [
-              Tab(
-                child: Text(
-                  TextDoc.txtElementary,
-                  style: TextStyle(
-                    fontSize: titleSmallSize,
-                    fontWeight: titleSmallWeight,
-                  ),
-                ),
-              ),
+              // Tab(
+              //   child: Text(
+              //     TextDoc.txtElementary,
+              //     style: TextStyle(
+              //       fontSize: titleSmallSize,
+              //       fontWeight: titleSmallWeight,
+              //     ),
+              //   ),
+              // ),
               Tab(
                 child: Text(
                   TextDoc.txtPreIntermediate,
@@ -167,7 +167,7 @@ class _SelectTopicLevelViewState extends State<SelectTopicLevelView>
               controller: _tabController,
               physics: const NeverScrollableScrollPhysics(),
               children: const [
-                ElementaryTopicView(),
+                //ElementaryTopicsPage(),
                 PreIntermediateTopicPage(),
                 IntermediateTopicPage(),
                 UpperIntermediateTopicPage(),
