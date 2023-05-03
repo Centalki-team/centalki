@@ -1,19 +1,160 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class IntermediateTopicView extends StatefulWidget {
-  const IntermediateTopicView({Key? key}) : super(key: key);
+import '../../../../../../base/define/colors.dart';
+import '../../../../../../base/define/dimensions.dart';
+import '../../../../../../base/define/size.dart';
+import '../../../../../../base/define/text.dart';
+import '../../../../../../base/widgets/buttons/text_button.dart';
+import '../../../../../../base/widgets/toast/app_toast.dart';
+import '../../blocs/intermediate_topics_bloc/intermediate_topics_bloc.dart';
+import '../../widgets/topic_card.dart';
+
+class IntermediateTopicsView extends StatelessWidget {
+  const IntermediateTopicsView({Key? key}) : super(key: key);
 
   @override
-  State<IntermediateTopicView> createState() => _IntermediateTopicViewState();
-}
-
-class _IntermediateTopicViewState extends State<IntermediateTopicView> {
-  @override
-  Widget build(BuildContext context) => const Center(
-      child: Text(
-        'Intermediate Topic(s) Goes Here\nWorks In Progress...',
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 16),
-      ),
-    );
+  Widget build(BuildContext context) =>
+      BlocListener<IntermediateTopicsBloc, IntermediateTopicsState>(
+        listener: (context, state) {
+          if (state is IntermediateTopicsErrorState) {
+            AppToast(
+              mode: AppToastMode.error,
+              duration: const Duration(seconds: 3),
+              bottomOffset: 8.0,
+              message: Text(
+                state.exception.displayMessage,
+                style: const TextStyle(
+                  fontSize: bodyLargeSize,
+                  fontWeight: bodyLargeWeight,
+                  color: AppColor.white,
+                ),
+              ),
+            ).show(context);
+          } else if (state is IntermediateTopicsAddFavoriteDoneState) {
+            AppToast(
+              duration: const Duration(seconds: 3),
+              bottomOffset: 8.0,
+              message: const Text(
+                TextDoc.txtAddFavoriteSuccess,
+                style: TextStyle(
+                  fontSize: bodyLargeSize,
+                  fontWeight: bodyLargeWeight,
+                  color: AppColor.white,
+                ),
+              ),
+            ).show(context);
+            context
+                .read<IntermediateTopicsBloc>()
+                .add(const IntermediateTopicsLoadEvent());
+          } else if (state is IntermediateTopicsRemoveFavoriteDoneState) {
+            AppToast(
+              duration: const Duration(seconds: 3),
+              bottomOffset: 8.0,
+              message: const Text(
+                TextDoc.txtRemoveFavoriteSuccess,
+                style: TextStyle(
+                  fontSize: bodyLargeSize,
+                  fontWeight: bodyLargeWeight,
+                  color: AppColor.white,
+                ),
+              ),
+            ).show(context);
+            context
+                .read<IntermediateTopicsBloc>()
+                .add(const IntermediateTopicsLoadEvent());
+          }
+        },
+        child: BlocBuilder<IntermediateTopicsBloc, IntermediateTopicsState>(
+          buildWhen: (previous, current) =>
+              current != previous &&
+              (current is IntermediateTopicsLoadDoneState ||
+                  current is IntermediateTopicsLoadingState),
+          builder: (context, state) {
+            if (state is IntermediateTopicsLoadDoneState) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: padding16),
+                child: ListView.separated(
+                  padding: const EdgeInsets.only(top: 16),
+                  itemCount: state.topics.length,
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: spacing8),
+                  itemBuilder: (context, index) => TopicCard(
+                    item: state.topics[index],
+                    onTap: () async {
+                      if (state.topics[index].topicBookmark != null) {
+                        await showDialog(
+                          barrierDismissible: false,
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            backgroundColor: AppColor.white,
+                            title: const Text(
+                              TextDoc.txtConfirmRemoveFavoriteTitle,
+                              style: TextStyle(
+                                fontSize: titleLargeSize,
+                                fontWeight: titleLargeWeight,
+                                color: AppColor.defaultFont,
+                              ),
+                            ),
+                            content: const Text(
+                              TextDoc.txtConfirmRemoveFavoriteContent,
+                              style: TextStyle(
+                                fontSize: bodySmallSize,
+                                fontWeight: bodySmallWeight,
+                                color: AppColor.defaultFont,
+                              ),
+                            ),
+                            actions: [
+                              AppTextButton(
+                                text: TextDoc.txtCancel,
+                                onPressed: () => Navigator.pop(context, false),
+                              ),
+                              ElevatedButton(
+                                onPressed: () => Navigator.pop(context, true),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: AppColor.error,
+                                  foregroundColor: Colors.white,
+                                ),
+                                child: const Text(
+                                  TextDoc.txtRemove,
+                                  style: TextStyle(
+                                    fontSize: labelLargeSize,
+                                    fontWeight: labelLargeWeight,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ).then((confirmRemoved) => {
+                              if (confirmRemoved)
+                                {
+                                  context.read<IntermediateTopicsBloc>().add(
+                                          IntermediateTopicsRemoveFavoriteEvent(
+                                        id: state.topics[index].topicBookmark
+                                                ?.bookmarkId ??
+                                            '',
+                                      )),
+                                }
+                            });
+                      } else {
+                        context
+                            .read<IntermediateTopicsBloc>()
+                            .add(IntermediateTopicsAddFavoriteEvent(
+                              topicId: state.topics[index].topicId ?? '',
+                            ));
+                      }
+                    },
+                  ),
+                ),
+              );
+            }
+            if (state is IntermediateTopicsLoadingState && state.showLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            return const SizedBox.shrink();
+          },
+        ),
+      );
 }

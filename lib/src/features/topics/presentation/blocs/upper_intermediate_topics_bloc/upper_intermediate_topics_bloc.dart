@@ -12,27 +12,26 @@ import '../../../domain/repositories/topic_repository.dart';
 import '../../../domain/usecases/get_topics_usecase.dart';
 import '../../../domain/usecases/params/get_topics_params.dart';
 
-part 'pre_intermediate_topics_event.dart';
+part 'upper_intermediate_topics_event.dart';
+part 'upper_intermediate_topics_state.dart';
 
-part 'pre_intermediate_topics_state.dart';
+/// UPPER-INTERMEDIATE LEVEL ID: ZyPTZVkn2bG8zLHbdAUW
 
-/// PRE-INTERMEDIATE LEVEL ID: RA9HlzOCHavBC7UTVHjO
-
-class PreIntermediateTopicsBloc
-    extends Bloc<PreIntermediateTopicsEvent, PreIntermediateTopicsState> {
-  PreIntermediateTopicsBloc() : super(const TopicsInitState()) {
-    on<PreIntermediateTopicsInitEvent>(_onInit);
-    on<PreIntermediateTopicsLoadEvent>(_onLoad);
-    on<PreIntermediateTopicsAddFavoriteEvent>(_onAddFavorite);
-    on<PreIntermediateTopicsRemoveFavoriteEvent>(_onRemoveFavorite);
-    add(const PreIntermediateTopicsInitEvent());
+class UpperIntermediateTopicsBloc
+    extends Bloc<UpperIntermediateTopicsEvent, UpperIntermediateTopicsState> {
+  UpperIntermediateTopicsBloc() : super(const UpperIntermediateTopicsInitState()) {
+    on<UpperIntermediateTopicsInitEvent>(_onInit);
+    on<UpperIntermediateTopicsLoadEvent>(_onLoad);
+    on<UpperIntermediateTopicsAddFavoriteEvent>(_onAddFavorite);
+    on<UpperIntermediateTopicsRemoveFavoriteEvent>(_onRemoveFavorite);
+    add(const UpperIntermediateTopicsInitEvent());
   }
 
   final GetTopicsUseCase getTopicsUseCase = GetTopicsUseCase(
     topicRepository: getIt.get<TopicRepository>(),
   );
   final GetTopicsParams _getTopicsParams = const GetTopicsParams(
-    levelId: 'RA9HlzOCHavBC7UTVHjO',
+    levelId: 'ZyPTZVkn2bG8zLHbdAUW',
   );
 
   final CreateBookmarkTopicUseCase createBookmarkTopicUseCase =
@@ -45,59 +44,59 @@ class PreIntermediateTopicsBloc
     bookmarkTopicRepository: getIt.get<BookmarkTopicRepository>(),
   );
 
-  void _onInit(PreIntermediateTopicsInitEvent event, emit) {
-    add(const PreIntermediateTopicsLoadEvent());
+  void _onInit(UpperIntermediateTopicsInitEvent event, emit) {
+    add(const UpperIntermediateTopicsLoadEvent());
   }
 
-  void _onLoad(PreIntermediateTopicsLoadEvent event, emit) async {
-    emit(const PreIntermediateTopicsLoadingState());
+  void _onLoad(UpperIntermediateTopicsLoadEvent event, emit) async {
+    emit(const UpperIntermediateTopicsLoadingState());
 
     final topics = await getTopicsUseCase(_getTopicsParams);
-    emit(const PreIntermediateTopicsLoadingState(showLoading: false));
+    emit(const UpperIntermediateTopicsLoadingState(showLoading: false));
     topics.fold(
       (l) => emit(
-        PreIntermediateTopicsErrorState(
+        UpperIntermediateTopicsErrorState(
           exception: l,
         ),
       ),
       (r) => emit(
-        PreIntermediateTopicsLoadDoneState(
+        UpperIntermediateTopicsLoadDoneState(
           topics: r.topics ?? [],
         ),
       ),
     );
   }
 
-  void _onAddFavorite(PreIntermediateTopicsAddFavoriteEvent event, emit) async {
-    emit(const PreIntermediateTopicsLoadingState());
+  void _onAddFavorite(UpperIntermediateTopicsAddFavoriteEvent event, emit) async {
+    emit(const UpperIntermediateTopicsLoadingState());
     final result = await createBookmarkTopicUseCase(
         CreateBookmarkTopicParams(topicId: event.topicId));
-    emit(const PreIntermediateTopicsLoadingState(showLoading: false));
+    emit(const UpperIntermediateTopicsLoadingState(showLoading: false));
     result.fold(
       (l) => emit(
-        PreIntermediateTopicsErrorState(
+        UpperIntermediateTopicsErrorState(
           exception: l,
         ),
       ),
       (r) => emit(
-        const PreIntermediateTopicsAddFavoriteDoneState(),
+        const UpperIntermediateTopicsAddFavoriteDoneState(),
       ),
     );
   }
 
   void _onRemoveFavorite(
-      PreIntermediateTopicsRemoveFavoriteEvent event, emit) async {
-    emit(const PreIntermediateTopicsLoadingState());
+      UpperIntermediateTopicsRemoveFavoriteEvent event, emit) async {
+    emit(const UpperIntermediateTopicsLoadingState());
     final result = await deleteBookmarkTopicUseCase(event.id);
-    emit(const PreIntermediateTopicsLoadingState(showLoading: false));
+    emit(const UpperIntermediateTopicsLoadingState(showLoading: false));
     result.fold(
       (l) => emit(
-        PreIntermediateTopicsErrorState(
+        UpperIntermediateTopicsErrorState(
           exception: l,
         ),
       ),
       (r) => emit(
-        const PreIntermediateTopicsRemoveFavoriteDoneState(),
+        const UpperIntermediateTopicsRemoveFavoriteDoneState(),
       ),
     );
   }

@@ -7,15 +7,9 @@ import '../../../../../../base/widgets/toast/app_toast.dart';
 import '../../blocs/pre_intermediate_topic_bloc/pre_intermediate_topics_bloc.dart';
 import '../../widgets/topic_card.dart';
 
-class PreIntermediateTopicView extends StatefulWidget {
+class PreIntermediateTopicView extends StatelessWidget{
   const PreIntermediateTopicView({Key? key}) : super(key: key);
 
-  @override
-  State<PreIntermediateTopicView> createState() =>
-      _PreIntermediateTopicViewState();
-}
-
-class _PreIntermediateTopicViewState extends State<PreIntermediateTopicView> {
   @override
   Widget build(BuildContext context) =>
       BlocListener<PreIntermediateTopicsBloc, PreIntermediateTopicsState>(
