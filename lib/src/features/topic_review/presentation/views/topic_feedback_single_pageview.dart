@@ -13,6 +13,7 @@ class TopicFeedbackSinglePageView extends StatefulWidget {
     required this.topicFeedbackOptions,
     required this.selectionList,
     this.hint = '',
+    this.maxLength = 500,
     this.maxLines = 4,
     this.onAdjustSelection,
     this.onAdjustDetail,
@@ -23,6 +24,7 @@ class TopicFeedbackSinglePageView extends StatefulWidget {
   final List<TopicFeedbackChipEntity> selectionList;
   final String hint;
   final int maxLines;
+  final int maxLength;
   final Function(List<TopicFeedbackChipEntity>)? onAdjustSelection;
   final Function(String)? onAdjustDetail;
 
@@ -55,6 +57,7 @@ class _TopicFeedbackSinglePageViewState
                 controller: _txtController,
                 hintText: widget.hint,
                 maxLines: widget.maxLines,
+                maxLength: widget.maxLength,
                 onChanged: (value) => widget.onAdjustDetail?.call(value),
               )
             ],

@@ -16,6 +16,7 @@ class AppOutlinedTextField extends StatefulWidget {
     this.onChanged,
     this.minLines,
     this.maxLines = 1,
+    this.maxLength,
   })  : assert(!(obscureText && suffixIcon != null)),
         super(key: key);
 
@@ -29,6 +30,7 @@ class AppOutlinedTextField extends StatefulWidget {
   final IconData? suffixIcon;
   final int? maxLines;
   final int? minLines;
+  final int? maxLength;
   final void Function(String)? onChanged;
 
   @override
@@ -48,6 +50,7 @@ class _AppOutlinedTextFieldState extends State<AppOutlinedTextField> {
   Widget build(BuildContext context) => TextField(
         minLines: widget.minLines,
         maxLines: widget.maxLines,
+        maxLength: widget.maxLength,
         controller: widget.controller,
         obscureText: _obscureText,
         cursorColor: AppColor.mainColor2,
