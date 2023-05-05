@@ -144,6 +144,9 @@ class IntermediateTopicsView extends StatelessWidget {
                             ));
                       }
                     },
+                    onTopicsRefresh: () => context
+                        .read<IntermediateTopicsBloc>()
+                        .add(const IntermediateTopicsInitEvent()),
                   ),
                 ),
               );
