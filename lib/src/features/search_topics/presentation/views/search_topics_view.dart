@@ -131,7 +131,16 @@ class _SearchTopicsViewState extends State<SearchTopicsView> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 const SizedBox(
-                                  height: 72.0,
+                                  height: spacing80,
+                                  width: double.infinity,
+                                ),
+                                const Icon(
+                                  Icons.search_off_rounded,
+                                  size: 64.0,
+                                  color: AppColor.shadow,
+                                ),
+                                const SizedBox(
+                                  height: spacing80,
                                   width: double.infinity,
                                 ),
                                 const Text(
@@ -140,6 +149,7 @@ class _SearchTopicsViewState extends State<SearchTopicsView> {
                                     fontSize: titleLargeSize,
                                     fontWeight: titleLargeWeight,
                                     color: AppColor.defaultFont,
+                                    height: 28 / 30,
                                   ),
                                   textAlign: TextAlign.center,
                                 ),
@@ -154,6 +164,7 @@ class _SearchTopicsViewState extends State<SearchTopicsView> {
                                       fontSize: bodyMediumSize,
                                       fontWeight: bodyMediumWeight,
                                       color: AppColor.shadow,
+                                      height: 20 / 22,
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
@@ -169,6 +180,7 @@ class _SearchTopicsViewState extends State<SearchTopicsView> {
                                       fontSize: bodySmallSize,
                                       fontWeight: bodySmallWeight,
                                       color: AppColor.shadow,
+                                      height: 16 / 20,
                                     ),
                                     textAlign: TextAlign.center,
                                   ),

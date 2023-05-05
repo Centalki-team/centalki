@@ -2,25 +2,38 @@ import 'package:flutter/material.dart';
 
 class AppColor {
   // Main Color 1
-  static const mainColor1 = MaterialColor(0xFF3AAFFF, AppColorSwatch.mainColor1Swatch);
-  static const mainColor1Container = MaterialColor(0xFF60BCFB, AppColorSwatch.mainColor1ContainerSwatch);
-  static const mainColor1Surface = MaterialColor(0xFFB0DFFF, AppColorSwatch.mainColor1SurfaceSwatch);
+  static const mainColor1 =
+      MaterialColor(0xFF3AAFFF, AppColorSwatch.mainColor1Swatch);
+  static const mainColor1Container =
+      MaterialColor(0xFF60BCFB, AppColorSwatch.mainColor1ContainerSwatch);
+  static const mainColor1Surface =
+      MaterialColor(0xFFB0DFFF, AppColorSwatch.mainColor1SurfaceSwatch);
   // Main Color 2
-  static const mainColor2 = MaterialColor(0xFFFFD033, AppColorSwatch.mainColor2Swatch);
-  static const mainColor2Container = MaterialColor(0xFFFFD958, AppColorSwatch.mainColor2ContainerSwatch);
-  static const mainColor2Surface = MaterialColor(0xFFFFE384, AppColorSwatch.mainColor2SurfaceSwatch);
+  static const mainColor2 =
+      MaterialColor(0xFFFFD033, AppColorSwatch.mainColor2Swatch);
+  static const mainColor2Container =
+      MaterialColor(0xFFFFD958, AppColorSwatch.mainColor2ContainerSwatch);
+  static const mainColor2Surface =
+      MaterialColor(0xFFFFE384, AppColorSwatch.mainColor2SurfaceSwatch);
   // Auxiliary Colors
-  static const secondary = MaterialColor(0xFFFF8811, AppColorSwatch.secondarySwatch);
-  static const tertiary = MaterialColor(0xFFA55FEF, AppColorSwatch.tertiarySwatch);
-  static const support = MaterialColor(0xFF55C885, AppColorSwatch.secondarySwatch);
-  static const error = MaterialColor(0xFFFD6363, AppColorSwatch.errorSwatch);
+  static const secondary =
+      MaterialColor(0xFFFF8811, AppColorSwatch.secondarySwatch);
+  static const tertiary =
+      MaterialColor(0xFFA55FEF, AppColorSwatch.tertiarySwatch);
+  static const support =
+      MaterialColor(0xFF55C885, AppColorSwatch.secondarySwatch);
+  static const error = MaterialColor(0xFFFF6363, AppColorSwatch.errorSwatch);
   // Font Colors
-  static const defaultFont = MaterialColor(0xFF1B1B2A, AppColorSwatch.defaultFontSwatch);
-  static const defaultFontContainer = MaterialColor(0xFF3A3A4F, AppColorSwatch.defaultFontColorSwatch);
+  static const defaultFont =
+      MaterialColor(0xFF1B1B2A, AppColorSwatch.defaultFontSwatch);
+  static const defaultFontContainer =
+      MaterialColor(0xFF3A3A4F, AppColorSwatch.defaultFontColorSwatch);
   // Generic Colors
   static const shadow = MaterialColor(0xFF9D9DAD, AppColorSwatch.shadowSwatch);
-  static const container = MaterialColor(0xFFCECED6, AppColorSwatch.containerSwatch);
-  static const background = MaterialColor(0xFFE6E6EA, AppColorSwatch.backgroundSwatch);
+  static const container =
+      MaterialColor(0xFFCECED6, AppColorSwatch.containerSwatch);
+  static const background =
+      MaterialColor(0xFFE6E6EA, AppColorSwatch.backgroundSwatch);
   static const white = MaterialColor(0xFFFFFFFF, AppColorSwatch.whiteSwatch);
 }
 

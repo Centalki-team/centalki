@@ -6,6 +6,7 @@ import '../../../../../../base/define/styles.dart';
 import '../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../base/widgets/buttons/button.dart';
 import '../../../../../base/widgets/toast/app_toast.dart';
+import '../../../../../gen/assets.gen.dart';
 import '../../../connect_teacher/presentation/views/connect_teacher_page.dart';
 import '../../../topic_review/presentation/views/topic_review_page.dart';
 import '../../domain/entities/topic_detail_entity.dart';
@@ -230,12 +231,12 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(radius12)),
                           border: Border.all(
-                              width: state.topicDetail.bookmark != null
-                                  ? 2.0
-                                  : 1.0,
-                              color: state.topicDetail.bookmark != null
-                                  ? const Color(0xFFFF6363)
-                                  : const Color(0xFF9D9DAD)),
+                            width:
+                                state.topicDetail.bookmark != null ? 2.0 : 1.0,
+                            color: state.topicDetail.bookmark != null
+                                ? AppColor.error
+                                : AppColor.shadow,
+                          ),
                         ),
                         child: GestureDetector(
                           onTap: () async {
@@ -305,13 +306,11 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                             }
                           },
                           child: state.topicDetail.bookmark == null
-                              ? SvgPicture.asset(
-                                  "assets/icon/ic_heart.svg",
-                                  color: const Color(0xFF9D9DAD),
+                              ? Assets.icon.icHeart.svg(
+                                  color: AppColor.shadow,
                                 )
-                              : SvgPicture.asset(
-                                  "assets/icon/ic_heart_fill.svg",
-                                  color: const Color(0xFFFF6363),
+                              : Assets.icon.icHeartFill.svg(
+                                  color: AppColor.error,
                                 ),
                         ),
                       ),

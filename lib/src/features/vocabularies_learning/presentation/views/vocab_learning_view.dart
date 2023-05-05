@@ -226,6 +226,14 @@ class _VocabLearningViewState extends State<VocabLearningView>
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      const Icon(
+                        Icons.assignment_outlined,
+                        size: 64.0,
+                        color: AppColor.shadow,
+                      ),
+                      const SizedBox(
+                        height: spacing56,
+                      ),
                       const Padding(
                         padding: EdgeInsets.symmetric(
                           horizontal: spacing28,

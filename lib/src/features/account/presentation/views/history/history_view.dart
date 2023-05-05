@@ -110,6 +110,7 @@ class _HistoryViewState extends State<HistoryView> {
                                     ),
                                   )
                                 : ListView.separated(
+                                    padding: EdgeInsets.zero,
                                     shrinkWrap: true,
                                     physics:
                                         const NeverScrollableScrollPhysics(),

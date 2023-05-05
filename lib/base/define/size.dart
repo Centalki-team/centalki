@@ -29,7 +29,7 @@ const headlineLargeWeight = FontWeight.w300;
 const headlineMediumWeight = FontWeight.w300;
 const headlineSmallWeight = FontWeight.w300;
 
-const titleLargeWeight = FontWeight.w300;
+const titleLargeWeight = FontWeight.w400;
 const titleMediumWeight = FontWeight.w400;
 const titleSmallWeight = FontWeight.w400;
 

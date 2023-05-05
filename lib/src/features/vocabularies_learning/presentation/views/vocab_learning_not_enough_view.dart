@@ -27,6 +27,14 @@ class VocabLearningNotEnoughView extends StatelessWidget {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const Icon(
+              Icons.note_add_outlined,
+              size: 64.0,
+              color: AppColor.shadow,
+            ),
+            const SizedBox(
+              height: spacing60,
+            ),
             const Text(
               TextDoc.txtVocabLearningSuggestion,
               style: TextStyle(

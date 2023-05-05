@@ -28,12 +28,20 @@ class $AssetsIconGen {
   /// File path: assets/icon/account.png
   AssetGenImage get account => const AssetGenImage('assets/icon/account.png');
 
+  /// File path: assets/icon/account_filled.png
+  AssetGenImage get accountFilled =>
+      const AssetGenImage('assets/icon/account_filled.png');
+
   /// File path: assets/icon/chat.png
   AssetGenImage get chat => const AssetGenImage('assets/icon/chat.png');
 
   /// File path: assets/icon/dashboard.png
   AssetGenImage get dashboard =>
       const AssetGenImage('assets/icon/dashboard.png');
+
+  /// File path: assets/icon/dashboard_filled.png
+  AssetGenImage get dashboardFilled =>
+      const AssetGenImage('assets/icon/dashboard_filled.png');
 
   /// File path: assets/icon/favorite.png
   AssetGenImage get favorite => const AssetGenImage('assets/icon/favorite.png');
@@ -120,6 +128,10 @@ class $AssetsIconGen {
   /// File path: assets/icon/settings.png
   AssetGenImage get settings => const AssetGenImage('assets/icon/settings.png');
 
+  /// File path: assets/icon/settings_filled.png
+  AssetGenImage get settingsFilled =>
+      const AssetGenImage('assets/icon/settings_filled.png');
+
   /// File path: assets/icon/wallet.png
   AssetGenImage get wallet => const AssetGenImage('assets/icon/wallet.png');
 
@@ -130,11 +142,17 @@ class $AssetsIconGen {
   /// File path: assets/icon/white_tick.svg
   SvgGenImage get whiteTick => const SvgGenImage('assets/icon/white_tick.svg');
 
+  /// File path: assets/icon/wishlist_filled.png
+  AssetGenImage get wishlistFilled =>
+      const AssetGenImage('assets/icon/wishlist_filled.png');
+
   /// List of all assets
   List<dynamic> get values => [
         account,
+        accountFilled,
         chat,
         dashboard,
+        dashboardFilled,
         favorite,
         icClearCircle,
         icEmptyVocabs,
@@ -158,9 +176,11 @@ class $AssetsIconGen {
         radioSelected,
         radioUnselected,
         settings,
+        settingsFilled,
         wallet,
         whiteExclamation,
-        whiteTick
+        whiteTick,
+        wishlistFilled
       ];
 }
 

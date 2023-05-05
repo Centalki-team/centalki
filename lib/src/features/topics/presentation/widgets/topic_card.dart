@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../../base/define/styles.dart';
+import '../../../../../gen/assets.gen.dart';
 import '../../../topic_detail/presentation/views/topic_detail_page.dart';
 import '../../domain/entities/topic_item_entity.dart';
 
@@ -93,17 +94,15 @@ class _TopicCardState extends State<TopicCard> {
                               widget.onTap.call();
                             },
                             child: widget.item.topicBookmark == null
-                                ? SvgPicture.asset(
-                                    "assets/icon/ic_heart.svg",
-                                    width: 30,
-                                    height: 30,
-                                    color: const Color(0xFF9D9DAD),
+                                ? Assets.icon.icHeart.svg(
+                                    width: 24,
+                                    height: 24,
+                                    color: AppColor.shadow,
                                   )
-                                : SvgPicture.asset(
-                                    "assets/icon/ic_heart_fill.svg",
-                                    width: 30,
-                                    height: 30,
-                                    color: const Color(0xFFFF6363),
+                                : Assets.icon.icHeartFill.svg(
+                                    width: 24,
+                                    height: 24,
+                                    color: AppColor.error,
                                   ),
                           ),
                         ],

@@ -58,7 +58,7 @@ class _CustomCheckboxTileState extends State<CustomCheckboxTile> {
                       offset: Offset.zero,
                       blurRadius: 6.0,
                       spreadRadius: 1.0,
-                      color: const Color(0xFF9D9DAD).withOpacity(0.5),
+                      color: AppColor.shadow.withOpacity(0.5),
                     ),
                   ],
           ),
