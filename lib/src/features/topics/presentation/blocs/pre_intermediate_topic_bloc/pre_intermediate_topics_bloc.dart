@@ -50,10 +50,16 @@ class PreIntermediateTopicsBloc
   }
 
   void _onLoad(PreIntermediateTopicsLoadEvent event, emit) async {
-    emit(const PreIntermediateTopicsLoadingState());
+    emit(PreIntermediateTopicsLoadingState(
+      isOverlay: event.isRefresh,
+    ));
 
     final topics = await getTopicsUseCase(_getTopicsParams);
-    emit(const PreIntermediateTopicsLoadingState(showLoading: false));
+
+    emit(PreIntermediateTopicsLoadingState(
+      showLoading: false,
+      isOverlay: event.isRefresh,
+    ));
     topics.fold(
       (l) => emit(
         PreIntermediateTopicsErrorState(
@@ -69,10 +75,13 @@ class PreIntermediateTopicsBloc
   }
 
   void _onAddFavorite(PreIntermediateTopicsAddFavoriteEvent event, emit) async {
-    emit(const PreIntermediateTopicsLoadingState());
+    emit(const PreIntermediateTopicsLoadingState(isOverlay: true));
     final result = await createBookmarkTopicUseCase(
         CreateBookmarkTopicParams(topicId: event.topicId));
-    emit(const PreIntermediateTopicsLoadingState(showLoading: false));
+    emit(const PreIntermediateTopicsLoadingState(
+      showLoading: false,
+      isOverlay: true,
+    ));
     result.fold(
       (l) => emit(
         PreIntermediateTopicsErrorState(
@@ -87,9 +96,12 @@ class PreIntermediateTopicsBloc
 
   void _onRemoveFavorite(
       PreIntermediateTopicsRemoveFavoriteEvent event, emit) async {
-    emit(const PreIntermediateTopicsLoadingState());
+    emit(const PreIntermediateTopicsLoadingState(isOverlay: true));
     final result = await deleteBookmarkTopicUseCase(event.id);
-    emit(const PreIntermediateTopicsLoadingState(showLoading: false));
+    emit(const PreIntermediateTopicsLoadingState(
+      showLoading: false,
+      isOverlay: true,
+    ));
     result.fold(
       (l) => emit(
         PreIntermediateTopicsErrorState(

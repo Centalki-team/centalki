@@ -14,13 +14,16 @@ class IntermediateTopicsInitState extends IntermediateTopicsState {
 class IntermediateTopicsLoadingState extends IntermediateTopicsState {
   const IntermediateTopicsLoadingState({
     this.showLoading = true,
+    this.isOverlay = false,
   });
 
   final bool showLoading;
+  final bool isOverlay;
 
   @override
   List<Object?> get props => [
         showLoading,
+        isOverlay,
       ];
 }
 
@@ -54,6 +57,7 @@ class IntermediateTopicsAddFavoriteDoneState extends IntermediateTopicsState {
   const IntermediateTopicsAddFavoriteDoneState();
 }
 
-class IntermediateTopicsRemoveFavoriteDoneState extends IntermediateTopicsState {
+class IntermediateTopicsRemoveFavoriteDoneState
+    extends IntermediateTopicsState {
   const IntermediateTopicsRemoveFavoriteDoneState();
 }

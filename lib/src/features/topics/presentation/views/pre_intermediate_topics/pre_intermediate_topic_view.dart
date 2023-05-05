@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/buttons/text_button.dart';
 import '../../../../../../base/widgets/toast/app_toast.dart';
@@ -14,7 +15,10 @@ class PreIntermediateTopicView extends StatelessWidget {
   Widget build(BuildContext context) =>
       BlocListener<PreIntermediateTopicsBloc, PreIntermediateTopicsState>(
         listener: (context, state) {
-          if (state is PreIntermediateTopicsErrorState) {
+          if (state is PreIntermediateTopicsLoadingState) {
+            LoadingManager.setLoading(context,
+                loading: state.showLoading && state.isOverlay);
+          } else if (state is PreIntermediateTopicsErrorState) {
             AppToast(
               mode: AppToastMode.error,
               duration: const Duration(seconds: 3),
@@ -43,7 +47,7 @@ class PreIntermediateTopicView extends StatelessWidget {
             ).show(context);
             context
                 .read<PreIntermediateTopicsBloc>()
-                .add(const PreIntermediateTopicsLoadEvent());
+                .add(const PreIntermediateTopicsLoadEvent(isRefresh: true));
           } else if (state is PreIntermediateTopicsRemoveFavoriteDoneState) {
             AppToast(
               duration: const Duration(seconds: 3),
@@ -59,7 +63,7 @@ class PreIntermediateTopicView extends StatelessWidget {
             ).show(context);
             context
                 .read<PreIntermediateTopicsBloc>()
-                .add(const PreIntermediateTopicsLoadEvent());
+                .add(const PreIntermediateTopicsLoadEvent(isRefresh: true));
           }
         },
         child:
@@ -67,7 +71,8 @@ class PreIntermediateTopicView extends StatelessWidget {
           buildWhen: (previous, current) =>
               current != previous &&
               (current is PreIntermediateTopicsLoadDoneState ||
-                  current is PreIntermediateTopicsLoadingState),
+                  (current is PreIntermediateTopicsLoadingState &&
+                      !current.isOverlay)),
           builder: (context, state) {
             if (state is PreIntermediateTopicsLoadDoneState) {
               return Padding(
@@ -150,7 +155,8 @@ class PreIntermediateTopicView extends StatelessWidget {
               );
             }
             if (state is PreIntermediateTopicsLoadingState &&
-                state.showLoading) {
+                state.showLoading &&
+                !state.isOverlay) {
               return const Center(
                 child: CircularProgressIndicator(),
               );

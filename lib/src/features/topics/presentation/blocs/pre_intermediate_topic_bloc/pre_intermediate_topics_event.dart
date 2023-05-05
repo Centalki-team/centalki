@@ -9,7 +9,11 @@ class PreIntermediateTopicsInitEvent extends PreIntermediateTopicsEvent {
 }
 
 class PreIntermediateTopicsLoadEvent extends PreIntermediateTopicsEvent {
-  const PreIntermediateTopicsLoadEvent();
+  const PreIntermediateTopicsLoadEvent({
+    this.isRefresh = false,
+  });
+
+  final bool isRefresh;
 }
 
 class PreIntermediateTopicsAddFavoriteEvent extends PreIntermediateTopicsEvent {

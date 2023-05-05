@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../base/define/colors.dart';
 import '../../../../../../base/define/dimensions.dart';
+import '../../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../../base/define/size.dart';
 import '../../../../../../base/define/text.dart';
 import '../../../../../../base/widgets/buttons/text_button.dart';
@@ -17,7 +18,10 @@ class UpperIntermediateTopicView extends StatelessWidget {
   Widget build(BuildContext context) =>
       BlocListener<UpperIntermediateTopicsBloc, UpperIntermediateTopicsState>(
         listener: (context, state) {
-          if (state is UpperIntermediateTopicsErrorState) {
+          if (state is UpperIntermediateTopicsLoadingState) {
+            LoadingManager.setLoading(context,
+                loading: state.showLoading && state.isOverlay);
+          } else if (state is UpperIntermediateTopicsErrorState) {
             AppToast(
               mode: AppToastMode.error,
               duration: const Duration(seconds: 3),
@@ -46,7 +50,7 @@ class UpperIntermediateTopicView extends StatelessWidget {
             ).show(context);
             context
                 .read<UpperIntermediateTopicsBloc>()
-                .add(const UpperIntermediateTopicsLoadEvent());
+                .add(const UpperIntermediateTopicsLoadEvent(isRefresh: true));
           } else if (state is UpperIntermediateTopicsRemoveFavoriteDoneState) {
             AppToast(
               duration: const Duration(seconds: 3),
@@ -62,7 +66,7 @@ class UpperIntermediateTopicView extends StatelessWidget {
             ).show(context);
             context
                 .read<UpperIntermediateTopicsBloc>()
-                .add(const UpperIntermediateTopicsLoadEvent());
+                .add(const UpperIntermediateTopicsLoadEvent(isRefresh: true));
           }
         },
         child: BlocBuilder<UpperIntermediateTopicsBloc,
@@ -70,7 +74,8 @@ class UpperIntermediateTopicView extends StatelessWidget {
           buildWhen: (previous, current) =>
               current != previous &&
               (current is UpperIntermediateTopicsLoadDoneState ||
-                  current is UpperIntermediateTopicsLoadingState),
+                  (current is UpperIntermediateTopicsLoadingState &&
+                      !current.isOverlay)),
           builder: (context, state) {
             if (state is UpperIntermediateTopicsLoadDoneState) {
               return Padding(
@@ -147,13 +152,16 @@ class UpperIntermediateTopicView extends StatelessWidget {
                             ));
                       }
                     },
-                    onTopicsRefresh: () => context.read<UpperIntermediateTopicsBloc>().add(const UpperIntermediateTopicsInitEvent()),
+                    onTopicsRefresh: () => context
+                        .read<UpperIntermediateTopicsBloc>()
+                        .add(const UpperIntermediateTopicsInitEvent()),
                   ),
                 ),
               );
             }
             if (state is UpperIntermediateTopicsLoadingState &&
-                state.showLoading) {
+                state.showLoading &&
+                !state.isOverlay) {
               return const Center(
                 child: CircularProgressIndicator(),
               );

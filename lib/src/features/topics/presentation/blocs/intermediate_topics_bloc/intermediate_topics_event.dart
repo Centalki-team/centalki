@@ -9,7 +9,11 @@ class IntermediateTopicsInitEvent extends IntermediateTopicsEvent {
 }
 
 class IntermediateTopicsLoadEvent extends IntermediateTopicsEvent {
-  const IntermediateTopicsLoadEvent();
+  const IntermediateTopicsLoadEvent({
+    this.isRefresh = false,
+  });
+
+  final bool isRefresh;
 }
 
 class IntermediateTopicsAddFavoriteEvent extends IntermediateTopicsEvent {
@@ -18,8 +22,7 @@ class IntermediateTopicsAddFavoriteEvent extends IntermediateTopicsEvent {
   final String topicId;
 }
 
-class IntermediateTopicsRemoveFavoriteEvent
-    extends IntermediateTopicsEvent {
+class IntermediateTopicsRemoveFavoriteEvent extends IntermediateTopicsEvent {
   const IntermediateTopicsRemoveFavoriteEvent({required this.id});
 
   final String id;

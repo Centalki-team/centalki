@@ -14,13 +14,16 @@ class ElementaryTopicsInitState extends ElementaryTopicsState {
 class ElementaryTopicsLoadingState extends ElementaryTopicsState {
   const ElementaryTopicsLoadingState({
     this.showLoading = true,
+    this.isOverlay = false,
   });
 
   final bool showLoading;
+  final bool isOverlay;
 
   @override
   List<Object?> get props => [
         showLoading,
+        isOverlay,
       ];
 }
 

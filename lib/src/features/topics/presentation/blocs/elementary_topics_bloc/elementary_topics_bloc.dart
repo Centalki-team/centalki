@@ -49,10 +49,14 @@ class ElementaryTopicsBloc
   }
 
   void _onLoad(ElementaryTopicsLoadEvent event, emit) async {
-    emit(const ElementaryTopicsLoadingState());
+    emit(ElementaryTopicsLoadingState(isOverlay: event.isRefresh));
 
     final topics = await getTopicsUseCase(_getTopicsParams);
-    emit(const ElementaryTopicsLoadingState(showLoading: false));
+
+    emit(ElementaryTopicsLoadingState(
+      showLoading: false,
+      isOverlay: event.isRefresh,
+    ));
     topics.fold(
       (l) => emit(
         ElementaryTopicsErrorState(
@@ -68,10 +72,13 @@ class ElementaryTopicsBloc
   }
 
   void _onAddFavorite(ElementaryTopicsAddFavoriteEvent event, emit) async {
-    emit(const ElementaryTopicsLoadingState());
+    emit(const ElementaryTopicsLoadingState(isOverlay: true));
     final result = await createBookmarkTopicUseCase(
         CreateBookmarkTopicParams(topicId: event.topicId));
-    emit(const ElementaryTopicsLoadingState(showLoading: false));
+    emit(const ElementaryTopicsLoadingState(
+      showLoading: false,
+      isOverlay: true,
+    ));
     result.fold(
       (l) => emit(
         ElementaryTopicsErrorState(
@@ -86,9 +93,12 @@ class ElementaryTopicsBloc
 
   void _onRemoveFavorite(
       ElementaryTopicsRemoveFavoriteEvent event, emit) async {
-    emit(const ElementaryTopicsLoadingState());
+    emit(const ElementaryTopicsLoadingState(isOverlay: true));
     final result = await deleteBookmarkTopicUseCase(event.id);
-    emit(const ElementaryTopicsLoadingState(showLoading: false));
+    emit(const ElementaryTopicsLoadingState(
+      showLoading: false,
+      isOverlay: true,
+    ));
     result.fold(
       (l) => emit(
         ElementaryTopicsErrorState(
