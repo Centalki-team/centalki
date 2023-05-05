@@ -27,7 +27,8 @@ class _HistoryDetailViewState extends State<HistoryDetailView> {
       backgroundColor: Colors.white,
       bottomNavigationBar:
           widget.session.sessionFeedback?.feedbackTeacher == null
-              ? BottomAppBar(
+              ? SafeArea(
+                  top: false,
                   child: Padding(
                     padding: const EdgeInsets.only(
                       left: 16.0,

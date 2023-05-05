@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../base/define/app_text.dart';
 import '../../../../../base/define/colors.dart';
+import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
 import '../../../../../base/widgets/buttons/button.dart';
 import '../../../../../gen/assets.gen.dart';
@@ -173,24 +174,29 @@ class _AppIntroContentState extends State<AppIntroContent> {
                       }
                       return SafeArea(
                         top: false,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: List.generate(
-                            introsLength,
-                            (index) => Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 3.0,
-                              ),
-                              child: DecoratedBox(
-                                decoration: BoxDecoration(
-                                  color: index == currentIndex
-                                      ? AppColor.mainColor2
-                                      : AppColor.background,
-                                  borderRadius: BorderRadius.circular(16.0),
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            bottom: padding40,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: List.generate(
+                              introsLength,
+                              (index) => Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 3.0,
                                 ),
-                                child: const SizedBox(
-                                  height: 6.0,
-                                  width: 32.0,
+                                child: DecoratedBox(
+                                  decoration: BoxDecoration(
+                                    color: index == currentIndex
+                                        ? AppColor.mainColor2
+                                        : AppColor.background,
+                                    borderRadius: BorderRadius.circular(16.0),
+                                  ),
+                                  child: const SizedBox(
+                                    height: 6.0,
+                                    width: 32.0,
+                                  ),
                                 ),
                               ),
                             ),

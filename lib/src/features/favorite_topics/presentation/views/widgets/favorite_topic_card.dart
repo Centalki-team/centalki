@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/buttons/text_button.dart';
+import '../../../../../../gen/assets.gen.dart';
 import '../../../../bookmark/topic/domain/entities/bookmark_topic_entity.dart';
 import '../../../../topic_detail/presentation/views/topic_detail_page.dart';
 import '../../blocs/favorite_topics_bloc.dart';
@@ -147,11 +148,10 @@ class _FavoriteTopicCardState extends State<FavoriteTopicCard> {
                                         }
                                     });
                               },
-                              child: SvgPicture.asset(
-                                "assets/icon/ic_heart_fill.svg",
-                                width: 30,
-                                height: 30,
-                                color: const Color(0xFFFF6363),
+                              child: Assets.icon.icHeartFill.svg(
+                                width: 24,
+                                height: 24,
+                                color: AppColor.error,
                               ),
                             ),
                           ),

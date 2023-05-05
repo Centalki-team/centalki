@@ -102,7 +102,7 @@ class _AppOutlinedTextFieldState extends State<AppOutlinedTextField> {
                   child: Icon(
                     _obscureText ? Icons.visibility : Icons.visibility_off,
                     size: 24,
-                    color: const Color(0xFF9D9DAD),
+                    color: AppColor.shadow,
                   ),
                 )
               : (widget.suffixIcon == null

@@ -23,6 +23,9 @@ const spacing24 = 24.0;
 const spacing28 = 28.0;
 const spacing32 = 32.0;
 const spacing40 = 40.0;
+const spacing56 = 56.0;
+const spacing60 = 60.0;
+const spacing80 = 80.0;
 // Border Radius
 const radius8 = 8.0;
 const radius12 = 12.0;

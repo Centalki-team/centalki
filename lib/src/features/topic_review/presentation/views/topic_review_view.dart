@@ -43,6 +43,7 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                   fontSize: titleLargeSize,
                   fontWeight: titleLargeWeight,
                   color: AppColor.defaultFont,
+                  height: 28 / 30,
                 ),
               ),
               content: const Text(
@@ -51,6 +52,7 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                   fontSize: bodyLargeSize,
                   fontWeight: bodyLargeWeight,
                   color: AppColor.defaultFont,
+                  height: 1.0,
                 ),
               ),
               actions: [
@@ -103,6 +105,7 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                   fontSize: titleLargeSize,
                   fontWeight: titleLargeWeight,
                   color: AppColor.defaultFont,
+                  height: 28 / 30,
                 ),
               ),
               content: const Text(
@@ -111,6 +114,7 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                   fontSize: bodyLargeSize,
                   fontWeight: bodyLargeWeight,
                   color: AppColor.defaultFont,
+                  height: 1.0,
                 ),
               ),
               actions: [

@@ -156,7 +156,7 @@ class _HomeViewState extends State<HomeView>
                     width: 24.0,
                     height: 24,
                   ),
-                  activeIcon: Assets.icon.dashboard.image(
+                  activeIcon: Assets.icon.dashboardFilled.image(
                     width: 24.0,
                     height: 24,
                     color: AppColor.mainColor1,
@@ -168,7 +168,7 @@ class _HomeViewState extends State<HomeView>
                     width: 24.0,
                     height: 24,
                   ),
-                  activeIcon: Assets.icon.favorite.image(
+                  activeIcon: Assets.icon.wishlistFilled.image(
                       width: 24.0, height: 24, color: AppColor.mainColor1),
                   label: AppText.favorite,
                 ),
@@ -177,7 +177,7 @@ class _HomeViewState extends State<HomeView>
                     width: 24.0,
                     height: 24,
                   ),
-                  activeIcon: Assets.icon.account.image(
+                  activeIcon: Assets.icon.accountFilled.image(
                       width: 24.0, height: 24, color: AppColor.mainColor1),
                   label: AppText.account,
                 ),
@@ -186,7 +186,7 @@ class _HomeViewState extends State<HomeView>
                     width: 24.0,
                     height: 24,
                   ),
-                  activeIcon: Assets.icon.settings.image(
+                  activeIcon: Assets.icon.settingsFilled.image(
                       width: 24.0, height: 24, color: AppColor.mainColor1),
                   label: AppText.settings,
                 ),

@@ -30,11 +30,11 @@ class TopicFeedbackDataEntity extends Equatable {
   late List<TopicFeedbackChipEntity> qnaFb;
 
   bool get isEmptyData =>
-      nameFbDetail.isEmpty &&
-      picFbDetail.isEmpty &&
-      descriptionFbDetail.isEmpty &&
-      vocabFbDetail.isEmpty &&
-      qnaFbDetail.isEmpty &&
+      nameFbDetail.trim().isEmpty &&
+      picFbDetail.trim().isEmpty &&
+      descriptionFbDetail.trim().isEmpty &&
+      vocabFbDetail.trim().isEmpty &&
+      qnaFbDetail.trim().isEmpty &&
       nameFb.isEmpty &&
       picFb.isEmpty &&
       descriptionFb.isEmpty &&

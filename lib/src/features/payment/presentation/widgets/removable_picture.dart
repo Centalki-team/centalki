@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
+import '../../../../../base/define/colors.dart';
 import '../../../../../gen/assets.gen.dart';
 
 class RemovablePicture extends StatelessWidget {
@@ -29,7 +30,7 @@ class RemovablePicture extends StatelessWidget {
                   offset: Offset(0, 1),
                   blurRadius: 4.0,
                   spreadRadius: 0.0,
-                  color: Color(0xFF9D9DAD),
+                  color: AppColor.shadow,
                 ),
               ],
             ),
