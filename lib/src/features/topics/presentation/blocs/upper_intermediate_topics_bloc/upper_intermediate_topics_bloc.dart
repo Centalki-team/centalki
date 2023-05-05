@@ -19,7 +19,8 @@ part 'upper_intermediate_topics_state.dart';
 
 class UpperIntermediateTopicsBloc
     extends Bloc<UpperIntermediateTopicsEvent, UpperIntermediateTopicsState> {
-  UpperIntermediateTopicsBloc() : super(const UpperIntermediateTopicsInitState()) {
+  UpperIntermediateTopicsBloc()
+      : super(const UpperIntermediateTopicsInitState()) {
     on<UpperIntermediateTopicsInitEvent>(_onInit);
     on<UpperIntermediateTopicsLoadEvent>(_onLoad);
     on<UpperIntermediateTopicsAddFavoriteEvent>(_onAddFavorite);
@@ -49,10 +50,14 @@ class UpperIntermediateTopicsBloc
   }
 
   void _onLoad(UpperIntermediateTopicsLoadEvent event, emit) async {
-    emit(const UpperIntermediateTopicsLoadingState());
+    emit(UpperIntermediateTopicsLoadingState(isOverlay: event.isRefresh));
 
     final topics = await getTopicsUseCase(_getTopicsParams);
-    emit(const UpperIntermediateTopicsLoadingState(showLoading: false));
+
+    emit(UpperIntermediateTopicsLoadingState(
+      showLoading: false,
+      isOverlay: event.isRefresh,
+    ));
     topics.fold(
       (l) => emit(
         UpperIntermediateTopicsErrorState(
@@ -67,11 +72,15 @@ class UpperIntermediateTopicsBloc
     );
   }
 
-  void _onAddFavorite(UpperIntermediateTopicsAddFavoriteEvent event, emit) async {
-    emit(const UpperIntermediateTopicsLoadingState());
+  void _onAddFavorite(
+      UpperIntermediateTopicsAddFavoriteEvent event, emit) async {
+    emit(const UpperIntermediateTopicsLoadingState(isOverlay: true));
     final result = await createBookmarkTopicUseCase(
         CreateBookmarkTopicParams(topicId: event.topicId));
-    emit(const UpperIntermediateTopicsLoadingState(showLoading: false));
+    emit(const UpperIntermediateTopicsLoadingState(
+      showLoading: false,
+      isOverlay: true,
+    ));
     result.fold(
       (l) => emit(
         UpperIntermediateTopicsErrorState(
@@ -86,9 +95,12 @@ class UpperIntermediateTopicsBloc
 
   void _onRemoveFavorite(
       UpperIntermediateTopicsRemoveFavoriteEvent event, emit) async {
-    emit(const UpperIntermediateTopicsLoadingState());
+    emit(const UpperIntermediateTopicsLoadingState(isOverlay: true));
     final result = await deleteBookmarkTopicUseCase(event.id);
-    emit(const UpperIntermediateTopicsLoadingState(showLoading: false));
+    emit(const UpperIntermediateTopicsLoadingState(
+      showLoading: false,
+      isOverlay: true,
+    ));
     result.fold(
       (l) => emit(
         UpperIntermediateTopicsErrorState(

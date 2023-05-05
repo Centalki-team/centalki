@@ -9,10 +9,15 @@ class UpperIntermediateTopicsInitEvent extends UpperIntermediateTopicsEvent {
 }
 
 class UpperIntermediateTopicsLoadEvent extends UpperIntermediateTopicsEvent {
-  const UpperIntermediateTopicsLoadEvent();
+  const UpperIntermediateTopicsLoadEvent({
+    this.isRefresh = false,
+  });
+
+  final bool isRefresh;
 }
 
-class UpperIntermediateTopicsAddFavoriteEvent extends UpperIntermediateTopicsEvent {
+class UpperIntermediateTopicsAddFavoriteEvent
+    extends UpperIntermediateTopicsEvent {
   const UpperIntermediateTopicsAddFavoriteEvent({required this.topicId});
 
   final String topicId;

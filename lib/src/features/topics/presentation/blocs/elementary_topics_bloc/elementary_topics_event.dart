@@ -9,7 +9,11 @@ class ElementaryTopicsInitEvent extends ElementaryTopicsEvent {
 }
 
 class ElementaryTopicsLoadEvent extends ElementaryTopicsEvent {
-  const ElementaryTopicsLoadEvent();
+  const ElementaryTopicsLoadEvent({
+    this.isRefresh = false,
+  });
+
+  final bool isRefresh;
 }
 
 class ElementaryTopicsAddFavoriteEvent extends ElementaryTopicsEvent {
@@ -18,8 +22,7 @@ class ElementaryTopicsAddFavoriteEvent extends ElementaryTopicsEvent {
   final String topicId;
 }
 
-class ElementaryTopicsRemoveFavoriteEvent
-    extends ElementaryTopicsEvent {
+class ElementaryTopicsRemoveFavoriteEvent extends ElementaryTopicsEvent {
   const ElementaryTopicsRemoveFavoriteEvent({required this.id});
 
   final String id;

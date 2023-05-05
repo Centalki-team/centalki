@@ -14,13 +14,16 @@ class UpperIntermediateTopicsInitState extends UpperIntermediateTopicsState {
 class UpperIntermediateTopicsLoadingState extends UpperIntermediateTopicsState {
   const UpperIntermediateTopicsLoadingState({
     this.showLoading = true,
+    this.isOverlay = false,
   });
 
   final bool showLoading;
+  final bool isOverlay;
 
   @override
   List<Object?> get props => [
         showLoading,
+        isOverlay,
       ];
 }
 
