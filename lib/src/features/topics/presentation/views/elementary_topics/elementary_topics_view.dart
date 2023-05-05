@@ -145,6 +145,9 @@ class ElementaryTopicView extends StatelessWidget {
                             ));
                       }
                     },
+                    onTopicsRefresh: () => context
+                        .read<ElementaryTopicsBloc>()
+                        .add(const ElementaryTopicsInitEvent()),
                   ),
                 ),
               );

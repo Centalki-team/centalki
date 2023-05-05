@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../../base/define/styles.dart';
 import '../../../../../gen/assets.gen.dart';
@@ -12,10 +11,12 @@ class TopicCard extends StatefulWidget {
     Key? key,
     required this.item,
     required this.onTap,
+    this.onTopicsRefresh,
   }) : super(key: key);
 
   final TopicItemEntity item;
   final Function() onTap;
+  final Function()? onTopicsRefresh;
 
   @override
   State<TopicCard> createState() => _TopicCardState();
@@ -24,13 +25,16 @@ class TopicCard extends StatefulWidget {
 class _TopicCardState extends State<TopicCard> {
   @override
   Widget build(BuildContext context) => GestureDetector(
-        onTap: () => Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => TopicDetailPage(
-              topicId: widget.item.topicId ?? '',
+        onTap: () async {
+          await Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => TopicDetailPage(
+                topicId: widget.item.topicId ?? '',
+              ),
             ),
-          ),
-        ),
+          );
+          widget.onTopicsRefresh?.call();
+        },
         child: Container(
           margin: const EdgeInsets.all(spacing8),
           height: 150,

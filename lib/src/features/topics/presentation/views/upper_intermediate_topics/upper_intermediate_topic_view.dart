@@ -147,6 +147,7 @@ class UpperIntermediateTopicView extends StatelessWidget {
                             ));
                       }
                     },
+                    onTopicsRefresh: () => context.read<UpperIntermediateTopicsBloc>().add(const UpperIntermediateTopicsInitEvent()),
                   ),
                 ),
               );

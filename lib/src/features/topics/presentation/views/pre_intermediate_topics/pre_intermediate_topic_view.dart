@@ -7,7 +7,7 @@ import '../../../../../../base/widgets/toast/app_toast.dart';
 import '../../blocs/pre_intermediate_topic_bloc/pre_intermediate_topics_bloc.dart';
 import '../../widgets/topic_card.dart';
 
-class PreIntermediateTopicView extends StatelessWidget{
+class PreIntermediateTopicView extends StatelessWidget {
   const PreIntermediateTopicView({Key? key}) : super(key: key);
 
   @override
@@ -142,6 +142,9 @@ class PreIntermediateTopicView extends StatelessWidget{
                             ));
                       }
                     },
+                    onTopicsRefresh: () => context
+                        .read<PreIntermediateTopicsBloc>()
+                        .add(const PreIntermediateTopicsInitEvent()),
                   ),
                 ),
               );
