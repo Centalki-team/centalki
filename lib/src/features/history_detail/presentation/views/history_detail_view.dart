@@ -409,9 +409,18 @@ class _HistoryDetailViewState extends State<HistoryDetailView> {
                               ),
                               const SizedBox(height: spacing8),
                               Text(
-                                widget.session.sessionFeedback?.feedbackStudent
-                                        ?.suggestions ??
-                                    'No suggestions',
+                                (widget.session.sessionFeedback?.feedbackStudent
+                                                ?.suggestions !=
+                                            null &&
+                                        widget
+                                            .session
+                                            .sessionFeedback!
+                                            .feedbackStudent!
+                                            .suggestions!
+                                            .isNotEmpty)
+                                    ? widget.session.sessionFeedback!
+                                        .feedbackStudent!.suggestions!
+                                    : 'No suggestions',
                                 style: const TextStyle(
                                   height: 1.5,
                                   fontSize: bodyLargeSize,
@@ -458,7 +467,11 @@ class _HistoryDetailViewState extends State<HistoryDetailView> {
                             color: AppColor.shadow,
                           ),
                         ),
+                        const SizedBox(
+                          width: spacing8,
+                        ),
                         AppTextButton(
+                          minimumSize: const Size(124, 20),
                           onPressed: () => Navigator.push(
                             context,
                             MaterialPageRoute(
