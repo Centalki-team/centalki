@@ -19,7 +19,7 @@ class BottomIndicatorBar extends StatefulWidget {
     required this.onTap,
     required this.items,
     this.activeColor,
-    this.inactiveColor = const Color(0xFFB0DFFF),
+    this.inactiveColor = AppColor.mainColor1Surface,
     this.shadow = true,
     this.currentIndex = 0,
   }) : super(key: key);

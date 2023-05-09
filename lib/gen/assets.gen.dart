@@ -50,6 +50,10 @@ class $AssetsIconGen {
   SvgGenImage get icClearCircle =>
       const SvgGenImage('assets/icon/ic_clear_circle.svg');
 
+  /// File path: assets/icon/ic_empty_topics.png
+  AssetGenImage get icEmptyTopics =>
+      const AssetGenImage('assets/icon/ic_empty_topics.png');
+
   /// File path: assets/icon/ic_empty_vocabs.png
   AssetGenImage get icEmptyVocabs =>
       const AssetGenImage('assets/icon/ic_empty_vocabs.png');
@@ -155,6 +159,7 @@ class $AssetsIconGen {
         dashboardFilled,
         favorite,
         icClearCircle,
+        icEmptyTopics,
         icEmptyVocabs,
         icErrorToast,
         icFeedback,

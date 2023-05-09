@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/toast/app_toast.dart';
 import '../blocs/favorite_topics_bloc.dart';
+import 'favorite_topics_empty_view.dart';
 import 'widgets/favorite_topic_card.dart';
 
 class FavoriteTopicsView extends StatefulWidget {
@@ -58,13 +59,7 @@ class _FavoriteTopicsViewState extends State<FavoriteTopicsView> {
           builder: (context, state) {
             if (state is FavoriteTopicsLoadDoneState) {
               if (state.bookmarks.isEmpty) {
-                return const Center(
-                  child: Text(
-                    TextDoc.txtFavoriteTopicsEmpty,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 16),
-                  ),
-                );
+                return const FavoriteTopicsEmptyView();
               }
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: padding16),
