@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../base/define/text.dart';
+import '../../../../../shared/extensions.dart';
 
 part 'change_password_event.dart';
 
@@ -29,28 +30,30 @@ class ChangePasswordBloc
 
     if (currentPassword.isEmpty) {
       passwordError = TextDoc.txtPasswordEmpty;
-    } else if (currentPassword.length < 6) {
+    } else if (currentPassword.length < 8) {
       passwordError = TextDoc.txtPasswordTooShort;
     } else if (currentPassword.length > 100) {
       passwordError = TextDoc.txtPasswordTooLong;
+    } else if (!currentPassword.validatePassword) {
+      newPasswordError = TextDoc.txtPasswordNotValid;
     } else {
       passwordError = null;
     }
 
     if (newPassword.isEmpty) {
       newPasswordError = TextDoc.txtNewPasswordEmptyWarning;
-    } else if (newPassword.length < 6) {
+    } else if (newPassword.length < 8) {
       newPasswordError = TextDoc.txtNewPasswordTooShort;
     } else if (newPassword.length > 100) {
       newPasswordError = TextDoc.txtNewPasswordTooLong;
+    } else if (!newPassword.validatePassword) {
+      newPasswordError = TextDoc.txtNewPasswordNotValid;
     } else {
       newPasswordError = null;
     }
 
     if (confirmPassword.isEmpty) {
       confirmPasswordError = TextDoc.txtConfirmedPasswordEmptyWarning;
-    } else if (confirmPassword.length > 100) {
-      confirmPasswordError = TextDoc.txtConfirmedPasswordTooLong;
     } else if (confirmPassword != newPassword) {
       confirmPasswordError = TextDoc.txtConfirmedPasswordMatchWarning;
     } else {

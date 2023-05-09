@@ -16,8 +16,10 @@ class TextDoc {
   static const txtBioTooLong = 'Your biography cannot exceed 200 characters';
   static const txtPasswordEmpty = 'Password cannot be empty';
   static const txtPasswordTooShort =
-      'Password must contain at least 6 characters';
+      'Password must contain at least 8 characters';
   static const txtPasswordTooLong = 'Password cannot exceed 100 characters';
+  static const txtPasswordNotValid =
+      'Password must contain at least 1 uppercase, 1 numeric and 1 special character';
   static const txtRetypePasswordEmpty = 'Please enter your password again';
   static const txtRetypePasswordNotMatch = 'Retyped password mismatched';
   static const txtTermsNotAgreed = 'Please agree with our Terms & Conditions';
@@ -188,6 +190,8 @@ class TextDoc {
       'New password must contain at least 6 characters';
   static const txtNewPasswordTooLong =
       'New password cannot exceed 100 characters';
+  static const txtNewPasswordNotValid =
+      'New password must contain at least 1 uppercase, 1 numeric and 1 special character';
   static const txtConfirmedPassword =
       'Confirmed password must match the new password';
   static const txtConfirmedPasswordEmptyWarning =

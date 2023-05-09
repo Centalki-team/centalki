@@ -7,6 +7,7 @@ import '../../../../../../base/define/text.dart';
 import '../../../../../../base/gateway/exception/app_exception.dart';
 import '../../../../../../base/temp_dio/dio_client.dart';
 import '../../../../../../di/di_module.dart';
+import '../../../../../shared/extensions.dart';
 import '../../../domain/entities/self_review/self_level_entity.dart';
 import '../../../domain/repositories/sign_up_repo/sign_up_repository.dart';
 import '../../../domain/usecases/sign_up_usecase/params/set_initial_level_params.dart';
@@ -57,10 +58,12 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
 
     if (event.password.isEmpty) {
       passwordError = TextDoc.txtPasswordEmpty;
-    } else if (event.password.length < 6) {
+    } else if (event.password.length < 8) {
       passwordError = TextDoc.txtPasswordTooShort;
     } else if (event.password.length > 100) {
       passwordError = TextDoc.txtPasswordTooLong;
+    } else if (!event.password.validatePassword) {
+      passwordError = TextDoc.txtPasswordNotValid;
     }
 
     if (event.retypePassword.isEmpty) {
