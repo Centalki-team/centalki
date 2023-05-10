@@ -44,7 +44,7 @@ class _CustomCheckboxTileState extends State<CustomCheckboxTile> {
             boxShadow: curValue
                 ? [
                     BoxShadow(
-                      color: const Color(0xFF3A3A4F).withOpacity(0.6),
+                      color: AppColor.defaultFontContainer.shade500,
                     ),
                     const BoxShadow(
                       offset: Offset.zero,
@@ -58,7 +58,7 @@ class _CustomCheckboxTileState extends State<CustomCheckboxTile> {
                       offset: Offset.zero,
                       blurRadius: 6.0,
                       spreadRadius: 1.0,
-                      color: AppColor.shadow.withOpacity(0.5),
+                      color: AppColor.shadow.shade400,
                     ),
                   ],
           ),

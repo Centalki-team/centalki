@@ -35,7 +35,7 @@ class NotiItemCard extends StatelessWidget {
           decoration: BoxDecoration(
             color: notiListItemEntity.seenAtTime != null
                 ? AppColor.white
-                : AppColor.mainColor2Surface.withOpacity(0.6),
+                : AppColor.mainColor2Surface.shade500,
             borderRadius: BorderRadius.circular(12.0),
           ),
           child: Row(
