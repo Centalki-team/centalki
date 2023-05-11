@@ -356,7 +356,16 @@ class AssetGenImage {
     );
   }
 
-  ImageProvider provider() => AssetImage(_assetName);
+  ImageProvider provider({
+    AssetBundle? bundle,
+    String? package,
+  }) {
+    return AssetImage(
+      _assetName,
+      bundle: bundle,
+      package: package,
+    );
+  }
 
   String get path => _assetName;
 
@@ -383,9 +392,9 @@ class SvgGenImage {
     bool excludeFromSemantics = false,
     SvgTheme theme = const SvgTheme(),
     ColorFilter? colorFilter,
+    Clip clipBehavior = Clip.hardEdge,
     @deprecated Color? color,
     @deprecated BlendMode colorBlendMode = BlendMode.srcIn,
-    @deprecated Clip? clipBehavior,
     @deprecated bool cacheColorFilter = false,
   }) {
     return SvgPicture.asset(
@@ -406,7 +415,7 @@ class SvgGenImage {
       // colorFilter: colorFilter,
       color: color,
       colorBlendMode: colorBlendMode,
-      // clipBehavior: clipBehavior,
+      clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,
     );
   }

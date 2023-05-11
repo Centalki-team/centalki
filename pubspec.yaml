@@ -67,6 +67,7 @@ dependencies:
   carousel_slider: ^4.2.1
   firebase_messaging: ^14.4.1
   timeago: ^3.4.0
+  copy_with_extension: 5.0.2
   
 dependency_overrides:
   permission_handler: "any"
@@ -84,6 +85,7 @@ dev_dependencies:
   flutter_gen_runner: ^5.0.0
   build_runner: ^2.2.0
   json_serializable: ^6.5.4
+  copy_with_extension_gen: 5.0.2
 
 flutter_gen:
   output: lib/gen/
