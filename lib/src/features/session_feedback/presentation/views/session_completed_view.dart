@@ -17,7 +17,12 @@ class SessionCompletedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(padding16, 60, padding16, 46),
+        padding: EdgeInsets.fromLTRB(
+          padding16,
+          MediaQuery.of(context).padding.top + kToolbarHeight + spacing56,
+          padding16,
+          46,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

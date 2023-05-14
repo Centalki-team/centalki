@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../../base/define/styles.dart';
 import '../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../base/widgets/buttons/button.dart';
 import '../../../../../base/widgets/toast/app_toast.dart';
+import '../../../../../gen/assets.gen.dart';
 import '../../../connect_teacher/presentation/views/connect_teacher_page.dart';
 import '../../../topic_review/presentation/views/topic_review_page.dart';
+import '../../domain/entities/topic_detail_entity.dart';
 import '../blocs/topic_detail_bloc/topic_detail_bloc.dart';
 import '../widgets/phrase_card.dart';
 import '../widgets/question_card.dart';
@@ -25,6 +26,70 @@ class TopicDetailView extends StatefulWidget {
 }
 
 class _TopicDetailViewState extends State<TopicDetailView> {
+  _showConfirmRemoveSavedPhrase(TopicPhraseEntity item) async {
+    final result = await showDialog(
+      //barrierDismissible: false,
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: AppColor.white,
+        title: const Text(
+          TextDoc.txtConfirmRemoveSavedTitle,
+          style: TextStyle(
+            fontSize: titleMediumSize,
+            fontWeight: titleMediumWeight,
+            color: AppColor.defaultFont,
+            height: 1.0,
+          ),
+        ),
+        content: const Text(
+          TextDoc.txtConfirmRemoveSavedContent,
+          style: TextStyle(
+            fontSize: bodyLargeSize,
+            fontWeight: bodyLargeWeight,
+            color: AppColor.defaultFont,
+            height: 1.0,
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            style: TextButton.styleFrom(
+              foregroundColor: AppColor.mainColor1,
+            ),
+            child: const Text(
+              TextDoc.txtCancel,
+              style: TextStyle(
+                fontSize: labelLargeSize,
+                fontWeight: labelLargeWeight,
+              ),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(context, true),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColor.error,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text(
+              TextDoc.txtRemove,
+              style: TextStyle(
+                fontSize: labelLargeSize,
+                fontWeight: labelLargeWeight,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+    if (result == true) {
+      if (mounted) {
+        context.read<TopicDetailBloc>().add(
+            TopicDetailPhraseRemoveBookmarkEvent(
+                bookmarkId: item.bookmark!.id!));
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) =>
       BlocListener<TopicDetailBloc, TopicDetailState>(
@@ -165,12 +230,12 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(radius12)),
                           border: Border.all(
-                              width: state.topicDetail.bookmark != null
-                                  ? 2.0
-                                  : 1.0,
-                              color: state.topicDetail.bookmark != null
-                                  ? const Color(0xFFFF6363)
-                                  : const Color(0xFF9D9DAD)),
+                            width:
+                                state.topicDetail.bookmark != null ? 2.0 : 1.0,
+                            color: state.topicDetail.bookmark != null
+                                ? AppColor.error
+                                : AppColor.shadow,
+                          ),
                         ),
                         child: GestureDetector(
                           onTap: () async {
@@ -240,13 +305,11 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                             }
                           },
                           child: state.topicDetail.bookmark == null
-                              ? SvgPicture.asset(
-                                  "assets/icon/ic_heart.svg",
-                                  color: const Color(0xFF9D9DAD),
+                              ? Assets.icon.icHeart.svg(
+                                  color: AppColor.shadow,
                                 )
-                              : SvgPicture.asset(
-                                  "assets/icon/ic_heart_fill.svg",
-                                  color: const Color(0xFFFF6363),
+                              : Assets.icon.icHeartFill.svg(
+                                  color: AppColor.error,
                                 ),
                         ),
                       ),
@@ -350,6 +413,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                     fontSize: headlineSmallSize,
                                     fontWeight: headlineSmallWeight,
                                   ),
+                                  textAlign: TextAlign.center,
                                 ),
                               ),
                               const SizedBox(height: spacing6),
@@ -469,6 +533,8 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                   }
                                   return PhraseCard(
                                     phraseEntity: phrase,
+                                    onRemovePhraseBookmark:
+                                        _showConfirmRemoveSavedPhrase,
                                   );
                                 },
                                 separatorBuilder: (context, index) =>

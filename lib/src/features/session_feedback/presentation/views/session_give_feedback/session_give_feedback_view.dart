@@ -74,10 +74,7 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
 
               return CustomScrollView(
                 slivers: [
-                  SliverAppBar(
-                    pinned: true,
-                    backgroundColor: AppColor.white,
-                    automaticallyImplyLeading: false,
+                  SliverAppBar.medium(
                     leading: GestureDetector(
                       onTap: (() {
                         Navigator.pop(context);
@@ -89,18 +86,15 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                         color: AppColor.defaultFont,
                       ),
                     ),
-                    title: Row(
-                      children: const [
-                        Text(
-                          TextDoc.txtSessionFeedback,
-                          style: TextStyle(
-                            fontSize: headlineSmallSize,
-                            fontWeight: headlineSmallWeight,
-                            color: AppColor.defaultFont,
-                          ),
-                        ),
-                      ],
+                    title: const Text(
+                      TextDoc.txtSessionFeedback,
+                      style: TextStyle(
+                        fontSize: headlineSmallSize,
+                        fontWeight: headlineSmallWeight,
+                        color: AppColor.defaultFont,
+                      ),
                     ),
+                    centerTitle: true,
                   ),
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
@@ -113,7 +107,6 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const SizedBox(height: spacing8),
                             const Text(
                               TextDoc.txtRating,
                               style: TextStyle(
@@ -209,6 +202,13 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                                         runSpacing: spacing8,
                                         children: satisfiedProblems!
                                             .map((e) => FilterChip(
+                                                shape:
+                                                    const RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                    Radius.circular(24.0),
+                                                  ),
+                                                ),
                                                 label: Text(e.contentTitle!),
                                                 labelStyle: const TextStyle(
                                                   fontSize: bodyLargeSize,
@@ -335,6 +335,13 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                                         runSpacing: spacing8,
                                         children: notSatisfiedProblems!
                                             .map((e) => FilterChip(
+                                                shape:
+                                                    const RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                    Radius.circular(24.0),
+                                                  ),
+                                                ),
                                                 label: Text(e.contentTitle!),
                                                 labelStyle: const TextStyle(
                                                   fontSize: bodyLargeSize,

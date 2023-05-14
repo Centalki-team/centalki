@@ -12,7 +12,9 @@ class TopicFeedbackSinglePageView extends StatefulWidget {
     required this.title,
     required this.topicFeedbackOptions,
     required this.selectionList,
+    required this.fbDetail,
     this.hint = '',
+    this.maxLength = 500,
     this.maxLines = 4,
     this.onAdjustSelection,
     this.onAdjustDetail,
@@ -21,8 +23,10 @@ class TopicFeedbackSinglePageView extends StatefulWidget {
   final String title;
   final List<TopicFeedbackChipEntity> topicFeedbackOptions;
   final List<TopicFeedbackChipEntity> selectionList;
+  final String fbDetail;
   final String hint;
   final int maxLines;
+  final int maxLength;
   final Function(List<TopicFeedbackChipEntity>)? onAdjustSelection;
   final Function(String)? onAdjustDetail;
 
@@ -34,6 +38,12 @@ class TopicFeedbackSinglePageView extends StatefulWidget {
 class _TopicFeedbackSinglePageViewState
     extends State<TopicFeedbackSinglePageView> {
   final _txtController = TextEditingController();
+
+  @override
+  void initState() {
+    _txtController.text = widget.fbDetail;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) => GestureDetector(
@@ -55,6 +65,7 @@ class _TopicFeedbackSinglePageViewState
                 controller: _txtController,
                 hintText: widget.hint,
                 maxLines: widget.maxLines,
+                maxLength: widget.maxLength,
                 onChanged: (value) => widget.onAdjustDetail?.call(value),
               )
             ],

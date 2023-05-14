@@ -1,7 +1,11 @@
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:equatable/equatable.dart';
 
 import 'topic_feedback_chip_entity.dart';
 
+part 'topic_feedback_data_entity.g.dart';
+
+@CopyWith()
 class TopicFeedbackDataEntity extends Equatable {
   TopicFeedbackDataEntity({
     required this.topicId,
@@ -30,11 +34,11 @@ class TopicFeedbackDataEntity extends Equatable {
   late List<TopicFeedbackChipEntity> qnaFb;
 
   bool get isEmptyData =>
-      nameFbDetail.isEmpty &&
-      picFbDetail.isEmpty &&
-      descriptionFbDetail.isEmpty &&
-      vocabFbDetail.isEmpty &&
-      qnaFbDetail.isEmpty &&
+      nameFbDetail.trim().isEmpty &&
+      picFbDetail.trim().isEmpty &&
+      descriptionFbDetail.trim().isEmpty &&
+      vocabFbDetail.trim().isEmpty &&
+      qnaFbDetail.trim().isEmpty &&
       nameFb.isEmpty &&
       picFb.isEmpty &&
       descriptionFb.isEmpty &&

@@ -28,6 +28,10 @@ class $AssetsIconGen {
   /// File path: assets/icon/account.png
   AssetGenImage get account => const AssetGenImage('assets/icon/account.png');
 
+  /// File path: assets/icon/account_filled.png
+  AssetGenImage get accountFilled =>
+      const AssetGenImage('assets/icon/account_filled.png');
+
   /// File path: assets/icon/chat.png
   AssetGenImage get chat => const AssetGenImage('assets/icon/chat.png');
 
@@ -35,12 +39,24 @@ class $AssetsIconGen {
   AssetGenImage get dashboard =>
       const AssetGenImage('assets/icon/dashboard.png');
 
+  /// File path: assets/icon/dashboard_filled.png
+  AssetGenImage get dashboardFilled =>
+      const AssetGenImage('assets/icon/dashboard_filled.png');
+
   /// File path: assets/icon/favorite.png
   AssetGenImage get favorite => const AssetGenImage('assets/icon/favorite.png');
 
   /// File path: assets/icon/ic_clear_circle.svg
   SvgGenImage get icClearCircle =>
       const SvgGenImage('assets/icon/ic_clear_circle.svg');
+
+  /// File path: assets/icon/ic_empty_topics.png
+  AssetGenImage get icEmptyTopics =>
+      const AssetGenImage('assets/icon/ic_empty_topics.png');
+
+  /// File path: assets/icon/ic_empty_vocabs.png
+  AssetGenImage get icEmptyVocabs =>
+      const AssetGenImage('assets/icon/ic_empty_vocabs.png');
 
   /// File path: assets/icon/ic_error_toast.svg
   SvgGenImage get icErrorToast =>
@@ -67,6 +83,14 @@ class $AssetsIconGen {
   /// File path: assets/icon/ic_noti_header.svg
   SvgGenImage get icNotiHeader =>
       const SvgGenImage('assets/icon/ic_noti_header.svg');
+
+  /// File path: assets/icon/ic_noti_read.png
+  AssetGenImage get icNotiRead =>
+      const AssetGenImage('assets/icon/ic_noti_read.png');
+
+  /// File path: assets/icon/ic_noti_unread.png
+  AssetGenImage get icNotiUnread =>
+      const AssetGenImage('assets/icon/ic_noti_unread.png');
 
   /// File path: assets/icon/ic_paint_palette.svg
   SvgGenImage get icPaintPalette =>
@@ -108,6 +132,10 @@ class $AssetsIconGen {
   /// File path: assets/icon/settings.png
   AssetGenImage get settings => const AssetGenImage('assets/icon/settings.png');
 
+  /// File path: assets/icon/settings_filled.png
+  AssetGenImage get settingsFilled =>
+      const AssetGenImage('assets/icon/settings_filled.png');
+
   /// File path: assets/icon/wallet.png
   AssetGenImage get wallet => const AssetGenImage('assets/icon/wallet.png');
 
@@ -118,13 +146,21 @@ class $AssetsIconGen {
   /// File path: assets/icon/white_tick.svg
   SvgGenImage get whiteTick => const SvgGenImage('assets/icon/white_tick.svg');
 
+  /// File path: assets/icon/wishlist_filled.png
+  AssetGenImage get wishlistFilled =>
+      const AssetGenImage('assets/icon/wishlist_filled.png');
+
   /// List of all assets
   List<dynamic> get values => [
         account,
+        accountFilled,
         chat,
         dashboard,
+        dashboardFilled,
         favorite,
         icClearCircle,
+        icEmptyTopics,
+        icEmptyVocabs,
         icErrorToast,
         icFeedback,
         icHeart,
@@ -132,6 +168,8 @@ class $AssetsIconGen {
         icLanguage,
         icNoti,
         icNotiHeader,
+        icNotiRead,
+        icNotiUnread,
         icPaintPalette,
         icRatingStar,
         icRatingStarSelected,
@@ -143,9 +181,11 @@ class $AssetsIconGen {
         radioSelected,
         radioUnselected,
         settings,
+        settingsFilled,
         wallet,
         whiteExclamation,
-        whiteTick
+        whiteTick,
+        wishlistFilled
       ];
 }
 
@@ -316,7 +356,16 @@ class AssetGenImage {
     );
   }
 
-  ImageProvider provider() => AssetImage(_assetName);
+  ImageProvider provider({
+    AssetBundle? bundle,
+    String? package,
+  }) {
+    return AssetImage(
+      _assetName,
+      bundle: bundle,
+      package: package,
+    );
+  }
 
   String get path => _assetName;
 
@@ -343,9 +392,9 @@ class SvgGenImage {
     bool excludeFromSemantics = false,
     SvgTheme theme = const SvgTheme(),
     ColorFilter? colorFilter,
+    Clip clipBehavior = Clip.hardEdge,
     @deprecated Color? color,
     @deprecated BlendMode colorBlendMode = BlendMode.srcIn,
-    @deprecated Clip? clipBehavior,
     @deprecated bool cacheColorFilter = false,
   }) {
     return SvgPicture.asset(
@@ -366,7 +415,7 @@ class SvgGenImage {
       // colorFilter: colorFilter,
       color: color,
       colorBlendMode: colorBlendMode,
-      // clipBehavior: clipBehavior,
+      clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,
     );
   }

@@ -43,6 +43,7 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                   fontSize: titleLargeSize,
                   fontWeight: titleLargeWeight,
                   color: AppColor.defaultFont,
+                  height: 28 / 30,
                 ),
               ),
               content: const Text(
@@ -51,6 +52,7 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                   fontSize: bodyLargeSize,
                   fontWeight: bodyLargeWeight,
                   color: AppColor.defaultFont,
+                  height: 1.0,
                 ),
               ),
               actions: [
@@ -103,6 +105,7 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                   fontSize: titleLargeSize,
                   fontWeight: titleLargeWeight,
                   color: AppColor.defaultFont,
+                  height: 28 / 30,
                 ),
               ),
               content: const Text(
@@ -111,6 +114,7 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                   fontSize: bodyLargeSize,
                   fontWeight: bodyLargeWeight,
                   color: AppColor.defaultFont,
+                  height: 1.0,
                 ),
               ),
               actions: [
@@ -241,7 +245,7 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                               builder: (_, value, __) => value == 4
                                   ? ValueListenableBuilder(
                                       valueListenable: topicFeedbackData,
-                                      builder: (_, feedbackData, __) =>
+                                      builder: (ctx, feedbackData, w) =>
                                           feedbackData.isEmptyData
                                               ? const AppElevatedButton(
                                                   text: TextDoc.txtSend,
@@ -321,83 +325,111 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                             controller: _tabController,
                             physics: const NeverScrollableScrollPhysics(),
                             children: [
-                              TopicFeedbackSinglePageView(
-                                title: 'Topic\'s Name',
-                                topicFeedbackOptions:
-                                    state.topicFeedbackOptionsEntity.topicName,
-                                selectionList: topicFeedbackData.value.nameFb,
-                                hint:
-                                    'We appreciate any detailed feedback from you, if possible.',
-                                onAdjustSelection: (value) {
-                                  topicFeedbackData.value.nameFb.clear();
-                                  topicFeedbackData.value.nameFb.addAll(value);
-                                },
-                                onAdjustDetail: (value) => topicFeedbackData
-                                    .value.nameFbDetail = value,
+                              ValueListenableBuilder(
+                                valueListenable: topicFeedbackData,
+                                builder: (_, valueTopicFeedback, __) =>
+                                    TopicFeedbackSinglePageView(
+                                  title: 'Topic\'s Name',
+                                  topicFeedbackOptions: state
+                                      .topicFeedbackOptionsEntity.topicName,
+                                  selectionList: valueTopicFeedback.nameFb,
+                                  fbDetail: valueTopicFeedback.nameFbDetail,
+                                  hint:
+                                      'We appreciate any detailed feedback from you, if possible.',
+                                  onAdjustSelection: (value) {
+                                    topicFeedbackData.value.nameFb =
+                                        List.from(value);
+                                  },
+                                  onAdjustDetail: (value) => topicFeedbackData
+                                      .value.nameFbDetail = value,
+                                ),
                               ),
-                              TopicFeedbackSinglePageView(
-                                title: 'Illustration Photo',
-                                topicFeedbackOptions:
-                                    state.topicFeedbackOptionsEntity.topicPhoto,
-                                selectionList: topicFeedbackData.value.picFb,
-                                hint:
-                                    'We appreciate any detailed feedback from you, if possible.',
-                                onAdjustSelection: (value) {
-                                  topicFeedbackData.value.picFb.clear();
-                                  topicFeedbackData.value.picFb.addAll(value);
-                                },
-                                onAdjustDetail: (value) =>
-                                    topicFeedbackData.value.picFbDetail = value,
+                              ValueListenableBuilder(
+                                valueListenable: topicFeedbackData,
+                                builder: (_, valueTopicFeedback, __) =>
+                                    TopicFeedbackSinglePageView(
+                                  title: 'Illustration Photo',
+                                  topicFeedbackOptions: state
+                                      .topicFeedbackOptionsEntity.topicPhoto,
+                                  selectionList: valueTopicFeedback.picFb,
+                                  fbDetail: valueTopicFeedback.picFbDetail,
+                                  hint:
+                                      'We appreciate any detailed feedback from you, if possible.',
+                                  onAdjustSelection: (value) {
+                                    topicFeedbackData.value.picFb =
+                                        List.from(value);
+                                  },
+                                  onAdjustDetail: (value) => topicFeedbackData
+                                      .value.picFbDetail = value,
+                                ),
                               ),
-                              TopicFeedbackSinglePageView(
-                                title: 'Topic\'s Description',
-                                topicFeedbackOptions: state
-                                    .topicFeedbackOptionsEntity
-                                    .topicDescription,
-                                selectionList:
-                                    topicFeedbackData.value.descriptionFb,
-                                hint:
-                                    'We appreciate any detailed feedback from you, if possible.',
-                                onAdjustSelection: (value) {
-                                  topicFeedbackData.value.descriptionFb.clear();
-                                  topicFeedbackData.value.descriptionFb
-                                      .addAll(value);
-                                },
-                                onAdjustDetail: (value) => topicFeedbackData
-                                    .value.descriptionFbDetail = value,
+                              ValueListenableBuilder(
+                                valueListenable: topicFeedbackData,
+                                builder: (_, valueTopicFeedback, __) =>
+                                    TopicFeedbackSinglePageView(
+                                  title: 'Topic\'s Description',
+                                  topicFeedbackOptions: state
+                                      .topicFeedbackOptionsEntity
+                                      .topicDescription,
+                                  selectionList:
+                                      valueTopicFeedback.descriptionFb,
+                                  fbDetail:
+                                      valueTopicFeedback.descriptionFbDetail,
+                                  hint:
+                                      'We appreciate any detailed feedback from you, if possible.',
+                                  onAdjustSelection: (value) {
+                                    topicFeedbackData.value.descriptionFb =
+                                        List.from(value);
+                                  },
+                                  onAdjustDetail: (value) => topicFeedbackData
+                                      .value.descriptionFbDetail = value,
+                                ),
                               ),
-                              TopicFeedbackSinglePageView(
-                                title: 'Vocabularies',
-                                topicFeedbackOptions:
-                                    state.topicFeedbackOptionsEntity.topicVocab,
-                                selectionList: topicFeedbackData.value.vocabFb,
-                                hint:
-                                    'We appreciate if you could tell us which phrases and/or examples cause the problems.',
-                                maxLines: 5,
-                                onAdjustSelection: (value) {
-                                  topicFeedbackData.value.vocabFb.clear();
-                                  topicFeedbackData.value.vocabFb.addAll(value);
-                                },
-                                onAdjustDetail: (value) => topicFeedbackData
-                                    .value.vocabFbDetail = value,
+                              ValueListenableBuilder(
+                                valueListenable: topicFeedbackData,
+                                builder: (_, valueTopicFeedback, __) =>
+                                    TopicFeedbackSinglePageView(
+                                  title: 'Vocabularies',
+                                  topicFeedbackOptions: state
+                                      .topicFeedbackOptionsEntity.topicVocab,
+                                  selectionList: valueTopicFeedback.vocabFb,
+                                  fbDetail: valueTopicFeedback.vocabFbDetail,
+                                  hint:
+                                      'We appreciate if you could tell us which phrases and/or examples cause the problems.',
+                                  maxLines: 5,
+                                  onAdjustSelection: (value) {
+                                    topicFeedbackData.value.vocabFb =
+                                        List.from(value);
+                                  },
+                                  onAdjustDetail: (value) => topicFeedbackData
+                                      .value.vocabFbDetail = value,
+                                ),
                               ),
-                              TopicFeedbackSinglePageView(
-                                title: 'Questions and Answers',
-                                topicFeedbackOptions: state
-                                    .topicFeedbackOptionsEntity.topicQuestions,
-                                selectionList: topicFeedbackData.value.qnaFb,
-                                hint:
-                                    'We appreciate if you could tell us which questions and/or answers cause the problems.',
-                                maxLines: 5,
-                                onAdjustSelection: (value) {
-                                  topicFeedbackData.value.qnaFb.clear();
-                                  topicFeedbackData.value.qnaFb.addAll(value);
-                                  setState(() {});
-                                },
-                                onAdjustDetail: (value) {
-                                  topicFeedbackData.value.qnaFbDetail = value;
-                                  setState(() {});
-                                },
+                              ValueListenableBuilder(
+                                valueListenable: topicFeedbackData,
+                                builder: (_, valueTopicFeedback, __) =>
+                                    TopicFeedbackSinglePageView(
+                                  title: 'Questions and Answers',
+                                  topicFeedbackOptions: state
+                                      .topicFeedbackOptionsEntity
+                                      .topicQuestions,
+                                  selectionList: valueTopicFeedback.qnaFb,
+                                  fbDetail: valueTopicFeedback.qnaFbDetail,
+                                  hint:
+                                      'We appreciate if you could tell us which questions and/or answers cause the problems.',
+                                  maxLines: 5,
+                                  onAdjustSelection: (value) {
+                                    topicFeedbackData.value = topicFeedbackData
+                                        .value
+                                        .copyWith(qnaFb: value);
+                                  },
+                                  onAdjustDetail: (value) {
+                                    topicFeedbackData.value = topicFeedbackData
+                                        .value
+                                        .copyWith(qnaFbDetail: value);
+                                    //setState(() {});
+                                  },
+                                ),
                               ),
                             ],
                           ),

@@ -1,22 +1,22 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../../base/define/styles.dart';
-import '../../../../../base/widgets/buttons/text_button.dart';
+import '../../../../../gen/assets.gen.dart';
 import '../../../topic_detail/presentation/views/topic_detail_page.dart';
 import '../../domain/entities/topic_item_entity.dart';
-import '../blocs/pre_intermediate_topic_bloc/pre_intermediate_topics_bloc.dart';
 
 class TopicCard extends StatefulWidget {
   const TopicCard({
     Key? key,
     required this.item,
     required this.onTap,
+    this.onTopicsRefresh,
   }) : super(key: key);
 
   final TopicItemEntity item;
   final Function() onTap;
+  final Function()? onTopicsRefresh;
 
   @override
   State<TopicCard> createState() => _TopicCardState();
@@ -25,15 +25,19 @@ class TopicCard extends StatefulWidget {
 class _TopicCardState extends State<TopicCard> {
   @override
   Widget build(BuildContext context) => GestureDetector(
-        onTap: () => Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => TopicDetailPage(
-              topicId: widget.item.topicId ?? '',
+        onTap: () async {
+          await Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => TopicDetailPage(
+                topicId: widget.item.topicId ?? '',
+              ),
             ),
-          ),
-        ),
+          );
+          widget.onTopicsRefresh?.call();
+        },
         child: Container(
           margin: const EdgeInsets.all(spacing8),
+          height: 150,
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
               color: AppColor.white,
@@ -49,15 +53,13 @@ class _TopicCardState extends State<TopicCard> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.network(
-                widget.item.image ?? '',
+              SizedBox(
+                height: 150,
                 width: 150,
-                height: 120,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) => const SizedBox(
-                  width: 150,
-                  height: 120,
-                  child: Icon(
+                child: CachedNetworkImage(
+                  imageUrl: widget.item.image ?? '',
+                  fit: BoxFit.cover,
+                  errorWidget: (context, error, stackTrace) => const Icon(
                     Icons.error_outline_rounded,
                     size: 32,
                     color: Colors.red,
@@ -68,46 +70,60 @@ class _TopicCardState extends State<TopicCard> {
                 child: Padding(
                   padding: const EdgeInsets.all(12),
                   child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              widget.item.topicName ?? '',
+                              style: const TextStyle(
+                                fontSize: titleMediumSize,
+                                fontWeight: titleMediumWeight,
+                                color: AppColor.defaultFont,
+                                height: 1.0,
+                              ),
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: spacing8,
+                          ),
+                          GestureDetector(
+                            onTap: () async {
+                              widget.onTap.call();
+                            },
+                            child: widget.item.topicBookmark == null
+                                ? Assets.icon.icHeart.svg(
+                                    width: 24,
+                                    height: 24,
+                                    color: AppColor.shadow,
+                                  )
+                                : Assets.icon.icHeartFill.svg(
+                                    width: 24,
+                                    height: 24,
+                                    color: AppColor.error,
+                                  ),
+                          ),
+                        ],
+                      ),
                       Text(
                         widget.item.topicCategory ?? '',
                         style: const TextStyle(
                           fontSize: bodySmallSize,
                           fontWeight: bodySmallWeight,
                           color: AppColor.defaultFont,
+                          height: 16 / 20,
                         ),
-                      ),
-                      Text(
-                        widget.item.topicName ?? '',
-                        style: const TextStyle(
-                          fontSize: titleMediumSize,
-                          fontWeight: titleMediumWeight,
-                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ],
                   ),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: spacing12, right: spacing12),
-                child: GestureDetector(
-                  onTap: () async {
-                    widget.onTap.call();
-                  },
-                  child: widget.item.topicBookmark == null
-                      ? SvgPicture.asset(
-                          "assets/icon/ic_heart.svg",
-                          width: 30,
-                          height: 30,
-                          color: const Color(0xFF9D9DAD),
-                        )
-                      : SvgPicture.asset(
-                          "assets/icon/ic_heart_fill.svg",
-                          width: 30,
-                          height: 30,
-                          color: const Color(0xFFFF6363),
-                        ),
                 ),
               ),
             ],

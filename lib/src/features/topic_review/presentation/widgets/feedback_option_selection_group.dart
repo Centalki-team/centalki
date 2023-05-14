@@ -57,8 +57,22 @@ class _FeedbackOptionsSelectionGroupState
             spacing: spacing8,
             children: widget.topicFeedbackOptions.map((e) {
               var isSelected = selectionList.contains(e);
-              return GestureDetector(
-                onTap: () {
+              return FilterChip(
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(24.0),
+                  ),
+                ),
+                label: Text(e.title),
+                labelStyle: const TextStyle(
+                  fontSize: bodyLargeSize,
+                  fontWeight: bodyLargeWeight,
+                  color: AppColor.defaultFont,
+                ),
+                checkmarkColor: AppColor.defaultFont,
+                selectedColor: AppColor.mainColor2Surface,
+                selected: isSelected,
+                onSelected: (_) {
                   setState(() {
                     if (isSelected) {
                       selectionList = List.from(selectionList)..remove(e);
@@ -68,10 +82,6 @@ class _FeedbackOptionsSelectionGroupState
                   });
                   widget.onAdjustFeedbackOptions?.call(selectionList);
                 },
-                child: SelectableFeedbackOptionChip(
-                  topicFeedbackChipEntity: e,
-                  isSelected: isSelected,
-                ),
               );
             }).toList(),
           ),

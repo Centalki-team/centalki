@@ -55,7 +55,7 @@ class _AddPhotoButtonState extends State<AddPhotoButton> {
                   offset: Offset(0, 1),
                   blurRadius: 4.0,
                   spreadRadius: 0.0,
-                  color: Color(0xFF9D9DAD),
+                  color: AppColor.shadow,
                 ),
               ],
             ),
