@@ -1,141 +1,160 @@
-import 'package:dio/dio.dart';
+import 'dart:async';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 
+import '../../../../../../base/define/colors.dart';
+import '../../../../../../base/define/theme.dart';
 import '../../../../../../base/gateway/exception/app_exception.dart';
-import '../../../../../../base/helpers/upload-file.dart';
+import '../../../../../../base/helpers/iap.dart';
 import '../../../../../../di/di_module.dart';
-import '../../../domain/entities/payment_method_entity.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../domain/repositories/payment_repository.dart';
-import '../../../domain/usecases/create_payment_receipt_usecase.dart';
-import '../../../domain/usecases/get_payment_methods_usecase.dart';
-import '../../../domain/usecases/get_presigned_url_usecase.dart';
-import '../../../domain/usecases/params/create_payment_receipt_params.dart';
-import '../../../domain/usecases/params/get_presigned_url_params.dart';
+import '../../../domain/usecases/verify_purchase_usecase.dart';
 
 part 'payment_event.dart';
 part 'payment_state.dart';
 
 class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
   PaymentBloc() : super(const PaymentInitState()) {
-    on<PaymentValidateEvent>(_onValidate);
-    on<PaymentUploadImageEvent>(_onUploadImage);
-    //on<PaymentUploadPresignedUrlEvent>(_uploadFilePresignedUrl);
-    on<PaymentCreateReceiptEvent>(_onCreatePaymentReceipt);
-    on<PaymentLoadPaymentMethodsEvent>(_onLoadPaymentMethods);
+    on<PaymentInitEvent>(_onInit);
+    on<PaymentGetProductsEvent>(_onGetProducts);
+    on<PaymentPurchaseEvent>(_onPurchase);
+    on<PaymentCancelPurchaseEvent>(_onCancelPurchase);
+    on<PaymentOccurErrorEvent>(_onOccurError);
+    on<PaymentVerifyPurchaseEvent>(_onVerifyPurchase);
+    on<PaymentCompletePurchaseEvent>(_onCompletePurchase);
   }
 
-  final PaymentGetPresignedUrlUseCase _paymentGetPresignedUrlUseCase =
-      PaymentGetPresignedUrlUseCase(
-    paymentRepository: getIt.get<PaymentRepository>(),
-  );
-  final PaymentCreateReceiptUseCase _paymentCreateReceiptUseCase =
-      PaymentCreateReceiptUseCase(
-    paymentRepository: getIt.get<PaymentRepository>(),
-  );
-  final GetPaymentMethodsUseCase _getPaymentMethodsUseCase =
-      GetPaymentMethodsUseCase(
+  late StreamSubscription<List<PurchaseDetails>> _subscription;
+  static final productsDetail = {
+    'com.centalki.app.one_session': {
+      'options': S.current.txtMostPopular,
+      'color': AppColor.tertiary,
+      'name': S.current.txtOneSession,
+      'desc': [
+        S.current.txtOneSessionLearningTime,
+        S.current.txtQualityVideoCall
+      ],
+      'save': '',
+    },
+    'com.centalki.app.six_session': {
+      'options': S.current.txtBestValue,
+      'color': AppColor.secondary,
+      'name': S.current.txtSixSessions,
+      'desc': [
+        S.current.txtSixSessionsLearningTime,
+        S.current.txtQualityVideoCall
+      ],
+      'save': S.current.txtSave16Percent,
+    },
+  };
+  final VerifyPurchaseUseCase verifyPurchaseUseCase = VerifyPurchaseUseCase(
     paymentRepository: getIt.get<PaymentRepository>(),
   );
 
-  _onValidate(PaymentValidateEvent event, emit) =>
-      emit(const PaymentValidateState());
-
-  _onUploadImage(PaymentUploadImageEvent event, emit) async {
-    emit(const PaymentLoadingState());
-    final presignedUrlRes =
-        await _paymentGetPresignedUrlUseCase(PaymentGetPresignedUrlParams(
-      filename: event.img.name,
-    ));
-    presignedUrlRes.fold(
-      (l) {
-        emit(const PaymentLoadingState(showLoading: false));
-        emit(PaymentErrorState(
-            exception: l, displayMessage: "Lỗi lấy link upload ảnh"));
-      },
-      (r) => add(PaymentUploadPresignedUrlEvent(img: event.img, url: r.data)),
-    );
+  @override
+  Future<void> close() {
+    _subscription.cancel();
+    return super.close();
   }
 
-  // _uploadFilePresignedUrl(PaymentUploadPresignedUrlEvent event, emit) async {
-  //   final formData = FormData.fromMap({
-  //     'file': await MultipartFile.fromFile(event.img.path),
-  //   });
-
-  //   try {
-  //     final response = await Dio().put(event.url, data: formData);
-  //     if (response.statusCode == 200 || response.statusCode == 201) {
-  //       add(PaymentCreateReceiptEvent(
-  //         imgUrl: event.url,
-  //       ));
-  //     }
-  //   } catch (e) {
-  //     emit(const PaymentLoadingState(showLoading: false));
-  //     emit(PaymentErrorState(
-  //       exception: AppException(
-  //         error: e,
-  //       ),
-  //       displayMessage: "Lỗi lấy link upload ảnh",
-  //     ));
-  //   }
-
-  //   // if (response.statusCode == 200 || response.statusCode == 201) {
-  //   //   emit(PaymentUploadPresignedUrlSuccess(
-  //   //     uploadedUrl: event.url,
-  //   //   ));
-  //   // } else {
-
-  //   // }
-  // }
-
-  _onCreatePaymentReceipt(PaymentCreateReceiptEvent event, emit) async {
-    final url = await uploadFile(event.img);
-    final createReceiptRes = await _paymentCreateReceiptUseCase(
-        CreatePaymentReceiptParams(imageURLs: [url]));
-    createReceiptRes.fold(
-      (l) => emit(PaymentCreateReceiptErrorState(
-          exception: l,
-          displayMessage:
-              "Lỗi tạo hóa đơn chuyển khoản, vui lòng thử lại sau..")),
-      (r) => emit(const PaymentCreateReceiptDoneState()),
-    );
-  }
-
-  _onLoadPaymentMethods(PaymentLoadPaymentMethodsEvent event, emit) async {
-    final methods = await _getPaymentMethodsUseCase(null);
-    methods.fold(
-      (l) => emit(PaymentErrorState(
-        exception: l,
-      )),
-      (r) {
-        var methodsList = <PaymentMethodEntity>[];
-        if (r.momo != null) {
-          methodsList.add(PaymentMethodEntity(
-            methodName: 'MoMo',
-            methodType: PaymentMethodEnum.momo,
-            methodCode: r.momo!.transferCode,
-            accountHolder: r.momo!.accountHolder,
-            phoneNumber: r.momo!.phoneNumber,
-          ));
+  void _onInit(PaymentInitEvent event, emit) {
+    emit(const PaymentInitState());
+    add(const PaymentGetProductsEvent());
+    final purchaseUpdated = InAppPurchase.instance.purchaseStream;
+    _subscription = purchaseUpdated.listen((purchaseDetailsList) async {
+      for (var purchaseDetails in purchaseDetailsList) {
+        if (purchaseDetails.status == PurchaseStatus.pending) {
+        } else {
+          if (purchaseDetails.status == PurchaseStatus.error) {
+            add(
+              PaymentOccurErrorEvent(
+                AppException(
+                  displayMessage:
+                      'Purchase error: ${purchaseDetails.error?.message}',
+                ),
+              ),
+            );
+          } else if (purchaseDetails.status == PurchaseStatus.purchased ||
+              purchaseDetails.status == PurchaseStatus.restored) {
+            add(PaymentVerifyPurchaseEvent(purchaseDetails));
+          } else if (purchaseDetails.status == PurchaseStatus.canceled) {
+            add(const PaymentCancelPurchaseEvent());
+          }
+          if (purchaseDetails.pendingCompletePurchase) {
+            add(PaymentCompletePurchaseEvent(purchaseDetails));
+          }
         }
-        if (r.banking != null) {
-          methodsList.add(PaymentMethodEntity(
-            methodName: 'Banking',
-            methodType: PaymentMethodEnum.credit,
-            accountHolder: r.banking!.accountHolder,
-            accountNumber: r.banking!.accountNumber,
-            phoneNumber: r.banking!.bank,
-            bankName: r.banking!.bank,
-          ));
-        }
-        emit(
-          PaymentLoadPaymentMethodsDoneState(
-            paymentMethodInfoEntity: r,
-            methodsList: methodsList,
+      }
+    }, onDone: () {
+      _subscription.cancel();
+    }, onError: (error) {
+      // handle error here.
+      add(
+        PaymentOccurErrorEvent(
+          AppException(
+            displayMessage: 'Purchase error: $error',
           ),
-        );
+        ),
+      );
+    });
+  }
+
+  void _onGetProducts(PaymentGetProductsEvent event, emit) async {
+    emit(const PaymentLoadingState());
+
+    final products = await getProducts();
+
+    emit(
+      PaymentLoadDoneState(
+        products: products,
+        productsDetail: productsDetail,
+      ),
+    );
+  }
+
+  void _onPurchase(PaymentPurchaseEvent event, emit) async {
+    emit(const PaymentPurchasingState());
+    await handlePurchase(event.product);
+  }
+
+  void _onCancelPurchase(PaymentCancelPurchaseEvent event, emit) async {
+    emit(const PaymentPurchasedCancelledState());
+  }
+
+  void _onOccurError(PaymentOccurErrorEvent event, emit) async {
+    emit(PaymentPurchasedErrorState(event.exception));
+  }
+
+  void _onVerifyPurchase(PaymentVerifyPurchaseEvent event, emit) async {
+    emit(const PaymentPurchasingState());
+    final res = await verifyPurchaseUseCase.execute(event.purchaseDetails);
+    res.fold(
+      (l) => emit(
+        PaymentPurchasedErrorState(l),
+      ),
+      (r) {
+        if (r) {
+          add(PaymentCompletePurchaseEvent(event.purchaseDetails));
+          return;
+        } else {
+          add(
+            const PaymentOccurErrorEvent(
+              AppException(
+                displayMessage: 'Purchase is not valid.',
+              ),
+            ),
+          );
+          return;
+        }
       },
     );
+  }
+
+  void _onCompletePurchase(PaymentCompletePurchaseEvent event, emit) async {
+    await InAppPurchase.instance.completePurchase(event.purchaseDetails);
+    emit(const PaymentPurchasedDoneState());
   }
 }

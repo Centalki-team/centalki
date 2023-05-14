@@ -298,5 +298,14 @@
     "txtNotFinishTopicSuggest": "Unfinished Topic Suggestion",
     "txtNotFinishTopicSuggestContent": "Are you sure you want to exit and return to the previous screen? Your suggestions are invaluable to us.",
     "txtSendTopicSuggestSuccess": "Suggestion Sent Successfully",
-    "txtSendTopicSuggestSuccessContent": "We are deeply appreciated the efforts you took to help us further improve our contents.\nWe always look forward to hearing more ideas from you."
+    "txtSendTopicSuggestSuccessContent": "We are deeply appreciated the efforts you took to help us further improve our contents.\nWe always look forward to hearing more ideas from you.",
+    "txtPurchase": "Purchase",
+    "txtMostPopular": "Most Popular",
+    "txtBestValue": "Best Value",
+    "txtOneSession": "1 session",
+    "txtSixSessions": "6 sessions",
+    "txtOneSessionLearningTime": "Total 30 minutes of learning time",
+    "txtSixSessionsLearningTime": "Total 180 minutes of learning time",
+    "txtQualityVideoCall": "High-quality video call",
+    "txtSave16Percent": "Save 16%"
   }

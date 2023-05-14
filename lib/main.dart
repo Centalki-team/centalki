@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'dart:io';
 
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -196,11 +198,16 @@ class _MyWidgetState extends State<MyWidget> {
     }
   }
 
+  _requestAppTracking() async {
+    final status = await AppTrackingTransparency.requestTrackingAuthorization();
+  }
+
   @override
   void initState() {
     if (widget.uiStatus == UIStatus.loadSuccess) {
       _checkToShowAppIntro();
     }
+    _requestAppTracking();
     // Right after the listener has been registered.
     // When a user is signed in.
     // When the current user is signed out.
