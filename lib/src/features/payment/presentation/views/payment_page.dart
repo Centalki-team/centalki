@@ -1,8 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/payment_bloc/payment_bloc.dart';
-import 'payment_view.dart';
+import 'payment_view_iap.dart';
 
 class PaymentPage extends StatelessWidget {
   const PaymentPage({super.key});
@@ -11,6 +13,6 @@ class PaymentPage extends StatelessWidget {
   Widget build(BuildContext context) => BlocProvider<PaymentBloc>(
         create: (context) =>
             PaymentBloc()..add(const PaymentLoadPaymentMethodsEvent()),
-        child: const PaymentView(),
+        child: const PaymentViewIAP(),
       );
 }

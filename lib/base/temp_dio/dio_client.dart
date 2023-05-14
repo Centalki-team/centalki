@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 
 import '../../src/features/account/data/account_datasources/remote_data/model/user_account_model.dart';
 import '../../src/features/account/data/balance_datasources/remote_data/model/balance_model.dart';
@@ -171,5 +172,27 @@ class DioClient {
           "blockedId": blockedId,
         },
         options: Options(headers: {"Authorization": idToken}));
+  }
+
+  static verifyPurchase(PurchaseDetails purchaseDetails) async {
+    try {
+      final idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
+      final endpoint = Platform.isIOS
+          ? "$baseUrl/transaction/apple/verify-purchase"
+          : "$baseUrl/transaction/google/verify-purchase";
+      final response = await _dio.post(endpoint,
+          data: {
+            'source': purchaseDetails.verificationData.source,
+            'productId': purchaseDetails.productID,
+            'verificationData':
+                purchaseDetails.verificationData.serverVerificationData,
+          },
+          options: Options(headers: {"Authorization": idToken}));
+      print('statusCode:${response.statusCode}');
+
+      return response.statusCode == 201;
+    } catch (e) {
+      return false;
+    }
   }
 }
