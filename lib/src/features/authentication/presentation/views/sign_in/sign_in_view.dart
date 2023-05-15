@@ -45,187 +45,190 @@ class _SignInViewState extends State<SignInView> {
         child: Scaffold(
           body: SingleChildScrollView(
             padding: const EdgeInsets.all(24.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                SizedBox(
-                  height: 280,
-                  child: Assets.illustration.signIn.svg(),
-                ),
-                const Text(
-                  TextDoc.txtSignInIntroduction,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: titleLargeSize,
-                    fontWeight: titleLargeWeight,
-                    color: AppColor.defaultFontContainer,
+            child: GestureDetector(
+              onTap: () => FocusScope.of(context).unfocus(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  SizedBox(
+                    height: 280,
+                    child: Assets.illustration.signIn.svg(),
                   ),
-                ),
-                const SizedBox(height: spacing16),
-                BlocBuilder<SignInBloc, SignInState>(
-                  builder: (context, state) => Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      const Text(
-                        TextDoc.txtEmail,
-                        style: TextStyle(
-                          fontSize: titleMediumSize,
-                          fontWeight: titleMediumWeight,
-                          color: AppColor.defaultFont,
-                        ),
-                      ),
-                      AppOutlinedTextField(
-                        controller: _emailController,
-                        textInputType: TextInputType.emailAddress,
-                        errorText: (state is SignInValidateState &&
-                                state.emailError.isNotEmpty)
-                            ? state.emailError
-                            : null,
-                        onChanged: _validateSignInInputs,
-                      ),
-                      const SizedBox(height: spacing8),
-                      const Text(
-                        TextDoc.txtPassword,
-                        style: TextStyle(
-                          fontSize: titleMediumSize,
-                          fontWeight: titleMediumWeight,
-                          color: AppColor.defaultFont,
-                        ),
-                      ),
-                      AppOutlinedTextField(
-                        controller: _passwordController,
-                        obscureText: true,
-                        errorText: (state is SignInValidateState &&
-                                state.passwordError.isNotEmpty)
-                            ? state.passwordError
-                            : null,
-                        onChanged: _validateSignInInputs,
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: spacing24),
-                BlocBuilder<SignInBloc, SignInState>(
-                  builder: (context, state) {
-                    if (state is SignInLoadingState) {
-                      return const Center(
-                        child: CupertinoActivityIndicator(),
-                      );
-                    }
-                    return AppFilledButton(
-                      text: TextDoc.txtSignIn,
-                      onPressed: (state is SignInValidateState &&
-                              !state.forceDisabled)
-                          ? () =>
-                              context.read<SignInBloc>().add(SignInSendEvent(
-                                    email: _emailController.text,
-                                    password: _passwordController.text,
-                                  ))
-                          : null,
-                      minimumSize: const Size.fromHeight(48),
-                    );
-                  },
-                ),
-                const SizedBox(height: spacing24),
-                const Center(
-                  child: Text(
-                    TextDoc.txtOrLoginWith,
+                  const Text(
+                    TextDoc.txtSignInIntroduction,
+                    textAlign: TextAlign.left,
                     style: TextStyle(
-                      fontSize: bodyLargeSize,
-                      fontWeight: bodyLargeWeight,
-                      color: AppColor.defaultFont,
+                      fontSize: titleLargeSize,
+                      fontWeight: titleLargeWeight,
+                      color: AppColor.defaultFontContainer,
                     ),
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    BlocBuilder<SignInBloc, SignInState>(
-                      builder: (context, state) => TextButton(
-                        onPressed: () => context
-                            .read<SignInBloc>()
-                            .add(const GoogleSignInEvent()),
-                        style: TextButton.styleFrom(
-                          shape: const CircleBorder(),
+                  const SizedBox(height: spacing16),
+                  BlocBuilder<SignInBloc, SignInState>(
+                    builder: (context, state) => Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const Text(
+                          TextDoc.txtEmail,
+                          style: TextStyle(
+                            fontSize: titleMediumSize,
+                            fontWeight: titleMediumWeight,
+                            color: AppColor.defaultFont,
+                          ),
                         ),
-                        child: Image.asset(
-                          Assets.logo.google.path,
-                          width: 40,
-                          height: 40,
+                        AppOutlinedTextField(
+                          controller: _emailController,
+                          textInputType: TextInputType.emailAddress,
+                          errorText: (state is SignInValidateState &&
+                                  state.emailError.isNotEmpty)
+                              ? state.emailError
+                              : null,
+                          onChanged: _validateSignInInputs,
                         ),
+                        const SizedBox(height: spacing8),
+                        const Text(
+                          TextDoc.txtPassword,
+                          style: TextStyle(
+                            fontSize: titleMediumSize,
+                            fontWeight: titleMediumWeight,
+                            color: AppColor.defaultFont,
+                          ),
+                        ),
+                        AppOutlinedTextField(
+                          controller: _passwordController,
+                          obscureText: true,
+                          errorText: (state is SignInValidateState &&
+                                  state.passwordError.isNotEmpty)
+                              ? state.passwordError
+                              : null,
+                          onChanged: _validateSignInInputs,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: spacing24),
+                  BlocBuilder<SignInBloc, SignInState>(
+                    builder: (context, state) {
+                      if (state is SignInLoadingState) {
+                        return const Center(
+                          child: CupertinoActivityIndicator(),
+                        );
+                      }
+                      return AppFilledButton(
+                        text: TextDoc.txtSignIn,
+                        onPressed: (state is SignInValidateState &&
+                                !state.forceDisabled)
+                            ? () =>
+                                context.read<SignInBloc>().add(SignInSendEvent(
+                                      email: _emailController.text,
+                                      password: _passwordController.text,
+                                    ))
+                            : null,
+                        minimumSize: const Size.fromHeight(48),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: spacing24),
+                  const Center(
+                    child: Text(
+                      TextDoc.txtOrLoginWith,
+                      style: TextStyle(
+                        fontSize: bodyLargeSize,
+                        fontWeight: bodyLargeWeight,
+                        color: AppColor.defaultFont,
                       ),
                     ),
-                    const SizedBox(width: spacing12),
-                    BlocBuilder<SignInBloc, SignInState>(
-                      builder: (context, state) => TextButton(
-                        onPressed: () => context
-                            .read<SignInBloc>()
-                            .add(const FacebookSignInEvent()),
-                        style: TextButton.styleFrom(
-                          shape: const CircleBorder(),
-                        ),
-                        child: Image.asset(
-                          Assets.logo.facebook.path,
-                          width: 40,
-                          height: 40,
-                        ),
-                      ),
-                    ),
-                    if (Platform.isIOS) ...[
-                      const SizedBox(width: spacing12),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
                       BlocBuilder<SignInBloc, SignInState>(
                         builder: (context, state) => TextButton(
                           onPressed: () => context
                               .read<SignInBloc>()
-                              .add(const AppleSignInEvent()),
+                              .add(const GoogleSignInEvent()),
                           style: TextButton.styleFrom(
                             shape: const CircleBorder(),
                           ),
                           child: Image.asset(
-                            Assets.logo.apple.path,
+                            Assets.logo.google.path,
                             width: 40,
                             height: 40,
                           ),
                         ),
                       ),
-                    ] else
-                      ...[],
-                  ],
-                ),
-                const SizedBox(height: spacing8),
-                AppTextButton(
-                  onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const ResetPasswordPage(),
-                      )),
-                  text: TextDoc.txtForgotPassword,
-                ),
-                const SizedBox(height: spacing8),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const Text(
-                      TextDoc.txtHaveNoAccount,
-                      style: TextStyle(
-                        fontSize: bodyMediumSize,
-                        fontWeight: bodyMediumWeight,
-                        color: AppColor.defaultFont,
+                      const SizedBox(width: spacing12),
+                      BlocBuilder<SignInBloc, SignInState>(
+                        builder: (context, state) => TextButton(
+                          onPressed: () => context
+                              .read<SignInBloc>()
+                              .add(const FacebookSignInEvent()),
+                          style: TextButton.styleFrom(
+                            shape: const CircleBorder(),
+                          ),
+                          child: Image.asset(
+                            Assets.logo.facebook.path,
+                            width: 40,
+                            height: 40,
+                          ),
+                        ),
                       ),
-                    ),
-                    AppTextButton(
-                      onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const SignUpPage(),
-                          )),
-                      text: TextDoc.txtSignUp,
-                    ),
-                  ],
-                ),
-              ],
+                      if (Platform.isIOS) ...[
+                        const SizedBox(width: spacing12),
+                        BlocBuilder<SignInBloc, SignInState>(
+                          builder: (context, state) => TextButton(
+                            onPressed: () => context
+                                .read<SignInBloc>()
+                                .add(const AppleSignInEvent()),
+                            style: TextButton.styleFrom(
+                              shape: const CircleBorder(),
+                            ),
+                            child: Image.asset(
+                              Assets.logo.apple.path,
+                              width: 40,
+                              height: 40,
+                            ),
+                          ),
+                        ),
+                      ] else
+                        ...[],
+                    ],
+                  ),
+                  const SizedBox(height: spacing8),
+                  AppTextButton(
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ResetPasswordPage(),
+                        )),
+                    text: TextDoc.txtForgotPassword,
+                  ),
+                  const SizedBox(height: spacing8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Text(
+                        TextDoc.txtHaveNoAccount,
+                        style: TextStyle(
+                          fontSize: bodyMediumSize,
+                          fontWeight: bodyMediumWeight,
+                          color: AppColor.defaultFont,
+                        ),
+                      ),
+                      AppTextButton(
+                        onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const SignUpPage(),
+                            )),
+                        text: TextDoc.txtSignUp,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
