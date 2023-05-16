@@ -40,64 +40,67 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
         child: Scaffold(
           body: SingleChildScrollView(
             padding: const EdgeInsets.all(24.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                SizedBox(
-                  height: 280,
-                  child: Assets.illustration.resetPassword.svg(),
-                ),
-                const Text(
-                  TextDoc.txtResetPasswordIntroduction,
-                  style: TextStyle(
-                    fontSize: titleLargeSize,
-                    fontWeight: titleLargeWeight,
-                    color: AppColor.defaultFontContainer,
+            child: GestureDetector(
+              onTap: () => FocusScope.of(context).unfocus(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  SizedBox(
+                    height: 280,
+                    child: Assets.illustration.resetPassword.svg(),
                   ),
-                ),
-                const SizedBox(height: spacing16),
-                BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
-                  builder: (context, state) => Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      const Text(
-                        TextDoc.txtEmail,
-                        style: TextStyle(
-                          fontSize: titleMediumSize,
-                          fontWeight: titleMediumWeight,
-                          color: AppColor.defaultFont,
+                  const Text(
+                    TextDoc.txtResetPasswordIntroduction,
+                    style: TextStyle(
+                      fontSize: titleLargeSize,
+                      fontWeight: titleLargeWeight,
+                      color: AppColor.defaultFontContainer,
+                    ),
+                  ),
+                  const SizedBox(height: spacing16),
+                  BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
+                    builder: (context, state) => Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const Text(
+                          TextDoc.txtEmail,
+                          style: TextStyle(
+                            fontSize: titleMediumSize,
+                            fontWeight: titleMediumWeight,
+                            color: AppColor.defaultFont,
+                          ),
                         ),
-                      ),
-                      AppOutlinedTextField(
-                        controller: _emailController,
-                        textInputType: TextInputType.emailAddress,
-                        errorText: (state is ResetPasswordValidateState && state.emailError.isNotEmpty)
-                            ? state.emailError
-                            : null,
-                        onChanged: (value) =>
-                            context.read<ResetPasswordBloc>().add(ResetPasswordValidateEvent(email: value)),
-                      ),
-                      const SizedBox(height: spacing24),
-                      AppFilledButton(
-                        text: TextDoc.txtResetPassword,
-                        onPressed: (state is ResetPasswordValidateState && !state.forceDisabled)
-                            ? () => context
-                                .read<ResetPasswordBloc>()
-                                .add(ResetPasswordSendEvent(email: _emailController.text))
-                            : null,
-                        minimumSize: const Size.fromHeight(48),
-                      ),
-                    ],
+                        AppOutlinedTextField(
+                          controller: _emailController,
+                          textInputType: TextInputType.emailAddress,
+                          errorText: (state is ResetPasswordValidateState && state.emailError.isNotEmpty)
+                              ? state.emailError
+                              : null,
+                          onChanged: (value) =>
+                              context.read<ResetPasswordBloc>().add(ResetPasswordValidateEvent(email: value)),
+                        ),
+                        const SizedBox(height: spacing24),
+                        AppFilledButton(
+                          text: TextDoc.txtResetPassword,
+                          onPressed: (state is ResetPasswordValidateState && !state.forceDisabled)
+                              ? () => context
+                                  .read<ResetPasswordBloc>()
+                                  .add(ResetPasswordSendEvent(email: _emailController.text))
+                              : null,
+                          minimumSize: const Size.fromHeight(48),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                const SizedBox(height: spacing8),
-                AppTextButton(
-                  text: TextDoc.txtReturnSignIn,
-                  onPressed: () => Navigator.pop(context),
-                  minimumSize: const Size.fromHeight(48),
-                ),
-                const SizedBox(height: spacing16),
-              ],
+                  const SizedBox(height: spacing8),
+                  AppTextButton(
+                    text: TextDoc.txtReturnSignIn,
+                    onPressed: () => Navigator.pop(context),
+                    minimumSize: const Size.fromHeight(48),
+                  ),
+                  const SizedBox(height: spacing16),
+                ],
+              ),
             ),
           ),
         ),

@@ -42,76 +42,79 @@ class _DeleteAccountViewState extends State<DeleteAccountView> {
         },
         child: Scaffold(
           backgroundColor: AppColor.white,
-          body: CustomScrollView(
-            slivers: [
-              SliverAppBar.medium(
-                title: const Text(
-                  TextDoc.txtDeleteAccount,
-                  style: TextStyle(
-                    fontSize: headlineSmallSize,
-                    fontWeight: headlineSmallWeight,
-                    color: AppColor.defaultFont,
-                  ),
-                ),
-                centerTitle: true,
-              ),
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  childCount: 1,
-                  (context, index) => Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: padding16,
-                      vertical: padding24,
+          body: GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: CustomScrollView(
+              slivers: [
+                SliverAppBar.medium(
+                  title: const Text(
+                    TextDoc.txtDeleteAccount,
+                    style: TextStyle(
+                      fontSize: headlineSmallSize,
+                      fontWeight: headlineSmallWeight,
+                      color: AppColor.defaultFont,
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        const Text(
-                          TextDoc.txtEnterPasswordToDelete,
-                          style: TextStyle(
-                            fontSize: titleMediumSize,
-                            fontWeight: titleMediumWeight,
-                            color: AppColor.defaultFont,
+                  ),
+                  centerTitle: true,
+                ),
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    childCount: 1,
+                    (context, index) => Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: padding16,
+                        vertical: padding24,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          const Text(
+                            TextDoc.txtEnterPasswordToDelete,
+                            style: TextStyle(
+                              fontSize: titleMediumSize,
+                              fontWeight: titleMediumWeight,
+                              color: AppColor.defaultFont,
+                            ),
                           ),
-                        ),
-                        BlocBuilder<DeleteAccountBloc, DeleteAccountState>(
-                          builder: (context, state) => AppOutlinedTextField(
-                            controller: _controller,
-                            obscureText: true,
-                            errorText:
-                                state is DeleteAccountPasswordInvalidState
-                                    ? state.message
-                                    : null,
-                            onChanged: (value) =>
-                                context.read<DeleteAccountBloc>().add(
-                                      DeleteAccountChangePasswordEvent(value),
-                                    ),
+                          BlocBuilder<DeleteAccountBloc, DeleteAccountState>(
+                            builder: (context, state) => AppOutlinedTextField(
+                              controller: _controller,
+                              obscureText: true,
+                              errorText:
+                                  state is DeleteAccountPasswordInvalidState
+                                      ? state.message
+                                      : null,
+                              onChanged: (value) =>
+                                  context.read<DeleteAccountBloc>().add(
+                                        DeleteAccountChangePasswordEvent(value),
+                                      ),
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: spacing24),
-                        BlocBuilder<DeleteAccountBloc, DeleteAccountState>(
-                          builder: (context, state) => AppElevatedButton(
-                            text: TextDoc.txtConfirmDeleteAccount,
+                          const SizedBox(height: spacing24),
+                          BlocBuilder<DeleteAccountBloc, DeleteAccountState>(
+                            builder: (context, state) => AppElevatedButton(
+                              text: TextDoc.txtConfirmDeleteAccount,
+                              minimumSize: const Size.fromHeight(48),
+                              onPressed: state is DeleteAccountPasswordValidState
+                                  ? () => context.read<DeleteAccountBloc>().add(
+                                        const DeleteAccountDeleteEvent(),
+                                      )
+                                  : null,
+                            ),
+                          ),
+                          const SizedBox(height: spacing8),
+                          AppTextButton(
+                            text: TextDoc.txtCancel,
                             minimumSize: const Size.fromHeight(48),
-                            onPressed: state is DeleteAccountPasswordValidState
-                                ? () => context.read<DeleteAccountBloc>().add(
-                                      const DeleteAccountDeleteEvent(),
-                                    )
-                                : null,
+                            onPressed: () => Navigator.pop(context),
                           ),
-                        ),
-                        const SizedBox(height: spacing8),
-                        AppTextButton(
-                          text: TextDoc.txtCancel,
-                          minimumSize: const Size.fromHeight(48),
-                          onPressed: () => Navigator.pop(context),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       );

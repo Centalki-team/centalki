@@ -155,266 +155,269 @@ class _TopicSuggestionViewState extends State<TopicSuggestionView> {
               }
             }
           },
-          child: Scaffold(
-            backgroundColor: AppColor.white,
-            body: BlocBuilder<TopicSuggestionBloc, TopicSuggestionState>(
-              buildWhen: (previous, current) =>
-                  current != previous &&
-                  current is TopicSuggestionLoadDoneState,
-              builder: (context, state) {
-                if (state is TopicSuggestionLoadDoneState) {
-                  final levels = state.contents;
+          child: GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: Scaffold(
+              backgroundColor: AppColor.white,
+              body: BlocBuilder<TopicSuggestionBloc, TopicSuggestionState>(
+                buildWhen: (previous, current) =>
+                    current != previous &&
+                    current is TopicSuggestionLoadDoneState,
+                builder: (context, state) {
+                  if (state is TopicSuggestionLoadDoneState) {
+                    final levels = state.contents;
 
-                  return CustomScrollView(
-                    slivers: [
-                      SliverAppBar.medium(
-                        leading: GestureDetector(
-                          onTap: _showExitOptionDialog,
-                          child: const Icon(
-                            Icons.arrow_back,
-                            color: AppColor.defaultFont,
-                          ),
-                        ),
-                        title: const Text(
-                          TextDoc.txtTopicSuggestion,
-                          style: TextStyle(
-                            fontSize: headlineSmallSize,
-                            fontWeight: headlineSmallWeight,
-                            color: AppColor.defaultFont,
-                          ),
-                        ),
-                        centerTitle: true,
-                      ),
-                      SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                          childCount: 1,
-                          (context, index) => Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: spacing16,
-                              vertical: spacing8,
+                    return CustomScrollView(
+                      slivers: [
+                        SliverAppBar.medium(
+                          leading: GestureDetector(
+                            onTap: _showExitOptionDialog,
+                            child: const Icon(
+                              Icons.arrow_back,
+                              color: AppColor.defaultFont,
                             ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  TextDoc.txtSubjectLabel,
-                                  style: TextStyle(
-                                    fontSize: titleMediumSize,
-                                    fontWeight: titleMediumWeight,
-                                    color: AppColor.defaultFont,
-                                  ),
-                                ),
-                                const Text(
-                                  TextDoc.txtSubjectSubTitle,
-                                  style: TextStyle(
-                                    height: 1.15,
-                                    fontSize: bodySmallSize,
-                                    fontWeight: bodySmallWeight,
-                                    color: AppColor.shadow,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: spacing24,
-                                ),
-                                BlocBuilder<TopicSuggestionBloc,
-                                    TopicSuggestionState>(
-                                  builder: (context, state) =>
-                                      AppOutlinedTextField(
-                                    hintText: TextDoc.txtSubjectHint,
-                                    controller: subjectController,
-                                    maxLines: 4,
-                                    errorText:
-                                        (state is TopicSuggestionValidateState &&
-                                                state.subjectError.isNotEmpty)
-                                            ? state.subjectError
-                                            : null,
-                                    onChanged: (_) => context
-                                        .read<TopicSuggestionBloc>()
-                                        .add(TopicSuggestionValidateEvent(
-                                          subjectAndCategory:
-                                              subjectController.text,
-                                          descriptionAndRequirements:
-                                              descriptionController.text,
-                                        )),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: spacing24,
-                                ),
-                                const Text(
-                                  TextDoc.txtLevelLabel,
-                                  style: TextStyle(
-                                    fontSize: titleMediumSize,
-                                    fontWeight: titleMediumWeight,
-                                    color: AppColor.defaultFont,
-                                  ),
-                                ),
-                                const Text(
-                                  TextDoc.txtLevelSubTitle,
-                                  style: TextStyle(
-                                    height: 1.15,
-                                    fontSize: bodySmallSize,
-                                    fontWeight: bodySmallWeight,
-                                    color: AppColor.shadow,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: spacing16,
-                                ),
-                                Wrap(
-                                  spacing: spacing16,
-                                  runSpacing: spacing8,
-                                  children: levels
-                                      .map((e) => FilterChip(
-                                          shape: const RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(24.0),
-                                            ),
-                                          ),
-                                          label: Text(e.title),
-                                          labelStyle: const TextStyle(
-                                            fontSize: bodyLargeSize,
-                                            fontWeight: bodyLargeWeight,
-                                            color: AppColor.defaultFont,
-                                          ),
-                                          checkmarkColor: AppColor.defaultFont,
-                                          selectedColor:
-                                              AppColor.mainColor2Surface,
-                                          selected: (selectedLevel == e.key),
-                                          onSelected: (_) {
-                                            setState(() {
-                                              if (selectedLevel != e.key) {
-                                                selectedLevel = e.key;
-                                              } else {
-                                                selectedLevel = '';
-                                              }
-                                            });
-                                            context
-                                                .read<TopicSuggestionBloc>()
-                                                .add(
-                                                    TopicSuggestionValidateEvent(
-                                                  subjectAndCategory:
-                                                      subjectController.text,
-                                                  descriptionAndRequirements:
-                                                      descriptionController
-                                                          .text,
-                                                ));
-                                          }))
-                                      .toList(),
-                                ),
-                                const SizedBox(
-                                  height: spacing24,
-                                ),
-                                const Text(
-                                  TextDoc.txtDescriptionAndRequirementsLabel,
-                                  style: TextStyle(
-                                    fontSize: titleMediumSize,
-                                    fontWeight: titleMediumWeight,
-                                    color: AppColor.defaultFont,
-                                  ),
-                                ),
-                                const Text(
-                                  TextDoc.txtDescriptionAndRequirementsSubTitle,
-                                  style: TextStyle(
-                                    height: 1.15,
-                                    fontSize: bodySmallSize,
-                                    fontWeight: bodySmallWeight,
-                                    color: AppColor.shadow,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: spacing16,
-                                ),
-                                BlocBuilder<TopicSuggestionBloc,
-                                    TopicSuggestionState>(
-                                  builder: (context, state) =>
-                                      AppOutlinedTextField(
-                                    hintText: TextDoc
-                                        .txtDescriptionAndRequirementsHint,
-                                    controller: descriptionController,
-                                    minLines: 4,
-                                    maxLines: 6,
-                                    errorText:
-                                        (state is TopicSuggestionValidateState &&
-                                                state.descriptionError
-                                                    .isNotEmpty)
-                                            ? state.descriptionError
-                                            : null,
-                                    onChanged: (_) => context
-                                        .read<TopicSuggestionBloc>()
-                                        .add(TopicSuggestionValidateEvent(
-                                          subjectAndCategory:
-                                              subjectController.text,
-                                          descriptionAndRequirements:
-                                              descriptionController.text,
-                                        )),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: spacing24 * 2,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                    bottom: 24.0,
-                                  ),
-                                  child: BlocBuilder<TopicSuggestionBloc,
-                                      TopicSuggestionState>(
-                                    builder: (context, state) =>
-                                        AppFilledButton(
-                                      onPressed:
-                                          (state is TopicSuggestionValidateState &&
-                                                  !state.forceDisabled)
-                                              ? () async {
-                                                  context
-                                                      .read<
-                                                          TopicSuggestionBloc>()
-                                                      .add(
-                                                        TopicSuggestionSendEvent(
-                                                          subjectAndCategory:
-                                                              subjectController
-                                                                  .text,
-                                                          descriptionAndRequirements:
-                                                              descriptionController
-                                                                  .text,
-                                                          selectedLevel:
-                                                              selectedLevel,
-                                                        ),
-                                                      );
-                                                }
-                                              : null,
-                                      text: TextDoc.txtSend,
-                                      minimumSize: const Size.fromHeight(48),
+                          ),
+                          title: const Text(
+                            TextDoc.txtTopicSuggestion,
+                            style: TextStyle(
+                              fontSize: headlineSmallSize,
+                              fontWeight: headlineSmallWeight,
+                              color: AppColor.defaultFont,
+                            ),
+                          ),
+                          centerTitle: true,
+                        ),
+                        SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                            childCount: 1,
+                            (context, index) => Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: spacing16,
+                                vertical: spacing8,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    TextDoc.txtSubjectLabel,
+                                    style: TextStyle(
+                                      fontSize: titleMediumSize,
+                                      fontWeight: titleMediumWeight,
+                                      color: AppColor.defaultFont,
                                     ),
                                   ),
-                                ),
-                              ],
+                                  const Text(
+                                    TextDoc.txtSubjectSubTitle,
+                                    style: TextStyle(
+                                      height: 1.15,
+                                      fontSize: bodySmallSize,
+                                      fontWeight: bodySmallWeight,
+                                      color: AppColor.shadow,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: spacing24,
+                                  ),
+                                  BlocBuilder<TopicSuggestionBloc,
+                                      TopicSuggestionState>(
+                                    builder: (context, state) =>
+                                        AppOutlinedTextField(
+                                      hintText: TextDoc.txtSubjectHint,
+                                      controller: subjectController,
+                                      maxLines: 4,
+                                      errorText:
+                                          (state is TopicSuggestionValidateState &&
+                                                  state.subjectError.isNotEmpty)
+                                              ? state.subjectError
+                                              : null,
+                                      onChanged: (_) => context
+                                          .read<TopicSuggestionBloc>()
+                                          .add(TopicSuggestionValidateEvent(
+                                            subjectAndCategory:
+                                                subjectController.text,
+                                            descriptionAndRequirements:
+                                                descriptionController.text,
+                                          )),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: spacing24,
+                                  ),
+                                  const Text(
+                                    TextDoc.txtLevelLabel,
+                                    style: TextStyle(
+                                      fontSize: titleMediumSize,
+                                      fontWeight: titleMediumWeight,
+                                      color: AppColor.defaultFont,
+                                    ),
+                                  ),
+                                  const Text(
+                                    TextDoc.txtLevelSubTitle,
+                                    style: TextStyle(
+                                      height: 1.15,
+                                      fontSize: bodySmallSize,
+                                      fontWeight: bodySmallWeight,
+                                      color: AppColor.shadow,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: spacing16,
+                                  ),
+                                  Wrap(
+                                    spacing: spacing16,
+                                    runSpacing: spacing8,
+                                    children: levels
+                                        .map((e) => FilterChip(
+                                            shape: const RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(24.0),
+                                              ),
+                                            ),
+                                            label: Text(e.title),
+                                            labelStyle: const TextStyle(
+                                              fontSize: bodyLargeSize,
+                                              fontWeight: bodyLargeWeight,
+                                              color: AppColor.defaultFont,
+                                            ),
+                                            checkmarkColor: AppColor.defaultFont,
+                                            selectedColor:
+                                                AppColor.mainColor2Surface,
+                                            selected: (selectedLevel == e.key),
+                                            onSelected: (_) {
+                                              setState(() {
+                                                if (selectedLevel != e.key) {
+                                                  selectedLevel = e.key;
+                                                } else {
+                                                  selectedLevel = '';
+                                                }
+                                              });
+                                              context
+                                                  .read<TopicSuggestionBloc>()
+                                                  .add(
+                                                      TopicSuggestionValidateEvent(
+                                                    subjectAndCategory:
+                                                        subjectController.text,
+                                                    descriptionAndRequirements:
+                                                        descriptionController
+                                                            .text,
+                                                  ));
+                                            }))
+                                        .toList(),
+                                  ),
+                                  const SizedBox(
+                                    height: spacing24,
+                                  ),
+                                  const Text(
+                                    TextDoc.txtDescriptionAndRequirementsLabel,
+                                    style: TextStyle(
+                                      fontSize: titleMediumSize,
+                                      fontWeight: titleMediumWeight,
+                                      color: AppColor.defaultFont,
+                                    ),
+                                  ),
+                                  const Text(
+                                    TextDoc.txtDescriptionAndRequirementsSubTitle,
+                                    style: TextStyle(
+                                      height: 1.15,
+                                      fontSize: bodySmallSize,
+                                      fontWeight: bodySmallWeight,
+                                      color: AppColor.shadow,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: spacing16,
+                                  ),
+                                  BlocBuilder<TopicSuggestionBloc,
+                                      TopicSuggestionState>(
+                                    builder: (context, state) =>
+                                        AppOutlinedTextField(
+                                      hintText: TextDoc
+                                          .txtDescriptionAndRequirementsHint,
+                                      controller: descriptionController,
+                                      minLines: 4,
+                                      maxLines: 6,
+                                      errorText:
+                                          (state is TopicSuggestionValidateState &&
+                                                  state.descriptionError
+                                                      .isNotEmpty)
+                                              ? state.descriptionError
+                                              : null,
+                                      onChanged: (_) => context
+                                          .read<TopicSuggestionBloc>()
+                                          .add(TopicSuggestionValidateEvent(
+                                            subjectAndCategory:
+                                                subjectController.text,
+                                            descriptionAndRequirements:
+                                                descriptionController.text,
+                                          )),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: spacing24 * 2,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      bottom: 24.0,
+                                    ),
+                                    child: BlocBuilder<TopicSuggestionBloc,
+                                        TopicSuggestionState>(
+                                      builder: (context, state) =>
+                                          AppFilledButton(
+                                        onPressed:
+                                            (state is TopicSuggestionValidateState &&
+                                                    !state.forceDisabled)
+                                                ? () async {
+                                                    context
+                                                        .read<
+                                                            TopicSuggestionBloc>()
+                                                        .add(
+                                                          TopicSuggestionSendEvent(
+                                                            subjectAndCategory:
+                                                                subjectController
+                                                                    .text,
+                                                            descriptionAndRequirements:
+                                                                descriptionController
+                                                                    .text,
+                                                            selectedLevel:
+                                                                selectedLevel,
+                                                          ),
+                                                        );
+                                                  }
+                                                : null,
+                                        text: TextDoc.txtSend,
+                                        minimumSize: const Size.fromHeight(48),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
+                      ],
+                    );
+                  }
+                  if (state is TopicSuggestionLoadFailedState) {
+                    AppToast(
+                      mode: AppToastMode.error,
+                      duration: const Duration(seconds: 3),
+                      bottomOffset: 8.0,
+                      message: Text(
+                        state.exception.displayMessage,
+                        style: const TextStyle(
+                          fontSize: bodyLargeSize,
+                          fontWeight: bodyLargeWeight,
+                          color: AppColor.white,
+                        ),
                       ),
-                    ],
+                    ).show(context);
+                    return const SizedBox.shrink();
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(),
                   );
-                }
-                if (state is TopicSuggestionLoadFailedState) {
-                  AppToast(
-                    mode: AppToastMode.error,
-                    duration: const Duration(seconds: 3),
-                    bottomOffset: 8.0,
-                    message: Text(
-                      state.exception.displayMessage,
-                      style: const TextStyle(
-                        fontSize: bodyLargeSize,
-                        fontWeight: bodyLargeWeight,
-                        color: AppColor.white,
-                      ),
-                    ),
-                  ).show(context);
-                  return const SizedBox.shrink();
-                }
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              },
+                },
+              ),
             ),
           ),
         ),
