@@ -72,6 +72,8 @@
 	<string>This app requires access for Photo Library usage.</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>$(PRODUCT_NAME) needs access to the Calendars for meeting schedules.</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>We want to access your data to recommend suitable topics and improve user experience.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>
