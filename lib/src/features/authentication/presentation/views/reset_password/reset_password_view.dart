@@ -19,7 +19,8 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
   final _emailController = TextEditingController();
 
   @override
-  Widget build(BuildContext context) => BlocListener<ResetPasswordBloc, ResetPasswordState>(
+  Widget build(BuildContext context) =>
+      BlocListener<ResetPasswordBloc, ResetPasswordState>(
         listener: (context, state) {
           if (state is ResetPasswordLoadingState) {
             LoadingManager.setLoading(context, loading: true);
@@ -73,19 +74,22 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                         AppOutlinedTextField(
                           controller: _emailController,
                           textInputType: TextInputType.emailAddress,
-                          errorText: (state is ResetPasswordValidateState && state.emailError.isNotEmpty)
+                          errorText: (state is ResetPasswordValidateState &&
+                                  state.emailError.isNotEmpty)
                               ? state.emailError
                               : null,
-                          onChanged: (value) =>
-                              context.read<ResetPasswordBloc>().add(ResetPasswordValidateEvent(email: value)),
+                          onChanged: (value) => context
+                              .read<ResetPasswordBloc>()
+                              .add(ResetPasswordValidateEvent(email: value)),
                         ),
                         const SizedBox(height: spacing24),
                         AppFilledButton(
                           text: TextDoc.txtResetPassword,
-                          onPressed: (state is ResetPasswordValidateState && !state.forceDisabled)
-                              ? () => context
-                                  .read<ResetPasswordBloc>()
-                                  .add(ResetPasswordSendEvent(email: _emailController.text))
+                          onPressed: (state is ResetPasswordValidateState &&
+                                  !state.forceDisabled)
+                              ? () => context.read<ResetPasswordBloc>().add(
+                                  ResetPasswordSendEvent(
+                                      email: _emailController.text))
                               : null,
                           minimumSize: const Size.fromHeight(48),
                         ),

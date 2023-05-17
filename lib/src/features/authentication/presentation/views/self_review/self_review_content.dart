@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../base/define/app_text.dart';
 import '../../../../../../base/define/colors.dart';
 import '../../../../../../base/define/dimensions.dart';
 import '../../../../../../base/define/size.dart';
@@ -173,7 +172,7 @@ class _SelfReviewContentState extends State<SelfReviewContent> {
                               return ValueListenableBuilder<SelfLevelEntity?>(
                                   valueListenable: selectedLevel,
                                   builder: (_, value, __) => AppFilledButton(
-                                        text: AppText.txtSignUp,
+                                        text: TextDoc.txtSignUp,
                                         minimumSize: const Size.fromHeight(40),
                                         onPressed: selectedLevel.value != null
                                             ? () => widget.onSignUp.call()

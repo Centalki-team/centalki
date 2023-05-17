@@ -3,9 +3,11 @@ import 'dart:io';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'base/define/storage/storage_gateway.dart';
 import 'base/temp_dio/dio_client.dart';
@@ -47,19 +49,54 @@ void main(List<String> args) async {
   // );
   var analytics = FirebaseAnalytics.instance;
 
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    theme: ThemeData(
-      useMaterial3: true,
-      fontFamily: 'Dongle',
+  runApp(
+    MyApp(
+      firebaseAnalytics: analytics,
     ),
-    home: const MyWidget(),
-    navigatorObservers: kDebugMode
-        ? []
-        : [
-            FirebaseAnalyticsObserver(analytics: analytics),
-          ],
-  ));
+  );
+}
+
+class MyApp extends StatefulWidget {
+  const MyApp({
+    super.key,
+    required this.firebaseAnalytics,
+  });
+
+  final FirebaseAnalytics firebaseAnalytics;
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          useMaterial3: true,
+          fontFamily: 'Dongle',
+        ),
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          DefaultCupertinoLocalizations.delegate,
+        ],
+        home: const MyWidget(),
+        navigatorObservers: kDebugMode
+            ? []
+            : [
+                FirebaseAnalyticsObserver(
+                  analytics: widget.firebaseAnalytics,
+                ),
+              ],
+      );
 }
 
 class MyWidget extends StatefulWidget {

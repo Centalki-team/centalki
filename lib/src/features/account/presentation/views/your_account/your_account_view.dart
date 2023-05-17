@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../base/define/app_text.dart';
 import '../../../../../../base/define/common_txt_style.dart';
 import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/avatar.dart';
@@ -71,7 +70,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    AppText.appName,
+                                    TextDoc.appName,
                                     style: CommonTxtStyle.t30Regular.apply(
                                       color: AppColor.defaultFont,
                                     ),

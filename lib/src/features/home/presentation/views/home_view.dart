@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../base/define/app_text.dart';
 import '../../../../../base/define/styles.dart';
 import '../../../../../base/widgets/bottom_bar/custom_bottom_nav.dart';
 import '../../../../../gen/assets.gen.dart';
@@ -8,7 +7,6 @@ import '../../../account/presentation/views/your_account/your_account_page.dart'
 import '../../../favorites/presentation/views/favorite_view.dart';
 import '../../../settings/presentation/views/settings_view.dart';
 import '../../../topics/presentation/views/select_topic_level/select_topic_level_view.dart';
-import '../widgets/custom_bot_nav_bar_item.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -161,7 +159,7 @@ class _HomeViewState extends State<HomeView>
                     height: 24,
                     color: AppColor.mainColor1,
                   ),
-                  label: AppText.topic,
+                  label: TextDoc.topic,
                 ),
                 BottomNavigationBarItem(
                   icon: Assets.icon.favorite.image(
@@ -170,7 +168,7 @@ class _HomeViewState extends State<HomeView>
                   ),
                   activeIcon: Assets.icon.wishlistFilled.image(
                       width: 24.0, height: 24, color: AppColor.mainColor1),
-                  label: AppText.favorite,
+                  label: TextDoc.favorite,
                 ),
                 BottomNavigationBarItem(
                   icon: Assets.icon.account.image(
@@ -179,7 +177,7 @@ class _HomeViewState extends State<HomeView>
                   ),
                   activeIcon: Assets.icon.accountFilled.image(
                       width: 24.0, height: 24, color: AppColor.mainColor1),
-                  label: AppText.account,
+                  label: TextDoc.account,
                 ),
                 BottomNavigationBarItem(
                   icon: Assets.icon.settings.image(
@@ -188,7 +186,7 @@ class _HomeViewState extends State<HomeView>
                   ),
                   activeIcon: Assets.icon.settingsFilled.image(
                       width: 24.0, height: 24, color: AppColor.mainColor1),
-                  label: AppText.settings,
+                  label: TextDoc.settings,
                 ),
               ],
             ),
