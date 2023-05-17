@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../base/define/app_text.dart';
 import '../../../../../base/define/styles.dart';
 import '../widgets/setting_switch_row.dart';
 
@@ -23,7 +22,7 @@ class SettingsNotification extends StatelessWidget {
           title: Row(
             children: const [
               Text(
-              TextDoc.txtNotification,
+                TextDoc.txtNotification,
                 style: TextStyle(
                   fontSize: headlineSmallSize,
                   fontWeight: headlineSmallWeight,
