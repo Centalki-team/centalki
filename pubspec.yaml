@@ -74,6 +74,8 @@ dependencies:
 dependency_overrides:
   permission_handler: "any"
   intl: ^0.18.0
+  jitsi_meet_wrapper:
+    path: jitsi_meet_wrapper/jitsi_meet_wrapper
 
 dev_dependencies:
   flutter_test:

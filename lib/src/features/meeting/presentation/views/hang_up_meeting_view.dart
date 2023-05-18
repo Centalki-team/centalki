@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../base/define/styles.dart';
-import '../../../../../base/temp_dio/dio_client.dart';
 import '../../../../../base/widgets/buttons/button.dart';
-import '../../../report_meeting/presentation/views/report_meeting_page.dart';
+import '../../../../../gen/assets.gen.dart';
+import '../../../connect_teacher/domain/entities/session_schedule_entity.dart';
 import '../../../report_meeting/presentation/views/report_meeting_view.dart';
 import '../../../session_feedback/presentation/views/session_completed_view.dart';
 
@@ -17,86 +18,81 @@ class HangUpMeetingView extends StatefulWidget {
 class _HangUpMeetingViewState extends State<HangUpMeetingView> {
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
+    final args = ModalRoute.of(context)!.settings.arguments as SessionScheduleEntity;
+    final width = MediaQuery.of(context).size.width;
     return WillPopScope(
       onWillPop: () => Future.value(false),
       child: Scaffold(
-        body: Center(
+        backgroundColor: AppColor.white,
+        body: Padding(
+          padding: const EdgeInsets.fromLTRB(
+              padding24, padding48 + padding12, padding24, padding24),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              AppOutlinedButton(
+              SvgPicture.asset(
+                Assets.illustration.afterHangUp.path,
+                width: width / 2,
+                height: width / 2,
+                fit: BoxFit.fill,
+              ),
+              const SizedBox(height: spacing24),
+              const Text(
+                "Did you leave by mistake or due to a network error? Don’t worry, you can rejoin this session and will be able to continue learning and practicing.",
+                style: TextStyle(
+                  fontSize: bodySmallSize,
+                  fontWeight: bodySmallWeight,
+                  color: AppColor.shadow,
+                  height: 1,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: spacing12),
+              AppFilledButton(
+                text: "Rejoin",
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (_) => const ReportMeetingPage(),
-                        settings: RouteSettings(arguments: args)),
-                  );
+                  Navigator.pop(context, true);
                 },
-                text: 'Report',
-                icon: Icons.report_outlined,
-                textColor: AppColor.error,
-                iconColor: AppColor.error,
-                minimumSize: const Size(100, 48),
+                minimumSize: Size(width / 2, 48),
               ),
-              const SizedBox(height: spacing8),
-              AppOutlinedButton(
-                onPressed: () async {
-                  final result = await showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title: const Text('Confirm block'),
-                      content:
-                          const Text('Are you sure to block this teacher?'),
-                      actions: [
-                        AppTextButton(
-                          onPressed: () {
-                            Navigator.pop(context, false);
-                          },
-                          text: 'Cancel',
-                        ),
-                        AppFilledButton(
-                          onPressed: () async {
-                            await DioClient.blockTeacher(
-                                blockedId: args.teacherId);
-                            if (!mounted) return;
-                            Navigator.pop(context, true);
-                          },
-                          text: 'Block',
-                        ),
-                      ],
-                    ),
-                  );
-                  if (result) {
-                    if (mounted) {
-                      Navigator.pop(context);
-                    }
-                  }
-                },
-                text: 'Block',
-                textColor: AppColor.error,
-                icon: Icons.block,
-                iconColor: AppColor.error,
-                minimumSize: const Size(100, 48),
+              const Spacer(),
+              const Text(
+                "Mark this session as done to finalize it and proceed to report and feedback screen. Please note that you are unable to rejoin after that.",
+                style: TextStyle(
+                  fontSize: bodySmallSize,
+                  fontWeight: bodySmallWeight,
+                  color: AppColor.shadow,
+                  height: 1,
+                ),
+                textAlign: TextAlign.center,
               ),
-              const SizedBox(height: spacing8),
-              AppOutlinedButton(
+              const SizedBox(height: spacing12),
+              ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => const SessionCompletedView(),
-                      settings: RouteSettings(arguments: args),
+                      settings: RouteSettings(arguments: ScreenArguments(args.sessionTeacher?.id ?? "", args.sessionId)),
                     ),
                   );
                 },
-                text: 'Done',
-                textColor: AppColor.support,
-                icon: Icons.done,
-                iconColor: AppColor.support,
-                minimumSize: const Size(100, 48),
-              ),
+                style: ElevatedButton.styleFrom(
+                  elevation: 0.0,
+                  backgroundColor: AppColor.support,
+                  shadowColor: AppColor.shadow.shade200,
+                  minimumSize: const Size.fromHeight(48),
+                ),
+                child: const Text(
+                  "Done",
+                  style: TextStyle(
+                    fontFamily: 'Dongle',
+                    fontSize: labelLargeSize,
+                    fontWeight: labelLargeWeight,
+                    color: AppColor.white,
+                  ),
+                ),
+              )
             ],
           ),
         ),
