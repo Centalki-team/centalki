@@ -75,9 +75,11 @@ class SessionScheduleUserModel extends SessionScheduleUserEntity {
     this.displayName,
     this.metadata,
     this.uid,
+    this.photoURL,
   }) : super(
           fullName: displayName,
           id: uid,
+          avatarURL: photoURL,
         );
 
   final String? tokensValidAfterTime;
@@ -88,6 +90,7 @@ class SessionScheduleUserModel extends SessionScheduleUserEntity {
   final String? displayName;
   final MetadataModel? metadata;
   final String? uid;
+  final String? photoURL;
 
   factory SessionScheduleUserModel.fromJson(Map<String, dynamic> json) =>
       _$SessionScheduleUserModelFromJson(json);

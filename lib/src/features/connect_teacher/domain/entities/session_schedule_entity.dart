@@ -47,10 +47,12 @@ class SessionScheduleUserEntity {
   const SessionScheduleUserEntity({
     this.fullName,
     this.id,
+    this.avatarURL,
   });
 
   final String? fullName;
   final String? id;
+  final String? avatarURL;
 }
 
 class SessionFeedbackEntity {

@@ -25,12 +25,13 @@ class MeetingBloc extends Bloc<MeetingEvent, MeetingState> {
     on<MeetingParticipantLeftEvent>(_onParticipantLeft);
   }
 
-  late final SessionScheduleEntity session;
+  SessionScheduleEntity session = const SessionScheduleEntity(sessionId: "");
   late DatabaseReference statusSessionRef;
   final CreateEventTrackingUseCase createEventTrackingUseCase =
       CreateEventTrackingUseCase(
     eventTrackingRepository: getIt.get<EventTrackingRepository>(),
   );
+  var notCompleted = true;
 
   @override
   Future<void> close() {
@@ -48,12 +49,14 @@ class MeetingBloc extends Bloc<MeetingEvent, MeetingState> {
       currentStatus = e.snapshot.value.toString();
       switch (currentStatus) {
         case 'PICKED_UP':
+          notCompleted = true;
           add(const MeetingLoadEvent());
           break;
         case 'COMPLETED':
         case 'CANCELLED':
+          notCompleted = false;
           JitsiMeetWrapper.hangUp();
-          add(const MeetingExitRoomEvent());
+          add(MeetingExitRoomEvent(notCompleted: notCompleted));
           break;
       }
     }
@@ -63,6 +66,7 @@ class MeetingBloc extends Bloc<MeetingEvent, MeetingState> {
     var featureFlags = <FeatureFlag, bool>{
       FeatureFlag.isWelcomePageEnabled: false,
       FeatureFlag.isAddPeopleEnabled: false,
+      FeatureFlag.isPrejoinPageEnabled: false,
     };
 
     if (!kIsWeb) {
@@ -74,45 +78,56 @@ class MeetingBloc extends Bloc<MeetingEvent, MeetingState> {
     }
 
     var options = JitsiMeetingOptions(
-        roomNameOrUrl: session.sessionId,
-        serverUrl: 'https://meet.jit.si/',
-        subject:
-            'Meeting room of ${session.sessionStudent?.fullName ?? 'student'} and ${session.sessionTeacher?.fullName ?? 'teacher'}',
-        userDisplayName: session.sessionStudent?.fullName ?? 'Student',
-        isAudioMuted: true,
-        isVideoMuted: true,
-        featureFlags: featureFlags,
-        configOverrides: {
-          "hideEmailInSettings": true,
-          "hiddenPremeetingButtons": ['invite'],
-          "toolbarButtons": [
-            'camera',
-            'chat',
-            'fullscreen',
-            'hangup',
-            'help',
-            'microphone',
-            'participants-pane',
-            'raisehand',
-            'recording',
-            'select-background',
-            'whiteboard',
-          ],
-          "disableInviteFunctions": true,
-          "remoteVideoMenu": {
-            "disableKick": true,
-          },
-          "breakoutRooms": {
-            "hideAddRoomButton": true,
-          },
-        });
+      roomNameOrUrl: session.sessionId,
+      serverUrl: 'https://meet.jit.si/',
+      subject:
+          'Meeting room of ${session.sessionStudent?.fullName ?? 'student'} and ${session.sessionTeacher?.fullName ?? 'teacher'}',
+      userDisplayName: session.sessionStudent?.fullName ?? 'Student',
+      userAvatarUrl: session.sessionStudent?.avatarURL ?? '',
+      isAudioMuted: true,
+      isVideoMuted: true,
+      featureFlags: featureFlags,
+      configOverrides: {
+        "hideEmailInSettings": true,
+        "hiddenPremeetingButtons": ['invite'],
+        "toolbarButtons": [
+          'camera',
+          'chat',
+          'desktop',
+          'fullscreen',
+          'hangup',
+          'help',
+          'microphone',
+          'participants-pane',
+          'raisehand',
+          'recording',
+          'select-background',
+          'whiteboard',
+        ],
+        "disableInviteFunctions": true,
+        "remoteVideoMenu": {
+          "disableKick": true,
+        },
+        "breakoutRooms": {
+          "hideAddRoomButton": true,
+        },
+        "welcomePage": {
+          "disabled": true,
+        },
+        "enableClosePage": false,
+        "defaultLocalDisplayName":
+            session.sessionStudent?.fullName ?? 'Student',
+        "defaultRemoteDisplayName":
+            session.sessionStudent?.fullName ?? 'Student',
+      },
+    );
 
     var listeners = JitsiMeetingListener(
       onConferenceJoined: (url) async {
         add(const MeetingJoinRoomEvent());
       },
       onClosed: () async {
-        add(const MeetingExitRoomEvent());
+        add(MeetingExitRoomEvent(notCompleted: notCompleted));
       },
       onConferenceTerminated: (url, error) async {
         add(const MeetingOccurErrorEvent());
@@ -146,7 +161,7 @@ class MeetingBloc extends Bloc<MeetingEvent, MeetingState> {
             'Student ${session.sessionStudent?.fullName ?? 'unknown name'} exited room.',
       ),
     );
-    emit(MeetingEndState(session.sessionTeacher?.id, session.sessionId));
+    emit(MeetingEndState(session: session, notCompleted: event.notCompleted));
   }
 
   void _onOccurError(MeetingOccurErrorEvent event, emit) async {

@@ -19,7 +19,9 @@ class MeetingJoinRoomEvent extends MeetingEvent {
 }
 
 class MeetingExitRoomEvent extends MeetingEvent {
-  const MeetingExitRoomEvent();
+  const MeetingExitRoomEvent({this.notCompleted = false});
+
+  final bool notCompleted;
 }
 
 class MeetingOccurErrorEvent extends MeetingEvent {

@@ -9,8 +9,8 @@ class MeetingInitState extends MeetingState {
 }
 
 class MeetingEndState extends MeetingState {
-  const MeetingEndState(this.teacherId, this.sessionId);
+  const MeetingEndState({required this.session, this.notCompleted = false});
 
-  final String? teacherId;
-  final String sessionId;
+  final SessionScheduleEntity session;
+  final bool notCompleted;
 }
