@@ -11,7 +11,7 @@ class ConfirmToBlockDialogContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) => AlertDialog(
         title: const Text(
-          "Block Teacher?",
+          TextDoc.txtQuestionBlockTeacher,
           style: TextStyle(
             fontSize: titleMediumSize,
             fontWeight: titleMediumWeight,
@@ -20,7 +20,7 @@ class ConfirmToBlockDialogContent extends StatelessWidget {
           ),
         ),
         content: const Text(
-          "If you believe this teacher's behavior was disrespectful and unethical, you can block them permanently to have better overall experiences.\nHowever, this action cannot be undone, and you will have fewer choices for your future sessions.",
+          TextDoc.txtBlockTeacherDesc,
           style: TextStyle(
             fontSize: bodyLargeSize,
             fontWeight: bodyLargeWeight,
@@ -36,7 +36,7 @@ class ConfirmToBlockDialogContent extends StatelessWidget {
             },
           ),
           AppFilledButton(
-            text: "Block",
+            text: TextDoc.txtBlock,
             onPressed: blockCallback,
           ),
         ],

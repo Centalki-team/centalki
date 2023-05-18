@@ -435,4 +435,15 @@ class TextDoc {
   static const txtSendTopicSuggestSuccess = 'Suggestion Sent Successfully';
   static const txtSendTopicSuggestSuccessContent =
       'We are deeply appreciated the efforts you took to help us further improve our contents.\nWe always look forward to hearing more ideas from you.';
+
+  // HANG UP
+  static const txtRejoinDesc = "Did you leave by mistake or due to a network error? Don’t worry, you can rejoin this session and will be able to continue learning and practicing.";
+  static const txtRejoin = "Rejoin";
+  static const txtDoneDesc = "Mark this session as done to finalize it and proceed to report and feedback screen. Please note that you are unable to rejoin after that.";
+  static const txtDone = "Done";
+
+  // BLOCK TEACHER
+  static const txtQuestionBlockTeacher = "Block Teacher?";
+  static const txtBlockTeacherDesc = "If you believe this teacher's behavior was disrespectful and unethical, you can block them permanently to have better overall experiences.\nHowever, this action cannot be undone, and you will have fewer choices for your future sessions.";
+  static const txtBlock = "Block";
 }

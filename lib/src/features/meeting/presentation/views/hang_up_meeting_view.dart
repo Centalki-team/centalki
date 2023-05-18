@@ -38,7 +38,7 @@ class _HangUpMeetingViewState extends State<HangUpMeetingView> {
               ),
               const SizedBox(height: spacing24),
               const Text(
-                "Did you leave by mistake or due to a network error? Don’t worry, you can rejoin this session and will be able to continue learning and practicing.",
+                TextDoc.txtRejoinDesc,
                 style: TextStyle(
                   fontSize: bodySmallSize,
                   fontWeight: bodySmallWeight,
@@ -49,7 +49,7 @@ class _HangUpMeetingViewState extends State<HangUpMeetingView> {
               ),
               const SizedBox(height: spacing12),
               AppFilledButton(
-                text: "Rejoin",
+                text: TextDoc.txtRejoin,
                 onPressed: () {
                   Navigator.pop(context, true);
                 },
@@ -57,7 +57,7 @@ class _HangUpMeetingViewState extends State<HangUpMeetingView> {
               ),
               const Spacer(),
               const Text(
-                "Mark this session as done to finalize it and proceed to report and feedback screen. Please note that you are unable to rejoin after that.",
+                TextDoc.txtDoneDesc,
                 style: TextStyle(
                   fontSize: bodySmallSize,
                   fontWeight: bodySmallWeight,
@@ -84,7 +84,7 @@ class _HangUpMeetingViewState extends State<HangUpMeetingView> {
                   minimumSize: const Size.fromHeight(48),
                 ),
                 child: const Text(
-                  "Done",
+                  TextDoc.txtDone,
                   style: TextStyle(
                     fontFamily: 'Dongle',
                     fontSize: labelLargeSize,
