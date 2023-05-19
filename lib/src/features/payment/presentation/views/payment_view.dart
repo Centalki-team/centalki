@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:intl/intl.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
@@ -11,6 +12,7 @@ import '../../../../../base/define/size.dart';
 import '../../../../../base/define/text.dart';
 import '../../../../../base/widgets/buttons/button.dart';
 import '../../../../../base/widgets/toast/app_toast.dart';
+import '../../../../../iap/helper.dart';
 import '../../domain/entities/payment_method_entity.dart';
 import '../blocs/payment_bloc/payment_bloc.dart';
 import '../widgets/add_photo_button.dart';
@@ -43,11 +45,22 @@ class _PaymentViewState extends State<PaymentView> {
   // ];
   late ValueNotifier<PaymentMethodEntity?> selectedPaymentMethod;
   late ValueNotifier<XFile?> paymentBill;
+  List<ProductDetails> products = [];
+
+  _getProducts() async {
+    var products = await getProducts();
+    await handlePurchase(products[0]);
+
+    setState(() {
+      products = products;
+    });
+  }
 
   @override
   void initState() {
     selectedPaymentMethod = ValueNotifier<PaymentMethodEntity?>(null);
     paymentBill = ValueNotifier<XFile?>(null);
+    _getProducts();
     super.initState();
   }
 

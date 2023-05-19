@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 
 import '../../src/features/account/data/account_datasources/remote_data/model/user_account_model.dart';
 import '../../src/features/account/data/balance_datasources/remote_data/model/balance_model.dart';
@@ -169,6 +170,19 @@ class DioClient {
     return await _dio.post("$baseUrl/blocking",
         data: {
           "blockedId": blockedId,
+        },
+        options: Options(headers: {"Authorization": idToken}));
+  }
+
+  static verifyPurchase(PurchaseDetails purchaseDetails) async {
+    print('base64:${purchaseDetails.verificationData.serverVerificationData}');
+    final idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
+    return await _dio.post("$baseUrl/transaction/apple/verify-purchase",
+        data: {
+          'source': purchaseDetails.verificationData.source,
+          'productId': purchaseDetails.productID,
+          'verificationData':
+              purchaseDetails.verificationData.serverVerificationData,
         },
         options: Options(headers: {"Authorization": idToken}));
   }

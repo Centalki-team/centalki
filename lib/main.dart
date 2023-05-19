@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 
 import 'base/define/storage/storage_gateway.dart';
 import 'base/temp_dio/dio_client.dart';
@@ -16,6 +18,7 @@ import 'config/main_config.dart';
 import 'di/di_module.dart';
 import 'di/injection/injection.dart';
 import 'firebase_options.dart';
+import 'iap/helper.dart';
 import 'src/features/authentication/presentation/views/sign_in/sign_in_page.dart';
 import 'src/features/authentication/presentation/views/verify_email.dart';
 import 'src/features/home/presentation/views/home_view.dart';
@@ -70,10 +73,22 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  late StreamSubscription<List<PurchaseDetails>> _subscription;
   @override
   void initState() {
-    // TODO: implement initState
+    final purchaseUpdated = InAppPurchase.instance.purchaseStream;
+    _subscription = purchaseUpdated.listen(listenToPurchaseUpdated, onDone: () {
+      _subscription.cancel();
+    }, onError: (error) {
+      // handle error here.
+    });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _subscription.cancel();
+    super.dispose();
   }
 
   @override
