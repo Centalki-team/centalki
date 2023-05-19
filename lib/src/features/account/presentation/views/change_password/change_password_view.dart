@@ -52,135 +52,138 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
         },
         child: Scaffold(
           backgroundColor: AppColor.white,
-          body: CustomScrollView(
-            slivers: [
-              SliverAppBar.medium(
-                title: const Text(
-                  TextDoc.txtChangePassword,
-                  style: TextStyle(
-                    height: 1.0,
-                    fontSize: headlineSmallSize,
-                    fontWeight: headlineSmallWeight,
-                    color: AppColor.defaultFont,
+          body: GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: CustomScrollView(
+              slivers: [
+                SliverAppBar.medium(
+                  title: const Text(
+                    TextDoc.txtChangePassword,
+                    style: TextStyle(
+                      height: 1.0,
+                      fontSize: headlineSmallSize,
+                      fontWeight: headlineSmallWeight,
+                      color: AppColor.defaultFont,
+                    ),
                   ),
+                  centerTitle: true,
                 ),
-                centerTitle: true,
-              ),
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  childCount: 1,
-                  (_, index) => Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: padding16, vertical: 24.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Watch out
-                        const Text(
-                          TextDoc.txtThirdPartyChangePassword,
-                          style: TextStyle(
-                            fontSize: titleMediumSize,
-                            fontWeight: bodyLargeWeight,
-                            color: AppColor.error,
-                            height: 1,
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    childCount: 1,
+                    (_, index) => Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: padding16, vertical: 24.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Watch out
+                          const Text(
+                            TextDoc.txtThirdPartyChangePassword,
+                            style: TextStyle(
+                              fontSize: titleMediumSize,
+                              fontWeight: bodyLargeWeight,
+                              color: AppColor.error,
+                              height: 1,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: spacing8),
-                        const Text(
-                          TextDoc.txtCurrentPassword,
-                          style: TextStyle(
-                            fontSize: titleMediumSize,
-                            fontWeight: titleMediumWeight,
-                            color: AppColor.defaultFont,
+                          const SizedBox(height: spacing8),
+                          const Text(
+                            TextDoc.txtCurrentPassword,
+                            style: TextStyle(
+                              fontSize: titleMediumSize,
+                              fontWeight: titleMediumWeight,
+                              color: AppColor.defaultFont,
+                            ),
                           ),
-                        ),
-                        BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
-                          builder: (context, state) => AppOutlinedTextField(
-                            controller: _currentPasswordController,
-                            obscureText: true,
-                            errorText: state is ChangePasswordInvalidInputState
-                                ? state.passwordError
-                                : null,
-                            onChanged: (value) =>
-                                context.read<ChangePasswordBloc>().add(
-                                      ChangePasswordSendPasswordEvent(
-                                        _currentPasswordController.text,
-                                        _newPasswordController.text,
-                                        _confirmPasswordController.text,
+                          BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
+                            builder: (context, state) => AppOutlinedTextField(
+                              controller: _currentPasswordController,
+                              obscureText: true,
+                              errorText: state is ChangePasswordInvalidInputState
+                                  ? state.passwordError
+                                  : null,
+                              onChanged: (value) =>
+                                  context.read<ChangePasswordBloc>().add(
+                                        ChangePasswordSendPasswordEvent(
+                                          _currentPasswordController.text,
+                                          _newPasswordController.text,
+                                          _confirmPasswordController.text,
+                                        ),
                                       ),
-                                    ),
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: spacing16),
-                        const Text(
-                          TextDoc.txtNewPassword,
-                          style: TextStyle(
-                            fontSize: titleMediumSize,
-                            fontWeight: titleMediumWeight,
-                            color: AppColor.defaultFont,
+                          const SizedBox(height: spacing16),
+                          const Text(
+                            TextDoc.txtNewPassword,
+                            style: TextStyle(
+                              fontSize: titleMediumSize,
+                              fontWeight: titleMediumWeight,
+                              color: AppColor.defaultFont,
+                            ),
                           ),
-                        ),
-                        BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
-                          builder: (context, state) => AppOutlinedTextField(
-                            controller: _newPasswordController,
-                            obscureText: true,
-                            errorText: state is ChangePasswordInvalidInputState
-                                ? state.newPasswordError
-                                : null,
-                            onChanged: (value) =>
-                                context.read<ChangePasswordBloc>().add(
-                                      ChangePasswordSendPasswordEvent(
-                                        _currentPasswordController.text,
-                                        _newPasswordController.text,
-                                        _confirmPasswordController.text,
+                          BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
+                            builder: (context, state) => AppOutlinedTextField(
+                              controller: _newPasswordController,
+                              obscureText: true,
+                              errorText: state is ChangePasswordInvalidInputState
+                                  ? state.newPasswordError
+                                  : null,
+                              onChanged: (value) =>
+                                  context.read<ChangePasswordBloc>().add(
+                                        ChangePasswordSendPasswordEvent(
+                                          _currentPasswordController.text,
+                                          _newPasswordController.text,
+                                          _confirmPasswordController.text,
+                                        ),
                                       ),
-                                    ),
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: spacing16),
-                        const Text(
-                          TextDoc.txtConfirmPassword,
-                          style: TextStyle(
-                            fontSize: titleMediumSize,
-                            fontWeight: titleMediumWeight,
-                            color: AppColor.defaultFont,
+                          const SizedBox(height: spacing16),
+                          const Text(
+                            TextDoc.txtConfirmPassword,
+                            style: TextStyle(
+                              fontSize: titleMediumSize,
+                              fontWeight: titleMediumWeight,
+                              color: AppColor.defaultFont,
+                            ),
                           ),
-                        ),
-                        BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
-                          builder: (context, state) => AppOutlinedTextField(
-                            controller: _confirmPasswordController,
-                            obscureText: true,
-                            errorText: state is ChangePasswordInvalidInputState
-                                ? state.confirmPasswordError
-                                : null,
-                            onChanged: (value) =>
-                                context.read<ChangePasswordBloc>().add(
-                                      ChangePasswordSendPasswordEvent(
-                                        _currentPasswordController.text,
-                                        _newPasswordController.text,
-                                        _confirmPasswordController.text,
+                          BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
+                            builder: (context, state) => AppOutlinedTextField(
+                              controller: _confirmPasswordController,
+                              obscureText: true,
+                              errorText: state is ChangePasswordInvalidInputState
+                                  ? state.confirmPasswordError
+                                  : null,
+                              onChanged: (value) =>
+                                  context.read<ChangePasswordBloc>().add(
+                                        ChangePasswordSendPasswordEvent(
+                                          _currentPasswordController.text,
+                                          _newPasswordController.text,
+                                          _confirmPasswordController.text,
+                                        ),
                                       ),
-                                    ),
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: spacing24),
-                        BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
-                          builder: (context, state) => AppElevatedButton(
-                            text: TextDoc.txtChangePassword,
-                            minimumSize: const Size.fromHeight(48),
-                            onPressed: state is ChangePasswordValidInputState
-                                ? () => context.read<ChangePasswordBloc>().add(
-                                      const ChangePasswordChangeEvent(),
-                                    )
-                                : null,
+                          const SizedBox(height: spacing24),
+                          BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
+                            builder: (context, state) => AppElevatedButton(
+                              text: TextDoc.txtChangePassword,
+                              minimumSize: const Size.fromHeight(48),
+                              onPressed: state is ChangePasswordValidInputState
+                                  ? () => context.read<ChangePasswordBloc>().add(
+                                        const ChangePasswordChangeEvent(),
+                                      )
+                                  : null,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       );

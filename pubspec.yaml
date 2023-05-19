@@ -31,6 +31,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -71,6 +73,9 @@ dependencies:
 
 dependency_overrides:
   permission_handler: "any"
+  intl: ^0.18.0
+  jitsi_meet_wrapper:
+    path: jitsi_meet_wrapper/jitsi_meet_wrapper
 
 dev_dependencies:
   flutter_test:
@@ -184,6 +189,9 @@ flutter:
         - asset: fonts/NotoSans/NotoSans-BlackItalic.ttf
           weight: 900
           style: italic
+
+flutter_intl:
+  enabled: true
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

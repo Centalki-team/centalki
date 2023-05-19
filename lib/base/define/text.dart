@@ -1,4 +1,33 @@
 class TextDoc {
+  static String topic = 'Topic';
+
+  static String favorite = 'Favorite';
+
+  static String account = 'Account';
+
+  static String settings = 'Settings';
+
+  static String appName = 'Centalki';
+
+  // Authentication
+  static String txtEmailEmptyWarning = 'E-mail address cannot be empty';
+  static String txtEmailInvalidFormatWarning = 'Invalid email format';
+  static String txtPasswordEmptyWarning = 'Password cannot be empty';
+  static String txtNoUserFoundForEmail = 'No user found for that email!';
+  static String txtWrongPasswordProvided =
+      'Wrong password provided for that user.';
+  static String txtSignInYourAccount = 'Sign in your account';
+  static String txtNotAccount = 'Don\'t have an account?';
+  static String txtForgotPasswordIntroduction =
+      'Your email used to sign in Centalki';
+  static String txtReturnSignIn = 'Return Sign In';
+  static String txtWelcomeSignIn = 'Speak English Everyday';
+  static String txtWelcomeForgotPassword =
+      'Connect and share your English knowledge';
+
+  // introduction
+  static String txtGetStarted = 'Get Started';
+
   // AUTHENTICATION
   // Validation error messages
   static const txtEmailEmpty = 'Email address cannot be empty';
@@ -52,7 +81,7 @@ class TextDoc {
   static const txtSignUp = 'Sign Up';
   static const txtNext = 'Next';
   static const txtResetPassword = 'Reset Password';
-  static const txtReturnSignIn = 'Return to Sign In';
+  static const txtReturnToSignIn = 'Return to Sign In';
   static const txtForgotPassword = 'Forgot Password?';
   static const txtTerms = 'Terms & Conditions';
 
@@ -406,4 +435,15 @@ class TextDoc {
   static const txtSendTopicSuggestSuccess = 'Suggestion Sent Successfully';
   static const txtSendTopicSuggestSuccessContent =
       'We are deeply appreciated the efforts you took to help us further improve our contents.\nWe always look forward to hearing more ideas from you.';
+
+  // HANG UP
+  static const txtRejoinDesc = "Did you leave by mistake or due to a network error? Don’t worry, you can rejoin this session and will be able to continue learning and practicing.";
+  static const txtRejoin = "Rejoin";
+  static const txtDoneDesc = "Mark this session as done to finalize it and proceed to report and feedback screen. Please note that you are unable to rejoin after that.";
+  static const txtDone = "Done";
+
+  // BLOCK TEACHER
+  static const txtQuestionBlockTeacher = "Block Teacher?";
+  static const txtBlockTeacherDesc = "If you believe this teacher's behavior was disrespectful and unethical, you can block them permanently to have better overall experiences.\nHowever, this action cannot be undone, and you will have fewer choices for your future sessions.";
+  static const txtBlock = "Block";
 }

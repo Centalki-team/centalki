@@ -70,6 +70,7 @@ SessionScheduleUserModel _$SessionScheduleUserModelFromJson(
           ? null
           : MetadataModel.fromJson(json['metadata'] as Map<String, dynamic>),
       uid: json['uid'] as String?,
+      photoURL: json['photoURL'] as String?,
     );
 
 ProviderDataModel _$ProviderDataModelFromJson(Map<String, dynamic> json) =>

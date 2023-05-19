@@ -2,10 +2,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../base/define/app_text.dart';
 import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
+import '../../../../../base/define/text.dart';
 import '../../../../../base/widgets/buttons/button.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../blocs/app_intro_bloc/app_intro_bloc.dart';
@@ -147,7 +147,7 @@ class _AppIntroContentState extends State<AppIntroContent> {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 16.0),
                                     child: AppFilledButton(
-                                      text: AppText.txtGetStarted,
+                                      text: TextDoc.txtGetStarted,
                                       minimumSize: const Size.fromHeight(40),
                                       onPressed: _navigateToHomeScreen,
                                     ),

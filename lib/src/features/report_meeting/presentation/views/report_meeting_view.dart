@@ -73,82 +73,85 @@ class _ReportMeetingViewState extends State<ReportMeetingView> {
             horizontal: spacing16,
             vertical: spacing8,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Summarize your problem',
-                style: TextStyle(
-                  fontSize: titleMediumSize,
-                  fontWeight: titleMediumWeight,
-                  color: AppColor.defaultFont,
+          child: GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Summarize your problem',
+                  style: TextStyle(
+                    fontSize: titleMediumSize,
+                    fontWeight: titleMediumWeight,
+                    color: AppColor.defaultFont,
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: spacing8,
-              ),
-              Wrap(
-                spacing: spacing16,
-                runSpacing: spacing8,
-                children: problems
-                    .map((e) => FilterChip(
-                        label: Text(e),
-                        labelStyle: const TextStyle(
-                          fontSize: bodyLargeSize,
-                          fontWeight: bodyLargeWeight,
-                          color: AppColor.defaultFont,
-                        ),
-                        checkmarkColor: AppColor.defaultFont,
-                        selectedColor: AppColor.mainColor2Surface,
-                        selected: selectedProblems[problems.indexOf(e)],
-                        onSelected: (value) {
-                          setState(() {
-                            selectedProblems[problems.indexOf(e)] = value;
-                          });
-                        }))
-                    .toList(),
-              ),
-              const SizedBox(
-                height: spacing16,
-              ),
-              const Text(
-                'Description',
-                style: TextStyle(
-                  fontSize: titleMediumSize,
-                  fontWeight: titleMediumWeight,
-                  color: AppColor.defaultFont,
+                const SizedBox(
+                  height: spacing8,
                 ),
-              ),
-              const SizedBox(
-                height: spacing8,
-              ),
-              AppOutlinedTextField(
-                controller: descriptionController,
-                maxLines: 5,
-              ),
-              const SizedBox(
-                height: spacing12,
-              ),
-              AppFilledButton(
-                onPressed: () async {
-                  var summary = <String>[];
-                  for (var i = 0; i < selectedProblems.length; i++) {
-                    if (selectedProblems[i]) {
-                      summary.add(problems[i]);
+                Wrap(
+                  spacing: spacing16,
+                  runSpacing: spacing8,
+                  children: problems
+                      .map((e) => FilterChip(
+                          label: Text(e),
+                          labelStyle: const TextStyle(
+                            fontSize: bodyLargeSize,
+                            fontWeight: bodyLargeWeight,
+                            color: AppColor.defaultFont,
+                          ),
+                          checkmarkColor: AppColor.defaultFont,
+                          selectedColor: AppColor.mainColor2Surface,
+                          selected: selectedProblems[problems.indexOf(e)],
+                          onSelected: (value) {
+                            setState(() {
+                              selectedProblems[problems.indexOf(e)] = value;
+                            });
+                          }))
+                      .toList(),
+                ),
+                const SizedBox(
+                  height: spacing16,
+                ),
+                const Text(
+                  'Description',
+                  style: TextStyle(
+                    fontSize: titleMediumSize,
+                    fontWeight: titleMediumWeight,
+                    color: AppColor.defaultFont,
+                  ),
+                ),
+                const SizedBox(
+                  height: spacing8,
+                ),
+                AppOutlinedTextField(
+                  controller: descriptionController,
+                  maxLines: 5,
+                ),
+                const SizedBox(
+                  height: spacing12,
+                ),
+                AppFilledButton(
+                  onPressed: () async {
+                    var summary = <String>[];
+                    for (var i = 0; i < selectedProblems.length; i++) {
+                      if (selectedProblems[i]) {
+                        summary.add(problems[i]);
+                      }
                     }
-                  }
-                  context.read<ReportMeetingBloc>().add(
-                        ReportMeetingLoadEvent(
-                          teacherId: args.teacherId ?? '',
-                          problems: summary,
-                          description: descriptionController.text,
-                        ),
-                      );
-                },
-                text: 'Send',
-                minimumSize: const Size.fromHeight(48),
-              ),
-            ],
+                    context.read<ReportMeetingBloc>().add(
+                          ReportMeetingLoadEvent(
+                            teacherId: args.teacherId ?? '',
+                            problems: summary,
+                            description: descriptionController.text,
+                          ),
+                        );
+                  },
+                  text: 'Send',
+                  minimumSize: const Size.fromHeight(48),
+                ),
+              ],
+            ),
           ),
         ),
       ),

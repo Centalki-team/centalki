@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../base/define/app_text.dart';
 import '../../../../../base/define/common_txt_style.dart';
 import '../../../../../base/define/styles.dart';
 import '../../../../../gen/assets.gen.dart';
@@ -31,7 +30,7 @@ class SettingsView extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    AppText.appName,
+                    TextDoc.appName,
                     style: CommonTxtStyle.t30Regular.apply(
                       color: AppColor.defaultFont,
                     ),

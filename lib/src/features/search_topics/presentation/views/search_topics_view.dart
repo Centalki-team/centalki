@@ -56,7 +56,7 @@ class _SearchTopicsViewState extends State<SearchTopicsView> {
               scrolledUnderElevation: 0.0,
               centerTitle: false,
               titleSpacing: 0.0,
-              toolbarHeight: 60.0,
+              toolbarHeight: 80.0,
               title: SearchTextField(
                 focusNode: _focusNode,
                 controller: _searchController,

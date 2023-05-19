@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../base/define/app_text.dart';
 import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/common_txt_style.dart';
 import '../../../../../base/define/dimensions.dart';
@@ -57,7 +56,7 @@ class _FavoriteViewState extends State<FavoriteView>
               children: [
                 Expanded(
                   child: Text(
-                    AppText.appName,
+                    TextDoc.appName,
                     style: CommonTxtStyle.t30Regular.apply(
                       color: AppColor.defaultFont,
                     ),

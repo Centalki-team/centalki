@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../base/define/app_text.dart';
 import '../../../../../../base/define/colors.dart';
 import '../../../../../../base/define/common_txt_style.dart';
 import '../../../../../../base/define/dimensions.dart';
@@ -11,7 +10,6 @@ import '../../../../../shared/widgets/tab_indicator/tab_indicator.dart';
 import '../../../../notifications/presentation/views/noti_list_page.dart';
 import '../../../../search_topics/presentation/views/search_topics_page.dart';
 import '../../../../topic_suggestion/presentation/views/topic_suggestion_page.dart';
-import '../elementary_topics/elementary_topics_page.dart';
 import '../intermediate_topics/intermediate_topic_page.dart';
 import '../pre_intermediate_topics/pre_intermediate_topic_page.dart';
 import '../upper_intermediate_topics/upper_intermediate_topic_page.dart';
@@ -51,7 +49,7 @@ class _SelectTopicLevelViewState extends State<SelectTopicLevelView>
         appBar: AppBar(
           backgroundColor: AppColor.white,
           title: Text(
-            AppText.appName,
+            TextDoc.appName,
             style: CommonTxtStyle.t30Regular.apply(
               color: AppColor.defaultFont,
             ),
