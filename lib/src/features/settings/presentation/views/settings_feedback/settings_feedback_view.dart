@@ -6,6 +6,7 @@ import '../../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/text_fields/outlined_text_field.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../blocs/settings_feedback_bloc/settings_feedback_bloc.dart';
 
 class SettingsFeedbackView extends StatefulWidget {
@@ -38,10 +39,10 @@ class _SettingsFeedbackViewState extends State<SettingsFeedbackView> {
             ),
           ),
           title: Row(
-            children: const [
+            children: [
               Text(
-                TextDoc.txtGiveFeedback,
-                style: TextStyle(
+                S.current.txtGiveFeedback,
+                style: const TextStyle(
                   fontSize: headlineSmallSize,
                   fontWeight: headlineSmallWeight,
                   color: AppColor.defaultFont,
@@ -60,17 +61,17 @@ class _SettingsFeedbackViewState extends State<SettingsFeedbackView> {
                 showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
-                    title: const Text(
-                      TextDoc.txtSuccess,
-                      style: TextStyle(
+                    title: Text(
+                      S.current.txtSuccess,
+                      style: const TextStyle(
                         fontSize: titleMediumSize,
                         fontWeight: titleMediumWeight,
                         color: AppColor.defaultFont,
                       ),
                     ),
-                    content: const Text(
-                      TextDoc.txtSuccessFeedback,
-                      style: TextStyle(
+                    content: Text(
+                      S.current.txtSuccessFeedback,
+                      style: const TextStyle(
                         fontSize: bodyMediumSize,
                         fontWeight: bodyMediumWeight,
                         color: AppColor.defaultFont,
@@ -78,7 +79,7 @@ class _SettingsFeedbackViewState extends State<SettingsFeedbackView> {
                     ),
                     actions: [
                       AppTextButton(
-                        text: TextDoc.txtOk,
+                        text: S.current.txtOk,
                         onPressed: () => Navigator.pop(context),
                       )
                     ],
@@ -88,9 +89,9 @@ class _SettingsFeedbackViewState extends State<SettingsFeedbackView> {
                 showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
-                    title: const Text(
-                      TextDoc.txtLoadFail,
-                      style: TextStyle(
+                    title: Text(
+                      S.current.txtLoadFail,
+                      style: const TextStyle(
                         fontSize: titleMediumSize,
                         fontWeight: titleMediumWeight,
                         color: AppColor.defaultFont,
@@ -106,7 +107,7 @@ class _SettingsFeedbackViewState extends State<SettingsFeedbackView> {
                     ),
                     actions: [
                       AppTextButton(
-                        text: TextDoc.txtOk,
+                        text: S.current.txtOk,
                         onPressed: () => Navigator.pop(context),
                       )
                     ],
@@ -121,9 +122,9 @@ class _SettingsFeedbackViewState extends State<SettingsFeedbackView> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const SizedBox(height: spacing8),
-                const Text(
-                  TextDoc.txtRateOurApp,
-                  style: TextStyle(
+                Text(
+                  S.current.txtRateOurApp,
+                  style: const TextStyle(
                     fontSize: titleMediumSize,
                     fontWeight: titleMediumWeight,
                     color: AppColor.defaultFont,
@@ -180,9 +181,9 @@ class _SettingsFeedbackViewState extends State<SettingsFeedbackView> {
                   ),
                 ),
                 const SizedBox(height: spacing16),
-                const Text(
-                  TextDoc.txtPleaseTellUsWatUThink,
-                  style: TextStyle(
+                Text(
+                  S.current.txtPleaseTellUsWatUThink,
+                  style: const TextStyle(
                     fontSize: titleMediumSize,
                     fontWeight: titleMediumWeight,
                     color: AppColor.defaultFont,
@@ -209,7 +210,7 @@ class _SettingsFeedbackViewState extends State<SettingsFeedbackView> {
                 const SizedBox(height: spacing32),
                 BlocBuilder<SettingsFeedbackBloc, SettingsFeedbackState>(
                   builder: (context, state) => AppFilledButton(
-                    text: TextDoc.txtSend,
+                    text: S.current.txtSend,
                     onPressed: (state is SettingsFeedbackValidateState &&
                             !state.forceDisabled)
                         ? () => context

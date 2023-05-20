@@ -5,6 +5,7 @@ import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
 import '../../../../../base/define/text.dart';
 import '../../../../../gen/assets.gen.dart';
+import '../../../../../generated/l10n.dart';
 
 class FavoriteTopicsEmptyView extends StatelessWidget {
   const FavoriteTopicsEmptyView({super.key});
@@ -21,13 +22,13 @@ class FavoriteTopicsEmptyView extends StatelessWidget {
             height: spacing40,
             width: double.infinity,
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(
+          Padding(
+            padding: const EdgeInsets.symmetric(
               horizontal: padding16,
             ),
             child: Text(
-              TextDoc.txtNoFavoriteTopicsTitle,
-              style: TextStyle(
+              S.current.txtNoFavoriteTopicsTitle,
+              style: const TextStyle(
                 fontSize: titleMediumSize,
                 fontWeight: titleMediumWeight,
                 color: AppColor.defaultFont,
@@ -39,14 +40,14 @@ class FavoriteTopicsEmptyView extends StatelessWidget {
             height: spacing40 + spacing4,
             width: double.infinity,
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(
+          Padding(
+            padding: const EdgeInsets.symmetric(
               horizontal: padding48,
             ),
             child: Text(
-              TextDoc.txtNoFavoriteTopicsContent,
+              S.current.txtNoFavoriteTopicsContent,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: bodyMediumSize,
                 fontWeight: bodyMediumWeight,
                 color: AppColor.shadow,

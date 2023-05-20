@@ -7,6 +7,7 @@ import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
 import '../../../../../../base/widgets/dialog/success_dialog_content.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../domain/entities/user_account_entity.dart';
 import '../../blocs/account_information_bloc/account_information_bloc.dart';
 import '../../widgets/gender_radio_button_group.dart';
@@ -23,9 +24,9 @@ class _AccountInformationViewState extends State<AccountInformationView> {
 
   final dateOfBirthController = TextEditingController();
   final nameConnections = [
-    TextDoc.txtFacebook,
-    TextDoc.txtGoogle,
-    TextDoc.txtApple
+    S.current.txtFacebook,
+    S.current.txtGoogle,
+    S.current.txtApple
   ];
   var gender = Gender.male;
   var connections = [false, true, false];
@@ -47,7 +48,7 @@ class _AccountInformationViewState extends State<AccountInformationView> {
               showDialog(
                 context: context,
                 builder: (context) => ErrorDialogContent(
-                  title: TextDoc.txtLoadFailed,
+                  title: S.current.txtLoadFailed,
                   content: state.message,
                 ),
               );
@@ -55,15 +56,15 @@ class _AccountInformationViewState extends State<AccountInformationView> {
               showDialog(
                 context: context,
                 builder: (context) => ErrorDialogContent(
-                  title: TextDoc.txtProfileUpdateFailed,
+                  title: S.current.txtProfileUpdateFailed,
                   content: state.message,
                 ),
               );
             } else if (state is AccountInformationSaveDoneState) {
               showDialog(
                 context: context,
-                builder: (context) => const SuccessDialogContent(
-                  title: TextDoc.txtProfileUpdateSuccess,
+                builder: (context) => SuccessDialogContent(
+                  title: S.current.txtProfileUpdateSuccess,
                 ),
               );
             }
@@ -76,9 +77,9 @@ class _AccountInformationViewState extends State<AccountInformationView> {
               CustomScrollView(
                 slivers: [
                   SliverAppBar.medium(
-                    title: const Text(
-                      TextDoc.txtAccountInformation,
-                      style: TextStyle(
+                    title: Text(
+                      S.current.txtAccountInformation,
+                      style: const TextStyle(
                         fontSize: headlineSmallSize,
                         fontWeight: headlineSmallWeight,
                         color: AppColor.defaultFont,
@@ -95,9 +96,9 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                TextDoc.txtEmail,
-                                style: TextStyle(
+                               Text(
+                                S.current.txtEmail,
+                                style: const TextStyle(
                                   fontSize: titleMediumSize,
                                   fontWeight: titleMediumWeight,
                                   color: AppColor.defaultFont,
@@ -141,9 +142,9 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                           const SizedBox(
                             height: spaceBetweenLine12,
                           ),*/
-                              const Text(
-                                TextDoc.txtDateOfBirthTitle,
-                                style: TextStyle(
+                               Text(
+                                S.current.txtDateOfBirthTitle,
+                                style: const TextStyle(
                                   fontSize: titleMediumSize,
                                   fontWeight: titleMediumWeight,
                                   color: AppColor.defaultFont,
@@ -242,9 +243,9 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                                 ),
                               ),
                               const SizedBox(height: spacing16),
-                              const Text(
-                                TextDoc.txtGenderTitle,
-                                style: TextStyle(
+                              Text(
+                                S.current.txtGenderTitle,
+                                style: const TextStyle(
                                   fontSize: titleMediumSize,
                                   fontWeight: titleMediumWeight,
                                   color: AppColor.defaultFont,
@@ -325,7 +326,7 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                     ),
                     color: AppColor.white,
                     child: AppElevatedButton(
-                      text: TextDoc.txtSaveChanges,
+                      text: S.current.txtSaveChanges,
                       minimumSize: const Size.fromHeight(48),
                       onPressed: state is AccountInformationChangingState
                           ? () => context.read<AccountInformationBloc>().add(

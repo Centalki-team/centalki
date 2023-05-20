@@ -7,6 +7,7 @@ import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
 import '../../../../../base/define/text.dart';
 import '../../../../../gen/assets.gen.dart';
+import '../../../../../generated/l10n.dart';
 
 class VocabsEmptyView extends StatelessWidget {
   const VocabsEmptyView({super.key});
@@ -23,13 +24,13 @@ class VocabsEmptyView extends StatelessWidget {
             height: spacing40,
             width: double.infinity,
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(
+          Padding(
+            padding: const EdgeInsets.symmetric(
               horizontal: padding16,
             ),
             child: Text(
-              TextDoc.txtNoFavoriteVocabsTitle,
-              style: TextStyle(
+              S.current.txtNoFavoriteVocabsTitle,
+              style: const TextStyle(
                 fontSize: titleMediumSize,
                 fontWeight: titleMediumWeight,
                 color: AppColor.defaultFont,
@@ -41,13 +42,13 @@ class VocabsEmptyView extends StatelessWidget {
             height: spacing40 + spacing4,
             width: double.infinity,
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(
+          Padding(
+            padding: const EdgeInsets.symmetric(
               horizontal: spacing16,
             ),
             child: Text(
-              TextDoc.txtNoFavoriteVocabsContent,
-              style: TextStyle(
+              S.current.txtNoFavoriteVocabsContent,
+              style: const TextStyle(
                 fontSize: bodyMediumSize,
                 fontWeight: bodyMediumWeight,
                 color: AppColor.shadow,

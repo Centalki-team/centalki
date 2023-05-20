@@ -1,4 +1,8 @@
 import '../../base/define/storage/storage_gateway.dart';
+import '../../src/features/application/data/datasources/local_data/application_local_datasrc/application_local_datasource.dart';
+import '../../src/features/application/data/repositories/application_repository_impl.dart';
+import '../../src/features/application/domain/repositories/application_repository.dart';
+import '../../src/features/application/presentation/blocs/application_bloc/application_bloc.dart';
 import '../../src/features/authentication/data/datasources/remote_data/self_review_remote_datasrc/self_review_remote_datasrc.dart';
 import '../../src/features/authentication/data/datasources/remote_data/sign_up_remote_datasrc/sign_up_remote_datasrc.dart';
 import '../../src/features/authentication/data/repositories/self_review_repo_impl/self_review_repo_impl.dart';
@@ -95,6 +99,11 @@ class RepositoriesModule extends DIModule {
           TopicSuggestionContentLocalDataSource.new)
       ..registerLazySingleton<TopicSuggestionRemoteDatasrc>(
           TopicSuggestionRemoteDatasrc.new)
+      ..registerLazySingleton<ApplicationLocalDatasource>(
+        () => ApplicationLocalDatasource(
+          storageGateway: StorageGateway.defaultGateway(),
+        ),
+      )
       //Repositories
       ..registerLazySingleton<TopicRepository>(TopicRepositoryImpl.new)
       ..registerLazySingleton<TopicDetailRepository>(
@@ -125,6 +134,10 @@ class RepositoriesModule extends DIModule {
           TopicReviewPagesRepositoryImpl.new)
       ..registerLazySingleton<NotiListRepository>(NotiListRepositoryImpl.new)
       ..registerLazySingleton<TopicSuggestionRepository>(
-          TopicSuggestionRepositoryImpl.new);
+          TopicSuggestionRepositoryImpl.new)
+      ..registerLazySingleton<ApplicationRepository>(
+          ApplicationRepositoryImpl.new)
+      // BLOCS
+      ..registerSingleton<ApplicationBloc>(ApplicationBloc());
   }
 }

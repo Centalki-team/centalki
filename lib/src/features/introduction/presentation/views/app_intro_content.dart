@@ -8,6 +8,7 @@ import '../../../../../base/define/size.dart';
 import '../../../../../base/define/text.dart';
 import '../../../../../base/widgets/buttons/button.dart';
 import '../../../../../gen/assets.gen.dart';
+import '../../../../../generated/l10n.dart';
 import '../blocs/app_intro_bloc/app_intro_bloc.dart';
 
 class AppIntroContent extends StatefulWidget {
@@ -147,7 +148,7 @@ class _AppIntroContentState extends State<AppIntroContent> {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 16.0),
                                     child: AppFilledButton(
-                                      text: TextDoc.txtGetStarted,
+                                      text: S.current.txtGetStarted,
                                       minimumSize: const Size.fromHeight(40),
                                       onPressed: _navigateToHomeScreen,
                                     ),

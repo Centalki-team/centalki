@@ -15,6 +15,7 @@ class AppConfig {
   });
 
   static late final AppConfig value;
+  static const String defaultLocale = 'en';
   static bool _created = false;
   //final ENV env;
   String baseUrl;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../base/define/styles.dart';
+import '../../../../../generated/l10n.dart';
 import '../widgets/setting_switch_row.dart';
 
 class SettingsNotification extends StatelessWidget {
@@ -20,10 +21,10 @@ class SettingsNotification extends StatelessWidget {
             ),
           ),
           title: Row(
-            children: const [
+            children: [
               Text(
-                TextDoc.txtNotification,
-                style: TextStyle(
+                S.current.txtNotification,
+                style: const TextStyle(
                   fontSize: headlineSmallSize,
                   fontWeight: headlineSmallWeight,
                   color: AppColor.defaultFont,
@@ -40,44 +41,44 @@ class SettingsNotification extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: const [
-                SizedBox(height: spacing4),
+              children: [
+                const SizedBox(height: spacing4),
                 Text(
-                  TextDoc.txtNotifyMeAbout,
-                  style: TextStyle(
+                  S.current.txtNotifyMeAbout,
+                  style: const TextStyle(
                     fontSize: titleMediumSize,
                     fontWeight: titleMediumWeight,
                     color: AppColor.defaultFont,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 12.0,
                     vertical: 16.0,
                   ),
                   child: SettingSwitchRow(
-                    title: TextDoc.txtDealsAndDiscounts,
+                    title: S.current.txtDealsAndDiscounts,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 12.0,
                     vertical: 16.0,
                   ),
                   child: SettingSwitchRow(
-                    title: TextDoc.txtNewTopics,
+                    title: S.current.txtNewTopics,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 12.0,
                     vertical: 16.0,
                   ),
                   child: SettingSwitchRow(
-                    title: TextDoc.txtNewTeachers,
+                    title: S.current.txtNewTeachers,
                   ),
                 ),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.symmetric(
                     vertical: 16.0,
                     horizontal: 32.0,
@@ -93,21 +94,21 @@ class SettingsNotification extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 12.0,
                     vertical: 16.0,
                   ),
                   child: SettingSwitchRow(
-                    title: TextDoc.txtSounds,
+                    title: S.current.txtSounds,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 12.0,
                     vertical: 16.0,
                   ),
                   child: SettingSwitchRow(
-                    title: TextDoc.txtVibrations,
+                    title: S.current.txtVibrations,
                   ),
                 ),
               ],

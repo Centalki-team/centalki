@@ -8,6 +8,7 @@ import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
 import '../../../../../../base/widgets/dialog/success_dialog_content.dart';
 import '../../../../../../base/widgets/text_fields/outlined_text_field.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../../topics/domain/entities/topic_item_entity.dart';
 import '../../blocs/student_profile_bloc/student_profile_bloc.dart';
 import '../../widgets/custom_checkbox_tile_item.dart';
@@ -70,7 +71,7 @@ class _StudentProfileViewState extends State<StudentProfileView> {
               showDialog(
                 context: context,
                 builder: (context) => ErrorDialogContent(
-                  title: TextDoc.txtLoadFailed,
+                  title: S.current.txtLoadFailed,
                   content: state.message,
                 ),
               );
@@ -78,15 +79,15 @@ class _StudentProfileViewState extends State<StudentProfileView> {
               showDialog(
                 context: context,
                 builder: (context) => ErrorDialogContent(
-                  title: TextDoc.txtProfileUpdateFailed,
+                  title: S.current.txtProfileUpdateFailed,
                   content: state.message,
                 ),
               );
             } else if (state is StudentProfileSaveDoneState) {
               showDialog(
                 context: context,
-                builder: (context) => const SuccessDialogContent(
-                  title: TextDoc.txtProfileUpdateSuccess,
+                builder: (context) => SuccessDialogContent(
+                  title: S.current.txtProfileUpdateSuccess,
                 ),
               );
             } else if (state is StudentProfileChangedState) {
@@ -110,9 +111,9 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                     CustomScrollView(
                       slivers: [
                         SliverAppBar.medium(
-                          title: const Text(
-                            TextDoc.txtStudentProfile,
-                            style: TextStyle(
+                          title: Text(
+                            S.current.txtStudentProfile,
+                            style: const TextStyle(
                               fontSize: headlineSmallSize,
                               fontWeight: headlineSmallWeight,
                               color: AppColor.defaultFont,
@@ -125,18 +126,21 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                           delegate: SliverChildBuilderDelegate(
                             childCount: 1,
                             (_, index) => Padding(
-                              padding: const EdgeInsets.fromLTRB(16, 16, 16, 80),
+                              padding:
+                                  const EdgeInsets.fromLTRB(16, 16, 16, 80),
                               child: SingleChildScrollView(
                                 child: BlocBuilder<StudentProfileBloc,
                                     StudentProfileState>(
                                   builder: (context, state) => Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       BlocBuilder<StudentProfileBloc,
                                           StudentProfileState>(
                                         buildWhen: (previous, current) =>
-                                            current is StudentProfileChangedState,
+                                            current
+                                                is StudentProfileChangedState,
                                         builder: (context, state) => Center(
                                           child: Avatar(
                                             avatarUrl: avatarUrl,
@@ -154,7 +158,8 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                           builder: (context, state) {
                                             if (state
                                                 is StudentProfileChangedState) {
-                                              if (state.avatarException.isEmpty) {
+                                              if (state
+                                                  .avatarException.isEmpty) {
                                                 return Container();
                                               }
                                               return Center(
@@ -173,7 +178,7 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                           }),
                                       Center(
                                         child: AppTextButton(
-                                          text: TextDoc.txtChangeAvatar,
+                                          text: S.current.txtChangeAvatar,
                                           onPressed: () {
                                             context.read<StudentProfileBloc>().add(
                                                 const StudentProfileChangeAvatarEvent());
@@ -181,9 +186,9 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                         ),
                                       ),
                                       const SizedBox(height: spacing16),
-                                      const Text(
-                                        TextDoc.txtFullNameTitle,
-                                        style: TextStyle(
+                                      Text(
+                                        S.current.txtFullNameTitle,
+                                        style: const TextStyle(
                                           fontSize: titleMediumSize,
                                           fontWeight: titleMediumWeight,
                                           color: AppColor.defaultFont,
@@ -194,14 +199,15 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                         onChanged: _validateStudentProfile,
                                         errorText:
                                             state is StudentProfileChangedState &&
-                                                    state.fullNameError.isNotEmpty
+                                                    state.fullNameError
+                                                        .isNotEmpty
                                                 ? state.fullNameError
                                                 : null,
                                       ),
                                       const SizedBox(height: spacing16),
-                                      const Text(
-                                        TextDoc.txtEnglishNameTitle,
-                                        style: TextStyle(
+                                      Text(
+                                        S.current.txtEnglishNameTitle,
+                                        style: const TextStyle(
                                           fontSize: titleMediumSize,
                                           fontWeight: titleMediumWeight,
                                           color: AppColor.defaultFont,
@@ -218,9 +224,9 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                                 : null,
                                       ),
                                       const SizedBox(height: spacing16),
-                                      const Text(
-                                        TextDoc.txtBioTitle,
-                                        style: TextStyle(
+                                      Text(
+                                        S.current.txtBioTitle,
+                                        style: const TextStyle(
                                           fontSize: titleMediumSize,
                                           fontWeight: titleMediumWeight,
                                           color: AppColor.defaultFont,
@@ -237,9 +243,9 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                                 : null,
                                       ),
                                       const SizedBox(height: spacing16),
-                                      const Text(
-                                        TextDoc.txtInterestedTopics,
-                                        style: TextStyle(
+                                      Text(
+                                        S.current.txtInterestedTopics,
+                                        style: const TextStyle(
                                           fontSize: titleMediumSize,
                                           fontWeight: titleMediumWeight,
                                           color: AppColor.defaultFont,
@@ -257,20 +263,22 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                             crossAxisSpacing: 16.0,
                                             crossAxisCount: 2,
                                             childAspectRatio:
-                                                _getTopicsAspectRatio(widthView),
+                                                _getTopicsAspectRatio(
+                                                    widthView),
                                           ),
                                           physics:
                                               const NeverScrollableScrollPhysics(),
                                           itemCount: topics.length,
                                           itemBuilder: (_, index) =>
                                               CustomCheckboxTile(
-                                            title: topics[index].topicName ?? '',
-                                            value: selectedTopics
-                                                .contains(topics[index].topicId),
+                                            title:
+                                                topics[index].topicName ?? '',
+                                            value: selectedTopics.contains(
+                                                topics[index].topicId),
                                             onChanged: (value) {
                                               value
-                                                  ? selectedTopics
-                                                      .add(topics[index].topicId!)
+                                                  ? selectedTopics.add(
+                                                      topics[index].topicId!)
                                                   : selectedTopics.remove(
                                                       topics[index].topicId!);
                                               _validateStudentProfile('');
@@ -316,7 +324,7 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                   }
                                 : null,
                             minimumSize: const Size.fromHeight(48),
-                            text: TextDoc.txtSaveChanges,
+                            text: S.current.txtSaveChanges,
                           ),
                         ),
                       ),

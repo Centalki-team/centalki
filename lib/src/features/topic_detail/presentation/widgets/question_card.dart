@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../base/define/styles.dart';
+import '../../../../../generated/l10n.dart';
 import '../../domain/entities/topic_detail_entity.dart';
 
 class QuestionCard extends StatelessWidget {
@@ -62,9 +63,9 @@ class QuestionCard extends StatelessWidget {
             ],
           ),
           children: [
-            const Text(
-              TextDoc.txtTopicAnswers,
-              style: TextStyle(
+            Text(
+              S.current.txtTopicAnswers,
+              style: const TextStyle(
                 height: 0.9,
                 fontSize: titleMediumSize,
                 fontWeight: titleMediumWeight,

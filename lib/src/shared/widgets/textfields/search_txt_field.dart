@@ -6,6 +6,7 @@ import '../../../../base/define/opacity.dart';
 import '../../../../base/define/size.dart';
 import '../../../../base/define/text.dart';
 import '../../../../base/define/width.dart';
+import '../../../../generated/l10n.dart';
 
 class SearchTextField extends StatefulWidget {
   const SearchTextField({
@@ -83,7 +84,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
             hintText: widget.hintText,
             hintStyle: const TextStyle(height: 1),
             errorText: widget.controller.text.length > 100
-                ? TextDoc.txtSearchError
+                ? S.current.txtSearchError
                 : null,
             errorMaxLines: 2,
             errorStyle: const TextStyle(

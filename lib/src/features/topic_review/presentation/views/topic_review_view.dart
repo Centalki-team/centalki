@@ -8,6 +8,7 @@ import '../../../../../base/define/size.dart';
 import '../../../../../base/define/text.dart';
 import '../../../../../base/widgets/buttons/button.dart';
 import '../../../../../base/widgets/toast/app_toast.dart';
+import '../../../../../generated/l10n.dart';
 import '../../domain/entities/topic_feedback_data_entity.dart';
 import '../blocs/topic_review_bloc/topic_review_bloc.dart';
 import 'topic_feedback_single_pageview.dart';
@@ -37,18 +38,18 @@ class _TopicReviewContentState extends State<TopicReviewContent>
         context: context,
         builder: (context) => AlertDialog(
               backgroundColor: AppColor.white,
-              title: const Text(
-                TextDoc.txtNotFinishFeedback,
-                style: TextStyle(
+              title: Text(
+                S.current.txtNotFinishFeedback,
+                style: const TextStyle(
                   fontSize: titleLargeSize,
                   fontWeight: titleLargeWeight,
                   color: AppColor.defaultFont,
                   height: 28 / 30,
                 ),
               ),
-              content: const Text(
-                TextDoc.txtNotFinishFeedbackContent,
-                style: TextStyle(
+              content: Text(
+                S.current.txtNotFinishFeedbackContent,
+                style: const TextStyle(
                   fontSize: bodyLargeSize,
                   fontWeight: bodyLargeWeight,
                   color: AppColor.defaultFont,
@@ -61,9 +62,9 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                   style: TextButton.styleFrom(
                     foregroundColor: AppColor.mainColor1,
                   ),
-                  child: const Text(
-                    TextDoc.txtStayBtn,
-                    style: TextStyle(
+                  child: Text(
+                    S.current.txtStayBtn,
+                    style: const TextStyle(
                       fontSize: labelLargeSize,
                       fontWeight: labelLargeWeight,
                     ),
@@ -75,9 +76,9 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                     backgroundColor: AppColor.error,
                     foregroundColor: Colors.white,
                   ),
-                  child: const Text(
-                    TextDoc.txtExitBtn,
-                    style: TextStyle(
+                  child: Text(
+                    S.current.txtExitBtn,
+                    style: const TextStyle(
                       fontSize: labelLargeSize,
                       fontWeight: labelLargeWeight,
                     ),
@@ -99,18 +100,18 @@ class _TopicReviewContentState extends State<TopicReviewContent>
         context: context,
         builder: (context) => AlertDialog(
               backgroundColor: AppColor.white,
-              title: const Text(
-                TextDoc.txtFeedbackSuccess,
-                style: TextStyle(
+              title: Text(
+                S.current.txtFeedbackSuccess,
+                style: const TextStyle(
                   fontSize: titleLargeSize,
                   fontWeight: titleLargeWeight,
                   color: AppColor.defaultFont,
                   height: 28 / 30,
                 ),
               ),
-              content: const Text(
-                TextDoc.txtFeedbackSuccessContent,
-                style: TextStyle(
+              content: Text(
+                S.current.txtFeedbackSuccessContent,
+                style: const TextStyle(
                   fontSize: bodyLargeSize,
                   fontWeight: bodyLargeWeight,
                   color: AppColor.defaultFont,
@@ -123,9 +124,9 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                   style: TextButton.styleFrom(
                     foregroundColor: AppColor.mainColor1,
                   ),
-                  child: const Text(
-                    TextDoc.txtOk,
-                    style: TextStyle(
+                  child: Text(
+                    S.current.txtOk,
+                    style: const TextStyle(
                       fontSize: labelLargeSize,
                       fontWeight: labelLargeWeight,
                     ),
@@ -137,9 +138,9 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                 //     backgroundColor: AppColor.error,
                 //     foregroundColor: Colors.white,
                 //   ),
-                //   child: const Text(
-                //     TextDoc.txtExitBtn,
-                //     style: TextStyle(
+                //   child: Text(
+                //     S.current.txtExitBtn,
+                //     style: const TextStyle(
                 //       fontSize: labelLargeSize,
                 //       fontWeight: labelLargeWeight,
                 //     ),
@@ -219,7 +220,7 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                               valueListenable: currentTabIndex,
                               builder: (_, value, __) => value > 0
                                   ? AppTextButton(
-                                      text: TextDoc.txtBackBtn,
+                                      text: S.current.txtBackBtn,
                                       minimumSize: const Size(104, 40),
                                       onPressed: () => _tabController
                                           .animateTo(--currentTabIndex.value),
@@ -247,12 +248,12 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                                       valueListenable: topicFeedbackData,
                                       builder: (ctx, feedbackData, w) =>
                                           feedbackData.isEmptyData
-                                              ? const AppElevatedButton(
-                                                  text: TextDoc.txtSend,
-                                                  minimumSize: Size(104, 40),
+                                              ? AppElevatedButton(
+                                                  text: S.current.txtSend,
+                                                  minimumSize: const Size(104, 40),
                                                 )
                                               : AppElevatedButton(
-                                                  text: TextDoc.txtSend,
+                                                  text: S.current.txtSend,
                                                   minimumSize:
                                                       const Size(104, 40),
                                                   onPressed: () => context
@@ -265,7 +266,7 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                                                 ),
                                     )
                                   : AppFilledButton(
-                                      text: TextDoc.txtNextBtn,
+                                      text: S.current.txtNextBtn,
                                       minimumSize: const Size(104, 40),
                                       onPressed: () => _tabController
                                           .animateTo(++currentTabIndex.value),
@@ -295,14 +296,14 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                     ),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(
+                Padding(
+                  padding: const EdgeInsets.only(
                     left: spacing24,
                     bottom: spacing16,
                   ),
                   child: Text(
-                    TextDoc.txtTopicFeedback,
-                    style: TextStyle(
+                    S.current.txtTopicFeedback,
+                    style: const TextStyle(
                       fontSize: headlineSmallSize,
                       fontWeight: headlineSmallWeight,
                       color: AppColor.defaultFont,

@@ -6,6 +6,7 @@ import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
 import '../../../../../../base/widgets/text_fields/outlined_text_field.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../blocs/delete_account_bloc/delete_account_bloc.dart';
 
 class DeleteAccountView extends StatefulWidget {
@@ -33,7 +34,7 @@ class _DeleteAccountViewState extends State<DeleteAccountView> {
                 barrierDismissible: false,
                 context: context,
                 builder: (context) => ErrorDialogContent(
-                  title: TextDoc.txtDeleteAccountResult,
+                  title: S.current.txtDeleteAccountResult,
                   content: state.message,
                 ),
               );
@@ -47,9 +48,9 @@ class _DeleteAccountViewState extends State<DeleteAccountView> {
             child: CustomScrollView(
               slivers: [
                 SliverAppBar.medium(
-                  title: const Text(
-                    TextDoc.txtDeleteAccount,
-                    style: TextStyle(
+                  title:  Text(
+                    S.current.txtDeleteAccount,
+                    style: const TextStyle(
                       fontSize: headlineSmallSize,
                       fontWeight: headlineSmallWeight,
                       color: AppColor.defaultFont,
@@ -68,9 +69,9 @@ class _DeleteAccountViewState extends State<DeleteAccountView> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          const Text(
-                            TextDoc.txtEnterPasswordToDelete,
-                            style: TextStyle(
+                           Text(
+                            S.current.txtEnterPasswordToDelete,
+                            style: const TextStyle(
                               fontSize: titleMediumSize,
                               fontWeight: titleMediumWeight,
                               color: AppColor.defaultFont,
@@ -93,7 +94,7 @@ class _DeleteAccountViewState extends State<DeleteAccountView> {
                           const SizedBox(height: spacing24),
                           BlocBuilder<DeleteAccountBloc, DeleteAccountState>(
                             builder: (context, state) => AppElevatedButton(
-                              text: TextDoc.txtConfirmDeleteAccount,
+                              text: S.current.txtConfirmDeleteAccount,
                               minimumSize: const Size.fromHeight(48),
                               onPressed: state is DeleteAccountPasswordValidState
                                   ? () => context.read<DeleteAccountBloc>().add(
@@ -104,7 +105,7 @@ class _DeleteAccountViewState extends State<DeleteAccountView> {
                           ),
                           const SizedBox(height: spacing8),
                           AppTextButton(
-                            text: TextDoc.txtCancel,
+                            text: S.current.txtCancel,
                             minimumSize: const Size.fromHeight(48),
                             onPressed: () => Navigator.pop(context),
                           ),

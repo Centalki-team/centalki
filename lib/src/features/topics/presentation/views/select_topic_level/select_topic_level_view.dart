@@ -6,6 +6,7 @@ import '../../../../../../base/define/dimensions.dart';
 import '../../../../../../base/define/size.dart';
 import '../../../../../../base/define/text.dart';
 import '../../../../../../gen/assets.gen.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../../../shared/widgets/tab_indicator/tab_indicator.dart';
 import '../../../../notifications/presentation/views/noti_list_page.dart';
 import '../../../../search_topics/presentation/views/search_topics_page.dart';
@@ -49,7 +50,7 @@ class _SelectTopicLevelViewState extends State<SelectTopicLevelView>
         appBar: AppBar(
           backgroundColor: AppColor.white,
           title: Text(
-            TextDoc.appName,
+            S.current.appName,
             style: CommonTxtStyle.t30Regular.apply(
               color: AppColor.defaultFont,
             ),
@@ -168,11 +169,11 @@ class _SelectTopicLevelViewState extends State<SelectTopicLevelView>
                 currentIndex = index;
                 _tabController.animateTo(index);
               },
-              tabs: const [
+              tabs: [
                 // Tab(
                 //   child: Text(
-                //     TextDoc.txtElementary,
-                //     style: TextStyle(
+                //     S.current.txtElementary,
+                //     style: const TextStyle(
                 //       fontSize: titleSmallSize,
                 //       fontWeight: titleSmallWeight,
                 //     ),
@@ -180,8 +181,8 @@ class _SelectTopicLevelViewState extends State<SelectTopicLevelView>
                 // ),
                 Tab(
                   child: Text(
-                    TextDoc.txtPreIntermediate,
-                    style: TextStyle(
+                    S.current.txtPreIntermediate,
+                    style: const TextStyle(
                       fontSize: titleSmallSize,
                       fontWeight: titleSmallWeight,
                     ),
@@ -189,8 +190,8 @@ class _SelectTopicLevelViewState extends State<SelectTopicLevelView>
                 ),
                 Tab(
                   child: Text(
-                    TextDoc.txtIntermediate,
-                    style: TextStyle(
+                    S.current.txtIntermediate,
+                    style: const TextStyle(
                       fontSize: titleSmallSize,
                       fontWeight: titleSmallWeight,
                     ),
@@ -198,8 +199,8 @@ class _SelectTopicLevelViewState extends State<SelectTopicLevelView>
                 ),
                 Tab(
                   child: Text(
-                    TextDoc.txtUpperIntermediate,
-                    style: TextStyle(
+                    S.current.txtUpperIntermediate,
+                    style: const TextStyle(
                       fontSize: titleSmallSize,
                       fontWeight: titleSmallWeight,
                     ),

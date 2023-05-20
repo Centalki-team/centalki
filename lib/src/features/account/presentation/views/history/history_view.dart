@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 
 import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../../history_detail/presentation/views/history_detail_page.dart';
 import '../../blocs/history_bloc/history_bloc.dart';
 
@@ -24,7 +25,7 @@ class _HistoryViewState extends State<HistoryView> {
               barrierDismissible: false,
               context: context,
               builder: (context) => ErrorDialogContent(
-                title: TextDoc.txtLoadFailed,
+                title: S.current.txtLoadFailed,
                 content: state.message,
               ),
             );
@@ -37,9 +38,9 @@ class _HistoryViewState extends State<HistoryView> {
               body: CustomScrollView(
                 slivers: [
                   SliverAppBar.medium(
-                    title: const Text(
-                      TextDoc.txtHistory,
-                      style: TextStyle(
+                    title: Text(
+                      S.current.txtHistory,
+                      style: const TextStyle(
                         height: 1.0,
                         fontSize: headlineSmallSize,
                         fontWeight: headlineSmallWeight,
@@ -70,9 +71,9 @@ class _HistoryViewState extends State<HistoryView> {
                               ),
                               child: Column(
                                 children: [
-                                  const Text(
-                                    TextDoc.txtTotalCompletedSessions,
-                                    style: TextStyle(
+                                   Text(
+                                    S.current.txtTotalCompletedSessions,
+                                    style: const TextStyle(
                                       fontSize: titleMediumSize,
                                       fontWeight: titleMediumWeight,
                                       color: AppColor.defaultFont,
@@ -90,19 +91,19 @@ class _HistoryViewState extends State<HistoryView> {
                               ),
                             ),
                             const SizedBox(height: spacing24),
-                            const Text(
-                              TextDoc.txtSessions,
-                              style: TextStyle(
+                             Text(
+                              S.current.txtSessions,
+                              style: const TextStyle(
                                 fontSize: titleMediumSize,
                                 fontWeight: titleMediumWeight,
                                 color: AppColor.tertiary,
                               ),
                             ),
                             state.sessionList.isEmpty
-                                ? const Center(
+                                ?  Center(
                                     child: Text(
-                                      TextDoc.txtNoData,
-                                      style: TextStyle(
+                                      S.current.txtNoData,
+                                      style: const TextStyle(
                                         fontSize: bodyLargeSize,
                                         fontWeight: bodyLargeWeight,
                                         color: AppColor.defaultFont,
@@ -135,10 +136,10 @@ class _HistoryViewState extends State<HistoryView> {
                                               const SizedBox(
                                                 height: spacing8,
                                               ),
-                                              const Text(
-                                                TextDoc
+                                               Text(
+                                                S.current
                                                     .txtTapToLoadMoreSessions,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   fontSize: bodyLargeSize,
                                                   fontWeight: bodyLargeWeight,
                                                   color: AppColor.shadow,

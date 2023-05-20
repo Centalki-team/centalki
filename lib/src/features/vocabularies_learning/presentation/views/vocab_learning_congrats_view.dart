@@ -5,6 +5,7 @@ import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
 import '../../../../../base/define/text.dart';
 import '../../../../../gen/assets.gen.dart';
+import '../../../../../generated/l10n.dart';
 
 class VocabLearningCongratsView extends StatelessWidget {
   const VocabLearningCongratsView({
@@ -27,9 +28,9 @@ class VocabLearningCongratsView extends StatelessWidget {
             height: spacing16,
             width: double.infinity,
           ),
-          const Text(
-            TextDoc.txtCongrats,
-            style: TextStyle(
+          Text(
+            S.current.txtCongrats,
+            style: const TextStyle(
               fontSize: headlineLargeSize,
               fontWeight: headlineLargeWeight,
               color: AppColor.support,
@@ -39,9 +40,9 @@ class VocabLearningCongratsView extends StatelessWidget {
           const SizedBox(
             height: spacing10,
           ),
-          const Text(
-            TextDoc.txtCompleteRemind,
-            style: TextStyle(
+          Text(
+            S.current.txtCompleteRemind,
+            style: const TextStyle(
               fontSize: bodyLargeSize,
               fontWeight: bodyLargeWeight,
               color: AppColor.defaultFont,

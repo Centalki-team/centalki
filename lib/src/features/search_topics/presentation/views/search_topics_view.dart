@@ -6,6 +6,7 @@ import '../../../../../base/define/styles.dart';
 import '../../../../../base/widgets/buttons/button.dart';
 import '../../../../../base/widgets/buttons/outlined_button.dart';
 import '../../../../../base/widgets/toast/app_toast.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../../shared/widgets/textfields/search_txt_field.dart';
 import '../../../topic_suggestion/presentation/views/topic_suggestion_page.dart';
 import '../../../topics/presentation/widgets/topic_card.dart';
@@ -143,9 +144,9 @@ class _SearchTopicsViewState extends State<SearchTopicsView> {
                                   height: spacing80,
                                   width: double.infinity,
                                 ),
-                                const Text(
-                                  TextDoc.txtNoResultFound,
-                                  style: TextStyle(
+                                Text(
+                                  S.current.txtNoResultFound,
+                                  style: const TextStyle(
                                     fontSize: titleLargeSize,
                                     fontWeight: titleLargeWeight,
                                     color: AppColor.defaultFont,
@@ -156,11 +157,11 @@ class _SearchTopicsViewState extends State<SearchTopicsView> {
                                 const SizedBox(
                                   height: 38.0,
                                 ),
-                                const SizedBox(
+                                SizedBox(
                                   width: 271.0,
                                   child: Text(
-                                    '${TextDoc.txtSearchSr}\n\n${TextDoc.txtSearchPlsTryAgain}',
-                                    style: TextStyle(
+                                    '${S.current.txtSearchSr}\n\n${S.current.txtSearchPlsTryAgain}',
+                                    style: const TextStyle(
                                       fontSize: bodyMediumSize,
                                       fontWeight: bodyMediumWeight,
                                       color: AppColor.shadow,
@@ -172,11 +173,12 @@ class _SearchTopicsViewState extends State<SearchTopicsView> {
                                 const SizedBox(
                                   height: 160,
                                 ),
-                                const Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 56),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 56),
                                   child: Text(
-                                    TextDoc.txtSearchSuggestTopic,
-                                    style: TextStyle(
+                                    S.current.txtSearchSuggestTopic,
+                                    style: const TextStyle(
                                       fontSize: bodySmallSize,
                                       fontWeight: bodySmallWeight,
                                       color: AppColor.shadow,
@@ -197,7 +199,7 @@ class _SearchTopicsViewState extends State<SearchTopicsView> {
                                         MaterialPageRoute(
                                             builder: (_) =>
                                                 const TopicSuggestionPage())),
-                                    text: TextDoc.txtSuggestTopicBtn,
+                                    text: S.current.txtSuggestTopicBtn,
                                     minimumSize: const Size.fromHeight(48),
                                   ),
                                 ),

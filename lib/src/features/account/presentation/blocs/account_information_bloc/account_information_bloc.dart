@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../base/define/text.dart';
 import '../../../../../../base/helpers/time_helper.dart';
 import '../../../../../../base/temp_dio/dio_client.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../domain/entities/user_account_entity.dart';
 
 part 'account_information_event.dart';
@@ -54,8 +55,8 @@ class AccountInformationBloc
         throw Exception();
       }
     } on Exception catch (_) {
-      emit(const AccountInformationSaveFailureState(
-          TextDoc.txtProfileUpdateFailed));
+      emit(
+          AccountInformationSaveFailureState(S.current.txtProfileUpdateFailed));
     }
   }
 

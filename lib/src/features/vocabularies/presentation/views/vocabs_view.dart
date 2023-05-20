@@ -8,6 +8,7 @@ import '../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../base/define/size.dart';
 import '../../../../../base/define/text.dart';
 import '../../../../../base/widgets/toast/app_toast.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../bookmark/domain/entities/bookmark_phrase_item_entity.dart';
 import '../../../vocabularies_learning/presentation/views/vocab_learning_page.dart';
 import '../blocs/vocabs_bloc/vocabs_bloc.dart';
@@ -28,18 +29,18 @@ class _VocabsViewState extends State<VocabsView> {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: AppColor.white,
-        title: const Text(
-          TextDoc.txtConfirmRemoveSavedTitle,
-          style: TextStyle(
+        title: Text(
+          S.current.txtConfirmRemoveSavedTitle,
+          style: const TextStyle(
             fontSize: titleMediumSize,
             fontWeight: titleMediumWeight,
             color: AppColor.defaultFont,
             height: 1.0,
           ),
         ),
-        content: const Text(
-          TextDoc.txtConfirmRemoveSavedContent,
-          style: TextStyle(
+        content: Text(
+          S.current.txtConfirmRemoveSavedContent,
+          style: const TextStyle(
             fontSize: bodyLargeSize,
             fontWeight: bodyLargeWeight,
             color: AppColor.defaultFont,
@@ -52,9 +53,9 @@ class _VocabsViewState extends State<VocabsView> {
             style: TextButton.styleFrom(
               foregroundColor: AppColor.mainColor1,
             ),
-            child: const Text(
-              TextDoc.txtCancel,
-              style: TextStyle(
+            child: Text(
+              S.current.txtCancel,
+              style: const TextStyle(
                 fontSize: labelLargeSize,
                 fontWeight: labelLargeWeight,
               ),
@@ -66,9 +67,9 @@ class _VocabsViewState extends State<VocabsView> {
               backgroundColor: AppColor.error,
               foregroundColor: Colors.white,
             ),
-            child: const Text(
-              TextDoc.txtRemove,
-              style: TextStyle(
+            child: Text(
+              S.current.txtRemove,
+              style: const TextStyle(
                 fontSize: labelLargeSize,
                 fontWeight: labelLargeWeight,
               ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../base/define/common_txt_style.dart';
 import '../../../../../base/define/styles.dart';
 import '../../../../../gen/assets.gen.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../notifications/presentation/views/noti_list_page.dart';
 import '../widgets/setting_tile.dart';
 import 'settings_about_view.dart';
@@ -30,7 +31,7 @@ class SettingsView extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    TextDoc.appName,
+                    S.current.appName,
                     style: CommonTxtStyle.t30Regular.apply(
                       color: AppColor.defaultFont,
                     ),
@@ -73,7 +74,7 @@ class SettingsView extends StatelessWidget {
                 children: [
                   SettingTile(
                     icon: Icons.notifications_outlined,
-                    title: TextDoc.txtNotification,
+                    title: S.current.txtNotification,
                     onClick: () => Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => const SettingsNotification(),
@@ -83,7 +84,7 @@ class SettingsView extends StatelessWidget {
                   const SizedBox(height: spacing16),
                   SettingTile(
                     icon: Icons.brush_outlined,
-                    title: TextDoc.txtAppearance,
+                    title: S.current.txtAppearance,
                     onClick: () => Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => const SettingsAppearance(),
@@ -93,7 +94,7 @@ class SettingsView extends StatelessWidget {
                   const SizedBox(height: spacing16),
                   SettingTile(
                     icon: Icons.language_outlined,
-                    title: TextDoc.txtLanguage,
+                    title: S.current.txtLanguage,
                     onClick: () => Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => const SettingsLanguage(),
@@ -103,7 +104,7 @@ class SettingsView extends StatelessWidget {
                   const SizedBox(height: spacing16),
                   SettingTile(
                     icon: Icons.feedback_outlined,
-                    title: TextDoc.txtGiveFeedback,
+                    title: S.current.txtGiveFeedback,
                     onClick: () => Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => const SettingsFeedbackPage(),
@@ -113,7 +114,7 @@ class SettingsView extends StatelessWidget {
                   const SizedBox(height: spacing16),
                   SettingTile(
                     icon: Icons.info_outline,
-                    title: TextDoc.txtAbout,
+                    title: S.current.txtAbout,
                     onClick: () => Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => const SettingsAboutView(),

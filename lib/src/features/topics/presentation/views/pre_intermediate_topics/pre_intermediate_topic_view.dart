@@ -5,6 +5,7 @@ import '../../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/buttons/text_button.dart';
 import '../../../../../../base/widgets/toast/app_toast.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../blocs/pre_intermediate_topic_bloc/pre_intermediate_topics_bloc.dart';
 import '../../widgets/topic_card.dart';
 
@@ -36,9 +37,9 @@ class PreIntermediateTopicView extends StatelessWidget {
             AppToast(
               duration: const Duration(seconds: 3),
               bottomOffset: 8.0,
-              message: const Text(
-                TextDoc.txtAddFavoriteSuccess,
-                style: TextStyle(
+              message: Text(
+                S.current.txtAddFavoriteSuccess,
+                style: const TextStyle(
                   fontSize: bodyLargeSize,
                   fontWeight: bodyLargeWeight,
                   color: AppColor.white,
@@ -52,9 +53,9 @@ class PreIntermediateTopicView extends StatelessWidget {
             AppToast(
               duration: const Duration(seconds: 3),
               bottomOffset: 8.0,
-              message: const Text(
-                TextDoc.txtRemoveFavoriteSuccess,
-                style: TextStyle(
+              message: Text(
+                S.current.txtRemoveFavoriteSuccess,
+                style: const TextStyle(
                   fontSize: bodyLargeSize,
                   fontWeight: bodyLargeWeight,
                   color: AppColor.white,
@@ -91,17 +92,17 @@ class PreIntermediateTopicView extends StatelessWidget {
                           context: context,
                           builder: (context) => AlertDialog(
                             backgroundColor: AppColor.white,
-                            title: const Text(
-                              TextDoc.txtConfirmRemoveFavoriteTitle,
-                              style: TextStyle(
+                            title: Text(
+                              S.current.txtConfirmRemoveFavoriteTitle,
+                              style: const TextStyle(
                                 fontSize: titleLargeSize,
                                 fontWeight: titleLargeWeight,
                                 color: AppColor.defaultFont,
                               ),
                             ),
-                            content: const Text(
-                              TextDoc.txtConfirmRemoveFavoriteContent,
-                              style: TextStyle(
+                            content: Text(
+                              S.current.txtConfirmRemoveFavoriteContent,
+                              style: const TextStyle(
                                 fontSize: bodySmallSize,
                                 fontWeight: bodySmallWeight,
                                 color: AppColor.defaultFont,
@@ -109,7 +110,7 @@ class PreIntermediateTopicView extends StatelessWidget {
                             ),
                             actions: [
                               AppTextButton(
-                                text: TextDoc.txtCancel,
+                                text: S.current.txtCancel,
                                 onPressed: () => Navigator.pop(context, false),
                               ),
                               ElevatedButton(
@@ -118,9 +119,9 @@ class PreIntermediateTopicView extends StatelessWidget {
                                   backgroundColor: AppColor.error,
                                   foregroundColor: Colors.white,
                                 ),
-                                child: const Text(
-                                  TextDoc.txtRemove,
-                                  style: TextStyle(
+                                child: Text(
+                                  S.current.txtRemove,
+                                  style: const TextStyle(
                                     fontSize: labelLargeSize,
                                     fontWeight: labelLargeWeight,
                                   ),

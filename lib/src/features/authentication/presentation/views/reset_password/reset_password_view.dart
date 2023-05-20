@@ -6,6 +6,7 @@ import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/text_fields/text_field.dart';
 import '../../../../../../gen/assets.gen.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../blocs/reset_password_bloc/reset_password_bloc.dart';
 
 class ResetPasswordView extends StatefulWidget {
@@ -50,9 +51,9 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                     height: 280,
                     child: Assets.illustration.resetPassword.svg(),
                   ),
-                  const Text(
-                    TextDoc.txtResetPasswordIntroduction,
-                    style: TextStyle(
+                   Text(
+                    S.current.txtResetPasswordIntroduction,
+                    style: const TextStyle(
                       fontSize: titleLargeSize,
                       fontWeight: titleLargeWeight,
                       color: AppColor.defaultFontContainer,
@@ -63,9 +64,9 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                     builder: (context, state) => Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        const Text(
-                          TextDoc.txtEmail,
-                          style: TextStyle(
+                         Text(
+                          S.current.txtEmail,
+                          style: const TextStyle(
                             fontSize: titleMediumSize,
                             fontWeight: titleMediumWeight,
                             color: AppColor.defaultFont,
@@ -84,7 +85,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                         ),
                         const SizedBox(height: spacing24),
                         AppFilledButton(
-                          text: TextDoc.txtResetPassword,
+                          text: S.current.txtResetPassword,
                           onPressed: (state is ResetPasswordValidateState &&
                                   !state.forceDisabled)
                               ? () => context.read<ResetPasswordBloc>().add(
@@ -98,7 +99,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                   ),
                   const SizedBox(height: spacing8),
                   AppTextButton(
-                    text: TextDoc.txtReturnSignIn,
+                    text: S.current.txtReturnSignIn,
                     onPressed: () => Navigator.pop(context),
                     minimumSize: const Size.fromHeight(48),
                   ),

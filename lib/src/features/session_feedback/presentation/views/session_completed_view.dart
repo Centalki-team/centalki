@@ -4,6 +4,7 @@ import '../../../../../base/define/styles.dart';
 import '../../../../../base/widgets/buttons/elevated_button.dart';
 import '../../../../../base/widgets/buttons/text_button.dart';
 import '../../../../../gen/assets.gen.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../report_meeting/presentation/views/report_meeting_page.dart';
 import '../../../report_meeting/presentation/views/report_meeting_view.dart';
 import 'session_give_feedback/session_give_feedback_page.dart';
@@ -31,18 +32,18 @@ class SessionCompletedView extends StatelessWidget {
               width: 160,
             ),
             const SizedBox(height: spacing24),
-            const Text(
-              TextDoc.txtCongrats,
+            Text(
+              S.current.txtCongrats,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 color: AppColor.support,
                 fontSize: headlineLargeSize,
                 fontWeight: headlineLargeWeight,
               ),
             ),
-            const Text(
-              TextDoc.txtSessionCompletedBody,
-              style: TextStyle(
+            Text(
+              S.current.txtSessionCompletedBody,
+              style: const TextStyle(
                 fontSize: bodyLargeSize,
                 fontWeight: bodyLargeWeight,
                 letterSpacing: 0.5,
@@ -54,10 +55,10 @@ class SessionCompletedView extends StatelessWidget {
             const SizedBox(
               height: 100.0,
             ),
-            const Text(
-              TextDoc.txtSessionCompletedAskForFeedback,
+            Text(
+              S.current.txtSessionCompletedAskForFeedback,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 height: 1.25,
                 letterSpacing: 0.5,
                 fontSize: bodyLargeSize,
@@ -69,7 +70,7 @@ class SessionCompletedView extends StatelessWidget {
               height: spacing8,
             ),
             AppElevatedButton(
-              text: TextDoc.txtSessionCompletedFeedbackBtn,
+              text: S.current.txtSessionCompletedFeedbackBtn,
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -82,7 +83,7 @@ class SessionCompletedView extends StatelessWidget {
                 Navigator.pop(context),
                 Navigator.pop(context),
               },
-              text: TextDoc.txtDoItLater,
+              text: S.current.txtDoItLater,
             ),
             const SizedBox(
               height: spacing16,
@@ -91,9 +92,9 @@ class SessionCompletedView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text(
-                  TextDoc.txtSessionCompletedAskForReport,
-                  style: TextStyle(
+                Text(
+                  S.current.txtSessionCompletedAskForReport,
+                  style: const TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
                     color: AppColor.shadow,
@@ -106,7 +107,7 @@ class SessionCompletedView extends StatelessWidget {
                         builder: (_) => const ReportMeetingPage(),
                         settings: RouteSettings(arguments: args)),
                   ),
-                  text: TextDoc.txtSessionCompletedReportBtn,
+                  text: S.current.txtSessionCompletedReportBtn,
                 ),
               ],
             ),

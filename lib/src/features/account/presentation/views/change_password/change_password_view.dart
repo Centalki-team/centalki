@@ -7,6 +7,7 @@ import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
 import '../../../../../../base/widgets/dialog/success_dialog_content.dart';
 import '../../../../../../base/widgets/text_fields/outlined_text_field.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../blocs/change_password_bloc/change_password_bloc.dart';
 
 class ChangePasswordView extends StatefulWidget {
@@ -34,7 +35,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                 barrierDismissible: false,
                 context: context,
                 builder: (context) => ErrorDialogContent(
-                  title: TextDoc.txtChangePasswordResult,
+                  title: S.current.txtChangePasswordResult,
                   content: state.message,
                 ),
               );
@@ -42,9 +43,9 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
               await showDialog(
                 barrierDismissible: false,
                 context: context,
-                builder: (context) => const SuccessDialogContent(
-                  title: TextDoc.txtChangePasswordResult,
-                  content: TextDoc.txtSuccessfullyChanged,
+                builder: (context) => SuccessDialogContent(
+                  title: S.current.txtChangePasswordResult,
+                  content: S.current.txtSuccessfullyChanged,
                 ),
               );
             }
@@ -57,9 +58,9 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
             child: CustomScrollView(
               slivers: [
                 SliverAppBar.medium(
-                  title: const Text(
-                    TextDoc.txtChangePassword,
-                    style: TextStyle(
+                  title: Text(
+                    S.current.txtChangePassword,
+                    style: const TextStyle(
                       height: 1.0,
                       fontSize: headlineSmallSize,
                       fontWeight: headlineSmallWeight,
@@ -78,9 +79,9 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           // Watch out
-                          const Text(
-                            TextDoc.txtThirdPartyChangePassword,
-                            style: TextStyle(
+                          Text(
+                            S.current.txtThirdPartyChangePassword,
+                            style: const TextStyle(
                               fontSize: titleMediumSize,
                               fontWeight: bodyLargeWeight,
                               color: AppColor.error,
@@ -88,9 +89,9 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                             ),
                           ),
                           const SizedBox(height: spacing8),
-                          const Text(
-                            TextDoc.txtCurrentPassword,
-                            style: TextStyle(
+                          Text(
+                            S.current.txtCurrentPassword,
+                            style: const TextStyle(
                               fontSize: titleMediumSize,
                               fontWeight: titleMediumWeight,
                               color: AppColor.defaultFont,
@@ -100,9 +101,10 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                             builder: (context, state) => AppOutlinedTextField(
                               controller: _currentPasswordController,
                               obscureText: true,
-                              errorText: state is ChangePasswordInvalidInputState
-                                  ? state.passwordError
-                                  : null,
+                              errorText:
+                                  state is ChangePasswordInvalidInputState
+                                      ? state.passwordError
+                                      : null,
                               onChanged: (value) =>
                                   context.read<ChangePasswordBloc>().add(
                                         ChangePasswordSendPasswordEvent(
@@ -114,9 +116,9 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                             ),
                           ),
                           const SizedBox(height: spacing16),
-                          const Text(
-                            TextDoc.txtNewPassword,
-                            style: TextStyle(
+                          Text(
+                            S.current.txtNewPassword,
+                            style: const TextStyle(
                               fontSize: titleMediumSize,
                               fontWeight: titleMediumWeight,
                               color: AppColor.defaultFont,
@@ -126,9 +128,10 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                             builder: (context, state) => AppOutlinedTextField(
                               controller: _newPasswordController,
                               obscureText: true,
-                              errorText: state is ChangePasswordInvalidInputState
-                                  ? state.newPasswordError
-                                  : null,
+                              errorText:
+                                  state is ChangePasswordInvalidInputState
+                                      ? state.newPasswordError
+                                      : null,
                               onChanged: (value) =>
                                   context.read<ChangePasswordBloc>().add(
                                         ChangePasswordSendPasswordEvent(
@@ -140,9 +143,9 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                             ),
                           ),
                           const SizedBox(height: spacing16),
-                          const Text(
-                            TextDoc.txtConfirmPassword,
-                            style: TextStyle(
+                          Text(
+                            S.current.txtConfirmPassword,
+                            style: const TextStyle(
                               fontSize: titleMediumSize,
                               fontWeight: titleMediumWeight,
                               color: AppColor.defaultFont,
@@ -152,9 +155,10 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                             builder: (context, state) => AppOutlinedTextField(
                               controller: _confirmPasswordController,
                               obscureText: true,
-                              errorText: state is ChangePasswordInvalidInputState
-                                  ? state.confirmPasswordError
-                                  : null,
+                              errorText:
+                                  state is ChangePasswordInvalidInputState
+                                      ? state.confirmPasswordError
+                                      : null,
                               onChanged: (value) =>
                                   context.read<ChangePasswordBloc>().add(
                                         ChangePasswordSendPasswordEvent(
@@ -168,12 +172,13 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                           const SizedBox(height: spacing24),
                           BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
                             builder: (context, state) => AppElevatedButton(
-                              text: TextDoc.txtChangePassword,
+                              text: S.current.txtChangePassword,
                               minimumSize: const Size.fromHeight(48),
                               onPressed: state is ChangePasswordValidInputState
-                                  ? () => context.read<ChangePasswordBloc>().add(
-                                        const ChangePasswordChangeEvent(),
-                                      )
+                                  ? () =>
+                                      context.read<ChangePasswordBloc>().add(
+                                            const ChangePasswordChangeEvent(),
+                                          )
                                   : null,
                             ),
                           ),

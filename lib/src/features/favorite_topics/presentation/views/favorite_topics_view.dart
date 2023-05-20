@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/toast/app_toast.dart';
+import '../../../../../generated/l10n.dart';
 import '../blocs/favorite_topics_bloc.dart';
 import 'favorite_topics_empty_view.dart';
 import 'widgets/favorite_topic_card.dart';
@@ -37,9 +38,9 @@ class _FavoriteTopicsViewState extends State<FavoriteTopicsView> {
             AppToast(
               duration: const Duration(seconds: 3),
               bottomOffset: 8.0,
-              message: const Text(
-                TextDoc.txtRemoveFavoriteSuccess,
-                style: TextStyle(
+              message: Text(
+                S.current.txtRemoveFavoriteSuccess,
+                style: const TextStyle(
                   fontSize: bodyLargeSize,
                   fontWeight: bodyLargeWeight,
                   color: AppColor.white,

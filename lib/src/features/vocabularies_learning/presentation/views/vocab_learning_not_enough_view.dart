@@ -4,6 +4,7 @@ import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
 import '../../../../../base/define/text.dart';
+import '../../../../../generated/l10n.dart';
 
 class VocabLearningNotEnoughView extends StatelessWidget {
   const VocabLearningNotEnoughView({
@@ -35,9 +36,9 @@ class VocabLearningNotEnoughView extends StatelessWidget {
             const SizedBox(
               height: spacing60,
             ),
-            const Text(
-              TextDoc.txtVocabLearningSuggestion,
-              style: TextStyle(
+            Text(
+              S.current.txtVocabLearningSuggestion,
+              style: const TextStyle(
                 fontSize: titleLargeSize,
                 fontWeight: titleLargeWeight,
                 color: AppColor.defaultFont,

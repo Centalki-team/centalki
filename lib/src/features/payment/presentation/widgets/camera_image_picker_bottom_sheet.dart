@@ -5,6 +5,7 @@ import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
 import '../../../../../base/define/text.dart';
+import '../../../../../generated/l10n.dart';
 // import '../../domain/entities/image_with_size_entity.dart';
 
 class CameraAndImagePickerPopUp extends StatelessWidget {
@@ -38,9 +39,9 @@ class CameraAndImagePickerPopUp extends StatelessWidget {
                     style: TextButton.styleFrom(
                       backgroundColor: AppColor.white,
                     ),
-                    child: const Text(
-                      TextDoc.txtTakeAPic,
-                      style: TextStyle(
+                    child: Text(
+                      S.current.txtTakeAPic,
+                      style: const TextStyle(
                         fontSize: labelLargeSize,
                         fontWeight: labelLargeWeight,
                         height: 20 / 22,
@@ -74,9 +75,9 @@ class CameraAndImagePickerPopUp extends StatelessWidget {
                       style: TextButton.styleFrom(
                         backgroundColor: AppColor.white,
                       ),
-                      child: const Text(
-                        TextDoc.txtChooseFromLibrary,
-                        style: TextStyle(
+                      child: Text(
+                        S.current.txtChooseFromLibrary,
+                        style: const TextStyle(
                           fontSize: labelLargeSize,
                           fontWeight: labelLargeWeight,
                           height: 20 / 22,

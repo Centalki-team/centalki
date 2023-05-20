@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
 import '../../../../../../base/widgets/toast/app_toast.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../../payment/presentation/views/payment_page.dart';
 import '../../blocs/wallet_bloc/wallet_bloc.dart';
 
@@ -24,7 +25,7 @@ class _WalletViewState extends State<WalletView> {
               barrierDismissible: false,
               context: context,
               builder: (context) => ErrorDialogContent(
-                title: TextDoc.txtLoadFailed,
+                title: S.current.txtLoadFailed,
                 content: state.message,
               ),
             );
@@ -50,9 +51,9 @@ class _WalletViewState extends State<WalletView> {
               body: CustomScrollView(
                 slivers: [
                   SliverAppBar.medium(
-                    title: const Text(
-                      TextDoc.txtWallet,
-                      style: TextStyle(
+                    title: Text(
+                      S.current.txtWallet,
+                      style: const TextStyle(
                         fontSize: headlineSmallSize,
                         fontWeight: headlineSmallWeight,
                         color: AppColor.defaultFont,
@@ -130,9 +131,9 @@ class _WalletViewState extends State<WalletView> {
                                 ),
                                 child: Column(
                                   children: [
-                                    const Text(
-                                      TextDoc.txtBalance,
-                                      style: TextStyle(
+                                     Text(
+                                      S.current.txtBalance,
+                                      style: const TextStyle(
                                         fontSize: titleMediumSize,
                                         fontWeight: titleMediumWeight,
                                         color: AppColor.defaultFont,
@@ -147,9 +148,9 @@ class _WalletViewState extends State<WalletView> {
                                         color: AppColor.support,
                                       ),
                                     ),
-                                    const Text(
-                                      TextDoc.txtOr,
-                                      style: TextStyle(
+                                     Text(
+                                      S.current.txtOr,
+                                      style: const TextStyle(
                                         fontSize: labelLargeSize,
                                         fontWeight: labelLargeWeight,
                                         color: AppColor.defaultFont,
@@ -165,9 +166,9 @@ class _WalletViewState extends State<WalletView> {
                                       ),
                                     ),
                                     const SizedBox(height: spacing12),
-                                    const Text(
-                                      TextDoc.txtEachSessionDuration,
-                                      style: TextStyle(
+                                     Text(
+                                      S.current.txtEachSessionDuration,
+                                      style: const TextStyle(
                                         height: 0.5,
                                         fontStyle: FontStyle.italic,
                                         fontSize: bodySmallSize,
@@ -176,7 +177,7 @@ class _WalletViewState extends State<WalletView> {
                                       ),
                                     ),
                                     Text(
-                                      '${TextDoc.txtEachSessionPrice}${currencyFormat.format(state.costPerSession)}',
+                                      '${S.current.txtEachSessionPrice}${currencyFormat.format(state.costPerSession)}',
                                       style: const TextStyle(
                                         fontStyle: FontStyle.italic,
                                         fontSize: bodySmallSize,

@@ -6,6 +6,7 @@ import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../base/define/size.dart';
 import '../../../../../base/define/text.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../settings/presentation/views/settings_notification_view.dart';
 import '../../domain/entities/noti_list_item_entity.dart';
 import '../blocs/noti_list_bloc/noti_list_bloc.dart';
@@ -95,9 +96,9 @@ class _NotiListViewState extends State<NotiListView> {
           body: CustomScrollView(
             slivers: [
               SliverAppBar.medium(
-                title: const Text(
-                  TextDoc.txtNotifications,
-                  style: TextStyle(
+                title: Text(
+                  S.current.txtNotifications,
+                  style: const TextStyle(
                     fontSize: headlineSmallSize,
                     fontWeight: headlineSmallWeight,
                     color: AppColor.defaultFont,
@@ -127,22 +128,22 @@ class _NotiListViewState extends State<NotiListView> {
                           return Column(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              SizedBox(
+                            children: [
+                              const SizedBox(
                                 height: 100,
                               ),
-                              Icon(
+                              const Icon(
                                 Icons.notifications_none_outlined,
                                 color: AppColor.shadow,
                                 size: 80.0,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: spacing16,
                                 width: double.infinity,
                               ),
                               Text(
-                                TextDoc.txtNoNotiToShow,
-                                style: TextStyle(
+                                S.current.txtNoNotiToShow,
+                                style: const TextStyle(
                                   fontSize: titleLargeSize,
                                   fontWeight: titleLargeWeight,
                                   color: AppColor.defaultFont,
@@ -150,13 +151,13 @@ class _NotiListViewState extends State<NotiListView> {
                                 ),
                                 textAlign: TextAlign.center,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: spacing8,
                                 width: double.infinity,
                               ),
                               Text(
-                                TextDoc.txtNotiWillUpdateRemind,
-                                style: TextStyle(
+                                S.current.txtNotiWillUpdateRemind,
+                                style: const TextStyle(
                                   fontSize: bodyMediumSize,
                                   fontWeight: bodyMediumWeight,
                                   color: AppColor.shadow,
@@ -172,21 +173,21 @@ class _NotiListViewState extends State<NotiListView> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               NotiList(
-                                title: TextDoc.txtToday,
+                                title: S.current.txtToday,
                                 notiList: state.todayList,
                                 selectedList: selectedNotiList,
                                 needTimeAgoConvert: true,
                                 markAsRead: _markAsRead,
                               ),
                               NotiList(
-                                title: TextDoc.txtThisWeek,
+                                title: S.current.txtThisWeek,
                                 notiList: state.thisWeekList,
                                 selectedList: selectedNotiList,
                                 needTimeAgoConvert: true,
                                 markAsRead: _markAsRead,
                               ),
                               NotiList(
-                                title: TextDoc.txtPrevious,
+                                title: S.current.txtPrevious,
                                 notiList: state.previousList,
                                 selectedList: selectedNotiList,
                                 markAsRead: _markAsRead,

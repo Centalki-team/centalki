@@ -3,13 +3,19 @@ import 'package:flutter/material.dart';
 import '../../../../../base/define/styles.dart';
 import '../../../../../base/widgets/bottom_bar/custom_bottom_nav.dart';
 import '../../../../../gen/assets.gen.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../account/presentation/views/your_account/your_account_page.dart';
 import '../../../favorites/presentation/views/favorite_view.dart';
 import '../../../settings/presentation/views/settings_view.dart';
 import '../../../topics/presentation/views/select_topic_level/select_topic_level_view.dart';
 
 class HomeView extends StatefulWidget {
-  const HomeView({Key? key}) : super(key: key);
+  const HomeView({
+    Key? key,
+    this.tabIndex,
+  }) : super(key: key);
+
+  final int? tabIndex;
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -17,15 +23,16 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView>
     with SingleTickerProviderStateMixin {
-  ValueNotifier<int> currentIndex = ValueNotifier(0);
+  late ValueNotifier<int> currentIndex;
   late final TabController _tabController;
   final bottomNavList = <BottomIndicatorNavigationBarItem>[];
 
   @override
   void initState() {
+    currentIndex = ValueNotifier(widget.tabIndex ?? 0);
     _tabController = TabController(
       length: 4,
-      initialIndex: 0,
+      initialIndex: widget.tabIndex ?? 0,
       vsync: this,
       animationDuration: const Duration(milliseconds: 300),
     );
@@ -159,7 +166,7 @@ class _HomeViewState extends State<HomeView>
                     height: 24,
                     color: AppColor.mainColor1,
                   ),
-                  label: TextDoc.topic,
+                  label: S.current.topic,
                 ),
                 BottomNavigationBarItem(
                   icon: Assets.icon.favorite.image(
@@ -168,7 +175,7 @@ class _HomeViewState extends State<HomeView>
                   ),
                   activeIcon: Assets.icon.wishlistFilled.image(
                       width: 24.0, height: 24, color: AppColor.mainColor1),
-                  label: TextDoc.favorite,
+                  label: S.current.favorite,
                 ),
                 BottomNavigationBarItem(
                   icon: Assets.icon.account.image(
@@ -177,7 +184,7 @@ class _HomeViewState extends State<HomeView>
                   ),
                   activeIcon: Assets.icon.accountFilled.image(
                       width: 24.0, height: 24, color: AppColor.mainColor1),
-                  label: TextDoc.account,
+                  label: S.current.account,
                 ),
                 BottomNavigationBarItem(
                   icon: Assets.icon.settings.image(
@@ -186,7 +193,7 @@ class _HomeViewState extends State<HomeView>
                   ),
                   activeIcon: Assets.icon.settingsFilled.image(
                       width: 24.0, height: 24, color: AppColor.mainColor1),
-                  label: TextDoc.settings,
+                  label: S.current.settings,
                 ),
               ],
             ),
