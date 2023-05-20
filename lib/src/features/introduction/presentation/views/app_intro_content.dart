@@ -109,9 +109,9 @@ class _AppIntroContentState extends State<AppIntroContent> {
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 16.0),
+                                      horizontal: padding16),
                                   child: SizedBox(
-                                    height: 320.0,
+                                    height: 280.0,
                                     child: SvgGenImage(intros[i].img).svg(
                                       height: 320.0,
                                       fit: BoxFit.cover,
@@ -119,26 +119,27 @@ class _AppIntroContentState extends State<AppIntroContent> {
                                   ),
                                 ),
                                 const SizedBox(
-                                  height: 40.0,
+                                  height: spacing40,
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 16.0),
+                                      horizontal: padding16),
                                   child: Text(
                                     intros[i].title,
                                     style: const TextStyle(
-                                      fontSize: 40,
+                                      height: 1.0,
+                                      fontSize: 34,
                                       fontWeight: FontWeight.w700,
                                       color: AppColor.defaultFont,
                                     ),
                                   ),
                                 ),
                                 const SizedBox(
-                                  height: 16.0,
+                                  height: spacing16,
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 16.0),
+                                      horizontal: padding16),
                                   child: intros[i].content,
                                 ),
                                 const Spacer(),
@@ -161,7 +162,7 @@ class _AppIntroContentState extends State<AppIntroContent> {
                     ),
                   ),
                   const SizedBox(
-                    height: 40.0,
+                    height: spacing40,
                   ),
                   BlocBuilder<AppIntroBloc, AppIntroState>(
                     buildWhen: (previous, current) =>
@@ -176,7 +177,7 @@ class _AppIntroContentState extends State<AppIntroContent> {
                         top: false,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                            bottom: padding40,
+                            bottom: padding24,
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,

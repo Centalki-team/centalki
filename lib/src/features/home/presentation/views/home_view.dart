@@ -123,8 +123,8 @@ class _HomeViewState extends State<HomeView>
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-                color: AppColor.shadow.shade400,
-                blurRadius: 8.0,
+                color: AppColor.shadow.shade200,
+                blurRadius: 4.0,
               )
             ],
           ),

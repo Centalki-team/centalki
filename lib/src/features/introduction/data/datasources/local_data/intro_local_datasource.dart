@@ -21,7 +21,9 @@ class IntroLocalDatasource {
           content: const Text.rich(
             TextSpan(
               children: [
-                TextSpan(text: 'Participate in '),
+                TextSpan(
+                  text: 'Participate in '
+                ),
                 TextSpan(
                   text: '1-1 video call',
                   style: TextStyle(
@@ -30,7 +32,9 @@ class IntroLocalDatasource {
                     color: AppColor.secondary,
                   ),
                 ),
-                TextSpan(text: ' sessions with '),
+                TextSpan(
+                  text: ' sessions with '
+                ),
                 TextSpan(
                   text: 'foreign teachers',
                   style: TextStyle(
@@ -40,14 +44,17 @@ class IntroLocalDatasource {
                   ),
                 ),
                 TextSpan(
-                    text:
-                        ' to practice speaking English and improve your skills.'),
+                  text: ' to practice speaking English and improve your skills.',
+                ),
               ],
               style: TextStyle(
                 fontSize: bodyLargeSize,
                 fontWeight: bodyLargeWeight,
                 color: AppColor.defaultFont,
               ),
+            ),
+            style: TextStyle(
+              height: 1.2,
             ),
           ),
         ),
@@ -76,6 +83,9 @@ class IntroLocalDatasource {
                 color: AppColor.defaultFont,
               ),
             ),
+            style: TextStyle(
+              height: 1.2,
+            ),
           ),
         ),
         AppIntroEntity(
@@ -102,6 +112,9 @@ class IntroLocalDatasource {
                 fontWeight: bodyLargeWeight,
                 color: AppColor.defaultFont,
               ),
+            ),
+            style: TextStyle(
+              height: 1.2,
             ),
           ),
         ),
