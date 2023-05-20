@@ -6,6 +6,7 @@ import '../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../base/widgets/buttons/button.dart';
 import '../../../../../base/widgets/toast/app_toast.dart';
 import '../../../../../gen/assets.gen.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../connect_teacher/presentation/views/connect_teacher_page.dart';
 import '../../../topic_review/presentation/views/topic_review_page.dart';
 import '../../domain/entities/topic_detail_entity.dart';
@@ -32,18 +33,18 @@ class _TopicDetailViewState extends State<TopicDetailView> {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: AppColor.white,
-        title: const Text(
-          TextDoc.txtConfirmRemoveSavedTitle,
-          style: TextStyle(
+        title: Text(
+          S.current.txtConfirmRemoveSavedTitle,
+          style: const TextStyle(
             fontSize: titleMediumSize,
             fontWeight: titleMediumWeight,
             color: AppColor.defaultFont,
             height: 1.0,
           ),
         ),
-        content: const Text(
-          TextDoc.txtConfirmRemoveSavedContent,
-          style: TextStyle(
+        content: Text(
+          S.current.txtConfirmRemoveSavedContent,
+          style: const TextStyle(
             fontSize: bodyLargeSize,
             fontWeight: bodyLargeWeight,
             color: AppColor.defaultFont,
@@ -56,9 +57,9 @@ class _TopicDetailViewState extends State<TopicDetailView> {
             style: TextButton.styleFrom(
               foregroundColor: AppColor.mainColor1,
             ),
-            child: const Text(
-              TextDoc.txtCancel,
-              style: TextStyle(
+            child: Text(
+              S.current.txtCancel,
+              style: const TextStyle(
                 fontSize: labelLargeSize,
                 fontWeight: labelLargeWeight,
               ),
@@ -70,9 +71,9 @@ class _TopicDetailViewState extends State<TopicDetailView> {
               backgroundColor: AppColor.error,
               foregroundColor: Colors.white,
             ),
-            child: const Text(
-              TextDoc.txtRemove,
-              style: TextStyle(
+            child: Text(
+              S.current.txtRemove,
+              style: const TextStyle(
                 fontSize: labelLargeSize,
                 fontWeight: labelLargeWeight,
               ),
@@ -163,9 +164,9 @@ class _TopicDetailViewState extends State<TopicDetailView> {
             AppToast(
               duration: const Duration(seconds: 3),
               bottomOffset: 8.0,
-              message: const Text(
-                TextDoc.txtAddFavoriteSuccess,
-                style: TextStyle(
+              message: Text(
+                S.current.txtAddFavoriteSuccess,
+                style: const TextStyle(
                   fontSize: bodyLargeSize,
                   fontWeight: bodyLargeWeight,
                   color: AppColor.white,
@@ -179,9 +180,9 @@ class _TopicDetailViewState extends State<TopicDetailView> {
             AppToast(
               duration: const Duration(seconds: 3),
               bottomOffset: 8.0,
-              message: const Text(
-                TextDoc.txtRemoveFavoriteSuccess,
-                style: TextStyle(
+              message: Text(
+                S.current.txtRemoveFavoriteSuccess,
+                style: const TextStyle(
                   fontSize: bodyLargeSize,
                   fontWeight: bodyLargeWeight,
                   color: AppColor.white,
@@ -210,7 +211,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                     children: [
                       Expanded(
                         child: AppElevatedButton(
-                          text: TextDoc.txtTalk,
+                          text: S.current.txtTalk,
                           onPressed: () => Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -245,17 +246,17 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                 context: context,
                                 builder: (context) => AlertDialog(
                                   backgroundColor: AppColor.white,
-                                  title: const Text(
-                                    TextDoc.txtConfirmRemoveFavoriteTitle,
-                                    style: TextStyle(
+                                  title: Text(
+                                    S.current.txtConfirmRemoveFavoriteTitle,
+                                    style: const TextStyle(
                                       fontSize: titleLargeSize,
                                       fontWeight: titleLargeWeight,
                                       color: AppColor.defaultFont,
                                     ),
                                   ),
-                                  content: const Text(
-                                    TextDoc.txtConfirmRemoveFavoriteContent,
-                                    style: TextStyle(
+                                  content: Text(
+                                    S.current.txtConfirmRemoveFavoriteContent,
+                                    style: const TextStyle(
                                       fontSize: bodySmallSize,
                                       fontWeight: bodySmallWeight,
                                       color: AppColor.defaultFont,
@@ -263,7 +264,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                   ),
                                   actions: [
                                     AppTextButton(
-                                      text: TextDoc.txtCancel,
+                                      text: S.current.txtCancel,
                                       onPressed: () =>
                                           Navigator.pop(context, false),
                                     ),
@@ -274,9 +275,9 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                         backgroundColor: AppColor.error,
                                         foregroundColor: Colors.white,
                                       ),
-                                      child: const Text(
-                                        TextDoc.txtRemove,
-                                        style: TextStyle(
+                                      child: Text(
+                                        S.current.txtRemove,
+                                        style: const TextStyle(
                                           fontSize: labelLargeSize,
                                           fontWeight: labelLargeWeight,
                                         ),
@@ -430,9 +431,9 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.end,
                                         children: [
-                                          const Text(
-                                            TextDoc.txtTopicCategory,
-                                            style: TextStyle(
+                                          Text(
+                                            S.current.txtTopicCategory,
+                                            style: const TextStyle(
                                               fontSize: labelMediumSize,
                                               fontWeight: labelMediumWeight,
                                               color: AppColor.shadow,
@@ -472,9 +473,9 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          const Text(
-                                            TextDoc.txtTopicLevel,
-                                            style: TextStyle(
+                                          Text(
+                                            S.current.txtTopicLevel,
+                                            style: const TextStyle(
                                               fontSize: labelMediumSize,
                                               fontWeight: labelMediumWeight,
                                               color: AppColor.shadow,
@@ -511,9 +512,9 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                 ),
                               ),
                               const SizedBox(height: spacing16),
-                              const Text(
-                                TextDoc.txtTopicVocab,
-                                style: TextStyle(
+                              Text(
+                                S.current.txtTopicVocab,
+                                style: const TextStyle(
                                   fontSize: titleLargeSize,
                                   fontWeight: FontWeight.bold,
                                   color: AppColor.tertiary,
@@ -543,9 +544,9 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                 ),
                               ),
                               const SizedBox(height: spacing16),
-                              const Text(
-                                TextDoc.txtTopicQuestions,
-                                style: TextStyle(
+                              Text(
+                                S.current.txtTopicQuestions,
+                                style: const TextStyle(
                                   fontSize: titleLargeSize,
                                   fontWeight: FontWeight.bold,
                                   color: AppColor.tertiary,

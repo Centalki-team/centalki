@@ -11,6 +11,7 @@ import '../../../../../base/define/size.dart';
 import '../../../../../base/define/text.dart';
 import '../../../../../base/widgets/buttons/button.dart';
 import '../../../../../base/widgets/toast/app_toast.dart';
+import '../../../../../generated/l10n.dart';
 import '../../domain/entities/payment_method_entity.dart';
 import '../blocs/payment_bloc/payment_bloc.dart';
 import '../widgets/add_photo_button.dart';
@@ -100,7 +101,7 @@ class _PaymentViewState extends State<PaymentView> {
                     child: SafeArea(
                       top: false,
                       child: AppFilledButton(
-                        text: TextDoc.txtUpload,
+                        text: S.current.txtUpload,
                         minimumSize: const Size.fromHeight(48),
                         onPressed: () => context
                             .read<PaymentBloc>()
@@ -119,9 +120,9 @@ class _PaymentViewState extends State<PaymentView> {
         body: CustomScrollView(
           slivers: [
             SliverAppBar.medium(
-              title: const Text(
-                TextDoc.txtBuyMoreSessions,
-                style: TextStyle(
+              title: Text(
+                S.current.txtBuyMoreSessions,
+                style: const TextStyle(
                   fontSize: headlineSmallSize,
                   fontWeight: headlineSmallWeight,
                   color: AppColor.defaultFont,
@@ -142,9 +143,9 @@ class _PaymentViewState extends State<PaymentView> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          TextDoc.txtChoosePaymentMethod,
-                          style: TextStyle(
+                         Text(
+                          S.current.txtChoosePaymentMethod,
+                          style: const TextStyle(
                             fontSize: titleSmallSize,
                             fontWeight: titleSmallWeight,
                             color: AppColor.defaultFont,
@@ -177,9 +178,9 @@ class _PaymentViewState extends State<PaymentView> {
                         const SizedBox(
                           height: spacing16,
                         ),
-                        const Text(
-                          TextDoc.txtPaymentInformation,
-                          style: TextStyle(
+                        Text(
+                          S.current.txtPaymentInformation,
+                          style: const TextStyle(
                             fontSize: titleMediumSize,
                             fontWeight: titleMediumWeight,
                             color: Colors.black,
@@ -220,9 +221,9 @@ class _PaymentViewState extends State<PaymentView> {
                         const SizedBox(
                           height: spacing8,
                         ),
-                        const Text(
-                          TextDoc.txtInstructions,
-                          style: TextStyle(
+                        Text(
+                          S.current.txtInstructions,
+                          style: const TextStyle(
                             fontSize: titleMediumSize,
                             fontWeight: titleMediumWeight,
                             color: Colors.black,
@@ -232,19 +233,19 @@ class _PaymentViewState extends State<PaymentView> {
                         const SizedBox(
                           height: spacing8,
                         ),
-                        const Text.rich(
+                        Text.rich(
                           TextSpan(
                             children: [
                               TextSpan(
-                                text: '${TextDoc.txtPricePerSessionAnnounce} ',
-                                style: TextStyle(
+                                text: '${S.current.txtPricePerSessionAnnounce} ',
+                                style: const TextStyle(
                                   fontSize: bodySmallSize,
                                   fontWeight: bodySmallWeight,
                                   color: AppColor.defaultFont,
                                   height: 16 / 20,
                                 ),
                               ),
-                              TextSpan(
+                              const TextSpan(
                                 text: '100,000 VNĐ.',
                                 style: TextStyle(
                                   fontSize: labelMediumSize,
@@ -259,9 +260,9 @@ class _PaymentViewState extends State<PaymentView> {
                         const SizedBox(
                           height: spacing8,
                         ),
-                        const Text(
-                          TextDoc.txtPaymentInstructionDetail,
-                          style: TextStyle(
+                        Text(
+                          S.current.txtPaymentInstructionDetail,
+                          style: const TextStyle(
                             fontSize: bodySmallSize,
                             fontWeight: bodySmallWeight,
                             color: AppColor.defaultFont,
@@ -271,9 +272,9 @@ class _PaymentViewState extends State<PaymentView> {
                         const SizedBox(
                           height: spacing16,
                         ),
-                        const Text(
-                          TextDoc.txtPaymentBillUpload,
-                          style: TextStyle(
+                        Text(
+                          S.current.txtPaymentBillUpload,
+                          style: const TextStyle(
                             fontSize: titleMediumSize,
                             fontWeight: titleMediumWeight,
                             color: Colors.black,

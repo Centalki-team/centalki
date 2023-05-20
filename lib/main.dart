@@ -3,18 +3,22 @@ import 'dart:io';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'base/define/manager/locale_manager.dart';
 import 'base/define/storage/storage_gateway.dart';
 import 'base/temp_dio/dio_client.dart';
+import 'config/app_config.dart';
 import 'config/main_config.dart';
 import 'di/di_module.dart';
 import 'di/injection/injection.dart';
 import 'firebase_options.dart';
+import 'generated/l10n.dart';
+import 'src/features/application/presentation/blocs/application_bloc/application_bloc.dart';
 import 'src/features/authentication/presentation/views/sign_in/sign_in_page.dart';
 import 'src/features/authentication/presentation/views/verify_email.dart';
 import 'src/features/home/presentation/views/home_view.dart';
@@ -24,8 +28,6 @@ import 'src/features/introduction/presentation/views/app_intro_page.dart';
 import 'src/features/splash/presentation/views/splash_screen.dart';
 
 void main(List<String> args) async {
-  await Injection.inject();
-  await configureApp();
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
@@ -38,7 +40,10 @@ void main(List<String> args) async {
     });
   }
 
+  AppLocaleManager.init();
   await StorageGateway.init();
+  await Injection.inject();
+  await configureApp();
 
   HttpOverrides.global = MyHttpOverrides();
   // runApp(
@@ -64,43 +69,87 @@ class MyApp extends StatefulWidget {
 
   final FirebaseAnalytics firebaseAnalytics;
 
+  static void setLocale(BuildContext context, Locale newLocale) async {
+    var state = context.findAncestorStateOfType<_MyAppState>();
+    state?.changeLanguage(newLocale);
+  }
+
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
+  late final ApplicationBloc _bloc;
+  int? savedTabIndex;
+  late String _locale;
+  late bool _isDarkMode;
+  late final AppLocalizationDelegate appLocalizationDelegate;
+
+  changeLanguage(Locale locale) {
+    setState(() {
+      _locale = locale.languageCode;
+      savedTabIndex = 3;
+    });
+  }
+
   @override
   void initState() {
-    // TODO: implement initState
+    _locale = AppConfig.defaultLocale;
+    _bloc = getIt.get<ApplicationBloc>();
+    _bloc.add(ApplicationLoaded());
+    _isDarkMode = false;
+    appLocalizationDelegate = const AppLocalizationDelegate();
     super.initState();
   }
 
   @override
-  Widget build(BuildContext context) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          useMaterial3: true,
-          fontFamily: 'Dongle',
-        ),
-        localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-          DefaultCupertinoLocalizations.delegate,
+  Widget build(BuildContext context) => MultiBlocProvider(
+        providers: [
+          BlocProvider.value(
+            value: _bloc,
+          ),
         ],
-        home: const MyWidget(),
-        navigatorObservers: kDebugMode
-            ? []
-            : [
-                FirebaseAnalyticsObserver(
-                  analytics: widget.firebaseAnalytics,
-                ),
-              ],
+        child: BlocBuilder<ApplicationBloc, ApplicationState>(
+            bloc: _bloc,
+            builder: (context, state) => MaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  theme: ThemeData(
+                    useMaterial3: true,
+                    fontFamily: 'Dongle',
+                  ),
+                  localizationsDelegates: [
+                    appLocalizationDelegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                  ],
+                  supportedLocales: appLocalizationDelegate.supportedLocales,
+                  locale: Locale(_locale),
+                  themeMode: _isDarkMode ? ThemeMode.dark : ThemeMode.light,
+                  // theme: AppThemes.lightTheme,
+                  // darkTheme: AppThemes.darkTheme,
+                  home: MyWidget(
+                    key: UniqueKey(),
+                    currentTabIndex: savedTabIndex,
+                  ),
+                  navigatorObservers: kDebugMode
+                      ? []
+                      : [
+                          FirebaseAnalyticsObserver(
+                            analytics: widget.firebaseAnalytics,
+                          ),
+                        ],
+                )),
       );
 }
 
 class MyWidget extends StatefulWidget {
-  const MyWidget({super.key});
+  const MyWidget({
+    super.key,
+    this.currentTabIndex,
+  });
+
+  final int? currentTabIndex;
 
   @override
   State<MyWidget> createState() => _MyWidgetState();
@@ -175,7 +224,9 @@ class _MyWidgetState extends State<MyWidget> {
       case "not_email_verified":
         return const VerifyEmailView();
       case "success":
-        return const HomeView();
+        return HomeView(
+          tabIndex: widget.currentTabIndex,
+        );
       default:
         return const SplashScreen();
     }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../base/define/styles.dart';
 import '../../../../../gen/assets.gen.dart';
+import '../../../../../generated/l10n.dart';
 
 class SettingsAboutView extends StatelessWidget {
   const SettingsAboutView({super.key});
@@ -20,10 +21,10 @@ class SettingsAboutView extends StatelessWidget {
             ),
           ),
           title: Row(
-            children: const [
+            children: [
               Text(
-                TextDoc.txtAbout,
-                style: TextStyle(
+                S.current.txtAbout,
+                style: const TextStyle(
                   fontSize: headlineSmallSize,
                   fontWeight: headlineSmallWeight,
                   color: AppColor.defaultFont,
@@ -45,18 +46,18 @@ class SettingsAboutView extends StatelessWidget {
                 width: 160,
               ),
               const SizedBox(height: spacing24),
-              const Text(
-                TextDoc.txtCentalkiTitle,
+              Text(
+                S.current.txtCentalkiTitle,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   color: AppColor.defaultFont,
                   fontSize: displayLargeSize,
                   letterSpacing: -0.25,
                 ),
               ),
-              const Text(
-                TextDoc.txtCentalkiDescription,
-                style: TextStyle(
+              Text(
+                S.current.txtCentalkiDescription,
+                style: const TextStyle(
                   fontSize: bodyLargeSize,
                   fontWeight: bodyLargeWeight,
                   letterSpacing: 0.5,
@@ -68,10 +69,10 @@ class SettingsAboutView extends StatelessWidget {
               const SizedBox(
                 height: 160.0,
               ),
-              const Text(
-                TextDoc.txtCentalkiSource,
+              Text(
+                S.current.txtCentalkiSource,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   height: 1.25,
                   letterSpacing: 0.5,
                   fontSize: bodySmallSize,
@@ -82,10 +83,10 @@ class SettingsAboutView extends StatelessWidget {
               const SizedBox(
                 height: spacing32,
               ),
-              const Text(
-                TextDoc.txtCentalkiVersion,
+              Text(
+                S.current.txtCentalkiVersion,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   height: 1.0,
                   letterSpacing: 0.5,
                   fontSize: labelLargeSize,
@@ -93,10 +94,10 @@ class SettingsAboutView extends StatelessWidget {
                   color: AppColor.defaultFont,
                 ),
               ),
-              const Text(
-                TextDoc.txtLastUpdated,
+              Text(
+                S.current.txtLastUpdated,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   height: 1.0,
                   letterSpacing: 0.5,
                   fontSize: labelLargeSize,

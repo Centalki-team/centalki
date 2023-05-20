@@ -6,6 +6,7 @@ import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/text_fields/outlined_text_field.dart';
 import '../../../../../../gen/assets.gen.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../blocs/sign_up_bloc/sign_up_bloc.dart';
 import '../self_review/self_review_page.dart';
 import 'terms.dart';
@@ -49,10 +50,10 @@ class _SignUpViewState extends State<SignUpView> {
                   height: 280,
                   child: Assets.illustration.signUp.svg(),
                 ),
-                const Text(
-                  TextDoc.txtSignUpIntroduction,
+                 Text(
+                  S.current.txtSignUpIntroduction,
                   textAlign: TextAlign.left,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: titleLargeSize,
                     fontWeight: titleLargeWeight,
                     color: AppColor.defaultFontContainer,
@@ -63,9 +64,9 @@ class _SignUpViewState extends State<SignUpView> {
                   builder: (context, state) => Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      const Text(
-                        TextDoc.txtFullName,
-                        style: TextStyle(
+                       Text(
+                        S.current.txtFullName,
+                        style: const TextStyle(
                           fontSize: titleMediumSize,
                           fontWeight: titleMediumWeight,
                           color: AppColor.defaultFont,
@@ -80,9 +81,9 @@ class _SignUpViewState extends State<SignUpView> {
                         onChanged: _validateSignUpInputs,
                       ),
                       const SizedBox(height: spacing8),
-                      const Text(
-                        TextDoc.txtEmail,
-                        style: TextStyle(
+                       Text(
+                        S.current.txtEmail,
+                        style: const TextStyle(
                           fontSize: titleMediumSize,
                           fontWeight: titleMediumWeight,
                           color: AppColor.defaultFont,
@@ -98,9 +99,9 @@ class _SignUpViewState extends State<SignUpView> {
                         onChanged: _validateSignUpInputs,
                       ),
                       const SizedBox(height: spacing8),
-                      const Text(
-                        TextDoc.txtPassword,
-                        style: TextStyle(
+                       Text(
+                        S.current.txtPassword,
+                        style: const TextStyle(
                           fontSize: titleMediumSize,
                           fontWeight: titleMediumWeight,
                           color: AppColor.defaultFont,
@@ -116,9 +117,9 @@ class _SignUpViewState extends State<SignUpView> {
                         onChanged: _validateSignUpInputs,
                       ),
                       const SizedBox(height: spacing8),
-                      const Text(
-                        TextDoc.txtRetypePassword,
-                        style: TextStyle(
+                       Text(
+                        S.current.txtRetypePassword,
+                        style: const TextStyle(
                           fontSize: titleMediumSize,
                           fontWeight: titleMediumWeight,
                           color: AppColor.defaultFont,
@@ -147,16 +148,16 @@ class _SignUpViewState extends State<SignUpView> {
                               _validateSignUpInputs('');
                             },
                           ),
-                          const Text(
-                            TextDoc.txtTermsAccept,
-                            style: TextStyle(
+                           Text(
+                            S.current.txtTermsAccept,
+                            style: const TextStyle(
                               fontSize: bodyMediumSize,
                               fontWeight: bodyMediumWeight,
                               color: AppColor.defaultFont,
                             ),
                           ),
                           AppTextButton(
-                            text: TextDoc.txtTerms,
+                            text: S.current.txtTerms,
                             onPressed: () => Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -178,7 +179,7 @@ class _SignUpViewState extends State<SignUpView> {
                       );
                     }
                     return AppFilledButton(
-                      text: TextDoc.txtNext,
+                      text: S.current.txtNext,
                       minimumSize: const Size.fromHeight(48),
                       onPressed: state is SignUpValidateState &&
                               state.forceDisabled == false
@@ -210,9 +211,9 @@ class _SignUpViewState extends State<SignUpView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text(
-                      TextDoc.txtHaveAnAccount,
-                      style: TextStyle(
+                     Text(
+                      S.current.txtHaveAnAccount,
+                      style: const TextStyle(
                         fontSize: bodyMediumSize,
                         fontWeight: bodyMediumWeight,
                         color: AppColor.defaultFont,
@@ -220,7 +221,7 @@ class _SignUpViewState extends State<SignUpView> {
                     ),
                     const SizedBox(width: spacing4),
                     AppTextButton(
-                      text: TextDoc.txtSignIn,
+                      text: S.current.txtSignIn,
                       onPressed: () => Navigator.pop(context),
                     )
                   ],

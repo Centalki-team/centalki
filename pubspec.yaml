@@ -70,6 +70,7 @@ dependencies:
   firebase_messaging: ^14.4.1
   timeago: ^3.4.0
   copy_with_extension: 5.0.2
+  rxdart: ^0.27.7
   
 dependency_overrides:
   permission_handler: "any"

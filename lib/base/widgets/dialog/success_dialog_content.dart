@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../generated/l10n.dart';
 import '../../define/styles.dart';
 import '../buttons/button.dart';
 
@@ -40,7 +41,7 @@ class SuccessDialogContent extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             },
-            text: TextDoc.txtOk,
+            text: S.current.txtOk,
           ),
         ],
       );

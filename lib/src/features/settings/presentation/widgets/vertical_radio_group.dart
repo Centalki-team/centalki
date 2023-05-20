@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../base/define/styles.dart';
+import '../../domain/entities/language_entity.dart';
 import 'radio_row.dart';
 
 class VerticalRadioGroup extends StatefulWidget {
@@ -14,20 +15,22 @@ class VerticalRadioGroup extends StatefulWidget {
 
   //final String title;
   final String? initValue;
-  final List<String> dataList;
-  final Function(dynamic)? onChanged;
+  final List<LanguageEntity> dataList;
+  final Function(LanguageEntity)? onChanged;
 
   @override
   State<VerticalRadioGroup> createState() => _VerticalRadioGroupState();
 }
 
 class _VerticalRadioGroupState extends State<VerticalRadioGroup> {
-  late String? currentValue;
+  late LanguageEntity? currentValue;
 
   @override
   void initState() {
     super.initState();
-    currentValue = widget.initValue ?? (widget.dataList.isNotEmpty ? widget.dataList[0] : null);
+    currentValue = widget.initValue == null
+        ? (widget.dataList.isNotEmpty ? widget.dataList[0] : null)
+        : (widget.initValue == 'en' ? widget.dataList[0] : widget.dataList[1]);
   }
 
   @override
@@ -47,12 +50,12 @@ class _VerticalRadioGroupState extends State<VerticalRadioGroup> {
                   vertical: padding4,
                 ),
                 child: RadioRow(
-                  title: e,
+                  value: e,
                   isSelected: currentValue == e,
                   onSelect: (value) {
-                    setState(() {
-                      currentValue = value;
-                    });
+                    if (value != currentValue) {
+                      widget.onChanged?.call(value);
+                    }
                   },
                 ),
               ),

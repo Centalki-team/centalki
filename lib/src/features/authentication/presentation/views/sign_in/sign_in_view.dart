@@ -7,6 +7,7 @@ import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/text_fields/text_field.dart';
 import '../../../../../../gen/assets.gen.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../blocs/sign_in_bloc/sign_in_bloc.dart';
 import '../reset_password/reset_password_page.dart';
 import '../sign_up/sign_up_page.dart';
@@ -54,10 +55,10 @@ class _SignInViewState extends State<SignInView> {
                     height: 280,
                     child: Assets.illustration.signIn.svg(),
                   ),
-                  const Text(
-                    TextDoc.txtSignInIntroduction,
+                   Text(
+                    S.current.txtSignInIntroduction,
                     textAlign: TextAlign.left,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: titleLargeSize,
                       fontWeight: titleLargeWeight,
                       color: AppColor.defaultFontContainer,
@@ -68,9 +69,9 @@ class _SignInViewState extends State<SignInView> {
                     builder: (context, state) => Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        const Text(
-                          TextDoc.txtEmail,
-                          style: TextStyle(
+                         Text(
+                          S.current.txtEmail,
+                          style: const TextStyle(
                             fontSize: titleMediumSize,
                             fontWeight: titleMediumWeight,
                             color: AppColor.defaultFont,
@@ -86,9 +87,9 @@ class _SignInViewState extends State<SignInView> {
                           onChanged: _validateSignInInputs,
                         ),
                         const SizedBox(height: spacing8),
-                        const Text(
-                          TextDoc.txtPassword,
-                          style: TextStyle(
+                         Text(
+                          S.current.txtPassword,
+                          style: const TextStyle(
                             fontSize: titleMediumSize,
                             fontWeight: titleMediumWeight,
                             color: AppColor.defaultFont,
@@ -115,7 +116,7 @@ class _SignInViewState extends State<SignInView> {
                         );
                       }
                       return AppFilledButton(
-                        text: TextDoc.txtSignIn,
+                        text: S.current.txtSignIn,
                         onPressed: (state is SignInValidateState &&
                                 !state.forceDisabled)
                             ? () =>
@@ -129,10 +130,10 @@ class _SignInViewState extends State<SignInView> {
                     },
                   ),
                   const SizedBox(height: spacing24),
-                  const Center(
+                  Center(
                     child: Text(
-                      TextDoc.txtOrLoginWith,
-                      style: TextStyle(
+                      S.current.txtOrLoginWith,
+                      style: const TextStyle(
                         fontSize: bodyLargeSize,
                         fontWeight: bodyLargeWeight,
                         color: AppColor.defaultFont,
@@ -202,16 +203,16 @@ class _SignInViewState extends State<SignInView> {
                         MaterialPageRoute(
                           builder: (context) => const ResetPasswordPage(),
                         )),
-                    text: TextDoc.txtForgotPassword,
+                    text: S.current.txtForgotPassword,
                   ),
                   const SizedBox(height: spacing8),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const Text(
-                        TextDoc.txtHaveNoAccount,
-                        style: TextStyle(
+                       Text(
+                        S.current.txtHaveNoAccount,
+                        style: const TextStyle(
                           fontSize: bodyMediumSize,
                           fontWeight: bodyMediumWeight,
                           color: AppColor.defaultFont,
@@ -223,7 +224,7 @@ class _SignInViewState extends State<SignInView> {
                             MaterialPageRoute(
                               builder: (context) => const SignUpPage(),
                             )),
-                        text: TextDoc.txtSignUp,
+                        text: S.current.txtSignUp,
                       ),
                     ],
                   ),

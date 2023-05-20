@@ -6,6 +6,7 @@ import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
 import '../../../../../base/define/text.dart';
 import '../../../../../base/widgets/buttons/button.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../bookmark/domain/entities/bookmark_phrase_item_entity.dart';
 import '../blocs/vocab_learning_bloc/vocab_learning_bloc.dart';
 import '../widgets/vocab_flash_card.dart';
@@ -35,18 +36,18 @@ class _VocabLearningViewState extends State<VocabLearningView>
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: AppColor.white,
-        title: const Text(
-          TextDoc.txtEndProgress,
-          style: TextStyle(
+        title: Text(
+          S.current.txtEndProgress,
+          style: const TextStyle(
             fontSize: titleMediumSize,
             fontWeight: titleMediumWeight,
             color: AppColor.defaultFont,
             height: 1.0,
           ),
         ),
-        content: const Text(
-          TextDoc.txtEndProgressContent,
-          style: TextStyle(
+        content: Text(
+          S.current.txtEndProgressContent,
+          style: const TextStyle(
             fontSize: bodyLargeSize,
             fontWeight: bodyLargeWeight,
             color: AppColor.defaultFont,
@@ -59,9 +60,9 @@ class _VocabLearningViewState extends State<VocabLearningView>
             style: TextButton.styleFrom(
               foregroundColor: AppColor.mainColor1,
             ),
-            child: const Text(
-              TextDoc.txtCancel,
-              style: TextStyle(
+            child: Text(
+              S.current.txtCancel,
+              style: const TextStyle(
                 fontSize: labelLargeSize,
                 fontWeight: labelLargeWeight,
               ),
@@ -73,9 +74,9 @@ class _VocabLearningViewState extends State<VocabLearningView>
               backgroundColor: AppColor.error,
               foregroundColor: Colors.white,
             ),
-            child: const Text(
-              TextDoc.txtEndBtn,
-              style: TextStyle(
+            child: Text(
+              S.current.txtEndBtn,
+              style: const TextStyle(
                 fontSize: labelLargeSize,
                 fontWeight: labelLargeWeight,
               ),
@@ -146,7 +147,7 @@ class _VocabLearningViewState extends State<VocabLearningView>
                               children: [
                                 if (value != 4) ...[
                                   AppOutlinedButton(
-                                    text: TextDoc.txtEndBtn,
+                                    text: S.current.txtEndBtn,
                                     textColor: AppColor.error,
                                     outlineColor: AppColor.error,
                                     minimumSize: const Size(171, 40),
@@ -156,7 +157,7 @@ class _VocabLearningViewState extends State<VocabLearningView>
                                     height: spacing16,
                                   ),
                                   AppFilledButton(
-                                    text: TextDoc.txtNextBtn,
+                                    text: S.current.txtNextBtn,
                                     minimumSize: const Size(171, 40),
                                     onPressed: () {
                                       _tabController
@@ -165,7 +166,7 @@ class _VocabLearningViewState extends State<VocabLearningView>
                                   ),
                                 ] else ...[
                                   AppFilledButton(
-                                    text: TextDoc.txtCompleteBtn,
+                                    text: S.current.txtCompleteBtn,
                                     minimumSize: const Size(171, 40),
                                     onPressed: () => context
                                         .read<VocabLearningBloc>()
@@ -179,9 +180,9 @@ class _VocabLearningViewState extends State<VocabLearningView>
                     return Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Text(
-                          TextDoc.txtStillWantToLearnMore,
-                          style: TextStyle(
+                        Text(
+                          S.current.txtStillWantToLearnMore,
+                          style: const TextStyle(
                             fontSize: bodyMediumSize,
                             fontWeight: bodyMediumWeight,
                             color: AppColor.shadow,
@@ -192,7 +193,7 @@ class _VocabLearningViewState extends State<VocabLearningView>
                           height: spacing8,
                         ),
                         AppElevatedButton(
-                          text: TextDoc.txtOfCourse,
+                          text: S.current.txtOfCourse,
                           minimumSize: const Size(171, 40),
                           onPressed: () =>
                               context.read<VocabLearningBloc>().add(
@@ -205,7 +206,7 @@ class _VocabLearningViewState extends State<VocabLearningView>
                           height: spacing16,
                         ),
                         AppTextButton(
-                          text: TextDoc.txtThatEnoughForToday,
+                          text: S.current.txtThatEnoughForToday,
                           minimumSize: const Size(171, 40),
                           onPressed: Navigator.of(context).pop,
                         ),
@@ -319,7 +320,7 @@ class _VocabLearningViewState extends State<VocabLearningView>
                                 vocabsList: widget.vocabsList,
                               ),
                             ),
-                        text: TextDoc.txtStartBtn,
+                        text: S.current.txtStartBtn,
                         minimumSize: const Size(171, 40),
                       )
                     ],

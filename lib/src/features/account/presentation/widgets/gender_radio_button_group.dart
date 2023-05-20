@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/size.dart';
 import '../../../../../base/define/text.dart';
+import '../../../../../generated/l10n.dart';
 import '../../domain/entities/user_account_entity.dart';
 
 class GenderRadioButtonGroup extends StatefulWidget {
@@ -49,9 +50,9 @@ class _GenderRadioButtonGroupState extends State<GenderRadioButtonGroup> {
                     });
                     widget.genderCallback(selectedGender);
                   },
-                  title: const Text(
-                    TextDoc.txtMale,
-                    style: TextStyle(
+                  title: Text(
+                    S.current.txtMale,
+                    style: const TextStyle(
                       fontSize: bodyLargeSize,
                       fontWeight: bodyLargeWeight,
                       color: AppColor.defaultFont,
@@ -68,9 +69,9 @@ class _GenderRadioButtonGroupState extends State<GenderRadioButtonGroup> {
                     });
                     widget.genderCallback(selectedGender);
                   },
-                  title: const Text(
-                    TextDoc.txtFemale,
-                    style: TextStyle(
+                  title: Text(
+                    S.current.txtFemale,
+                    style: const TextStyle(
                       fontSize: bodyLargeSize,
                       fontWeight: bodyLargeWeight,
                       color: AppColor.defaultFont,
@@ -87,9 +88,9 @@ class _GenderRadioButtonGroupState extends State<GenderRadioButtonGroup> {
                     });
                     widget.genderCallback(selectedGender);
                   },
-                  title: const Text(
-                    TextDoc.txtOthers,
-                    style: TextStyle(
+                  title: Text(
+                    S.current.txtOthers,
+                    style: const TextStyle(
                       fontSize: bodyLargeSize,
                       fontWeight: bodyLargeWeight,
                       color: AppColor.defaultFont,
@@ -111,7 +112,7 @@ class _GenderRadioButtonGroupState extends State<GenderRadioButtonGroup> {
                     });
                     widget.genderCallback(selectedGender);
                   },
-                  title: const Text(TextDoc.txtMale),
+                  title: Text(S.current.txtMale),
                 ),
               ),
               Expanded(
@@ -124,7 +125,7 @@ class _GenderRadioButtonGroupState extends State<GenderRadioButtonGroup> {
                     });
                     widget.genderCallback(selectedGender);
                   },
-                  title: const Text(TextDoc.txtFemale),
+                  title: Text(S.current.txtFemale),
                 ),
               ),
               Expanded(
@@ -137,7 +138,7 @@ class _GenderRadioButtonGroupState extends State<GenderRadioButtonGroup> {
                     });
                     widget.genderCallback(selectedGender);
                   },
-                  title: const Text(TextDoc.txtOthers),
+                  title: Text(S.current.txtOthers),
                 ),
               ),
             ],

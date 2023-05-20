@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../base/define/styles.dart';
+import '../../domain/entities/language_entity.dart';
 
 class RadioRow extends StatelessWidget {
   const RadioRow({
     super.key,
-    required this.title,
+    required this.value,
     this.isSelected = false,
     this.onSelect,
   });
 
-  final String title;
+  final LanguageEntity value;
   final bool isSelected;
-  final Function(String)? onSelect;
+  final Function(LanguageEntity)? onSelect;
 
   @override
   Widget build(BuildContext context) => InkWell(
-        onTap: isSelected ? null : () => onSelect?.call(title),
+        onTap: isSelected ? null : () => onSelect?.call(value),
         child: Padding(
           padding: const EdgeInsets.all(padding16),
           child: Row(
@@ -24,7 +25,7 @@ class RadioRow extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  title,
+                  value.name,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
@@ -35,7 +36,9 @@ class RadioRow extends StatelessWidget {
                 ),
               ),
               Icon(
-                isSelected ? Icons.radio_button_checked_outlined : Icons.radio_button_off_outlined,
+                isSelected
+                    ? Icons.radio_button_checked_outlined
+                    : Icons.radio_button_off_outlined,
                 color: isSelected ? AppColor.mainColor2 : AppColor.defaultFont,
               )
             ],

@@ -7,6 +7,7 @@ import '../../../../../../base/widgets/avatar.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
 import '../../../../../../gen/assets.gen.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../../notifications/presentation/views/noti_list_page.dart';
 import '../../blocs/your_account_bloc/your_account_bloc.dart';
 import '../../widgets/account_tile.dart';
@@ -37,7 +38,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                 showDialog(
                   context: context,
                   builder: (context) => ErrorDialogContent(
-                    title: TextDoc.txtLoadFailed,
+                    title: S.current.txtLoadFailed,
                     content: state.message,
                   ),
                 );
@@ -70,7 +71,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    TextDoc.appName,
+                                    S.current.appName,
                                     style: CommonTxtStyle.t30Regular.apply(
                                       color: AppColor.defaultFont,
                                     ),
@@ -215,7 +216,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                               children: [
                                 AccountTile(
                                   icon: Icons.person_outline,
-                                  title: TextDoc.txtStudentProfile,
+                                  title: S.current.txtStudentProfile,
                                   onTap: () async {
                                     await Navigator.push(
                                         context,
@@ -233,7 +234,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                 const SizedBox(height: spacing12),
                                 AccountTile(
                                   icon: Icons.wallet_outlined,
-                                  title: TextDoc.txtWallet,
+                                  title: S.current.txtWallet,
                                   onTap: () => Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -243,7 +244,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                 const SizedBox(height: spacing12),
                                 AccountTile(
                                   icon: Icons.history_outlined,
-                                  title: TextDoc.txtHistory,
+                                  title: S.current.txtHistory,
                                   onTap: () => Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -253,7 +254,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                 const SizedBox(height: spacing12),
                                 AccountTile(
                                   icon: Icons.manage_accounts_outlined,
-                                  title: TextDoc.txtAccountInformation,
+                                  title: S.current.txtAccountInformation,
                                   onTap: () => Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -264,7 +265,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                 const SizedBox(height: spacing12),
                                 AccountTile(
                                   icon: Icons.password_outlined,
-                                  title: TextDoc.txtChangePassword,
+                                  title: S.current.txtChangePassword,
                                   onTap: () => Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -275,7 +276,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                 const SizedBox(height: spacing12),
                                 AccountTile(
                                   icon: Icons.person_remove_outlined,
-                                  title: TextDoc.txtDeleteAccount,
+                                  title: S.current.txtDeleteAccount,
                                   foregroundColor: AppColor.error,
                                   onTap: () async {
                                     final confirmedDelete = await showDialog(
@@ -283,18 +284,19 @@ class _YourAccountViewState extends State<YourAccountView> {
                                       context: context,
                                       builder: (context) => AlertDialog(
                                         backgroundColor: AppColor.white,
-                                        title: const Text(
-                                          TextDoc.txtConfirmDeleteAccountTitle,
-                                          style: TextStyle(
+                                        title: Text(
+                                          S.current
+                                              .txtConfirmDeleteAccountTitle,
+                                          style: const TextStyle(
                                             fontSize: titleLargeSize,
                                             fontWeight: titleLargeWeight,
                                             color: AppColor.error,
                                           ),
                                         ),
-                                        content: const Text(
-                                          TextDoc
+                                        content: Text(
+                                          S.current
                                               .txtConfirmDeleteAccountContent,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontSize: bodySmallSize,
                                             fontWeight: bodySmallWeight,
                                             color: AppColor.defaultFont,
@@ -302,7 +304,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                         ),
                                         actions: [
                                           AppTextButton(
-                                            text: TextDoc.txtCancel,
+                                            text: S.current.txtCancel,
                                             onPressed: () =>
                                                 Navigator.pop(context, false),
                                           ),
@@ -313,9 +315,9 @@ class _YourAccountViewState extends State<YourAccountView> {
                                               backgroundColor: AppColor.error,
                                               foregroundColor: Colors.white,
                                             ),
-                                            child: const Text(
-                                              TextDoc.txtDeleteAccount,
-                                              style: TextStyle(
+                                            child: Text(
+                                              S.current.txtDeleteAccount,
+                                              style: const TextStyle(
                                                 fontSize: labelLargeSize,
                                                 fontWeight: labelLargeWeight,
                                               ),
@@ -344,17 +346,17 @@ class _YourAccountViewState extends State<YourAccountView> {
                                         context: context,
                                         builder: (context) => AlertDialog(
                                               backgroundColor: AppColor.white,
-                                              title: const Text(
-                                                TextDoc.txtSignOut,
-                                                style: TextStyle(
+                                              title: Text(
+                                                S.current.txtSignOut,
+                                                style: const TextStyle(
                                                   fontSize: titleLargeSize,
                                                   fontWeight: titleLargeWeight,
                                                   color: AppColor.error,
                                                 ),
                                               ),
-                                              content: const Text(
-                                                TextDoc.txtSignOutContent,
-                                                style: TextStyle(
+                                              content: Text(
+                                                S.current.txtSignOutContent,
+                                                style: const TextStyle(
                                                   fontSize: bodySmallSize,
                                                   fontWeight: bodySmallWeight,
                                                   color: AppColor.defaultFont,
@@ -369,9 +371,9 @@ class _YourAccountViewState extends State<YourAccountView> {
                                                     foregroundColor:
                                                         AppColor.mainColor1,
                                                   ),
-                                                  child: const Text(
-                                                    TextDoc.txtCancel,
-                                                    style: TextStyle(
+                                                  child: Text(
+                                                    S.current.txtCancel,
+                                                    style: const TextStyle(
                                                       fontSize: labelLargeSize,
                                                       fontWeight:
                                                           labelLargeWeight,
@@ -389,9 +391,9 @@ class _YourAccountViewState extends State<YourAccountView> {
                                                     foregroundColor:
                                                         Colors.white,
                                                   ),
-                                                  child: const Text(
-                                                    TextDoc.txtSignOut,
-                                                    style: TextStyle(
+                                                  child: Text(
+                                                    S.current.txtSignOut,
+                                                    style: const TextStyle(
                                                       fontSize: labelLargeSize,
                                                       fontWeight:
                                                           labelLargeWeight,
@@ -418,14 +420,14 @@ class _YourAccountViewState extends State<YourAccountView> {
                                   ),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
-                                    children: const [
-                                      Icon(
+                                    children: [
+                                      const Icon(
                                         Icons.logout_outlined,
                                       ),
-                                      SizedBox(width: spacing8),
+                                      const SizedBox(width: spacing8),
                                       Text(
-                                        TextDoc.txtSignOut,
-                                        style: TextStyle(
+                                        S.current.txtSignOut,
+                                        style: const TextStyle(
                                           fontSize: labelLargeSize,
                                           fontWeight: labelLargeWeight,
                                         ),
@@ -471,10 +473,10 @@ class _YourAccountViewState extends State<YourAccountView> {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    const Text(
-                                      TextDoc.txtRemainingSessions,
+                                    Text(
+                                      S.current.txtRemainingSessions,
                                       textAlign: TextAlign.end,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: titleSmallSize,
                                         fontWeight: titleSmallWeight,
                                         color: AppColor.shadow,
@@ -504,9 +506,9 @@ class _YourAccountViewState extends State<YourAccountView> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    const Text(
-                                      TextDoc.txtCompletedSessions,
-                                      style: TextStyle(
+                                    Text(
+                                      S.current.txtCompletedSessions,
+                                      style: const TextStyle(
                                         fontSize: titleSmallSize,
                                         fontWeight: titleSmallWeight,
                                         color: AppColor.shadow,

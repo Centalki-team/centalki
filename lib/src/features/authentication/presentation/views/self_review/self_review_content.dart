@@ -8,6 +8,7 @@ import '../../../../../../base/define/size.dart';
 import '../../../../../../base/define/text.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/toast/app_toast.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../domain/entities/self_review/self_level_entity.dart';
 import '../../blocs/self_review_bloc/self_review_bloc.dart';
 import '../../blocs/sign_up_bloc/sign_up_bloc.dart';
@@ -94,9 +95,9 @@ class _SelfReviewContentState extends State<SelfReviewContent> {
           body: CustomScrollView(
             slivers: [
               SliverAppBar.medium(
-                title: const Text(
-                  TextDoc.txtSelfReviewTitle,
-                  style: TextStyle(
+                title:  Text(
+                  S.current.txtSelfReviewTitle,
+                  style: const TextStyle(
                     fontSize: titleLargeSize,
                     fontWeight: titleLargeWeight,
                     color: AppColor.defaultFont,
@@ -118,9 +119,9 @@ class _SelfReviewContentState extends State<SelfReviewContent> {
                           const SizedBox(
                             height: spacing12,
                           ),
-                          const Text(
-                            TextDoc.txtSelfReviewContent,
-                            style: TextStyle(
+                           Text(
+                            S.current.txtSelfReviewContent,
+                            style: const TextStyle(
                               fontSize: bodyMediumSize,
                               fontWeight: bodyMediumWeight,
                               color: AppColor.defaultFont,
@@ -172,7 +173,7 @@ class _SelfReviewContentState extends State<SelfReviewContent> {
                               return ValueListenableBuilder<SelfLevelEntity?>(
                                   valueListenable: selectedLevel,
                                   builder: (_, value, __) => AppFilledButton(
-                                        text: TextDoc.txtSignUp,
+                                        text: S.current.txtSignUp,
                                         minimumSize: const Size.fromHeight(40),
                                         onPressed: selectedLevel.value != null
                                             ? () => widget.onSignUp.call()
@@ -189,9 +190,9 @@ class _SelfReviewContentState extends State<SelfReviewContent> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                const Text(
-                                  TextDoc.txtHaveAnAccount,
-                                  style: TextStyle(
+                                 Text(
+                                  S.current.txtHaveAnAccount,
+                                  style: const TextStyle(
                                     fontSize: bodyMediumSize,
                                     fontWeight: bodyMediumWeight,
                                     color: AppColor.defaultFont,
@@ -199,7 +200,7 @@ class _SelfReviewContentState extends State<SelfReviewContent> {
                                 ),
                                 const SizedBox(width: spacing4),
                                 AppTextButton(
-                                  text: TextDoc.txtSignIn,
+                                  text: S.current.txtSignIn,
                                   onPressed: () => Navigator.popUntil(
                                       context, (route) => route.isFirst),
                                 )

@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/buttons/text_button.dart';
 import '../../../../../../gen/assets.gen.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../../bookmark/topic/domain/entities/bookmark_topic_entity.dart';
 import '../../../../topic_detail/presentation/views/topic_detail_page.dart';
 import '../../blocs/favorite_topics_bloc.dart';
@@ -96,17 +97,17 @@ class _FavoriteTopicCardState extends State<FavoriteTopicCard> {
                                   context: context,
                                   builder: (context) => AlertDialog(
                                     backgroundColor: AppColor.white,
-                                    title: const Text(
-                                      TextDoc.txtConfirmRemoveFavoriteTitle,
-                                      style: TextStyle(
+                                    title: Text(
+                                      S.current.txtConfirmRemoveFavoriteTitle,
+                                      style: const TextStyle(
                                         fontSize: titleMediumSize,
                                         fontWeight: titleMediumWeight,
                                         color: AppColor.defaultFont,
                                       ),
                                     ),
-                                    content: const Text(
-                                      TextDoc.txtConfirmRemoveFavoriteContent,
-                                      style: TextStyle(
+                                    content: Text(
+                                      S.current.txtConfirmRemoveFavoriteContent,
+                                      style: const TextStyle(
                                         fontSize: bodySmallSize,
                                         fontWeight: bodySmallWeight,
                                         color: AppColor.defaultFont,
@@ -114,7 +115,7 @@ class _FavoriteTopicCardState extends State<FavoriteTopicCard> {
                                     ),
                                     actions: [
                                       AppTextButton(
-                                        text: TextDoc.txtCancel,
+                                        text: S.current.txtCancel,
                                         onPressed: () =>
                                             Navigator.pop(context, false),
                                       ),
@@ -125,9 +126,9 @@ class _FavoriteTopicCardState extends State<FavoriteTopicCard> {
                                           backgroundColor: AppColor.error,
                                           foregroundColor: Colors.white,
                                         ),
-                                        child: const Text(
-                                          TextDoc.txtRemove,
-                                          style: TextStyle(
+                                        child: Text(
+                                          S.current.txtRemove,
+                                          style: const TextStyle(
                                             fontSize: labelLargeSize,
                                             fontWeight: labelLargeWeight,
                                           ),

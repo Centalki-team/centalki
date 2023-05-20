@@ -6,6 +6,7 @@ import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
 import '../../../../../base/define/text.dart';
 import '../../../../../gen/assets.gen.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../../shared/widgets/tab_indicator/tab_indicator.dart';
 import '../../../favorite_topics/presentation/views/favorite_topics_page.dart';
 import '../../../notifications/presentation/views/noti_list_page.dart';
@@ -56,7 +57,7 @@ class _FavoriteViewState extends State<FavoriteView>
               children: [
                 Expanded(
                   child: Text(
-                    TextDoc.appName,
+                    S.current.appName,
                     style: CommonTxtStyle.t30Regular.apply(
                       color: AppColor.defaultFont,
                     ),
@@ -111,10 +112,10 @@ class _FavoriteViewState extends State<FavoriteView>
               Tab(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     Text(
-                      TextDoc.txtTopicsTab,
-                      style: TextStyle(
+                      S.current.txtTopicsTab,
+                      style: const TextStyle(
                         fontSize: titleSmallSize,
                         fontWeight: titleSmallWeight,
                       ),
@@ -125,10 +126,10 @@ class _FavoriteViewState extends State<FavoriteView>
               Tab(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     Text(
-                      TextDoc.txtVocabsTab,
-                      style: TextStyle(
+                      S.current.txtVocabsTab,
+                      style: const TextStyle(
                         fontSize: titleSmallSize,
                         fontWeight: titleSmallWeight,
                       ),

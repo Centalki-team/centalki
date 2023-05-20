@@ -5,6 +5,7 @@ import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/text.dart';
 import '../../../../../base/widgets/buttons/button.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../meeting/presentation/views/meeting_page.dart';
 import '../blocs/connect_teacher_bloc.dart';
 import '../widgets/warning_dialog_content.dart';
@@ -43,7 +44,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                     Navigator.pop(context);
                     Navigator.pop(context);
                   },
-                  child: const Text(TextDoc.txtOk),
+                  child: Text(S.current.txtOk),
                 ),
               ],
             ),
@@ -58,7 +59,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                 actions: (state.message == TextDoc.txtInternetConnection)
                     ? [
                         AppFilledButton(
-                          text: TextDoc.txtTryAgain,
+                          text: S.current.txtTryAgain,
                           onPressed: () {
                             pContext
                                 .read<ConnectTeacherBloc>()
@@ -69,7 +70,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                     : [
                         // state.failureType == ConnectFailure.NOT_FOUND_TEACHER
                         AppFilledButton(
-                          text: TextDoc.txtGoBack,
+                          text: S.current.txtGoBack,
                           onPressed: () {
                             Navigator.pop(context);
                             Navigator.pop(context);
@@ -97,7 +98,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
               content: state.message,
               actions: [
                 AppFilledButton(
-                  text: TextDoc.txtTryAgain,
+                  text: S.current.txtTryAgain,
                   onPressed: () {
                     pContext
                         .read<ConnectTeacherBloc>()
@@ -116,12 +117,12 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                       Icons.check,
                       color: AppColor.support,
                     ),
-                    title: const Text(
-                      TextDoc.txtSuccessfullyCancel,
+                    title: Text(
+                      S.current.txtSuccessfullyCancel,
                     ),
                     actions: [
                       AppFilledButton(
-                        text: TextDoc.txtOk,
+                        text: S.current.txtOk,
                         minimumSize: const Size.fromHeight(40),
                         onPressed: () {
                           Navigator.pop(context);
@@ -201,12 +202,12 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                           final result = await showDialog(
                             context: context,
                             builder: (context) => AlertDialog(
-                              title: const Text(
-                                TextDoc.txtCancelTitle,
+                              title: Text(
+                                S.current.txtCancelTitle,
                                 textAlign: TextAlign.center,
                               ),
-                              content: const Text(
-                                TextDoc.txtCancelContent,
+                              content: Text(
+                                S.current.txtCancelContent,
                                 textAlign: TextAlign.center,
                               ),
                               actions: [
@@ -216,7 +217,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                                       child: AppElevatedButton(
                                         onPressed: () =>
                                             Navigator.pop(context, false),
-                                        text: TextDoc.txtNo,
+                                        text: S.current.txtNo,
                                       ),
                                     ),
                                     const SizedBox(width: spacing10),
@@ -224,7 +225,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                                       child: AppTextButton(
                                         onPressed: () =>
                                             Navigator.pop(context, true),
-                                        text: TextDoc.txtYes,
+                                        text: S.current.txtYes,
                                       ),
                                     ),
                                   ],
@@ -241,9 +242,12 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                         },
                         icon: const Icon(Icons.close_rounded,
                             color: AppColor.error),
-                        label: const Text(
-                          TextDoc.txtCancel,
-                          style: TextStyle(fontSize: 18, color: AppColor.error),
+                        label: Text(
+                          S.current.txtCancel,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            color: AppColor.error,
+                          ),
                         ),
                       ),
               )
