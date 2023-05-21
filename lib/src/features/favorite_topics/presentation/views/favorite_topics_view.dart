@@ -5,8 +5,8 @@ import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/toast/app_toast.dart';
 import '../../../../../generated/l10n.dart';
 import '../blocs/favorite_topics_bloc.dart';
+import '../widgets/favorite_topic_card.dart';
 import 'favorite_topics_empty_view.dart';
-import 'widgets/favorite_topic_card.dart';
 
 class FavoriteTopicsView extends StatefulWidget {
   const FavoriteTopicsView({Key? key}) : super(key: key);
@@ -65,7 +65,7 @@ class _FavoriteTopicsViewState extends State<FavoriteTopicsView> {
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: padding16),
                 child: ListView.separated(
-                  padding: const EdgeInsets.only(top: 16),
+                  padding: const EdgeInsets.symmetric(vertical: padding16),
                   itemCount: state.bookmarks.length,
                   separatorBuilder: (context, index) =>
                       const SizedBox(height: spacing8),

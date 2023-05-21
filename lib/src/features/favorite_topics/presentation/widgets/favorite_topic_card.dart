@@ -1,15 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/buttons/text_button.dart';
 import '../../../../../../gen/assets.gen.dart';
 import '../../../../../../generated/l10n.dart';
-import '../../../../bookmark/topic/domain/entities/bookmark_topic_entity.dart';
-import '../../../../topic_detail/presentation/views/topic_detail_page.dart';
-import '../../blocs/favorite_topics_bloc.dart';
+import '../../../bookmark/topic/domain/entities/bookmark_topic_entity.dart';
+import '../../../topic_detail/presentation/views/topic_detail_page.dart';
+import '../blocs/favorite_topics_bloc.dart';
 
 class FavoriteTopicCard extends StatefulWidget {
   const FavoriteTopicCard({
@@ -35,7 +34,7 @@ class _FavoriteTopicCardState extends State<FavoriteTopicCard> {
         ),
         child: Container(
           margin: const EdgeInsets.all(spacing8),
-          height: 150,
+          height: 128,
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
               color: AppColor.white,
@@ -45,15 +44,15 @@ class _FavoriteTopicCardState extends State<FavoriteTopicCard> {
                   color: AppColor.shadow.shade300,
                   spreadRadius: 0,
                   blurRadius: 4.0,
-                  offset: const Offset(0, 2),
+                  offset: const Offset(1, 2),
                 )
               ]),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                width: 150,
-                height: 150,
+                width: 128,
+                height: 128,
                 child: CachedNetworkImage(
                   imageUrl: widget.bookmark.bookmarkTopic?.topicImage ?? '',
                   fit: BoxFit.cover,
@@ -80,7 +79,7 @@ class _FavoriteTopicCardState extends State<FavoriteTopicCard> {
                                 fontSize: titleMediumSize,
                                 fontWeight: titleMediumWeight,
                                 color: AppColor.defaultFont,
-                                height: 1.0,
+                                height: 0.9,
                               ),
                               maxLines: 3,
                               overflow: TextOverflow.ellipsis,
@@ -116,12 +115,10 @@ class _FavoriteTopicCardState extends State<FavoriteTopicCard> {
                                     actions: [
                                       AppTextButton(
                                         text: S.current.txtCancel,
-                                        onPressed: () =>
-                                            Navigator.pop(context, false),
+                                        onPressed: () => Navigator.pop(context, false),
                                       ),
                                       ElevatedButton(
-                                        onPressed: () =>
-                                            Navigator.pop(context, true),
+                                        onPressed: () => Navigator.pop(context, true),
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor: AppColor.error,
                                           foregroundColor: Colors.white,
@@ -142,9 +139,7 @@ class _FavoriteTopicCardState extends State<FavoriteTopicCard> {
                                           context
                                               .read<FavoriteTopicsBloc>()
                                               .add(RemoveFavoriteTopicEvent(
-                                                id: widget
-                                                        .bookmark.bookmarkId ??
-                                                    '',
+                                                id: widget.bookmark.bookmarkId ?? '',
                                               )),
                                         }
                                     });
@@ -157,6 +152,9 @@ class _FavoriteTopicCardState extends State<FavoriteTopicCard> {
                             ),
                           ),
                         ],
+                      ),
+                      const SizedBox(
+                        height: spacing8,
                       ),
                       Text(
                         widget.bookmark.bookmarkTopic?.topicCategory ?? '',
