@@ -16,12 +16,10 @@ class ElementaryTopicView extends StatelessWidget {
   const ElementaryTopicView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) =>
-      BlocListener<ElementaryTopicsBloc, ElementaryTopicsState>(
+  Widget build(BuildContext context) => BlocListener<ElementaryTopicsBloc, ElementaryTopicsState>(
         listener: (context, state) {
           if (state is ElementaryTopicsLoadingState) {
-            LoadingManager.setLoading(context,
-                loading: state.showLoading && state.isOverlay);
+            LoadingManager.setLoading(context, loading: state.showLoading && state.isOverlay);
           } else if (state is ElementaryTopicsErrorState) {
             AppToast(
               mode: AppToastMode.error,
@@ -74,17 +72,15 @@ class ElementaryTopicView extends StatelessWidget {
           buildWhen: (previous, current) =>
               current != previous &&
               (current is ElementaryTopicsLoadDoneState ||
-                  (current is ElementaryTopicsLoadingState &&
-                      !current.isOverlay)),
+                  (current is ElementaryTopicsLoadingState && !current.isOverlay)),
           builder: (context, state) {
             if (state is ElementaryTopicsLoadDoneState) {
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: padding16),
                 child: ListView.separated(
-                  padding: const EdgeInsets.only(top: 16),
+                  padding: const EdgeInsets.symmetric(vertical: padding16),
                   itemCount: state.topics.length,
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(height: spacing8),
+                  separatorBuilder: (context, index) => const SizedBox(height: spacing8),
                   itemBuilder: (context, index) => TopicCard(
                     item: state.topics[index],
                     onTap: () async {
@@ -137,30 +133,23 @@ class ElementaryTopicView extends StatelessWidget {
                                   context
                                       .read<ElementaryTopicsBloc>()
                                       .add(ElementaryTopicsRemoveFavoriteEvent(
-                                        id: state.topics[index].topicBookmark
-                                                ?.bookmarkId ??
-                                            '',
+                                        id: state.topics[index].topicBookmark?.bookmarkId ?? '',
                                       )),
                                 }
                             });
                       } else {
-                        context
-                            .read<ElementaryTopicsBloc>()
-                            .add(ElementaryTopicsAddFavoriteEvent(
+                        context.read<ElementaryTopicsBloc>().add(ElementaryTopicsAddFavoriteEvent(
                               topicId: state.topics[index].topicId ?? '',
                             ));
                       }
                     },
-                    onTopicsRefresh: () => context
-                        .read<ElementaryTopicsBloc>()
-                        .add(const ElementaryTopicsInitEvent()),
+                    onTopicsRefresh: () =>
+                        context.read<ElementaryTopicsBloc>().add(const ElementaryTopicsInitEvent()),
                   ),
                 ),
               );
             }
-            if (state is ElementaryTopicsLoadingState &&
-                state.showLoading &&
-                !state.isOverlay) {
+            if (state is ElementaryTopicsLoadingState && state.showLoading && !state.isOverlay) {
               return const Center(
                 child: CircularProgressIndicator(),
               );

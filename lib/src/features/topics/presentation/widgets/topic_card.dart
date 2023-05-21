@@ -37,7 +37,7 @@ class _TopicCardState extends State<TopicCard> {
         },
         child: Container(
           margin: const EdgeInsets.all(spacing8),
-          height: 150,
+          height: 120,
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
               color: AppColor.white,
@@ -47,15 +47,15 @@ class _TopicCardState extends State<TopicCard> {
                   color: AppColor.shadow.shade300,
                   spreadRadius: 0,
                   blurRadius: 4.0,
-                  offset: const Offset(0, 2),
+                  offset: const Offset(1, 2),
                 )
               ]),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: 150,
-                width: 150,
+                height: 120,
+                width: 120,
                 child: CachedNetworkImage(
                   imageUrl: widget.item.image ?? '',
                   fit: BoxFit.cover,
@@ -84,7 +84,7 @@ class _TopicCardState extends State<TopicCard> {
                                 fontSize: titleMediumSize,
                                 fontWeight: titleMediumWeight,
                                 color: AppColor.defaultFont,
-                                height: 1.0,
+                                height: 0.9,
                               ),
                               maxLines: 3,
                               overflow: TextOverflow.ellipsis,
@@ -110,6 +110,9 @@ class _TopicCardState extends State<TopicCard> {
                                   ),
                           ),
                         ],
+                      ),
+                      const SizedBox(
+                        height: spacing8,
                       ),
                       Text(
                         widget.item.topicCategory ?? '',
