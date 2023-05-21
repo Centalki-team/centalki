@@ -20,7 +20,7 @@ class CustomJitsiViewFactory: NSObject, FlutterPlatformViewFactory {
         viewIdentifier viewId: Int64,
         arguments args: Any?
     ) -> FlutterPlatformView {
-        return JitsiView(frame: frame, viewId: viewId, args: args, binaryMessenger: messenger)
+        return CustomJitsiView(frame: frame, viewId: viewId, args: args, binaryMessenger: messenger)
     }
 }
 
@@ -137,7 +137,7 @@ class CustomJitsiView: NSObject, FlutterPlatformView {
 
 }
 
-extension JitsiView: JitsiMeetViewDelegate {
+extension CustomJitsiView: JitsiMeetViewDelegate {
     func conferenceJoined(_ data: [AnyHashable : Any]) {
         EventManager.shared.eventSink?(["event": "conferenceJoined", "data": data])
     }

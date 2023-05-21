@@ -131,6 +131,7 @@ class _MyAppState extends State<MyApp> {
                   home: MyWidget(
                     key: UniqueKey(),
                     currentTabIndex: savedTabIndex,
+                    uiStatus: state.status,
                   ),
                   navigatorObservers: kDebugMode
                       ? []
@@ -147,9 +148,11 @@ class MyWidget extends StatefulWidget {
   const MyWidget({
     super.key,
     this.currentTabIndex,
+    this.uiStatus,
   });
 
   final int? currentTabIndex;
+  final UIStatus? uiStatus;
 
   @override
   State<MyWidget> createState() => _MyWidgetState();
@@ -172,7 +175,9 @@ class _MyWidgetState extends State<MyWidget> {
 
   @override
   void initState() {
-    _checkToShowAppIntro();
+    if (widget.uiStatus == UIStatus.loadSuccess) {
+      _checkToShowAppIntro();
+    }
     // Right after the listener has been registered.
     // When a user is signed in.
     // When the current user is signed out.

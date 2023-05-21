@@ -12,7 +12,7 @@ public class SwiftJitsiMeetWrapperPlugin: NSObject, FlutterPlugin, FlutterStream
     }
 
     public static func register(with registrar: FlutterPluginRegistrar) {
-        let factory = JitsiViewFactory(messenger: registrar.messenger())
+        let factory = CustomJitsiViewFactory(messenger: registrar.messenger())
         registrar.register(factory, withId: "plugins.jitsi_meet_wrapper:custom_jitsi_native_view")
         let channel = FlutterMethodChannel(name: "jitsi_meet_wrapper", binaryMessenger: registrar.messenger())
         let flutterViewController: UIViewController = (UIApplication.shared.delegate?.window??.rootViewController)!

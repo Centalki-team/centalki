@@ -56,7 +56,7 @@ packages:
       name: bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "8.1.1"
+    version: "8.1.2"
   boolean_selector:
     dependency: transitive
     description:
@@ -453,7 +453,7 @@ packages:
       name: flutter_bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "8.1.2"
+    version: "8.1.3"
   flutter_blurhash:
     dependency: transitive
     description:
@@ -556,7 +556,7 @@ packages:
       name: flutter_plugin_android_lifecycle
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.14"
+    version: "2.0.15"
   flutter_rating_bar:
     dependency: "direct main"
     description:
@@ -734,7 +734,7 @@ packages:
       name: image_picker_android
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.8.6+15"
+    version: "0.8.6+16"
   image_picker_for_web:
     dependency: transitive
     description:
@@ -778,7 +778,7 @@ packages:
     source: path
     version: "0.0.6"
   jitsi_meet_wrapper_platform_interface:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       path: "jitsi_meet_wrapper/jitsi_meet_wrapper_platform_interface"
       relative: true

@@ -3,6 +3,7 @@ description: A Flutter wrapper around the official JitsiMeetSDKs. With this pack
 version: 0.0.6
 homepage: https://github.com/saibotma/jitsi_meet_wrapper/tree/main/jitsi_meet_wrapper
 repository: https://github.com/saibotma/jitsi_meet_wrapper/tree/main/jitsi_meet_wrapper
+publish_to: none
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
