@@ -5,7 +5,6 @@ import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../base/define/size.dart';
-import '../../../../../base/define/text.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../settings/presentation/views/settings_notification_view.dart';
 import '../../domain/entities/noti_list_item_entity.dart';
@@ -124,7 +123,9 @@ class _NotiListViewState extends State<NotiListView> {
                         previous != current && current is NotiListLoadDoneState,
                     builder: (context, state) {
                       if (state is NotiListLoadDoneState) {
-                        if (state.notiListResponseEntity.data.isEmpty) {
+                        if (state.todayList.isEmpty &&
+                            state.thisWeekList.isEmpty &&
+                            state.previousList.isEmpty) {
                           return Column(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.center,

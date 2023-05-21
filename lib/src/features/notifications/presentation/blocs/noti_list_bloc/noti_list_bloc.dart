@@ -34,53 +34,73 @@ class NotiListBloc extends Bloc<NotiListEvent, NotiListState> {
 
   _onLoadNotiList(NotiListLoadDataEvent event, emit) async {
     emit(const NotiListLoadingState());
-    final res = await _getNotiListUseCase(const GetNotiListParam(
-      sort: SortCreatedAtEnum.desc,
-    ));
-    emit(const NotiListLoadingState(showLoading: false));
-    res.fold(
-      (l) => emit(
-        NotiListErrorState(
-          exception: l,
-          emitTime: DateTime.now(),
-        ),
-      ),
-      (r) {
-        var todayList = <NotiListItemEntity>[];
-        var thisWeekList = <NotiListItemEntity>[];
-        var previousList = <NotiListItemEntity>[];
-        var nowDate = DateTime.now();
-        var startWeekDate = DateTime(nowDate.year, nowDate.month,
-            nowDate.day - (nowDate.weekday % 7 - 1));
-        var endWeekDate = DateTime(
-            startWeekDate.year, startWeekDate.month, startWeekDate.day + 6);
-        var indexStep = 0;
-        for (indexStep; indexStep < r.data.length; indexStep++) {
-          if (nowDate
-                  .difference(r.data[indexStep].createdAtTime ?? nowDate)
-                  .inDays ==
-              0) {
-            todayList.add(r.data[indexStep]);
-          } else if ((r.data[indexStep].createdAtTime ?? nowDate)
-                  .isAfter(startWeekDate) &&
-              (r.data[indexStep].createdAtTime ?? nowDate)
-                  .isBefore(endWeekDate)) {
-            thisWeekList.add(r.data[indexStep]);
-          } else {
-            previousList.addAll(r.data.sublist(indexStep));
-            break;
-          }
-        }
-        emit(
-          NotiListLoadDoneState(
-            notiListResponseEntity: r,
-            todayList: todayList,
-            thisWeekList: thisWeekList,
-            previousList: previousList,
+    var todayList = <NotiListItemEntity>[];
+    var thisWeekList = <NotiListItemEntity>[];
+    var previousList = <NotiListItemEntity>[];
+    var nowDate = DateTime.now();
+    var startWeekDate = DateTime(
+        nowDate.year, nowDate.month, nowDate.day - (nowDate.weekday - 1));
+    var endWeekDate = DateTime(
+        startWeekDate.year, startWeekDate.month, startWeekDate.day + 6);
+
+    var continueToLoad = true;
+    var hasNextPageSecondTime = 0;
+    var page = 1;
+
+    while (continueToLoad) {
+      final res = await _getNotiListUseCase(GetNotiListParam(
+        page: page,
+        size: 20,
+        sort: SortCreatedAtEnum.desc,
+      ));
+      emit(const NotiListLoadingState(showLoading: false));
+      res.fold(
+        (l) => emit(
+          NotiListErrorState(
+            exception: l,
+            emitTime: DateTime.now(),
           ),
-        );
-      },
-    );
+        ),
+        (r) {
+          var indexStep = 0;
+          for (indexStep; indexStep < r.data.length; indexStep++) {
+            if (nowDate
+                    .difference(r.data[indexStep].createdAtTime ?? nowDate)
+                    .inDays ==
+                0) {
+              todayList.add(r.data[indexStep]);
+            } else if ((r.data[indexStep].createdAtTime ?? nowDate)
+                    .isAfter(startWeekDate) &&
+                (r.data[indexStep].createdAtTime ?? nowDate)
+                    .isBefore(endWeekDate)) {
+              thisWeekList.add(r.data[indexStep]);
+            } else {
+              previousList.addAll(r.data.sublist(indexStep));
+              break;
+            }
+          }
+
+          if (r.meta?.hasNextPage == false) {
+            if (hasNextPageSecondTime == 0) {
+              hasNextPageSecondTime++;
+            } else {
+              continueToLoad = false;
+            }
+          }
+          page++;
+        },
+      );
+    }
+
+    if (!continueToLoad) {
+      emit(
+        NotiListLoadDoneState(
+          todayList: todayList,
+          thisWeekList: thisWeekList,
+          previousList: previousList,
+        ),
+      );
+    }
   }
 
   _onMarkSingleNotiAsRead(NotiListMarkReadSingleEvent event, emit) async {
