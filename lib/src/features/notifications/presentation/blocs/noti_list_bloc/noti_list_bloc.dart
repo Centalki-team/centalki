@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../base/gateway/exception/app_exception.dart';
 import '../../../../../../di/di_module.dart';
 import '../../../domain/entities/noti_list_item_entity.dart';
-import '../../../domain/entities/noti_list_response_entity.dart';
 import '../../../domain/repositories/noti_list_repository.dart';
 import '../../../domain/usecases/get_noti_list_usecase.dart';
 import '../../../domain/usecases/mark_all_noti_as_read_usecase.dart';
@@ -34,73 +33,59 @@ class NotiListBloc extends Bloc<NotiListEvent, NotiListState> {
 
   _onLoadNotiList(NotiListLoadDataEvent event, emit) async {
     emit(const NotiListLoadingState());
-    var todayList = <NotiListItemEntity>[];
-    var thisWeekList = <NotiListItemEntity>[];
-    var previousList = <NotiListItemEntity>[];
-    var nowDate = DateTime.now();
-    var startWeekDate = DateTime(
-        nowDate.year, nowDate.month, nowDate.day - (nowDate.weekday - 1));
-    var endWeekDate = DateTime(
-        startWeekDate.year, startWeekDate.month, startWeekDate.day + 6);
 
-    var continueToLoad = true;
-    var hasNextPageSecondTime = 0;
-    var page = 1;
+    final res = await _getNotiListUseCase(const GetNotiListParam(
+      sort: SortCreatedAtEnum.desc,
+    ));
+    emit(const NotiListLoadingState(showLoading: false));
+    res.fold(
+      (l) => emit(
+        NotiListErrorState(
+          exception: l,
+          emitTime: DateTime.now(),
+        ),
+      ),
+      (r) {
+        var todayList = <NotiListItemEntity>[];
+        var thisWeekList = <NotiListItemEntity>[];
+        var previousList = <NotiListItemEntity>[];
+        var nowDate = DateTime.now();
+        var startWeekDate = DateTime(
+            nowDate.year, nowDate.month, nowDate.day - (nowDate.weekday - 1));
+        var endWeekDate = DateTime(
+            startWeekDate.year, startWeekDate.month, startWeekDate.day + 6);
 
-    while (continueToLoad) {
-      final res = await _getNotiListUseCase(GetNotiListParam(
-        page: page,
-        size: 20,
-        sort: SortCreatedAtEnum.desc,
-      ));
-      emit(const NotiListLoadingState(showLoading: false));
-      res.fold(
-        (l) => emit(
-          NotiListErrorState(
-            exception: l,
-            emitTime: DateTime.now(),
+        var indexStep = 0;
+        for (indexStep; indexStep < r.data.length; indexStep++) {
+          if (nowDate
+                  .difference(r.data[indexStep].createdAtTime ?? nowDate)
+                  .inDays ==
+              0) {
+            todayList.add(r.data[indexStep]);
+          } else if ((r.data[indexStep].createdAtTime ?? nowDate)
+                  .isAfter(startWeekDate) &&
+              (r.data[indexStep].createdAtTime ?? nowDate)
+                  .isBefore(endWeekDate)) {
+            thisWeekList.add(r.data[indexStep]);
+          } else {
+            previousList.addAll(r.data.sublist(indexStep));
+            break;
+          }
+        }
+
+        todayList.sort((a, b) => b.createdAtTime!.compareTo(a.createdAtTime!));
+        thisWeekList.sort((a, b) => b.createdAtTime!.compareTo(a.createdAtTime!));
+        previousList.sort((a, b) => b.createdAtTime!.compareTo(a.createdAtTime!));
+
+        emit(
+          NotiListLoadDoneState(
+            todayList: todayList,
+            thisWeekList: thisWeekList,
+            previousList: previousList,
           ),
-        ),
-        (r) {
-          var indexStep = 0;
-          for (indexStep; indexStep < r.data.length; indexStep++) {
-            if (nowDate
-                    .difference(r.data[indexStep].createdAtTime ?? nowDate)
-                    .inDays ==
-                0) {
-              todayList.add(r.data[indexStep]);
-            } else if ((r.data[indexStep].createdAtTime ?? nowDate)
-                    .isAfter(startWeekDate) &&
-                (r.data[indexStep].createdAtTime ?? nowDate)
-                    .isBefore(endWeekDate)) {
-              thisWeekList.add(r.data[indexStep]);
-            } else {
-              previousList.addAll(r.data.sublist(indexStep));
-              break;
-            }
-          }
-
-          if (r.meta?.hasNextPage == false) {
-            if (hasNextPageSecondTime == 0) {
-              hasNextPageSecondTime++;
-            } else {
-              continueToLoad = false;
-            }
-          }
-          page++;
-        },
-      );
-    }
-
-    if (!continueToLoad) {
-      emit(
-        NotiListLoadDoneState(
-          todayList: todayList,
-          thisWeekList: thisWeekList,
-          previousList: previousList,
-        ),
-      );
-    }
+        );
+      },
+    );
   }
 
   _onMarkSingleNotiAsRead(NotiListMarkReadSingleEvent event, emit) async {
