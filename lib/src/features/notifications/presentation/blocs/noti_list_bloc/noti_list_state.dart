@@ -32,20 +32,17 @@ class NotiListLoadingState extends NotiListState {
 
 class NotiListLoadDoneState extends NotiListState {
   const NotiListLoadDoneState({
-    required this.notiListResponseEntity,
     required this.todayList,
     required this.thisWeekList,
     required this.previousList,
   });
 
-  final NotiListResponseEntity notiListResponseEntity;
   final List<NotiListItemEntity> todayList;
   final List<NotiListItemEntity> thisWeekList;
   final List<NotiListItemEntity> previousList;
 
   @override
   List<Object?> get props => [
-        notiListResponseEntity,
         todayList,
         thisWeekList,
         previousList,
