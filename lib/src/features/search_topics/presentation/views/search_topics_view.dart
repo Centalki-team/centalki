@@ -51,7 +51,10 @@ class _SearchTopicsViewState extends State<SearchTopicsView> {
             //backgroundColor: Colors.white,
             appBar: AppBar(
               leading: IconButton(
-                icon: const Icon(Icons.arrow_back),
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: colorsByTheme(context).defaultFont,
+                ),
                 onPressed: () => Navigator.maybePop(context),
               ),
               //backgroundColor: Colors.white,
