@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>450040217669-1j183r83ju6tdcb0g9g1sd92a4cg8ajr.apps.googleusercontent.com</string>
+	<string>450040217669-ltq7t9k6mpndqn7q26qbiodaclvbefs9.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.450040217669-1j183r83ju6tdcb0g9g1sd92a4cg8ajr</string>
+	<string>com.googleusercontent.apps.450040217669-ltq7t9k6mpndqn7q26qbiodaclvbefs9</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>450040217669-28066jcifvkef38i27dqt8odac8edquq.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.centalki.student</string>
+	<string>com.centalki.app.student</string>
 	<key>PROJECT_ID</key>
 	<string>centalki</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,7 +31,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:450040217669:ios:18d2ff6beddb90fd04a32c</string>
+	<string>1:450040217669:ios:7f40f88ea15ba57b04a32c</string>
 	<key>DATABASE_URL</key>
 	<string>https://centalki-default-rtdb.asia-southeast1.firebasedatabase.app</string>
 </dict>
