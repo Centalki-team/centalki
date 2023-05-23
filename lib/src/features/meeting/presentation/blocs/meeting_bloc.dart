@@ -32,7 +32,7 @@ class MeetingBloc extends Bloc<MeetingEvent, MeetingState> {
     eventTrackingRepository: getIt.get<EventTrackingRepository>(),
   );
   var notCompleted = true;
-  final serverURL = "http://54.179.53.253:8443/";
+  final serverURL = "https://meet.centalki.com/";
 
   @override
   Future<void> close() {
