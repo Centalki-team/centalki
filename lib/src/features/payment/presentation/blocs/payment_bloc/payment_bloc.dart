@@ -117,7 +117,11 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
 
   void _onPurchase(PaymentPurchaseEvent event, emit) async {
     emit(const PaymentPurchasingState());
-    await handlePurchase(event.product);
+    try {
+      await handlePurchase(event.product);
+    } catch (e) {
+      add(const PaymentCancelPurchaseEvent());
+    }
   }
 
   void _onCancelPurchase(PaymentCancelPurchaseEvent event, emit) async {
