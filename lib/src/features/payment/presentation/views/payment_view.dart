@@ -9,6 +9,7 @@ import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../base/define/size.dart';
 import '../../../../../base/define/text.dart';
+import '../../../../../base/define/theme.dart';
 import '../../../../../base/widgets/buttons/button.dart';
 import '../../../../../base/widgets/toast/app_toast.dart';
 import '../../../../../generated/l10n.dart';
@@ -81,7 +82,7 @@ class _PaymentViewState extends State<PaymentView> {
         }
       },
       child: Scaffold(
-        backgroundColor: AppColor.white,
+        //backgroundColor: AppColor.white,
         bottomNavigationBar: Material(
           elevation: 10.0,
           borderRadius: const BorderRadius.only(
@@ -120,12 +121,19 @@ class _PaymentViewState extends State<PaymentView> {
         body: CustomScrollView(
           slivers: [
             SliverAppBar.medium(
+              leading: IconButton(
+                onPressed: Navigator.of(context).pop,
+                icon: Icon(
+                  Icons.arrow_back_ios_new,
+                  color: colorsByTheme(context).defaultFont,
+                ),
+              ),
               title: Text(
                 S.current.txtBuyMoreSessions,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: headlineSmallSize,
                   fontWeight: headlineSmallWeight,
-                  color: AppColor.defaultFont,
+                  color: colorsByTheme(context).defaultFont,
                   height: 32 / 34,
                 ),
               ),
@@ -143,12 +151,12 @@ class _PaymentViewState extends State<PaymentView> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                         Text(
+                        Text(
                           S.current.txtChoosePaymentMethod,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: titleSmallSize,
                             fontWeight: titleSmallWeight,
-                            color: AppColor.defaultFont,
+                            color: colorsByTheme(context).defaultFont,
                             height: 20 / 22,
                           ),
                         ),
@@ -180,10 +188,10 @@ class _PaymentViewState extends State<PaymentView> {
                         ),
                         Text(
                           S.current.txtPaymentInformation,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: titleMediumSize,
                             fontWeight: titleMediumWeight,
-                            color: Colors.black,
+                            color: colorsByTheme(context).defaultFont,
                             height: 1.0,
                           ),
                         ),
@@ -203,14 +211,17 @@ class _PaymentViewState extends State<PaymentView> {
                                   ? QrImage(
                                       data: value.methodCode!,
                                       size: 160.0,
+                                      foregroundColor:
+                                          colorsByTheme(context).defaultFont,
                                     )
                                   : Center(
                                       child: Text(
                                         'Bank: ${value.bankName}\nAccount Holder: ${value.accountHolder}\nAccount Number: ${value.accountNumber}',
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontSize: bodySmallSize,
                                           fontWeight: bodySmallWeight,
-                                          color: AppColor.defaultFont,
+                                          color: colorsByTheme(context)
+                                              .defaultFont,
                                           height: 16 / 20,
                                         ),
                                       ),
@@ -223,10 +234,10 @@ class _PaymentViewState extends State<PaymentView> {
                         ),
                         Text(
                           S.current.txtInstructions,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: titleMediumSize,
                             fontWeight: titleMediumWeight,
-                            color: Colors.black,
+                            color: colorsByTheme(context).defaultFont,
                             height: 1.0,
                           ),
                         ),
@@ -237,20 +248,21 @@ class _PaymentViewState extends State<PaymentView> {
                           TextSpan(
                             children: [
                               TextSpan(
-                                text: '${S.current.txtPricePerSessionAnnounce} ',
-                                style: const TextStyle(
+                                text:
+                                    '${S.current.txtPricePerSessionAnnounce} ',
+                                style: TextStyle(
                                   fontSize: bodySmallSize,
                                   fontWeight: bodySmallWeight,
-                                  color: AppColor.defaultFont,
+                                  color: colorsByTheme(context).defaultFont,
                                   height: 16 / 20,
                                 ),
                               ),
-                              const TextSpan(
+                              TextSpan(
                                 text: '100,000 VNĐ.',
                                 style: TextStyle(
                                   fontSize: labelMediumSize,
                                   fontWeight: labelMediumWeight,
-                                  color: AppColor.defaultFont,
+                                  color: colorsByTheme(context).defaultFont,
                                   height: 16 / 20,
                                 ),
                               ),
@@ -262,10 +274,10 @@ class _PaymentViewState extends State<PaymentView> {
                         ),
                         Text(
                           S.current.txtPaymentInstructionDetail,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: bodySmallSize,
                             fontWeight: bodySmallWeight,
-                            color: AppColor.defaultFont,
+                            color: colorsByTheme(context).defaultFont,
                             height: 16 / 20,
                           ),
                         ),
@@ -274,10 +286,10 @@ class _PaymentViewState extends State<PaymentView> {
                         ),
                         Text(
                           S.current.txtPaymentBillUpload,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: titleMediumSize,
                             fontWeight: titleMediumWeight,
-                            color: Colors.black,
+                            color: colorsByTheme(context).defaultFont,
                             height: 1.0,
                           ),
                         ),

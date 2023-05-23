@@ -5,6 +5,7 @@ import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
 import '../../../../../base/define/text.dart';
+import '../../../../../base/define/theme.dart';
 import '../../../../../generated/l10n.dart';
 // import '../../domain/entities/image_with_size_entity.dart';
 
@@ -37,15 +38,16 @@ class CameraAndImagePickerPopUp extends StatelessWidget {
                   child: TextButton(
                     onPressed: () async => takeAPictureButtonAction?.call(),
                     style: TextButton.styleFrom(
-                      backgroundColor: AppColor.white,
+                      backgroundColor:
+                          colorsByTheme(context).backgroundCardsChip,
                     ),
                     child: Text(
                       S.current.txtTakeAPic,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: labelLargeSize,
                         fontWeight: labelLargeWeight,
                         height: 20 / 22,
-                        color: AppColor.defaultFont,
+                        color: colorsByTheme(context).defaultFont,
                       ),
                     ),
                   ),
@@ -73,15 +75,16 @@ class CameraAndImagePickerPopUp extends StatelessWidget {
                         }
                       },
                       style: TextButton.styleFrom(
-                        backgroundColor: AppColor.white,
+                        backgroundColor:
+                            colorsByTheme(context).backgroundCardsChip,
                       ),
                       child: Text(
                         S.current.txtChooseFromLibrary,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: labelLargeSize,
                           fontWeight: labelLargeWeight,
                           height: 20 / 22,
-                          color: AppColor.defaultFont,
+                          color: colorsByTheme(context).defaultFont,
                         ),
                       ),
                     ),

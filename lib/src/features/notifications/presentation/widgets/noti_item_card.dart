@@ -4,6 +4,7 @@ import 'package:timeago/timeago.dart' as timeago;
 import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
+import '../../../../../base/define/theme.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../../shared/utilities/datetime_helper.dart';
 import '../../domain/entities/noti_list_item_entity.dart';
@@ -34,7 +35,7 @@ class NotiItemCard extends StatelessWidget {
           ),
           decoration: BoxDecoration(
             color: notiListItemEntity.seenAtTime != null
-                ? AppColor.white
+                ? colorsByTheme(context).backgroundCardsChip
                 : AppColor.mainColor2Surface.shade500,
             borderRadius: BorderRadius.circular(12.0),
           ),
@@ -57,19 +58,23 @@ class NotiItemCard extends StatelessWidget {
                   children: [
                     Text(
                       notiListItemEntity.title?.en ?? '',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: titleMediumSize,
                         fontWeight: titleMediumWeight,
-                        color: AppColor.defaultFont,
+                        color: notiListItemEntity.seenAtTime != null
+                            ? colorsByTheme(context).defaultFont
+                            : AppColor.defaultFontLight,
                         height: 1.0,
                       ),
                     ),
                     Text(
                       notiListItemEntity.body?.en ?? '',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: bodySmallSize,
                         fontWeight: bodySmallWeight,
-                        color: AppColor.defaultFont,
+                        color: notiListItemEntity.seenAtTime != null
+                            ? colorsByTheme(context).defaultFont
+                            : AppColor.defaultFontLight,
                         height: 16 / 20,
                       ),
                       maxLines: isSelected ? 1000 : 2,

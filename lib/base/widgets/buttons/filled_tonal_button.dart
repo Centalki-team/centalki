@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../define/styles.dart';
+import '../../define/theme.dart';
 
 class AppFilledTonalButton extends StatefulWidget {
   const AppFilledTonalButton({
@@ -44,7 +45,7 @@ class _AppFilledTonalButtonState extends State<AppFilledTonalButton> {
             onPressed: widget.onPressed == null ? null : widget.onPressed!,
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColor.white,
-              foregroundColor: AppColor.defaultFont,
+              foregroundColor: colorsByTheme(context).defaultFont,
               textStyle: const TextStyle(
                 fontSize: labelLargeSize,
                 fontWeight: labelLargeWeight,
@@ -56,7 +57,7 @@ class _AppFilledTonalButtonState extends State<AppFilledTonalButton> {
             icon: Icon(
               widget.icon!,
               size: iconButtonSize,
-              color: AppColor.defaultFont,
+              color: colorsByTheme(context).defaultFont,
             ),
             label: Text(
               widget.text,

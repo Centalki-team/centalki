@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../base/define/styles.dart';
+import '../../../../../base/define/theme.dart';
 import '../../../../../base/widgets/buttons/button.dart';
 import '../../../../../base/widgets/buttons/outlined_button.dart';
 import '../../../../../base/widgets/toast/app_toast.dart';
@@ -47,13 +48,13 @@ class _SearchTopicsViewState extends State<SearchTopicsView> {
         child: GestureDetector(
           onTap: _focusNode.unfocus,
           child: Scaffold(
-            backgroundColor: Colors.white,
+            //backgroundColor: Colors.white,
             appBar: AppBar(
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back),
                 onPressed: () => Navigator.maybePop(context),
               ),
-              backgroundColor: Colors.white,
+              //backgroundColor: Colors.white,
               scrolledUnderElevation: 0.0,
               centerTitle: false,
               titleSpacing: 0.0,
@@ -90,10 +91,10 @@ class _SearchTopicsViewState extends State<SearchTopicsView> {
                           children: [
                             Text(
                               'Found ${state.topicsListEntity.topics!.length} topics',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: bodyLargeSize,
                                 fontWeight: bodyLargeWeight,
-                                color: AppColor.defaultFont,
+                                color: colorsByTheme(context).defaultFont,
                               ),
                             ),
                           ],
@@ -146,10 +147,10 @@ class _SearchTopicsViewState extends State<SearchTopicsView> {
                                 ),
                                 Text(
                                   S.current.txtNoResultFound,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: titleLargeSize,
                                     fontWeight: titleLargeWeight,
-                                    color: AppColor.defaultFont,
+                                    color: colorsByTheme(context).defaultFont,
                                     height: 28 / 30,
                                   ),
                                   textAlign: TextAlign.center,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../base/define/colors.dart';
 import '../../../../base/define/size.dart';
 import '../../../../base/define/text.dart';
+import '../../../../base/define/theme.dart';
 
 class ConfirmPopup extends StatelessWidget {
   const ConfirmPopup({
@@ -20,7 +21,7 @@ class ConfirmPopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => AlertDialog(
-        backgroundColor: AppColor.white,
+        backgroundColor: colorsByTheme(context).backgroundCardsChip,
         title: Text(
           title,
           style: const TextStyle(
@@ -31,10 +32,10 @@ class ConfirmPopup extends StatelessWidget {
         ),
         content: Text(
           content,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: bodySmallSize,
             fontWeight: bodySmallWeight,
-            color: AppColor.defaultFont,
+            color: colorsByTheme(context).defaultFont,
           ),
         ),
         actions: [

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../define/styles.dart';
+import '../../define/theme.dart';
 
 class AppFilledTextField extends StatefulWidget {
   const AppFilledTextField({
@@ -32,8 +33,8 @@ class _AppFilledTextFieldState extends State<AppFilledTextField> {
       controller: widget.controller,
       obscureText: widget.obscureText == null ? false : widget.obscureText!,
       cursorColor: AppColor.mainColor1,
-      style: const TextStyle(
-        color: AppColor.defaultFont,
+      style: TextStyle(
+        color: colorsByTheme(context).defaultFont,
         fontSize: bodyLargeSize,
         fontWeight: bodyLargeWeight,
       ),

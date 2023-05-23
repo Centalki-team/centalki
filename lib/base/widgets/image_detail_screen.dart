@@ -20,7 +20,7 @@ class _ImageDetailScreenState extends State<ImageDetailScreen> {
   var canbeScale = true;
   @override
   Widget build(BuildContext context) => Scaffold(
-        backgroundColor: Colors.black,
+        //backgroundColor: Colors.black,
         appBar: AppBar(
           elevation: 0,
           title: const Text('Chi tiết hình ảnh'),

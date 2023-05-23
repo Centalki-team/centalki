@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../../../../../base/define/styles.dart';
+import '../../../../../base/define/theme.dart';
 import '../../../../../base/helpers/time_helper.dart';
 import '../../../../../base/widgets/buttons/button.dart';
 import '../../../connect_teacher/domain/entities/session_schedule_entity.dart';
@@ -24,7 +25,7 @@ class HistoryDetailView extends StatefulWidget {
 class _HistoryDetailViewState extends State<HistoryDetailView> {
   @override
   Widget build(BuildContext context) => Scaffold(
-      backgroundColor: Colors.white,
+      //backgroundColor: Colors.white,
       bottomNavigationBar:
           widget.session.sessionFeedback?.feedbackTeacher == null
               ? SafeArea(
@@ -83,9 +84,9 @@ class _HistoryDetailViewState extends State<HistoryDetailView> {
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(),
               onPressed: () => Navigator.of(context).pop(),
-              icon: const Icon(
+              icon: Icon(
                 Icons.arrow_back,
-                color: AppColor.defaultFont,
+                color: colorsByTheme(context).defaultFont,
               ),
             ),
           ),

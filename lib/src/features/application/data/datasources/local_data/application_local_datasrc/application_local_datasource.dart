@@ -16,4 +16,13 @@ class ApplicationLocalDatasource {
   Future<void> setLocale(String locale) async {
     await storageGateway.putString(StorageConstants.localeKey, locale);
   }
+
+  Future<bool> checkThemeIsDark() async {
+    final res = await storageGateway.getBool(StorageConstants.themeKey);
+    return res ?? false;
+  }
+
+  Future<void> setTheme({bool isDark = false}) async {
+    await storageGateway.putBool(StorageConstants.themeKey, isDark);
+  }
 }

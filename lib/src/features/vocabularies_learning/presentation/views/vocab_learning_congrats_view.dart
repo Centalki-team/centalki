@@ -4,6 +4,7 @@ import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
 import '../../../../../base/define/text.dart';
+import '../../../../../base/define/theme.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../../../generated/l10n.dart';
 
@@ -42,10 +43,10 @@ class VocabLearningCongratsView extends StatelessWidget {
           ),
           Text(
             S.current.txtCompleteRemind,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: bodyLargeSize,
               fontWeight: bodyLargeWeight,
-              color: AppColor.defaultFont,
+              color: colorsByTheme(context).defaultFont,
               height: 1,
             ),
             textAlign: TextAlign.center,

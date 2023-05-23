@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../base/define/styles.dart';
+import '../../../../../base/define/theme.dart';
 import '../../../../../base/widgets/bottom_bar/custom_bottom_nav.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../../../generated/l10n.dart';
@@ -47,7 +48,7 @@ class _HomeViewState extends State<HomeView>
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        backgroundColor: AppColor.white,
+        //backgroundColor: AppColor.white,
         body: Column(
           children: [
             // SizedBox(
@@ -138,22 +139,27 @@ class _HomeViewState extends State<HomeView>
           child: ValueListenableBuilder(
             valueListenable: currentIndex,
             builder: (_, value, __) => BottomNavigationBar(
+              backgroundColor: colorsByTheme(context).backgroundTheme,
               type: BottomNavigationBarType.fixed,
               currentIndex: value,
-              backgroundColor: Colors.white,
+              //backgroundColor: Colors.white,
               onTap: (newValue) {
                 currentIndex.value = newValue;
                 _tabController.animateTo(newValue);
               },
               selectedItemColor: AppColor.mainColor1,
               selectedLabelStyle: const TextStyle(
+                fontFamily: 'dongle',
                 fontSize: labelLargeSize,
                 fontWeight: labelLargeWeight,
+                //height: 20 / 22,
               ),
               unselectedItemColor: AppColor.shadow,
               unselectedLabelStyle: const TextStyle(
+                fontFamily: 'dongle',
                 fontSize: bodyMediumSize,
                 fontWeight: bodyMediumWeight,
+                //height: 20 / 22,
               ),
               items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(

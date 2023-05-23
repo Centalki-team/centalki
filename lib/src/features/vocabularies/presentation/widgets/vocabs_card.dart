@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
+import '../../../../../base/define/theme.dart';
 import '../../../bookmark/domain/entities/bookmark_phrase_item_entity.dart';
 
 class VocabCard extends StatelessWidget {
@@ -20,7 +21,7 @@ class VocabCard extends StatelessWidget {
         data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
         child: Container(
           decoration: BoxDecoration(
-            color: AppColor.white,
+            color: colorsByTheme(context).backgroundCardsChip,
             borderRadius: BorderRadius.circular(12.0),
             boxShadow: [
               BoxShadow(
@@ -33,8 +34,11 @@ class VocabCard extends StatelessWidget {
           ),
           clipBehavior: Clip.hardEdge,
           child: ExpansionTile(
-            collapsedBackgroundColor: Colors.white,
-            backgroundColor: Colors.white,
+            collapsedBackgroundColor:
+                colorsByTheme(context).backgroundCardsChip,
+            backgroundColor: colorsByTheme(context).backgroundCardsChip,
+            iconColor: colorsByTheme(context).expansionIcon,
+            collapsedIconColor: colorsByTheme(context).expansionIcon,
             expandedCrossAxisAlignment: CrossAxisAlignment.start,
             childrenPadding: const EdgeInsets.only(
               left: padding32,
@@ -78,22 +82,22 @@ class VocabCard extends StatelessWidget {
                   ),
                   Text(
                     item.phrase?.phonetic ?? 'no phonetic',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontFamily: 'NotoSans',
                       fontSize: bodySmallSize * 0.6,
                       fontWeight: bodySmallWeight,
-                      color: AppColor.defaultFont,
+                      color: colorsByTheme(context).defaultFont,
                     ),
                   ),
                   const SizedBox(height: spacing4),
                   ...(item.phrase?.translations ?? []).map(
                     (e) => Text(
                       e.meaning ?? 'null meaning',
-                      style: const TextStyle(
+                      style: TextStyle(
                         height: 0.9,
                         fontSize: titleMediumSize,
                         fontWeight: titleMediumWeight,
-                        color: AppColor.defaultFont,
+                        color: colorsByTheme(context).defaultFont,
                       ),
                     ),
                   ),

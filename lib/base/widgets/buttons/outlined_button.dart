@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../define/styles.dart';
+import '../../define/theme.dart';
 
 class AppOutlinedButton extends StatefulWidget {
   const AppOutlinedButton({
@@ -32,7 +33,7 @@ class _AppOutlinedButtonState extends State<AppOutlinedButton> {
       ? OutlinedButton(
           onPressed: widget.onPressed == null ? null : widget.onPressed!,
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColor.white,
+            backgroundColor: colorsByTheme(context).backgroundTheme,
             textStyle: TextStyle(
               fontFamily: 'Dongle',
               fontSize: labelLargeSize,

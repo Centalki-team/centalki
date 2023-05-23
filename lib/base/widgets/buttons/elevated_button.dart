@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../define/styles.dart';
+import '../../define/theme.dart';
 
 class AppElevatedButton extends StatefulWidget {
   const AppElevatedButton({
@@ -28,19 +29,26 @@ class _AppElevatedButtonState extends State<AppElevatedButton> {
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColor.secondary,
             surfaceTintColor: AppColor.secondary,
-            foregroundColor: AppColor.defaultFont,
+            foregroundColor: colorsByTheme(context).defaultFont,
             disabledBackgroundColor: AppColor.background,
             disabledForegroundColor: AppColor.shadow,
-            textStyle: const TextStyle(
+            textStyle: TextStyle(
               fontFamily: 'Dongle',
               fontSize: labelLargeSize,
               fontWeight: labelLargeWeight,
+              color: colorsByTheme(context).backgroundTheme,
             ),
             elevation: 5.0,
             minimumSize: widget.minimumSize,
           ),
           child: Text(
             widget.text,
+            style: TextStyle(
+              fontFamily: 'Dongle',
+              fontSize: labelLargeSize,
+              fontWeight: labelLargeWeight,
+              color: colorsByTheme(context).backgroundTheme,
+            ),
           ),
         )
       : ElevatedButton.icon(
@@ -60,7 +68,7 @@ class _AppElevatedButtonState extends State<AppElevatedButton> {
           icon: Icon(
             widget.icon!,
             size: iconButtonSize,
-            color: AppColor.defaultFont,
+            color: colorsByTheme(context).defaultFont,
           ),
           label: Text(
             widget.text,

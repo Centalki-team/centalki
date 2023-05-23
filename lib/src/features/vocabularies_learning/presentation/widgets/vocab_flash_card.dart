@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
+import '../../../../../base/define/theme.dart';
 import '../../../bookmark/domain/entities/bookmark_phrase_item_entity.dart';
 
 class VocabFlashCard extends StatefulWidget {
@@ -39,7 +40,7 @@ class _VocabFlashCardState extends State<VocabFlashCard> {
           ),
           padding: const EdgeInsets.all(spacing16),
           decoration: BoxDecoration(
-            color: AppColor.white,
+            color: colorsByTheme(context).backgroundCardsChip,
             borderRadius: BorderRadius.circular(24.0),
             boxShadow: [
               BoxShadow(
@@ -74,10 +75,10 @@ class _VocabFlashCardState extends State<VocabFlashCard> {
                                 .single
                                 .meaning ??
                             '',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: titleMediumSize,
                           fontWeight: titleMediumWeight,
-                          color: AppColor.defaultFont,
+                          color: colorsByTheme(context).defaultFont,
                           height: 1,
                         ),
                       ),
@@ -90,10 +91,10 @@ class _VocabFlashCardState extends State<VocabFlashCard> {
                                 .single
                                 .sentence ??
                             '',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: bodyLargeSize,
                           fontWeight: bodyLargeWeight,
-                          color: AppColor.defaultFont,
+                          color: colorsByTheme(context).defaultFont,
                           height: 1,
                         ),
                         textAlign: TextAlign.center,

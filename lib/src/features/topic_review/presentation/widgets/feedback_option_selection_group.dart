@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
+import '../../../../../base/define/theme.dart';
 import '../../domain/entities/topic_feedback_chip_entity.dart';
-import 'selectable_feedback_option_chip.dart';
 
 class FeedbackOptionsSelectionGroup extends StatefulWidget {
   const FeedbackOptionsSelectionGroup({
@@ -43,10 +43,10 @@ class _FeedbackOptionsSelectionGroupState
         children: [
           Text(
             widget.title,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: titleMediumSize,
               fontWeight: titleMediumWeight,
-              color: AppColor.defaultFont,
+              color: colorsByTheme(context).defaultFont,
             ),
           ),
           const SizedBox(
@@ -58,18 +58,22 @@ class _FeedbackOptionsSelectionGroupState
             children: widget.topicFeedbackOptions.map((e) {
               var isSelected = selectionList.contains(e);
               return FilterChip(
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(24.0),
-                  ),
-                ),
+                backgroundColor: colorsByTheme(context).selectableChipBg,
+                // shape: const RoundedRectangleBorder(
+                //   borderRadius: BorderRadius.all(
+                //     Radius.circular(24.0),
+                //   ),
+                // ),
+                shape: const StadiumBorder(),
                 label: Text(e.title),
-                labelStyle: const TextStyle(
+                labelStyle: TextStyle(
                   fontSize: bodyLargeSize,
                   fontWeight: bodyLargeWeight,
-                  color: AppColor.defaultFont,
+                  color: isSelected
+                      ? AppColor.defaultFontLight
+                      : colorsByTheme(context).defaultFont,
                 ),
-                checkmarkColor: AppColor.defaultFont,
+                checkmarkColor: AppColor.defaultFontLight,
                 selectedColor: AppColor.mainColor2Surface,
                 selected: isSelected,
                 onSelected: (_) {

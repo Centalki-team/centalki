@@ -1,6 +1,39 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
-class AppColor {
+class AppColor extends ThemeExtension<AppColor> {
+  AppColor({
+    required this.defaultFont,
+    required this.icon,
+    required this.iconBackground,
+    required this.backgroundTheme,
+    required this.backgroundCardHistoryWallet,
+    required this.backgroundAvatar,
+    required this.hintTextColor,
+    required this.tabTitleColor,
+    required this.backgroundCardsChip,
+    required this.expansionIcon,
+    required this.selectableChipBg,
+  });
+
+  final Color? defaultFont;
+
+  ///ONLY FOR LEARN VOCABS BUTTON
+  final Color? icon;
+
+  ///ONLY FOR LEARN VOCABS BUTTON
+  final Color? iconBackground;
+
+  final Color? backgroundTheme;
+  final Color? backgroundCardHistoryWallet;
+  final Color? backgroundAvatar;
+  final Color? hintTextColor;
+  final Color? tabTitleColor;
+  final Color? backgroundCardsChip;
+  final Color? expansionIcon;
+  final Color? selectableChipBg;
+
   // Main Color 1
   static const mainColor1 =
       MaterialColor(0xFF3AAFFF, AppColorSwatch.mainColor1Swatch);
@@ -24,7 +57,7 @@ class AppColor {
       MaterialColor(0xFF55C885, AppColorSwatch.secondarySwatch);
   static const error = MaterialColor(0xFFFF6363, AppColorSwatch.errorSwatch);
   // Font Colors
-  static const defaultFont =
+  static const defaultFontLight =
       MaterialColor(0xFF1B1B2A, AppColorSwatch.defaultFontSwatch);
   static const defaultFontContainer =
       MaterialColor(0xFF3A3A4F, AppColorSwatch.defaultFontColorSwatch);
@@ -35,6 +68,65 @@ class AppColor {
   static const background =
       MaterialColor(0xFFE6E6EA, AppColorSwatch.backgroundSwatch);
   static const white = MaterialColor(0xFFFFFFFF, AppColorSwatch.whiteSwatch);
+  static const backgroundLight =
+      MaterialColor(0xFFFFFFFF, AppColorSwatch.whiteSwatch);
+  //DarkMode
+  static const backgroundLogo = MaterialColor(0xFF1c284C, {});
+  static const defaultFontDark =
+      MaterialColor(0xFFFFFFFF, AppColorSwatch.whiteSwatch);
+  static const backgroundDark = MaterialColor(0xFF121212, {});
+  static const darkModeContainer = MaterialColor(0xFF2C2C2C, {});
+
+  @override
+  ThemeExtension<AppColor> copyWith({
+    Color? defaultFont,
+    Color? icon,
+    Color? iconBackground,
+    Color? backgroundTheme,
+    Color? backgroundCardHistoryWallet,
+    Color? backgroundAvatar,
+    Color? hintTextColor,
+    Color? tabTitleColor,
+    Color? backgroundCardsChip,
+    Color? expansionIcon,
+    Color? selectableChipBg,
+  }) =>
+      AppColor(
+        defaultFont: defaultFont ?? this.defaultFont,
+        icon: icon ?? this.icon,
+        iconBackground: iconBackground ?? this.iconBackground,
+        backgroundTheme: backgroundTheme ?? this.backgroundTheme,
+        backgroundCardHistoryWallet:
+            backgroundCardHistoryWallet ?? this.backgroundCardHistoryWallet,
+        backgroundAvatar: backgroundAvatar ?? this.backgroundAvatar,
+        hintTextColor: hintTextColor ?? this.hintTextColor,
+        tabTitleColor: tabTitleColor ?? this.tabTitleColor,
+        backgroundCardsChip: backgroundCardsChip ?? this.backgroundCardsChip,
+        expansionIcon: expansionIcon ?? this.expansionIcon,
+        selectableChipBg: selectableChipBg ?? this.selectableChipBg,
+      );
+
+  @override
+  ThemeExtension<AppColor> lerp(ThemeExtension<AppColor>? other, double t) {
+    if (other is! AppColor) {
+      return this;
+    }
+    return AppColor(
+      defaultFont: Color.lerp(defaultFont, other.defaultFont, t),
+      icon: Color.lerp(icon, other.icon, t),
+      iconBackground: Color.lerp(iconBackground, other.iconBackground, t),
+      backgroundTheme: Color.lerp(backgroundTheme, other.backgroundTheme, t),
+      backgroundCardHistoryWallet: Color.lerp(
+          backgroundCardHistoryWallet, other.backgroundCardHistoryWallet, t),
+      backgroundAvatar: Color.lerp(backgroundAvatar, other.backgroundAvatar, t),
+      hintTextColor: Color.lerp(hintTextColor, other.hintTextColor, t),
+      tabTitleColor: Color.lerp(tabTitleColor, other.tabTitleColor, t),
+      backgroundCardsChip:
+          Color.lerp(backgroundCardsChip, other.backgroundCardsChip, t),
+      expansionIcon: Color.lerp(expansionIcon, other.expansionIcon, t),
+      selectableChipBg: Color.lerp(selectableChipBg, other.selectableChipBg, t),
+    );
+  }
 }
 
 class AppColorSwatch {
@@ -227,6 +319,7 @@ class AppColorSwatch {
     500: Color.fromRGBO(255, 255, 255, .6),
     600: Color.fromRGBO(255, 255, 255, .7),
     700: Color.fromRGBO(255, 255, 255, .8),
+    870: Color.fromRGBO(255, 255, 255, .87),
     800: Color.fromRGBO(255, 255, 255, .9),
     900: Color.fromRGBO(255, 255, 255, 1),
   };

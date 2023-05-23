@@ -6,6 +6,7 @@ import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
 import '../../../../../base/define/text.dart';
+import '../../../../../base/define/theme.dart';
 import '../../../../../base/widgets/buttons/button.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../../../generated/l10n.dart';
@@ -127,11 +128,11 @@ class _AppIntroContentState extends State<AppIntroContent> {
                                       horizontal: padding16),
                                   child: Text(
                                     intros[i].title,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       height: 1.0,
                                       fontSize: 34,
                                       fontWeight: FontWeight.w700,
-                                      color: AppColor.defaultFont,
+                                      color: colorsByTheme(context).defaultFont,
                                     ),
                                   ),
                                 ),

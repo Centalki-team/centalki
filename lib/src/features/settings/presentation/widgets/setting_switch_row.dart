@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../base/define/styles.dart';
+import '../../../../../base/define/theme.dart';
 
 class SettingSwitchRow extends StatefulWidget {
   const SettingSwitchRow({
@@ -39,10 +40,10 @@ class _SettingSwitchRowState extends State<SettingSwitchRow> {
                 widget.title,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: titleSmallSize,
                   fontWeight: titleSmallWeight,
-                  color: AppColor.defaultFont,
+                  color: colorsByTheme(context).defaultFont,
                 ),
               ),
             ),

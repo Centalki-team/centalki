@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../define/styles.dart';
+import '../../define/theme.dart';
 
 class AppOutlinedTextField extends StatefulWidget {
   const AppOutlinedTextField({
@@ -56,15 +57,15 @@ class _AppOutlinedTextFieldState extends State<AppOutlinedTextField> {
         cursorColor: AppColor.mainColor2,
         keyboardType: widget.textInputType,
         onChanged: widget.onChanged,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: bodyLargeSize,
           fontWeight: bodyLargeWeight,
-          color: AppColor.defaultFont,
+          color: colorsByTheme(context).defaultFont,
         ),
         decoration: InputDecoration(
           hintText: widget.hintText,
-          hintStyle: const TextStyle(
-            color: AppColor.shadow,
+          hintStyle: TextStyle(
+            color: colorsByTheme(context).hintTextColor,
             fontSize: bodyLargeSize,
             fontWeight: bodyLargeWeight,
             height: 1,
@@ -72,7 +73,7 @@ class _AppOutlinedTextFieldState extends State<AppOutlinedTextField> {
           labelText: widget.labelText,
           labelStyle: TextStyle(
             color: widget.errorText == null
-                ? AppColor.defaultFont
+                ? colorsByTheme(context).defaultFont
                 : AppColor.error,
             fontSize: bodyLargeSize,
             fontWeight: bodyLargeWeight,
@@ -94,7 +95,8 @@ class _AppOutlinedTextFieldState extends State<AppOutlinedTextField> {
                   widget.icon!,
                   size: 24,
                 ),
-          iconColor: widget.icon == null ? null : AppColor.defaultFont,
+          iconColor:
+              widget.icon == null ? null : colorsByTheme(context).defaultFont,
           suffixIcon: widget.obscureText
               ? GestureDetector(
                   onTap: () {
@@ -114,8 +116,9 @@ class _AppOutlinedTextFieldState extends State<AppOutlinedTextField> {
                       widget.suffixIcon!,
                       size: 24,
                     )),
-          suffixIconColor:
-              widget.suffixIcon == null ? null : AppColor.defaultFont,
+          suffixIconColor: widget.suffixIcon == null
+              ? null
+              : colorsByTheme(context).defaultFont,
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           enabledBorder: const OutlineInputBorder(

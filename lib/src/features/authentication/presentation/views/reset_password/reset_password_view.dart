@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../../base/define/styles.dart';
+import '../../../../../../base/define/theme.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/text_fields/text_field.dart';
 import '../../../../../../gen/assets.gen.dart';
@@ -51,7 +52,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                     height: 280,
                     child: Assets.illustration.resetPassword.svg(),
                   ),
-                   Text(
+                  Text(
                     S.current.txtResetPasswordIntroduction,
                     style: const TextStyle(
                       fontSize: titleLargeSize,
@@ -64,12 +65,12 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                     builder: (context, state) => Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                         Text(
+                        Text(
                           S.current.txtEmail,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: titleMediumSize,
                             fontWeight: titleMediumWeight,
-                            color: AppColor.defaultFont,
+                            color: colorsByTheme(context).defaultFont,
                           ),
                         ),
                         AppOutlinedTextField(

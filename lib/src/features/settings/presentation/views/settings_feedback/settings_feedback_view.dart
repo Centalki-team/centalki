@@ -4,6 +4,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../../base/define/styles.dart';
+import '../../../../../../base/define/theme.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/text_fields/outlined_text_field.dart';
 import '../../../../../../generated/l10n.dart';
@@ -27,25 +28,25 @@ class _SettingsFeedbackViewState extends State<SettingsFeedbackView> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        backgroundColor: Colors.white,
+        //backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: AppColor.white,
+          //backgroundColor: AppColor.white,
           automaticallyImplyLeading: false,
           leading: GestureDetector(
             onTap: Navigator.of(context).pop,
-            child: const Icon(
+            child: Icon(
               Icons.arrow_back,
-              color: AppColor.defaultFont,
+              color: colorsByTheme(context).defaultFont,
             ),
           ),
           title: Row(
             children: [
               Text(
                 S.current.txtGiveFeedback,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: headlineSmallSize,
                   fontWeight: headlineSmallWeight,
-                  color: AppColor.defaultFont,
+                  color: colorsByTheme(context).defaultFont,
                 ),
               ),
             ],
@@ -61,20 +62,21 @@ class _SettingsFeedbackViewState extends State<SettingsFeedbackView> {
                 showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
+                    backgroundColor: colorsByTheme(context).backgroundCardsChip,
                     title: Text(
                       S.current.txtSuccess,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: titleMediumSize,
                         fontWeight: titleMediumWeight,
-                        color: AppColor.defaultFont,
+                        color: colorsByTheme(context).defaultFont,
                       ),
                     ),
                     content: Text(
                       S.current.txtSuccessFeedback,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: bodyMediumSize,
                         fontWeight: bodyMediumWeight,
-                        color: AppColor.defaultFont,
+                        color: colorsByTheme(context).defaultFont,
                       ),
                     ),
                     actions: [
@@ -89,20 +91,21 @@ class _SettingsFeedbackViewState extends State<SettingsFeedbackView> {
                 showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
+                    backgroundColor: colorsByTheme(context).backgroundCardsChip,
                     title: Text(
                       S.current.txtLoadFail,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: titleMediumSize,
                         fontWeight: titleMediumWeight,
-                        color: AppColor.defaultFont,
+                        color: colorsByTheme(context).defaultFont,
                       ),
                     ),
                     content: Text(
                       state.exception.message,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: bodyMediumSize,
                         fontWeight: bodyMediumWeight,
-                        color: AppColor.defaultFont,
+                        color: colorsByTheme(context).defaultFont,
                       ),
                     ),
                     actions: [
@@ -124,10 +127,10 @@ class _SettingsFeedbackViewState extends State<SettingsFeedbackView> {
                 const SizedBox(height: spacing8),
                 Text(
                   S.current.txtRateOurApp,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: titleMediumSize,
                     fontWeight: titleMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 const SizedBox(height: spacing16),
@@ -183,10 +186,10 @@ class _SettingsFeedbackViewState extends State<SettingsFeedbackView> {
                 const SizedBox(height: spacing16),
                 Text(
                   S.current.txtPleaseTellUsWatUThink,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: titleMediumSize,
                     fontWeight: titleMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 const SizedBox(height: spacing8),

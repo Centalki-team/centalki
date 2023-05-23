@@ -6,6 +6,7 @@ import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../base/define/size.dart';
 import '../../../../../base/define/text.dart';
+import '../../../../../base/define/theme.dart';
 import '../../../../../base/widgets/buttons/button.dart';
 import '../../../../../base/widgets/toast/app_toast.dart';
 import '../../../../../generated/l10n.dart';
@@ -37,22 +38,22 @@ class _TopicReviewContentState extends State<TopicReviewContent>
         barrierDismissible: false,
         context: context,
         builder: (context) => AlertDialog(
-              backgroundColor: AppColor.white,
+              backgroundColor: colorsByTheme(context).backgroundCardsChip,
               title: Text(
                 S.current.txtNotFinishFeedback,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: titleLargeSize,
                   fontWeight: titleLargeWeight,
-                  color: AppColor.defaultFont,
+                  color: colorsByTheme(context).defaultFont,
                   height: 28 / 30,
                 ),
               ),
               content: Text(
                 S.current.txtNotFinishFeedbackContent,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: bodyLargeSize,
                   fontWeight: bodyLargeWeight,
-                  color: AppColor.defaultFont,
+                  color: colorsByTheme(context).defaultFont,
                   height: 1.0,
                 ),
               ),
@@ -99,22 +100,22 @@ class _TopicReviewContentState extends State<TopicReviewContent>
         barrierDismissible: false,
         context: context,
         builder: (context) => AlertDialog(
-              backgroundColor: AppColor.white,
+              backgroundColor: colorsByTheme(context).backgroundCardsChip,
               title: Text(
                 S.current.txtFeedbackSuccess,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: titleLargeSize,
                   fontWeight: titleLargeWeight,
-                  color: AppColor.defaultFont,
+                  color: colorsByTheme(context).defaultFont,
                   height: 28 / 30,
                 ),
               ),
               content: Text(
                 S.current.txtFeedbackSuccessContent,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: bodyLargeSize,
                   fontWeight: bodyLargeWeight,
-                  color: AppColor.defaultFont,
+                  color: colorsByTheme(context).defaultFont,
                   height: 1.0,
                 ),
               ),
@@ -201,7 +202,7 @@ class _TopicReviewContentState extends State<TopicReviewContent>
             }
           },
           child: Scaffold(
-            backgroundColor: AppColor.white,
+            //backgroundColor: AppColor.white,
             bottomNavigationBar: SafeArea(
               top: false,
               child: BlocBuilder<TopicReviewBloc, TopicReviewState>(
@@ -250,7 +251,8 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                                           feedbackData.isEmptyData
                                               ? AppElevatedButton(
                                                   text: S.current.txtSend,
-                                                  minimumSize: const Size(104, 40),
+                                                  minimumSize:
+                                                      const Size(104, 40),
                                                 )
                                               : AppElevatedButton(
                                                   text: S.current.txtSend,
@@ -290,9 +292,10 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                   ),
                   child: GestureDetector(
                     onTap: _showExitOptionDialog,
-                    child: const Icon(
-                      Icons.arrow_back,
+                    child: Icon(
+                      Icons.arrow_back_ios_new,
                       size: 24.0,
+                      color: colorsByTheme(context).defaultFont,
                     ),
                   ),
                 ),
@@ -303,10 +306,10 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                   ),
                   child: Text(
                     S.current.txtTopicFeedback,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: headlineSmallSize,
                       fontWeight: headlineSmallWeight,
-                      color: AppColor.defaultFont,
+                      color: colorsByTheme(context).defaultFont,
                       height: 32 / 34,
                     ),
                   ),

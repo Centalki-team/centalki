@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../base/define/styles.dart';
 import '../../../../../base/define/manager/loading_manager.dart';
+import '../../../../../base/define/theme.dart';
 import '../../../../../base/widgets/buttons/button.dart';
 import '../../../../../base/widgets/toast/app_toast.dart';
 import '../../../../../gen/assets.gen.dart';
@@ -32,22 +33,22 @@ class _TopicDetailViewState extends State<TopicDetailView> {
       //barrierDismissible: false,
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: AppColor.white,
+        backgroundColor: colorsByTheme(context).backgroundCardsChip,
         title: Text(
           S.current.txtConfirmRemoveSavedTitle,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: titleMediumSize,
             fontWeight: titleMediumWeight,
-            color: AppColor.defaultFont,
+            color: colorsByTheme(context).defaultFont,
             height: 1.0,
           ),
         ),
         content: Text(
           S.current.txtConfirmRemoveSavedContent,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: bodyLargeSize,
             fontWeight: bodyLargeWeight,
-            color: AppColor.defaultFont,
+            color: colorsByTheme(context).defaultFont,
             height: 1.0,
           ),
         ),
@@ -195,7 +196,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
           }
         },
         child: Scaffold(
-          backgroundColor: Colors.white,
+          //backgroundColor: Colors.white,
           bottomNavigationBar: BlocBuilder<TopicDetailBloc, TopicDetailState>(
             buildWhen: (previous, current) =>
                 previous != current && current is TopicDetailLoadDoneState,
@@ -245,21 +246,21 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                 barrierDismissible: false,
                                 context: context,
                                 builder: (context) => AlertDialog(
-                                  backgroundColor: AppColor.white,
+                                  backgroundColor: colorsByTheme(context).backgroundCardsChip,
                                   title: Text(
                                     S.current.txtConfirmRemoveFavoriteTitle,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: titleLargeSize,
                                       fontWeight: titleLargeWeight,
-                                      color: AppColor.defaultFont,
+                                      color: colorsByTheme(context).defaultFont,
                                     ),
                                   ),
                                   content: Text(
                                     S.current.txtConfirmRemoveFavoriteContent,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: bodySmallSize,
                                       fontWeight: bodySmallWeight,
-                                      color: AppColor.defaultFont,
+                                      color: colorsByTheme(context).defaultFont,
                                     ),
                                   ),
                                   actions: [
@@ -382,9 +383,9 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                         padding: EdgeInsets.zero,
                         constraints: const BoxConstraints(),
                         onPressed: () => Navigator.of(context).pop(),
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.arrow_back,
-                          color: AppColor.defaultFont,
+                          color: colorsByTheme(context).defaultFont,
                         ),
                       ),
                     ),
@@ -393,9 +394,9 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                         top: 128.0 + MediaQuery.of(context).padding.top,
                       ),
                       child: Container(
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
+                        decoration: BoxDecoration(
+                          color: colorsByTheme(context).backgroundTheme,
+                          borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(24.0),
                             topRight: Radius.circular(24.0),
                           ),
@@ -443,11 +444,12 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                             child: Text(
                                               state.topicDetail.topicCategory ??
                                                   'null. This topic is out of this world',
-                                              style: const TextStyle(
+                                              style: TextStyle(
                                                 height: 0.9,
                                                 fontSize: bodySmallSize,
                                                 fontWeight: bodySmallWeight,
-                                                color: AppColor.defaultFont,
+                                                color: colorsByTheme(context)
+                                                    .defaultFont,
                                               ),
                                               overflow: TextOverflow.ellipsis,
                                             ),
@@ -485,11 +487,12 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                             child: Text(
                                               state.topicDetail.topicLevel ??
                                                   'null. This topic is for Einstein',
-                                              style: const TextStyle(
+                                              style: TextStyle(
                                                 height: 0.9,
                                                 fontSize: bodySmallSize,
                                                 fontWeight: bodySmallWeight,
-                                                color: AppColor.defaultFont,
+                                                color: colorsByTheme(context)
+                                                    .defaultFont,
                                               ),
                                               overflow: TextOverflow.ellipsis,
                                             ),
@@ -508,7 +511,6 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                   height: 1.15,
                                   fontSize: bodyLargeSize,
                                   fontWeight: bodyLargeWeight,
-                                  color: Colors.black,
                                 ),
                               ),
                               const SizedBox(height: spacing16),

@@ -5,6 +5,7 @@ import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../base/define/size.dart';
+import '../../../../../base/define/theme.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../settings/presentation/views/settings_notification_view.dart';
 import '../../domain/entities/noti_list_item_entity.dart';
@@ -25,7 +26,7 @@ class _NotiListViewState extends State<NotiListView> {
   _showNotiExternalOptions() async {
     final result = await showModalBottomSheet(
       context: context,
-      backgroundColor: AppColor.white,
+      backgroundColor: colorsByTheme(context).backgroundCardsChip,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(24.0),
@@ -91,16 +92,23 @@ class _NotiListViewState extends State<NotiListView> {
           }
         },
         child: Scaffold(
-          backgroundColor: AppColor.white,
+          //backgroundColor: AppColor.white,
           body: CustomScrollView(
             slivers: [
               SliverAppBar.medium(
+                leading: IconButton(
+                  onPressed: Navigator.of(context).pop,
+                  icon: Icon(
+                    Icons.arrow_back_ios_new,
+                    color: colorsByTheme(context).defaultFont,
+                  ),
+                ),
                 title: Text(
                   S.current.txtNotifications,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: headlineSmallSize,
                     fontWeight: headlineSmallWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                     height: 32 / 34,
                   ),
                 ),
@@ -144,10 +152,10 @@ class _NotiListViewState extends State<NotiListView> {
                               ),
                               Text(
                                 S.current.txtNoNotiToShow,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: titleLargeSize,
                                   fontWeight: titleLargeWeight,
-                                  color: AppColor.defaultFont,
+                                  color: colorsByTheme(context).defaultFont,
                                   height: 28 / 30,
                                 ),
                                 textAlign: TextAlign.center,

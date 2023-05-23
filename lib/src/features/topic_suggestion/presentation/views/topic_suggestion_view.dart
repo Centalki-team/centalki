@@ -4,10 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
-import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
-import '../../../../../../base/widgets/dialog/success_dialog_content.dart';
 import '../../../../../../base/widgets/text_fields/outlined_text_field.dart';
 import '../../../../../../base/widgets/toast/app_toast.dart';
+import '../../../../../base/define/theme.dart';
 import '../blocs/topic_suggestion_bloc.dart';
 
 class TopicSuggestionView extends StatefulWidget {
@@ -28,21 +27,21 @@ class _TopicSuggestionViewState extends State<TopicSuggestionView> {
         barrierDismissible: false,
         context: context,
         builder: (context) => AlertDialog(
-              backgroundColor: AppColor.white,
-              title: const Text(
+              backgroundColor: colorsByTheme(context).backgroundCardsChip,
+              title: Text(
                 TextDoc.txtNotFinishTopicSuggest,
                 style: TextStyle(
                   fontSize: titleLargeSize,
                   fontWeight: titleLargeWeight,
-                  color: AppColor.defaultFont,
+                  color: colorsByTheme(context).defaultFont,
                 ),
               ),
-              content: const Text(
+              content: Text(
                 TextDoc.txtNotFinishTopicSuggestContent,
                 style: TextStyle(
                   fontSize: bodyLargeSize,
                   fontWeight: bodyLargeWeight,
-                  color: AppColor.defaultFont,
+                  color: colorsByTheme(context).defaultFont,
                 ),
               ),
               actions: [
@@ -88,21 +87,21 @@ class _TopicSuggestionViewState extends State<TopicSuggestionView> {
         barrierDismissible: false,
         context: context,
         builder: (context) => AlertDialog(
-              backgroundColor: AppColor.white,
-              title: const Text(
+              backgroundColor: colorsByTheme(context).backgroundCardsChip,
+              title: Text(
                 TextDoc.txtSendTopicSuggestSuccess,
                 style: TextStyle(
                   fontSize: titleLargeSize,
                   fontWeight: titleLargeWeight,
-                  color: AppColor.defaultFont,
+                  color: colorsByTheme(context).defaultFont,
                 ),
               ),
-              content: const Text(
+              content: Text(
                 TextDoc.txtSendTopicSuggestSuccessContent,
                 style: TextStyle(
                   fontSize: bodyLargeSize,
                   fontWeight: bodyLargeWeight,
-                  color: AppColor.defaultFont,
+                  color: colorsByTheme(context).defaultFont,
                 ),
               ),
               actions: [
@@ -158,7 +157,7 @@ class _TopicSuggestionViewState extends State<TopicSuggestionView> {
           child: GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: Scaffold(
-              backgroundColor: AppColor.white,
+              //backgroundColor: AppColor.white,
               body: BlocBuilder<TopicSuggestionBloc, TopicSuggestionState>(
                 buildWhen: (previous, current) =>
                     current != previous &&
@@ -170,19 +169,19 @@ class _TopicSuggestionViewState extends State<TopicSuggestionView> {
                     return CustomScrollView(
                       slivers: [
                         SliverAppBar.medium(
-                          leading: GestureDetector(
-                            onTap: _showExitOptionDialog,
-                            child: const Icon(
-                              Icons.arrow_back,
-                              color: AppColor.defaultFont,
+                          leading: IconButton(
+                            onPressed: Navigator.of(context).pop,
+                            icon: Icon(
+                              Icons.arrow_back_ios_new,
+                              color: colorsByTheme(context).defaultFont,
                             ),
                           ),
-                          title: const Text(
+                          title: Text(
                             TextDoc.txtTopicSuggestion,
                             style: TextStyle(
                               fontSize: headlineSmallSize,
                               fontWeight: headlineSmallWeight,
-                              color: AppColor.defaultFont,
+                              color: colorsByTheme(context).defaultFont,
                             ),
                           ),
                           centerTitle: true,
@@ -198,12 +197,12 @@ class _TopicSuggestionViewState extends State<TopicSuggestionView> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text(
+                                  Text(
                                     TextDoc.txtSubjectLabel,
                                     style: TextStyle(
                                       fontSize: titleMediumSize,
                                       fontWeight: titleMediumWeight,
-                                      color: AppColor.defaultFont,
+                                      color: colorsByTheme(context).defaultFont,
                                     ),
                                   ),
                                   const Text(
@@ -243,12 +242,12 @@ class _TopicSuggestionViewState extends State<TopicSuggestionView> {
                                   const SizedBox(
                                     height: spacing24,
                                   ),
-                                  const Text(
+                                  Text(
                                     TextDoc.txtLevelLabel,
                                     style: TextStyle(
                                       fontSize: titleMediumSize,
                                       fontWeight: titleMediumWeight,
-                                      color: AppColor.defaultFont,
+                                      color: colorsByTheme(context).defaultFont,
                                     ),
                                   ),
                                   const Text(
@@ -268,18 +267,26 @@ class _TopicSuggestionViewState extends State<TopicSuggestionView> {
                                     runSpacing: spacing8,
                                     children: levels
                                         .map((e) => FilterChip(
-                                            shape: const RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(24.0),
-                                              ),
-                                            ),
+                                            backgroundColor:
+                                                colorsByTheme(context)
+                                                    .selectableChipBg,
+                                            // shape: const RoundedRectangleBorder(
+                                            //   borderRadius: BorderRadius.all(
+                                            //     Radius.circular(24.0),
+                                            //   ),
+                                            // ),
+                                            shape: const StadiumBorder(),
                                             label: Text(e.title),
-                                            labelStyle: const TextStyle(
+                                            labelStyle: TextStyle(
                                               fontSize: bodyLargeSize,
                                               fontWeight: bodyLargeWeight,
-                                              color: AppColor.defaultFont,
+                                              color: selectedLevel == e.key
+                                                  ? AppColor.defaultFontLight
+                                                  : colorsByTheme(context)
+                                                      .defaultFont,
                                             ),
-                                            checkmarkColor: AppColor.defaultFont,
+                                            checkmarkColor:
+                                                AppColor.defaultFontLight,
                                             selectedColor:
                                                 AppColor.mainColor2Surface,
                                             selected: (selectedLevel == e.key),
@@ -307,16 +314,17 @@ class _TopicSuggestionViewState extends State<TopicSuggestionView> {
                                   const SizedBox(
                                     height: spacing24,
                                   ),
-                                  const Text(
+                                  Text(
                                     TextDoc.txtDescriptionAndRequirementsLabel,
                                     style: TextStyle(
                                       fontSize: titleMediumSize,
                                       fontWeight: titleMediumWeight,
-                                      color: AppColor.defaultFont,
+                                      color: colorsByTheme(context).defaultFont,
                                     ),
                                   ),
                                   const Text(
-                                    TextDoc.txtDescriptionAndRequirementsSubTitle,
+                                    TextDoc
+                                        .txtDescriptionAndRequirementsSubTitle,
                                     style: TextStyle(
                                       height: 1.15,
                                       fontSize: bodySmallSize,

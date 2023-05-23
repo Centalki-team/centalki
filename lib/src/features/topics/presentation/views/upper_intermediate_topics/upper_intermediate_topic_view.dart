@@ -6,6 +6,7 @@ import '../../../../../../base/define/dimensions.dart';
 import '../../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../../base/define/size.dart';
 import '../../../../../../base/define/text.dart';
+import '../../../../../../base/define/theme.dart';
 import '../../../../../../base/widgets/buttons/text_button.dart';
 import '../../../../../../base/widgets/toast/app_toast.dart';
 import '../../../../../../generated/l10n.dart';
@@ -90,21 +91,21 @@ class UpperIntermediateTopicView extends StatelessWidget {
                           barrierDismissible: false,
                           context: context,
                           builder: (context) => AlertDialog(
-                            backgroundColor: AppColor.white,
+                            backgroundColor: colorsByTheme(context).backgroundCardsChip,
                             title: Text(
                               S.current.txtConfirmRemoveFavoriteTitle,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: titleLargeSize,
                                 fontWeight: titleLargeWeight,
-                                color: AppColor.defaultFont,
+                                color: colorsByTheme(context).defaultFont,
                               ),
                             ),
                             content: Text(
                               S.current.txtConfirmRemoveFavoriteContent,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: bodySmallSize,
                                 fontWeight: bodySmallWeight,
-                                color: AppColor.defaultFont,
+                                color: colorsByTheme(context).defaultFont,
                               ),
                             ),
                             actions: [

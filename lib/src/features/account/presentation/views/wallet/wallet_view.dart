@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../../base/define/styles.dart';
+import '../../../../../../base/define/theme.dart';
 import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
 import '../../../../../../base/widgets/toast/app_toast.dart';
 import '../../../../../../generated/l10n.dart';
@@ -47,16 +48,23 @@ class _WalletViewState extends State<WalletView> {
 
           if (state is WalletLoadDoneState) {
             return Scaffold(
-              backgroundColor: AppColor.white,
+              //backgroundColor: AppColor.white,
               body: CustomScrollView(
                 slivers: [
                   SliverAppBar.medium(
+                    leading: IconButton(
+                      onPressed: Navigator.of(context).pop,
+                      icon: Icon(
+                        Icons.arrow_back_ios_new,
+                        color: colorsByTheme(context).defaultFont,
+                      ),
+                    ),
                     title: Text(
                       S.current.txtWallet,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: headlineSmallSize,
                         fontWeight: headlineSmallWeight,
-                        color: AppColor.defaultFont,
+                        color: colorsByTheme(context).defaultFont,
                       ),
                     ),
                     centerTitle: true,
@@ -124,19 +132,21 @@ class _WalletViewState extends State<WalletView> {
                                   vertical: padding8,
                                   horizontal: padding16,
                                 ),
-                                decoration: const BoxDecoration(
-                                  color: AppColor.mainColor2Surface,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(12.0)),
+                                decoration: BoxDecoration(
+                                  color: colorsByTheme(context)
+                                      .backgroundCardHistoryWallet,
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(12.0)),
                                 ),
                                 child: Column(
                                   children: [
-                                     Text(
+                                    Text(
                                       S.current.txtBalance,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: titleMediumSize,
                                         fontWeight: titleMediumWeight,
-                                        color: AppColor.defaultFont,
+                                        color:
+                                            colorsByTheme(context).defaultFont,
                                       ),
                                     ),
                                     Text(
@@ -148,12 +158,13 @@ class _WalletViewState extends State<WalletView> {
                                         color: AppColor.support,
                                       ),
                                     ),
-                                     Text(
+                                    Text(
                                       S.current.txtOr,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: labelLargeSize,
                                         fontWeight: labelLargeWeight,
-                                        color: AppColor.defaultFont,
+                                        color:
+                                            colorsByTheme(context).defaultFont,
                                       ),
                                     ),
                                     Text(
@@ -166,23 +177,25 @@ class _WalletViewState extends State<WalletView> {
                                       ),
                                     ),
                                     const SizedBox(height: spacing12),
-                                     Text(
+                                    Text(
                                       S.current.txtEachSessionDuration,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         height: 0.5,
                                         fontStyle: FontStyle.italic,
                                         fontSize: bodySmallSize,
                                         fontWeight: bodySmallWeight,
-                                        color: AppColor.defaultFont,
+                                        color:
+                                            colorsByTheme(context).defaultFont,
                                       ),
                                     ),
                                     Text(
                                       '${S.current.txtEachSessionPrice}${currencyFormat.format(state.costPerSession)}',
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontStyle: FontStyle.italic,
                                         fontSize: bodySmallSize,
                                         fontWeight: bodySmallWeight,
-                                        color: AppColor.defaultFont,
+                                        color:
+                                            colorsByTheme(context).defaultFont,
                                       ),
                                     ),
                                   ],

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../base/define/styles.dart';
+import '../../../../../base/define/theme.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../topic_detail/presentation/views/topic_detail_page.dart';
 import '../../domain/entities/topic_item_entity.dart';
@@ -40,7 +41,7 @@ class _TopicCardState extends State<TopicCard> {
           height: 120,
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
-              color: AppColor.white,
+              color: colorsByTheme(context).backgroundCardsChip,
               borderRadius: const BorderRadius.all(Radius.circular(12)),
               boxShadow: [
                 BoxShadow(
@@ -80,10 +81,10 @@ class _TopicCardState extends State<TopicCard> {
                           Expanded(
                             child: Text(
                               widget.item.topicName ?? '',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: titleMediumSize,
                                 fontWeight: titleMediumWeight,
-                                color: AppColor.defaultFont,
+                                color: colorsByTheme(context).defaultFont,
                                 height: 0.9,
                               ),
                               maxLines: 3,
@@ -116,10 +117,10 @@ class _TopicCardState extends State<TopicCard> {
                       ),
                       Text(
                         widget.item.topicCategory ?? '',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: bodySmallSize,
                           fontWeight: bodySmallWeight,
-                          color: AppColor.defaultFont,
+                          color: colorsByTheme(context).defaultFont,
                           height: 16 / 20,
                         ),
                         maxLines: 2,

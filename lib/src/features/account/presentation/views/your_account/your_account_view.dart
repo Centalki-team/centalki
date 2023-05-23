@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../base/define/common_txt_style.dart';
 import '../../../../../../base/define/styles.dart';
+import '../../../../../../base/define/theme.dart';
 import '../../../../../../base/widgets/avatar.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
@@ -53,7 +54,7 @@ class _YourAccountViewState extends State<YourAccountView> {
               }
               if (state is YourAccountLoadDoneState) {
                 return Scaffold(
-                  backgroundColor: AppColor.white,
+                  //backgroundColor: AppColor.white,
                   body: Stack(
                     children: [
                       Column(
@@ -73,7 +74,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                   child: Text(
                                     S.current.appName,
                                     style: CommonTxtStyle.t30Regular.apply(
-                                      color: AppColor.defaultFont,
+                                      color: colorsByTheme(context).defaultFont,
                                     ),
                                   ),
                                 ),
@@ -166,7 +167,8 @@ class _YourAccountViewState extends State<YourAccountView> {
                                               style: const TextStyle(
                                                 fontSize: titleMediumSize,
                                                 fontWeight: titleMediumWeight,
-                                                color: AppColor.defaultFont,
+                                                color:
+                                                    AppColor.defaultFontLight,
                                               ),
                                             ),
                                             const SizedBox(
@@ -199,7 +201,8 @@ class _YourAccountViewState extends State<YourAccountView> {
                                                 style: const TextStyle(
                                                   fontSize: titleMediumSize,
                                                   fontWeight: titleMediumWeight,
-                                                  color: AppColor.defaultFont,
+                                                  color:
+                                                      AppColor.defaultFontLight,
                                                 ),
                                               ),
                                             ],
@@ -283,7 +286,8 @@ class _YourAccountViewState extends State<YourAccountView> {
                                       barrierDismissible: false,
                                       context: context,
                                       builder: (context) => AlertDialog(
-                                        backgroundColor: AppColor.white,
+                                        backgroundColor: colorsByTheme(context)
+                                            .backgroundCardsChip,
                                         title: Text(
                                           S.current
                                               .txtConfirmDeleteAccountTitle,
@@ -296,10 +300,11 @@ class _YourAccountViewState extends State<YourAccountView> {
                                         content: Text(
                                           S.current
                                               .txtConfirmDeleteAccountContent,
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                             fontSize: bodySmallSize,
                                             fontWeight: bodySmallWeight,
-                                            color: AppColor.defaultFont,
+                                            color: colorsByTheme(context)
+                                                .defaultFont,
                                           ),
                                         ),
                                         actions: [
@@ -345,7 +350,9 @@ class _YourAccountViewState extends State<YourAccountView> {
                                         barrierDismissible: false,
                                         context: context,
                                         builder: (context) => AlertDialog(
-                                              backgroundColor: AppColor.white,
+                                              backgroundColor:
+                                                  colorsByTheme(context)
+                                                      .backgroundCardsChip,
                                               title: Text(
                                                 S.current.txtSignOut,
                                                 style: const TextStyle(
@@ -356,10 +363,11 @@ class _YourAccountViewState extends State<YourAccountView> {
                                               ),
                                               content: Text(
                                                 S.current.txtSignOutContent,
-                                                style: const TextStyle(
+                                                style: TextStyle(
                                                   fontSize: bodySmallSize,
                                                   fontWeight: bodySmallWeight,
-                                                  color: AppColor.defaultFont,
+                                                  color: colorsByTheme(context)
+                                                      .defaultFont,
                                                 ),
                                               ),
                                               actions: [
@@ -454,7 +462,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                         decoration: BoxDecoration(
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(12.0)),
-                            color: AppColor.white,
+                            color: colorsByTheme(context).backgroundTheme,
                             boxShadow: [
                               BoxShadow(
                                 color: AppColor.shadow.shade300,
@@ -484,11 +492,12 @@ class _YourAccountViewState extends State<YourAccountView> {
                                     ),
                                     Text(
                                       '${(state.account.userProfile?.accountBalance ?? 0) ~/ (state.account.userProfile?.currentCostPerSession ?? 1)}',
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         height: 0.75,
                                         fontSize: bodyLargeSize,
                                         fontWeight: bodyLargeWeight,
-                                        color: AppColor.defaultFont,
+                                        color:
+                                            colorsByTheme(context).defaultFont,
                                       ),
                                     ),
                                   ],
@@ -516,11 +525,12 @@ class _YourAccountViewState extends State<YourAccountView> {
                                     ),
                                     Text(
                                       '${state.account.accountCompletedSessions ?? 0}',
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         height: 0.75,
                                         fontSize: bodyLargeSize,
                                         fontWeight: bodyLargeWeight,
-                                        color: AppColor.defaultFont,
+                                        color:
+                                            colorsByTheme(context).defaultFont,
                                       ),
                                     ),
                                   ],

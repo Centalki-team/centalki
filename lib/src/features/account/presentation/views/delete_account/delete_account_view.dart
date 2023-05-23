@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../../base/define/styles.dart';
+import '../../../../../../base/define/theme.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
 import '../../../../../../base/widgets/text_fields/outlined_text_field.dart';
@@ -42,18 +43,25 @@ class _DeleteAccountViewState extends State<DeleteAccountView> {
           }
         },
         child: Scaffold(
-          backgroundColor: AppColor.white,
+          //backgroundColor: AppColor.white,
           body: GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: CustomScrollView(
               slivers: [
                 SliverAppBar.medium(
-                  title:  Text(
+                  leading: IconButton(
+                    onPressed: Navigator.of(context).pop,
+                    icon: Icon(
+                      Icons.arrow_back_ios_new,
+                      color: colorsByTheme(context).defaultFont,
+                    ),
+                  ),
+                  title: Text(
                     S.current.txtDeleteAccount,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: headlineSmallSize,
                       fontWeight: headlineSmallWeight,
-                      color: AppColor.defaultFont,
+                      color: colorsByTheme(context).defaultFont,
                     ),
                   ),
                   centerTitle: true,
@@ -69,12 +77,12 @@ class _DeleteAccountViewState extends State<DeleteAccountView> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                           Text(
+                          Text(
                             S.current.txtEnterPasswordToDelete,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: titleMediumSize,
                               fontWeight: titleMediumWeight,
-                              color: AppColor.defaultFont,
+                              color: colorsByTheme(context).defaultFont,
                             ),
                           ),
                           BlocBuilder<DeleteAccountBloc, DeleteAccountState>(
@@ -96,7 +104,8 @@ class _DeleteAccountViewState extends State<DeleteAccountView> {
                             builder: (context, state) => AppElevatedButton(
                               text: S.current.txtConfirmDeleteAccount,
                               minimumSize: const Size.fromHeight(48),
-                              onPressed: state is DeleteAccountPasswordValidState
+                              onPressed: state
+                                      is DeleteAccountPasswordValidState
                                   ? () => context.read<DeleteAccountBloc>().add(
                                         const DeleteAccountDeleteEvent(),
                                       )

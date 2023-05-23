@@ -5,6 +5,7 @@ import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
 import '../../../../../base/define/text.dart';
+import '../../../../../base/define/theme.dart';
 import '../../../../../base/widgets/buttons/button.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../bookmark/domain/entities/bookmark_phrase_item_entity.dart';
@@ -35,22 +36,22 @@ class _VocabLearningViewState extends State<VocabLearningView>
       barrierDismissible: false,
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: AppColor.white,
+        backgroundColor: colorsByTheme(context).backgroundCardsChip,
         title: Text(
           S.current.txtEndProgress,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: titleMediumSize,
             fontWeight: titleMediumWeight,
-            color: AppColor.defaultFont,
+            color: colorsByTheme(context).defaultFont,
             height: 1.0,
           ),
         ),
         content: Text(
           S.current.txtEndProgressContent,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: bodyLargeSize,
             fontWeight: bodyLargeWeight,
-            color: AppColor.defaultFont,
+            color: colorsByTheme(context).defaultFont,
             height: 1.0,
           ),
         ),
@@ -116,7 +117,7 @@ class _VocabLearningViewState extends State<VocabLearningView>
           },
           child: Scaffold(
             extendBody: true,
-            backgroundColor: AppColor.white,
+            //backgroundColor: AppColor.white,
             appBar: PreferredSize(
               preferredSize: const Size.fromHeight(kToolbarHeight),
               child: BlocBuilder<VocabLearningBloc, VocabLearningState>(
@@ -124,8 +125,9 @@ class _VocabLearningViewState extends State<VocabLearningView>
                   if (state is VocabLearningInitState) {
                     return AppBar(
                       leading: IconButton(
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.arrow_back,
+                          color: colorsByTheme(context).defaultFont,
                         ),
                         onPressed: Navigator.of(context).pop,
                       ),
@@ -146,16 +148,6 @@ class _VocabLearningViewState extends State<VocabLearningView>
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 if (value != 4) ...[
-                                  AppOutlinedButton(
-                                    text: S.current.txtEndBtn,
-                                    textColor: AppColor.error,
-                                    outlineColor: AppColor.error,
-                                    minimumSize: const Size(171, 40),
-                                    onPressed: _showEndProgressOptionalDialog,
-                                  ),
-                                  const SizedBox(
-                                    height: spacing16,
-                                  ),
                                   AppFilledButton(
                                     text: S.current.txtNextBtn,
                                     minimumSize: const Size(171, 40),
@@ -163,6 +155,16 @@ class _VocabLearningViewState extends State<VocabLearningView>
                                       _tabController
                                           .animateTo(++_currentTabIndex.value);
                                     },
+                                  ),
+                                  const SizedBox(
+                                    height: spacing16,
+                                  ),
+                                  AppOutlinedButton(
+                                    text: S.current.txtEndBtn,
+                                    textColor: AppColor.error,
+                                    outlineColor: AppColor.error,
+                                    minimumSize: const Size(171, 40),
+                                    onPressed: _showEndProgressOptionalDialog,
                                   ),
                                 ] else ...[
                                   AppFilledButton(

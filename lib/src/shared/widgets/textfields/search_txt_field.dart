@@ -5,6 +5,7 @@ import '../../../../base/define/dimensions.dart';
 import '../../../../base/define/opacity.dart';
 import '../../../../base/define/size.dart';
 import '../../../../base/define/text.dart';
+import '../../../../base/define/theme.dart';
 import '../../../../base/define/width.dart';
 import '../../../../generated/l10n.dart';
 
@@ -75,10 +76,10 @@ class _SearchTextFieldState extends State<SearchTextField> {
             setState(() {});
             widget.onSubmitted?.call(value);
           },
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: bodyLargeSize,
             fontWeight: bodyLargeWeight,
-            color: AppColor.defaultFont,
+            color: colorsByTheme(context).defaultFont,
           ),
           decoration: InputDecoration(
             hintText: widget.hintText,

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../define/colors.dart';
 import '../../define/common_txt_style.dart';
+import '../../define/theme.dart';
 import '../common_assets.dart';
 
 class BottomIndicatorBar extends StatefulWidget {
@@ -128,7 +129,7 @@ class _BottomIndicatorBarState extends State<BottomIndicatorBar> {
               // color: isSelect
               //     ? widget.activeColor ?? const Color(0xff0050B3)
               //     : widget.inactiveColor,
-              color: AppColor.defaultFont,
+              color: colorsByTheme(context).defaultFont,
               size: 24,
             ),
           ),
@@ -143,7 +144,7 @@ class _BottomIndicatorBarState extends State<BottomIndicatorBar> {
 
                 //     ? widget.activeColor ?? const Color(0xff0050B3)
                 //     : widget.inactiveColor,),
-                color: AppColor.defaultFont,
+                color: colorsByTheme(context).defaultFont,
               ),
               // maxLines: 1,
             ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../base/define/styles.dart';
+import '../../../../../base/define/theme.dart';
 import '../../domain/entities/language_entity.dart';
 
 class RadioRow extends StatelessWidget {
@@ -28,10 +29,10 @@ class RadioRow extends StatelessWidget {
                   value.name,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: titleSmallSize,
                     fontWeight: titleSmallWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
               ),
@@ -39,7 +40,9 @@ class RadioRow extends StatelessWidget {
                 isSelected
                     ? Icons.radio_button_checked_outlined
                     : Icons.radio_button_off_outlined,
-                color: isSelected ? AppColor.mainColor2 : AppColor.defaultFont,
+                color: isSelected
+                    ? AppColor.mainColor2
+                    : colorsByTheme(context).defaultFont,
               )
             ],
           ),

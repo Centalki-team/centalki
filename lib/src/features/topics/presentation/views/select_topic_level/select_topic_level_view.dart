@@ -5,6 +5,7 @@ import '../../../../../../base/define/common_txt_style.dart';
 import '../../../../../../base/define/dimensions.dart';
 import '../../../../../../base/define/size.dart';
 import '../../../../../../base/define/text.dart';
+import '../../../../../../base/define/theme.dart';
 import '../../../../../../gen/assets.gen.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../../../../shared/widgets/tab_indicator/tab_indicator.dart';
@@ -46,13 +47,13 @@ class _SelectTopicLevelViewState extends State<SelectTopicLevelView>
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        backgroundColor: AppColor.white,
+        //backgroundColor: AppColor.white,
         appBar: AppBar(
-          backgroundColor: AppColor.white,
+          //backgroundColor: AppColor.white,
           title: Text(
             S.current.appName,
             style: CommonTxtStyle.t30Regular.apply(
-              color: AppColor.defaultFont,
+              color: colorsByTheme(context).defaultFont,
             ),
           ),
           centerTitle: false,
@@ -116,7 +117,7 @@ class _SelectTopicLevelViewState extends State<SelectTopicLevelView>
             //         child: Text(
             //           AppText.appName,
             //           style: CommonTxtStyle.t30Regular.apply(
-            //             color: AppColor.defaultFont,
+            //             color: colorsByTheme(context).defaultFont,
             //           ),
             //         ),
             //       ),
@@ -161,7 +162,7 @@ class _SelectTopicLevelViewState extends State<SelectTopicLevelView>
               ),
               indicatorColor: AppColor.secondary,
               labelColor: AppColor.secondary,
-              unselectedLabelColor: AppColor.defaultFontContainer,
+              unselectedLabelColor: colorsByTheme(context).tabTitleColor,
               controller: _tabController,
               isScrollable: true,
               // physics: const NeverScrollableScrollPhysics(),
