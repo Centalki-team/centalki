@@ -4,36 +4,38 @@ abstract class PaymentEvent {
   const PaymentEvent();
 }
 
-class PaymentValidateEvent extends PaymentEvent {
-  const PaymentValidateEvent();
+class PaymentInitEvent extends PaymentEvent {
+  const PaymentInitEvent();
 }
 
-class PaymentUploadImageEvent extends PaymentEvent {
-  const PaymentUploadImageEvent({
-    required this.img,
-  });
-
-  final XFile img;
+class PaymentGetProductsEvent extends PaymentEvent {
+  const PaymentGetProductsEvent();
 }
 
-class PaymentUploadPresignedUrlEvent extends PaymentEvent {
-  const PaymentUploadPresignedUrlEvent({
-    required this.img,
-    required this.url,
-  });
+class PaymentPurchaseEvent extends PaymentEvent {
+  const PaymentPurchaseEvent({required this.product});
 
-  final XFile img;
-  final String url;
+  final ProductDetails product;
 }
 
-class PaymentCreateReceiptEvent extends PaymentEvent {
-  const PaymentCreateReceiptEvent({
-    required this.img,
-  });
-
-  final XFile img;
+class PaymentCancelPurchaseEvent extends PaymentEvent {
+  const PaymentCancelPurchaseEvent();
 }
 
-class PaymentLoadPaymentMethodsEvent extends PaymentEvent {
-  const PaymentLoadPaymentMethodsEvent();
+class PaymentOccurErrorEvent extends PaymentEvent {
+  const PaymentOccurErrorEvent(this.exception);
+
+  final AppException exception;
+}
+
+class PaymentVerifyPurchaseEvent extends PaymentEvent {
+  const PaymentVerifyPurchaseEvent(this.purchaseDetails);
+
+  final PurchaseDetails purchaseDetails;
+}
+
+class PaymentCompletePurchaseEvent extends PaymentEvent {
+  const PaymentCompletePurchaseEvent(this.purchaseDetails);
+
+  final PurchaseDetails purchaseDetails;
 }

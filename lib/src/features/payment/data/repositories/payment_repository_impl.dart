@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:in_app_purchase_platform_interface/src/types/purchase_details.dart';
 
 import '../../../../../base/gateway/exception/app_exception.dart';
 import '../../../../../di/di_module.dart';
@@ -67,6 +68,24 @@ class PaymentRepositoryImpl extends PaymentRepository {
       return Left(
         AppException(
           error: err,
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<AppException, bool>> verifyPurchase(
+      PurchaseDetails purchaseDetails) async {
+    try {
+      final result = await paymentRemoteDatasourceAuthRequired
+          .verifyPurchase(purchaseDetails);
+      return Right(result);
+    } on AppException catch (s) {
+      return Left(s);
+    } catch (err) {
+      return const Left(
+        AppException(
+          displayMessage: 'Something went wrong. Please try again later.',
         ),
       );
     }

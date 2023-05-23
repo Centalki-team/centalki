@@ -3049,6 +3049,96 @@ class S {
       args: [],
     );
   }
+
+  /// `Purchase`
+  String get txtPurchase {
+    return Intl.message(
+      'Purchase',
+      name: 'txtPurchase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Most Popular`
+  String get txtMostPopular {
+    return Intl.message(
+      'Most Popular',
+      name: 'txtMostPopular',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Best Value`
+  String get txtBestValue {
+    return Intl.message(
+      'Best Value',
+      name: 'txtBestValue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `1 session`
+  String get txtOneSession {
+    return Intl.message(
+      '1 session',
+      name: 'txtOneSession',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `6 sessions`
+  String get txtSixSessions {
+    return Intl.message(
+      '6 sessions',
+      name: 'txtSixSessions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total 30 minutes of learning time`
+  String get txtOneSessionLearningTime {
+    return Intl.message(
+      'Total 30 minutes of learning time',
+      name: 'txtOneSessionLearningTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total 180 minutes of learning time`
+  String get txtSixSessionsLearningTime {
+    return Intl.message(
+      'Total 180 minutes of learning time',
+      name: 'txtSixSessionsLearningTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `High-quality video call`
+  String get txtQualityVideoCall {
+    return Intl.message(
+      'High-quality video call',
+      name: 'txtQualityVideoCall',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save 16%`
+  String get txtSave16Percent {
+    return Intl.message(
+      'Save 16%',
+      name: 'txtSave16Percent',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

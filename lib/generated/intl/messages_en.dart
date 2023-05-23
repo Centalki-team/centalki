@@ -40,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtBack": MessageLookupByLibrary.simpleMessage("Back"),
         "txtBackBtn": MessageLookupByLibrary.simpleMessage("Back"),
         "txtBalance": MessageLookupByLibrary.simpleMessage("Balance"),
+        "txtBestValue": MessageLookupByLibrary.simpleMessage("Best Value"),
         "txtBioTitle": MessageLookupByLibrary.simpleMessage("Bio"),
         "txtBioTooLong": MessageLookupByLibrary.simpleMessage(
             "Your biography cannot exceed 200 characters"),
@@ -251,6 +252,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Failed to load your profile!"),
         "txtMale": MessageLookupByLibrary.simpleMessage("Male"),
         "txtMinutes": MessageLookupByLibrary.simpleMessage("minutes"),
+        "txtMostPopular": MessageLookupByLibrary.simpleMessage("Most Popular"),
         "txtNewPassword": MessageLookupByLibrary.simpleMessage("New password"),
         "txtNewPasswordEmptyWarning": MessageLookupByLibrary.simpleMessage(
             "New password cannot be empty"),
@@ -313,6 +315,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Notify me about"),
         "txtOfCourse": MessageLookupByLibrary.simpleMessage("Of course"),
         "txtOk": MessageLookupByLibrary.simpleMessage("OK"),
+        "txtOneSession": MessageLookupByLibrary.simpleMessage("1 session"),
+        "txtOneSessionLearningTime": MessageLookupByLibrary.simpleMessage(
+            "Total 30 minutes of learning time"),
         "txtOr": MessageLookupByLibrary.simpleMessage("or"),
         "txtOrLoginWith":
             MessageLookupByLibrary.simpleMessage("Or log in with"),
@@ -352,6 +357,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Successfully updated your profile!!"),
         "txtPronunciation":
             MessageLookupByLibrary.simpleMessage("Pronunciation"),
+        "txtPurchase": MessageLookupByLibrary.simpleMessage("Purchase"),
+        "txtQualityVideoCall":
+            MessageLookupByLibrary.simpleMessage("High-quality video call"),
         "txtRateOurApp": MessageLookupByLibrary.simpleMessage("Rate Our App"),
         "txtRating": MessageLookupByLibrary.simpleMessage("Rating"),
         "txtRatingEmptyError":
@@ -389,6 +397,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "What did the teacher make you satisfied with?"),
         "txtSatisfiedDescriptionHint": MessageLookupByLibrary.simpleMessage(
             "It would be nice if you could tell teacher more about what made your experiences good."),
+        "txtSave16Percent": MessageLookupByLibrary.simpleMessage("Save 16%"),
         "txtSaveChanges": MessageLookupByLibrary.simpleMessage("Save Changes"),
         "txtSearchError": MessageLookupByLibrary.simpleMessage(
             "Topics name cannot exceed 100 characters"),
@@ -439,6 +448,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtSignUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "txtSignUpIntroduction": MessageLookupByLibrary.simpleMessage(
             "Sign up to discover Centalki"),
+        "txtSixSessions": MessageLookupByLibrary.simpleMessage("6 sessions"),
+        "txtSixSessionsLearningTime": MessageLookupByLibrary.simpleMessage(
+            "Total 180 minutes of learning time"),
         "txtSounds": MessageLookupByLibrary.simpleMessage("Sounds"),
         "txtStartBtn": MessageLookupByLibrary.simpleMessage("Start"),
         "txtStayBtn": MessageLookupByLibrary.simpleMessage("Stay"),
