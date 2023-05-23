@@ -32,6 +32,7 @@ class MeetingBloc extends Bloc<MeetingEvent, MeetingState> {
     eventTrackingRepository: getIt.get<EventTrackingRepository>(),
   );
   var notCompleted = true;
+  final serverURL = "https://meet.centalki.com/";
 
   @override
   Future<void> close() {
@@ -77,50 +78,65 @@ class MeetingBloc extends Bloc<MeetingEvent, MeetingState> {
       }
     }
 
-    var options = JitsiMeetingOptions(
-      roomNameOrUrl: session.sessionId,
-      serverUrl: 'https://meet.jit.si/',
-      subject:
-          'Meeting room of ${session.sessionStudent?.fullName ?? 'student'} and ${session.sessionTeacher?.fullName ?? 'teacher'}',
-      userDisplayName: session.sessionStudent?.fullName ?? 'Student',
-      userAvatarUrl: session.sessionStudent?.avatarURL ?? '',
-      isAudioMuted: true,
-      isVideoMuted: true,
-      featureFlags: featureFlags,
-      configOverrides: {
-        "hideEmailInSettings": true,
-        "hiddenPremeetingButtons": ['invite'],
-        "toolbarButtons": [
-          'camera',
-          'chat',
-          'desktop',
-          'fullscreen',
-          'hangup',
-          'help',
-          'microphone',
-          'participants-pane',
-          'raisehand',
-          'recording',
-          'select-background',
-          'whiteboard',
-        ],
-        "disableInviteFunctions": true,
-        "remoteVideoMenu": {
-          "disableKick": true,
-        },
-        "breakoutRooms": {
-          "hideAddRoomButton": true,
-        },
-        "welcomePage": {
-          "disabled": true,
-        },
-        "enableClosePage": false,
-        "defaultLocalDisplayName":
-            session.sessionStudent?.fullName ?? 'Student',
-        "defaultRemoteDisplayName":
-            session.sessionStudent?.fullName ?? 'Student',
+    var configOverrides = {
+      "hideEmailInSettings": true,
+      "hiddenPremeetingButtons": ['invite'],
+      "toolbarButtons": [
+        'camera',
+        'chat',
+        'desktop',
+        'fullscreen',
+        'hangup',
+        'help',
+        'microphone',
+        'participants-pane',
+        'raisehand',
+        'recording',
+        'select-background',
+        'whiteboard',
+      ],
+      "disableInviteFunctions": true,
+      "remoteVideoMenu": {
+        "disableKick": true,
       },
-    );
+      "breakoutRooms": {
+        "hideAddRoomButton": true,
+      },
+      "welcomePage": {
+        "disabled": true,
+      },
+      "enableClosePage": false,
+      "defaultLocalDisplayName": session.sessionStudent?.fullName ?? 'Student',
+      "defaultRemoteDisplayName": session.sessionStudent?.fullName ?? 'Student',
+    };
+
+    var options = JitsiMeetingOptions(roomNameOrUrl: '');
+    if (session.sessionStudent?.avatarURL != null) {
+      options = JitsiMeetingOptions(
+        roomNameOrUrl: session.sessionId,
+        serverUrl: serverURL,
+        subject:
+            'Meeting room of ${session.sessionStudent?.fullName ?? 'student'} and ${session.sessionTeacher?.fullName ?? 'teacher'}',
+        userDisplayName: session.sessionStudent?.fullName ?? 'Student',
+        userAvatarUrl: session.sessionStudent?.avatarURL!,
+        isAudioMuted: true,
+        isVideoMuted: true,
+        featureFlags: featureFlags,
+        configOverrides: configOverrides,
+      );
+    } else {
+      options = JitsiMeetingOptions(
+        roomNameOrUrl: session.sessionId,
+        serverUrl: serverURL,
+        subject:
+            'Meeting room of ${session.sessionStudent?.fullName ?? 'student'} and ${session.sessionTeacher?.fullName ?? 'teacher'}',
+        userDisplayName: session.sessionStudent?.fullName ?? 'Student',
+        isAudioMuted: true,
+        isVideoMuted: true,
+        featureFlags: featureFlags,
+        configOverrides: configOverrides,
+      );
+    }
 
     var listeners = JitsiMeetingListener(
       onConferenceJoined: (url) async {
