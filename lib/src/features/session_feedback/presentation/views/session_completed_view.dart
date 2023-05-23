@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../base/define/styles.dart';
+import '../../../../../base/define/theme.dart';
 import '../../../../../base/widgets/buttons/elevated_button.dart';
 import '../../../../../base/widgets/buttons/text_button.dart';
 import '../../../../../gen/assets.gen.dart';
@@ -16,7 +17,7 @@ class SessionCompletedView extends StatelessWidget {
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
     return Scaffold(
-      backgroundColor: Colors.white,
+      //backgroundColor: Colors.white,
       body: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(
           padding16,
@@ -43,12 +44,12 @@ class SessionCompletedView extends StatelessWidget {
             ),
             Text(
               S.current.txtSessionCompletedBody,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: bodyLargeSize,
                 fontWeight: bodyLargeWeight,
                 letterSpacing: 0.5,
                 height: 24 / 16,
-                color: AppColor.defaultFont,
+                color: colorsByTheme(context).defaultFont,
               ),
               textAlign: TextAlign.center,
             ),

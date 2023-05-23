@@ -7,6 +7,7 @@ import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../base/define/size.dart';
 import '../../../../../base/define/text.dart';
+import '../../../../../base/define/theme.dart';
 import '../../../../../base/widgets/toast/app_toast.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../bookmark/domain/entities/bookmark_phrase_item_entity.dart';
@@ -28,22 +29,22 @@ class _VocabsViewState extends State<VocabsView> {
       //barrierDismissible: false,
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: AppColor.white,
+        backgroundColor: colorsByTheme(context).backgroundCardsChip,
         title: Text(
           S.current.txtConfirmRemoveSavedTitle,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: titleMediumSize,
             fontWeight: titleMediumWeight,
-            color: AppColor.defaultFont,
+            color: colorsByTheme(context).defaultFont,
             height: 1.0,
           ),
         ),
         content: Text(
           S.current.txtConfirmRemoveSavedContent,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: bodyLargeSize,
             fontWeight: bodyLargeWeight,
-            color: AppColor.defaultFont,
+            color: colorsByTheme(context).defaultFont,
             height: 1.0,
           ),
         ),
@@ -129,7 +130,7 @@ class _VocabsViewState extends State<VocabsView> {
           }
         },
         child: Scaffold(
-          backgroundColor: AppColor.white,
+          //backgroundColor: AppColor.white,
           body: BlocBuilder<VocabsBloc, VocabsState>(
             buildWhen: (previous, current) =>
                 current is VocabsBookmarkedLoadDoneState ||
@@ -179,10 +180,10 @@ class _VocabsViewState extends State<VocabsView> {
                     ),
                   ),
                   shape: const CircleBorder(),
-                  backgroundColor: AppColor.secondary,
-                  child: const Icon(
+                  backgroundColor: colorsByTheme(context).iconBackground,
+                  child: Icon(
                     Icons.local_library_outlined,
-                    color: AppColor.white,
+                    color: colorsByTheme(context).icon,
                   ),
                 );
               }

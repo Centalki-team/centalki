@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../base/define/styles.dart';
+import '../../../../../base/define/theme.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../../../generated/l10n.dart';
 
@@ -9,25 +10,25 @@ class SettingsAboutView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        backgroundColor: Colors.white,
+        //backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: AppColor.white,
+          //backgroundColor: AppColor.white,
           automaticallyImplyLeading: false,
           leading: GestureDetector(
             onTap: Navigator.of(context).pop,
-            child: const Icon(
+            child: Icon(
               Icons.arrow_back,
-              color: AppColor.defaultFont,
+              color: colorsByTheme(context).defaultFont,
             ),
           ),
           title: Row(
             children: [
               Text(
                 S.current.txtAbout,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: headlineSmallSize,
                   fontWeight: headlineSmallWeight,
-                  color: AppColor.defaultFont,
+                  color: colorsByTheme(context).defaultFont,
                 ),
               ),
             ],
@@ -49,20 +50,20 @@ class SettingsAboutView extends StatelessWidget {
               Text(
                 S.current.txtCentalkiTitle,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: AppColor.defaultFont,
+                style: TextStyle(
+                  color: colorsByTheme(context).defaultFont,
                   fontSize: displayLargeSize,
                   letterSpacing: -0.25,
                 ),
               ),
               Text(
                 S.current.txtCentalkiDescription,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: bodyLargeSize,
                   fontWeight: bodyLargeWeight,
                   letterSpacing: 0.5,
                   height: 24 / 16,
-                  color: AppColor.defaultFont,
+                  color: colorsByTheme(context).defaultFont,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -72,12 +73,12 @@ class SettingsAboutView extends StatelessWidget {
               Text(
                 S.current.txtCentalkiSource,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
+                style: TextStyle(
                   height: 1.25,
                   letterSpacing: 0.5,
                   fontSize: bodySmallSize,
                   fontWeight: bodySmallWeight,
-                  color: AppColor.defaultFont,
+                  color: colorsByTheme(context).defaultFont,
                 ),
               ),
               const SizedBox(
@@ -86,23 +87,23 @@ class SettingsAboutView extends StatelessWidget {
               Text(
                 S.current.txtCentalkiVersion,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
+                style: TextStyle(
                   height: 1.0,
                   letterSpacing: 0.5,
                   fontSize: labelLargeSize,
                   fontWeight: labelLargeWeight,
-                  color: AppColor.defaultFont,
+                  color: colorsByTheme(context).defaultFont,
                 ),
               ),
               Text(
                 S.current.txtLastUpdated,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
+                style:  TextStyle(
                   height: 1.0,
                   letterSpacing: 0.5,
                   fontSize: labelLargeSize,
                   fontWeight: labelLargeWeight,
-                  color: AppColor.defaultFont,
+                  color: colorsByTheme(context).defaultFont,
                 ),
               ),
             ],

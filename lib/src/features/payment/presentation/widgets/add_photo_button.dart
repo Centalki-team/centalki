@@ -1,11 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../../base/define/colors.dart';
-import '../../../../../base/helpers/upload-file.dart';
-import '../../domain/entities/image_with_size_entity.dart';
+import '../../../../../base/define/theme.dart';
 import 'camera_image_picker_bottom_sheet.dart';
 import 'removable_picture.dart';
 
@@ -48,7 +45,7 @@ class _AddPhotoButtonState extends State<AddPhotoButton> {
             width: 88.0,
             height: 88.0,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: colorsByTheme(context).backgroundCardsChip,
               borderRadius: BorderRadius.circular(12.0),
               boxShadow: const [
                 BoxShadow(

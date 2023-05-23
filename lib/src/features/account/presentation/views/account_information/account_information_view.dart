@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 import '../../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../../base/define/styles.dart';
+import '../../../../../../base/define/theme.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
 import '../../../../../../base/widgets/dialog/success_dialog_content.dart';
@@ -71,18 +72,25 @@ class _AccountInformationViewState extends State<AccountInformationView> {
           }
         },
         child: Scaffold(
-          backgroundColor: AppColor.white,
+          //backgroundColor: AppColor.white,
           body: Stack(
             children: [
               CustomScrollView(
                 slivers: [
                   SliverAppBar.medium(
+                    leading: IconButton(
+                      onPressed: Navigator.of(context).pop,
+                      icon: Icon(
+                        Icons.arrow_back_ios_new,
+                        color: colorsByTheme(context).defaultFont,
+                      ),
+                    ),
                     title: Text(
                       S.current.txtAccountInformation,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: headlineSmallSize,
                         fontWeight: headlineSmallWeight,
-                        color: AppColor.defaultFont,
+                        color: colorsByTheme(context).defaultFont,
                       ),
                     ),
                     centerTitle: true,
@@ -96,21 +104,21 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                               Text(
+                              Text(
                                 S.current.txtEmail,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: titleMediumSize,
                                   fontWeight: titleMediumWeight,
-                                  color: AppColor.defaultFont,
+                                  color: colorsByTheme(context).defaultFont,
                                 ),
                               ),
                               TextField(
                                 controller: emailController,
                                 enabled: false,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: bodyLargeSize,
                                   fontWeight: bodyLargeWeight,
-                                  color: AppColor.defaultFont,
+                                  color: colorsByTheme(context).defaultFont,
                                 ),
                                 decoration: const InputDecoration(
                                   contentPadding: EdgeInsets.symmetric(
@@ -142,21 +150,21 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                           const SizedBox(
                             height: spaceBetweenLine12,
                           ),*/
-                               Text(
+                              Text(
                                 S.current.txtDateOfBirthTitle,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: titleMediumSize,
                                   fontWeight: titleMediumWeight,
-                                  color: AppColor.defaultFont,
+                                  color: colorsByTheme(context).defaultFont,
                                 ),
                               ),
                               TextField(
                                 controller: dateOfBirthController,
                                 readOnly: true,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: bodyLargeSize,
                                   fontWeight: bodyLargeWeight,
-                                  color: AppColor.defaultFont,
+                                  color: colorsByTheme(context).defaultFont,
                                 ),
                                 decoration: InputDecoration(
                                   contentPadding: const EdgeInsets.symmetric(
@@ -235,9 +243,9 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                                         }
                                       }
                                     },
-                                    icon: const Icon(
+                                    icon: Icon(
                                       Icons.calendar_today_outlined,
-                                      color: AppColor.defaultFont,
+                                      color: colorsByTheme(context).defaultFont,
                                     ),
                                   ),
                                 ),
@@ -245,10 +253,10 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                               const SizedBox(height: spacing16),
                               Text(
                                 S.current.txtGenderTitle,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: titleMediumSize,
                                   fontWeight: titleMediumWeight,
-                                  color: AppColor.defaultFont,
+                                  color: colorsByTheme(context).defaultFont,
                                 ),
                               ),
                               BlocBuilder<AccountInformationBloc,
@@ -324,7 +332,7 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                       right: 16.0,
                       bottom: 24.0,
                     ),
-                    color: AppColor.white,
+                    color: colorsByTheme(context).backgroundTheme,
                     child: AppElevatedButton(
                       text: S.current.txtSaveChanges,
                       minimumSize: const Size.fromHeight(48),

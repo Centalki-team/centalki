@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../base/define/styles.dart';
+import '../../../../../base/define/theme.dart';
 import '../../../../../generated/l10n.dart';
 import '../../domain/entities/topic_detail_entity.dart';
 
@@ -19,6 +20,7 @@ class QuestionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
         decoration: BoxDecoration(
+          color: colorsByTheme(context).backgroundCardsChip,
           borderRadius: BorderRadius.circular(radius12),
           boxShadow: [
             BoxShadow(
@@ -31,8 +33,10 @@ class QuestionCard extends StatelessWidget {
         ),
         clipBehavior: Clip.hardEdge,
         child: ExpansionTile(
-          collapsedBackgroundColor: Colors.white,
-          backgroundColor: Colors.white,
+          collapsedBackgroundColor: colorsByTheme(context).backgroundCardsChip,
+          backgroundColor: colorsByTheme(context).backgroundCardsChip,
+          iconColor: colorsByTheme(context).expansionIcon,
+          collapsedIconColor: colorsByTheme(context).expansionIcon,
           expandedCrossAxisAlignment: CrossAxisAlignment.start,
           childrenPadding:
               const EdgeInsets.fromLTRB(padding16, 0, padding8, padding16),
@@ -43,20 +47,20 @@ class QuestionCard extends StatelessWidget {
             children: [
               Text(
                 '${index + 1}.',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: titleMediumSize,
                   fontWeight: titleMediumWeight,
-                  color: AppColor.defaultFont,
+                  color: colorsByTheme(context).defaultFont,
                 ),
               ),
               const SizedBox(width: spacing8),
               Expanded(
                 child: Text(
                   questionContent,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: titleSmallSize,
                     fontWeight: titleSmallWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
               ),
@@ -76,12 +80,12 @@ class QuestionCard extends StatelessWidget {
               (e) => Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     '•',
                     style: TextStyle(
                       height: 0.6,
                       fontSize: headlineLargeSize,
-                      color: AppColor.defaultFont,
+                      color: colorsByTheme(context).defaultFont,
                     ),
                   ),
                   const SizedBox(width: spacing8),

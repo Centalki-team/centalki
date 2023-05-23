@@ -11,6 +11,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'base/define/manager/locale_manager.dart';
 import 'base/define/storage/storage_gateway.dart';
+import 'base/define/theme.dart';
 import 'base/temp_dio/dio_client.dart';
 import 'config/app_config.dart';
 import 'config/main_config.dart';
@@ -74,6 +75,11 @@ class MyApp extends StatefulWidget {
     state?.changeLanguage(newLocale);
   }
 
+  static void setTheme(BuildContext context, {bool isDark = false}) async {
+    var state = context.findAncestorStateOfType<_MyAppState>();
+    state?.changeTheme(isDark: isDark);
+  }
+
   @override
   State<MyApp> createState() => _MyAppState();
 }
@@ -92,12 +98,19 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  changeTheme({bool isDark = false}) {
+    setState(() {
+      _isDarkMode = isDark;
+      savedTabIndex = 3;
+    });
+  }
+
   @override
   void initState() {
     _locale = AppConfig.defaultLocale;
+    _isDarkMode = false;
     _bloc = getIt.get<ApplicationBloc>();
     _bloc.add(ApplicationLoaded());
-    _isDarkMode = false;
     appLocalizationDelegate = const AppLocalizationDelegate();
     super.initState();
   }
@@ -109,38 +122,48 @@ class _MyAppState extends State<MyApp> {
             value: _bloc,
           ),
         ],
-        child: BlocBuilder<ApplicationBloc, ApplicationState>(
-            bloc: _bloc,
-            builder: (context, state) => MaterialApp(
-                  debugShowCheckedModeBanner: false,
-                  theme: ThemeData(
-                    useMaterial3: true,
-                    fontFamily: 'Dongle',
-                  ),
-                  localizationsDelegates: [
-                    appLocalizationDelegate,
-                    GlobalMaterialLocalizations.delegate,
-                    GlobalWidgetsLocalizations.delegate,
-                    GlobalCupertinoLocalizations.delegate,
-                  ],
-                  supportedLocales: appLocalizationDelegate.supportedLocales,
-                  locale: Locale(_locale),
-                  themeMode: _isDarkMode ? ThemeMode.dark : ThemeMode.light,
-                  // theme: AppThemes.lightTheme,
-                  // darkTheme: AppThemes.darkTheme,
-                  home: MyWidget(
-                    key: UniqueKey(),
-                    currentTabIndex: savedTabIndex,
-                    uiStatus: state.status,
-                  ),
-                  navigatorObservers: kDebugMode
-                      ? []
-                      : [
-                          FirebaseAnalyticsObserver(
-                            analytics: widget.firebaseAnalytics,
-                          ),
-                        ],
-                )),
+        child: BlocListener<ApplicationBloc, ApplicationState>(
+          listener: (context, state) {
+            if (state.locale != _locale || state.isDarkMode != _isDarkMode) {
+              setState(() {
+                _locale = state.locale;
+                _isDarkMode = state.isDarkMode;
+              });
+            }
+          },
+          child: BlocBuilder<ApplicationBloc, ApplicationState>(
+              bloc: _bloc,
+              builder: (context, state) => MaterialApp(
+                    debugShowCheckedModeBanner: false,
+                    theme: getThemeData(
+                      context,
+                      isDarkTheme: _isDarkMode,
+                    ),
+                    localizationsDelegates: [
+                      appLocalizationDelegate,
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate,
+                      GlobalCupertinoLocalizations.delegate,
+                    ],
+                    supportedLocales: appLocalizationDelegate.supportedLocales,
+                    locale: Locale(_locale),
+                    themeMode: _isDarkMode ? ThemeMode.dark : ThemeMode.light,
+                    // theme: AppThemes.lightTheme,
+                    // darkTheme: AppThemes.darkTheme,
+                    home: MyWidget(
+                      key: UniqueKey(),
+                      currentTabIndex: savedTabIndex,
+                      uiStatus: state.status,
+                    ),
+                    navigatorObservers: kDebugMode
+                        ? []
+                        : [
+                            FirebaseAnalyticsObserver(
+                              analytics: widget.firebaseAnalytics,
+                            ),
+                          ],
+                  )),
+        ),
       );
 }
 

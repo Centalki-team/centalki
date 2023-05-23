@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../base/define/styles.dart';
+import '../../../../../../base/define/theme.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/text_fields/text_field.dart';
 import '../../../../../../gen/assets.gen.dart';
@@ -55,13 +56,13 @@ class _SignInViewState extends State<SignInView> {
                     height: 280,
                     child: Assets.illustration.signIn.svg(),
                   ),
-                   Text(
+                  Text(
                     S.current.txtSignInIntroduction,
                     textAlign: TextAlign.left,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: titleLargeSize,
                       fontWeight: titleLargeWeight,
-                      color: AppColor.defaultFontContainer,
+                      color: colorsByTheme(context).defaultFont,
                     ),
                   ),
                   const SizedBox(height: spacing16),
@@ -69,12 +70,12 @@ class _SignInViewState extends State<SignInView> {
                     builder: (context, state) => Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                         Text(
+                        Text(
                           S.current.txtEmail,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: titleMediumSize,
                             fontWeight: titleMediumWeight,
-                            color: AppColor.defaultFont,
+                            color: colorsByTheme(context).defaultFont,
                           ),
                         ),
                         AppOutlinedTextField(
@@ -87,12 +88,12 @@ class _SignInViewState extends State<SignInView> {
                           onChanged: _validateSignInInputs,
                         ),
                         const SizedBox(height: spacing8),
-                         Text(
+                        Text(
                           S.current.txtPassword,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: titleMediumSize,
                             fontWeight: titleMediumWeight,
-                            color: AppColor.defaultFont,
+                            color: colorsByTheme(context).defaultFont,
                           ),
                         ),
                         AppOutlinedTextField(
@@ -133,10 +134,10 @@ class _SignInViewState extends State<SignInView> {
                   Center(
                     child: Text(
                       S.current.txtOrLoginWith,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: bodyLargeSize,
                         fontWeight: bodyLargeWeight,
-                        color: AppColor.defaultFont,
+                        color: colorsByTheme(context).defaultFont,
                       ),
                     ),
                   ),
@@ -210,12 +211,12 @@ class _SignInViewState extends State<SignInView> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                       Text(
+                      Text(
                         S.current.txtHaveNoAccount,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: bodyMediumSize,
                           fontWeight: bodyMediumWeight,
-                          color: AppColor.defaultFont,
+                          color: colorsByTheme(context).defaultFont,
                         ),
                       ),
                       AppTextButton(

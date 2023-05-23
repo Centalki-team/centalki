@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/size.dart';
+import '../../../../../base/define/theme.dart';
 
 class CustomCheckboxTile extends StatefulWidget {
   const CustomCheckboxTile({
@@ -40,7 +41,7 @@ class _CustomCheckboxTileState extends State<CustomCheckboxTile> {
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
-            color: curValue ? null : AppColor.white,
+            color: curValue ? null : colorsByTheme(context).backgroundCardsChip,
             boxShadow: curValue
                 ? [
                     BoxShadow(
@@ -66,8 +67,10 @@ class _CustomCheckboxTileState extends State<CustomCheckboxTile> {
             alignment: Alignment.centerLeft,
             child: Text(
               widget.title,
-              style: const TextStyle(
-                color: AppColor.defaultFont,
+              style: TextStyle(
+                color: curValue
+                    ? AppColor.defaultFontLight
+                    : colorsByTheme(context).defaultFont,
                 fontSize: bodySmallSize,
                 fontWeight: bodySmallWeight,
               ),

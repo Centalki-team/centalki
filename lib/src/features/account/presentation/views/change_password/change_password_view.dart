@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../../base/define/styles.dart';
+import '../../../../../../base/define/theme.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
 import '../../../../../../base/widgets/dialog/success_dialog_content.dart';
@@ -52,19 +53,26 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
           }
         },
         child: Scaffold(
-          backgroundColor: AppColor.white,
+          //backgroundColor: AppColor.white,
           body: GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: CustomScrollView(
               slivers: [
                 SliverAppBar.medium(
+                  leading: IconButton(
+                    onPressed: Navigator.of(context).pop,
+                    icon: Icon(
+                      Icons.arrow_back_ios_new,
+                      color: colorsByTheme(context).defaultFont,
+                    ),
+                  ),
                   title: Text(
                     S.current.txtChangePassword,
-                    style: const TextStyle(
+                    style: TextStyle(
                       height: 1.0,
                       fontSize: headlineSmallSize,
                       fontWeight: headlineSmallWeight,
-                      color: AppColor.defaultFont,
+                      color: colorsByTheme(context).defaultFont,
                     ),
                   ),
                   centerTitle: true,
@@ -91,10 +99,10 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                           const SizedBox(height: spacing8),
                           Text(
                             S.current.txtCurrentPassword,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: titleMediumSize,
                               fontWeight: titleMediumWeight,
-                              color: AppColor.defaultFont,
+                              color: colorsByTheme(context).defaultFont,
                             ),
                           ),
                           BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
@@ -118,10 +126,10 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                           const SizedBox(height: spacing16),
                           Text(
                             S.current.txtNewPassword,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: titleMediumSize,
                               fontWeight: titleMediumWeight,
-                              color: AppColor.defaultFont,
+                              color: colorsByTheme(context).defaultFont,
                             ),
                           ),
                           BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
@@ -145,10 +153,10 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                           const SizedBox(height: spacing16),
                           Text(
                             S.current.txtConfirmPassword,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: titleMediumSize,
                               fontWeight: titleMediumWeight,
-                              color: AppColor.defaultFont,
+                              color: colorsByTheme(context).defaultFont,
                             ),
                           ),
                           BlocBuilder<ChangePasswordBloc, ChangePasswordState>(

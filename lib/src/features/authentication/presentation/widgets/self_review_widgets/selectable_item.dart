@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../../base/define/colors.dart';
 import '../../../../../../base/define/dimensions.dart';
 import '../../../../../../base/define/size.dart';
+import '../../../../../../base/define/theme.dart';
 import '../../../domain/entities/self_review/self_level_entity.dart';
 
 class SelectableLevelItem extends StatelessWidget {
@@ -35,10 +36,10 @@ class SelectableLevelItem extends StatelessWidget {
         child: Row(
           children: [
             if (isSelected) ...[
-              const Icon(
+              Icon(
                 Icons.check_sharp,
                 size: 20.0,
-                color: AppColor.defaultFont,
+                color: colorsByTheme(context).defaultFont,
               ),
               const SizedBox(
                 width: 12.5,
@@ -49,7 +50,7 @@ class SelectableLevelItem extends StatelessWidget {
               style: TextStyle(
                 fontSize: isSelected ? 20 : bodySmallSize,
                 fontWeight: isSelected ? FontWeight.w400 : bodySmallWeight,
-                color: AppColor.defaultFont,
+                color: colorsByTheme(context).defaultFont,
               ),
             ),
           ],

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
-import '../../../../../base/define/text.dart';
+import '../../../../../base/define/theme.dart';
 import '../../../../../generated/l10n.dart';
 
 class VocabLearningNotEnoughView extends StatelessWidget {
@@ -16,11 +16,12 @@ class VocabLearningNotEnoughView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        backgroundColor: AppColor.white,
+        //backgroundColor: AppColor.white,
         appBar: AppBar(
           leading: IconButton(
-            icon: const Icon(
+            icon: Icon(
               Icons.arrow_back,
+              color: colorsByTheme(context).defaultFont,
             ),
             onPressed: Navigator.of(context).pop,
           ),
@@ -38,10 +39,10 @@ class VocabLearningNotEnoughView extends StatelessWidget {
             ),
             Text(
               S.current.txtVocabLearningSuggestion,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: titleLargeSize,
                 fontWeight: titleLargeWeight,
-                color: AppColor.defaultFont,
+                color: colorsByTheme(context).defaultFont,
                 height: 28 / 30,
               ),
               textAlign: TextAlign.center,

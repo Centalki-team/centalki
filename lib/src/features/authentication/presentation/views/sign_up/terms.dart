@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../base/define/styles.dart';
+import '../../../../../../base/define/theme.dart';
 
 class TermsAndConditions extends StatelessWidget {
   const TermsAndConditions({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        backgroundColor: AppColor.background,
+        //backgroundColor: AppColor.background,
         appBar: AppBar(
-          backgroundColor: AppColor.background,
+          //backgroundColor: AppColor.background,
           title: const Text(
             'Terms and Conditions',
             style: TextStyle(
@@ -26,13 +27,13 @@ class TermsAndConditions extends StatelessWidget {
             padding: const EdgeInsets.all(24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 Text(
                   'Terms and Conditions',
                   style: TextStyle(
                     fontSize: headlineSmallSize,
                     fontWeight: headlineSmallWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -40,34 +41,34 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
-                SizedBox(height: spacing8),
+                const SizedBox(height: spacing8),
                 Text(
                   """If you purchase, subscribe to or register for a trial of our products and services, you will be asked to accept additional terms governing your use of such products and services.""",
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
-                SizedBox(height: spacing8),
+                const SizedBox(height: spacing8),
                 Text(
                   """We are owned and operated by a small group called Centalki Team. The terms "we" and "our" as used herein refer to such group of people.""",
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
-                SizedBox(height: spacing12),
+                const SizedBox(height: spacing12),
                 Text(
                   'What we provide',
                   style: TextStyle(
                     fontSize: headlineSmallSize,
                     fontWeight: headlineSmallWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -75,26 +76,26 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
-                SizedBox(height: spacing8),
+                const SizedBox(height: spacing8),
                 Text(
                   """Please note that, other than purely billing (i.e., credit card numbers) and contact information, other information you post to the application may become publicly viewable. Therefore, you should not submit information that you consider confidential.""",
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
-                SizedBox(height: spacing12),
+                const SizedBox(height: spacing12),
                 Text(
                   'Who Our Services Are for',
                   style: TextStyle(
                     fontFamily: 'Dongle',
                     fontSize: headlineSmallSize,
                     fontWeight: headlineSmallWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -102,7 +103,7 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -110,7 +111,7 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -118,7 +119,7 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -126,7 +127,7 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -134,7 +135,7 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -142,7 +143,7 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -150,7 +151,7 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -158,7 +159,7 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -166,17 +167,17 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
-                SizedBox(height: spacing12),
+                const SizedBox(height: spacing12),
                 Text(
                   'Rights Reserved',
                   style: TextStyle(
                     fontFamily: 'Dongle',
                     fontSize: headlineSmallSize,
                     fontWeight: headlineSmallWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -184,26 +185,26 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
-                SizedBox(height: spacing8),
+                const SizedBox(height: spacing8),
                 Text(
                   """In case you want to cancel your subscription, you will not receive a refund, but will continue to have access at the remaining learning hours until they are all used up or your account is deactivated.""",
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
-                SizedBox(height: spacing12),
+                const SizedBox(height: spacing12),
                 Text(
                   'User Submissions',
                   style: TextStyle(
                     fontFamily: 'Dongle',
                     fontSize: headlineSmallSize,
                     fontWeight: headlineSmallWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -211,35 +212,35 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
-                SizedBox(height: spacing8),
+                const SizedBox(height: spacing8),
                 Text(
                   """When using the Centalki App, you may be exposed to User Submissions from a variety of sources (i.e., comments and reviews) we are not responsible for the accuracy, usefulness, safety, or intellectual property rights of or relating to such User Submissions, which may be inaccurate, infringing, offensive, indecent or objectionable.""",
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
-                SizedBox(height: spacing8),
+                const SizedBox(height: spacing8),
                 Text(
                   """You understand that all information posted through our services is the sole responsibility of the person from which such content originated and that we are not and will not be liable for any errors or omissions in any content.  Furthermore, we cannot guarantee the identity of any other users you may interact with while using your app. Additionally, we cannot and do not guarantee the authenticity or accuracy of any data that users may provide about themselves or relationships they may describe.""",
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
-                SizedBox(height: spacing12),
+                const SizedBox(height: spacing12),
                 Text(
                   'Trademarks',
                   style: TextStyle(
                     fontFamily: 'Dongle',
                     fontSize: headlineSmallSize,
                     fontWeight: headlineSmallWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -247,17 +248,17 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
-                SizedBox(height: spacing12),
+                const SizedBox(height: spacing12),
                 Text(
                   'Miscellaneous',
                   style: TextStyle(
                     fontFamily: 'Dongle',
                     fontSize: headlineSmallSize,
                     fontWeight: headlineSmallWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -265,17 +266,17 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
-                SizedBox(height: spacing12),
+                const SizedBox(height: spacing12),
                 Text(
                   'End User License Agreement',
                   style: TextStyle(
                     fontFamily: 'Dongle',
                     fontSize: headlineMediumSize,
                     fontWeight: headlineMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -283,17 +284,17 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
-                SizedBox(height: spacing12),
+                const SizedBox(height: spacing12),
                 Text(
                   'Additional Software Applications',
                   style: TextStyle(
                     fontFamily: 'Dongle',
                     fontSize: headlineSmallSize,
                     fontWeight: headlineSmallWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -301,17 +302,17 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
-                SizedBox(height: spacing12),
+                const SizedBox(height: spacing12),
                 Text(
                   'User Account and Service Security',
                   style: TextStyle(
                     fontFamily: 'Dongle',
                     fontSize: headlineSmallSize,
                     fontWeight: headlineSmallWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -319,17 +320,17 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
-                SizedBox(height: spacing12),
+                const SizedBox(height: spacing12),
                 Text(
                   'License to Use',
                   style: TextStyle(
                     fontFamily: 'Dongle',
                     fontSize: headlineSmallSize,
                     fontWeight: headlineSmallWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -337,17 +338,17 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
-                SizedBox(height: spacing12),
+                const SizedBox(height: spacing12),
                 Text(
                   'Account and Password',
                   style: TextStyle(
                     fontFamily: 'Dongle',
                     fontSize: headlineSmallSize,
                     fontWeight: headlineSmallWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -355,17 +356,17 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
-                SizedBox(height: spacing12),
+                const SizedBox(height: spacing12),
                 Text(
                   'Content and Certain Restrictions',
                   style: TextStyle(
                     fontFamily: 'Dongle',
                     fontSize: headlineSmallSize,
                     fontWeight: headlineSmallWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -373,16 +374,16 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
-                SizedBox(height: spacing8),
+                const SizedBox(height: spacing8),
                 Text(
                   """You may not use the Software Application(s) for any unlawful purpose, including infringement of the copyrights or other proprietary rights of others, or in any illegal manner or for creation or distribution of illegal content. Without limiting the foregoing, you may not use the Software Application(s) for any of the following purposes:""",
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -390,7 +391,7 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -398,7 +399,7 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -406,7 +407,7 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -414,7 +415,7 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -422,7 +423,7 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -430,7 +431,7 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -438,7 +439,7 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -446,17 +447,17 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
-                SizedBox(height: spacing12),
+                const SizedBox(height: spacing12),
                 Text(
                   'Disconnection',
                   style: TextStyle(
                     fontFamily: 'Dongle',
                     fontSize: headlineSmallSize,
                     fontWeight: headlineSmallWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -464,7 +465,7 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -472,7 +473,7 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -480,17 +481,17 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
-                SizedBox(height: spacing12),
+                const SizedBox(height: spacing12),
                 Text(
                   'Loss of Content; Security',
                   style: TextStyle(
                     fontFamily: 'Dongle',
                     fontSize: headlineSmallSize,
                     fontWeight: headlineSmallWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -498,17 +499,17 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
-                SizedBox(height: spacing12),
+                const SizedBox(height: spacing12),
                 Text(
                   'Payment Information',
                   style: TextStyle(
                     fontFamily: 'Dongle',
                     fontSize: headlineSmallSize,
                     fontWeight: headlineSmallWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -516,44 +517,44 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
-                SizedBox(height: spacing8),
+                const SizedBox(height: spacing8),
                 Text(
                   """You agree, understand and confirm that the credit card details provided by you will be correct and accurate and you are using a credit card that you are legally authorized to use for this purpose. We will not be liable for any credit card fraud, abuse or unauthorized use by you or others. The liability to use a card fraudulently will be on the user and the onus to ‘prove otherwise’ shall be exclusively on the user.""",
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
-                SizedBox(height: spacing8),
+                const SizedBox(height: spacing8),
                 Text(
                   """The said information will not be utilized and shared by us with any third parties other than our payment service unless required by law, regulation or court order.""",
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
-                SizedBox(height: spacing8),
+                const SizedBox(height: spacing8),
                 Text(
                   """In consideration of the license granted pursuant to this EULA, you agree to pay the Developer, the Fees as set forth in the website or other location from which you are subscribing for the Software Application(s) and you agree that Developer or its payment processor may charge such amounts against the account information provided by you. Developer reserves the right to amend or revise the Fees for Software Applications from time to time. Licensee shall be responsible to pay the applicable taxes, i.e. any and all federal, foreign, state or local sales, use and excise taxes, duties, levies, and any other assessments in the nature of taxes however designated on the purchase/license and/or use of the Software Applications, including without limitation VAT if applicable to your license/purchase and use of the Software Application(s). It is understood and agreed that the Fees are exclusive of such taxes, duties and other assessments unless expressly stated otherwise.""",
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
-                SizedBox(height: spacing12),
+                const SizedBox(height: spacing12),
                 Text(
                   'License Restrictions',
                   style: TextStyle(
                     fontFamily: 'Dongle',
                     fontSize: headlineSmallSize,
                     fontWeight: headlineSmallWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -561,7 +562,7 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -569,7 +570,7 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -577,7 +578,7 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -585,7 +586,7 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -593,7 +594,7 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -601,7 +602,7 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -609,17 +610,17 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
-                SizedBox(height: spacing12),
+                const SizedBox(height: spacing12),
                 Text(
                   'Third Party Licenses',
                   style: TextStyle(
                     fontFamily: 'Dongle',
                     fontSize: headlineSmallSize,
                     fontWeight: headlineSmallWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -627,17 +628,17 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
-                SizedBox(height: spacing12),
+                const SizedBox(height: spacing12),
                 Text(
                   'Developer\'s Confidential Information',
                   style: TextStyle(
                     fontFamily: 'Dongle',
                     fontSize: headlineSmallSize,
                     fontWeight: headlineSmallWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -645,7 +646,7 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -653,7 +654,7 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -661,17 +662,17 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
-                SizedBox(height: spacing12),
+                const SizedBox(height: spacing12),
                 Text(
                   'Termination',
                   style: TextStyle(
                     fontFamily: 'Dongle',
                     fontSize: headlineSmallSize,
                     fontWeight: headlineSmallWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Text(
@@ -679,7 +680,7 @@ class TermsAndConditions extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodyMediumSize,
                     fontWeight: bodyMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
               ],

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/text.dart';
+import '../../../../../base/define/theme.dart';
 import '../../../../../base/widgets/buttons/button.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../meeting/presentation/views/meeting_page.dart';
@@ -113,6 +114,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
               context: context,
               barrierDismissible: false,
               builder: (context) => AlertDialog(
+                    backgroundColor: colorsByTheme(context).backgroundCardsChip,
                     icon: const Icon(
                       Icons.check,
                       color: AppColor.support,
@@ -176,8 +178,9 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     state is ConnectTeacherConnectingRoomState
-                        ? const CircleAvatar(
-                            backgroundColor: Colors.white,
+                        ? CircleAvatar(
+                            backgroundColor:
+                                colorsByTheme(context).backgroundAvatar,
                             radius: 48,
                           )
                         : const SizedBox.shrink(),
@@ -202,6 +205,8 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                           final result = await showDialog(
                             context: context,
                             builder: (context) => AlertDialog(
+                              backgroundColor:
+                                  colorsByTheme(context).backgroundCardsChip,
                               title: Text(
                                 S.current.txtCancelTitle,
                                 textAlign: TextAlign.center,

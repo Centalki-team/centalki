@@ -6,6 +6,7 @@ import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
 import '../../../../../base/define/text.dart';
+import '../../../../../base/define/theme.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../../../generated/l10n.dart';
 
@@ -30,10 +31,10 @@ class VocabsEmptyView extends StatelessWidget {
             ),
             child: Text(
               S.current.txtNoFavoriteVocabsTitle,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: titleMediumSize,
                 fontWeight: titleMediumWeight,
-                color: AppColor.defaultFont,
+                color: colorsByTheme(context).defaultFont,
                 height: 1.0,
               ),
             ),

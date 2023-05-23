@@ -5,6 +5,7 @@ import '../../../../../base/define/common_txt_style.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
 import '../../../../../base/define/text.dart';
+import '../../../../../base/define/theme.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../shared/widgets/tab_indicator/tab_indicator.dart';
@@ -59,7 +60,7 @@ class _FavoriteViewState extends State<FavoriteView>
                   child: Text(
                     S.current.appName,
                     style: CommonTxtStyle.t30Regular.apply(
-                      color: AppColor.defaultFont,
+                      color: colorsByTheme(context).defaultFont,
                     ),
                   ),
                 ),
@@ -102,7 +103,7 @@ class _FavoriteViewState extends State<FavoriteView>
             ),
             indicatorColor: AppColor.secondary,
             labelColor: AppColor.secondary,
-            unselectedLabelColor: AppColor.defaultFontContainer,
+            unselectedLabelColor: colorsByTheme(context).tabTitleColor,
             controller: _tabController,
             onTap: (index) {
               currentIndex = index;

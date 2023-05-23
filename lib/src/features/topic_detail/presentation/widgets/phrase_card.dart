@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../base/define/styles.dart';
+import '../../../../../base/define/theme.dart';
 import '../../domain/entities/topic_detail_entity.dart';
 import '../blocs/topic_detail_bloc/topic_detail_bloc.dart';
 
@@ -20,7 +21,7 @@ class PhraseCard extends StatelessWidget {
         data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
         child: Container(
           decoration: BoxDecoration(
-            color: AppColor.white,
+            color: colorsByTheme(context).backgroundCardsChip,
             borderRadius: BorderRadius.circular(12.0),
             boxShadow: [
               BoxShadow(
@@ -33,8 +34,11 @@ class PhraseCard extends StatelessWidget {
           ),
           clipBehavior: Clip.hardEdge,
           child: ExpansionTile(
-            collapsedBackgroundColor: Colors.white,
-            backgroundColor: Colors.white,
+            collapsedBackgroundColor:
+                colorsByTheme(context).backgroundCardsChip,
+            backgroundColor: colorsByTheme(context).backgroundCardsChip,
+            iconColor: colorsByTheme(context).expansionIcon,
+            collapsedIconColor: colorsByTheme(context).expansionIcon,
             expandedCrossAxisAlignment: CrossAxisAlignment.start,
             childrenPadding: const EdgeInsets.only(
               left: padding32,
@@ -94,22 +98,22 @@ class PhraseCard extends StatelessWidget {
                   ),
                   Text(
                     phraseEntity.phrasePhonetic ?? 'no phonetic',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontFamily: 'NotoSans',
                       fontSize: bodySmallSize * 0.6,
                       fontWeight: bodySmallWeight,
-                      color: AppColor.defaultFont,
+                      color: colorsByTheme(context).defaultFont,
                     ),
                   ),
                   const SizedBox(height: spacing4),
                   ...phraseEntity.phraseTranslations!.map(
                     (e) => Text(
                       e.phraseMeaning ?? 'null meaning',
-                      style: const TextStyle(
+                      style: TextStyle(
                         height: 0.9,
                         fontSize: titleMediumSize,
                         fontWeight: titleMediumWeight,
-                        color: AppColor.defaultFont,
+                        color: colorsByTheme(context).defaultFont,
                       ),
                     ),
                   ),

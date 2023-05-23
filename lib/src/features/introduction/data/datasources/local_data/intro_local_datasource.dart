@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../../base/define/colors.dart';
 import '../../../../../../base/define/size.dart';
 import '../../../../../../base/define/storage/storage_gateway.dart';
+import '../../../../../../base/define/theme.dart';
 import '../../../../../../gen/assets.gen.dart';
 import '../../../../../shared/constants.dart';
 import '../../../domain/entities/app_intro_entity.dart';
@@ -50,7 +51,7 @@ class IntroLocalDatasource {
               style: TextStyle(
                 fontSize: bodyLargeSize,
                 fontWeight: bodyLargeWeight,
-                color: AppColor.defaultFont,
+                color: AppColor.defaultFontLight,
               ),
             ),
             style: TextStyle(
@@ -80,7 +81,7 @@ class IntroLocalDatasource {
               style: TextStyle(
                 fontSize: bodyLargeSize,
                 fontWeight: bodyLargeWeight,
-                color: AppColor.defaultFont,
+                color: AppColor.defaultFontLight,
               ),
             ),
             style: TextStyle(
@@ -110,7 +111,7 @@ class IntroLocalDatasource {
               style: TextStyle(
                 fontSize: bodyLargeSize,
                 fontWeight: bodyLargeWeight,
-                color: AppColor.defaultFont,
+                color: AppColor.defaultFontLight,
               ),
             ),
             style: TextStyle(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../base/define/styles.dart';
+import '../../../../../base/define/theme.dart';
 
 class AccountTile extends StatelessWidget {
   const AccountTile({
@@ -22,7 +23,7 @@ class AccountTile extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: AppColor.white,
+            color: colorsByTheme(context).backgroundTheme,
             borderRadius: const BorderRadius.all(Radius.circular(12)),
             boxShadow: [
               BoxShadow(
@@ -37,7 +38,7 @@ class AccountTile extends StatelessWidget {
             children: [
               Icon(
                 icon,
-                color: foregroundColor ?? AppColor.defaultFont,
+                color: foregroundColor ?? colorsByTheme(context).defaultFont,
               ),
               const SizedBox(width: spacing16),
               Text(
@@ -45,7 +46,7 @@ class AccountTile extends StatelessWidget {
                 style: TextStyle(
                   fontSize: bodyLargeSize,
                   fontWeight: bodyLargeWeight,
-                  color: foregroundColor ?? AppColor.defaultFont,
+                  color: foregroundColor ?? colorsByTheme(context).defaultFont,
                 ),
               )
             ],

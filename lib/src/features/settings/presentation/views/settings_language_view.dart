@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../base/define/styles.dart';
+import '../../../../../base/define/theme.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../../main.dart';
 import '../../../application/presentation/blocs/application_bloc/application_bloc.dart';
@@ -36,25 +37,25 @@ class _SettingsLanguageState extends State<SettingsLanguage> {
           }
         },
         child: Scaffold(
-          backgroundColor: Colors.white,
+          //backgroundColor: Colors.white,
           appBar: AppBar(
-            backgroundColor: AppColor.white,
+            //backgroundColor: AppColor.white,
             automaticallyImplyLeading: false,
             leading: GestureDetector(
               onTap: Navigator.of(context).pop,
-              child: const Icon(
+              child: Icon(
                 Icons.arrow_back,
-                color: AppColor.defaultFont,
+                color: colorsByTheme(context).defaultFont,
               ),
             ),
             title: Row(
               children: [
                 Text(
                   S.current.txtLanguage,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: headlineSmallSize,
                     fontWeight: headlineSmallWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
               ],

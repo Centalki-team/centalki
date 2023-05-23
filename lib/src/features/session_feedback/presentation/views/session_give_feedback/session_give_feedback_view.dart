@@ -4,6 +4,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../../base/define/styles.dart';
+import '../../../../../../base/define/theme.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
 import '../../../../../../base/widgets/dialog/success_dialog_content.dart';
@@ -64,7 +65,7 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
       child: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(
-          backgroundColor: AppColor.white,
+          //backgroundColor: AppColor.white,
           body: BlocBuilder<SessionGiveFeedbackBloc, SessionGiveFeedbackState>(
             buildWhen: (previous, current) =>
                 current != previous &&
@@ -83,17 +84,17 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                           Navigator.pop(context);
                           Navigator.pop(context);
                         }),
-                        child: const Icon(
+                        child: Icon(
                           Icons.arrow_back,
-                          color: AppColor.defaultFont,
+                          color: colorsByTheme(context).defaultFont,
                         ),
                       ),
-                      title: const Text(
+                      title: Text(
                         TextDoc.txtSessionFeedback,
                         style: TextStyle(
                           fontSize: headlineSmallSize,
                           fontWeight: headlineSmallWeight,
-                          color: AppColor.defaultFont,
+                          color: colorsByTheme(context).defaultFont,
                         ),
                       ),
                       centerTitle: true,
@@ -109,12 +110,12 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
+                              Text(
                                 TextDoc.txtRating,
                                 style: TextStyle(
                                   fontSize: titleMediumSize,
                                   fontWeight: titleMediumWeight,
-                                  color: AppColor.defaultFont,
+                                  color: colorsByTheme(context).defaultFont,
                                 ),
                               ),
                               const SizedBox(height: spacing16),
@@ -182,12 +183,12 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                                 ),
                               ),
                               const SizedBox(height: spacing16),
-                              const Text(
+                              Text(
                                 TextDoc.txtSatisfiedDesciptionLabel,
                                 style: TextStyle(
                                   fontSize: titleMediumSize,
                                   fontWeight: titleMediumWeight,
-                                  color: AppColor.defaultFont,
+                                  color: colorsByTheme(context).defaultFont,
                                 ),
                               ),
                               const SizedBox(
@@ -204,21 +205,29 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                                           runSpacing: spacing8,
                                           children: satisfiedProblems!
                                               .map((e) => FilterChip(
-                                                  shape:
-                                                      const RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                      Radius.circular(24.0),
-                                                    ),
-                                                  ),
+                                                  backgroundColor:
+                                                      colorsByTheme(context)
+                                                          .selectableChipBg,
+                                                  // shape: const RoundedRectangleBorder(
+                                                  //   borderRadius: BorderRadius.all(
+                                                  //     Radius.circular(24.0),
+                                                  //   ),
+                                                  // ),
+                                                  shape: const StadiumBorder(),
                                                   label: Text(e.contentTitle!),
-                                                  labelStyle: const TextStyle(
+                                                  labelStyle: TextStyle(
                                                     fontSize: bodyLargeSize,
                                                     fontWeight: bodyLargeWeight,
-                                                    color: AppColor.defaultFont,
+                                                    color: selectedSatisfied
+                                                            .contains(
+                                                                e.contentKey)
+                                                        ? AppColor
+                                                            .defaultFontLight
+                                                        : colorsByTheme(context)
+                                                            .defaultFont,
                                                   ),
                                                   checkmarkColor:
-                                                      AppColor.defaultFont,
+                                                      AppColor.defaultFontLight,
                                                   selectedColor: AppColor
                                                       .mainColor2Surface,
                                                   selected: selectedSatisfied
@@ -277,12 +286,12 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                               const SizedBox(
                                 height: spacing16,
                               ),
-                              const Text(
+                              Text(
                                 TextDoc.txtDescriptionLabel,
                                 style: TextStyle(
                                   fontSize: titleMediumSize,
                                   fontWeight: titleMediumWeight,
-                                  color: AppColor.defaultFont,
+                                  color: colorsByTheme(context).defaultFont,
                                 ),
                               ),
                               const SizedBox(
@@ -318,12 +327,12 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                                 ),
                               ),
                               const SizedBox(height: spacing16),
-                              const Text(
+                              Text(
                                 TextDoc.txtNotSatisfiedDesciptionLabel,
                                 style: TextStyle(
                                   fontSize: titleMediumSize,
                                   fontWeight: titleMediumWeight,
-                                  color: AppColor.defaultFont,
+                                  color: colorsByTheme(context).defaultFont,
                                 ),
                               ),
                               const SizedBox(
@@ -340,21 +349,29 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                                           runSpacing: spacing8,
                                           children: notSatisfiedProblems!
                                               .map((e) => FilterChip(
-                                                  shape:
-                                                      const RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                      Radius.circular(24.0),
-                                                    ),
-                                                  ),
+                                                  backgroundColor:
+                                                      colorsByTheme(context)
+                                                          .selectableChipBg,
+                                                  // shape: const RoundedRectangleBorder(
+                                                  //   borderRadius: BorderRadius.all(
+                                                  //     Radius.circular(24.0),
+                                                  //   ),
+                                                  // ),
+                                                  shape: const StadiumBorder(),
                                                   label: Text(e.contentTitle!),
-                                                  labelStyle: const TextStyle(
+                                                  labelStyle: TextStyle(
                                                     fontSize: bodyLargeSize,
                                                     fontWeight: bodyLargeWeight,
-                                                    color: AppColor.defaultFont,
+                                                    color: selectedNotSatisfied
+                                                            .contains(
+                                                                e.contentKey)
+                                                        ? AppColor
+                                                            .defaultFontLight
+                                                        : colorsByTheme(context)
+                                                            .defaultFont,
                                                   ),
                                                   checkmarkColor:
-                                                      AppColor.defaultFont,
+                                                      AppColor.defaultFontLight,
                                                   selectedColor: AppColor
                                                       .mainColor2Surface,
                                                   selected: selectedNotSatisfied
@@ -413,12 +430,12 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                               const SizedBox(
                                 height: spacing16,
                               ),
-                              const Text(
+                              Text(
                                 TextDoc.txtDescriptionLabel,
                                 style: TextStyle(
                                   fontSize: titleMediumSize,
                                   fontWeight: titleMediumWeight,
-                                  color: AppColor.defaultFont,
+                                  color: colorsByTheme(context).defaultFont,
                                 ),
                               ),
                               const SizedBox(
@@ -457,12 +474,12 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                               const SizedBox(
                                 height: spacing16,
                               ),
-                              const Text(
+                              Text(
                                 TextDoc.txtSuggetionsLabel,
                                 style: TextStyle(
                                   fontSize: titleMediumSize,
                                   fontWeight: titleMediumWeight,
-                                  color: AppColor.defaultFont,
+                                  color: colorsByTheme(context).defaultFont,
                                 ),
                               ),
                               const SizedBox(

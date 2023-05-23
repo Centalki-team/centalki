@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../base/define/styles.dart';
+import '../../../../../base/define/theme.dart';
 import '../../../../../base/widgets/buttons/button.dart';
 import '../../../../../base/widgets/dialog/error_dialog_content.dart';
 import '../../../../../base/widgets/dialog/success_dialog_content.dart';
@@ -66,7 +67,7 @@ class _ReportMeetingViewState extends State<ReportMeetingView> {
         }
       },
       child: Scaffold(
-        backgroundColor: AppColor.white,
+        //backgroundColor: AppColor.white,
         appBar: AppBar(),
         body: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(
@@ -78,12 +79,12 @@ class _ReportMeetingViewState extends State<ReportMeetingView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'Summarize your problem',
                   style: TextStyle(
                     fontSize: titleMediumSize,
                     fontWeight: titleMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 const SizedBox(
@@ -95,12 +96,12 @@ class _ReportMeetingViewState extends State<ReportMeetingView> {
                   children: problems
                       .map((e) => FilterChip(
                           label: Text(e),
-                          labelStyle: const TextStyle(
+                          labelStyle: TextStyle(
                             fontSize: bodyLargeSize,
                             fontWeight: bodyLargeWeight,
-                            color: AppColor.defaultFont,
+                            color: colorsByTheme(context).defaultFont,
                           ),
-                          checkmarkColor: AppColor.defaultFont,
+                          checkmarkColor: AppColor.defaultFontLight,
                           selectedColor: AppColor.mainColor2Surface,
                           selected: selectedProblems[problems.indexOf(e)],
                           onSelected: (value) {
@@ -113,12 +114,12 @@ class _ReportMeetingViewState extends State<ReportMeetingView> {
                 const SizedBox(
                   height: spacing16,
                 ),
-                const Text(
+                Text(
                   'Description',
                   style: TextStyle(
                     fontSize: titleMediumSize,
                     fontWeight: titleMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 const SizedBox(

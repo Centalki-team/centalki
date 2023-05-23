@@ -14,4 +14,12 @@ class ApplicationRepositoryImpl extends ApplicationRepository {
   @override
   Future<void> setLocale(String locale) =>
       _applicationLocalDatasource.setLocale(locale);
+
+  @override
+  Future<bool> checkThemeIsDark() =>
+      _applicationLocalDatasource.checkThemeIsDark();
+
+  @override
+  Future<void> setTheme({bool isDark = false}) =>
+      _applicationLocalDatasource.setTheme(isDark: isDark);
 }

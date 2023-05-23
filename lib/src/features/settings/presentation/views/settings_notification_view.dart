@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../base/define/styles.dart';
+import '../../../../../base/define/theme.dart';
 import '../../../../../generated/l10n.dart';
 import '../widgets/setting_switch_row.dart';
 
@@ -9,25 +10,25 @@ class SettingsNotification extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        backgroundColor: Colors.white,
+        //backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: AppColor.white,
+          //backgroundColor: AppColor.white,
           automaticallyImplyLeading: false,
           leading: GestureDetector(
             onTap: Navigator.of(context).pop,
-            child: const Icon(
+            child: Icon(
               Icons.arrow_back,
-              color: AppColor.defaultFont,
+              color: colorsByTheme(context).defaultFont,
             ),
           ),
           title: Row(
             children: [
               Text(
                 S.current.txtNotification,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: headlineSmallSize,
                   fontWeight: headlineSmallWeight,
-                  color: AppColor.defaultFont,
+                  color: colorsByTheme(context).defaultFont,
                 ),
               ),
             ],
@@ -45,10 +46,10 @@ class SettingsNotification extends StatelessWidget {
                 const SizedBox(height: spacing4),
                 Text(
                   S.current.txtNotifyMeAbout,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: titleMediumSize,
                     fontWeight: titleMediumWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 Padding(

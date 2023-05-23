@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../base/define/styles.dart';
+import '../../../../../../base/define/theme.dart';
 import '../../../../../../base/widgets/buttons/text_button.dart';
 import '../../../../../../gen/assets.gen.dart';
 import '../../../../../../generated/l10n.dart';
@@ -37,7 +38,7 @@ class _FavoriteTopicCardState extends State<FavoriteTopicCard> {
           height: 128,
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
-              color: AppColor.white,
+              color: colorsByTheme(context).backgroundCardsChip,
               borderRadius: const BorderRadius.all(Radius.circular(12)),
               boxShadow: [
                 BoxShadow(
@@ -75,10 +76,10 @@ class _FavoriteTopicCardState extends State<FavoriteTopicCard> {
                           Expanded(
                             child: Text(
                               widget.bookmark.bookmarkTopic?.topicName ?? '',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: titleMediumSize,
                                 fontWeight: titleMediumWeight,
-                                color: AppColor.defaultFont,
+                                color: colorsByTheme(context).defaultFont,
                                 height: 0.9,
                               ),
                               maxLines: 3,
@@ -95,30 +96,35 @@ class _FavoriteTopicCardState extends State<FavoriteTopicCard> {
                                   barrierDismissible: false,
                                   context: context,
                                   builder: (context) => AlertDialog(
-                                    backgroundColor: AppColor.white,
+                                    backgroundColor: colorsByTheme(context)
+                                        .backgroundCardsChip,
                                     title: Text(
                                       S.current.txtConfirmRemoveFavoriteTitle,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: titleMediumSize,
                                         fontWeight: titleMediumWeight,
-                                        color: AppColor.defaultFont,
+                                        color:
+                                            colorsByTheme(context).defaultFont,
                                       ),
                                     ),
                                     content: Text(
                                       S.current.txtConfirmRemoveFavoriteContent,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: bodySmallSize,
                                         fontWeight: bodySmallWeight,
-                                        color: AppColor.defaultFont,
+                                        color:
+                                            colorsByTheme(context).defaultFont,
                                       ),
                                     ),
                                     actions: [
                                       AppTextButton(
                                         text: S.current.txtCancel,
-                                        onPressed: () => Navigator.pop(context, false),
+                                        onPressed: () =>
+                                            Navigator.pop(context, false),
                                       ),
                                       ElevatedButton(
-                                        onPressed: () => Navigator.pop(context, true),
+                                        onPressed: () =>
+                                            Navigator.pop(context, true),
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor: AppColor.error,
                                           foregroundColor: Colors.white,
@@ -139,7 +145,9 @@ class _FavoriteTopicCardState extends State<FavoriteTopicCard> {
                                           context
                                               .read<FavoriteTopicsBloc>()
                                               .add(RemoveFavoriteTopicEvent(
-                                                id: widget.bookmark.bookmarkId ?? '',
+                                                id: widget
+                                                        .bookmark.bookmarkId ??
+                                                    '',
                                               )),
                                         }
                                     });
@@ -158,10 +166,10 @@ class _FavoriteTopicCardState extends State<FavoriteTopicCard> {
                       ),
                       Text(
                         widget.bookmark.bookmarkTopic?.topicCategory ?? '',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: bodySmallSize,
                           fontWeight: bodySmallWeight,
-                          color: AppColor.defaultFont,
+                          color: colorsByTheme(context).defaultFont,
                           height: 16 / 20,
                         ),
                         maxLines: 2,

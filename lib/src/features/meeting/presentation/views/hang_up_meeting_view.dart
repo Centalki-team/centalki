@@ -23,7 +23,7 @@ class _HangUpMeetingViewState extends State<HangUpMeetingView> {
     return WillPopScope(
       onWillPop: () => Future.value(false),
       child: Scaffold(
-        backgroundColor: AppColor.white,
+        //backgroundColor: AppColor.white,
         body: Padding(
           padding: const EdgeInsets.fromLTRB(
               padding24, padding48 + padding12, padding24, padding24),

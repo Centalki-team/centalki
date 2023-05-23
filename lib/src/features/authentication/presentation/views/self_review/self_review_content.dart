@@ -6,6 +6,7 @@ import '../../../../../../base/define/colors.dart';
 import '../../../../../../base/define/dimensions.dart';
 import '../../../../../../base/define/size.dart';
 import '../../../../../../base/define/text.dart';
+import '../../../../../../base/define/theme.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/toast/app_toast.dart';
 import '../../../../../../generated/l10n.dart';
@@ -91,16 +92,23 @@ class _SelfReviewContentState extends State<SelfReviewContent> {
           ),
         ],
         child: Scaffold(
-          backgroundColor: AppColor.white,
+          //backgroundColor: AppColor.white,
           body: CustomScrollView(
             slivers: [
               SliverAppBar.medium(
-                title:  Text(
+                leading: IconButton(
+                  onPressed: Navigator.of(context).pop,
+                  icon: Icon(
+                    Icons.arrow_back_ios_new,
+                    color: colorsByTheme(context).defaultFont,
+                  ),
+                ),
+                title: Text(
                   S.current.txtSelfReviewTitle,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: titleLargeSize,
                     fontWeight: titleLargeWeight,
-                    color: AppColor.defaultFont,
+                    color: colorsByTheme(context).defaultFont,
                     height: 1,
                   ),
                 ),
@@ -119,12 +127,12 @@ class _SelfReviewContentState extends State<SelfReviewContent> {
                           const SizedBox(
                             height: spacing12,
                           ),
-                           Text(
+                          Text(
                             S.current.txtSelfReviewContent,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: bodyMediumSize,
                               fontWeight: bodyMediumWeight,
-                              color: AppColor.defaultFont,
+                              color: colorsByTheme(context).defaultFont,
                             ),
                           ),
                           const SizedBox(
@@ -190,12 +198,12 @@ class _SelfReviewContentState extends State<SelfReviewContent> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                 Text(
+                                Text(
                                   S.current.txtHaveAnAccount,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: bodyMediumSize,
                                     fontWeight: bodyMediumWeight,
-                                    color: AppColor.defaultFont,
+                                    color: colorsByTheme(context).defaultFont,
                                   ),
                                 ),
                                 const SizedBox(width: spacing4),

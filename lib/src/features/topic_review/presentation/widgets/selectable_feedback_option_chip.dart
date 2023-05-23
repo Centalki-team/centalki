@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
+import '../../../../../base/define/theme.dart';
 import '../../domain/entities/topic_feedback_chip_entity.dart';
 
 class SelectableFeedbackOptionChip extends StatelessWidget {
@@ -35,9 +36,9 @@ class SelectableFeedbackOptionChip extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (isSelected) ...[
-              const Icon(
+              Icon(
                 Icons.check_rounded,
-                color: AppColor.defaultFont,
+                color: colorsByTheme(context).defaultFont,
               ),
               const SizedBox(
                 width: spacing8,
@@ -49,12 +50,12 @@ class SelectableFeedbackOptionChip extends StatelessWidget {
                   ? const TextStyle(
                       fontSize: labelLargeSize,
                       fontWeight: labelLargeWeight,
-                      color: AppColor.defaultFont,
+                      color: AppColor.defaultFontLight,
                     )
-                  : const TextStyle(
+                  : TextStyle(
                       fontSize: bodyMediumSize,
                       fontWeight: bodyMediumWeight,
-                      color: AppColor.defaultFont,
+                      color: colorsByTheme(context).defaultFont,
                     ),
             ),
           ],

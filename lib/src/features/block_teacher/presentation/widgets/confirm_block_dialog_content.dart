@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../base/define/styles.dart';
+import '../../../../../base/define/theme.dart';
 import '../../../../../base/widgets/buttons/button.dart';
 
 class ConfirmToBlockDialogContent extends StatelessWidget {
@@ -10,21 +11,22 @@ class ConfirmToBlockDialogContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => AlertDialog(
-        title: const Text(
+        backgroundColor: colorsByTheme(context).backgroundCardsChip,
+        title: Text(
           TextDoc.txtQuestionBlockTeacher,
           style: TextStyle(
             fontSize: titleMediumSize,
             fontWeight: titleMediumWeight,
-            color: AppColor.defaultFont,
+            color: colorsByTheme(context).defaultFont,
             height: 1,
           ),
         ),
-        content: const Text(
+        content: Text(
           TextDoc.txtBlockTeacherDesc,
           style: TextStyle(
             fontSize: bodyLargeSize,
             fontWeight: bodyLargeWeight,
-            color: AppColor.defaultFont,
+            color: colorsByTheme(context).defaultFont,
             height: 1,
           ),
         ),

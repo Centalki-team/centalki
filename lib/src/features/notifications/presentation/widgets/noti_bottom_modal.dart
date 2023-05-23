@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
+import '../../../../../base/define/theme.dart';
 
 class NotiModalBottomSheet extends StatelessWidget {
   const NotiModalBottomSheet({super.key});
@@ -18,9 +16,9 @@ class NotiModalBottomSheet extends StatelessWidget {
             horizontal: spacing16,
             vertical: spacing18,
           ),
-          decoration: const BoxDecoration(
-            color: AppColor.white,
-            borderRadius: BorderRadius.only(
+          decoration: BoxDecoration(
+            color: colorsByTheme(context).backgroundCardsChip,
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(24.0),
               topRight: Radius.circular(24.0),
             ),
@@ -29,7 +27,7 @@ class NotiModalBottomSheet extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              NotiModalOtion(
+              NotiModalOption(
                 iconData: Icons.notifications_none_rounded,
                 title: 'Mark all notifications as read',
                 onTap: () => Navigator.pop(context, 0),
@@ -37,7 +35,7 @@ class NotiModalBottomSheet extends StatelessWidget {
               const SizedBox(
                 height: spacing24,
               ),
-              NotiModalOtion(
+              NotiModalOption(
                 iconData: Icons.notifications_active_outlined,
                 title: 'Mark all notifications as unread',
                 onTap: () => Navigator.pop(context, 1),
@@ -45,7 +43,7 @@ class NotiModalBottomSheet extends StatelessWidget {
               const SizedBox(
                 height: spacing24,
               ),
-              NotiModalOtion(
+              NotiModalOption(
                 iconData: Icons.edit_notifications_outlined,
                 title: 'Edit notifications settings',
                 onTap: () => Navigator.pop(context, 2),
@@ -56,8 +54,8 @@ class NotiModalBottomSheet extends StatelessWidget {
       );
 }
 
-class NotiModalOtion extends StatelessWidget {
-  const NotiModalOtion({
+class NotiModalOption extends StatelessWidget {
+  const NotiModalOption({
     super.key,
     required this.iconData,
     required this.title,
@@ -77,16 +75,17 @@ class NotiModalOtion extends StatelessWidget {
             Icon(
               iconData,
               size: 24.0,
+              color: colorsByTheme(context).defaultFont,
             ),
             const SizedBox(
               width: spacing16,
             ),
             Text(
               title,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: bodySmallSize,
                 fontWeight: bodySmallWeight,
-                color: AppColor.defaultFont,
+                color: colorsByTheme(context).defaultFont,
                 height: 16 / 20,
               ),
             ),

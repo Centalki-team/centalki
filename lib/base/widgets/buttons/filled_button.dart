@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../define/styles.dart';
+import '../../define/theme.dart';
 
 class AppFilledButton extends StatefulWidget {
   const AppFilledButton({
@@ -33,11 +34,11 @@ class _AppFilledButtonState extends State<AppFilledButton> {
           ),
           child: Text(
             widget.text,
-            style: const TextStyle(
+            style: TextStyle(
               fontFamily: 'Dongle',
               fontSize: labelLargeSize,
               fontWeight: labelLargeWeight,
-              color: AppColor.defaultFont,
+              color: colorsByTheme(context).backgroundTheme,
             ),
           ),
         )
@@ -45,7 +46,7 @@ class _AppFilledButtonState extends State<AppFilledButton> {
           onPressed: widget.onPressed,
           style: TextButton.styleFrom(
             backgroundColor: AppColor.mainColor2,
-            foregroundColor: AppColor.defaultFont,
+            foregroundColor: colorsByTheme(context).defaultFont,
             elevation: 0.0,
             shadowColor: AppColor.shadow,
             minimumSize: widget.minimumSize,
@@ -58,7 +59,7 @@ class _AppFilledButtonState extends State<AppFilledButton> {
           icon: Icon(
             widget.icon!,
             size: iconButtonSize,
-            color: AppColor.defaultFont,
+            color: colorsByTheme(context).defaultFont,
           ),
           label: Text(widget.text),
         );

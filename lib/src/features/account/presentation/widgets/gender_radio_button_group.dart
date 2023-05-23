@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/size.dart';
 import '../../../../../base/define/text.dart';
+import '../../../../../base/define/theme.dart';
 import '../../../../../generated/l10n.dart';
 import '../../domain/entities/user_account_entity.dart';
 
@@ -52,10 +53,10 @@ class _GenderRadioButtonGroupState extends State<GenderRadioButtonGroup> {
                   },
                   title: Text(
                     S.current.txtMale,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: bodyLargeSize,
                       fontWeight: bodyLargeWeight,
-                      color: AppColor.defaultFont,
+                      color: colorsByTheme(context).defaultFont,
                     ),
                   ),
                 ),
@@ -71,10 +72,10 @@ class _GenderRadioButtonGroupState extends State<GenderRadioButtonGroup> {
                   },
                   title: Text(
                     S.current.txtFemale,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: bodyLargeSize,
                       fontWeight: bodyLargeWeight,
-                      color: AppColor.defaultFont,
+                      color: colorsByTheme(context).defaultFont,
                     ),
                   ),
                 ),
@@ -90,10 +91,10 @@ class _GenderRadioButtonGroupState extends State<GenderRadioButtonGroup> {
                   },
                   title: Text(
                     S.current.txtOthers,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: bodyLargeSize,
                       fontWeight: bodyLargeWeight,
-                      color: AppColor.defaultFont,
+                      color: colorsByTheme(context).defaultFont,
                     ),
                   ),
                 ),

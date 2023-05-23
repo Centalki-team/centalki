@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../../base/define/styles.dart';
+import '../../../../../../base/define/theme.dart';
 import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../../../history_detail/presentation/views/history_detail_page.dart';
@@ -34,17 +35,24 @@ class _HistoryViewState extends State<HistoryView> {
         builder: (context, state) {
           if (state is HistoryLoadDoneState) {
             return Scaffold(
-              backgroundColor: AppColor.white,
+              //backgroundColor: AppColor.white,
               body: CustomScrollView(
                 slivers: [
                   SliverAppBar.medium(
+                    leading: IconButton(
+                      onPressed: Navigator.of(context).pop,
+                      icon: Icon(
+                        Icons.arrow_back_ios_new,
+                        color: colorsByTheme(context).defaultFont,
+                      ),
+                    ),
                     title: Text(
                       S.current.txtHistory,
-                      style: const TextStyle(
+                      style: TextStyle(
                         height: 1.0,
                         fontSize: headlineSmallSize,
                         fontWeight: headlineSmallWeight,
-                        color: AppColor.defaultFont,
+                        color: colorsByTheme(context).defaultFont,
                       ),
                     ),
                     centerTitle: true,
@@ -64,19 +72,20 @@ class _HistoryViewState extends State<HistoryView> {
                                 vertical: padding8,
                                 horizontal: padding16,
                               ),
-                              decoration: const BoxDecoration(
-                                color: AppColor.mainColor2Surface,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12.0)),
+                              decoration: BoxDecoration(
+                                color: colorsByTheme(context)
+                                    .backgroundCardHistoryWallet,
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(12.0)),
                               ),
                               child: Column(
                                 children: [
-                                   Text(
+                                  Text(
                                     S.current.txtTotalCompletedSessions,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: titleMediumSize,
                                       fontWeight: titleMediumWeight,
-                                      color: AppColor.defaultFont,
+                                      color: colorsByTheme(context).defaultFont,
                                     ),
                                   ),
                                   Text(
@@ -91,7 +100,7 @@ class _HistoryViewState extends State<HistoryView> {
                               ),
                             ),
                             const SizedBox(height: spacing24),
-                             Text(
+                            Text(
                               S.current.txtSessions,
                               style: const TextStyle(
                                 fontSize: titleMediumSize,
@@ -100,13 +109,14 @@ class _HistoryViewState extends State<HistoryView> {
                               ),
                             ),
                             state.sessionList.isEmpty
-                                ?  Center(
+                                ? Center(
                                     child: Text(
                                       S.current.txtNoData,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: bodyLargeSize,
                                         fontWeight: bodyLargeWeight,
-                                        color: AppColor.defaultFont,
+                                        color:
+                                            colorsByTheme(context).defaultFont,
                                       ),
                                     ),
                                   )
@@ -136,13 +146,14 @@ class _HistoryViewState extends State<HistoryView> {
                                               const SizedBox(
                                                 height: spacing8,
                                               ),
-                                               Text(
+                                              Text(
                                                 S.current
                                                     .txtTapToLoadMoreSessions,
-                                                style: const TextStyle(
+                                                style: TextStyle(
                                                   fontSize: bodyLargeSize,
                                                   fontWeight: bodyLargeWeight,
-                                                  color: AppColor.shadow,
+                                                  color: colorsByTheme(context)
+                                                      .defaultFont,
                                                 ),
                                               ),
                                             ],
@@ -161,6 +172,8 @@ class _HistoryViewState extends State<HistoryView> {
                                               ),
                                             },
                                             child: Card(
+                                              color: colorsByTheme(context)
+                                                  .backgroundCardsChip,
                                               clipBehavior: Clip.hardEdge,
                                               child: Row(
                                                 children: [
@@ -207,13 +220,13 @@ class _HistoryViewState extends State<HistoryView> {
                                                                     .sessionTopic
                                                                     ?.name ??
                                                                 '',
-                                                            style:
-                                                                const TextStyle(
+                                                            style: TextStyle(
                                                               fontWeight:
                                                                   titleMediumWeight,
                                                               fontSize:
                                                                   titleMediumSize,
-                                                              color: AppColor
+                                                              color: colorsByTheme(
+                                                                      context)
                                                                   .defaultFont,
                                                             ),
                                                           ),
@@ -224,13 +237,13 @@ class _HistoryViewState extends State<HistoryView> {
                                                                     .sessionTeacher
                                                                     ?.fullName ??
                                                                 '',
-                                                            style:
-                                                                const TextStyle(
+                                                            style: TextStyle(
                                                               fontSize:
                                                                   bodyLargeSize,
                                                               fontWeight:
                                                                   bodyLargeWeight,
-                                                              color: AppColor
+                                                              color: colorsByTheme(
+                                                                      context)
                                                                   .defaultFont,
                                                             ),
                                                           ),

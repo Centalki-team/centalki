@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import '../../define/colors.dart';
 import '../../define/icons.dart';
+import '../../define/theme.dart';
 import '../scale_down_widget.dart';
 
 class CopyableText extends StatelessWidget {
@@ -30,10 +31,10 @@ class CopyableText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final usedStyle = style ??
-        const TextStyle(
+        TextStyle(
           fontSize: 14.0,
           fontWeight: FontWeight.w400,
-          color: AppColor.defaultFont,
+          color: colorsByTheme(context).defaultFont,
         );
     final fontSize = usedStyle.fontSize;
 

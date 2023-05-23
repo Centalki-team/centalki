@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
+import '../../../../../base/define/theme.dart';
 import '../../domain/entities/noti_list_item_entity.dart';
 import 'noti_item_card.dart';
 
@@ -38,10 +39,10 @@ class NotiList extends StatelessWidget {
               ),
               child: Text(
                 title,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: titleLargeSize,
                   fontWeight: titleLargeWeight,
-                  color: AppColor.defaultFont,
+                  color: colorsByTheme(context).defaultFont,
                   height: 28 / 30,
                 ),
               ),

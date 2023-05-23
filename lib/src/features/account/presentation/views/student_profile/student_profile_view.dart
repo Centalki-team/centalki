@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../../base/define/styles.dart';
+import '../../../../../../base/define/theme.dart';
 import '../../../../../../base/widgets/avatar.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
@@ -103,7 +104,7 @@ class _StudentProfileViewState extends State<StudentProfileView> {
             final widthView = constraint.maxWidth;
 
             return Scaffold(
-              backgroundColor: AppColor.white,
+              //backgroundColor: AppColor.white,
               body: GestureDetector(
                 onTap: () => FocusScope.of(context).unfocus(),
                 child: Stack(
@@ -111,12 +112,19 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                     CustomScrollView(
                       slivers: [
                         SliverAppBar.medium(
+                          leading: IconButton(
+                            onPressed: Navigator.of(context).pop,
+                            icon: Icon(
+                              Icons.arrow_back_ios_new,
+                              color: colorsByTheme(context).defaultFont,
+                            ),
+                          ),
                           title: Text(
                             S.current.txtStudentProfile,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: headlineSmallSize,
                               fontWeight: headlineSmallWeight,
-                              color: AppColor.defaultFont,
+                              color: colorsByTheme(context).defaultFont,
                               height: 1,
                             ),
                           ),
@@ -188,10 +196,11 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                       const SizedBox(height: spacing16),
                                       Text(
                                         S.current.txtFullNameTitle,
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontSize: titleMediumSize,
                                           fontWeight: titleMediumWeight,
-                                          color: AppColor.defaultFont,
+                                          color: colorsByTheme(context)
+                                              .defaultFont,
                                         ),
                                       ),
                                       AppOutlinedTextField(
@@ -207,10 +216,11 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                       const SizedBox(height: spacing16),
                                       Text(
                                         S.current.txtEnglishNameTitle,
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontSize: titleMediumSize,
                                           fontWeight: titleMediumWeight,
-                                          color: AppColor.defaultFont,
+                                          color: colorsByTheme(context)
+                                              .defaultFont,
                                         ),
                                       ),
                                       AppOutlinedTextField(
@@ -226,10 +236,11 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                       const SizedBox(height: spacing16),
                                       Text(
                                         S.current.txtBioTitle,
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontSize: titleMediumSize,
                                           fontWeight: titleMediumWeight,
-                                          color: AppColor.defaultFont,
+                                          color: colorsByTheme(context)
+                                              .defaultFont,
                                         ),
                                       ),
                                       AppOutlinedTextField(
@@ -245,10 +256,11 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                       const SizedBox(height: spacing16),
                                       Text(
                                         S.current.txtInterestedTopics,
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontSize: titleMediumSize,
                                           fontWeight: titleMediumWeight,
-                                          color: AppColor.defaultFont,
+                                          color: colorsByTheme(context)
+                                              .defaultFont,
                                         ),
                                       ),
                                       BlocBuilder<StudentProfileBloc,

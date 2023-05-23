@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../base/define/styles.dart';
+import '../../../../../../base/define/theme.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/text_fields/outlined_text_field.dart';
 import '../../../../../../gen/assets.gen.dart';
@@ -50,13 +51,13 @@ class _SignUpViewState extends State<SignUpView> {
                   height: 280,
                   child: Assets.illustration.signUp.svg(),
                 ),
-                 Text(
+                Text(
                   S.current.txtSignUpIntroduction,
                   textAlign: TextAlign.left,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: titleLargeSize,
                     fontWeight: titleLargeWeight,
-                    color: AppColor.defaultFontContainer,
+                    color: colorsByTheme(context).defaultFont,
                   ),
                 ),
                 const SizedBox(height: spacing16),
@@ -64,12 +65,12 @@ class _SignUpViewState extends State<SignUpView> {
                   builder: (context, state) => Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                       Text(
+                      Text(
                         S.current.txtFullName,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: titleMediumSize,
                           fontWeight: titleMediumWeight,
-                          color: AppColor.defaultFont,
+                          color: colorsByTheme(context).defaultFont,
                         ),
                       ),
                       AppOutlinedTextField(
@@ -81,12 +82,12 @@ class _SignUpViewState extends State<SignUpView> {
                         onChanged: _validateSignUpInputs,
                       ),
                       const SizedBox(height: spacing8),
-                       Text(
+                      Text(
                         S.current.txtEmail,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: titleMediumSize,
                           fontWeight: titleMediumWeight,
-                          color: AppColor.defaultFont,
+                          color: colorsByTheme(context).defaultFont,
                         ),
                       ),
                       AppOutlinedTextField(
@@ -99,12 +100,12 @@ class _SignUpViewState extends State<SignUpView> {
                         onChanged: _validateSignUpInputs,
                       ),
                       const SizedBox(height: spacing8),
-                       Text(
+                      Text(
                         S.current.txtPassword,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: titleMediumSize,
                           fontWeight: titleMediumWeight,
-                          color: AppColor.defaultFont,
+                          color: colorsByTheme(context).defaultFont,
                         ),
                       ),
                       AppOutlinedTextField(
@@ -117,12 +118,12 @@ class _SignUpViewState extends State<SignUpView> {
                         onChanged: _validateSignUpInputs,
                       ),
                       const SizedBox(height: spacing8),
-                       Text(
+                      Text(
                         S.current.txtRetypePassword,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: titleMediumSize,
                           fontWeight: titleMediumWeight,
-                          color: AppColor.defaultFont,
+                          color: colorsByTheme(context).defaultFont,
                         ),
                       ),
                       AppOutlinedTextField(
@@ -148,12 +149,12 @@ class _SignUpViewState extends State<SignUpView> {
                               _validateSignUpInputs('');
                             },
                           ),
-                           Text(
+                          Text(
                             S.current.txtTermsAccept,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: bodyMediumSize,
                               fontWeight: bodyMediumWeight,
-                              color: AppColor.defaultFont,
+                              color: colorsByTheme(context).defaultFont,
                             ),
                           ),
                           AppTextButton(
@@ -161,7 +162,8 @@ class _SignUpViewState extends State<SignUpView> {
                             onPressed: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const TermsAndConditions(),
+                                builder: (context) =>
+                                    const TermsAndConditions(),
                               ),
                             ),
                           )
@@ -211,12 +213,12 @@ class _SignUpViewState extends State<SignUpView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                     Text(
+                    Text(
                       S.current.txtHaveAnAccount,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: bodyMediumSize,
                         fontWeight: bodyMediumWeight,
-                        color: AppColor.defaultFont,
+                        color: colorsByTheme(context).defaultFont,
                       ),
                     ),
                     const SizedBox(width: spacing4),
