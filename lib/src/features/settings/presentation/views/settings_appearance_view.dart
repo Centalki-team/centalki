@@ -11,59 +11,58 @@ class SettingsAppearance extends StatelessWidget {
   const SettingsAppearance({super.key});
 
   @override
-  Widget build(BuildContext context) =>
-      BlocBuilder<ApplicationBloc, ApplicationState>(
-        builder: (context, state) => Scaffold(
-          //backgroundColor: Colors.white,
-          appBar: AppBar(
-            //backgroundColor: const Color(0xFFFDFCFF),
-            automaticallyImplyLeading: false,
-            leading: GestureDetector(
-              onTap: Navigator.of(context).pop,
-              child: Icon(
-                Icons.arrow_back,
-                color: colorsByTheme(context).defaultFont,
-              ),
+  Widget build(BuildContext context) => Scaffold(
+        //backgroundColor: Colors.white,
+        appBar: AppBar(
+          //backgroundColor: const Color(0xFFFDFCFF),
+          automaticallyImplyLeading: false,
+          leading: GestureDetector(
+            onTap: Navigator.of(context).pop,
+            child: Icon(
+              Icons.arrow_back,
+              color: colorsByTheme(context).defaultFont,
             ),
-            title: Row(
+          ),
+          title: Row(
+            children: [
+              Text(
+                S.current.txtAppearance,
+                style: TextStyle(
+                  fontSize: headlineSmallSize,
+                  fontWeight: headlineSmallWeight,
+                  color: colorsByTheme(context).defaultFont,
+                ),
+              ),
+            ],
+          ),
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16.0,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                const SizedBox(
+                  height: spacing4,
+                ),
                 Text(
-                  S.current.txtAppearance,
+                  S.current.txtApplicationTheme,
                   style: TextStyle(
-                    fontSize: headlineSmallSize,
-                    fontWeight: headlineSmallWeight,
+                    fontSize: titleMediumSize,
+                    fontWeight: titleMediumWeight,
                     color: colorsByTheme(context).defaultFont,
                   ),
                 ),
-              ],
-            ),
-          ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16.0,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const SizedBox(
-                    height: spacing4,
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12.0,
+                    vertical: 16.0,
                   ),
-                  Text(
-                    S.current.txtApplicationTheme,
-                    style: TextStyle(
-                      fontSize: titleMediumSize,
-                      fontWeight: titleMediumWeight,
-                      color: colorsByTheme(context).defaultFont,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12.0,
-                      vertical: 16.0,
-                    ),
-                    child: SettingSwitchRow(
+                  child: BlocBuilder<ApplicationBloc, ApplicationState>(
+                    builder: (context, state) => SettingSwitchRow(
                       initialValue: state.isDarkMode,
                       title: S.current.txtDarkMode,
                       onChanged: (value) => context
@@ -71,8 +70,8 @@ class SettingsAppearance extends StatelessWidget {
                           .add(ApplicationDarkModeChanged(enable: value)),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
