@@ -89,8 +89,8 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   late final ApplicationBloc _bloc;
   int? savedTabIndex;
-  late String _locale;
-  late bool _isDarkMode;
+  //late String _locale;
+  //late bool _isDarkMode;
   late final AppLocalizationDelegate appLocalizationDelegate;
 
   // changeLanguage(Locale locale) {
@@ -110,8 +110,8 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     savedTabIndex = 0;
-    _locale = AppConfig.defaultLocale;
-    _isDarkMode = false;
+    //_locale = AppConfig.defaultLocale;
+    //_isDarkMode = false;
     _bloc = getIt.get<ApplicationBloc>();
     _bloc.add(ApplicationLoaded());
     appLocalizationDelegate = const AppLocalizationDelegate();
@@ -126,22 +126,22 @@ class _MyAppState extends State<MyApp> {
           ),
         ],
         child: BlocListener<ApplicationBloc, ApplicationState>(
+          listenWhen: (previous, current) =>
+              (previous.locale != current.locale ||
+                  previous.isDarkMode != current.isDarkMode) &&
+              previous.status != UIStatus.initial,
           listener: (context, state) {
-            if (state.locale != _locale || state.isDarkMode != _isDarkMode) {
-              setState(() {
-                _locale = state.locale;
-                _isDarkMode = state.isDarkMode;
-                savedTabIndex = 3;
-              });
-            }
+            savedTabIndex = 3;
           },
           child: BlocBuilder<ApplicationBloc, ApplicationState>(
               bloc: _bloc,
+              buildWhen: (previous, current) =>
+                  previous != current || current.status == UIStatus.loadSuccess,
               builder: (context, state) => MaterialApp(
                     debugShowCheckedModeBanner: false,
                     theme: getThemeData(
                       context,
-                      isDarkTheme: _isDarkMode,
+                      isDarkTheme: state.isDarkMode,
                     ),
                     localizationsDelegates: [
                       appLocalizationDelegate,
@@ -150,15 +150,17 @@ class _MyAppState extends State<MyApp> {
                       GlobalCupertinoLocalizations.delegate,
                     ],
                     supportedLocales: appLocalizationDelegate.supportedLocales,
-                    locale: Locale(_locale),
-                    themeMode: _isDarkMode ? ThemeMode.dark : ThemeMode.light,
+                    locale: Locale(state.locale),
+                    themeMode:
+                        state.isDarkMode ? ThemeMode.dark : ThemeMode.light,
                     // theme: AppThemes.lightTheme,
                     // darkTheme: AppThemes.darkTheme,
-                    home: MyWidget(
-                      key: UniqueKey(),
-                      currentTabIndex: savedTabIndex,
-                      uiStatus: state.status,
-                    ),
+                    home: state.status != UIStatus.loadSuccess
+                        ? const SplashScreen()
+                        : MyWidget(
+                            key: UniqueKey(),
+                            currentTabIndex: savedTabIndex,
+                          ),
                     navigatorObservers: kDebugMode
                         ? []
                         : [
@@ -175,11 +177,11 @@ class MyWidget extends StatefulWidget {
   const MyWidget({
     super.key,
     this.currentTabIndex,
-    this.uiStatus,
+    //this.uiStatus,
   });
 
   final int? currentTabIndex;
-  final UIStatus? uiStatus;
+  //final UIStatus? uiStatus;
 
   @override
   State<MyWidget> createState() => _MyWidgetState();
@@ -206,9 +208,7 @@ class _MyWidgetState extends State<MyWidget> {
 
   @override
   void initState() {
-    if (widget.uiStatus == UIStatus.loadSuccess) {
-      _checkToShowAppIntro();
-    }
+    _checkToShowAppIntro();
     _requestAppTracking();
     // Right after the listener has been registered.
     // When a user is signed in.
