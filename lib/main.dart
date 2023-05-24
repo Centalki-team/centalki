@@ -72,15 +72,15 @@ class MyApp extends StatefulWidget {
 
   final FirebaseAnalytics firebaseAnalytics;
 
-  static void setLocale(BuildContext context, Locale newLocale) async {
-    var state = context.findAncestorStateOfType<_MyAppState>();
-    state?.changeLanguage(newLocale);
-  }
+  // static void setLocale(BuildContext context, Locale newLocale) async {
+  //   var state = context.findAncestorStateOfType<_MyAppState>();
+  //   state?.changeLanguage(newLocale);
+  // }
 
-  static void setTheme(BuildContext context, {bool isDark = false}) async {
-    var state = context.findAncestorStateOfType<_MyAppState>();
-    state?.changeTheme(isDark: isDark);
-  }
+  // static void setTheme(BuildContext context, {bool isDark = false}) async {
+  //   var state = context.findAncestorStateOfType<_MyAppState>();
+  //   state?.changeTheme(isDark: isDark);
+  // }
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -93,22 +93,23 @@ class _MyAppState extends State<MyApp> {
   late bool _isDarkMode;
   late final AppLocalizationDelegate appLocalizationDelegate;
 
-  changeLanguage(Locale locale) {
-    setState(() {
-      _locale = locale.languageCode;
-      savedTabIndex = 3;
-    });
-  }
+  // changeLanguage(Locale locale) {
+  //   setState(() {
+  //     _locale = locale.languageCode;
+  //     savedTabIndex = 3;
+  //   });
+  // }
 
-  changeTheme({bool isDark = false}) {
-    setState(() {
-      _isDarkMode = isDark;
-      savedTabIndex = 3;
-    });
-  }
+  // changeTheme({bool isDark = false}) {
+  //   setState(() {
+  //     _isDarkMode = isDark;
+  //     savedTabIndex = 3;
+  //   });
+  // }
 
   @override
   void initState() {
+    savedTabIndex = 0;
     _locale = AppConfig.defaultLocale;
     _isDarkMode = false;
     _bloc = getIt.get<ApplicationBloc>();
@@ -130,6 +131,7 @@ class _MyAppState extends State<MyApp> {
               setState(() {
                 _locale = state.locale;
                 _isDarkMode = state.isDarkMode;
+                savedTabIndex = 3;
               });
             }
           },
