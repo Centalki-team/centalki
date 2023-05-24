@@ -5,6 +5,8 @@ import '../../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/define/theme.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
+import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
+import '../../../../../../base/widgets/dialog/success_dialog_content.dart';
 import '../../../../../../base/widgets/text_fields/text_field.dart';
 import '../../../../../../gen/assets.gen.dart';
 import '../../../../../../generated/l10n.dart';
@@ -23,19 +25,29 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
   @override
   Widget build(BuildContext context) =>
       BlocListener<ResetPasswordBloc, ResetPasswordState>(
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state is ResetPasswordLoadingState) {
             LoadingManager.setLoading(context, loading: true);
           } else {
             LoadingManager.setLoading(context);
             if (state is ResetPasswordLoadDoneState) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text(state.message),
-              ));
+              await showDialog(
+                barrierDismissible: false,
+                context: context,
+                builder: (context) => SuccessDialogContent(
+                  title: S.current.txtResetPasswordResult,
+                  content: state.message,
+                ),
+              );
             } else if (state is ResetPasswordLoadErrorState) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text(state.message),
-              ));
+              await showDialog(
+                barrierDismissible: false,
+                context: context,
+                builder: (context) => ErrorDialogContent(
+                  title: S.current.txtResetPasswordResult,
+                  content: state.message,
+                ),
+              );
             }
           }
         },

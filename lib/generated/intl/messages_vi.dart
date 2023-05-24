@@ -377,6 +377,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Chúng tôi sẽ gửi cho bạn đường liên kết giúp đặt lại mật khẩu"),
         "txtResetPasswordIntroduction": MessageLookupByLibrary.simpleMessage(
             "Nhập địa chỉ email mà bạn đã dùng để đăng ký tài khoản"),
+        "txtResetPasswordResult":
+            MessageLookupByLibrary.simpleMessage("Kết quả đặt lại mật khẩu"),
         "txtReturnSignIn":
             MessageLookupByLibrary.simpleMessage("Quay về trang đăng nhập"),
         "txtReturnToSignIn":
@@ -435,6 +437,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtSignIn": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
         "txtSignInAgainToDelete": MessageLookupByLibrary.simpleMessage(
             "Vui lòng đăng nhập lại để xoá tài khoản của bạn."),
+        "txtSignInError": MessageLookupByLibrary.simpleMessage("Lỗi đăng nhập"),
         "txtSignInIntroduction": MessageLookupByLibrary.simpleMessage(
             "Đăng nhập để bắt đầu luyện tập kỹ năng nói tiếng Anh"),
         "txtSignInYourAccount": MessageLookupByLibrary.simpleMessage(
@@ -445,6 +448,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtSignUp": MessageLookupByLibrary.simpleMessage("Đăng ký"),
         "txtSignUpIntroduction": MessageLookupByLibrary.simpleMessage(
             "Đăng ký tài khoản để khám phá Centalki"),
+        "txtSignUpResult":
+            MessageLookupByLibrary.simpleMessage("Kết quả đăng ký"),
         "txtSixSessions": MessageLookupByLibrary.simpleMessage("6 sessions"),
         "txtSixSessionsLearningTime": MessageLookupByLibrary.simpleMessage(
             "Total 180 minutes of learning time"),

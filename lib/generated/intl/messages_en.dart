@@ -381,6 +381,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "We\'ll send you a link to reset your password"),
         "txtResetPasswordIntroduction": MessageLookupByLibrary.simpleMessage(
             "Enter the email address you used for Centalki"),
+        "txtResetPasswordResult":
+            MessageLookupByLibrary.simpleMessage("Reset password result"),
         "txtReturnSignIn":
             MessageLookupByLibrary.simpleMessage("Return Sign In"),
         "txtReturnToSignIn":
@@ -438,6 +440,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtSignIn": MessageLookupByLibrary.simpleMessage("Sign In"),
         "txtSignInAgainToDelete": MessageLookupByLibrary.simpleMessage(
             "Please sign in again to delete your account"),
+        "txtSignInError": MessageLookupByLibrary.simpleMessage("Sign in error"),
         "txtSignInIntroduction": MessageLookupByLibrary.simpleMessage(
             "Sign in to start practicing your English speaking skill"),
         "txtSignInYourAccount":
@@ -448,6 +451,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtSignUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "txtSignUpIntroduction": MessageLookupByLibrary.simpleMessage(
             "Sign up to discover Centalki"),
+        "txtSignUpResult":
+            MessageLookupByLibrary.simpleMessage("Sign up result"),
         "txtSixSessions": MessageLookupByLibrary.simpleMessage("6 sessions"),
         "txtSixSessionsLearningTime": MessageLookupByLibrary.simpleMessage(
             "Total 180 minutes of learning time"),

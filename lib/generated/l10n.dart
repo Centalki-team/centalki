@@ -400,6 +400,16 @@ class S {
     );
   }
 
+  /// `Sign in error`
+  String get txtSignInError {
+    return Intl.message(
+      'Sign in error',
+      name: 'txtSignInError',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `User not found for that email!`
   String get txtUserNotFound {
     return Intl.message(
@@ -570,6 +580,16 @@ class S {
     );
   }
 
+  /// `Sign up result`
+  String get txtSignUpResult {
+    return Intl.message(
+      'Sign up result',
+      name: 'txtSignUpResult',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Next`
   String get txtNext {
     return Intl.message(
@@ -585,6 +605,16 @@ class S {
     return Intl.message(
       'Reset Password',
       name: 'txtResetPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset password result`
+  String get txtResetPasswordResult {
+    return Intl.message(
+      'Reset password result',
+      name: 'txtResetPasswordResult',
       desc: '',
       args: [],
     );
