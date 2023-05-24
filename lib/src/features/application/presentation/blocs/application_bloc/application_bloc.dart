@@ -35,7 +35,7 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
 
   _onLoaded(ApplicationLoaded event, emit) async {
     emit(state.copyWith(
-      status: UIStatus.loading,
+      status: UIStatus.initial,
     ));
 
     final savedLocale = await _getApplicationLocaleUseCase(null);
