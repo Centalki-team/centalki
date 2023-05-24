@@ -26,50 +26,41 @@ class _SettingsLanguageState extends State<SettingsLanguage> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      BlocListener<ApplicationBloc, ApplicationState>(
-        listener: (context, state) {
-          if (state.locale != currentLocale) {
-            MyApp.setLocale(context, Locale(state.locale));
-            setState(() {
-              currentLocale = state.locale;
-            });
-          }
-        },
-        child: Scaffold(
-          //backgroundColor: Colors.white,
-          appBar: AppBar(
-            //backgroundColor: AppColor.white,
-            automaticallyImplyLeading: false,
-            leading: GestureDetector(
-              onTap: Navigator.of(context).pop,
-              child: Icon(
-                Icons.arrow_back,
-                color: colorsByTheme(context).defaultFont,
-              ),
-            ),
-            title: Row(
-              children: [
-                Text(
-                  S.current.txtLanguage,
-                  style: TextStyle(
-                    fontSize: headlineSmallSize,
-                    fontWeight: headlineSmallWeight,
-                    color: colorsByTheme(context).defaultFont,
-                  ),
-                ),
-              ],
+  Widget build(BuildContext context) => Scaffold(
+        //backgroundColor: Colors.white,
+        appBar: AppBar(
+          //backgroundColor: AppColor.white,
+          automaticallyImplyLeading: false,
+          leading: GestureDetector(
+            onTap: Navigator.of(context).pop,
+            child: Icon(
+              Icons.arrow_back,
+              color: colorsByTheme(context).defaultFont,
             ),
           ),
-          body: SingleChildScrollView(
-            child: VerticalRadioGroup(
+          title: Row(
+            children: [
+              Text(
+                S.current.txtLanguage,
+                style: TextStyle(
+                  fontSize: headlineSmallSize,
+                  fontWeight: headlineSmallWeight,
+                  color: colorsByTheme(context).defaultFont,
+                ),
+              ),
+            ],
+          ),
+        ),
+        body: SingleChildScrollView(
+          child: BlocBuilder<ApplicationBloc, ApplicationState>(
+            builder: (context, state) => VerticalRadioGroup(
               key: UniqueKey(),
               onChanged: (value) {
                 context
                     .read<ApplicationBloc>()
                     .add(ApplicationLocaleChanged(locale: value.locale));
               },
-              initValue: currentLocale,
+              initValue: state.locale,
               dataList: [
                 LanguageEntity(
                   name: S.current.txtEnglish,
