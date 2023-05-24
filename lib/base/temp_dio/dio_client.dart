@@ -15,7 +15,6 @@ import '../../src/features/connect_teacher/domain/entities/session_schedule_enti
 import '../../src/features/topic_detail/data/datasources/topics_datasource/remote_data/model/topic_detail_model.dart';
 import '../../src/features/topic_detail/domain/entities/topic_detail_entity.dart';
 import '../../src/features/topics/data/datasources/topics_datasource/remote_data/model/topic_model.dart';
-import '../../src/features/topics/domain/entities/topic_item_entity.dart';
 
 class MyHttpOverrides extends HttpOverrides {
   @override
@@ -40,9 +39,9 @@ class DioClient {
         "displayName": displayName
       });
 
-  // static Future<dynamic> validateRole(String? idToken) =>
-  //     _dio.post("$baseUrl/auth/validate-role",
-  //         data: {"idToken": idToken, "role": "STUDENT"});
+  static Future<dynamic> validateRole(String? idToken) =>
+      _dio.post("$baseUrl/auth/validate-role",
+          data: {"idToken": idToken, "role": "STUDENT"});
 
   static Future<TopicsListBaseModel> getTopicList() async {
     final response = await _dio.get(

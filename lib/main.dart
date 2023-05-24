@@ -1,7 +1,7 @@
-import 'dart:async';
 import 'dart:io';
 
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -15,7 +15,6 @@ import 'base/define/manager/locale_manager.dart';
 import 'base/define/storage/storage_gateway.dart';
 import 'base/define/theme.dart';
 import 'base/temp_dio/dio_client.dart';
-import 'config/app_config.dart';
 import 'config/main_config.dart';
 import 'di/di_module.dart';
 import 'di/injection/injection.dart';
@@ -217,31 +216,40 @@ class _MyWidgetState extends State<MyWidget> {
     super.initState();
     FirebaseAuth.instance.currentUser?.reload();
     FirebaseAuth.instance.idTokenChanges().listen((user) async {
-      if (user == null) {
-        print('User is currently signed out!');
-        setState(() {
-          _status = "not_auth";
-        });
-      } else {
-        print('User is signed in!');
-        var idToken = await user.getIdToken();
-        print(idToken);
-        if (user.providerData[0].providerId.contains('password')) {
-          if (!user.emailVerified) {
-            user.sendEmailVerification();
-            setState(() {
-              _status = "not_email_verified";
-            });
+      try {
+        if (user == null) {
+          print('User is currently signed out!');
+          setState(() {
+            _status = "not_auth";
+          });
+        } else {
+          print('User is signed in!');
+          var idToken = await user.getIdToken();
+          print(idToken);
+          await DioClient.validateRole(idToken);
+
+          if (user.providerData[0].providerId.contains('password')) {
+            if (!user.emailVerified) {
+              user.sendEmailVerification();
+              setState(() {
+                _status = "not_email_verified";
+              });
+            } else {
+              setState(() {
+                _status = "success";
+              });
+            }
           } else {
             setState(() {
               _status = "success";
             });
           }
-        } else {
-          setState(() {
-            _status = "success";
-          });
         }
+      } on DioError catch (_) {
+        FirebaseAuth.instance.signOut();
+        setState(() {
+          _status = "not_auth";
+        });
       }
 
       if (user?.uid != null) {

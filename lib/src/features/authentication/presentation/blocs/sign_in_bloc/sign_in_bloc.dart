@@ -56,10 +56,9 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         password: event.password,
       );
       final idToken = await credential.user?.getIdToken();
-      print(idToken);
-      // if (idToken != null) {
-      //   await DioClient.validateRole(idToken);
-      // }
+      if (idToken != null) {
+        await DioClient.validateRole(idToken);
+      }
       emit(const SignInLoadDoneState());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
