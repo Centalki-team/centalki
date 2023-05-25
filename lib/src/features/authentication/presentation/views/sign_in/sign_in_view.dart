@@ -58,7 +58,7 @@ class _SignInViewState extends State<SignInView> {
                 children: [
                   SizedBox(
                     height: 280,
-                    child: Assets.illustration.signIn.svg(),
+                    child: Assets.illustration.signInIllustration.image(),
                   ),
                   Text(
                     S.current.txtSignInIntroduction,
@@ -66,6 +66,7 @@ class _SignInViewState extends State<SignInView> {
                     style: TextStyle(
                       fontSize: titleLargeSize,
                       fontWeight: titleLargeWeight,
+                      height: 30 / 28,
                       color: colorsByTheme(context).defaultFont,
                     ),
                   ),

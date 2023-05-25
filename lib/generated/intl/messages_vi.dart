@@ -531,6 +531,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "Không tìm thấy người dùng với email này!"),
         "txtUserNotSignIn":
             MessageLookupByLibrary.simpleMessage("Người dùng chưa đăng nhập"),
+        "txtVerifyEmailContent": MessageLookupByLibrary.simpleMessage(
+            "Chúng tôi rất trân trọng sự quan tâm của bạn đến ứng dụng của chúng tôi. Để đảm bảo chất lượng và an ninh của dịch vụ chúng tôi, tất cả người dùng PHẢI xác minh địa chỉ email của họ trong vòng 24 giờ."),
+        "txtVerifyEmailContent2": MessageLookupByLibrary.simpleMessage(
+            "Nếu bạn vẫn thấy thông báo này sau khi đã xác minh địa chỉ email thành công, hãy thử Đăng xuất và Đăng nhập lại."),
+        "txtVerifyEmailTitle": MessageLookupByLibrary.simpleMessage("Cảm ơn!"),
         "txtVibrations": MessageLookupByLibrary.simpleMessage("Độ rung"),
         "txtVietnamese": MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
         "txtVocabLearningSuggestion": MessageLookupByLibrary.simpleMessage(

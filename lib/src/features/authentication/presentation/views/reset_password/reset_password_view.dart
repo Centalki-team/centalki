@@ -62,13 +62,15 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                 children: [
                   SizedBox(
                     height: 280,
-                    child: Assets.illustration.resetPassword.svg(),
+                    child:
+                        Assets.illustration.forgotPasswordIllustration.image(),
                   ),
                   Text(
                     S.current.txtResetPasswordIntroduction,
                     style: const TextStyle(
                       fontSize: titleLargeSize,
                       fontWeight: titleLargeWeight,
+                      height: 30 / 28,
                       color: AppColor.defaultFontContainer,
                     ),
                   ),
@@ -112,7 +114,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                   ),
                   const SizedBox(height: spacing8),
                   AppTextButton(
-                    text: S.current.txtReturnSignIn,
+                    text: S.current.txtReturnToSignIn,
                     onPressed: () => Navigator.pop(context),
                     minimumSize: const Size.fromHeight(48),
                   ),
