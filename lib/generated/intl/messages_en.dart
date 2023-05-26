@@ -378,7 +378,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtResetPassword":
             MessageLookupByLibrary.simpleMessage("Reset Password"),
         "txtResetPasswordDescription": MessageLookupByLibrary.simpleMessage(
-            "We\'ll send you a link to reset your password"),
+            "Didn\'t receive any email? Try looking up in your Spams or try again after 1 minute"),
         "txtResetPasswordIntroduction": MessageLookupByLibrary.simpleMessage(
             "Enter email used for sign in our app"),
         "txtResetPasswordResult":

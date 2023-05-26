@@ -374,7 +374,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtResetPassword":
             MessageLookupByLibrary.simpleMessage("Đặt lại mật khẩu"),
         "txtResetPasswordDescription": MessageLookupByLibrary.simpleMessage(
-            "Chúng tôi sẽ gửi cho bạn đường liên kết giúp đặt lại mật khẩu"),
+            "Không nhận được email? Hãy kiểm tra trong mục thư rác của bạn hoặc thử lại sau 1 phút."),
         "txtResetPasswordIntroduction": MessageLookupByLibrary.simpleMessage(
             "Nhập địa chỉ email mà bạn đã dùng để đăng ký tài khoản"),
         "txtResetPasswordResult":

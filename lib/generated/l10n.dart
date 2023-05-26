@@ -550,10 +550,10 @@ class S {
     );
   }
 
-  /// `We'll send you a link to reset your password`
+  /// `Didn't receive any email? Try looking up in your Spams or try again after 1 minute`
   String get txtResetPasswordDescription {
     return Intl.message(
-      'We\'ll send you a link to reset your password',
+      'Didn\'t receive any email? Try looking up in your Spams or try again after 1 minute',
       name: 'txtResetPasswordDescription',
       desc: '',
       args: [],
