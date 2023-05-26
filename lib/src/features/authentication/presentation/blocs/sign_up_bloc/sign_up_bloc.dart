@@ -32,7 +32,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
 
   void _onValidate(SignUpValidateEvent event, emit) {
     final emailRegExp = RegExp(
-      r'^[a-zA-Z\d.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z\d-]+(?:\.[a-zA-Z\d-]+)*$',
+      r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
     );
 
     var fullnameError = '';
