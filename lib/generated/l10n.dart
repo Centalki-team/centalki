@@ -400,6 +400,16 @@ class S {
     );
   }
 
+  /// `Sign in error`
+  String get txtSignInError {
+    return Intl.message(
+      'Sign in error',
+      name: 'txtSignInError',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `User not found for that email!`
   String get txtUserNotFound {
     return Intl.message(
@@ -510,10 +520,10 @@ class S {
     );
   }
 
-  /// `Sign in to start practicing your English speaking skill`
+  /// `Sign in to practice your English speaking skill`
   String get txtSignInIntroduction {
     return Intl.message(
-      'Sign in to start practicing your English speaking skill',
+      'Sign in to practice your English speaking skill',
       name: 'txtSignInIntroduction',
       desc: '',
       args: [],
@@ -530,20 +540,20 @@ class S {
     );
   }
 
-  /// `Enter the email address you used for Centalki`
+  /// `Enter email used for sign in our app`
   String get txtResetPasswordIntroduction {
     return Intl.message(
-      'Enter the email address you used for Centalki',
+      'Enter email used for sign in our app',
       name: 'txtResetPasswordIntroduction',
       desc: '',
       args: [],
     );
   }
 
-  /// `We'll send you a link to reset your password`
+  /// `Didn't receive any email? Try looking up in your Spams or try again after 1 minute`
   String get txtResetPasswordDescription {
     return Intl.message(
-      'We\'ll send you a link to reset your password',
+      'Didn\'t receive any email? Try looking up in your Spams or try again after 1 minute',
       name: 'txtResetPasswordDescription',
       desc: '',
       args: [],
@@ -570,6 +580,16 @@ class S {
     );
   }
 
+  /// `Sign up result`
+  String get txtSignUpResult {
+    return Intl.message(
+      'Sign up result',
+      name: 'txtSignUpResult',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Next`
   String get txtNext {
     return Intl.message(
@@ -590,10 +610,20 @@ class S {
     );
   }
 
-  /// `Return to Sign In`
+  /// `Reset password result`
+  String get txtResetPasswordResult {
+    return Intl.message(
+      'Reset password result',
+      name: 'txtResetPasswordResult',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go to Sign In`
   String get txtReturnToSignIn {
     return Intl.message(
-      'Return to Sign In',
+      'Go to Sign In',
       name: 'txtReturnToSignIn',
       desc: '',
       args: [],
@@ -615,6 +645,36 @@ class S {
     return Intl.message(
       'Terms & Conditions',
       name: 'txtTerms',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Thank you!`
+  String get txtVerifyEmailTitle {
+    return Intl.message(
+      'Thank you!',
+      name: 'txtVerifyEmailTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We appreciate your interest in our application. To ensure the quality and security of our service, all users MUST verify their email address within 24 hours.`
+  String get txtVerifyEmailContent {
+    return Intl.message(
+      'We appreciate your interest in our application. To ensure the quality and security of our service, all users MUST verify their email address within 24 hours.',
+      name: 'txtVerifyEmailContent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `If you're still seeing this message after successfully verified your email, consider Signing Out and Signing In again`
+  String get txtVerifyEmailContent2 {
+    return Intl.message(
+      'If you\'re still seeing this message after successfully verified your email, consider Signing Out and Signing In again',
+      name: 'txtVerifyEmailContent2',
       desc: '',
       args: [],
     );

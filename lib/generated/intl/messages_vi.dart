@@ -374,9 +374,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtResetPassword":
             MessageLookupByLibrary.simpleMessage("Đặt lại mật khẩu"),
         "txtResetPasswordDescription": MessageLookupByLibrary.simpleMessage(
-            "Chúng tôi sẽ gửi cho bạn đường liên kết giúp đặt lại mật khẩu"),
+            "Không nhận được email? Hãy kiểm tra trong mục thư rác của bạn hoặc thử lại sau 1 phút."),
         "txtResetPasswordIntroduction": MessageLookupByLibrary.simpleMessage(
             "Nhập địa chỉ email mà bạn đã dùng để đăng ký tài khoản"),
+        "txtResetPasswordResult":
+            MessageLookupByLibrary.simpleMessage("Kết quả đặt lại mật khẩu"),
         "txtReturnSignIn":
             MessageLookupByLibrary.simpleMessage("Quay về trang đăng nhập"),
         "txtReturnToSignIn":
@@ -435,6 +437,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtSignIn": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
         "txtSignInAgainToDelete": MessageLookupByLibrary.simpleMessage(
             "Vui lòng đăng nhập lại để xoá tài khoản của bạn."),
+        "txtSignInError": MessageLookupByLibrary.simpleMessage("Lỗi đăng nhập"),
         "txtSignInIntroduction": MessageLookupByLibrary.simpleMessage(
             "Đăng nhập để bắt đầu luyện tập kỹ năng nói tiếng Anh"),
         "txtSignInYourAccount": MessageLookupByLibrary.simpleMessage(
@@ -445,6 +448,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtSignUp": MessageLookupByLibrary.simpleMessage("Đăng ký"),
         "txtSignUpIntroduction": MessageLookupByLibrary.simpleMessage(
             "Đăng ký tài khoản để khám phá Centalki"),
+        "txtSignUpResult":
+            MessageLookupByLibrary.simpleMessage("Kết quả đăng ký"),
         "txtSixSessions": MessageLookupByLibrary.simpleMessage("6 sessions"),
         "txtSixSessionsLearningTime": MessageLookupByLibrary.simpleMessage(
             "Total 180 minutes of learning time"),
@@ -526,6 +531,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "Không tìm thấy người dùng với email này!"),
         "txtUserNotSignIn":
             MessageLookupByLibrary.simpleMessage("Người dùng chưa đăng nhập"),
+        "txtVerifyEmailContent": MessageLookupByLibrary.simpleMessage(
+            "Chúng tôi rất trân trọng sự quan tâm của bạn đến ứng dụng của chúng tôi. Để đảm bảo chất lượng và an ninh của dịch vụ chúng tôi, tất cả người dùng PHẢI xác minh địa chỉ email của họ trong vòng 24 giờ."),
+        "txtVerifyEmailContent2": MessageLookupByLibrary.simpleMessage(
+            "Nếu bạn vẫn thấy thông báo này sau khi đã xác minh địa chỉ email thành công, hãy thử Đăng xuất và Đăng nhập lại."),
+        "txtVerifyEmailTitle": MessageLookupByLibrary.simpleMessage("Cảm ơn!"),
         "txtVibrations": MessageLookupByLibrary.simpleMessage("Độ rung"),
         "txtVietnamese": MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
         "txtVocabLearningSuggestion": MessageLookupByLibrary.simpleMessage(

@@ -200,21 +200,46 @@ class $AssetsIllustrationGen {
   SvgGenImage get congrats =>
       const SvgGenImage('assets/illustration/congrats.svg');
 
+  /// File path: assets/illustration/forgot-password-illustration.png
+  AssetGenImage get forgotPasswordIllustration => const AssetGenImage(
+      'assets/illustration/forgot-password-illustration.png');
+
   /// File path: assets/illustration/reset-password.svg
   SvgGenImage get resetPassword =>
       const SvgGenImage('assets/illustration/reset-password.svg');
+
+  /// File path: assets/illustration/sign-in-illustration.png
+  AssetGenImage get signInIllustration =>
+      const AssetGenImage('assets/illustration/sign-in-illustration.png');
 
   /// File path: assets/illustration/sign-in.svg
   SvgGenImage get signIn =>
       const SvgGenImage('assets/illustration/sign-in.svg');
 
+  /// File path: assets/illustration/sign-up-illustration.png
+  AssetGenImage get signUpIllustration =>
+      const AssetGenImage('assets/illustration/sign-up-illustration.png');
+
   /// File path: assets/illustration/sign-up.svg
   SvgGenImage get signUp =>
       const SvgGenImage('assets/illustration/sign-up.svg');
 
+  /// File path: assets/illustration/verify-email-illustration.svg
+  SvgGenImage get verifyEmailIllustration =>
+      const SvgGenImage('assets/illustration/verify-email-illustration.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values =>
-      [afterHangUp, congrats, resetPassword, signIn, signUp];
+  List<dynamic> get values => [
+        afterHangUp,
+        congrats,
+        forgotPasswordIllustration,
+        resetPassword,
+        signInIllustration,
+        signIn,
+        signUpIllustration,
+        signUp,
+        verifyEmailIllustration
+      ];
 }
 
 class $AssetsImagesGen {

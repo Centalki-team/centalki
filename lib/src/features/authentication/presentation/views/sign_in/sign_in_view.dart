@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/define/theme.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
+import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
 import '../../../../../../base/widgets/text_fields/text_field.dart';
 import '../../../../../../gen/assets.gen.dart';
 import '../../../../../../generated/l10n.dart';
@@ -33,11 +34,14 @@ class _SignInViewState extends State<SignInView> {
 
   @override
   Widget build(BuildContext context) => BlocListener<SignInBloc, SignInState>(
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state is SignInLoadErrorState) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.message),
+            await showDialog(
+              barrierDismissible: false,
+              context: context,
+              builder: (context) => ErrorDialogContent(
+                title: S.current.txtSignInError,
+                content: state.message,
               ),
             );
             _validateSignInInputs('');
@@ -54,7 +58,7 @@ class _SignInViewState extends State<SignInView> {
                 children: [
                   SizedBox(
                     height: 280,
-                    child: Assets.illustration.signIn.svg(),
+                    child: Assets.illustration.signInIllustration.image(),
                   ),
                   Text(
                     S.current.txtSignInIntroduction,
@@ -62,6 +66,7 @@ class _SignInViewState extends State<SignInView> {
                     style: TextStyle(
                       fontSize: titleLargeSize,
                       fontWeight: titleLargeWeight,
+                      height: 30 / 28,
                       color: colorsByTheme(context).defaultFont,
                     ),
                   ),

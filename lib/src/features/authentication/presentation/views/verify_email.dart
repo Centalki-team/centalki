@@ -1,7 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../../base/define/colors.dart';
+import '../../../../../base/define/styles.dart';
+import '../../../../../base/define/theme.dart';
+import '../../../../../base/widgets/buttons/filled_error_button.dart';
+import '../../../../../gen/assets.gen.dart';
+import '../../../../../generated/l10n.dart';
 
 class VerifyEmailView extends StatefulWidget {
   const VerifyEmailView({Key? key}) : super(key: key);
@@ -12,35 +17,74 @@ class VerifyEmailView extends StatefulWidget {
 
 class _VerifyEmailViewState extends State<VerifyEmailView> {
   @override
-  Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'Please verify your email\nto activate your account',
-              style: TextStyle(
-                fontSize: 22,
-                color: AppColor.defaultFontContainer,
-              ),
+  Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+
+    return Scaffold(
+      body: SizedBox(
+        height: height,
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(
+              padding16,
+              MediaQuery.of(context).padding.top + kToolbarHeight,
+              padding16,
+              padding48,
             ),
-            const SizedBox(height: 16),
-            TextButton(
-                onPressed: () async {
-                  await FirebaseAuth.instance.signOut();
-                  // ignore: use_build_context_synchronously
-                  Navigator.of(context).popUntil((route) => route.isFirst);
-                },
-                child: const Text(
-                  'Log out',
+            child: Column(
+              children: [
+                SvgPicture.asset(
+                  Assets.illustration.verifyEmailIllustration.path,
+                  height: height / 4,
+                ),
+                const SizedBox(
+                  height: spacing16,
+                ),
+                Text(
+                  S.current.txtVerifyEmailTitle,
                   style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold,
+                    fontSize: headlineLargeSize,
+                    color: colorsByTheme(context).defaultFont,
                   ),
-                ))
-          ],
+                ),
+                Text(
+                  S.current.txtVerifyEmailContent,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: bodySmallSize,
+                    fontWeight: bodySmallWeight,
+                    height: 1.05,
+                    color: AppColor.shadow,
+                  ),
+                ),
+                const Spacer(),
+                Text(
+                  S.current.txtVerifyEmailContent2,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: bodySmallSize,
+                    fontWeight: bodySmallWeight,
+                    height: 1.05,
+                    color: colorsByTheme(context).defaultFont,
+                  ),
+                ),
+                const SizedBox(
+                  height: spacing16,
+                ),
+                AppFilledErrorButton(
+                  onPressed: () async {
+                    await FirebaseAuth.instance.signOut();
+                    // ignore: use_build_context_synchronously
+                    Navigator.of(context).popUntil((route) => route.isFirst);
+                  },
+                  text: S.current.txtSignOut,
+                  minimumSize: const Size(400, 48),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
+  }
 }

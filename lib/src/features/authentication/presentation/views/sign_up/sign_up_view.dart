@@ -49,7 +49,7 @@ class _SignUpViewState extends State<SignUpView> {
               children: [
                 SizedBox(
                   height: 280,
-                  child: Assets.illustration.signUp.svg(),
+                  child: Assets.illustration.signUpIllustration.image(),
                 ),
                 Text(
                   S.current.txtSignUpIntroduction,
@@ -57,6 +57,7 @@ class _SignUpViewState extends State<SignUpView> {
                   style: TextStyle(
                     fontSize: titleLargeSize,
                     fontWeight: titleLargeWeight,
+                    height: 30 / 28,
                     color: colorsByTheme(context).defaultFont,
                   ),
                 ),

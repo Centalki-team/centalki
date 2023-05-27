@@ -16,12 +16,14 @@ class SessionCompletedView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
+    final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      //backgroundColor: Colors.white,
-      body: SingleChildScrollView(
+      body: Container(
+        height: height,
         padding: EdgeInsets.fromLTRB(
           padding16,
-          MediaQuery.of(context).padding.top + kToolbarHeight + spacing56,
+          MediaQuery.of(context).padding.top + kToolbarHeight,
           padding16,
           46,
         ),
@@ -29,8 +31,7 @@ class SessionCompletedView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Assets.illustration.congrats.svg(
-              height: 160,
-              width: 160,
+              height: height / 4,
             ),
             const SizedBox(height: spacing24),
             Text(
@@ -48,14 +49,12 @@ class SessionCompletedView extends StatelessWidget {
                 fontSize: bodyLargeSize,
                 fontWeight: bodyLargeWeight,
                 letterSpacing: 0.5,
-                height: 24 / 16,
+                height: 1,
                 color: colorsByTheme(context).defaultFont,
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(
-              height: 100.0,
-            ),
+            const Spacer(),
             Text(
               S.current.txtSessionCompletedAskForFeedback,
               textAlign: TextAlign.center,
@@ -85,9 +84,6 @@ class SessionCompletedView extends StatelessWidget {
                 Navigator.pop(context),
               },
               text: S.current.txtDoItLater,
-            ),
-            const SizedBox(
-              height: spacing16,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

@@ -8,6 +8,7 @@ import '../../../../../../base/define/size.dart';
 import '../../../../../../base/define/text.dart';
 import '../../../../../../base/define/theme.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
+import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
 import '../../../../../../base/widgets/toast/app_toast.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../../domain/entities/self_review/self_level_entity.dart';
@@ -59,11 +60,14 @@ class _SelfReviewContentState extends State<SelfReviewContent> {
             },
           ),
           BlocListener<SignUpBloc, SignUpState>(
-            listener: (context, state) {
+            listener: (context, state) async {
               if (state is SignUpErrorState) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(state.message),
+                await showDialog(
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (context) => ErrorDialogContent(
+                    title: S.current.txtSignUpResult,
+                    content: state.message,
                   ),
                 );
               } else if (state is SignUpSuccessState) {

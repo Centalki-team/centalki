@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
+import '../../../../../base/define/styles.dart';
 import '../../../../../base/define/text.dart';
 import '../../../../../base/define/theme.dart';
 import '../../../../../base/widgets/buttons/button.dart';
@@ -190,7 +191,9 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                         state.message,
                         textAlign: TextAlign.center,
                         style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                          fontSize: titleLargeSize,
+                          fontWeight: titleLargeWeight,
+                        ),
                       ),
                     )
                   ],
@@ -210,10 +213,18 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                               title: Text(
                                 S.current.txtCancelTitle,
                                 textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: titleLargeSize,
+                                ),
                               ),
                               content: Text(
                                 S.current.txtCancelContent,
                                 textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: bodyLargeSize,
+                                  fontWeight: bodyLargeWeight,
+                                  height: 1,
+                                ),
                               ),
                               actions: [
                                 Row(
@@ -250,7 +261,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                         label: Text(
                           S.current.txtCancel,
                           style: const TextStyle(
-                            fontSize: 18,
+                            fontSize: titleSmallSize,
                             color: AppColor.error,
                           ),
                         ),

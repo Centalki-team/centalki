@@ -378,13 +378,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtResetPassword":
             MessageLookupByLibrary.simpleMessage("Reset Password"),
         "txtResetPasswordDescription": MessageLookupByLibrary.simpleMessage(
-            "We\'ll send you a link to reset your password"),
+            "Didn\'t receive any email? Try looking up in your Spams or try again after 1 minute"),
         "txtResetPasswordIntroduction": MessageLookupByLibrary.simpleMessage(
-            "Enter the email address you used for Centalki"),
+            "Enter email used for sign in our app"),
+        "txtResetPasswordResult":
+            MessageLookupByLibrary.simpleMessage("Reset password result"),
         "txtReturnSignIn":
             MessageLookupByLibrary.simpleMessage("Return Sign In"),
         "txtReturnToSignIn":
-            MessageLookupByLibrary.simpleMessage("Return to Sign In"),
+            MessageLookupByLibrary.simpleMessage("Go to Sign In"),
         "txtRetypePassword":
             MessageLookupByLibrary.simpleMessage("Retype Password"),
         "txtRetypePasswordEmpty": MessageLookupByLibrary.simpleMessage(
@@ -438,8 +440,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtSignIn": MessageLookupByLibrary.simpleMessage("Sign In"),
         "txtSignInAgainToDelete": MessageLookupByLibrary.simpleMessage(
             "Please sign in again to delete your account"),
+        "txtSignInError": MessageLookupByLibrary.simpleMessage("Sign in error"),
         "txtSignInIntroduction": MessageLookupByLibrary.simpleMessage(
-            "Sign in to start practicing your English speaking skill"),
+            "Sign in to practice your English speaking skill"),
         "txtSignInYourAccount":
             MessageLookupByLibrary.simpleMessage("Sign in your account"),
         "txtSignOut": MessageLookupByLibrary.simpleMessage("Sign Out"),
@@ -448,6 +451,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtSignUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "txtSignUpIntroduction": MessageLookupByLibrary.simpleMessage(
             "Sign up to discover Centalki"),
+        "txtSignUpResult":
+            MessageLookupByLibrary.simpleMessage("Sign up result"),
         "txtSixSessions": MessageLookupByLibrary.simpleMessage("6 sessions"),
         "txtSixSessionsLearningTime": MessageLookupByLibrary.simpleMessage(
             "Total 180 minutes of learning time"),
@@ -526,6 +531,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "User not found for that email!"),
         "txtUserNotSignIn":
             MessageLookupByLibrary.simpleMessage("User does not sign in!"),
+        "txtVerifyEmailContent": MessageLookupByLibrary.simpleMessage(
+            "We appreciate your interest in our application. To ensure the quality and security of our service, all users MUST verify their email address within 24 hours."),
+        "txtVerifyEmailContent2": MessageLookupByLibrary.simpleMessage(
+            "If you\'re still seeing this message after successfully verified your email, consider Signing Out and Signing In again"),
+        "txtVerifyEmailTitle":
+            MessageLookupByLibrary.simpleMessage("Thank you!"),
         "txtVibrations": MessageLookupByLibrary.simpleMessage("Vibrations"),
         "txtVietnamese": MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
         "txtVocabLearningSuggestion": MessageLookupByLibrary.simpleMessage(

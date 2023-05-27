@@ -6,8 +6,7 @@ import '../../../../../../base/define/text.dart';
 part 'reset_password_event.dart';
 part 'reset_password_state.dart';
 
-class ResetPasswordBloc
-    extends Bloc<ResetPasswordEvent, ResetPasswordState> {
+class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
   ResetPasswordBloc() : super(const ResetPasswordInitState()) {
     on<ResetPasswordInitEvent>(_onInit);
     on<ResetPasswordValidateEvent>(_onValidate);
@@ -18,7 +17,7 @@ class ResetPasswordBloc
 
   void _onValidate(ResetPasswordValidateEvent event, emit) {
     final emailRegExp = RegExp(
-      r'^[a-zA-Z\d.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z\d-]+(?:\.[a-zA-Z\d-]+)*$',
+      r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
     );
     var emailError = '';
 
@@ -42,7 +41,8 @@ class ResetPasswordBloc
               'Reset password link was sent to email address: ${event.email}!\nPlease do not share to anybody!'));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        emit(const ResetPasswordLoadErrorState(message: TextDoc.txtUserNotFound));
+        emit(const ResetPasswordLoadErrorState(
+            message: TextDoc.txtUserNotFound));
       }
     }
   }
