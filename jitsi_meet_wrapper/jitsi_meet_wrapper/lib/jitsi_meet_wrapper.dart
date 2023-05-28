@@ -9,6 +9,9 @@ export 'package:jitsi_meet_wrapper_platform_interface/jitsi_meet_wrapper_platfor
         FeatureFlag,
         JitsiMeetingListener;
 
+export 'custom_jitsi_native_view/custom_jitsi_native_view.dart';
+export 'custom_jitsi_native_view/custom_jitsi_native_view_controller.dart';
+
 class JitsiMeetWrapper {
   /// Joins a meeting based on the JitsiMeetingOptions passed in.
   /// A JitsiMeetingListener can be attached to this meeting that will automatically

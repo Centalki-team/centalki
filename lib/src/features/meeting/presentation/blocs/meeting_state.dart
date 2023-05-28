@@ -14,3 +14,13 @@ class MeetingEndState extends MeetingState {
   final SessionScheduleEntity session;
   final bool notCompleted;
 }
+
+class MeetingInitIosState extends MeetingState {
+  const MeetingInitIosState({
+    required this.options,
+    required this.listeners,
+  });
+
+  final JitsiMeetingOptions options;
+  final JitsiMeetingListener listeners;
+}
