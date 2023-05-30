@@ -83,6 +83,7 @@ class _IAPCardState extends State<IAPCard> {
                               .length,
                           separatorBuilder: (context, index) =>
                               const SizedBox(height: spacing4),
+                          padding: EdgeInsets.zero,
                           itemBuilder: (context, index) => Row(
                             children: [
                               const Icon(
@@ -109,7 +110,8 @@ class _IAPCardState extends State<IAPCard> {
                     ),
                   ),
                   const SizedBox(width: spacing8),
-                  Expanded(
+                  SizedBox(
+                    width: 100,
                     child: Column(
                       children: [
                         Text(

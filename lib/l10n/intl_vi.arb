@@ -306,12 +306,12 @@
   "txtSendTopicSuggestSuccess": "Gửi đề xuất thành công",
   "txtSendTopicSuggestSuccessContent": "Chúng tôi rất cảm kích khi bạn đã dành thời gian giúp cải thiện nội dung trên hệ thống.\nChúng tôi luôn sẵn sàng lắng nghe các ý tưởng mới từ bạn.",
   "txtPurchase": "Mua",
-  "txtMostPopular": "Most Popular",
-  "txtBestValue": "Best Value",
-  "txtOneSession": "1 session",
-  "txtSixSessions": "6 sessions",
-  "txtOneSessionLearningTime": "Total 30 minutes of learning time",
-  "txtSixSessionsLearningTime": "Total 180 minutes of learning time",
-  "txtQualityVideoCall": "High-quality video call",
-  "txtSave16Percent": "Save 16%"
+  "txtMostPopular": "Phổ biến nhất",
+  "txtBestValue": "Tốt nhất",
+  "txtOneSession": "1 buổi học",
+  "txtSixSessions": "6 buổi học",
+  "txtOneSessionLearningTime": "Tổng thời gian học 30 phút",
+  "txtSixSessionsLearningTime": "Tổng thời gian học 180 phút",
+  "txtQualityVideoCall": "Cuộc gọi video chất lượng cao",
+  "txtSave16Percent": "Tiết kiệm 8%"
 }

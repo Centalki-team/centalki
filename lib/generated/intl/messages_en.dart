@@ -399,7 +399,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "What did the teacher make you satisfied with?"),
         "txtSatisfiedDescriptionHint": MessageLookupByLibrary.simpleMessage(
             "It would be nice if you could tell teacher more about what made your experiences good."),
-        "txtSave16Percent": MessageLookupByLibrary.simpleMessage("Save 16%"),
+        "txtSave16Percent": MessageLookupByLibrary.simpleMessage("Save 8%"),
         "txtSaveChanges": MessageLookupByLibrary.simpleMessage("Save Changes"),
         "txtSearchError": MessageLookupByLibrary.simpleMessage(
             "Topics name cannot exceed 100 characters"),
