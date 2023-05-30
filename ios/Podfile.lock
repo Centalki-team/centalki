@@ -220,6 +220,13 @@ PODS:
   - PromisesObjC (2.2.0)
   - sensors_plus (0.0.1):
     - Flutter
+  - Sentry/HybridSDK (8.7.3):
+    - SentryPrivate (= 8.7.3)
+  - sentry_flutter (0.0.1):
+    - Flutter
+    - FlutterMacOS
+    - Sentry/HybridSDK (= 8.7.3)
+  - SentryPrivate (8.7.3)
   - share_plus (0.0.1):
     - Flutter
   - shared_preferences_foundation (0.0.1):
@@ -252,6 +259,7 @@ DEPENDENCIES:
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - sensors_plus (from `.symlinks/plugins/sensors_plus/ios`)
+  - sentry_flutter (from `.symlinks/plugins/sentry_flutter/ios`)
   - share_plus (from `.symlinks/plugins/share_plus/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
@@ -290,6 +298,8 @@ SPEC REPOS:
     - libwebp
     - nanopb
     - PromisesObjC
+    - Sentry
+    - SentryPrivate
 
 EXTERNAL SOURCES:
   app_tracking_transparency:
@@ -332,6 +342,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
   sensors_plus:
     :path: ".symlinks/plugins/sensors_plus/ios"
+  sentry_flutter:
+    :path: ".symlinks/plugins/sentry_flutter/ios"
   share_plus:
     :path: ".symlinks/plugins/share_plus/ios"
   shared_preferences_foundation:
@@ -393,6 +405,9 @@ SPEC CHECKSUMS:
   permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
   sensors_plus: 5717760720f7e6acd96fdbd75b7428f5ad755ec2
+  Sentry: c7a86f43510a7d5678d4de28d78c28ab351d295b
+  sentry_flutter: f2710a4f537e9a7143b02562b8754ccdc8224751
+  SentryPrivate: 2eaabf598a46d4b9b8822aef766df2a84caf2e6f
   share_plus: 056a1e8ac890df3e33cb503afffaf1e9b4fbae68
   shared_preferences_foundation: e2dae3258e06f44cc55f49d42024fd8dd03c590c
   sqflite: 31f7eba61e3074736dff8807a9b41581e4f7f15a

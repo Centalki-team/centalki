@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 import '../../../../../../base/define/colors.dart';
 import '../../../../../../base/gateway/exception/app_exception.dart';
@@ -81,8 +82,7 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
             add(PaymentVerifyPurchaseEvent(purchaseDetails));
           } else if (purchaseDetails.status == PurchaseStatus.canceled) {
             add(const PaymentCancelPurchaseEvent());
-          }
-          if (purchaseDetails.pendingCompletePurchase) {
+          } else if (purchaseDetails.pendingCompletePurchase) {
             add(PaymentCompletePurchaseEvent(purchaseDetails));
           }
         }
@@ -118,7 +118,12 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
     emit(const PaymentPurchasingState());
     try {
       await handlePurchase(event.product);
-    } catch (e) {
+    } catch (exception, stackTrace) {
+      await Sentry.captureException(
+        exception,
+        stackTrace: stackTrace,
+      );
+    } finally {
       add(const PaymentCancelPurchaseEvent());
     }
   }
@@ -157,7 +162,14 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
   }
 
   void _onCompletePurchase(PaymentCompletePurchaseEvent event, emit) async {
-    await InAppPurchase.instance.completePurchase(event.purchaseDetails);
-    emit(const PaymentPurchasedDoneState());
+    try {
+      await InAppPurchase.instance.completePurchase(event.purchaseDetails);
+      emit(const PaymentPurchasedDoneState());
+    } catch (exception, stackTrace) {
+      await Sentry.captureException(
+        exception,
+        stackTrace: stackTrace,
+      );
+    }
   }
 }
