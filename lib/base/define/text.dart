@@ -438,7 +438,7 @@ class TextDoc {
 
   // HANG UP
   static const txtRejoinDesc =
-      "Did you leave by mistake or due to a network error? Don’t worry, you can rejoin this session and will be able to continue learning and practicing.";
+      "Did you leave by mistake or due to a network error? Don't worry, you can rejoin this session and will be able to continue learning and practicing.";
   static const txtRejoin = "Rejoin";
   static const txtDoneDesc =
       "Mark this session as done to finalize it and proceed to report and feedback screen. Please note that you are unable to rejoin after that.";

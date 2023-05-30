@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
 import '../../../../../base/define/theme.dart';
+import '../../../../../generated/l10n.dart';
 
 class NotiModalBottomSheet extends StatelessWidget {
   const NotiModalBottomSheet({super.key});
@@ -29,7 +29,7 @@ class NotiModalBottomSheet extends StatelessWidget {
             children: [
               NotiModalOption(
                 iconData: Icons.notifications_none_rounded,
-                title: 'Mark all notifications as read',
+                title: S.current.txtMarkAllNotiAsRead,
                 onTap: () => Navigator.pop(context, 0),
               ),
               const SizedBox(
@@ -37,7 +37,7 @@ class NotiModalBottomSheet extends StatelessWidget {
               ),
               NotiModalOption(
                 iconData: Icons.notifications_active_outlined,
-                title: 'Mark all notifications as unread',
+                title: S.current.txtMarkAllNotiAsUnread,
                 onTap: () => Navigator.pop(context, 1),
               ),
               const SizedBox(
@@ -45,7 +45,7 @@ class NotiModalBottomSheet extends StatelessWidget {
               ),
               NotiModalOption(
                 iconData: Icons.edit_notifications_outlined,
-                title: 'Edit notifications settings',
+                title: S.current.txtEditNotiSettings,
                 onTap: () => Navigator.pop(context, 2),
               ),
             ],

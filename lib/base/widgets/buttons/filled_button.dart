@@ -29,16 +29,17 @@ class _AppFilledButtonState extends State<AppFilledButton> {
           style: ElevatedButton.styleFrom(
             elevation: 0.0,
             backgroundColor: AppColor.mainColor2,
+            disabledBackgroundColor: AppColor.container,
             shadowColor: AppColor.shadow,
             minimumSize: widget.minimumSize,
           ),
           child: Text(
             widget.text,
-            style: TextStyle(
+            style: const TextStyle(
               fontFamily: 'Dongle',
               fontSize: labelLargeSize,
               fontWeight: labelLargeWeight,
-              color: colorsByTheme(context).backgroundTheme,
+              color: AppColor.defaultFontLight,
             ),
           ),
         )
@@ -46,6 +47,7 @@ class _AppFilledButtonState extends State<AppFilledButton> {
           onPressed: widget.onPressed,
           style: TextButton.styleFrom(
             backgroundColor: AppColor.mainColor2,
+            disabledBackgroundColor: AppColor.container,
             foregroundColor: colorsByTheme(context).defaultFont,
             elevation: 0.0,
             shadowColor: AppColor.shadow,
@@ -61,6 +63,14 @@ class _AppFilledButtonState extends State<AppFilledButton> {
             size: iconButtonSize,
             color: colorsByTheme(context).defaultFont,
           ),
-          label: Text(widget.text),
+          label: Text(
+            widget.text,
+            style: const TextStyle(
+              fontFamily: 'Dongle',
+              fontSize: labelLargeSize,
+              fontWeight: labelLargeWeight,
+              color: AppColor.defaultFontLight,
+            ),
+          ),
         );
 }

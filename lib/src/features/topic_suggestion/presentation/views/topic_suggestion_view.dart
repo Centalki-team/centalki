@@ -169,6 +169,7 @@ class _TopicSuggestionViewState extends State<TopicSuggestionView> {
                     return CustomScrollView(
                       slivers: [
                         SliverAppBar.medium(
+                          expandedHeight: sliverAppBarHeight,
                           leading: IconButton(
                             onPressed: Navigator.of(context).pop,
                             icon: Icon(

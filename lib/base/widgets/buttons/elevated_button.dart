@@ -32,22 +32,22 @@ class _AppElevatedButtonState extends State<AppElevatedButton> {
             foregroundColor: colorsByTheme(context).defaultFont,
             disabledBackgroundColor: AppColor.background,
             disabledForegroundColor: AppColor.shadow,
-            textStyle: TextStyle(
+            textStyle: const TextStyle(
               fontFamily: 'Dongle',
               fontSize: labelLargeSize,
               fontWeight: labelLargeWeight,
-              color: colorsByTheme(context).backgroundTheme,
+              color: AppColor.defaultFontLight,
             ),
             elevation: 5.0,
             minimumSize: widget.minimumSize,
           ),
           child: Text(
             widget.text,
-            style: TextStyle(
+            style: const TextStyle(
               fontFamily: 'Dongle',
               fontSize: labelLargeSize,
               fontWeight: labelLargeWeight,
-              color: colorsByTheme(context).backgroundTheme,
+              color: AppColor.defaultFontLight,
             ),
           ),
         )
@@ -72,6 +72,12 @@ class _AppElevatedButtonState extends State<AppElevatedButton> {
           ),
           label: Text(
             widget.text,
+            style: const TextStyle(
+              fontFamily: 'Dongle',
+              fontSize: labelLargeSize,
+              fontWeight: labelLargeWeight,
+              color: AppColor.defaultFontLight,
+            ),
           ),
         );
 }

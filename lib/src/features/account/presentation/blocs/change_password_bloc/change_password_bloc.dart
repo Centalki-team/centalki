@@ -30,12 +30,6 @@ class ChangePasswordBloc
 
     if (currentPassword.isEmpty) {
       passwordError = TextDoc.txtPasswordEmpty;
-    } else if (currentPassword.length < 8) {
-      passwordError = TextDoc.txtPasswordTooShort;
-    } else if (currentPassword.length > 100) {
-      passwordError = TextDoc.txtPasswordTooLong;
-    } else if (!currentPassword.validatePassword) {
-      newPasswordError = TextDoc.txtPasswordNotValid;
     } else {
       passwordError = null;
     }

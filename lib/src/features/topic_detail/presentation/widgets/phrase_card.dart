@@ -42,6 +42,7 @@ class PhraseCard extends StatelessWidget {
             expandedCrossAxisAlignment: CrossAxisAlignment.start,
             childrenPadding: const EdgeInsets.only(
               left: padding32,
+              right: padding16,
               bottom: padding12,
             ),
             title: Padding(
