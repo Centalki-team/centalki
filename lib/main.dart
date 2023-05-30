@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'base/define/manager/locale_manager.dart';
 import 'base/define/storage/storage_gateway.dart';
@@ -56,9 +57,18 @@ void main(List<String> args) async {
   // );
   var analytics = FirebaseAnalytics.instance;
 
-  runApp(
-    MyApp(
-      firebaseAnalytics: analytics,
+  await SentryFlutter.init(
+    (options) {
+      options.dsn =
+          'https://11ad017736744b90b464eb203ef6e289@o4504653843857408.ingest.sentry.io/4505274398343168';
+      // Set tracesSampleRate to 1.0 to capture 100% of transactions for performance monitoring.
+      // We recommend adjusting this value in production.
+      options.tracesSampleRate = 0.5;
+    },
+    appRunner: () => runApp(
+      MyApp(
+        firebaseAnalytics: analytics,
+      ),
     ),
   );
 }
