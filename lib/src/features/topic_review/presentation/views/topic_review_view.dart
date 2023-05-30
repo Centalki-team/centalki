@@ -234,7 +234,7 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                             ValueListenableBuilder(
                               valueListenable: currentTabIndex,
                               builder: (_, value, __) => Text(
-                                '${value + 1} of 5',
+                                '${value + 1} ${S.current.txtOf} 5',
                                 style: const TextStyle(
                                   fontSize: labelLargeSize,
                                   fontWeight: labelLargeWeight,
@@ -333,13 +333,12 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                                 valueListenable: topicFeedbackData,
                                 builder: (_, valueTopicFeedback, __) =>
                                     TopicFeedbackSinglePageView(
-                                  title: 'Topic\'s Name',
+                                  title: S.current.txtTopicName,
                                   topicFeedbackOptions: state
                                       .topicFeedbackOptionsEntity.topicName,
                                   selectionList: valueTopicFeedback.nameFb,
                                   fbDetail: valueTopicFeedback.nameFbDetail,
-                                  hint:
-                                      'We appreciate any detailed feedback from you, if possible.',
+                                  hint: S.current.txtTopicFeedbackCommonHint,
                                   onAdjustSelection: (value) {
                                     topicFeedbackData.value.nameFb =
                                         List.from(value);
@@ -352,13 +351,12 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                                 valueListenable: topicFeedbackData,
                                 builder: (_, valueTopicFeedback, __) =>
                                     TopicFeedbackSinglePageView(
-                                  title: 'Illustration Photo',
+                                  title: S.current.txtIllustrationPhoto,
                                   topicFeedbackOptions: state
                                       .topicFeedbackOptionsEntity.topicPhoto,
                                   selectionList: valueTopicFeedback.picFb,
                                   fbDetail: valueTopicFeedback.picFbDetail,
-                                  hint:
-                                      'We appreciate any detailed feedback from you, if possible.',
+                                  hint: S.current.txtTopicFeedbackCommonHint,
                                   onAdjustSelection: (value) {
                                     topicFeedbackData.value.picFb =
                                         List.from(value);
@@ -371,7 +369,7 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                                 valueListenable: topicFeedbackData,
                                 builder: (_, valueTopicFeedback, __) =>
                                     TopicFeedbackSinglePageView(
-                                  title: 'Topic\'s Description',
+                                  title: S.current.txtTopicDescriptionFeedback,
                                   topicFeedbackOptions: state
                                       .topicFeedbackOptionsEntity
                                       .topicDescription,
@@ -379,8 +377,7 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                                       valueTopicFeedback.descriptionFb,
                                   fbDetail:
                                       valueTopicFeedback.descriptionFbDetail,
-                                  hint:
-                                      'We appreciate any detailed feedback from you, if possible.',
+                                  hint: S.current.txtTopicFeedbackCommonHint,
                                   onAdjustSelection: (value) {
                                     topicFeedbackData.value.descriptionFb =
                                         List.from(value);
@@ -393,13 +390,12 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                                 valueListenable: topicFeedbackData,
                                 builder: (_, valueTopicFeedback, __) =>
                                     TopicFeedbackSinglePageView(
-                                  title: 'Vocabularies',
+                                  title: S.current.txtVocabularies,
                                   topicFeedbackOptions: state
                                       .topicFeedbackOptionsEntity.topicVocab,
                                   selectionList: valueTopicFeedback.vocabFb,
                                   fbDetail: valueTopicFeedback.vocabFbDetail,
-                                  hint:
-                                      'We appreciate if you could tell us which phrases and/or examples cause the problems.',
+                                  hint: S.current.txtTopicVocabHint,
                                   maxLines: 5,
                                   onAdjustSelection: (value) {
                                     topicFeedbackData.value.vocabFb =
@@ -413,14 +409,13 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                                 valueListenable: topicFeedbackData,
                                 builder: (_, valueTopicFeedback, __) =>
                                     TopicFeedbackSinglePageView(
-                                  title: 'Questions and Answers',
+                                  title: S.current.txtQuestionsAndAnswers,
                                   topicFeedbackOptions: state
                                       .topicFeedbackOptionsEntity
                                       .topicQuestions,
                                   selectionList: valueTopicFeedback.qnaFb,
                                   fbDetail: valueTopicFeedback.qnaFbDetail,
-                                  hint:
-                                      'We appreciate if you could tell us which questions and/or answers cause the problems.',
+                                  hint: S.current.txtTopicQnaHint,
                                   maxLines: 5,
                                   onAdjustSelection: (value) {
                                     topicFeedbackData.value = topicFeedbackData

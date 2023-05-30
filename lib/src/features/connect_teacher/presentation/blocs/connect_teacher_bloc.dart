@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../base/define/text.dart';
 import '../../../../../base/temp_dio/dio_client.dart';
+import '../../../../../generated/l10n.dart';
 import '../../domain/entities/session_schedule_entity.dart';
 
 part 'connect_teacher_event.dart';
@@ -31,7 +31,7 @@ class ConnectTeacherBloc
   }
 
   void _onInit(ConnectTeacherInit event, emit) async {
-    emit(const ConnectTeacherLoadingState(TextDoc.txtFindTeacher));
+    emit(ConnectTeacherLoadingState(S.current.txtFindTeacher));
 
     topicId = event.topicId;
     if (FirebaseAuth.instance.currentUser != null) {
@@ -40,13 +40,13 @@ class ConnectTeacherBloc
         final sessionSchedule =
             await DioClient.createNewSessionSchedule(studentId, topicId);
         sessionId = sessionSchedule.sessionId;
-        emit(const ConnectTeacherLoadDoneState(TextDoc.txtFindTeacher));
+        emit(ConnectTeacherLoadDoneState(S.current.txtFindTeacher));
       } on Exception catch (e) {
         var message = e.toString().split("Exception: ")[1];
         emit(ConnectTeacherLoadFailureState(message));
       }
     } else {
-      emit(const ConnectTeacherLoadFailureState(TextDoc.txtNotSignIn));
+      emit(ConnectTeacherLoadFailureState(S.current.txtNotSignIn));
     }
   }
 
@@ -57,7 +57,7 @@ class ConnectTeacherBloc
   }
 
   void _onFindTeacher(ConnectTeacherFindTeacher event, emit) async {
-    emit(const ConnectTeacherFindingTeacherState(TextDoc.txtFindTeacher));
+    emit(ConnectTeacherFindingTeacherState(S.current.txtFindTeacher));
 
     try {
       var currentStatus = '';
@@ -68,13 +68,12 @@ class ConnectTeacherBloc
         currentStatus = status.snapshot.value.toString();
         switch (currentStatus) {
           case 'PICKED_UP':
-            emit(
-                const ConnectTeacherFindDoneState(TextDoc.txtConnectedTeacher));
+            emit(ConnectTeacherFindDoneState(S.current.txtConnectedTeacher));
             add(const ConnectTeacherConnectRoom());
             break;
           case 'TIME_OUT':
-            emit(const ConnectTeacherFindFailureState(
-                TextDoc.txtNotTeacherAvailableContent));
+            emit(ConnectTeacherFindFailureState(
+                S.current.txtNotTeacherAvailableContent));
             break;
           default:
             break;
@@ -99,16 +98,16 @@ class ConnectTeacherBloc
       });
       if (teacherName != null) {
         emit(ConnectTeacherConnectingRoomState(
-            '${TextDoc.txtConnectedTeacher}$teacherName${TextDoc.txtLaunchSession}'));
+            '${S.current.txtConnectedTeacher}$teacherName${S.current.txtLaunchSession}'));
         await Future.delayed(const Duration(seconds: 1));
         emit(ConnectTeacherConnectDoneState(session!));
       } else {
-        emit(const ConnectTeacherConnectErrorState(
-            TextDoc.txtNotTeacherAvailableContent));
+        emit(ConnectTeacherConnectErrorState(
+            S.current.txtNotTeacherAvailableContent));
       }
     } on Exception catch (_) {
-      emit(const ConnectTeacherConnectErrorState(
-          TextDoc.txtNotTeacherAvailableContent));
+      emit(ConnectTeacherConnectErrorState(
+          S.current.txtNotTeacherAvailableContent));
     }
   }
 

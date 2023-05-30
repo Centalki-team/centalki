@@ -29,6 +29,7 @@ class _AppFilledButtonState extends State<AppFilledButton> {
           style: ElevatedButton.styleFrom(
             elevation: 0.0,
             backgroundColor: AppColor.mainColor2,
+            disabledBackgroundColor: AppColor.container,
             shadowColor: AppColor.shadow,
             minimumSize: widget.minimumSize,
           ),
@@ -46,6 +47,7 @@ class _AppFilledButtonState extends State<AppFilledButton> {
           onPressed: widget.onPressed,
           style: TextButton.styleFrom(
             backgroundColor: AppColor.mainColor2,
+            disabledBackgroundColor: AppColor.container,
             foregroundColor: colorsByTheme(context).defaultFont,
             elevation: 0.0,
             shadowColor: AppColor.shadow,

@@ -149,6 +149,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "The duration of each session is 30 minutes"),
         "txtEachSessionPrice": MessageLookupByLibrary.simpleMessage(
             "The price of each session is "),
+        "txtEditNotiSettings":
+            MessageLookupByLibrary.simpleMessage("Edit notifications settings"),
         "txtElementary": MessageLookupByLibrary.simpleMessage("Elementary"),
         "txtEmail": MessageLookupByLibrary.simpleMessage("Email"),
         "txtEmailEmpty": MessageLookupByLibrary.simpleMessage(
@@ -171,7 +173,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "English name cannot exceed 50 characters"),
         "txtEngNameTooShort": MessageLookupByLibrary.simpleMessage(
             "English name must contain at least 2 non-whitespace characters"),
-        "txtEnglish": MessageLookupByLibrary.simpleMessage("English"),
+        "txtEnglish":
+            MessageLookupByLibrary.simpleMessage("English (Tiếng Anh)"),
         "txtEnglishNameTitle":
             MessageLookupByLibrary.simpleMessage("English Name"),
         "txtEnterPasswordToDelete": MessageLookupByLibrary.simpleMessage(
@@ -232,13 +235,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtHistory": MessageLookupByLibrary.simpleMessage("History"),
         "txtHours": MessageLookupByLibrary.simpleMessage("hours"),
         "txtIdea": MessageLookupByLibrary.simpleMessage("Idea"),
+        "txtIllustrationPhoto":
+            MessageLookupByLibrary.simpleMessage("Illustration Photo"),
         "txtInstructions": MessageLookupByLibrary.simpleMessage("Instructions"),
         "txtInterestedTopics":
             MessageLookupByLibrary.simpleMessage("Interested Topics"),
         "txtIntermediate": MessageLookupByLibrary.simpleMessage("Intermediate"),
         "txtInternetConnection": MessageLookupByLibrary.simpleMessage(
             "Please check your internet connection and try again."),
-        "txtLanguage": MessageLookupByLibrary.simpleMessage("Language"),
+        "txtLanguage":
+            MessageLookupByLibrary.simpleMessage("Language (Ngôn ngữ)"),
         "txtLastUpdated":
             MessageLookupByLibrary.simpleMessage("Last updated: Mar 03, 2023"),
         "txtLaunchSession":
@@ -251,6 +257,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtLoadFailed": MessageLookupByLibrary.simpleMessage(
             "Failed to load your profile!"),
         "txtMale": MessageLookupByLibrary.simpleMessage("Male"),
+        "txtMarkAllNotiAsRead": MessageLookupByLibrary.simpleMessage(
+            "Mark all notifications as read"),
+        "txtMarkAllNotiAsUnread": MessageLookupByLibrary.simpleMessage(
+            "Mark all notifications as unread"),
         "txtMinutes": MessageLookupByLibrary.simpleMessage("minutes"),
         "txtMostPopular": MessageLookupByLibrary.simpleMessage("Most Popular"),
         "txtNewPassword": MessageLookupByLibrary.simpleMessage("New password"),
@@ -313,6 +323,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Notifications"),
         "txtNotifyMeAbout":
             MessageLookupByLibrary.simpleMessage("Notify me about"),
+        "txtOf": MessageLookupByLibrary.simpleMessage("of"),
         "txtOfCourse": MessageLookupByLibrary.simpleMessage("Of course"),
         "txtOk": MessageLookupByLibrary.simpleMessage("OK"),
         "txtOneSession": MessageLookupByLibrary.simpleMessage("1 session"),
@@ -360,6 +371,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtPurchase": MessageLookupByLibrary.simpleMessage("Purchase"),
         "txtQualityVideoCall":
             MessageLookupByLibrary.simpleMessage("High-quality video call"),
+        "txtQuestionsAndAnswers":
+            MessageLookupByLibrary.simpleMessage("Questions and Answers"),
         "txtRateOurApp": MessageLookupByLibrary.simpleMessage("Rate Our App"),
         "txtRating": MessageLookupByLibrary.simpleMessage("Rating"),
         "txtRatingEmptyError":
@@ -507,17 +520,26 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtTopicCategory": MessageLookupByLibrary.simpleMessage("Category"),
         "txtTopicDescription":
             MessageLookupByLibrary.simpleMessage("Description"),
+        "txtTopicDescriptionFeedback":
+            MessageLookupByLibrary.simpleMessage("Topic\'s Description"),
         "txtTopicDetail": MessageLookupByLibrary.simpleMessage("Topic Detail"),
         "txtTopicFeedback":
             MessageLookupByLibrary.simpleMessage("Topic Feedback"),
+        "txtTopicFeedbackCommonHint": MessageLookupByLibrary.simpleMessage(
+            "We appreciate any detailed feedback from you, if possible."),
         "txtTopicLevel": MessageLookupByLibrary.simpleMessage("Level"),
+        "txtTopicName": MessageLookupByLibrary.simpleMessage("Topic\'s Name"),
         "txtTopicPhraseExample":
             MessageLookupByLibrary.simpleMessage("Example"),
+        "txtTopicQnaHint": MessageLookupByLibrary.simpleMessage(
+            "We appreciate if you could tell us which questions and/or answers cause the problems."),
         "txtTopicQuestions":
             MessageLookupByLibrary.simpleMessage("Recommended Questions"),
         "txtTopicSuggestion":
             MessageLookupByLibrary.simpleMessage("Topic Suggestion"),
         "txtTopicVocab": MessageLookupByLibrary.simpleMessage("Vocabulary"),
+        "txtTopicVocabHint": MessageLookupByLibrary.simpleMessage(
+            "We appreciate if you could tell us which phrases and/or examples cause the problems."),
         "txtTopicsTab": MessageLookupByLibrary.simpleMessage("Topics"),
         "txtTotalCompletedSessions":
             MessageLookupByLibrary.simpleMessage("Total Completed Sessions"),
@@ -538,7 +560,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtVerifyEmailTitle":
             MessageLookupByLibrary.simpleMessage("Thank you!"),
         "txtVibrations": MessageLookupByLibrary.simpleMessage("Vibrations"),
-        "txtVietnamese": MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
+        "txtVietnamese":
+            MessageLookupByLibrary.simpleMessage("Vietnamese (Tiếng Việt)"),
         "txtVocabLearningSuggestion": MessageLookupByLibrary.simpleMessage(
             "This feature works better with\nat least 10 saved phrases."),
         "txtVocabsTab": MessageLookupByLibrary.simpleMessage("Vocabularies"),

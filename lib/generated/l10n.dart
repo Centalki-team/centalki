@@ -1830,6 +1830,36 @@ class S {
     );
   }
 
+  /// `Mark all notifications as read`
+  String get txtMarkAllNotiAsRead {
+    return Intl.message(
+      'Mark all notifications as read',
+      name: 'txtMarkAllNotiAsRead',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mark all notifications as unread`
+  String get txtMarkAllNotiAsUnread {
+    return Intl.message(
+      'Mark all notifications as unread',
+      name: 'txtMarkAllNotiAsUnread',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit notifications settings`
+  String get txtEditNotiSettings {
+    return Intl.message(
+      'Edit notifications settings',
+      name: 'txtEditNotiSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Appearance`
   String get txtAppearance {
     return Intl.message(
@@ -1840,10 +1870,10 @@ class S {
     );
   }
 
-  /// `Language`
+  /// `Language (Ngôn ngữ)`
   String get txtLanguage {
     return Intl.message(
-      'Language',
+      'Language (Ngôn ngữ)',
       name: 'txtLanguage',
       desc: '',
       args: [],
@@ -1950,20 +1980,20 @@ class S {
     );
   }
 
-  /// `English`
+  /// `English (Tiếng Anh)`
   String get txtEnglish {
     return Intl.message(
-      'English',
+      'English (Tiếng Anh)',
       name: 'txtEnglish',
       desc: '',
       args: [],
     );
   }
 
-  /// `Tiếng Việt`
+  /// `Vietnamese (Tiếng Việt)`
   String get txtVietnamese {
     return Intl.message(
-      'Tiếng Việt',
+      'Vietnamese (Tiếng Việt)',
       name: 'txtVietnamese',
       desc: '',
       args: [],
@@ -2725,6 +2755,86 @@ class S {
     return Intl.message(
       'Send',
       name: 'txtSendBtn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Topic's Name`
+  String get txtTopicName {
+    return Intl.message(
+      'Topic\'s Name',
+      name: 'txtTopicName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We appreciate any detailed feedback from you, if possible.`
+  String get txtTopicFeedbackCommonHint {
+    return Intl.message(
+      'We appreciate any detailed feedback from you, if possible.',
+      name: 'txtTopicFeedbackCommonHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Illustration Photo`
+  String get txtIllustrationPhoto {
+    return Intl.message(
+      'Illustration Photo',
+      name: 'txtIllustrationPhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Topic's Description`
+  String get txtTopicDescriptionFeedback {
+    return Intl.message(
+      'Topic\'s Description',
+      name: 'txtTopicDescriptionFeedback',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Questions and Answers`
+  String get txtQuestionsAndAnswers {
+    return Intl.message(
+      'Questions and Answers',
+      name: 'txtQuestionsAndAnswers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We appreciate if you could tell us which phrases and/or examples cause the problems.`
+  String get txtTopicVocabHint {
+    return Intl.message(
+      'We appreciate if you could tell us which phrases and/or examples cause the problems.',
+      name: 'txtTopicVocabHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We appreciate if you could tell us which questions and/or answers cause the problems.`
+  String get txtTopicQnaHint {
+    return Intl.message(
+      'We appreciate if you could tell us which questions and/or answers cause the problems.',
+      name: 'txtTopicQnaHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `of`
+  String get txtOf {
+    return Intl.message(
+      'of',
+      name: 'txtOf',
       desc: '',
       args: [],
     );

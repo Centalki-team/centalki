@@ -145,6 +145,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Thời lượng mỗi buổi học là 30 phút"),
         "txtEachSessionPrice":
             MessageLookupByLibrary.simpleMessage("Chi phí cho mỗi buổi học là"),
+        "txtEditNotiSettings":
+            MessageLookupByLibrary.simpleMessage("Thay đổi cài đặt thông báo"),
         "txtElementary": MessageLookupByLibrary.simpleMessage("Elementary"),
         "txtEmail": MessageLookupByLibrary.simpleMessage("Email"),
         "txtEmailEmpty": MessageLookupByLibrary.simpleMessage(
@@ -168,7 +170,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tên tiếng Anh không được vượt quá 50 ký tự"),
         "txtEngNameTooShort": MessageLookupByLibrary.simpleMessage(
             "Tên tiếng Anh phải chứa ít nhất 2 ký tự không phải khoảng trắng"),
-        "txtEnglish": MessageLookupByLibrary.simpleMessage("Tiếng Anh"),
+        "txtEnglish":
+            MessageLookupByLibrary.simpleMessage("Tiếng Anh (English)"),
         "txtEnglishNameTitle":
             MessageLookupByLibrary.simpleMessage("Tên tiếng Anh"),
         "txtEnterPasswordToDelete": MessageLookupByLibrary.simpleMessage(
@@ -228,13 +231,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtHistory": MessageLookupByLibrary.simpleMessage("Lịch sử"),
         "txtHours": MessageLookupByLibrary.simpleMessage("giờ"),
         "txtIdea": MessageLookupByLibrary.simpleMessage("Ý tưởng"),
+        "txtIllustrationPhoto":
+            MessageLookupByLibrary.simpleMessage("Ảnh minh hoạ"),
         "txtInstructions": MessageLookupByLibrary.simpleMessage("Hướng dẫn"),
         "txtInterestedTopics":
             MessageLookupByLibrary.simpleMessage("Các chủ đề yêu thích"),
         "txtIntermediate": MessageLookupByLibrary.simpleMessage("Intermediate"),
         "txtInternetConnection": MessageLookupByLibrary.simpleMessage(
             "Làm ơn kiểm tra lại kết nối mạng và thử lại"),
-        "txtLanguage": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
+        "txtLanguage":
+            MessageLookupByLibrary.simpleMessage("Ngôn ngữ (Language)"),
         "txtLastUpdated": MessageLookupByLibrary.simpleMessage(
             "Lần cuối cập nhật: Ngày 21 tháng 5 năm 2023"),
         "txtLaunchSession":
@@ -247,6 +253,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtLoadFailed": MessageLookupByLibrary.simpleMessage(
             "Lỗi không thể tải thông tin cá nhân"),
         "txtMale": MessageLookupByLibrary.simpleMessage("Nam"),
+        "txtMarkAllNotiAsRead": MessageLookupByLibrary.simpleMessage(
+            "Đánh dấu tất cả thông báo là đã đọc"),
+        "txtMarkAllNotiAsUnread": MessageLookupByLibrary.simpleMessage(
+            "Đánh dấu tất cả thông báo là chưa đọc"),
         "txtMinutes": MessageLookupByLibrary.simpleMessage("phút"),
         "txtMostPopular": MessageLookupByLibrary.simpleMessage("Phổ biến nhất"),
         "txtNewPassword": MessageLookupByLibrary.simpleMessage("Mật khẩu mới"),
@@ -310,6 +320,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtNotifications": MessageLookupByLibrary.simpleMessage("Thông báo"),
         "txtNotifyMeAbout":
             MessageLookupByLibrary.simpleMessage("Thông báo cho tôi về"),
+        "txtOf": MessageLookupByLibrary.simpleMessage("trên"),
         "txtOfCourse": MessageLookupByLibrary.simpleMessage("Đương nhiên"),
         "txtOk": MessageLookupByLibrary.simpleMessage("Đồng ý"),
         "txtOneSession": MessageLookupByLibrary.simpleMessage("1 buổi học"),
@@ -355,6 +366,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtPurchase": MessageLookupByLibrary.simpleMessage("Mua"),
         "txtQualityVideoCall": MessageLookupByLibrary.simpleMessage(
             "Cuộc gọi video chất lượng cao"),
+        "txtQuestionsAndAnswers":
+            MessageLookupByLibrary.simpleMessage("Câu hỏi và câu trả lời"),
         "txtRateOurApp":
             MessageLookupByLibrary.simpleMessage("Đánh giá app của chúng tôi"),
         "txtRating": MessageLookupByLibrary.simpleMessage("Đánh giá"),
@@ -506,17 +519,26 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Câu trả lời mẫu"),
         "txtTopicCategory": MessageLookupByLibrary.simpleMessage("Thể loại"),
         "txtTopicDescription": MessageLookupByLibrary.simpleMessage("Mô tả"),
+        "txtTopicDescriptionFeedback":
+            MessageLookupByLibrary.simpleMessage("Mô tả chủ đề"),
         "txtTopicDetail":
             MessageLookupByLibrary.simpleMessage("Nội dung chủ đề"),
         "txtTopicFeedback":
             MessageLookupByLibrary.simpleMessage("Góp ý cho chủ đề"),
+        "txtTopicFeedbackCommonHint": MessageLookupByLibrary.simpleMessage(
+            "Chúng tôi đánh giá cao mọi phản hồi chi tiết từ bạn, nếu có thể."),
         "txtTopicLevel": MessageLookupByLibrary.simpleMessage("Cấp độ"),
+        "txtTopicName": MessageLookupByLibrary.simpleMessage("Tên chủ đề"),
         "txtTopicPhraseExample": MessageLookupByLibrary.simpleMessage("Ví dụ"),
+        "txtTopicQnaHint": MessageLookupByLibrary.simpleMessage(
+            "Chúng tôi đánh giá cao nếu bạn có thể cho chúng tôi biết những câu hỏi và/hoặc câu trả lời nào gây ra sự cố."),
         "txtTopicQuestions":
             MessageLookupByLibrary.simpleMessage("Câu hỏi gợi ý"),
         "txtTopicSuggestion":
             MessageLookupByLibrary.simpleMessage("Đề xuất chủ đề"),
         "txtTopicVocab": MessageLookupByLibrary.simpleMessage("Từ vựng"),
+        "txtTopicVocabHint": MessageLookupByLibrary.simpleMessage(
+            "Chúng tôi đánh giá cao nếu bạn có thể cho chúng tôi biết cụm từ và/hoặc ví dụ nào gây ra vấn đề."),
         "txtTopicsTab": MessageLookupByLibrary.simpleMessage("Chủ đề"),
         "txtTotalCompletedSessions": MessageLookupByLibrary.simpleMessage(
             "Số lượng buổi học đã hoàn thành"),
@@ -538,7 +560,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nếu bạn vẫn thấy thông báo này sau khi đã xác minh địa chỉ email thành công, hãy thử Đăng xuất và Đăng nhập lại."),
         "txtVerifyEmailTitle": MessageLookupByLibrary.simpleMessage("Cảm ơn!"),
         "txtVibrations": MessageLookupByLibrary.simpleMessage("Độ rung"),
-        "txtVietnamese": MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
+        "txtVietnamese":
+            MessageLookupByLibrary.simpleMessage("Tiếng Việt (Vietnamese)"),
         "txtVocabLearningSuggestion": MessageLookupByLibrary.simpleMessage(
             "Tính năng này hoạt động tốt nhất\nkhi bạn đã lưu ít nhất 10 từ vựng."),
         "txtVocabsTab": MessageLookupByLibrary.simpleMessage("Từ vựng"),

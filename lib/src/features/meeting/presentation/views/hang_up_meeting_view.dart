@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../../base/define/styles.dart';
 import '../../../../../base/widgets/buttons/button.dart';
 import '../../../../../gen/assets.gen.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../connect_teacher/domain/entities/session_schedule_entity.dart';
 import '../../../report_meeting/presentation/views/report_meeting_view.dart';
 import '../../../session_feedback/presentation/views/session_completed_view.dart';
@@ -18,7 +19,8 @@ class HangUpMeetingView extends StatefulWidget {
 class _HangUpMeetingViewState extends State<HangUpMeetingView> {
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as SessionScheduleEntity;
+    final args =
+        ModalRoute.of(context)!.settings.arguments as SessionScheduleEntity;
     final width = MediaQuery.of(context).size.width;
     return WillPopScope(
       onWillPop: () => Future.value(false),
@@ -73,7 +75,9 @@ class _HangUpMeetingViewState extends State<HangUpMeetingView> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => const SessionCompletedView(),
-                      settings: RouteSettings(arguments: ScreenArguments(args.sessionTeacher?.id ?? "", args.sessionId)),
+                      settings: RouteSettings(
+                          arguments: ScreenArguments(
+                              args.sessionTeacher?.id ?? "", args.sessionId)),
                     ),
                   );
                 },
