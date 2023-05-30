@@ -46,3 +46,6 @@ const iconButtonSize = 18.0;
 
 // Button height
 const buttonHeight = 48.0;
+
+// Sliver app bar height
+const sliverAppBarHeight = 120.0;

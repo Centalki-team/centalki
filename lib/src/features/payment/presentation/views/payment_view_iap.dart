@@ -62,42 +62,62 @@ class _PaymentViewIAPState extends State<PaymentViewIAP> {
         },
         child: Scaffold(
           backgroundColor: colorsByTheme(context).backgroundTheme,
-          appBar: AppBar(
-            title: Text(
-              S.current.txtBuyMoreSessions,
-              style: TextStyle(
-                fontSize: headlineSmallSize,
-                fontWeight: headlineSmallWeight,
-                color: colorsByTheme(context).defaultFont,
-              ),
-            ),
-          ),
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(
-                horizontal: spacing24, vertical: padding16),
-            child: BlocBuilder<PaymentBloc, PaymentState>(
-              builder: (context, state) {
-                if (state is PaymentLoadingState) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                return ListView.separated(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: products.length,
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(height: spacing20),
-                  itemBuilder: (context, index) => IAPCard(
-                    product: products[index],
-                    productsDetail: productsDetail,
-                    onPress: () {
-                      context
-                          .read<PaymentBloc>()
-                          .add(PaymentPurchaseEvent(product: products[index]));
-                    },
+          body: CustomScrollView(
+            slivers: [
+              SliverAppBar.medium(
+                expandedHeight: sliverAppBarHeight,
+                leading: IconButton(
+                  onPressed: Navigator.of(context).pop,
+                  icon: Icon(
+                    Icons.arrow_back_ios_new,
+                    color: colorsByTheme(context).defaultFont,
                   ),
-                );
-              },
-            ),
+                ),
+                title: Text(
+                  S.current.txtBuyMoreSessions,
+                  style: TextStyle(
+                    fontSize: headlineSmallSize,
+                    fontWeight: headlineSmallWeight,
+                    color: colorsByTheme(context).defaultFont,
+                  ),
+                ),
+                centerTitle: true,
+              ),
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  childCount: 1,
+                  (_, index) => Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: spacing24, vertical: padding12),
+                    child: BlocBuilder<PaymentBloc, PaymentState>(
+                      builder: (context, state) {
+                        if (state is PaymentLoadingState) {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        }
+                        return ListView.separated(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: products.length,
+                          separatorBuilder: (context, index) =>
+                              const SizedBox(height: spacing20),
+                          padding: EdgeInsets.zero,
+                          itemBuilder: (context, index) => IAPCard(
+                            product: products[index],
+                            productsDetail: productsDetail,
+                            onPress: () {
+                              context.read<PaymentBloc>().add(
+                                  PaymentPurchaseEvent(
+                                      product: products[index]));
+                            },
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       );

@@ -3190,10 +3190,10 @@ class S {
     );
   }
 
-  /// `Save 16%`
+  /// `Save 8%`
   String get txtSave16Percent {
     return Intl.message(
-      'Save 16%',
+      'Save 8%',
       name: 'txtSave16Percent',
       desc: '',
       args: [],

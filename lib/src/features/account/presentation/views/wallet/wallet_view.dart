@@ -52,6 +52,7 @@ class _WalletViewState extends State<WalletView> {
               body: CustomScrollView(
                 slivers: [
                   SliverAppBar.medium(
+                    expandedHeight: sliverAppBarHeight,
                     leading: IconButton(
                       onPressed: Navigator.of(context).pop,
                       icon: Icon(
@@ -120,9 +121,10 @@ class _WalletViewState extends State<WalletView> {
                       (_, index) => Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: padding16,
-                          vertical: padding24,
+                          vertical: padding12,
                         ),
                         child: SingleChildScrollView(
+                          padding: EdgeInsets.zero,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [

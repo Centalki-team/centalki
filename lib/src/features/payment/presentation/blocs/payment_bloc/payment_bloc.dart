@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 import '../../../../../../base/define/colors.dart';
-import '../../../../../../base/define/theme.dart';
 import '../../../../../../base/gateway/exception/app_exception.dart';
 import '../../../../../../base/helpers/iap.dart';
 import '../../../../../../di/di_module.dart';
@@ -28,7 +27,7 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
   }
 
   late StreamSubscription<List<PurchaseDetails>> _subscription;
-  static final productsDetail = {
+  final productsDetail = {
     'com.centalki.app.one_session': {
       'options': S.current.txtMostPopular,
       'color': AppColor.tertiary,
