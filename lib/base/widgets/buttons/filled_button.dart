@@ -34,11 +34,11 @@ class _AppFilledButtonState extends State<AppFilledButton> {
           ),
           child: Text(
             widget.text,
-            style: TextStyle(
+            style: const TextStyle(
               fontFamily: 'Dongle',
               fontSize: labelLargeSize,
               fontWeight: labelLargeWeight,
-              color: colorsByTheme(context).backgroundTheme,
+              color: AppColor.defaultFontLight,
             ),
           ),
         )
@@ -61,6 +61,14 @@ class _AppFilledButtonState extends State<AppFilledButton> {
             size: iconButtonSize,
             color: colorsByTheme(context).defaultFont,
           ),
-          label: Text(widget.text),
+          label: Text(
+            widget.text,
+            style: const TextStyle(
+              fontFamily: 'Dongle',
+              fontSize: labelLargeSize,
+              fontWeight: labelLargeWeight,
+              color: AppColor.defaultFontLight,
+            ),
+          ),
         );
 }
