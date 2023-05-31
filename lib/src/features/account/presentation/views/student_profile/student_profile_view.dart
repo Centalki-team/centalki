@@ -49,13 +49,9 @@ class _StudentProfileViewState extends State<StudentProfileView> {
 
   @override
   Widget build(BuildContext context) =>
-      BlocListener<StudentProfileBloc, StudentProfileState>(
+      BlocConsumer<StudentProfileBloc, StudentProfileState>(
         listener: (context, state) {
-          if (state is StudentProfileSavingState ||
-              state is StudentProfileLoadingState) {
-            if (state is StudentProfileLoadingState) {
-              LoadingManager.setLoading(context, loading: false);
-            }
+          if (state is StudentProfileSavingState) {
             LoadingManager.setLoading(context, loading: true);
           } else {
             LoadingManager.setLoading(context);
@@ -99,254 +95,241 @@ class _StudentProfileViewState extends State<StudentProfileView> {
             }
           }
         },
-        child: LayoutBuilder(
-          builder: (context, constraint) {
-            final widthView = constraint.maxWidth;
+        builder: (context, state) => state is StudentProfileLoadingState
+            ? Scaffold(
+                appBar: AppBar(),
+                body: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+              )
+            : LayoutBuilder(
+                builder: (context, constraint) {
+                  final widthView = constraint.maxWidth;
 
-            return Scaffold(
-              //backgroundColor: AppColor.white,
-              body: GestureDetector(
-                onTap: () => FocusScope.of(context).unfocus(),
-                child: Stack(
-                  children: [
-                    CustomScrollView(
-                      slivers: [
-                        SliverAppBar.medium(
-                          expandedHeight: sliverAppBarHeight,
-                          leading: IconButton(
-                            onPressed: Navigator.of(context).pop,
-                            icon: Icon(
-                              Icons.arrow_back_ios_new,
-                              color: colorsByTheme(context).defaultFont,
-                            ),
-                          ),
-                          title: Text(
-                            S.current.txtStudentProfile,
-                            style: TextStyle(
-                              fontSize: headlineSmallSize,
-                              fontWeight: headlineSmallWeight,
-                              color: colorsByTheme(context).defaultFont,
-                              height: 1,
-                            ),
-                          ),
-                          centerTitle: true,
-                        ),
-                        SliverList(
-                          delegate: SliverChildBuilderDelegate(
-                            childCount: 1,
-                            (_, index) => Padding(
-                              padding:
-                                  const EdgeInsets.fromLTRB(16, 16, 16, 80),
-                              child: SingleChildScrollView(
-                                child: BlocBuilder<StudentProfileBloc,
-                                    StudentProfileState>(
-                                  builder: (context, state) => Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      BlocBuilder<StudentProfileBloc,
-                                          StudentProfileState>(
-                                        buildWhen: (previous, current) =>
-                                            current
-                                                is StudentProfileChangedState,
-                                        builder: (context, state) => Center(
-                                          child: Avatar(
-                                            avatarUrl: avatarUrl,
-                                            maxRadius: 80,
-                                            fullName: fullName,
+                  return Scaffold(
+                    //backgroundColor: AppColor.white,
+                    body: GestureDetector(
+                      onTap: () => FocusScope.of(context).unfocus(),
+                      child: Stack(
+                        children: [
+                          CustomScrollView(
+                            slivers: [
+                              SliverAppBar.medium(
+                                expandedHeight: sliverAppBarHeight,
+                                leading: IconButton(
+                                  onPressed: Navigator.of(context).pop,
+                                  icon: Icon(
+                                    Icons.arrow_back_ios_new,
+                                    color: colorsByTheme(context).defaultFont,
+                                  ),
+                                ),
+                                title: Text(
+                                  S.current.txtStudentProfile,
+                                  style: TextStyle(
+                                    fontSize: headlineSmallSize,
+                                    fontWeight: headlineSmallWeight,
+                                    color: colorsByTheme(context).defaultFont,
+                                    height: 1,
+                                  ),
+                                ),
+                                centerTitle: true,
+                              ),
+                              SliverList(
+                                delegate: SliverChildBuilderDelegate(
+                                  childCount: 1,
+                                  (_, index) => Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        16, 16, 16, 80),
+                                    child: SingleChildScrollView(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Center(
+                                            child: Avatar(
+                                              avatarUrl: avatarUrl,
+                                              maxRadius: 80,
+                                              fullName: fullName,
+                                            ),
                                           ),
-                                        ),
-                                      ),
-                                      const SizedBox(height: spacing8),
-                                      BlocBuilder<StudentProfileBloc,
-                                              StudentProfileState>(
-                                          buildWhen: (previous, current) =>
-                                              current
-                                                  is StudentProfileChangedState,
-                                          builder: (context, state) {
-                                            if (state
-                                                is StudentProfileChangedState) {
-                                              if (state
-                                                  .avatarException.isEmpty) {
-                                                return Container();
-                                              }
-                                              return Center(
-                                                child: Text(
-                                                  state.avatarException,
-                                                  style: const TextStyle(
-                                                    fontSize: bodyLargeSize,
-                                                    fontWeight: bodyLargeWeight,
-                                                    color: AppColor.error,
-                                                    height: 1,
-                                                  ),
-                                                ),
-                                              );
-                                            }
-                                            return Container();
-                                          }),
-                                      Center(
-                                        child: AppTextButton(
-                                          text: S.current.txtChangeAvatar,
-                                          onPressed: () {
-                                            context.read<StudentProfileBloc>().add(
-                                                const StudentProfileChangeAvatarEvent());
-                                          },
-                                        ),
-                                      ),
-                                      const SizedBox(height: spacing16),
-                                      Text(
-                                        S.current.txtFullNameTitle,
-                                        style: TextStyle(
-                                          fontSize: titleMediumSize,
-                                          fontWeight: titleMediumWeight,
-                                          color: colorsByTheme(context)
-                                              .defaultFont,
-                                        ),
-                                      ),
-                                      AppOutlinedTextField(
-                                        controller: _fullNameController,
-                                        onChanged: _validateStudentProfile,
-                                        errorText:
-                                            state is StudentProfileChangedState &&
-                                                    state.fullNameError
-                                                        .isNotEmpty
-                                                ? state.fullNameError
-                                                : null,
-                                      ),
-                                      const SizedBox(height: spacing16),
-                                      Text(
-                                        S.current.txtEnglishNameTitle,
-                                        style: TextStyle(
-                                          fontSize: titleMediumSize,
-                                          fontWeight: titleMediumWeight,
-                                          color: colorsByTheme(context)
-                                              .defaultFont,
-                                        ),
-                                      ),
-                                      AppOutlinedTextField(
-                                        controller: _englishNameController,
-                                        onChanged: _validateStudentProfile,
-                                        errorText:
-                                            state is StudentProfileChangedState &&
-                                                    state.englishNameError
-                                                        .isNotEmpty
-                                                ? state.englishNameError
-                                                : null,
-                                      ),
-                                      const SizedBox(height: spacing16),
-                                      Text(
-                                        S.current.txtBioTitle,
-                                        style: TextStyle(
-                                          fontSize: titleMediumSize,
-                                          fontWeight: titleMediumWeight,
-                                          color: colorsByTheme(context)
-                                              .defaultFont,
-                                        ),
-                                      ),
-                                      AppOutlinedTextField(
-                                        controller: _bioController,
-                                        maxLines: 3,
-                                        onChanged: _validateStudentProfile,
-                                        errorText:
-                                            state is StudentProfileChangedState &&
-                                                    state.bioError.isNotEmpty
-                                                ? state.bioError
-                                                : null,
-                                      ),
-                                      const SizedBox(height: spacing16),
-                                      Text(
-                                        S.current.txtInterestedTopics,
-                                        style: TextStyle(
-                                          fontSize: titleMediumSize,
-                                          fontWeight: titleMediumWeight,
-                                          color: colorsByTheme(context)
-                                              .defaultFont,
-                                        ),
-                                      ),
-                                      BlocBuilder<StudentProfileBloc,
-                                          StudentProfileState>(
-                                        builder: (context, state) =>
-                                            GridView.builder(
-                                          padding: EdgeInsets.zero,
-                                          shrinkWrap: true,
-                                          gridDelegate:
-                                              SliverGridDelegateWithFixedCrossAxisCount(
-                                            mainAxisSpacing: 16.0,
-                                            crossAxisSpacing: 16.0,
-                                            crossAxisCount: 2,
-                                            childAspectRatio:
-                                                _getTopicsAspectRatio(
-                                                    widthView),
+                                          const SizedBox(height: spacing8),
+                                          (state is StudentProfileChangedState)
+                                              ? (state.avatarException.isEmpty)
+                                                  ? Container()
+                                                  : Center(
+                                                      child: Text(
+                                                        state.avatarException,
+                                                        style: const TextStyle(
+                                                          fontSize:
+                                                              bodyLargeSize,
+                                                          fontWeight:
+                                                              bodyLargeWeight,
+                                                          color: AppColor.error,
+                                                          height: 1,
+                                                        ),
+                                                      ),
+                                                    )
+                                              : Container(),
+                                          Center(
+                                            child: AppTextButton(
+                                              text: S.current.txtChangeAvatar,
+                                              onPressed: () {
+                                                context
+                                                    .read<StudentProfileBloc>()
+                                                    .add(
+                                                        const StudentProfileChangeAvatarEvent());
+                                              },
+                                            ),
                                           ),
-                                          physics:
-                                              const NeverScrollableScrollPhysics(),
-                                          itemCount: topics.length,
-                                          itemBuilder: (_, index) =>
-                                              CustomCheckboxTile(
-                                            title:
-                                                topics[index].topicName ?? '',
-                                            value: selectedTopics.contains(
-                                                topics[index].topicId),
-                                            onChanged: (value) {
-                                              value
-                                                  ? selectedTopics.add(
-                                                      topics[index].topicId!)
-                                                  : selectedTopics.remove(
-                                                      topics[index].topicId!);
-                                              _validateStudentProfile('');
-                                            },
+                                          const SizedBox(height: spacing16),
+                                          Text(
+                                            S.current.txtFullNameTitle,
+                                            style: TextStyle(
+                                              fontSize: titleMediumSize,
+                                              fontWeight: titleMediumWeight,
+                                              color: colorsByTheme(context)
+                                                  .defaultFont,
+                                            ),
                                           ),
-                                        ),
+                                          AppOutlinedTextField(
+                                            controller: _fullNameController,
+                                            onChanged: _validateStudentProfile,
+                                            errorText:
+                                                state is StudentProfileChangedState &&
+                                                        state.fullNameError
+                                                            .isNotEmpty
+                                                    ? state.fullNameError
+                                                    : null,
+                                          ),
+                                          const SizedBox(height: spacing16),
+                                          Text(
+                                            S.current.txtEnglishNameTitle,
+                                            style: TextStyle(
+                                              fontSize: titleMediumSize,
+                                              fontWeight: titleMediumWeight,
+                                              color: colorsByTheme(context)
+                                                  .defaultFont,
+                                            ),
+                                          ),
+                                          AppOutlinedTextField(
+                                            controller: _englishNameController,
+                                            onChanged: _validateStudentProfile,
+                                            errorText:
+                                                state is StudentProfileChangedState &&
+                                                        state.englishNameError
+                                                            .isNotEmpty
+                                                    ? state.englishNameError
+                                                    : null,
+                                          ),
+                                          const SizedBox(height: spacing16),
+                                          Text(
+                                            S.current.txtBioTitle,
+                                            style: TextStyle(
+                                              fontSize: titleMediumSize,
+                                              fontWeight: titleMediumWeight,
+                                              color: colorsByTheme(context)
+                                                  .defaultFont,
+                                            ),
+                                          ),
+                                          AppOutlinedTextField(
+                                            controller: _bioController,
+                                            maxLines: 3,
+                                            onChanged: _validateStudentProfile,
+                                            errorText:
+                                                state is StudentProfileChangedState &&
+                                                        state
+                                                            .bioError.isNotEmpty
+                                                    ? state.bioError
+                                                    : null,
+                                          ),
+                                          const SizedBox(height: spacing16),
+                                          Text(
+                                            S.current.txtInterestedTopics,
+                                            style: TextStyle(
+                                              fontSize: titleMediumSize,
+                                              fontWeight: titleMediumWeight,
+                                              color: colorsByTheme(context)
+                                                  .defaultFont,
+                                            ),
+                                          ),
+                                          GridView.builder(
+                                            padding: EdgeInsets.zero,
+                                            shrinkWrap: true,
+                                            gridDelegate:
+                                                SliverGridDelegateWithFixedCrossAxisCount(
+                                              mainAxisSpacing: 16.0,
+                                              crossAxisSpacing: 16.0,
+                                              crossAxisCount: 2,
+                                              childAspectRatio:
+                                                  _getTopicsAspectRatio(
+                                                      widthView),
+                                            ),
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            itemCount: topics.length,
+                                            itemBuilder: (_, index) =>
+                                                CustomCheckboxTile(
+                                              title:
+                                                  topics[index].topicName ?? '',
+                                              value: selectedTopics.contains(
+                                                  topics[index].topicId),
+                                              onChanged: (value) {
+                                                value
+                                                    ? selectedTopics.add(
+                                                        topics[index].topicId!)
+                                                    : selectedTopics.remove(
+                                                        topics[index].topicId!);
+                                                _validateStudentProfile('');
+                                              },
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 32.0,
+                                          ),
+                                        ],
                                       ),
-                                      const SizedBox(
-                                        height: 32.0,
-                                      ),
-                                    ],
+                                    ),
                                   ),
                                 ),
                               ),
+                            ],
+                          ),
+                          Align(
+                            alignment: AlignmentDirectional.bottomCenter,
+                            child: Container(
+                              padding: const EdgeInsets.only(
+                                left: 16.0,
+                                right: 16.0,
+                                bottom: 24.0,
+                              ),
+                              color: Colors.transparent,
+                              child: AppElevatedButton(
+                                onPressed: state
+                                            is StudentProfileChangedState &&
+                                        state.forceDisabled == false
+                                    ? () {
+                                        context.read<StudentProfileBloc>().add(
+                                              StudentProfileSaveChangesEvent(
+                                                avatarUrl,
+                                                _fullNameController.text,
+                                                _englishNameController.text,
+                                                _bioController.text,
+                                                selectedTopics,
+                                              ),
+                                            );
+                                      }
+                                    : null,
+                                minimumSize: const Size.fromHeight(48),
+                                text: S.current.txtSaveChanges,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    BlocBuilder<StudentProfileBloc, StudentProfileState>(
-                      builder: (context, state) => Align(
-                        alignment: AlignmentDirectional.bottomCenter,
-                        child: Container(
-                          padding: const EdgeInsets.only(
-                            left: 16.0,
-                            right: 16.0,
-                            bottom: 24.0,
-                          ),
-                          color: Colors.transparent,
-                          child: AppElevatedButton(
-                            onPressed: state is StudentProfileChangedState &&
-                                    state.forceDisabled == false
-                                ? () {
-                                    context.read<StudentProfileBloc>().add(
-                                          StudentProfileSaveChangesEvent(
-                                            avatarUrl,
-                                            _fullNameController.text,
-                                            _englishNameController.text,
-                                            _bioController.text,
-                                            selectedTopics,
-                                          ),
-                                        );
-                                  }
-                                : null,
-                            minimumSize: const Size.fromHeight(48),
-                            text: S.current.txtSaveChanges,
-                          ),
-                        ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
+                  );
+                },
               ),
-            );
-          },
-        ),
       );
 }
