@@ -78,9 +78,6 @@ class _YourAccountViewState extends State<YourAccountView> {
                                     ),
                                   ),
                                 ),
-                                // const SizedBox(
-                                //   width: 24.0,
-                                // ),
                                 GestureDetector(
                                   onTap: () => Navigator.push(
                                     context,

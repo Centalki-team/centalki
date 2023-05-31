@@ -112,6 +112,7 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                     CustomScrollView(
                       slivers: [
                         SliverAppBar.medium(
+                          expandedHeight: sliverAppBarHeight,
                           leading: IconButton(
                             onPressed: Navigator.of(context).pop,
                             icon: Icon(

@@ -49,6 +49,7 @@ class _DeleteAccountViewState extends State<DeleteAccountView> {
             child: CustomScrollView(
               slivers: [
                 SliverAppBar.medium(
+                  expandedHeight: sliverAppBarHeight,
                   leading: IconButton(
                     onPressed: Navigator.of(context).pop,
                     icon: Icon(

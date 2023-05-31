@@ -78,6 +78,7 @@ class _AccountInformationViewState extends State<AccountInformationView> {
               CustomScrollView(
                 slivers: [
                   SliverAppBar.medium(
+                    expandedHeight: sliverAppBarHeight,
                     leading: IconButton(
                       onPressed: Navigator.of(context).pop,
                       icon: Icon(
@@ -136,20 +137,6 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                                 ),
                               ),
                               const SizedBox(height: spacing16),
-                              /*const Text(
-                            TextDoc.txtPhoneNumberTitle,
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          TextField(
-                            controller: phoneController,
-                            enabled: false,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: spaceBetweenLine12,
-                          ),*/
                               Text(
                                 S.current.txtDateOfBirthTitle,
                                 style: TextStyle(
@@ -195,8 +182,16 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                                             dateOfBirthController.text),
                                         firstDate: DateTime(1900),
                                         lastDate: DateTime.now(),
+                                        initialEntryMode: DatePickerEntryMode.calendarOnly,
                                         builder: (context, child) => Theme(
                                           data: Theme.of(context).copyWith(
+                                            colorScheme: ColorScheme.dark(
+                                              primary: AppColor.mainColor1Container,
+                                              surface: colorsByTheme(context).backgroundCardHistoryWallet ?? AppColor.white,
+                                              onSurface: colorsByTheme(context).defaultFont ?? AppColor.white,
+                                              tertiary: AppColor.mainColor1Container,
+                                            ),
+                                            dialogBackgroundColor: colorsByTheme(context).backgroundTheme,
                                             textTheme: const TextTheme(
                                               headline5: TextStyle(
                                                 fontFamily: 'NotoSans',

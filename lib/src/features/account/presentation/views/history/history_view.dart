@@ -39,6 +39,7 @@ class _HistoryViewState extends State<HistoryView> {
               body: CustomScrollView(
                 slivers: [
                   SliverAppBar.medium(
+                    expandedHeight: sliverAppBarHeight,
                     leading: IconButton(
                       onPressed: Navigator.of(context).pop,
                       icon: Icon(
