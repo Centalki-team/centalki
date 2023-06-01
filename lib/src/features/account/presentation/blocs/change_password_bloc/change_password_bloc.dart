@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../base/define/text.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../../../shared/extensions.dart';
 
 part 'change_password_event.dart';
@@ -29,27 +30,27 @@ class ChangePasswordBloc
     confirmPassword = event.confirmPassword;
 
     if (currentPassword.isEmpty) {
-      passwordError = TextDoc.txtPasswordEmpty;
+      passwordError = S.current.txtPasswordEmpty;
     } else {
       passwordError = null;
     }
 
     if (newPassword.isEmpty) {
-      newPasswordError = TextDoc.txtNewPasswordEmptyWarning;
+      newPasswordError = S.current.txtNewPasswordEmptyWarning;
     } else if (newPassword.length < 8) {
-      newPasswordError = TextDoc.txtNewPasswordTooShort;
+      newPasswordError = S.current.txtNewPasswordTooShort;
     } else if (newPassword.length > 100) {
-      newPasswordError = TextDoc.txtNewPasswordTooLong;
+      newPasswordError = S.current.txtNewPasswordTooLong;
     } else if (!newPassword.validatePassword) {
-      newPasswordError = TextDoc.txtNewPasswordNotValid;
+      newPasswordError = S.current.txtNewPasswordNotValid;
     } else {
       newPasswordError = null;
     }
 
     if (confirmPassword.isEmpty) {
-      confirmPasswordError = TextDoc.txtConfirmedPasswordEmptyWarning;
+      confirmPasswordError = S.current.txtConfirmedPasswordEmptyWarning;
     } else if (confirmPassword != newPassword) {
-      confirmPasswordError = TextDoc.txtConfirmedPasswordMatchWarning;
+      confirmPasswordError = S.current.txtConfirmedPasswordMatchWarning;
     } else {
       confirmPasswordError = null;
     }
@@ -84,13 +85,13 @@ class ChangePasswordBloc
       } on FirebaseAuthException catch (e) {
         emit(ChangePasswordLoadErrorState(e.message ?? ''));
       } on Exception catch (_) {
-        emit(const ChangePasswordLoadErrorState(
-          TextDoc.txtChangePasswordError,
+        emit(ChangePasswordLoadErrorState(
+          S.current.txtChangePasswordError,
         ));
       }
     } else {
-      emit(const ChangePasswordLoadErrorState(
-        TextDoc.txtUserNotSignIn,
+      emit(ChangePasswordLoadErrorState(
+        S.current.txtUserNotSignIn,
       ));
     }
   }

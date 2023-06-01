@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../base/define/text.dart';
 import '../../../../../../base/gateway/exception/app_exception.dart';
 import '../../../../../../di/di_module.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../domain/repositories/feedback_repository.dart';
 import '../../../domain/usecases/create_feedback_params.dart';
 import '../../../domain/usecases/create_feedback_usecase.dart';
@@ -29,13 +30,13 @@ class SettingsFeedbackBloc
     var feedbackError = '';
 
     if (event.rating == 0) {
-      ratingError = TextDoc.txtRatingEmptyError;
+      ratingError = S.current.txtRatingEmptyError;
     }
 
     if (event.feedback.isEmpty) {
-      feedbackError = TextDoc.txtFeedbackEmptyError;
+      feedbackError = S.current.txtFeedbackEmptyError;
     } else if (event.feedback.length > 500) {
-      feedbackError = TextDoc.txtFeedbackTooLong;
+      feedbackError = S.current.txtFeedbackTooLong;
     }
 
     emit(SettingsFeedbackValidateState(

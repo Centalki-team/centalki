@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../base/define/text.dart';
 import '../../../../../../base/temp_dio/dio_client.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../../connect_teacher/domain/entities/session_schedule_entity.dart';
 
 part 'history_event.dart';
@@ -32,7 +33,7 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
       ));
       // print(completedSessions.historySessions![0].sessionId);
     } on Exception catch (_) {
-      emit(const HistoryLoadFailureState(TextDoc.txtLoadFailed));
+      emit(HistoryLoadFailureState(S.current.txtLoadFailed));
     }
   }
 
@@ -50,7 +51,7 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
         hasReachMax: !(moreSessions.historyMeta?.historyHasNextPage ?? false),
       ));
     } on Exception catch (_) {
-      emit(const HistoryLoadFailureState(TextDoc.txtLoadFailed));
+      emit(HistoryLoadFailureState(S.current.txtLoadFailed));
     }
   }
 }

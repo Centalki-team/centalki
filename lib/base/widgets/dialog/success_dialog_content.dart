@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../generated/l10n.dart';
 import '../../define/styles.dart';
+import '../../define/theme.dart';
 import '../buttons/button.dart';
 
 class SuccessDialogContent extends StatelessWidget {
@@ -16,6 +17,7 @@ class SuccessDialogContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => AlertDialog(
+        backgroundColor: colorsByTheme(context).backgroundTheme,
         icon: const Icon(
           Icons.check,
           color: AppColor.support,

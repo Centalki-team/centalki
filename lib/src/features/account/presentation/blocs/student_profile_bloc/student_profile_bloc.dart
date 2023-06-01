@@ -9,6 +9,7 @@ import 'package:mime/mime.dart';
 
 import '../../../../../../base/define/text.dart';
 import '../../../../../../base/temp_dio/dio_client.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../../topics/domain/entities/topic_item_entity.dart';
 import '../../../domain/entities/user_account_entity.dart';
 
@@ -56,33 +57,33 @@ class StudentProfileBloc
 
   void _onChange(StudentProfileChangeEvent event, emit) {
     if (event.fullName.isEmpty) {
-      fullNameError = TextDoc.txtFullNameEmpty;
+      fullNameError = S.current.txtFullNameEmpty;
     } else if (event.fullName.replaceAll(' ', '').length < 2) {
-      fullNameError = TextDoc.txtFullNameTooShort;
+      fullNameError = S.current.txtFullNameTooShort;
     } else if (event.fullName.length > 50) {
-      fullNameError = TextDoc.txtFullNameTooLong;
+      fullNameError = S.current.txtFullNameTooLong;
     } else if (checkOnlyChar(event.fullName)) {
       fullNameError = '';
     } else {
-      fullNameError = TextDoc.txtFullNameOnlyCharacters;
+      fullNameError = S.current.txtFullNameOnlyCharacters;
     }
 
     if (event.englishName.isNotEmpty) {
       if (event.englishName.replaceAll(' ', '').length < 2) {
-        englishNameError = TextDoc.txtEngNameTooShort;
+        englishNameError = S.current.txtEngNameTooShort;
       } else if (event.englishName.length > 50) {
-        englishNameError = TextDoc.txtEngNameTooLong;
+        englishNameError = S.current.txtEngNameTooLong;
       } else if (checkOnlyChar(event.englishName)) {
         englishNameError = '';
       } else {
-        englishNameError = TextDoc.txtEngNameOnlyCharacters;
+        englishNameError = S.current.txtEngNameOnlyCharacters;
       }
     } else {
       englishNameError = '';
     }
 
     if (event.bio.length > 200) {
-      bioError = TextDoc.txtBioTooLong;
+      bioError = S.current.txtBioTooLong;
     } else {
       bioError = '';
     }
@@ -150,8 +151,8 @@ class StudentProfileBloc
           throw Exception();
         }
       } on Exception catch (_) {
-        emit(const StudentProfileSaveFailureState(
-          TextDoc.txtProfileUpdateFailed,
+        emit(StudentProfileSaveFailureState(
+          S.current.txtProfileUpdateFailed,
         ));
         return;
       }
@@ -165,7 +166,7 @@ class StudentProfileBloc
         .pickImage(source: ImageSource.gallery, imageQuality: 50);
     if (imagePicked != null) {
       if (await imagePicked.length() > 1024 * 1000 * 2) {
-        avatarException = TextDoc.txtFileMaximumPerFile;
+        avatarException = S.current.txtFileMaximumPerFile;
         emit(StudentProfileChangedState(
           avatarException: avatarException,
           fullNameError: fullNameError,
@@ -174,7 +175,7 @@ class StudentProfileBloc
           forceDisabled: checkDisabledButton(),
         ));
       } else if (!(await checkImageExtension(imagePicked))) {
-        avatarException = TextDoc.txtFileNotSupported;
+        avatarException = S.current.txtFileNotSupported;
         emit(StudentProfileChangedState(
           avatarException: avatarException,
           fullNameError: fullNameError,

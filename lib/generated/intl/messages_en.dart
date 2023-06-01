@@ -113,6 +113,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Connected to teacher "),
         "txtConnectionsTitle":
             MessageLookupByLibrary.simpleMessage("Connections"),
+        "txtConsiderSaveMore": MessageLookupByLibrary.simpleMessage(
+            "Consider saving some more in section"),
+        "txtCreateVocabBookmarkSuccess": MessageLookupByLibrary.simpleMessage(
+            "Create vocabulary bookmark successfully!"),
         "txtCurrentPassword":
             MessageLookupByLibrary.simpleMessage("Current password"),
         "txtDarkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
@@ -205,10 +209,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtFindTeacher":
             MessageLookupByLibrary.simpleMessage("Finding teacher for you..."),
         "txtFluency": MessageLookupByLibrary.simpleMessage("Fluency"),
+        "txtForEachOne": MessageLookupByLibrary.simpleMessage(
+            "For each one, you will learn its meaning and example simply by "),
         "txtForgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot Password?"),
         "txtForgotPasswordIntroduction": MessageLookupByLibrary.simpleMessage(
             "Your email used to sign in Centalki"),
+        "txtFound": MessageLookupByLibrary.simpleMessage("Found"),
         "txtFoundedTeacher": MessageLookupByLibrary.simpleMessage(
             "Teacher found. Connecting..."),
         "txtFullName": MessageLookupByLibrary.simpleMessage("Full name"),
@@ -222,6 +229,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtFullNameTooShort": MessageLookupByLibrary.simpleMessage(
             "Name must contain at least 2 non-whitespace characters"),
         "txtGenderTitle": MessageLookupByLibrary.simpleMessage("Gender"),
+        "txtGetAccountInformationInterceptor":
+            MessageLookupByLibrary.simpleMessage(
+                "Cannot get account information. Please try again later!"),
         "txtGetStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
         "txtGiveFeedback":
             MessageLookupByLibrary.simpleMessage("Give Feedback"),
@@ -277,6 +287,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtNext": MessageLookupByLibrary.simpleMessage("Next"),
         "txtNextBtn": MessageLookupByLibrary.simpleMessage("Next"),
         "txtNo": MessageLookupByLibrary.simpleMessage("No"),
+        "txtNoConnectionOrServerDown": MessageLookupByLibrary.simpleMessage(
+            "No Internet connection was found or the server is down."),
         "txtNoData": MessageLookupByLibrary.simpleMessage("No data"),
         "txtNoFavoriteTopicsContent": MessageLookupByLibrary.simpleMessage(
             "Explore our topics and tap the heart icon to save topics you love."),
@@ -324,6 +336,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtNotifyMeAbout":
             MessageLookupByLibrary.simpleMessage("Notify me about"),
         "txtOf": MessageLookupByLibrary.simpleMessage("of"),
+        "txtOfAnyTopic": MessageLookupByLibrary.simpleMessage(
+            "of any topic to start learning."),
         "txtOfCourse": MessageLookupByLibrary.simpleMessage("Of course"),
         "txtOk": MessageLookupByLibrary.simpleMessage("OK"),
         "txtOneSession": MessageLookupByLibrary.simpleMessage("1 session"),
@@ -373,6 +387,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("High-quality video call"),
         "txtQuestionsAndAnswers":
             MessageLookupByLibrary.simpleMessage("Questions and Answers"),
+        "txtRandomPhrases":
+            MessageLookupByLibrary.simpleMessage("5 random phrases"),
         "txtRateOurApp": MessageLookupByLibrary.simpleMessage("Rate Our App"),
         "txtRating": MessageLookupByLibrary.simpleMessage("Rating"),
         "txtRatingEmptyError":
@@ -385,9 +401,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "Re-authenticate your account"),
         "txtRemainingSessions":
             MessageLookupByLibrary.simpleMessage("Remaining"),
+        "txtRemoteVocabBookmarkSuccess": MessageLookupByLibrary.simpleMessage(
+            "Remove vocabulary bookmark successfully!"),
         "txtRemove": MessageLookupByLibrary.simpleMessage("Remove"),
         "txtRemoveFavoriteSuccess": MessageLookupByLibrary.simpleMessage(
             "Remove favorite topic successfully!"),
+        "txtReportMeetingHint": MessageLookupByLibrary.simpleMessage(
+            "Please help us to know more about your problem"),
         "txtResetPassword":
             MessageLookupByLibrary.simpleMessage("Reset Password"),
         "txtResetPasswordDescription": MessageLookupByLibrary.simpleMessage(
@@ -414,6 +434,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "It would be nice if you could tell teacher more about what made your experiences good."),
         "txtSave16Percent": MessageLookupByLibrary.simpleMessage("Save 8%"),
         "txtSaveChanges": MessageLookupByLibrary.simpleMessage("Save Changes"),
+        "txtSavedVocabsList": MessageLookupByLibrary.simpleMessage(
+            " in your vocabulary list that "),
         "txtSearchError": MessageLookupByLibrary.simpleMessage(
             "Topics name cannot exceed 100 characters"),
         "txtSearchPlsTryAgain": MessageLookupByLibrary.simpleMessage(
@@ -422,6 +444,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Sorry! We could not find any topic that matches your search criteria."),
         "txtSearchSuggestTopic": MessageLookupByLibrary.simpleMessage(
             "It is possible that the topics you are looking for are not yet available in our system."),
+        "txtSearchTopicHint":
+            MessageLookupByLibrary.simpleMessage("search topics by name"),
         "txtSelfReviewContent": MessageLookupByLibrary.simpleMessage(
             "This information will enable us to guide you better and recommend suitable contents for you"),
         "txtSelfReviewTitle": MessageLookupByLibrary.simpleMessage(
@@ -432,6 +456,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Send feedback failed"),
         "txtSendFeedbackSuccess":
             MessageLookupByLibrary.simpleMessage("Send feedback successfully"),
+        "txtSendReportFailed":
+            MessageLookupByLibrary.simpleMessage("Send report failed!"),
+        "txtSendReportSuccess":
+            MessageLookupByLibrary.simpleMessage("Send report successfully!"),
         "txtSendTopicSuggestSuccess": MessageLookupByLibrary.simpleMessage(
             "Suggestion Sent Successfully"),
         "txtSendTopicSuggestSuccessContent": MessageLookupByLibrary.simpleMessage(
@@ -502,6 +530,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Teachers are always welcomed to hear any suggestion that you believe will improve your overall experiences for future sessions."),
         "txtSuggetionsLabel":
             MessageLookupByLibrary.simpleMessage("Suggestions for Teacher"),
+        "txtSummarizeYourProblem":
+            MessageLookupByLibrary.simpleMessage("Summarize your problem"),
         "txtTakeAPic": MessageLookupByLibrary.simpleMessage("Using Camera"),
         "txtTalk": MessageLookupByLibrary.simpleMessage("Talk"),
         "txtTapToLoadMoreSessions":
@@ -535,15 +565,19 @@ class MessageLookup extends MessageLookupByLibrary {
             "We appreciate if you could tell us which questions and/or answers cause the problems."),
         "txtTopicQuestions":
             MessageLookupByLibrary.simpleMessage("Recommended Questions"),
+        "txtTopicSingular": MessageLookupByLibrary.simpleMessage("topic"),
         "txtTopicSuggestion":
             MessageLookupByLibrary.simpleMessage("Topic Suggestion"),
         "txtTopicVocab": MessageLookupByLibrary.simpleMessage("Vocabulary"),
         "txtTopicVocabHint": MessageLookupByLibrary.simpleMessage(
             "We appreciate if you could tell us which phrases and/or examples cause the problems."),
+        "txtTopicsPlural": MessageLookupByLibrary.simpleMessage("topics"),
         "txtTopicsTab": MessageLookupByLibrary.simpleMessage("Topics"),
         "txtTotalCompletedSessions":
             MessageLookupByLibrary.simpleMessage("Total Completed Sessions"),
         "txtTotalTime": MessageLookupByLibrary.simpleMessage("Total time is"),
+        "txtTouchFlashcard":
+            MessageLookupByLibrary.simpleMessage("touching the flashcard"),
         "txtTransactions": MessageLookupByLibrary.simpleMessage("Transactions"),
         "txtTryAgain": MessageLookupByLibrary.simpleMessage("Try Again"),
         "txtUpload": MessageLookupByLibrary.simpleMessage("Upload"),
@@ -577,6 +611,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Wrong password!"),
         "txtWrongPasswordProvided": MessageLookupByLibrary.simpleMessage(
             "Wrong password provided for that user."),
-        "txtYes": MessageLookupByLibrary.simpleMessage("Yes")
+        "txtYes": MessageLookupByLibrary.simpleMessage("Yes"),
+        "txtYouHaveOnly":
+            MessageLookupByLibrary.simpleMessage("You currently have only"),
+        "txtYouSaved": MessageLookupByLibrary.simpleMessage("you saved."),
+        "txtYouWillBePresented": MessageLookupByLibrary.simpleMessage(
+            "You will be presented with up to ")
       };
 }

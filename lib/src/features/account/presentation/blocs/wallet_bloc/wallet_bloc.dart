@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../base/define/text.dart';
 import '../../../../../../base/temp_dio/dio_client.dart';
+import '../../../../../../generated/l10n.dart';
 
 part 'wallet_event.dart';
 part 'wallet_state.dart';
@@ -25,7 +26,7 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
               (balanceInformation?.currentCostPerSession ?? 1),
           balanceInformation?.currentCostPerSession ?? 0));
     } on Exception catch (_) {
-      emit(const WalletLoadFailureState(TextDoc.txtLoadFailed));
+      emit(WalletLoadFailureState(S.current.txtLoadFailed));
     }
   }
 

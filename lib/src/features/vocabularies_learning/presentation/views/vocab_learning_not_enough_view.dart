@@ -57,7 +57,7 @@ class VocabLearningNotEnoughView extends StatelessWidget {
                   children: [
                     TextSpan(
                       text:
-                          'You currently have only $currentVocabsQuantity.\nConsider saving some more in ',
+                          '${S.current.txtYouHaveOnly} $currentVocabsQuantity.\n${S.current.txtConsiderSaveMore} ',
                       style: const TextStyle(
                         fontSize: bodyMediumSize,
                         fontWeight: bodyMediumWeight,
@@ -65,18 +65,18 @@ class VocabLearningNotEnoughView extends StatelessWidget {
                         height: 20 / 22,
                       ),
                     ),
-                    const TextSpan(
-                      text: 'Vocabulary',
-                      style: TextStyle(
+                    TextSpan(
+                      text: S.current.txtVocabsTab,
+                      style: const TextStyle(
                         fontSize: bodyMediumSize,
                         fontWeight: FontWeight.w400,
                         color: AppColor.shadow,
                         height: 20 / 22,
                       ),
                     ),
-                    const TextSpan(
-                      text: ' section of any topic to start learning.',
-                      style: TextStyle(
+                    TextSpan(
+                      text: ' ${S.current.txtOfAnyTopic}',
+                      style: const TextStyle(
                         fontSize: bodyMediumSize,
                         fontWeight: bodyMediumWeight,
                         color: AppColor.shadow,

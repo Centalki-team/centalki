@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../base/define/text.dart';
 import '../../../../../../base/gateway/exception/app_exception.dart';
 import '../../../../../../di/di_module.dart';
+import '../../../../../generated/l10n.dart';
 import '../../domain/entities/topic_suggestion_content_entity.dart';
 import '../../domain/repositories/topic_suggestion_repository.dart';
 import '../../domain/usecases/get_topic_suggestion_contents_usecase.dart';
@@ -62,13 +62,13 @@ class TopicSuggestionBloc
     var descriptionError = '';
 
     if (event.subjectAndCategory.isEmpty) {
-      subjectError = TextDoc.txtSubjectNotEmpty;
+      subjectError = S.current.txtSubjectNotEmpty;
     } else if (event.subjectAndCategory.length > 200) {
-      subjectError = TextDoc.txtSubjectTooLong;
+      subjectError = S.current.txtSubjectTooLong;
     }
 
     if (event.descriptionAndRequirements.length > 500) {
-      descriptionError = TextDoc.txtDescriptionAndRequirementsTooLong;
+      descriptionError = S.current.txtDescriptionAndRequirementsTooLong;
     }
 
     emit(TopicSuggestionValidateState(

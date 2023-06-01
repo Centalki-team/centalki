@@ -105,9 +105,9 @@ class _TopicDetailViewState extends State<TopicDetailView> {
             AppToast(
               duration: const Duration(seconds: 3),
               bottomOffset: 8.0,
-              message: const Text(
-                'Create bookmark successfully!',
-                style: TextStyle(
+              message: Text(
+                S.current.txtCreateVocabBookmarkSuccess,
+                style: const TextStyle(
                   fontSize: bodyLargeSize,
                   fontWeight: bodyLargeWeight,
                   color: AppColor.white,
@@ -121,9 +121,9 @@ class _TopicDetailViewState extends State<TopicDetailView> {
             AppToast(
               duration: const Duration(seconds: 3),
               bottomOffset: 8.0,
-              message: const Text(
-                'Remove bookmark successfully!',
-                style: TextStyle(
+              message: Text(
+                S.current.txtRemoteVocabBookmarkSuccess,
+                style: const TextStyle(
                   fontSize: bodyLargeSize,
                   fontWeight: bodyLargeWeight,
                   color: AppColor.white,
@@ -246,7 +246,8 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                 barrierDismissible: false,
                                 context: context,
                                 builder: (context) => AlertDialog(
-                                  backgroundColor: colorsByTheme(context).backgroundCardsChip,
+                                  backgroundColor: colorsByTheme(context)
+                                      .backgroundCardsChip,
                                   title: Text(
                                     S.current.txtConfirmRemoveFavoriteTitle,
                                     style: TextStyle(

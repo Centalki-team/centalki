@@ -65,7 +65,7 @@ class _SearchTopicsViewState extends State<SearchTopicsView> {
               title: SearchTextField(
                 focusNode: _focusNode,
                 controller: _searchController,
-                hintText: 'search topics by name',
+                hintText: S.current.txtSearchTopicHint,
                 onSubmitted: (value) => context
                     .read<SearchTopicsBloc>()
                     .add(SearchTopicsQuerySubmitEvent(
@@ -93,7 +93,7 @@ class _SearchTopicsViewState extends State<SearchTopicsView> {
                         child: Row(
                           children: [
                             Text(
-                              'Found ${state.topicsListEntity.topics!.length} topics',
+                              '${S.current.txtFound} ${state.topicsListEntity.topics!.length} ${state.topicsListEntity.topics!.length > 1 ? S.current.txtTopicsPlural : S.current.txtTopicSingular}',
                               style: TextStyle(
                                 fontSize: bodyLargeSize,
                                 fontWeight: bodyLargeWeight,

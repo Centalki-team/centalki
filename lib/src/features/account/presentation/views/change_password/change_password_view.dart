@@ -49,6 +49,9 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                   content: S.current.txtSuccessfullyChanged,
                 ),
               );
+              if (mounted) {
+                Navigator.popUntil(context, (route) => route.isFirst);
+              }
             }
           }
         },
