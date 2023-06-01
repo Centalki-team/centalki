@@ -79,7 +79,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtCompleteRemind": MessageLookupByLibrary.simpleMessage(
             "You have completed studying 5 phrases.\nTry to maintain this every day."),
         "txtCompletedSessions":
-            MessageLookupByLibrary.simpleMessage("Completed sessions"),
+            MessageLookupByLibrary.simpleMessage("Completed"),
         "txtConfirmDeleteAccount":
             MessageLookupByLibrary.simpleMessage("Confirm Delete"),
         "txtConfirmDeleteAccountContent": MessageLookupByLibrary.simpleMessage(
@@ -384,7 +384,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtReauthenticateAccount": MessageLookupByLibrary.simpleMessage(
             "Re-authenticate your account"),
         "txtRemainingSessions":
-            MessageLookupByLibrary.simpleMessage("Remaining sessions"),
+            MessageLookupByLibrary.simpleMessage("Remaining"),
         "txtRemove": MessageLookupByLibrary.simpleMessage("Remove"),
         "txtRemoveFavoriteSuccess": MessageLookupByLibrary.simpleMessage(
             "Remove favorite topic successfully!"),

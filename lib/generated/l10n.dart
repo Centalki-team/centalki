@@ -1180,20 +1180,20 @@ class S {
     );
   }
 
-  /// `Remaining sessions`
+  /// `Remaining`
   String get txtRemainingSessions {
     return Intl.message(
-      'Remaining sessions',
+      'Remaining',
       name: 'txtRemainingSessions',
       desc: '',
       args: [],
     );
   }
 
-  /// `Completed sessions`
+  /// `Completed`
   String get txtCompletedSessions {
     return Intl.message(
-      'Completed sessions',
+      'Completed',
       name: 'txtCompletedSessions',
       desc: '',
       args: [],

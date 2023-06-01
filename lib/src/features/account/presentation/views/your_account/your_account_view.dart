@@ -65,8 +65,8 @@ class _YourAccountViewState extends State<YourAccountView> {
                           Container(
                             height: 64.0,
                             padding: const EdgeInsets.only(
-                              left: 16.0,
-                              right: 4.0,
+                              left: padding16,
+                              right: padding4,
                             ),
                             child: Row(
                               children: [
@@ -88,7 +88,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
-                                      horizontal: 12.0,
+                                      horizontal: padding12,
                                     ),
                                     child: Assets.icon.icNotiHeader.svg(),
                                   ),
@@ -98,7 +98,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                           ),
                           Container(
                             width: double.maxFinite,
-                            height: heightView / 3,
+                            height: heightView / 3 + 15,
                             color: AppColor.mainColor2,
                             child: Stack(
                               children: [
@@ -169,7 +169,7 @@ class _YourAccountViewState extends State<YourAccountView> {
                                               ),
                                             ),
                                             const SizedBox(
-                                              height: spacing10,
+                                              height: spacing24,
                                             ),
                                           ],
                                         ),
@@ -209,11 +209,128 @@ class _YourAccountViewState extends State<YourAccountView> {
                               ],
                             ),
                           ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.fromLTRB(
+                              padding16,
+                              heightView * 1 / 3 -
+                                  30 +
+                                  MediaQuery.of(context).padding.top +
+                                  64.0,
+                              padding16,
+                              0,
+                            ),
+                            decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(radius12)),
+                                color: colorsByTheme(context).backgroundTheme,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: AppColor.shadow.shade300,
+                                    blurRadius: 12.0,
+                                    spreadRadius: 0.0,
+                                    offset: const Offset(0, 2),
+                                  )
+                                ]),
+                            child: Padding(
+                              padding: const EdgeInsets.all(padding8),
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(padding4),
+                                    child: Text(
+                                      S.current.txtSessions,
+                                      style: const TextStyle(
+                                        fontSize: titleMediumSize,
+                                        fontWeight: titleMediumWeight,
+                                        color: AppColor.tertiary,
+                                        height: 1,
+                                      ),
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              S.current.txtRemainingSessions,
+                                              textAlign: TextAlign.end,
+                                              style: const TextStyle(
+                                                fontSize: titleSmallSize,
+                                                fontWeight: titleSmallWeight,
+                                                color: AppColor.shadow,
+                                                height: 1,
+                                              ),
+                                            ),
+                                            Text(
+                                              '${(state.account.userProfile?.accountBalance ?? 0) ~/ (state.account.userProfile?.currentCostPerSession ?? 1)}',
+                                              style: TextStyle(
+                                                height: 0.75,
+                                                fontSize: bodyLargeSize,
+                                                fontWeight: bodyLargeWeight,
+                                                color: colorsByTheme(context)
+                                                    .defaultFont,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      const SizedBox(width: spacing16),
+                                      Container(
+                                        width: 1,
+                                        height: 40,
+                                        color: AppColor.container,
+                                      ),
+                                      const SizedBox(width: spacing16),
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              S.current.txtCompletedSessions,
+                                              style: const TextStyle(
+                                                fontSize: titleSmallSize,
+                                                fontWeight: titleSmallWeight,
+                                                color: AppColor.shadow,
+                                                height: 1,
+                                              ),
+                                            ),
+                                            Text(
+                                              '${state.account.accountCompletedSessions ?? 0}',
+                                              style: TextStyle(
+                                                height: 0.75,
+                                                fontSize: bodyLargeSize,
+                                                fontWeight: bodyLargeWeight,
+                                                color: colorsByTheme(context)
+                                                    .defaultFont,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: spacing8),
                           Expanded(
                             child: ListView(
-                              padding: const EdgeInsets.fromLTRB(
-                                  padding16, 60, padding16, 0),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: padding16),
                               children: [
+                                const SizedBox(height: spacing8),
                                 AccountTile(
                                   icon: Icons.person_outline,
                                   title: S.current.txtStudentProfile,
@@ -445,97 +562,6 @@ class _YourAccountViewState extends State<YourAccountView> {
                             ),
                           ),
                         ],
-                      ),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(
-                          padding16,
-                          heightView * 1 / 3 -
-                              30 +
-                              MediaQuery.of(context).padding.top +
-                              64.0,
-                          padding16,
-                          0,
-                        ),
-                        decoration: BoxDecoration(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(12.0)),
-                            color: colorsByTheme(context).backgroundTheme,
-                            boxShadow: [
-                              BoxShadow(
-                                color: AppColor.shadow.shade300,
-                                blurRadius: 4.0,
-                                spreadRadius: 0.0,
-                                offset: const Offset(0, 2),
-                              )
-                            ]),
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(8, 8, 8, 12),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      S.current.txtRemainingSessions,
-                                      textAlign: TextAlign.end,
-                                      style: const TextStyle(
-                                        fontSize: titleSmallSize,
-                                        fontWeight: titleSmallWeight,
-                                        color: AppColor.shadow,
-                                      ),
-                                    ),
-                                    Text(
-                                      '${(state.account.userProfile?.accountBalance ?? 0) ~/ (state.account.userProfile?.currentCostPerSession ?? 1)}',
-                                      style: TextStyle(
-                                        height: 0.75,
-                                        fontSize: bodyLargeSize,
-                                        fontWeight: bodyLargeWeight,
-                                        color:
-                                            colorsByTheme(context).defaultFont,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(width: spacing16),
-                              Container(
-                                width: 1,
-                                height: 48,
-                                color: AppColor.container,
-                              ),
-                              const SizedBox(width: spacing16),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      S.current.txtCompletedSessions,
-                                      style: const TextStyle(
-                                        fontSize: titleSmallSize,
-                                        fontWeight: titleSmallWeight,
-                                        color: AppColor.shadow,
-                                      ),
-                                    ),
-                                    Text(
-                                      '${state.account.accountCompletedSessions ?? 0}',
-                                      style: TextStyle(
-                                        height: 0.75,
-                                        fontSize: bodyLargeSize,
-                                        fontWeight: bodyLargeWeight,
-                                        color:
-                                            colorsByTheme(context).defaultFont,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
                       ),
                     ],
                   ),

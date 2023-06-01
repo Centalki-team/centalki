@@ -78,7 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtCompleteRemind": MessageLookupByLibrary.simpleMessage(
             "Bạn đã hoàn thành buổi học từ vựng hôm nay.\nCố gắng duy trì thói quen mỗi ngày nhé."),
         "txtCompletedSessions":
-            MessageLookupByLibrary.simpleMessage("Các buổi học đã hoàn thành"),
+            MessageLookupByLibrary.simpleMessage("Hoàn thành"),
         "txtConfirmDeleteAccount":
             MessageLookupByLibrary.simpleMessage("Xác nhận xoá"),
         "txtConfirmDeleteAccountContent": MessageLookupByLibrary.simpleMessage(
@@ -379,8 +379,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Xác thực lại"),
         "txtReauthenticateAccount": MessageLookupByLibrary.simpleMessage(
             "Xác thực lại tài khoản của bạn"),
-        "txtRemainingSessions":
-            MessageLookupByLibrary.simpleMessage("Số buổi học còn lại"),
+        "txtRemainingSessions": MessageLookupByLibrary.simpleMessage("Còn lại"),
         "txtRemove": MessageLookupByLibrary.simpleMessage("Xoá"),
         "txtRemoveFavoriteSuccess": MessageLookupByLibrary.simpleMessage(
             "Xóa khỏi danh sách yêu thích thành công!"),
