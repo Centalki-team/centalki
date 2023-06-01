@@ -4,9 +4,7 @@ import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/common_txt_style.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
-import '../../../../../base/define/text.dart';
 import '../../../../../base/define/theme.dart';
-import '../../../../../gen/assets.gen.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../shared/widgets/tab_indicator/tab_indicator.dart';
 import '../../../favorite_topics/presentation/views/favorite_topics_page.dart';
@@ -83,11 +81,14 @@ class _FavoriteViewState extends State<FavoriteView>
                       builder: (context) => const NotiListPage(),
                     ),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(
                       horizontal: 12.0,
                     ),
-                    child: Assets.icon.icNotiHeader.svg(),
+                    child: Icon(
+                      Icons.notifications_none_rounded,
+                      color: AppColor.mainColor1,
+                    ),
                   ),
                 ),
               ],

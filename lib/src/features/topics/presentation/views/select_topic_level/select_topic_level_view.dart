@@ -4,7 +4,6 @@ import '../../../../../../base/define/colors.dart';
 import '../../../../../../base/define/common_txt_style.dart';
 import '../../../../../../base/define/dimensions.dart';
 import '../../../../../../base/define/size.dart';
-import '../../../../../../base/define/text.dart';
 import '../../../../../../base/define/theme.dart';
 import '../../../../../../gen/assets.gen.dart';
 import '../../../../../../generated/l10n.dart';
@@ -93,9 +92,12 @@ class _SelectTopicLevelViewState extends State<SelectTopicLevelView>
                   builder: (context) => const NotiListPage(),
                 ),
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(padding12),
-                child: Assets.icon.icNotiHeader.svg(),
+              child: const Padding(
+                padding: EdgeInsets.all(padding12),
+                child: Icon(
+                  Icons.notifications_none_rounded,
+                  color: AppColor.mainColor1,
+                ),
               ),
             ),
           ],

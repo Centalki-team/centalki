@@ -7,7 +7,6 @@ import '../../../../../../base/define/theme.dart';
 import '../../../../../../base/widgets/avatar.dart';
 import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
-import '../../../../../../gen/assets.gen.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../../../notifications/presentation/views/noti_list_page.dart';
 import '../../blocs/your_account_bloc/your_account_bloc.dart';
@@ -86,11 +85,14 @@ class _YourAccountViewState extends State<YourAccountView> {
                                           const NotiListPage(),
                                     ),
                                   ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
+                                  child: const Padding(
+                                    padding: EdgeInsets.symmetric(
                                       horizontal: padding12,
                                     ),
-                                    child: Assets.icon.icNotiHeader.svg(),
+                                    child: Icon(
+                                      Icons.notifications_none_rounded,
+                                      color: AppColor.mainColor1,
+                                    ),
                                   ),
                                 ),
                               ],
