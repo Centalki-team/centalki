@@ -7,6 +7,7 @@ import '../../../../../../base/widgets/buttons/button.dart';
 import '../../../../../../base/widgets/text_fields/outlined_text_field.dart';
 import '../../../../../../base/widgets/toast/app_toast.dart';
 import '../../../../../base/define/theme.dart';
+import '../../../../../generated/l10n.dart';
 import '../blocs/topic_suggestion_bloc.dart';
 
 class TopicSuggestionView extends StatefulWidget {
@@ -29,7 +30,7 @@ class _TopicSuggestionViewState extends State<TopicSuggestionView> {
         builder: (context) => AlertDialog(
               backgroundColor: colorsByTheme(context).backgroundCardsChip,
               title: Text(
-                TextDoc.txtNotFinishTopicSuggest,
+                S.current.txtNotFinishTopicSuggest,
                 style: TextStyle(
                   fontSize: titleLargeSize,
                   fontWeight: titleLargeWeight,
@@ -37,7 +38,7 @@ class _TopicSuggestionViewState extends State<TopicSuggestionView> {
                 ),
               ),
               content: Text(
-                TextDoc.txtNotFinishTopicSuggestContent,
+                S.current.txtNotFinishTopicSuggestContent,
                 style: TextStyle(
                   fontSize: bodyLargeSize,
                   fontWeight: bodyLargeWeight,
@@ -50,9 +51,9 @@ class _TopicSuggestionViewState extends State<TopicSuggestionView> {
                   style: TextButton.styleFrom(
                     foregroundColor: AppColor.mainColor1,
                   ),
-                  child: const Text(
-                    TextDoc.txtStayBtn,
-                    style: TextStyle(
+                  child: Text(
+                    S.current.txtStayBtn,
+                    style: const TextStyle(
                       fontSize: labelLargeSize,
                       fontWeight: labelLargeWeight,
                     ),
@@ -64,9 +65,9 @@ class _TopicSuggestionViewState extends State<TopicSuggestionView> {
                     backgroundColor: AppColor.error,
                     foregroundColor: Colors.white,
                   ),
-                  child: const Text(
-                    TextDoc.txtExitBtn,
-                    style: TextStyle(
+                  child: Text(
+                    S.current.txtExitBtn,
+                    style: const TextStyle(
                       fontSize: labelLargeSize,
                       fontWeight: labelLargeWeight,
                     ),
@@ -89,7 +90,7 @@ class _TopicSuggestionViewState extends State<TopicSuggestionView> {
         builder: (context) => AlertDialog(
               backgroundColor: colorsByTheme(context).backgroundCardsChip,
               title: Text(
-                TextDoc.txtSendTopicSuggestSuccess,
+                S.current.txtSendTopicSuggestSuccess,
                 style: TextStyle(
                   fontSize: titleLargeSize,
                   fontWeight: titleLargeWeight,
@@ -97,7 +98,7 @@ class _TopicSuggestionViewState extends State<TopicSuggestionView> {
                 ),
               ),
               content: Text(
-                TextDoc.txtSendTopicSuggestSuccessContent,
+                S.current.txtSendTopicSuggestSuccessContent,
                 style: TextStyle(
                   fontSize: bodyLargeSize,
                   fontWeight: bodyLargeWeight,
@@ -110,9 +111,9 @@ class _TopicSuggestionViewState extends State<TopicSuggestionView> {
                   style: TextButton.styleFrom(
                     foregroundColor: AppColor.mainColor1,
                   ),
-                  child: const Text(
-                    TextDoc.txtOk,
-                    style: TextStyle(
+                  child: Text(
+                    S.current.txtOk,
+                    style: const TextStyle(
                       fontSize: labelLargeSize,
                       fontWeight: labelLargeWeight,
                     ),
@@ -171,14 +172,14 @@ class _TopicSuggestionViewState extends State<TopicSuggestionView> {
                         SliverAppBar.medium(
                           expandedHeight: sliverAppBarHeight,
                           leading: IconButton(
-                            onPressed: Navigator.of(context).pop,
+                            onPressed: _showExitOptionDialog,
                             icon: Icon(
                               Icons.arrow_back_ios_new,
                               color: colorsByTheme(context).defaultFont,
                             ),
                           ),
                           title: Text(
-                            TextDoc.txtTopicSuggestion,
+                            S.current.txtTopicSuggestion,
                             style: TextStyle(
                               fontSize: headlineSmallSize,
                               fontWeight: headlineSmallWeight,
@@ -199,16 +200,16 @@ class _TopicSuggestionViewState extends State<TopicSuggestionView> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    TextDoc.txtSubjectLabel,
+                                    S.current.txtSubjectLabel,
                                     style: TextStyle(
                                       fontSize: titleMediumSize,
                                       fontWeight: titleMediumWeight,
                                       color: colorsByTheme(context).defaultFont,
                                     ),
                                   ),
-                                  const Text(
-                                    TextDoc.txtSubjectSubTitle,
-                                    style: TextStyle(
+                                  Text(
+                                    S.current.txtSubjectSubTitle,
+                                    style: const TextStyle(
                                       height: 1.15,
                                       fontSize: bodySmallSize,
                                       fontWeight: bodySmallWeight,
@@ -222,7 +223,7 @@ class _TopicSuggestionViewState extends State<TopicSuggestionView> {
                                       TopicSuggestionState>(
                                     builder: (context, state) =>
                                         AppOutlinedTextField(
-                                      hintText: TextDoc.txtSubjectHint,
+                                      hintText: S.current.txtSubjectHint,
                                       controller: subjectController,
                                       maxLines: 4,
                                       errorText:
@@ -244,16 +245,16 @@ class _TopicSuggestionViewState extends State<TopicSuggestionView> {
                                     height: spacing24,
                                   ),
                                   Text(
-                                    TextDoc.txtLevelLabel,
+                                    S.current.txtLevelLabel,
                                     style: TextStyle(
                                       fontSize: titleMediumSize,
                                       fontWeight: titleMediumWeight,
                                       color: colorsByTheme(context).defaultFont,
                                     ),
                                   ),
-                                  const Text(
-                                    TextDoc.txtLevelSubTitle,
-                                    style: TextStyle(
+                                  Text(
+                                    S.current.txtLevelSubTitle,
+                                    style: const TextStyle(
                                       height: 1.15,
                                       fontSize: bodySmallSize,
                                       fontWeight: bodySmallWeight,
@@ -316,17 +317,18 @@ class _TopicSuggestionViewState extends State<TopicSuggestionView> {
                                     height: spacing24,
                                   ),
                                   Text(
-                                    TextDoc.txtDescriptionAndRequirementsLabel,
+                                    S.current
+                                        .txtDescriptionAndRequirementsLabel,
                                     style: TextStyle(
                                       fontSize: titleMediumSize,
                                       fontWeight: titleMediumWeight,
                                       color: colorsByTheme(context).defaultFont,
                                     ),
                                   ),
-                                  const Text(
-                                    TextDoc
+                                  Text(
+                                    S.current
                                         .txtDescriptionAndRequirementsSubTitle,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       height: 1.15,
                                       fontSize: bodySmallSize,
                                       fontWeight: bodySmallWeight,
@@ -340,7 +342,7 @@ class _TopicSuggestionViewState extends State<TopicSuggestionView> {
                                       TopicSuggestionState>(
                                     builder: (context, state) =>
                                         AppOutlinedTextField(
-                                      hintText: TextDoc
+                                      hintText: S.current
                                           .txtDescriptionAndRequirementsHint,
                                       controller: descriptionController,
                                       minLines: 4,
@@ -393,7 +395,7 @@ class _TopicSuggestionViewState extends State<TopicSuggestionView> {
                                                         );
                                                   }
                                                 : null,
-                                        text: TextDoc.txtSend,
+                                        text: S.current.txtSend,
                                         minimumSize: const Size.fromHeight(48),
                                       ),
                                     ),

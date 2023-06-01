@@ -10,6 +10,7 @@ import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
 import '../../../../../../base/widgets/dialog/success_dialog_content.dart';
 import '../../../../../../base/widgets/text_fields/outlined_text_field.dart';
 import '../../../../../../base/widgets/toast/app_toast.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../../report_meeting/presentation/views/report_meeting_view.dart';
 import '../../blocs/session_give_feedback_bloc/session_give_feedback_bloc.dart';
 
@@ -42,8 +43,8 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
           if (state is SessionGiveFeedbackSendDoneState) {
             await showDialog(
               context: context,
-              builder: (context) => const SuccessDialogContent(
-                title: TextDoc.txtSendFeedbackSuccess,
+              builder: (context) => SuccessDialogContent(
+                title: S.current.txtSendFeedbackSuccess,
               ),
             );
             if (mounted) {
@@ -55,7 +56,7 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
             await showDialog(
               context: context,
               builder: (context) => ErrorDialogContent(
-                title: TextDoc.txtSendFeedbackFailed,
+                title: S.current.txtSendFeedbackFailed,
                 content: state.exception.displayMessage,
               ),
             );
@@ -78,6 +79,7 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                 return CustomScrollView(
                   slivers: [
                     SliverAppBar.medium(
+                      expandedHeight: sliverAppBarHeight,
                       leading: GestureDetector(
                         onTap: (() {
                           Navigator.pop(context);
@@ -90,7 +92,7 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                         ),
                       ),
                       title: Text(
-                        TextDoc.txtSessionFeedback,
+                        S.current.txtSessionFeedback,
                         style: TextStyle(
                           fontSize: headlineSmallSize,
                           fontWeight: headlineSmallWeight,
@@ -111,7 +113,7 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                TextDoc.txtRating,
+                                S.current.txtRating,
                                 style: TextStyle(
                                   fontSize: titleMediumSize,
                                   fontWeight: titleMediumWeight,
@@ -184,7 +186,7 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                               ),
                               const SizedBox(height: spacing16),
                               Text(
-                                TextDoc.txtSatisfiedDesciptionLabel,
+                                S.current.txtSatisfiedDesciptionLabel,
                                 style: TextStyle(
                                   fontSize: titleMediumSize,
                                   fontWeight: titleMediumWeight,
@@ -287,7 +289,7 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                                 height: spacing16,
                               ),
                               Text(
-                                TextDoc.txtDescriptionLabel,
+                                S.current.txtDescriptionLabel,
                                 style: TextStyle(
                                   fontSize: titleMediumSize,
                                   fontWeight: titleMediumWeight,
@@ -301,7 +303,8 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                                   SessionGiveFeedbackState>(
                                 builder: (context, state) =>
                                     AppOutlinedTextField(
-                                  hintText: TextDoc.txtSatisfiedDescriptionHint,
+                                  hintText:
+                                      S.current.txtSatisfiedDescriptionHint,
                                   controller: satisfiedDescriptionController,
                                   maxLines: 5,
                                   errorText:
@@ -328,7 +331,7 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                               ),
                               const SizedBox(height: spacing16),
                               Text(
-                                TextDoc.txtNotSatisfiedDesciptionLabel,
+                                S.current.txtNotSatisfiedDesciptionLabel,
                                 style: TextStyle(
                                   fontSize: titleMediumSize,
                                   fontWeight: titleMediumWeight,
@@ -431,7 +434,7 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                                 height: spacing16,
                               ),
                               Text(
-                                TextDoc.txtDescriptionLabel,
+                                S.current.txtDescriptionLabel,
                                 style: TextStyle(
                                   fontSize: titleMediumSize,
                                   fontWeight: titleMediumWeight,
@@ -446,7 +449,7 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                                 builder: (context, state) =>
                                     AppOutlinedTextField(
                                   hintText:
-                                      TextDoc.txtNotSatisfiedDescriptionHint,
+                                      S.current.txtNotSatisfiedDescriptionHint,
                                   controller: notSatisfiedDescriptionController,
                                   maxLines: 5,
                                   errorText:
@@ -475,7 +478,7 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                                 height: spacing16,
                               ),
                               Text(
-                                TextDoc.txtSuggetionsLabel,
+                                S.current.txtSuggetionsLabel,
                                 style: TextStyle(
                                   fontSize: titleMediumSize,
                                   fontWeight: titleMediumWeight,
@@ -489,7 +492,7 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                                   SessionGiveFeedbackState>(
                                 builder: (context, state) =>
                                     AppOutlinedTextField(
-                                  hintText: TextDoc.txtSuggetionsHint,
+                                  hintText: S.current.txtSuggetionsHint,
                                   controller: suggestionsController,
                                   maxLines: 5,
                                   errorText:
@@ -552,7 +555,8 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                 current is SessionGiveFeedbackLoadDoneState,
             builder: (context, state) {
               if (state is SessionGiveFeedbackLoadDoneState) {
-                return BottomAppBar(
+                return SafeArea(
+                  top: false,
                   child: Padding(
                     padding: const EdgeInsets.only(
                       left: 16.0,
@@ -582,7 +586,7 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                                     );
                               }
                             : null,
-                        text: TextDoc.txtSend,
+                        text: S.current.txtSend,
                         minimumSize: const Size.fromHeight(48),
                       ),
                     ),

@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/size.dart';
-import '../../../../../base/define/text.dart';
 import '../../../../../base/define/theme.dart';
 import '../../../../../base/widgets/buttons/button.dart';
 import '../../../../../generated/l10n.dart';
@@ -237,16 +236,16 @@ class _VocabLearningViewState extends State<VocabLearningView>
                       const SizedBox(
                         height: spacing56,
                       ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: spacing28,
                         ),
                         child: Text.rich(
                           TextSpan(
                             children: [
                               TextSpan(
-                                text: 'You will be presented with up to ',
-                                style: TextStyle(
+                                text: S.current.txtYouWillBePresented,
+                                style: const TextStyle(
                                   fontSize: bodySmallSize,
                                   fontWeight: bodySmallWeight,
                                   color: AppColor.shadow,
@@ -254,8 +253,8 @@ class _VocabLearningViewState extends State<VocabLearningView>
                                 ),
                               ),
                               TextSpan(
-                                text: '5 random',
-                                style: TextStyle(
+                                text: S.current.txtRandomPhrases,
+                                style: const TextStyle(
                                   fontSize: bodySmallSize,
                                   fontWeight: FontWeight.w700,
                                   color: AppColor.shadow,
@@ -263,8 +262,8 @@ class _VocabLearningViewState extends State<VocabLearningView>
                                 ),
                               ),
                               TextSpan(
-                                text: ' phrases in your vocabulary list that ',
-                                style: TextStyle(
+                                text: S.current.txtSavedVocabsList,
+                                style: const TextStyle(
                                   fontSize: bodySmallSize,
                                   fontWeight: bodySmallWeight,
                                   color: AppColor.shadow,
@@ -272,8 +271,8 @@ class _VocabLearningViewState extends State<VocabLearningView>
                                 ),
                               ),
                               TextSpan(
-                                text: 'you saved.\n\n',
-                                style: TextStyle(
+                                text: '${S.current.txtYouSaved}\n\n',
+                                style: const TextStyle(
                                   fontSize: bodySmallSize,
                                   fontWeight: FontWeight.w700,
                                   color: AppColor.shadow,
@@ -281,9 +280,8 @@ class _VocabLearningViewState extends State<VocabLearningView>
                                 ),
                               ),
                               TextSpan(
-                                text:
-                                    'For each one, you will learn its meaning and example simply by ',
-                                style: TextStyle(
+                                text: S.current.txtForEachOne,
+                                style: const TextStyle(
                                   fontSize: bodySmallSize,
                                   fontWeight: bodySmallWeight,
                                   color: AppColor.shadow,
@@ -291,15 +289,15 @@ class _VocabLearningViewState extends State<VocabLearningView>
                                 ),
                               ),
                               TextSpan(
-                                text: 'touching the flashcard',
-                                style: TextStyle(
+                                text: S.current.txtTouchFlashcard,
+                                style: const TextStyle(
                                   fontSize: bodySmallSize,
                                   fontWeight: FontWeight.w700,
                                   color: AppColor.shadow,
                                   height: 16 / 20,
                                 ),
                               ),
-                              TextSpan(
+                              const TextSpan(
                                 text: '.',
                                 style: TextStyle(
                                   fontSize: bodySmallSize,

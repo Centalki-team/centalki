@@ -82,7 +82,8 @@ class _SettingsFeedbackViewState extends State<SettingsFeedbackView> {
                     actions: [
                       AppTextButton(
                         text: S.current.txtOk,
-                        onPressed: () => Navigator.pop(context),
+                        onPressed: () => Navigator.popUntil(
+                            context, (route) => route.isFirst),
                       )
                     ],
                   ),

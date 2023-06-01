@@ -207,7 +207,7 @@ class _WalletViewState extends State<WalletView> {
                                 height: spacing20,
                               ),
                               /*const Text(
-                                    TextDoc.txtTransactions,
+                                    S.current.txtTransactions,
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: tertiary,
@@ -254,7 +254,7 @@ class _WalletViewState extends State<WalletView> {
                                                       ),
                                                     ),
                                                     const Text(
-                                                      TextDoc.txtCharged,
+                                                      S.current.txtCharged,
                                                       style: TextStyle(
                                                         color: defaultFont,
                                                       ),

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../base/define/text.dart';
+import '../../../../../../generated/l10n.dart';
 
 part 'delete_account_event.dart';
 part 'delete_account_state.dart';
@@ -20,7 +21,7 @@ class DeleteAccountBloc extends Bloc<DeleteAccountEvent, DeleteAccountState> {
   void _onChangePassword(DeleteAccountChangePasswordEvent event, emit) {
     password = event.password;
     if (password.length > 100) {
-      emit(const DeleteAccountPasswordInvalidState(TextDoc.txtPasswordTooLong));
+      emit(DeleteAccountPasswordInvalidState(S.current.txtPasswordTooLong));
     } else {
       emit(const DeleteAccountPasswordValidState());
     }
@@ -41,13 +42,12 @@ class DeleteAccountBloc extends Bloc<DeleteAccountEvent, DeleteAccountState> {
               break;
             case 'google.com':
             case 'facebook.com':
-              if (DateTime
-                  .now()
-                  .difference(currentUser.metadata.lastSignInTime!)
-                  .inDays >
+              if (DateTime.now()
+                      .difference(currentUser.metadata.lastSignInTime!)
+                      .inDays >
                   7) {
                 throw FirebaseAuthException(
-                    code: '', message: TextDoc.txtSignInAgainToDelete);
+                    code: '', message: S.current.txtSignInAgainToDelete);
               }
               break;
             default:
@@ -58,12 +58,12 @@ class DeleteAccountBloc extends Bloc<DeleteAccountEvent, DeleteAccountState> {
             .delete()
             .then((value) => emit(const DeleteAccountLoadDoneState()));
       } else {
-        emit(const DeleteAccountLoadErrorState(TextDoc.txtUserNotSignIn));
+        emit(DeleteAccountLoadErrorState(S.current.txtUserNotSignIn));
       }
     } on FirebaseAuthException catch (e) {
       emit(DeleteAccountLoadErrorState(e.message ?? ''));
     } on Exception catch (_) {
-      emit(const DeleteAccountLoadErrorState(TextDoc.txtDeleteAccountError));
+      emit(DeleteAccountLoadErrorState(S.current.txtDeleteAccountError));
     }
   }
 }

@@ -68,6 +68,7 @@ class VocabCard extends StatelessWidget {
                         ),
                       ),
                       GestureDetector(
+                        behavior: HitTestBehavior.opaque,
                         onTap: () {
                           if (item.id != null && item.id!.isNotEmpty) {
                             onRemoveSaved?.call(item);

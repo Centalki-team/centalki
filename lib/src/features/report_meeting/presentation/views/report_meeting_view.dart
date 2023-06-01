@@ -8,6 +8,7 @@ import '../../../../../base/widgets/buttons/button.dart';
 import '../../../../../base/widgets/dialog/error_dialog_content.dart';
 import '../../../../../base/widgets/dialog/success_dialog_content.dart';
 import '../../../../../base/widgets/text_fields/outlined_text_field.dart';
+import '../../../../../generated/l10n.dart';
 import '../blocs/report_meeting_bloc.dart';
 
 class ScreenArguments {
@@ -48,8 +49,8 @@ class _ReportMeetingViewState extends State<ReportMeetingView> {
           if (state is ReportMeetingLoadDoneState) {
             await showDialog(
               context: context,
-              builder: (context) => const SuccessDialogContent(
-                title: 'Send successfully',
+              builder: (context) => SuccessDialogContent(
+                title: S.current.txtSendReportSuccess,
               ),
             );
             if (mounted) {
@@ -59,7 +60,7 @@ class _ReportMeetingViewState extends State<ReportMeetingView> {
             await showDialog(
               context: context,
               builder: (context) => ErrorDialogContent(
-                title: 'Send failed',
+                title: S.current.txtSendReportFailed,
                 content: state.exception.displayMessage,
               ),
             );
@@ -68,7 +69,15 @@ class _ReportMeetingViewState extends State<ReportMeetingView> {
       },
       child: Scaffold(
         //backgroundColor: AppColor.white,
-        appBar: AppBar(),
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: Navigator.of(context).pop,
+            icon: Icon(
+              Icons.arrow_back_ios_new,
+              color: colorsByTheme(context).defaultFont,
+            ),
+          ),
+        ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(
             horizontal: spacing16,
@@ -80,7 +89,7 @@ class _ReportMeetingViewState extends State<ReportMeetingView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Summarize your problem',
+                  S.current.txtSummarizeYourProblem,
                   style: TextStyle(
                     fontSize: titleMediumSize,
                     fontWeight: titleMediumWeight,
@@ -95,11 +104,16 @@ class _ReportMeetingViewState extends State<ReportMeetingView> {
                   runSpacing: spacing8,
                   children: problems
                       .map((e) => FilterChip(
+                          backgroundColor:
+                              colorsByTheme(context).selectableChipBg,
+                          shape: const StadiumBorder(),
                           label: Text(e),
                           labelStyle: TextStyle(
                             fontSize: bodyLargeSize,
                             fontWeight: bodyLargeWeight,
-                            color: colorsByTheme(context).defaultFont,
+                            color: selectedProblems[problems.indexOf(e)]
+                                ? AppColor.defaultFontLight
+                                : colorsByTheme(context).defaultFont,
                           ),
                           checkmarkColor: AppColor.defaultFontLight,
                           selectedColor: AppColor.mainColor2Surface,
@@ -115,7 +129,7 @@ class _ReportMeetingViewState extends State<ReportMeetingView> {
                   height: spacing16,
                 ),
                 Text(
-                  'Description',
+                  S.current.txtDescriptionLabel,
                   style: TextStyle(
                     fontSize: titleMediumSize,
                     fontWeight: titleMediumWeight,
@@ -127,6 +141,7 @@ class _ReportMeetingViewState extends State<ReportMeetingView> {
                 ),
                 AppOutlinedTextField(
                   controller: descriptionController,
+                  hintText: S.current.txtReportMeetingHint,
                   maxLines: 5,
                 ),
                 const SizedBox(
@@ -148,7 +163,7 @@ class _ReportMeetingViewState extends State<ReportMeetingView> {
                           ),
                         );
                   },
-                  text: 'Send',
+                  text: S.current.txtSend,
                   minimumSize: const Size.fromHeight(48),
                 ),
               ],
