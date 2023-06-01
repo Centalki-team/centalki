@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 
 import '../../../../../../base/define/styles.dart';
 import '../../../../../../base/define/theme.dart';
+import '../../../../../../base/helpers/time_helper.dart';
 import '../../../../../../base/widgets/dialog/error_dialog_content.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../../../history_detail/presentation/views/history_detail_page.dart';
@@ -62,8 +62,8 @@ class _HistoryViewState extends State<HistoryView> {
                     delegate: SliverChildBuilderDelegate(
                       childCount: 1,
                       (_, index) => Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: padding16, vertical: 24),
+                        padding: const EdgeInsets.fromLTRB(
+                            padding16, 0, padding16, padding12),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -77,7 +77,7 @@ class _HistoryViewState extends State<HistoryView> {
                                 color: colorsByTheme(context)
                                     .backgroundCardHistoryWallet,
                                 borderRadius: const BorderRadius.all(
-                                    Radius.circular(12.0)),
+                                    Radius.circular(radius12)),
                               ),
                               child: Column(
                                 children: [
@@ -172,11 +172,26 @@ class _HistoryViewState extends State<HistoryView> {
                                                 ),
                                               ),
                                             },
-                                            child: Card(
-                                              color: colorsByTheme(context)
-                                                  .backgroundCardsChip,
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        radius12),
+                                                color: colorsByTheme(context)
+                                                    .backgroundCardsChip,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: AppColor
+                                                        .shadow.shade200,
+                                                    blurRadius: 12,
+                                                    offset: const Offset(1, 4),
+                                                  )
+                                                ],
+                                              ),
                                               clipBehavior: Clip.hardEdge,
                                               child: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
                                                   Expanded(
                                                     flex: 2,
@@ -193,9 +208,13 @@ class _HistoryViewState extends State<HistoryView> {
                                                       progressIndicatorBuilder:
                                                           (context, url,
                                                                   downloadProgress) =>
-                                                              CircularProgressIndicator(
-                                                        value: downloadProgress
-                                                            .progress,
+                                                              Center(
+                                                        child:
+                                                            CircularProgressIndicator(
+                                                          value:
+                                                              downloadProgress
+                                                                  .progress,
+                                                        ),
                                                       ),
                                                       errorWidget: (context,
                                                               url, error) =>
@@ -205,10 +224,9 @@ class _HistoryViewState extends State<HistoryView> {
                                                   Expanded(
                                                     flex: 3,
                                                     child: Padding(
-                                                      padding: const EdgeInsets
-                                                              .symmetric(
-                                                          horizontal: 12.0,
-                                                          vertical: 8.0),
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              padding12),
                                                       child: Column(
                                                         crossAxisAlignment:
                                                             CrossAxisAlignment
@@ -229,6 +247,7 @@ class _HistoryViewState extends State<HistoryView> {
                                                               color: colorsByTheme(
                                                                       context)
                                                                   .defaultFont,
+                                                              height: 1,
                                                             ),
                                                           ),
                                                           Text(
@@ -246,12 +265,12 @@ class _HistoryViewState extends State<HistoryView> {
                                                               color: colorsByTheme(
                                                                       context)
                                                                   .defaultFont,
+                                                              height: 1,
                                                             ),
                                                           ),
                                                           Text(
-                                                            DateFormat(
-                                                                    'yyyy-MM-dd hh:mm a')
-                                                                .format(
+                                                            DateTimeHelper
+                                                                .timeToString5(
                                                               state
                                                                       .sessionList[
                                                                           index]
@@ -268,6 +287,7 @@ class _HistoryViewState extends State<HistoryView> {
                                                                   bodyLargeWeight,
                                                               fontSize:
                                                                   bodyLargeSize,
+                                                              height: 1,
                                                             ),
                                                           ),
                                                         ],

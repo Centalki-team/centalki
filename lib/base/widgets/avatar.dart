@@ -60,8 +60,10 @@ class Avatar extends StatelessWidget {
                 fit: BoxFit.fill,
                 imageUrl: avatarUrl,
                 progressIndicatorBuilder: (context, url, downloadProgress) =>
-                    CircularProgressIndicator(
-                  value: downloadProgress.progress,
+                    Center(
+                  child: CircularProgressIndicator(
+                    value: downloadProgress.progress,
+                  ),
                 ),
                 errorWidget: (context, url, error) => Text(
                   _getUserDefaultAvatar(fullName),
