@@ -34,7 +34,7 @@ class _AccountInformationViewState extends State<AccountInformationView> {
 
   @override
   Widget build(BuildContext context) =>
-      BlocListener<AccountInformationBloc, AccountInformationState>(
+      BlocConsumer<AccountInformationBloc, AccountInformationState>(
         listener: (context, state) {
           if (state is AccountInformationSavingState) {
             LoadingManager.setLoading(context, loading: true);
@@ -71,212 +71,230 @@ class _AccountInformationViewState extends State<AccountInformationView> {
             }
           }
         },
-        child: Scaffold(
-          //backgroundColor: AppColor.white,
-          body: Stack(
-            children: [
-              CustomScrollView(
-                slivers: [
-                  SliverAppBar.medium(
-                    leading: IconButton(
-                      onPressed: Navigator.of(context).pop,
-                      icon: Icon(
-                        Icons.arrow_back_ios_new,
-                        color: colorsByTheme(context).defaultFont,
-                      ),
-                    ),
-                    title: Text(
-                      S.current.txtAccountInformation,
-                      style: TextStyle(
-                        fontSize: headlineSmallSize,
-                        fontWeight: headlineSmallWeight,
-                        color: colorsByTheme(context).defaultFont,
-                      ),
-                    ),
-                    centerTitle: true,
-                  ),
-                  SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      childCount: 1,
-                      (_, index) => Padding(
-                        padding: const EdgeInsets.fromLTRB(16, 16, 16, 80),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                S.current.txtEmail,
-                                style: TextStyle(
-                                  fontSize: titleMediumSize,
-                                  fontWeight: titleMediumWeight,
-                                  color: colorsByTheme(context).defaultFont,
-                                ),
-                              ),
-                              TextField(
-                                controller: emailController,
-                                enabled: false,
-                                style: TextStyle(
-                                  fontSize: bodyLargeSize,
-                                  fontWeight: bodyLargeWeight,
-                                  color: colorsByTheme(context).defaultFont,
-                                ),
-                                decoration: const InputDecoration(
-                                  contentPadding: EdgeInsets.symmetric(
-                                    horizontal: 16,
-                                    vertical: 12,
-                                  ),
-                                  disabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(12.0)),
-                                    borderSide: BorderSide(
-                                      color: AppColor.background,
-                                      width: 2,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: spacing16),
-                              /*const Text(
-                            TextDoc.txtPhoneNumberTitle,
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          TextField(
-                            controller: phoneController,
-                            enabled: false,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
+        builder: (context, state) => state is AccountInformationLoadingState
+            ? Scaffold(
+                appBar: AppBar(),
+                body: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+              )
+            : Scaffold(
+                //backgroundColor: AppColor.white,
+                body: Stack(
+                  children: [
+                    CustomScrollView(
+                      slivers: [
+                        SliverAppBar.medium(
+                          expandedHeight: sliverAppBarHeight,
+                          leading: IconButton(
+                            onPressed: Navigator.of(context).pop,
+                            icon: Icon(
+                              Icons.arrow_back_ios_new,
+                              color: colorsByTheme(context).defaultFont,
                             ),
                           ),
-                          const SizedBox(
-                            height: spaceBetweenLine12,
-                          ),*/
-                              Text(
-                                S.current.txtDateOfBirthTitle,
-                                style: TextStyle(
-                                  fontSize: titleMediumSize,
-                                  fontWeight: titleMediumWeight,
-                                  color: colorsByTheme(context).defaultFont,
-                                ),
-                              ),
-                              TextField(
-                                controller: dateOfBirthController,
-                                readOnly: true,
-                                style: TextStyle(
-                                  fontSize: bodyLargeSize,
-                                  fontWeight: bodyLargeWeight,
-                                  color: colorsByTheme(context).defaultFont,
-                                ),
-                                decoration: InputDecoration(
-                                  contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 16,
-                                    vertical: 12,
-                                  ),
-                                  enabledBorder: const OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(radius8)),
-                                    borderSide: BorderSide(
-                                      color: AppColor.container,
-                                      width: enabledOutlineWidthTextField,
+                          title: Text(
+                            S.current.txtAccountInformation,
+                            style: TextStyle(
+                              fontSize: headlineSmallSize,
+                              fontWeight: headlineSmallWeight,
+                              color: colorsByTheme(context).defaultFont,
+                            ),
+                          ),
+                          centerTitle: true,
+                        ),
+                        SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                            childCount: 1,
+                            (_, index) => Padding(
+                              padding:
+                                  const EdgeInsets.fromLTRB(16, 16, 16, 80),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      S.current.txtEmail,
+                                      style: TextStyle(
+                                        fontSize: titleMediumSize,
+                                        fontWeight: titleMediumWeight,
+                                        color:
+                                            colorsByTheme(context).defaultFont,
+                                      ),
                                     ),
-                                  ),
-                                  focusedBorder: const OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(radius8)),
-                                    borderSide: BorderSide(
-                                      color: AppColor.container,
-                                      width: enabledOutlineWidthTextField,
-                                    ),
-                                  ),
-                                  suffixIcon: IconButton(
-                                    onPressed: () async {
-                                      final datePicked = await showDatePicker(
-                                        context: context,
-                                        initialDate: DateTime.parse(
-                                            dateOfBirthController.text),
-                                        firstDate: DateTime(1900),
-                                        lastDate: DateTime.now(),
-                                        builder: (context, child) => Theme(
-                                          data: Theme.of(context).copyWith(
-                                            textTheme: const TextTheme(
-                                              headline5: TextStyle(
-                                                fontFamily: 'NotoSans',
-                                              ),
-                                              // Selected Date landscape
-                                              headline6: TextStyle(
-                                                fontFamily: 'NotoSans',
-                                              ),
-                                              // Selected Date portrait
-                                              overline: TextStyle(
-                                                fontFamily: 'NotoSans',
-                                              ),
-                                              // Title - SELECT DATE
-                                              bodyText1: TextStyle(
-                                                fontFamily: 'NotoSans',
-                                              ),
-                                              // Year gridview picker
-                                              subtitle1: TextStyle(
-                                                fontFamily: 'NotoSans',
-                                              ),
-                                              // Date input
-                                              subtitle2: TextStyle(
-                                                fontFamily: 'NotoSans',
-                                              ),
-                                              // Month/Year picker
-                                              caption: TextStyle(
-                                                fontFamily: 'NotoSans',
-                                              ), // days
-                                            ),
-                                          ),
-                                          child: child!,
+                                    TextField(
+                                      controller: emailController,
+                                      enabled: false,
+                                      style: TextStyle(
+                                        fontSize: bodyLargeSize,
+                                        fontWeight: bodyLargeWeight,
+                                        color:
+                                            colorsByTheme(context).defaultFont,
+                                      ),
+                                      decoration: const InputDecoration(
+                                        contentPadding: EdgeInsets.symmetric(
+                                          horizontal: 16,
+                                          vertical: 12,
                                         ),
-                                      );
-                                      if (datePicked != null) {
-                                        if (mounted) {
-                                          context
-                                              .read<AccountInformationBloc>()
-                                              .add(
-                                                const AccountInformationChangeEvent(),
-                                              );
-                                          dateOfBirthController.text =
-                                              DateFormat('yyyy-MM-dd')
-                                                  .format(datePicked);
-                                        }
-                                      }
-                                    },
-                                    icon: Icon(
-                                      Icons.calendar_today_outlined,
-                                      color: colorsByTheme(context).defaultFont,
+                                        disabledBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(12.0)),
+                                          borderSide: BorderSide(
+                                            color: AppColor.background,
+                                            width: 2,
+                                          ),
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: spacing16),
-                              Text(
-                                S.current.txtGenderTitle,
-                                style: TextStyle(
-                                  fontSize: titleMediumSize,
-                                  fontWeight: titleMediumWeight,
-                                  color: colorsByTheme(context).defaultFont,
-                                ),
-                              ),
-                              BlocBuilder<AccountInformationBloc,
-                                  AccountInformationState>(
-                                builder: (context, state) {
-                                  if (state is AccountInformationLoadingState) {
-                                    return Container();
-                                  }
-                                  return GenderRadioButtonGroup(
-                                    gender: gender,
-                                    genderCallback: (selectedValue) {
-                                      gender = selectedValue;
-                                      context.read<AccountInformationBloc>().add(
-                                          const AccountInformationChangeEvent());
-                                    },
-                                  );
-                                },
-                              ),
-                              const SizedBox(height: spacing16),
-                              /*const Text(
+                                    const SizedBox(height: spacing16),
+                                    Text(
+                                      S.current.txtDateOfBirthTitle,
+                                      style: TextStyle(
+                                        fontSize: titleMediumSize,
+                                        fontWeight: titleMediumWeight,
+                                        color:
+                                            colorsByTheme(context).defaultFont,
+                                      ),
+                                    ),
+                                    TextField(
+                                      controller: dateOfBirthController,
+                                      readOnly: true,
+                                      style: TextStyle(
+                                        fontSize: bodyLargeSize,
+                                        fontWeight: bodyLargeWeight,
+                                        color:
+                                            colorsByTheme(context).defaultFont,
+                                      ),
+                                      decoration: InputDecoration(
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                          horizontal: 16,
+                                          vertical: 12,
+                                        ),
+                                        enabledBorder: const OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(radius8)),
+                                          borderSide: BorderSide(
+                                            color: AppColor.container,
+                                            width: enabledOutlineWidthTextField,
+                                          ),
+                                        ),
+                                        focusedBorder: const OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(radius8)),
+                                          borderSide: BorderSide(
+                                            color: AppColor.container,
+                                            width: enabledOutlineWidthTextField,
+                                          ),
+                                        ),
+                                        suffixIcon: IconButton(
+                                          onPressed: () async {
+                                            final datePicked =
+                                                await showDatePicker(
+                                              context: context,
+                                              initialDate: DateTime.parse(
+                                                  dateOfBirthController.text),
+                                              firstDate: DateTime(1900),
+                                              lastDate: DateTime.now(),
+                                              initialEntryMode:
+                                                  DatePickerEntryMode
+                                                      .calendarOnly,
+                                              builder: (context, child) =>
+                                                  Theme(
+                                                data:
+                                                    Theme.of(context).copyWith(
+                                                  colorScheme: ColorScheme.dark(
+                                                    primary: AppColor
+                                                        .mainColor1Container,
+                                                    surface: colorsByTheme(
+                                                                context)
+                                                            .backgroundCardHistoryWallet ??
+                                                        AppColor.white,
+                                                    onSurface:
+                                                        colorsByTheme(context)
+                                                                .defaultFont ??
+                                                            AppColor.white,
+                                                    tertiary: AppColor
+                                                        .mainColor1Container,
+                                                  ),
+                                                  dialogBackgroundColor:
+                                                      colorsByTheme(context)
+                                                          .backgroundTheme,
+                                                  textTheme: const TextTheme(
+                                                    headline5: TextStyle(
+                                                      fontFamily: 'NotoSans',
+                                                    ),
+                                                    // Selected Date landscape
+                                                    headline6: TextStyle(
+                                                      fontFamily: 'NotoSans',
+                                                    ),
+                                                    // Selected Date portrait
+                                                    overline: TextStyle(
+                                                      fontFamily: 'NotoSans',
+                                                    ),
+                                                    // Title - SELECT DATE
+                                                    bodyText1: TextStyle(
+                                                      fontFamily: 'NotoSans',
+                                                    ),
+                                                    // Year gridview picker
+                                                    subtitle1: TextStyle(
+                                                      fontFamily: 'NotoSans',
+                                                    ),
+                                                    // Date input
+                                                    subtitle2: TextStyle(
+                                                      fontFamily: 'NotoSans',
+                                                    ),
+                                                    // Month/Year picker
+                                                    caption: TextStyle(
+                                                      fontFamily: 'NotoSans',
+                                                    ), // days
+                                                  ),
+                                                ),
+                                                child: child!,
+                                              ),
+                                            );
+                                            if (datePicked != null) {
+                                              if (mounted) {
+                                                context
+                                                    .read<
+                                                        AccountInformationBloc>()
+                                                    .add(
+                                                      const AccountInformationChangeEvent(),
+                                                    );
+                                                dateOfBirthController.text =
+                                                    DateFormat('yyyy-MM-dd')
+                                                        .format(datePicked);
+                                              }
+                                            }
+                                          },
+                                          icon: Icon(
+                                            Icons.calendar_today_outlined,
+                                            color: colorsByTheme(context)
+                                                .defaultFont,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(height: spacing16),
+                                    Text(
+                                      S.current.txtGenderTitle,
+                                      style: TextStyle(
+                                        fontSize: titleMediumSize,
+                                        fontWeight: titleMediumWeight,
+                                        color:
+                                            colorsByTheme(context).defaultFont,
+                                      ),
+                                    ),
+                                    GenderRadioButtonGroup(
+                                      gender: gender,
+                                      genderCallback: (selectedValue) {
+                                        gender = selectedValue;
+                                        context.read<AccountInformationBloc>().add(
+                                            const AccountInformationChangeEvent());
+                                      },
+                                    ),
+                                    const SizedBox(height: spacing16),
+                                    /*const Text(
                                 TextDoc.txtConnectionsTitle,
                                 style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
@@ -308,48 +326,48 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                                 const SizedBox(
                                   height: spaceBetweenLine12,
                                 ),*/
-                              /*const Text(
+                                    /*const Text(
                                 TextDoc.txtPaymentMethodTitle,
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
                               const SizedBox(
                                 height: spaceBetweenLine20,
                               ),*/
-                            ],
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
+                        ),
+                      ],
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        padding: const EdgeInsets.only(
+                          left: 16.0,
+                          right: 16.0,
+                          bottom: 24.0,
+                        ),
+                        color: colorsByTheme(context).backgroundTheme,
+                        child: AppElevatedButton(
+                          text: S.current.txtSaveChanges,
+                          minimumSize: const Size.fromHeight(48),
+                          onPressed: state is AccountInformationChangingState
+                              ? () =>
+                                  context.read<AccountInformationBloc>().add(
+                                        AccountInformationSaveEvent(
+                                          DateTime.parse(
+                                              dateOfBirthController.text),
+                                          gender,
+                                        ),
+                                      )
+                              : null,
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              BlocBuilder<AccountInformationBloc, AccountInformationState>(
-                builder: (context, state) => Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    padding: const EdgeInsets.only(
-                      left: 16.0,
-                      right: 16.0,
-                      bottom: 24.0,
-                    ),
-                    color: colorsByTheme(context).backgroundTheme,
-                    child: AppElevatedButton(
-                      text: S.current.txtSaveChanges,
-                      minimumSize: const Size.fromHeight(48),
-                      onPressed: state is AccountInformationChangingState
-                          ? () => context.read<AccountInformationBloc>().add(
-                                AccountInformationSaveEvent(
-                                  DateTime.parse(dateOfBirthController.text),
-                                  gender,
-                                ),
-                              )
-                          : null,
-                    ),
-                  ),
+                  ],
                 ),
               ),
-            ],
-          ),
-        ),
       );
 }

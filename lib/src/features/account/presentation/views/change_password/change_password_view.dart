@@ -59,6 +59,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
             child: CustomScrollView(
               slivers: [
                 SliverAppBar.medium(
+                  expandedHeight: sliverAppBarHeight,
                   leading: IconButton(
                     onPressed: Navigator.of(context).pop,
                     icon: Icon(
