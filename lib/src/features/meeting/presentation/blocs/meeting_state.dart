@@ -15,6 +15,10 @@ class MeetingEndState extends MeetingState {
   final bool notCompleted;
 }
 
+class MeetingInitAndroidState extends MeetingState {
+  const MeetingInitAndroidState();
+}
+
 class MeetingInitIosState extends MeetingState {
   const MeetingInitIosState({
     required this.options,
