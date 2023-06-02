@@ -158,6 +158,7 @@ class MeetingBloc extends Bloc<MeetingEvent, MeetingState> {
 
     if (Platform.isAndroid) {
       await JitsiMeetWrapper.joinMeeting(options: options, listener: listeners);
+      emit(const MeetingInitAndroidState());
     } else if (Platform.isIOS) {
       emit(MeetingInitIosState(
         options: options,
