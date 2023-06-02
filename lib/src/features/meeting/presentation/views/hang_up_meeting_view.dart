@@ -39,9 +39,9 @@ class _HangUpMeetingViewState extends State<HangUpMeetingView> {
                 fit: BoxFit.fill,
               ),
               const SizedBox(height: spacing24),
-              const Text(
-                TextDoc.txtRejoinDesc,
-                style: TextStyle(
+              Text(
+                S.current.txtRejoinDesc,
+                style: const TextStyle(
                   fontSize: bodySmallSize,
                   fontWeight: bodySmallWeight,
                   color: AppColor.shadow,
@@ -51,16 +51,16 @@ class _HangUpMeetingViewState extends State<HangUpMeetingView> {
               ),
               const SizedBox(height: spacing12),
               AppFilledButton(
-                text: TextDoc.txtRejoin,
+                text: S.current.txtRejoin,
                 onPressed: () {
                   Navigator.pop(context, true);
                 },
                 minimumSize: Size(width / 2, 48),
               ),
               const Spacer(),
-              const Text(
-                TextDoc.txtDoneDesc,
-                style: TextStyle(
+              Text(
+                S.current.txtDoneDesc,
+                style: const TextStyle(
                   fontSize: bodySmallSize,
                   fontWeight: bodySmallWeight,
                   color: AppColor.shadow,
@@ -87,9 +87,9 @@ class _HangUpMeetingViewState extends State<HangUpMeetingView> {
                   shadowColor: AppColor.shadow.shade200,
                   minimumSize: const Size.fromHeight(48),
                 ),
-                child: const Text(
-                  TextDoc.txtDone,
-                  style: TextStyle(
+                child: Text(
+                  S.current.txtDone,
+                  style: const TextStyle(
                     fontFamily: 'Dongle',
                     fontSize: labelLargeSize,
                     fontWeight: labelLargeWeight,

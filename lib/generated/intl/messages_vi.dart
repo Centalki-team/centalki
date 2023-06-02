@@ -145,6 +145,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Mô tả không thể vượt quá 500 ký tự"),
         "txtDoItLater":
             MessageLookupByLibrary.simpleMessage("Tôi sẽ thực hiện sau"),
+        "txtDone": MessageLookupByLibrary.simpleMessage("Hoàn thành"),
+        "txtDoneDesc": MessageLookupByLibrary.simpleMessage(
+            "Đánh dấu buổi học này hoàn tất và chuyển sang màn hình báo cáo và phản hồi. Xin lưu ý rằng bạn không thể tham gia lại sau đó."),
         "txtEachSessionDuration": MessageLookupByLibrary.simpleMessage(
             "Thời lượng mỗi buổi học là 30 phút"),
         "txtEachSessionPrice":
@@ -395,6 +398,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Xác thực lại"),
         "txtReauthenticateAccount": MessageLookupByLibrary.simpleMessage(
             "Xác thực lại tài khoản của bạn"),
+        "txtRejoin": MessageLookupByLibrary.simpleMessage("Tham gia lại"),
+        "txtRejoinDesc": MessageLookupByLibrary.simpleMessage(
+            "Bạn đã rời đi do nhầm lẫn hoặc do lỗi mạng? Đừng lo lắng, bạn có thể tham gia lại buổi học này và sẽ có thể tiếp tục học và thực hành."),
         "txtRemainingSessions": MessageLookupByLibrary.simpleMessage("Còn lại"),
         "txtRemoteVocabBookmarkSuccess": MessageLookupByLibrary.simpleMessage(
             "Xoá từ vựng đã lưu thành công!"),

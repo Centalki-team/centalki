@@ -3519,6 +3519,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Rejoin`
+  String get txtRejoin {
+    return Intl.message(
+      'Rejoin',
+      name: 'txtRejoin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Did you leave by mistake or due to a network error? Don't worry, you can rejoin this session and will be able to continue learning and practicing.`
+  String get txtRejoinDesc {
+    return Intl.message(
+      'Did you leave by mistake or due to a network error? Don\'t worry, you can rejoin this session and will be able to continue learning and practicing.',
+      name: 'txtRejoinDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mark this session as done to finalize it and proceed to report and feedback screen. Please note that you are unable to rejoin after that.`
+  String get txtDoneDesc {
+    return Intl.message(
+      'Mark this session as done to finalize it and proceed to report and feedback screen. Please note that you are unable to rejoin after that.',
+      name: 'txtDoneDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Done`
+  String get txtDone {
+    return Intl.message(
+      'Done',
+      name: 'txtDone',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
