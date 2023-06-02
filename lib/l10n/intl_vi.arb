@@ -345,5 +345,9 @@
   "txtSavedVocabsList": " trong danh sách từ vựng mà ",
   "txtYouSaved": "bạn lưu.",
   "txtForEachOne": "Với mỗi từ vựng, bạn sẽ học ý nghĩa và ví dụ của từ đó bằng cách ",
-  "txtTouchFlashcard": "chạm vào thẻ thông tin"
+  "txtTouchFlashcard": "chạm vào thẻ thông tin",
+  "txtRejoin": "Tham gia lại",
+  "txtRejoinDesc": "Bạn đã rời đi do nhầm lẫn hoặc do lỗi mạng? Đừng lo lắng, bạn có thể tham gia lại buổi học này và sẽ có thể tiếp tục học và thực hành.",
+  "txtDoneDesc": "Đánh dấu buổi học này hoàn tất và chuyển sang màn hình báo cáo và phản hồi. Xin lưu ý rằng bạn không thể tham gia lại sau đó.",
+  "txtDone": "Hoàn thành"
 }

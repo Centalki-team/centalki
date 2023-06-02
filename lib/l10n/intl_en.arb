@@ -345,5 +345,9 @@
   "txtSavedVocabsList": " in your vocabulary list that ",
   "txtYouSaved": "you saved.",
   "txtForEachOne": "For each one, you will learn its meaning and example simply by ",
-  "txtTouchFlashcard": "touching the flashcard"
+  "txtTouchFlashcard": "touching the flashcard",
+  "txtRejoin": "Rejoin",
+  "txtRejoinDesc": "Did you leave by mistake or due to a network error? Don't worry, you can rejoin this session and will be able to continue learning and practicing.",
+  "txtDoneDesc": "Mark this session as done to finalize it and proceed to report and feedback screen. Please note that you are unable to rejoin after that.",
+  "txtDone": "Done"
 }

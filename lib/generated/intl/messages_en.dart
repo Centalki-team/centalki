@@ -149,6 +149,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Description cannot exceed 500 characters"),
         "txtDoItLater":
             MessageLookupByLibrary.simpleMessage("I will do it later"),
+        "txtDone": MessageLookupByLibrary.simpleMessage("Done"),
+        "txtDoneDesc": MessageLookupByLibrary.simpleMessage(
+            "Mark this session as done to finalize it and proceed to report and feedback screen. Please note that you are unable to rejoin after that."),
         "txtEachSessionDuration": MessageLookupByLibrary.simpleMessage(
             "The duration of each session is 30 minutes"),
         "txtEachSessionPrice": MessageLookupByLibrary.simpleMessage(
@@ -399,6 +402,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Re-authenticate"),
         "txtReauthenticateAccount": MessageLookupByLibrary.simpleMessage(
             "Re-authenticate your account"),
+        "txtRejoin": MessageLookupByLibrary.simpleMessage("Rejoin"),
+        "txtRejoinDesc": MessageLookupByLibrary.simpleMessage(
+            "Did you leave by mistake or due to a network error? Don\'t worry, you can rejoin this session and will be able to continue learning and practicing."),
         "txtRemainingSessions":
             MessageLookupByLibrary.simpleMessage("Remaining"),
         "txtRemoteVocabBookmarkSuccess": MessageLookupByLibrary.simpleMessage(
