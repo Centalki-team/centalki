@@ -26,29 +26,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
 
     return BlocConsumer<ConnectTeacherBloc, ConnectTeacherState>(
       listener: (context, state) async {
-        if (state is ConnectTeacherLoadDoneState) {
-          context
-              .read<ConnectTeacherBloc>()
-              .add(const ConnectTeacherFindTeacher());
-        } else if (state is ConnectTeacherLoadFailureState) {
-          showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (context) => WarningDialogContent(
-              title: 'Create session failed!',
-              content: state.message,
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    Navigator.pop(context);
-                  },
-                  child: Text(S.current.txtOk),
-                ),
-              ],
-            ),
-          );
-        } else if (state is ConnectTeacherFindFailureState) {
+        if (state is ConnectTeacherFindFailureState) {
           showDialog(
             context: context,
             barrierDismissible: false,
@@ -145,21 +123,17 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                 alignment: Alignment.bottomCenter,
                 child: Wave(
                   widthScreen: width,
-                  heightScreen: (state is ConnectTeacherLoadingState ||
-                          state is ConnectTeacherInitState ||
-                          state is ConnectTeacherLoadFailureState ||
+                  heightScreen: (state is ConnectTeacherInitState ||
                           state is ConnectTeacherFindingTeacherState ||
                           state is ConnectTeacherFindFailureState)
                       ? height * 1 / 3
                       : (state is ConnectTeacherConnectingRoomState)
                           ? height
                           : height * 2 / 3,
-                  colors: state is ConnectTeacherLoadingState ||
-                          state is ConnectTeacherFindingTeacherState ||
+                  colors: state is ConnectTeacherFindingTeacherState ||
                           state is ConnectTeacherInitState
                       ? [AppColor.secondary]
-                      : (state is ConnectTeacherLoadFailureState ||
-                              state is ConnectTeacherConnectErrorState ||
+                      : (state is ConnectTeacherConnectErrorState ||
                               state is ConnectTeacherFindFailureState ||
                               state is ConnectTeacherCancelState)
                           ? [AppColor.error]

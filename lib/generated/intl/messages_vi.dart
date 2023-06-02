@@ -111,6 +111,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtConnectedTeacher": MessageLookupByLibrary.simpleMessage(
             "Kết nối với giáo viên thành công "),
         "txtConnectionsTitle": MessageLookupByLibrary.simpleMessage("Liên hệ"),
+        "txtCreateSessionFailed":
+            MessageLookupByLibrary.simpleMessage("Khởi tạo buổi học thất bại"),
         "txtCurrentPassword":
             MessageLookupByLibrary.simpleMessage("Mật khẩu hiện tại"),
         "txtDarkMode": MessageLookupByLibrary.simpleMessage("Chế độ tối"),
@@ -234,6 +236,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtIllustrationPhoto":
             MessageLookupByLibrary.simpleMessage("Ảnh minh hoạ"),
         "txtInstructions": MessageLookupByLibrary.simpleMessage("Hướng dẫn"),
+        "txtInsufficientBalanceContent": MessageLookupByLibrary.simpleMessage(
+            "Số dư trong tài khoản của bạn không đủ để tạo và tham gia lớp học với giáo viên. Hãy nạp tiền vào tài khoản để bắt đầu quá trình cải thiện tiếng Anh ngay hôm nay với chúng tôi!"),
+        "txtInsufficientBalanceTitle": MessageLookupByLibrary.simpleMessage(
+            "Không đủ số dư trong tài khoản"),
         "txtInterestedTopics":
             MessageLookupByLibrary.simpleMessage("Các chủ đề yêu thích"),
         "txtIntermediate": MessageLookupByLibrary.simpleMessage("Intermediate"),
@@ -257,6 +263,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Đánh dấu tất cả thông báo là đã đọc"),
         "txtMarkAllNotiAsUnread": MessageLookupByLibrary.simpleMessage(
             "Đánh dấu tất cả thông báo là chưa đọc"),
+        "txtMaybeLater": MessageLookupByLibrary.simpleMessage("Để sau"),
         "txtMinutes": MessageLookupByLibrary.simpleMessage("phút"),
         "txtMostPopular": MessageLookupByLibrary.simpleMessage("Phổ biến nhất"),
         "txtNewPassword": MessageLookupByLibrary.simpleMessage("Mật khẩu mới"),
@@ -379,6 +386,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Xác thực lại"),
         "txtReauthenticateAccount": MessageLookupByLibrary.simpleMessage(
             "Xác thực lại tài khoản của bạn"),
+        "txtRefillNow": MessageLookupByLibrary.simpleMessage("Nạp ngay"),
         "txtRemainingSessions": MessageLookupByLibrary.simpleMessage("Còn lại"),
         "txtRemove": MessageLookupByLibrary.simpleMessage("Xoá"),
         "txtRemoveFavoriteSuccess": MessageLookupByLibrary.simpleMessage(

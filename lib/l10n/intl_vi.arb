@@ -97,6 +97,7 @@
   "txtSuccessfullyCancel": "Huỷ thành công",
   "txtOk": "Đồng ý",
   "txtConnectedTeacher": "Kết nối với giáo viên thành công ",
+  "txtCreateSessionFailed": "Khởi tạo buổi học thất bại",
   "txtLaunchSession": ". Đang khởi tạo buổi học...",
   "txtCancelledTitle": "Đã huỷ buổi học",
   "txtCancelledContent": "Giáo viên đã huỷ buổi học này.\n  Bạn có muốn thử tìm một giáo viên khác không?",
@@ -324,5 +325,9 @@
   "txtOneSessionLearningTime": "Tổng thời gian học 30 phút",
   "txtSixSessionsLearningTime": "Tổng thời gian học 180 phút",
   "txtQualityVideoCall": "Cuộc gọi video chất lượng cao",
-  "txtSave16Percent": "Tiết kiệm 8%"
+  "txtSave16Percent": "Tiết kiệm 8%",
+  "txtInsufficientBalanceTitle": "Không đủ số dư trong tài khoản",
+  "txtInsufficientBalanceContent": "Số dư trong tài khoản của bạn không đủ để tạo và tham gia lớp học với giáo viên. Hãy nạp tiền vào tài khoản để bắt đầu quá trình cải thiện tiếng Anh ngay hôm nay với chúng tôi!",
+  "txtRefillNow": "Nạp ngay",
+  "txtMaybeLater": "Để sau"
 }

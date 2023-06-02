@@ -1,9 +1,12 @@
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../base/gateway/exception/app_exception.dart';
+import '../../../../../../base/temp_dio/dio_client.dart';
 import '../../../../../../di/di_module.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../../bookmark/domain/repositories/bookmark_repository.dart';
 import '../../../../bookmark/domain/usecases/create_topic_phrase_bookmark_usecase.dart';
 import '../../../../bookmark/domain/usecases/delete_topic_phrase_bookmark_usecase.dart';
@@ -27,6 +30,7 @@ class TopicDetailBloc extends Bloc<TopicDetailEvent, TopicDetailState> {
     on<TopicDetailPhraseRemoveBookmarkEvent>(_onRemoveTopicPhraseBookmark);
     on<TopicDetailAddFavoriteEvent>(_onAddFavorite);
     on<TopicDetailRemoveFavoriteEvent>(_onRemoveFavorite);
+    on<TopicDetailConnectTeacherEvent>(_onConnectTeacher);
     add(const TopicDetailInitEvent());
   }
 
@@ -147,5 +151,29 @@ class TopicDetailBloc extends Bloc<TopicDetailEvent, TopicDetailState> {
         const TopicDetailRemoveFavoriteDoneState(),
       ),
     );
+  }
+
+  void _onConnectTeacher(TopicDetailConnectTeacherEvent event, emit) async {
+    emit(const ConnectTeacherLoadingState());
+
+    final topicId = event.topicId;
+    if (FirebaseAuth.instance.currentUser != null) {
+      try {
+        final studentId = FirebaseAuth.instance.currentUser?.uid ?? '';
+        final sessionSchedule =
+            await DioClient.createNewSessionSchedule(studentId, topicId);
+        final sessionId = sessionSchedule.sessionId;
+        emit(ConnectTeacherLoadDoneState(sessionId: sessionId));
+      } on Exception catch (e) {
+        var message = e.toString().split("Exception: ")[1];
+        if (message.contains("Insufficient balance")) {
+          emit(ConnectTeacherInsufficientBalanceState(message));
+        } else {
+          emit(ConnectTeacherLoadFailureState(message));
+        }
+      }
+    } else {
+      emit(ConnectTeacherLoadFailureState(S.current.txtNotSignIn));
+    }
   }
 }

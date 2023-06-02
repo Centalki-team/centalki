@@ -10,19 +10,6 @@ class ConnectTeacherInitState extends ConnectTeacherState {
   const ConnectTeacherInitState();
 }
 
-class ConnectTeacherLoadingState extends ConnectTeacherState {
-  const ConnectTeacherLoadingState(String message) : super(message: message);
-}
-
-class ConnectTeacherLoadFailureState extends ConnectTeacherState {
-  const ConnectTeacherLoadFailureState(String message)
-      : super(message: message);
-}
-
-class ConnectTeacherLoadDoneState extends ConnectTeacherState {
-  const ConnectTeacherLoadDoneState(String message) : super(message: message);
-}
-
 class ConnectTeacherFindingTeacherState extends ConnectTeacherState {
   const ConnectTeacherFindingTeacherState(String message)
       : super(message: message);

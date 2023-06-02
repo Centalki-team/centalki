@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../base/define/colors.dart';
+import '../../../../../base/define/styles.dart';
 
 class WarningDialogContent extends StatelessWidget {
   const WarningDialogContent({
@@ -20,8 +20,21 @@ class WarningDialogContent extends StatelessWidget {
           Icons.warning_amber_outlined,
           color: AppColor.error,
         ),
-        title: Text(title),
-        content: Text(content),
+        title: Text(
+          title,
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            fontSize: titleLargeSize,
+          ),
+        ),
+        content: Text(
+          content,
+          style: const TextStyle(
+            fontSize: bodyLargeSize,
+            fontWeight: bodyLargeWeight,
+            height: 1,
+          ),
+        ),
         actions: actions,
       );
 }

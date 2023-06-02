@@ -5,9 +5,9 @@ abstract class ConnectTeacherEvent {
 }
 
 class ConnectTeacherInit extends ConnectTeacherEvent {
-  const ConnectTeacherInit(this.topicId);
+  const ConnectTeacherInit(this.sessionId);
 
-  final String topicId;
+  final String sessionId;
 }
 
 class ConnectTeacherCancelButtonPressed extends ConnectTeacherEvent {

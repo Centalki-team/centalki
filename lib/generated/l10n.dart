@@ -1030,6 +1030,16 @@ class S {
     );
   }
 
+  /// `Create session failed`
+  String get txtCreateSessionFailed {
+    return Intl.message(
+      'Create session failed',
+      name: 'txtCreateSessionFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `. Launching session...`
   String get txtLaunchSession {
     return Intl.message(
@@ -3305,6 +3315,46 @@ class S {
     return Intl.message(
       'Save 8%',
       name: 'txtSave16Percent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Insufficient Account Balance`
+  String get txtInsufficientBalanceTitle {
+    return Intl.message(
+      'Insufficient Account Balance',
+      name: 'txtInsufficientBalanceTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your account balance is currently insufficient to proceed with the creating and joining a speaking session with teachers. Consider refilling your account balance to start practicing your English speaking skills.`
+  String get txtInsufficientBalanceContent {
+    return Intl.message(
+      'Your account balance is currently insufficient to proceed with the creating and joining a speaking session with teachers. Consider refilling your account balance to start practicing your English speaking skills.',
+      name: 'txtInsufficientBalanceContent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Refill now`
+  String get txtRefillNow {
+    return Intl.message(
+      'Refill now',
+      name: 'txtRefillNow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Maybe later`
+  String get txtMaybeLater {
+    return Intl.message(
+      'Maybe later',
+      name: 'txtMaybeLater',
       desc: '',
       args: [],
     );

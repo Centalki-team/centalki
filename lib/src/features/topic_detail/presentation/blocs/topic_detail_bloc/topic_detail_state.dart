@@ -1,7 +1,9 @@
 part of 'topic_detail_bloc.dart';
 
 abstract class TopicDetailState extends Equatable {
-  const TopicDetailState();
+  const TopicDetailState({this.message = ''});
+
+  final String message;
 
   @override
   List<Object?> get props => [];
@@ -107,4 +109,24 @@ class TopicDetailAddFavoriteDoneState extends TopicDetailState {
 
 class TopicDetailRemoveFavoriteDoneState extends TopicDetailState {
   const TopicDetailRemoveFavoriteDoneState();
+}
+
+class ConnectTeacherLoadFailureState extends TopicDetailState {
+  const ConnectTeacherLoadFailureState(String message)
+      : super(message: message);
+}
+
+class ConnectTeacherInsufficientBalanceState extends TopicDetailState {
+  const ConnectTeacherInsufficientBalanceState(String message)
+      : super(message: message);
+}
+
+class ConnectTeacherLoadDoneState extends TopicDetailState {
+  const ConnectTeacherLoadDoneState({required this.sessionId});
+
+  final String sessionId;
+}
+
+class ConnectTeacherLoadingState extends TopicDetailState {
+  const ConnectTeacherLoadingState();
 }

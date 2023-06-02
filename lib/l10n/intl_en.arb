@@ -97,6 +97,7 @@
   "txtSuccessfullyCancel": "Successfully Cancel",
   "txtOk": "OK",
   "txtConnectedTeacher": "Connected to teacher ",
+  "txtCreateSessionFailed": "Create session failed",
   "txtLaunchSession": ". Launching session...",
   "txtCancelledTitle": "Cancelled session",
   "txtCancelledContent": "The teacher cancelled this session.\n  Do you want to try with another?",
@@ -324,5 +325,9 @@
   "txtOneSessionLearningTime": "Total 30 minutes of learning time",
   "txtSixSessionsLearningTime": "Total 180 minutes of learning time",
   "txtQualityVideoCall": "High-quality video call",
-  "txtSave16Percent": "Save 8%"
+  "txtSave16Percent": "Save 8%",
+  "txtInsufficientBalanceTitle": "Insufficient Account Balance",
+  "txtInsufficientBalanceContent": "Your account balance is currently insufficient to proceed with the creating and joining a speaking session with teachers. Consider refilling your account balance to start practicing your English speaking skills.",
+  "txtRefillNow": "Refill now",
+  "txtMaybeLater": "Maybe later"
 }
