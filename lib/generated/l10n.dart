@@ -3609,6 +3609,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Questions`
+  String get txtQuestions {
+    return Intl.message(
+      'Questions',
+      name: 'txtQuestions',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

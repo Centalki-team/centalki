@@ -354,5 +354,6 @@
   "txtInsufficientBalanceTitle": "Insufficient Account Balance",
   "txtInsufficientBalanceContent": "Your account balance is currently insufficient to proceed with the creating and joining a speaking session with teachers. Consider refilling your account balance to start practicing your English speaking skills.",
   "txtRefillNow": "Refill now",
-  "txtMaybeLater": "Maybe later"
+  "txtMaybeLater": "Maybe later",
+  "txtQuestions": "Questions"
 }

@@ -395,6 +395,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtPurchase": MessageLookupByLibrary.simpleMessage("Purchase"),
         "txtQualityVideoCall":
             MessageLookupByLibrary.simpleMessage("High-quality video call"),
+        "txtQuestions": MessageLookupByLibrary.simpleMessage("Questions"),
         "txtQuestionsAndAnswers":
             MessageLookupByLibrary.simpleMessage("Questions and Answers"),
         "txtRandomPhrases":

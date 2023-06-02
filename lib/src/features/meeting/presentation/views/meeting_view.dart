@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../base/define/theme.dart';
 import '../../../report_meeting/presentation/views/report_meeting_view.dart';
 import '../../../session_feedback/presentation/views/session_completed_view.dart';
 import '../blocs/meeting_bloc.dart';
@@ -17,6 +18,7 @@ class MeetingView extends StatefulWidget {
 class _MeetingViewState extends State<MeetingView> {
   @override
   Widget build(BuildContext context) => Scaffold(
+        backgroundColor: colorsByTheme(context).backgroundTheme,
         body: BlocConsumer<MeetingBloc, MeetingState>(
           listener: (context, state) async {
             if (state is MeetingEndState) {
