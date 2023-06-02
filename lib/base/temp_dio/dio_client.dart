@@ -194,4 +194,13 @@ class DioClient {
       return false;
     }
   }
+
+  static Future<dynamic> setDeviceToken(String idToken, String token) =>
+      _dio.post(
+        "$baseUrl/auth/device-token",
+        data: {"token": token},
+        options: Options(headers: {
+          "Authorization": 'Bearer $idToken',
+        }),
+      );
 }
