@@ -83,7 +83,8 @@ class JitsiMeetingOptions {
       'userDisplayName': userDisplayName,
       'userEmail': userEmail,
       'userAvatarUrl': userAvatarUrl,
-      'featureFlags': featureFlags,
+      'featureFlags':
+          featureFlags?.map((key, value) => MapEntry(key.name, value)),
       'configOverrides': configOverrides,
     };
   }
@@ -107,8 +108,10 @@ class JitsiMeetingOptions {
       userAvatarUrl:
           map['userAvatarUrl'] != null ? map['userAvatarUrl'] as String : null,
       featureFlags: map['featureFlags'] != null
-          ? Map<FeatureFlag, Object?>.from(
-              map['featureFlags'] as Map<FeatureFlag, Object?>)
+          ? map['featureFlags']!.map(
+              (key, value) => MapEntry(
+                  enumFromString<FeatureFlag>(FeatureFlag.values, key), value),
+            )
           : null,
       configOverrides: map['configOverrides'] != null
           ? Map<String, Object?>.from(

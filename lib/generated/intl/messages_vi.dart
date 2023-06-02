@@ -390,6 +390,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtPurchase": MessageLookupByLibrary.simpleMessage("Mua"),
         "txtQualityVideoCall": MessageLookupByLibrary.simpleMessage(
             "Cuộc gọi video chất lượng cao"),
+        "txtQuestions": MessageLookupByLibrary.simpleMessage("Câu hỏi"),
         "txtQuestionsAndAnswers":
             MessageLookupByLibrary.simpleMessage("Câu hỏi và câu trả lời"),
         "txtRandomPhrases":

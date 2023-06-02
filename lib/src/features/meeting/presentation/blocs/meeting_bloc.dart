@@ -64,7 +64,7 @@ class MeetingBloc extends Bloc<MeetingEvent, MeetingState> {
   }
 
   void _onLoad(MeetingLoadEvent event, emit) async {
-    var featureFlags = <FeatureFlag, bool>{
+    var featureFlags = <FeatureFlag, Object?>{
       FeatureFlag.isWelcomePageEnabled: false,
       FeatureFlag.isAddPeopleEnabled: false,
       FeatureFlag.isPrejoinPageEnabled: false,
@@ -156,7 +156,14 @@ class MeetingBloc extends Bloc<MeetingEvent, MeetingState> {
       },
     );
 
-    await JitsiMeetWrapper.joinMeeting(options: options, listener: listeners);
+    if (Platform.isAndroid) {
+      await JitsiMeetWrapper.joinMeeting(options: options, listener: listeners);
+    } else if (Platform.isIOS) {
+      emit(MeetingInitIosState(
+        options: options,
+        listeners: listeners,
+      ));
+    }
   }
 
   void _onJoinRoom(MeetingJoinRoomEvent event, emit) async {

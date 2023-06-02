@@ -84,7 +84,7 @@ class CustomJitsiView: NSObject, FlutterPlatformView {
         }
 
         _jitsiMeetView = JitsiMeetView()
-        _methodChannel = FlutterMethodChannel(name: "plugins.jitsi_meet_wrapper/jitsi_meet_native_view_\(viewId)", binaryMessenger: messenger!)
+        _methodChannel = FlutterMethodChannel(name: "plugins.jitsi_meet_wrapper/custom_jitsi_meet_native_view_\(viewId)", binaryMessenger: messenger!)
 
         self.frame = frame
         self.viewId = viewId
