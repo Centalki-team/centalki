@@ -5,14 +5,15 @@ import '../blocs/connect_teacher_bloc.dart';
 import 'connect_teacher_view.dart';
 
 class ConnectTeacherPage extends StatelessWidget {
-  const ConnectTeacherPage({Key? key, required this.topicId}) : super(key: key);
+  const ConnectTeacherPage({Key? key, required this.sessionId})
+      : super(key: key);
 
-  final String topicId;
+  final String sessionId;
 
   @override
   Widget build(BuildContext context) => BlocProvider(
-      create: (context) =>
-      ConnectTeacherBloc()..add(ConnectTeacherInit(topicId)),
-      child: const ConnectTeacherView(),
-    );
+        create: (context) =>
+            ConnectTeacherBloc()..add(ConnectTeacherInit(sessionId)),
+        child: const ConnectTeacherView(),
+      );
 }

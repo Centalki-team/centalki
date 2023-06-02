@@ -9,6 +9,8 @@ import '../../../../../base/widgets/toast/app_toast.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../connect_teacher/presentation/views/connect_teacher_page.dart';
+import '../../../connect_teacher/presentation/widgets/warning_dialog_content.dart';
+import '../../../payment/presentation/views/payment_page.dart';
 import '../../../topic_review/presentation/views/topic_review_page.dart';
 import '../../domain/entities/topic_detail_entity.dart';
 import '../blocs/topic_detail_bloc/topic_detail_bloc.dart';
@@ -193,10 +195,85 @@ class _TopicDetailViewState extends State<TopicDetailView> {
             context
                 .read<TopicDetailBloc>()
                 .add(TopicDetailLoadEvent(topicId: widget.topicId));
+          } else if (state is ConnectTeacherLoadingState) {
+            LoadingManager.setLoading(
+              context,
+              loading: true,
+            );
+          } else if (state is ConnectTeacherLoadDoneState) {
+            LoadingManager.setLoading(
+              context,
+              loading: false,
+            );
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ConnectTeacherPage(
+                  sessionId: state.sessionId,
+                ),
+              ),
+            );
+          } else if (state is ConnectTeacherLoadFailureState) {
+            LoadingManager.setLoading(
+              context,
+              loading: false,
+            );
+            showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (context) => WarningDialogContent(
+                title: S.current.txtCreateSessionFailed,
+                content: state.message,
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text(S.current.txtOk),
+                  ),
+                ],
+              ),
+            );
+          } else if (state is ConnectTeacherInsufficientBalanceState) {
+            LoadingManager.setLoading(
+              context,
+              loading: false,
+            );
+            showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (context) => WarningDialogContent(
+                title: S.current.txtInsufficientBalanceTitle,
+                content: S.current.txtInsufficientBalanceContent,
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      S.current.txtMaybeLater,
+                      style: const TextStyle(
+                        fontSize: labelLargeSize,
+                      ),
+                    ),
+                  ),
+                  AppFilledButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const PaymentPage(),
+                        ),
+                      );
+                    },
+                    text: S.current.txtRefillNow,
+                  ),
+                ],
+              ),
+            );
           }
         },
         child: Scaffold(
-          //backgroundColor: Colors.white,
           bottomNavigationBar: BlocBuilder<TopicDetailBloc, TopicDetailState>(
             buildWhen: (previous, current) =>
                 previous != current && current is TopicDetailLoadDoneState,
@@ -213,14 +290,10 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                       Expanded(
                         child: AppElevatedButton(
                           text: S.current.txtTalk,
-                          onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ConnectTeacherPage(
-                                topicId: state.topicDetail.topicId ?? '',
+                          onPressed: () => context.read<TopicDetailBloc>().add(
+                                TopicDetailConnectTeacherEvent(
+                                    topicId: widget.topicId),
                               ),
-                            ),
-                          ),
                         ),
                       ),
                       Container(

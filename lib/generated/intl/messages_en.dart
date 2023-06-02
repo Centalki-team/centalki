@@ -115,6 +115,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Connections"),
         "txtConsiderSaveMore": MessageLookupByLibrary.simpleMessage(
             "Consider saving some more in section"),
+        "txtCreateSessionFailed":
+            MessageLookupByLibrary.simpleMessage("Create session failed"),
         "txtCreateVocabBookmarkSuccess": MessageLookupByLibrary.simpleMessage(
             "Create vocabulary bookmark successfully!"),
         "txtCurrentPassword":
@@ -251,6 +253,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtIllustrationPhoto":
             MessageLookupByLibrary.simpleMessage("Illustration Photo"),
         "txtInstructions": MessageLookupByLibrary.simpleMessage("Instructions"),
+        "txtInsufficientBalanceContent": MessageLookupByLibrary.simpleMessage(
+            "Your account balance is currently insufficient to proceed with the creating and joining a speaking session with teachers. Consider refilling your account balance to start practicing your English speaking skills."),
+        "txtInsufficientBalanceTitle": MessageLookupByLibrary.simpleMessage(
+            "Insufficient Account Balance"),
         "txtInterestedTopics":
             MessageLookupByLibrary.simpleMessage("Interested Topics"),
         "txtIntermediate": MessageLookupByLibrary.simpleMessage("Intermediate"),
@@ -274,6 +280,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Mark all notifications as read"),
         "txtMarkAllNotiAsUnread": MessageLookupByLibrary.simpleMessage(
             "Mark all notifications as unread"),
+        "txtMaybeLater": MessageLookupByLibrary.simpleMessage("Maybe later"),
         "txtMinutes": MessageLookupByLibrary.simpleMessage("minutes"),
         "txtMostPopular": MessageLookupByLibrary.simpleMessage("Most Popular"),
         "txtNewPassword": MessageLookupByLibrary.simpleMessage("New password"),
@@ -402,6 +409,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Re-authenticate"),
         "txtReauthenticateAccount": MessageLookupByLibrary.simpleMessage(
             "Re-authenticate your account"),
+        "txtRefillNow": MessageLookupByLibrary.simpleMessage("Refill now"),
         "txtRejoin": MessageLookupByLibrary.simpleMessage("Rejoin"),
         "txtRejoinDesc": MessageLookupByLibrary.simpleMessage(
             "Did you leave by mistake or due to a network error? Don\'t worry, you can rejoin this session and will be able to continue learning and practicing."),

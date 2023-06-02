@@ -42,3 +42,9 @@ class TopicDetailRemoveFavoriteEvent extends TopicDetailEvent {
 
   final String id;
 }
+
+class TopicDetailConnectTeacherEvent extends TopicDetailEvent {
+  const TopicDetailConnectTeacherEvent({required this.topicId});
+
+  final String topicId;
+}

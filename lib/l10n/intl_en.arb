@@ -97,6 +97,7 @@
   "txtSuccessfullyCancel": "Successfully Cancel",
   "txtOk": "OK",
   "txtConnectedTeacher": "Connected to teacher ",
+  "txtCreateSessionFailed": "Create session failed",
   "txtLaunchSession": ". Launching session...",
   "txtCancelledTitle": "Cancelled session",
   "txtCancelledContent": "The teacher cancelled this session.\n  Do you want to try with another?",
@@ -349,5 +350,9 @@
   "txtRejoin": "Rejoin",
   "txtRejoinDesc": "Did you leave by mistake or due to a network error? Don't worry, you can rejoin this session and will be able to continue learning and practicing.",
   "txtDoneDesc": "Mark this session as done to finalize it and proceed to report and feedback screen. Please note that you are unable to rejoin after that.",
-  "txtDone": "Done"
+  "txtDone": "Done",
+  "txtInsufficientBalanceTitle": "Insufficient Account Balance",
+  "txtInsufficientBalanceContent": "Your account balance is currently insufficient to proceed with the creating and joining a speaking session with teachers. Consider refilling your account balance to start practicing your English speaking skills.",
+  "txtRefillNow": "Refill now",
+  "txtMaybeLater": "Maybe later"
 }

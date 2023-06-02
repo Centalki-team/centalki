@@ -97,6 +97,7 @@
   "txtSuccessfullyCancel": "Huỷ thành công",
   "txtOk": "Đồng ý",
   "txtConnectedTeacher": "Kết nối với giáo viên thành công ",
+  "txtCreateSessionFailed": "Khởi tạo buổi học thất bại",
   "txtLaunchSession": ". Đang khởi tạo buổi học...",
   "txtCancelledTitle": "Đã huỷ buổi học",
   "txtCancelledContent": "Giáo viên đã huỷ buổi học này.\n  Bạn có muốn thử tìm một giáo viên khác không?",
@@ -349,5 +350,9 @@
   "txtRejoin": "Tham gia lại",
   "txtRejoinDesc": "Bạn đã rời đi do nhầm lẫn hoặc do lỗi mạng? Đừng lo lắng, bạn có thể tham gia lại buổi học này và sẽ có thể tiếp tục học và thực hành.",
   "txtDoneDesc": "Đánh dấu buổi học này hoàn tất và chuyển sang màn hình báo cáo và phản hồi. Xin lưu ý rằng bạn không thể tham gia lại sau đó.",
-  "txtDone": "Hoàn thành"
+  "txtDone": "Hoàn thành",
+  "txtInsufficientBalanceTitle": "Không đủ số dư trong tài khoản",
+  "txtInsufficientBalanceContent": "Số dư trong tài khoản của bạn không đủ để tạo và tham gia lớp học với giáo viên. Hãy nạp tiền vào tài khoản để bắt đầu quá trình cải thiện tiếng Anh ngay hôm nay với chúng tôi!",
+  "txtRefillNow": "Nạp ngay",
+  "txtMaybeLater": "Để sau"
 }

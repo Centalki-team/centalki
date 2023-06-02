@@ -17,11 +17,10 @@ class ConnectTeacherBloc
     on<ConnectTeacherFindTeacher>(_onFindTeacher);
     on<ConnectTeacherConnectRoom>(_onConnectRoom);
     on<ConnectTeacherTryInternetConnect>(_onTryInternetConnect);
-    on<ConnectTeacherFindOtherTeacher>(_onFindOtherTeacher);
+    // on<ConnectTeacherFindOtherTeacher>(_onFindOtherTeacher);
   }
 
-  String sessionId = '';
-  late final String topicId;
+  late final String sessionId;
   late DatabaseReference statusSessionRef;
 
   @override
@@ -31,23 +30,8 @@ class ConnectTeacherBloc
   }
 
   void _onInit(ConnectTeacherInit event, emit) async {
-    emit(ConnectTeacherLoadingState(S.current.txtFindTeacher));
-
-    topicId = event.topicId;
-    if (FirebaseAuth.instance.currentUser != null) {
-      try {
-        final studentId = FirebaseAuth.instance.currentUser?.uid ?? '';
-        final sessionSchedule =
-            await DioClient.createNewSessionSchedule(studentId, topicId);
-        sessionId = sessionSchedule.sessionId;
-        emit(ConnectTeacherLoadDoneState(S.current.txtFindTeacher));
-      } on Exception catch (e) {
-        var message = e.toString().split("Exception: ")[1];
-        emit(ConnectTeacherLoadFailureState(message));
-      }
-    } else {
-      emit(ConnectTeacherLoadFailureState(S.current.txtNotSignIn));
-    }
+    sessionId = event.sessionId;
+    add(const ConnectTeacherFindTeacher());
   }
 
   void _onCancelButtonPressed(
@@ -113,7 +97,7 @@ class ConnectTeacherBloc
 
   void _onTryInternetConnect(ConnectTeacherTryInternetConnect event, emit) {}
 
-  void _onFindOtherTeacher(ConnectTeacherFindOtherTeacher event, emit) {
-    add(ConnectTeacherInit(topicId));
-  }
+  // void _onFindOtherTeacher(ConnectTeacherFindOtherTeacher event, emit) {
+  //   add(ConnectTeacherInit(topicId));
+  // }
 }
