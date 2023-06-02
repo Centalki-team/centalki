@@ -3320,6 +3320,256 @@ class S {
     );
   }
 
+  /// `No Internet connection was found or the server is down.`
+  String get txtNoConnectionOrServerDown {
+    return Intl.message(
+      'No Internet connection was found or the server is down.',
+      name: 'txtNoConnectionOrServerDown',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cannot get account information. Please try again later!`
+  String get txtGetAccountInformationInterceptor {
+    return Intl.message(
+      'Cannot get account information. Please try again later!',
+      name: 'txtGetAccountInformationInterceptor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create vocabulary bookmark successfully!`
+  String get txtCreateVocabBookmarkSuccess {
+    return Intl.message(
+      'Create vocabulary bookmark successfully!',
+      name: 'txtCreateVocabBookmarkSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remove vocabulary bookmark successfully!`
+  String get txtRemoteVocabBookmarkSuccess {
+    return Intl.message(
+      'Remove vocabulary bookmark successfully!',
+      name: 'txtRemoteVocabBookmarkSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `search topics by name`
+  String get txtSearchTopicHint {
+    return Intl.message(
+      'search topics by name',
+      name: 'txtSearchTopicHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Found`
+  String get txtFound {
+    return Intl.message(
+      'Found',
+      name: 'txtFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `topic`
+  String get txtTopicSingular {
+    return Intl.message(
+      'topic',
+      name: 'txtTopicSingular',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `topics`
+  String get txtTopicsPlural {
+    return Intl.message(
+      'topics',
+      name: 'txtTopicsPlural',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Summarize your problem`
+  String get txtSummarizeYourProblem {
+    return Intl.message(
+      'Summarize your problem',
+      name: 'txtSummarizeYourProblem',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please help us to know more about your problem`
+  String get txtReportMeetingHint {
+    return Intl.message(
+      'Please help us to know more about your problem',
+      name: 'txtReportMeetingHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send report successfully!`
+  String get txtSendReportSuccess {
+    return Intl.message(
+      'Send report successfully!',
+      name: 'txtSendReportSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send report failed!`
+  String get txtSendReportFailed {
+    return Intl.message(
+      'Send report failed!',
+      name: 'txtSendReportFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You currently have only`
+  String get txtYouHaveOnly {
+    return Intl.message(
+      'You currently have only',
+      name: 'txtYouHaveOnly',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Consider saving some more in section`
+  String get txtConsiderSaveMore {
+    return Intl.message(
+      'Consider saving some more in section',
+      name: 'txtConsiderSaveMore',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `of any topic to start learning.`
+  String get txtOfAnyTopic {
+    return Intl.message(
+      'of any topic to start learning.',
+      name: 'txtOfAnyTopic',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You will be presented with up to `
+  String get txtYouWillBePresented {
+    return Intl.message(
+      'You will be presented with up to ',
+      name: 'txtYouWillBePresented',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `5 random phrases`
+  String get txtRandomPhrases {
+    return Intl.message(
+      '5 random phrases',
+      name: 'txtRandomPhrases',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` in your vocabulary list that `
+  String get txtSavedVocabsList {
+    return Intl.message(
+      ' in your vocabulary list that ',
+      name: 'txtSavedVocabsList',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `you saved.`
+  String get txtYouSaved {
+    return Intl.message(
+      'you saved.',
+      name: 'txtYouSaved',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `For each one, you will learn its meaning and example simply by `
+  String get txtForEachOne {
+    return Intl.message(
+      'For each one, you will learn its meaning and example simply by ',
+      name: 'txtForEachOne',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `touching the flashcard`
+  String get txtTouchFlashcard {
+    return Intl.message(
+      'touching the flashcard',
+      name: 'txtTouchFlashcard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rejoin`
+  String get txtRejoin {
+    return Intl.message(
+      'Rejoin',
+      name: 'txtRejoin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Did you leave by mistake or due to a network error? Don't worry, you can rejoin this session and will be able to continue learning and practicing.`
+  String get txtRejoinDesc {
+    return Intl.message(
+      'Did you leave by mistake or due to a network error? Don\'t worry, you can rejoin this session and will be able to continue learning and practicing.',
+      name: 'txtRejoinDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mark this session as done to finalize it and proceed to report and feedback screen. Please note that you are unable to rejoin after that.`
+  String get txtDoneDesc {
+    return Intl.message(
+      'Mark this session as done to finalize it and proceed to report and feedback screen. Please note that you are unable to rejoin after that.',
+      name: 'txtDoneDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Done`
+  String get txtDone {
+    return Intl.message(
+      'Done',
+      name: 'txtDone',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Insufficient Account Balance`
   String get txtInsufficientBalanceTitle {
     return Intl.message(

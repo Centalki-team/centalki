@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../base/define/text.dart';
 import '../../../../../../base/gateway/exception/app_exception.dart';
 import '../../../../../../di/di_module.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../domain/entities/session_feedback_content_entity.dart';
 import '../../../domain/repositories/session_feedback_repository.dart';
 import '../../../domain/usecases/create_session_feedback_usecase.dart';
@@ -64,33 +64,33 @@ class SessionGiveFeedbackBloc
     var suggestionsError = '';
 
     if (event.rating == 0) {
-      ratingError = TextDoc.txtRatingEmptyError;
+      ratingError = S.current.txtRatingEmptyError;
     }
 
     if (event.summarySatisfied.isEmpty) {
-      satisfiedChipError = TextDoc.txtSatisfiedChipNotEmpty;
+      satisfiedChipError = S.current.txtSatisfiedChipNotEmpty;
     } else if (event.summarySatisfied.contains('OTHERS') &&
         event.satisfiedDescription.isEmpty) {
-      satisfiedDescriptionError = TextDoc.txtDescriptionNotEmpty;
+      satisfiedDescriptionError = S.current.txtDescriptionNotEmpty;
     }
 
     if (event.summaryNotSatisfied.isEmpty) {
-      notSatisfiedChipError = TextDoc.txtSatisfiedChipNotEmpty;
+      notSatisfiedChipError = S.current.txtSatisfiedChipNotEmpty;
     } else if (event.summaryNotSatisfied.contains('OTHERS') &&
         event.notSatisfiedDescription.isEmpty) {
-      notSatisfiedDescriptionError = TextDoc.txtDescriptionNotEmpty;
+      notSatisfiedDescriptionError = S.current.txtDescriptionNotEmpty;
     }
 
     if (event.satisfiedDescription.length > 500) {
-      satisfiedDescriptionError = TextDoc.txtDescriptionTooLong;
+      satisfiedDescriptionError = S.current.txtDescriptionTooLong;
     }
 
     if (event.notSatisfiedDescription.length > 500) {
-      notSatisfiedDescriptionError = TextDoc.txtDescriptionTooLong;
+      notSatisfiedDescriptionError = S.current.txtDescriptionTooLong;
     }
 
     if (event.suggestions.length > 500) {
-      suggestionsError = TextDoc.txtSuggestionsTooLong;
+      suggestionsError = S.current.txtSuggestionsTooLong;
     }
 
     emit(SessionGiveFeedbackValidateState(

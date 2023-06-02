@@ -317,8 +317,8 @@ class _AccountInformationViewState extends State<AccountInformationView> {
                                               connections[index] ? mainColor1 : support,
                                         ),
                                         child: Text(connections[index]
-                                            ? TextDoc.txtConnected
-                                            : TextDoc.txtConnect),
+                                            ? S.current.txtConnected
+                                            : S.current.txtConnect),
                                       ),
                                     ],
                                   ),

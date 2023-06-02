@@ -103,9 +103,9 @@ class _VocabsViewState extends State<VocabsView> {
             AppToast(
               duration: const Duration(seconds: 3),
               bottomOffset: 8.0,
-              message: const Text(
-                'Remove bookmark successfully!',
-                style: TextStyle(
+              message: Text(
+                S.current.txtRemoteVocabBookmarkSuccess,
+                style: const TextStyle(
                   fontSize: bodyLargeSize,
                   fontWeight: bodyLargeWeight,
                   color: AppColor.white,

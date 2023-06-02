@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
+import '../../../generated/l10n.dart';
 import '../../define/network_error_code.dart';
 import '../exception/network_exception.dart';
 
@@ -17,7 +18,7 @@ class DefaultErrorHandlerInterceptor extends QueuedInterceptor {
         error: NetworkException(
             errorCode: NetworkErrorCode.noHost,
             error: err,
-            displayMessage: 'Không có kết nối hoặc không tìm thấy máy chủ.',
+            displayMessage: S.current.txtNoConnectionOrServerDown,
             message: (err.error as SocketException).message,
             url: err.requestOptions.path),
         response: err.response,

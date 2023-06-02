@@ -31,7 +31,8 @@ class AccountInformationBloc
           accountInformation?.userProfile?.dateOfBirth ?? DateTime.now(),
           accountInformation?.userProfile?.accountGender ?? Gender.male));
     } on Exception catch (_) {
-      emit(const AccountInformationLoadFailureState('Không thể tải thông tin'));
+      emit(AccountInformationLoadFailureState(
+          S.current.txtGetAccountInformationInterceptor));
     }
   }
 
