@@ -3619,6 +3619,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Find teacher failed!`
+  String get txtFindTeacherFailed {
+    return Intl.message(
+      'Find teacher failed!',
+      name: 'txtFindTeacherFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Connect room failed!`
+  String get txtConnectRoomFailed {
+    return Intl.message(
+      'Connect room failed!',
+      name: 'txtConnectRoomFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sorry, it seems that no teacher is available at the moment. Please try again in 5 minutes.`
+  String get txtFindTeacherFailedContent {
+    return Intl.message(
+      'Sorry, it seems that no teacher is available at the moment. Please try again in 5 minutes.',
+      name: 'txtFindTeacherFailedContent',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

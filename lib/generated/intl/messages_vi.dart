@@ -107,6 +107,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Mật khẩu điền lại không thể vượt quá 100 ký tự"),
         "txtCongrats": MessageLookupByLibrary.simpleMessage("Xin chúc mừng!"),
         "txtConnect": MessageLookupByLibrary.simpleMessage("Kết nối"),
+        "txtConnectRoomFailed":
+            MessageLookupByLibrary.simpleMessage("Kết nối phòng học thất bại!"),
         "txtConnected": MessageLookupByLibrary.simpleMessage("Đã kết nối"),
         "txtConnectedTeacher": MessageLookupByLibrary.simpleMessage(
             "Kết nối với giáo viên thành công "),
@@ -210,6 +212,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tệp tin không được hỗ trợ"),
         "txtFindTeacher": MessageLookupByLibrary.simpleMessage(
             "Đang tìm giáo viên cho bạn..."),
+        "txtFindTeacherFailed":
+            MessageLookupByLibrary.simpleMessage("Tìm giáo viên thất bại!"),
+        "txtFindTeacherFailedContent": MessageLookupByLibrary.simpleMessage(
+            "Rất tiếc, có vẻ như hiện tại không có giáo viên nào đang rảnh. Vui lòng thử lại sau 5 phút."),
         "txtFluency": MessageLookupByLibrary.simpleMessage("Độ trôi chảy"),
         "txtForEachOne": MessageLookupByLibrary.simpleMessage(
             "Với mỗi từ vựng, bạn sẽ học ý nghĩa và ví dụ của từ đó bằng cách "),
