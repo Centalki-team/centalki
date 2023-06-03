@@ -17,63 +17,78 @@ class MeetingView extends StatefulWidget {
 }
 
 class _MeetingViewState extends State<MeetingView> {
+  late bool allowPop;
+
   @override
-  Widget build(BuildContext context) => Scaffold(
-        backgroundColor: colorsByTheme(context).backgroundTheme,
-        body: BlocConsumer<MeetingBloc, MeetingState>(
-          listener: (context, state) async {
-            if (state is MeetingEndState) {
-              var rejoin = false;
-              if (state.notCompleted) {
-                rejoin = await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const HangUpMeetingView(),
-                            settings: RouteSettings(
-                              arguments: state.session,
-                            ))) ??
-                    false;
-                if (mounted) {
-                  if (rejoin) {
-                    context.read<MeetingBloc>().add(
-                          MeetingInitEvent(session: state.session),
-                        );
+  void initState() {
+    super.initState();
+    allowPop = false;
+  }
+
+  @override
+  Widget build(BuildContext context) => WillPopScope(
+        onWillPop: () => Future.value(allowPop),
+        child: Scaffold(
+          backgroundColor: colorsByTheme(context).backgroundTheme,
+          body: SafeArea(
+            child: BlocConsumer<MeetingBloc, MeetingState>(
+              listener: (context, state) async {
+                if (state is MeetingEndState) {
+                  var rejoin = false;
+                  if (state.notCompleted) {
+                    rejoin = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const HangUpMeetingView(),
+                                settings: RouteSettings(
+                                  arguments: state.session,
+                                ))) ??
+                        false;
+                    if (mounted) {
+                      if (rejoin) {
+                        context.read<MeetingBloc>().add(
+                              MeetingInitEvent(session: state.session),
+                            );
+                      } else {
+                        allowPop = true;
+                        Navigator.pop(context);
+                      }
+                    }
                   } else {
-                    Navigator.pop(context);
+                    allowPop = true;
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SessionCompletedView(),
+                        settings: RouteSettings(
+                          arguments: ScreenArguments(
+                              state.session.sessionTeacher?.id ?? "",
+                              state.session.sessionId),
+                        ),
+                      ),
+                    );
+                    if (mounted) {
+                      Navigator.pop(context);
+                    }
                   }
                 }
-              } else {
-                await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SessionCompletedView(),
-                    settings: RouteSettings(
-                      arguments: ScreenArguments(
-                          state.session.sessionTeacher?.id ?? "",
-                          state.session.sessionId),
-                    ),
-                  ),
-                );
-                if (mounted) {
-                  Navigator.pop(context);
+              },
+              buildWhen: (previous, current) =>
+                  current is MeetingInitIosState ||
+                  current is MeetingInitAndroidState,
+              builder: (context, state) {
+                if (state is MeetingInitIosState) {
+                  return JitsiNativeViewTest(
+                    options: state.options,
+                    listener: state.listeners,
+                  );
+                } else if (state is MeetingInitAndroidState) {
+                  return const MeetingAndroidView();
                 }
-              }
-            }
-          },
-          buildWhen: (previous, current) =>
-              current is MeetingInitIosState ||
-              current is MeetingInitAndroidState,
-          builder: (context, state) {
-            if (state is MeetingInitIosState) {
-              return JitsiNativeViewTest(
-                options: state.options,
-                listener: state.listeners,
-              );
-            } else if (state is MeetingInitAndroidState) {
-              return const MeetingAndroidView();
-            }
-            return const Center();
-          },
+                return const Center();
+              },
+            ),
+          ),
         ),
       );
 }
