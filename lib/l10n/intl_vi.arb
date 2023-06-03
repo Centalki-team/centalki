@@ -355,5 +355,7 @@
   "txtInsufficientBalanceContent": "Số dư trong tài khoản của bạn không đủ để tạo và tham gia lớp học với giáo viên. Hãy nạp tiền vào tài khoản để bắt đầu quá trình cải thiện tiếng Anh ngay hôm nay với chúng tôi!",
   "txtRefillNow": "Nạp ngay",
   "txtMaybeLater": "Để sau",
-  "txtQuestions": "Câu hỏi"
+  "txtQuestions": "Câu hỏi",
+  "txtFindTeacherFailed": "Tìm giáo viên thất bại!",
+  "txtConnectRoomFailed": "Kết nối phòng học thất bại!"
 }

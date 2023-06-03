@@ -31,7 +31,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
             context: context,
             barrierDismissible: false,
             builder: (context) => WarningDialogContent(
-                title: 'Find teacher failed!',
+                title: S.current.txtFindTeacherFailed,
                 content: state.message,
                 actions: (state.message == TextDoc.txtInternetConnection)
                     ? [
@@ -71,7 +71,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
             context: context,
             barrierDismissible: false,
             builder: (context) => WarningDialogContent(
-              title: 'Connect room failed!',
+              title: S.current.txtConnectRoomFailed,
               content: state.message,
               actions: [
                 AppFilledButton(

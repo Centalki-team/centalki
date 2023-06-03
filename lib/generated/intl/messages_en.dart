@@ -108,6 +108,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Confirm password cannot exceed 100 characters"),
         "txtCongrats": MessageLookupByLibrary.simpleMessage("Congrats!"),
         "txtConnect": MessageLookupByLibrary.simpleMessage("Connect"),
+        "txtConnectRoomFailed":
+            MessageLookupByLibrary.simpleMessage("Connect room failed!"),
         "txtConnected": MessageLookupByLibrary.simpleMessage("Connected"),
         "txtConnectedTeacher":
             MessageLookupByLibrary.simpleMessage("Connected to teacher "),
@@ -213,6 +215,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("File is not supported"),
         "txtFindTeacher":
             MessageLookupByLibrary.simpleMessage("Finding teacher for you..."),
+        "txtFindTeacherFailed":
+            MessageLookupByLibrary.simpleMessage("Find teacher failed!"),
         "txtFluency": MessageLookupByLibrary.simpleMessage("Fluency"),
         "txtForEachOne": MessageLookupByLibrary.simpleMessage(
             "For each one, you will learn its meaning and example simply by "),
