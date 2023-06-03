@@ -217,6 +217,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Finding teacher for you..."),
         "txtFindTeacherFailed":
             MessageLookupByLibrary.simpleMessage("Find teacher failed!"),
+        "txtFindTeacherFailedContent": MessageLookupByLibrary.simpleMessage(
+            "Sorry, it seems that no teacher is available at the moment. Please try again in 5 minutes."),
         "txtFluency": MessageLookupByLibrary.simpleMessage("Fluency"),
         "txtForEachOne": MessageLookupByLibrary.simpleMessage(
             "For each one, you will learn its meaning and example simply by "),

@@ -357,5 +357,6 @@
   "txtMaybeLater": "Để sau",
   "txtQuestions": "Câu hỏi",
   "txtFindTeacherFailed": "Tìm giáo viên thất bại!",
-  "txtConnectRoomFailed": "Kết nối phòng học thất bại!"
+  "txtConnectRoomFailed": "Kết nối phòng học thất bại!",
+  "txtFindTeacherFailedContent": "Rất tiếc, có vẻ như hiện tại không có giáo viên nào đang rảnh. Vui lòng thử lại sau 5 phút."
 }

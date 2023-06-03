@@ -32,7 +32,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
             barrierDismissible: false,
             builder: (context) => WarningDialogContent(
                 title: S.current.txtFindTeacherFailed,
-                content: state.message,
+                content: S.current.txtFindTeacherFailedContent,
                 actions: (state.message == TextDoc.txtInternetConnection)
                     ? [
                         AppFilledButton(

@@ -357,5 +357,6 @@
   "txtMaybeLater": "Maybe later",
   "txtQuestions": "Questions",
   "txtFindTeacherFailed": "Find teacher failed!",
-  "txtConnectRoomFailed": "Connect room failed!"
+  "txtConnectRoomFailed": "Connect room failed!",
+  "txtFindTeacherFailedContent": "Sorry, it seems that no teacher is available at the moment. Please try again in 5 minutes."
 }

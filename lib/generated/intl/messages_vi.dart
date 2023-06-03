@@ -214,6 +214,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Đang tìm giáo viên cho bạn..."),
         "txtFindTeacherFailed":
             MessageLookupByLibrary.simpleMessage("Tìm giáo viên thất bại!"),
+        "txtFindTeacherFailedContent": MessageLookupByLibrary.simpleMessage(
+            "Rất tiếc, có vẻ như hiện tại không có giáo viên nào đang rảnh. Vui lòng thử lại sau 5 phút."),
         "txtFluency": MessageLookupByLibrary.simpleMessage("Độ trôi chảy"),
         "txtForEachOne": MessageLookupByLibrary.simpleMessage(
             "Với mỗi từ vựng, bạn sẽ học ý nghĩa và ví dụ của từ đó bằng cách "),
