@@ -56,17 +56,79 @@ class _JitsiNativeViewTestState extends State<JitsiNativeViewTest>
           //   },
           //   child: const Text('hangup'),
           // ),
-          SizedBox(
-            height: 500,
-            width: MediaQuery.of(context).size.width,
-            child: CustomJitsiNativeView(
-              options: widget.options,
-              onViewCreated: (controller) {
-                _controller = controller;
-                _controller?.attachListener(widget.listener);
-              },
-            ),
+          Stack(
+            alignment: AlignmentDirectional.bottomEnd,
+            children: [
+              SizedBox(
+                height: 400,
+                width: MediaQuery.of(context).size.width,
+                child: CustomJitsiNativeView(
+                  options: widget.options,
+                  listener: widget.listener,
+                  onViewCreated: (controller) {
+                    _controller = controller;
+                    _controller
+                      ?..attachListener(widget.listener)
+                      ..join();
+                  },
+                ),
+              ),
+              GestureDetector(
+                behavior: HitTestBehavior.deferToChild,
+                onTap: () async {
+                  await _controller?.hangUp();
+                  if (mounted) {
+                    context.read<MeetingBloc>().add(
+                          MeetingExitRoomEvent(
+                            notCompleted: BlocProvider.of<MeetingBloc>(context)
+                                .notCompleted,
+                          ),
+                        );
+                  }
+                },
+                child: Container(
+                  color: Colors.transparent,
+                  width: MediaQuery.of(context).size.width / 5 - 10,
+                  height: MediaQuery.of(context).size.width / 5 - 10,
+                ),
+              ),
+            ],
           ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(
+          //     vertical: spacing10,
+          //   ),
+          //   child: Align(
+          //     alignment: Alignment.center,
+          //     child: Material(
+          //       color: AppColor.error,
+          //       borderRadius: BorderRadius.circular(radius24),
+          //       child: InkWell(
+          //         onHover: (hover) {},
+          //         onTap: () {
+          //           context.read<MeetingBloc>().add(
+          //                 MeetingExitRoomEvent(
+          //                   notCompleted: BlocProvider.of<MeetingBloc>(context)
+          //                       .notCompleted,
+          //                 ),
+          //               );
+          //         },
+          //         borderRadius: BorderRadius.circular(radius24),
+          //         child: SizedBox(
+          //           width: MediaQuery.of(context).size.width * 1 / 3,
+          //           child: const Padding(
+          //             padding: EdgeInsets.symmetric(vertical: padding8),
+          //             child: Icon(
+          //               Icons.call_end_outlined,
+          //               size: iconButtonSize,
+          //               color: AppColor.white,
+          //             ),
+          //           ),
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
           Expanded(
             child: TabBarView(
               controller: _tabController,

@@ -19,6 +19,7 @@ import 'base/temp_dio/dio_client.dart';
 import 'config/main_config.dart';
 import 'di/di_module.dart';
 import 'di/injection/injection.dart';
+import 'fcm/set_up_fcm.dart';
 import 'firebase_options.dart';
 import 'generated/l10n.dart';
 import 'src/features/application/presentation/blocs/application_bloc/application_bloc.dart';
@@ -245,11 +246,17 @@ class _MyWidgetState extends State<MyWidget> {
                 _status = "not_email_verified";
               });
             } else {
+              if (mounted) {
+                setUpFCM(context);
+              }
               setState(() {
                 _status = "success";
               });
             }
           } else {
+            if (mounted) {
+              setUpFCM(context);
+            }
             setState(() {
               _status = "success";
             });

@@ -41,7 +41,7 @@ class CustomJitsiView: NSObject, FlutterPlatformView {
         binaryMessenger messenger: FlutterBinaryMessenger?
     ) {
         _options = JitsiMeetConferenceOptions.fromBuilder { (builder) in
-            if let jitsiOptions = args as? [String:Any]   {
+            if let jitsiOptions = args as? Dictionary<String, Any>  {
 
                 // set options which is received from flutter
                 let isAudioOnly = jitsiOptions["isAudioOnly"] as? Bool
@@ -54,6 +54,8 @@ class CustomJitsiView: NSObject, FlutterPlatformView {
                 let userEmail = jitsiOptions["userEmail"] as? String
 
                 let token = jitsiOptions["token"] as? String
+
+                let configOverrides = jitsiOptions["configOverrides"] as? Dictionary<String, Any>
 
                 // UserInfo Update param from flutter
                 let userInfo = JitsiMeetUserInfo()
@@ -80,6 +82,10 @@ class CustomJitsiView: NSObject, FlutterPlatformView {
                         builder.setFeatureFlag(key, withValue: value)
                     }
                 }
+
+                configOverrides?.forEach { key, value in
+                    builder.setConfigOverride(key, withValue: value);
+                }
             }
         }
 
@@ -104,15 +110,13 @@ class CustomJitsiView: NSObject, FlutterPlatformView {
     func onMethodCall(call: FlutterMethodCall, result: FlutterResult) {
         switch(call.method){
            case "join":
-             join( call, result: result)
-
+            join( call, result: result)
            case "hangUp":
-                hangUp( call, result: result)
-
+            hangUp( call, result: result)
            case "setAudioMuted":
-                setAudioMuted(call, result: result)
+            setAudioMuted(call, result: result)
            default:
-               result(FlutterMethodNotImplemented)
+            result(FlutterMethodNotImplemented)
            }
        }
 

@@ -10,12 +10,14 @@ class CustomJitsiNativeView extends StatelessWidget {
     Key? key,
     required this.onViewCreated,
     required this.options,
+    required this.listener,
   }) : super(
           key: key,
         );
 
   final CustomJitsiNativeViewCreatedCallback onViewCreated;
   final JitsiMeetingOptions options;
+  final JitsiMeetingListener listener;
 
   @override
   Widget build(BuildContext context) {
@@ -34,5 +36,6 @@ class CustomJitsiNativeView extends StatelessWidget {
   void _onPlatformViewCreated(int id) =>
       onViewCreated(CustomJitsiNativeViewController(
         id: id,
+        listener: listener,
       ));
 }

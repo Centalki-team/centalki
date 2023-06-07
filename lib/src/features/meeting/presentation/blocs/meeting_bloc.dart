@@ -81,12 +81,28 @@ class MeetingBloc extends Bloc<MeetingEvent, MeetingState> {
     var configOverrides = {
       "hideEmailInSettings": true,
       "hiddenPremeetingButtons": ['invite'],
-      "toolbarButtons": [
+      "toolbarButtons":
+          // Platform.isIOS
+          //     ? [
+          //         'camera',
+          //         'chat',
+          //         'desktop',
+          //         'fullscreen',
+          //         'help',
+          //         'microphone',
+          //         'participants-pane',
+          //         'raisehand',
+          //         'recording',
+          //         'select-background',
+          //         'whiteboard',
+          //       ]
+          //     :
+          [
         'camera',
         'chat',
         'desktop',
         'fullscreen',
-        'hangup',
+        //'hangup',
         'help',
         'microphone',
         'participants-pane',
@@ -165,6 +181,9 @@ class MeetingBloc extends Bloc<MeetingEvent, MeetingState> {
         listeners: listeners,
       ));
     }
+
+    // await JitsiMeetWrapper.joinMeeting(options: options, listener: listeners);
+    // emit(const MeetingInitAndroidState());
   }
 
   void _onJoinRoom(MeetingJoinRoomEvent event, emit) async {
