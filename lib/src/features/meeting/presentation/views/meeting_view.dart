@@ -79,6 +79,7 @@ class _MeetingViewState extends State<MeetingView> {
               builder: (context, state) {
                 if (state is MeetingInitIosState) {
                   return JitsiNativeViewTest(
+                    key: UniqueKey(),
                     options: state.options,
                     listener: state.listeners,
                   );
