@@ -20,7 +20,7 @@ class TopicSuggestionView extends StatefulWidget {
 class _TopicSuggestionViewState extends State<TopicSuggestionView> {
   final subjectController = TextEditingController();
   final descriptionController = TextEditingController();
-  String selectedLevel = '';
+  String? selectedLevel;
   bool allowPop = false;
 
   _showExitOptionDialog() async {

@@ -63,6 +63,12 @@ class TopicSuggestionBloc
 
     if (event.subjectAndCategory.isEmpty) {
       subjectError = S.current.txtSubjectNotEmpty;
+    } else if (RegExp(
+            r'[^ a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễếệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]+')
+        .hasMatch(event.subjectAndCategory)) {
+      subjectError = S.current.txtSubjectOnlyCharacters;
+    } else if (event.subjectAndCategory.replaceAll(' ', '').length < 3) {
+      subjectError = S.current.txtSubjectTooShort;
     } else if (event.subjectAndCategory.length > 200) {
       subjectError = S.current.txtSubjectTooLong;
     }
@@ -81,7 +87,7 @@ class TopicSuggestionBloc
     emit(const TopicSuggestionSendingState());
 
     final res = await sendTopicSuggestionUseCase(SendTopicSuggestionParams(
-      subject: event.subjectAndCategory,
+      subject: event.subjectAndCategory.trim(),
       description: event.descriptionAndRequirements,
       difficulty: event.selectedLevel,
     ));

@@ -358,5 +358,7 @@
   "txtQuestions": "Questions",
   "txtFindTeacherFailed": "Find teacher failed!",
   "txtConnectRoomFailed": "Connect room failed!",
-  "txtFindTeacherFailedContent": "Sorry, it seems that no teacher is available at the moment. Please try again in 5 minutes."
+  "txtFindTeacherFailedContent": "Sorry, it seems that no teacher is available at the moment. Please try again in 5 minutes.",
+  "txtSubjectTooShort": "Subject and Category must contain at least 3 non-whitespace characters",
+  "txtSubjectOnlyCharacters": "Subject and Category just contains characters"
 }
