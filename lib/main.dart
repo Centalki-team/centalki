@@ -22,6 +22,7 @@ import 'di/injection/injection.dart';
 import 'fcm/set_up_fcm.dart';
 import 'firebase_options.dart';
 import 'generated/l10n.dart';
+import 'src/features/account/presentation/blocs/your_account_bloc/your_account_bloc.dart';
 import 'src/features/application/presentation/blocs/application_bloc/application_bloc.dart';
 import 'src/features/authentication/presentation/views/sign_in/sign_in_page.dart';
 import 'src/features/authentication/presentation/views/verify_email.dart';
@@ -263,7 +264,9 @@ class _MyWidgetState extends State<MyWidget> {
           }
         }
       } on DioError catch (_) {
-        FirebaseAuth.instance.signOut();
+        context.read<YourAccountBloc>().add(
+              const YourAccountLogOutEvent(),
+            );
         setState(() {
           _status = "not_auth";
         });
