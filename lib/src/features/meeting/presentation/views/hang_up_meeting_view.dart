@@ -93,7 +93,7 @@ class _HangUpMeetingViewState extends State<HangUpMeetingView> {
                     fontFamily: 'Dongle',
                     fontSize: labelLargeSize,
                     fontWeight: labelLargeWeight,
-                    color: AppColor.white,
+                    color: AppColor.defaultFontLight,
                   ),
                 ),
               )
