@@ -358,5 +358,7 @@
   "txtQuestions": "Câu hỏi",
   "txtFindTeacherFailed": "Tìm giáo viên thất bại!",
   "txtConnectRoomFailed": "Kết nối phòng học thất bại!",
-  "txtFindTeacherFailedContent": "Rất tiếc, có vẻ như hiện tại không có giáo viên nào đang rảnh. Vui lòng thử lại sau 5 phút."
+  "txtFindTeacherFailedContent": "Rất tiếc, có vẻ như hiện tại không có giáo viên nào đang rảnh. Vui lòng thử lại sau 5 phút.",
+  "txtSubjectTooShort": "Chủ đề và thể loại phải chứa ít nhất 3 ký tự không phải khoảng trắng",
+  "txtSubjectOnlyCharacters": "Chủ đề và thể loại chỉ chứa chữ cái"
 }

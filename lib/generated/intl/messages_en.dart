@@ -531,10 +531,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Subject and Category"),
         "txtSubjectNotEmpty": MessageLookupByLibrary.simpleMessage(
             "Subject and Category cannot be empty"),
+        "txtSubjectOnlyCharacters": MessageLookupByLibrary.simpleMessage(
+            "Subject and Category just contains characters"),
         "txtSubjectSubTitle": MessageLookupByLibrary.simpleMessage(
             "You can give us general ideas of the topics you wish to be available. It\'s best to suggest 1 idea every time, so that we can manage them more efficiently."),
         "txtSubjectTooLong": MessageLookupByLibrary.simpleMessage(
             "Subject and Category cannot exceed 200 characters"),
+        "txtSubjectTooShort": MessageLookupByLibrary.simpleMessage(
+            "Subject and Category must contain at least 3 non-whitespace characters"),
         "txtSuccess": MessageLookupByLibrary.simpleMessage("Success"),
         "txtSuccessFeedback":
             MessageLookupByLibrary.simpleMessage("Send feedback successfully"),

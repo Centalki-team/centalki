@@ -528,10 +528,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Chủ đề và thể loại"),
         "txtSubjectNotEmpty": MessageLookupByLibrary.simpleMessage(
             "Chủ đề và thể loại không được bỏ trống"),
+        "txtSubjectOnlyCharacters": MessageLookupByLibrary.simpleMessage(
+            "Chủ đề và thể loại chỉ chứa chữ cái"),
         "txtSubjectSubTitle": MessageLookupByLibrary.simpleMessage(
             "Bạn có thể cung cấp các ý tưởng sơ khai về chủ đề bạn mong muốn. Chúng tôi sẽ xử lý hiệu quả hơn nếu bạn chỉ đề xuất một chủ đề mỗi lần."),
         "txtSubjectTooLong": MessageLookupByLibrary.simpleMessage(
             "Chủ đề và thể loại không thể vượt quá 200 ký tự"),
+        "txtSubjectTooShort": MessageLookupByLibrary.simpleMessage(
+            "Chủ đề và thể loại phải chứa ít nhất 3 ký tự không phải khoảng trắng"),
         "txtSuccess": MessageLookupByLibrary.simpleMessage("Thành công"),
         "txtSuccessFeedback":
             MessageLookupByLibrary.simpleMessage("Gửi đánh giá thành công!"),

@@ -3649,6 +3649,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Subject and Category must contain at least 3 non-whitespace characters`
+  String get txtSubjectTooShort {
+    return Intl.message(
+      'Subject and Category must contain at least 3 non-whitespace characters',
+      name: 'txtSubjectTooShort',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subject and Category just contains characters`
+  String get txtSubjectOnlyCharacters {
+    return Intl.message(
+      'Subject and Category just contains characters',
+      name: 'txtSubjectOnlyCharacters',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
