@@ -29,12 +29,9 @@ class _SettingsFeedbackViewState extends State<SettingsFeedbackView> {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    print(width);
 
     return Scaffold(
-      //backgroundColor: Colors.white,
       appBar: AppBar(
-        //backgroundColor: AppColor.white,
         automaticallyImplyLeading: false,
         leading: GestureDetector(
           onTap: Navigator.of(context).pop,
