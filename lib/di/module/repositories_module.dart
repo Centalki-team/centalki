@@ -3,10 +3,13 @@ import '../../src/features/application/data/datasources/local_data/application_l
 import '../../src/features/application/data/repositories/application_repository_impl.dart';
 import '../../src/features/application/domain/repositories/application_repository.dart';
 import '../../src/features/application/presentation/blocs/application_bloc/application_bloc.dart';
+import '../../src/features/authentication/data/datasources/remote_data/log_out_remote_datasrc/log_out_remote_datasrc.dart';
 import '../../src/features/authentication/data/datasources/remote_data/self_review_remote_datasrc/self_review_remote_datasrc.dart';
 import '../../src/features/authentication/data/datasources/remote_data/sign_up_remote_datasrc/sign_up_remote_datasrc.dart';
+import '../../src/features/authentication/data/repositories/log_out_repo_impl/log_out_repo_impl.dart';
 import '../../src/features/authentication/data/repositories/self_review_repo_impl/self_review_repo_impl.dart';
 import '../../src/features/authentication/data/repositories/sign_up_repo_impl/sign_up_repo_impl.dart';
+import '../../src/features/authentication/domain/repositories/log_out_repo/log_out_repository.dart';
 import '../../src/features/authentication/domain/repositories/self_review_repo/self_review_repository.dart';
 import '../../src/features/authentication/domain/repositories/sign_up_repo/sign_up_repository.dart';
 import '../../src/features/bookmark/data/datasources/bookmark_datasrc/remote_data/bookmark_remote_datasrc.dart';
@@ -104,6 +107,8 @@ class RepositoriesModule extends DIModule {
           storageGateway: StorageGateway.defaultGateway(),
         ),
       )
+      ..registerLazySingleton<LogOutRemoteDatasource>(
+          LogOutRemoteDatasource.new)
       //Repositories
       ..registerLazySingleton<TopicRepository>(TopicRepositoryImpl.new)
       ..registerLazySingleton<TopicDetailRepository>(
@@ -137,6 +142,7 @@ class RepositoriesModule extends DIModule {
           TopicSuggestionRepositoryImpl.new)
       ..registerLazySingleton<ApplicationRepository>(
           ApplicationRepositoryImpl.new)
+      ..registerLazySingleton<LogOutRepository>(LogOutRepositoryImpl.new)
       // BLOCS
       ..registerSingleton<ApplicationBloc>(ApplicationBloc());
   }

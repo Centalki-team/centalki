@@ -38,8 +38,6 @@ Future<void> setUpFCM(context) async {
   );
   const initializationSettingsAndroid =
       AndroidInitializationSettings('@drawable/ic_centalki');
-  const initializationSettings =
-      InitializationSettings(android: initializationSettingsAndroid);
 
   //iOS
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
@@ -47,16 +45,21 @@ Future<void> setUpFCM(context) async {
     badge: true,
     sound: true,
   );
+  final initializationSettingsIOS = DarwinInitializationSettings(
+    onDidReceiveLocalNotification: (id, title, body, payload) => {
+      onClickNotification(context),
+    },
+  );
+
+  final initializationSettings = InitializationSettings(
+    android: initializationSettingsAndroid,
+    iOS: initializationSettingsIOS,
+  );
 
   final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
   await flutterLocalNotificationsPlugin.initialize(
     initializationSettings,
-    onDidReceiveNotificationResponse: (_) => Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const NotiListPage(),
-      ),
-    ),
+    onDidReceiveNotificationResponse: (_) => onClickNotification(context),
   );
 
   await flutterLocalNotificationsPlugin
@@ -90,11 +93,15 @@ Future<void> setUpFCM(context) async {
   });
 
   FirebaseMessaging.onMessageOpenedApp.listen((message) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const NotiListPage(),
-      ),
-    );
+    onClickNotification(context);
   });
+}
+
+void onClickNotification(context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => const NotiListPage(),
+    ),
+  );
 }
