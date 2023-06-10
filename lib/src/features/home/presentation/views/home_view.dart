@@ -14,9 +14,11 @@ class HomeView extends StatefulWidget {
   const HomeView({
     Key? key,
     this.tabIndex,
+    this.changeTabCallback,
   }) : super(key: key);
 
   final int? tabIndex;
+  final Function(int)? changeTabCallback;
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -145,6 +147,7 @@ class _HomeViewState extends State<HomeView>
               //backgroundColor: Colors.white,
               onTap: (newValue) {
                 currentIndex.value = newValue;
+                widget.changeTabCallback?.call(newValue);
                 _tabController.animateTo(newValue);
               },
               selectedItemColor: AppColor.mainColor1,

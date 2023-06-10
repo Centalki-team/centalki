@@ -136,51 +136,43 @@ class _MyAppState extends State<MyApp> {
             value: _bloc,
           ),
         ],
-        child: BlocListener<ApplicationBloc, ApplicationState>(
-          listenWhen: (previous, current) =>
-              (previous.locale != current.locale ||
-                  previous.isDarkMode != current.isDarkMode) &&
-              previous.status != UIStatus.initial,
-          listener: (context, state) {
-            savedTabIndex = 3;
-          },
-          child: BlocBuilder<ApplicationBloc, ApplicationState>(
-              bloc: _bloc,
-              buildWhen: (previous, current) =>
-                  previous != current || current.status == UIStatus.loadSuccess,
-              builder: (context, state) => MaterialApp(
-                    debugShowCheckedModeBanner: false,
-                    theme: getThemeData(
-                      context,
-                      isDarkTheme: state.isDarkMode,
-                    ),
-                    localizationsDelegates: [
-                      appLocalizationDelegate,
-                      GlobalMaterialLocalizations.delegate,
-                      GlobalWidgetsLocalizations.delegate,
-                      GlobalCupertinoLocalizations.delegate,
-                    ],
-                    supportedLocales: appLocalizationDelegate.supportedLocales,
-                    locale: Locale(state.locale),
-                    themeMode:
-                        state.isDarkMode ? ThemeMode.dark : ThemeMode.light,
-                    // theme: AppThemes.lightTheme,
-                    // darkTheme: AppThemes.darkTheme,
-                    home: state.status != UIStatus.loadSuccess
-                        ? const SplashScreen()
-                        : MyWidget(
-                            key: UniqueKey(),
-                            currentTabIndex: savedTabIndex,
+        child: BlocBuilder<ApplicationBloc, ApplicationState>(
+            bloc: _bloc,
+            buildWhen: (previous, current) =>
+                previous != current || current.status == UIStatus.loadSuccess,
+            builder: (context, state) => MaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  theme: getThemeData(
+                    context,
+                    isDarkTheme: state.isDarkMode,
+                  ),
+                  localizationsDelegates: [
+                    appLocalizationDelegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                  ],
+                  supportedLocales: appLocalizationDelegate.supportedLocales,
+                  locale: Locale(state.locale),
+                  themeMode:
+                      state.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+                  // theme: AppThemes.lightTheme,
+                  // darkTheme: AppThemes.darkTheme,
+                  home: state.status != UIStatus.loadSuccess
+                      ? const SplashScreen()
+                      : MyWidget(
+                          key: UniqueKey(),
+                          currentTabIndex: savedTabIndex,
+                          changeTabCallback: (value) => savedTabIndex = value,
+                        ),
+                  navigatorObservers: kDebugMode
+                      ? []
+                      : [
+                          FirebaseAnalyticsObserver(
+                            analytics: widget.firebaseAnalytics,
                           ),
-                    navigatorObservers: kDebugMode
-                        ? []
-                        : [
-                            FirebaseAnalyticsObserver(
-                              analytics: widget.firebaseAnalytics,
-                            ),
-                          ],
-                  )),
-        ),
+                        ],
+                )),
       );
 }
 
@@ -188,10 +180,12 @@ class MyWidget extends StatefulWidget {
   const MyWidget({
     super.key,
     this.currentTabIndex,
+    this.changeTabCallback,
     //this.uiStatus,
   });
 
   final int? currentTabIndex;
+  final Function(int)? changeTabCallback;
   //final UIStatus? uiStatus;
 
   @override
@@ -200,6 +194,7 @@ class MyWidget extends StatefulWidget {
 
 class _MyWidgetState extends State<MyWidget> {
   String _status = 'loading';
+  late int appCurrentTab;
 
   _checkToShowAppIntro() async {
     final check = await GetStatusAppIntroUseCase(
@@ -219,6 +214,7 @@ class _MyWidgetState extends State<MyWidget> {
 
   @override
   void initState() {
+    appCurrentTab = widget.currentTabIndex ?? 0;
     _checkToShowAppIntro();
     _requestAppTracking();
     // Right after the listener has been registered.
@@ -290,7 +286,12 @@ class _MyWidgetState extends State<MyWidget> {
         return const VerifyEmailView();
       case "success":
         return HomeView(
-          tabIndex: widget.currentTabIndex,
+          key: UniqueKey(),
+          tabIndex: appCurrentTab,
+          changeTabCallback: (value) {
+            appCurrentTab = value;
+            widget.changeTabCallback?.call(value);
+          },
         );
       default:
         return const SplashScreen();
