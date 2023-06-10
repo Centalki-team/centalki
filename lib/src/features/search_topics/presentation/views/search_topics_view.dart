@@ -12,6 +12,7 @@ import '../../../../shared/widgets/textfields/search_txt_field.dart';
 import '../../../topic_suggestion/presentation/views/topic_suggestion_page.dart';
 import '../../../topics/presentation/widgets/topic_card.dart';
 import '../blocs/search_topics_bloc/search_topics_bloc.dart';
+import '../widgets/search_topic_card.dart';
 
 class SearchTopicsView extends StatefulWidget {
   const SearchTopicsView({super.key});
@@ -50,33 +51,40 @@ class _SearchTopicsViewState extends State<SearchTopicsView> {
           child: Scaffold(
             //backgroundColor: Colors.white,
             appBar: AppBar(
-              leading: IconButton(
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: colorsByTheme(context).defaultFont,
-                ),
-                onPressed: () => Navigator.maybePop(context),
-              ),
-              //backgroundColor: Colors.white,
+              automaticallyImplyLeading: false,
               scrolledUnderElevation: 0.0,
               centerTitle: false,
               titleSpacing: 0.0,
-              toolbarHeight: 80.0,
-              title: SearchTextField(
-                focusNode: _focusNode,
-                controller: _searchController,
-                hintText: S.current.txtSearchTopicHint,
-                onSubmitted: (value) => context
-                    .read<SearchTopicsBloc>()
-                    .add(SearchTopicsQuerySubmitEvent(
-                      searchContent: value,
-                    )),
-              ),
-              actions: const [
-                SizedBox(
-                  width: spacing16,
+              toolbarHeight: 100.0,
+              flexibleSpace: SafeArea(
+                bottom: false,
+                child: Row(
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        Icons.arrow_back,
+                        color: colorsByTheme(context).defaultFont,
+                      ),
+                      onPressed: () => Navigator.maybePop(context),
+                    ),
+                    Expanded(
+                      child: SearchTextField(
+                        focusNode: _focusNode,
+                        controller: _searchController,
+                        hintText: S.current.txtSearchTopicHint,
+                        onSubmitted: (value) => context
+                            .read<SearchTopicsBloc>()
+                            .add(SearchTopicsQuerySubmitEvent(
+                              searchContent: value.trim(),
+                            )),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: spacing16,
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
             body: Column(
               children: [
@@ -88,7 +96,6 @@ class _SearchTopicsViewState extends State<SearchTopicsView> {
                       return Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: spacing16,
-                          vertical: spacing24,
                         ),
                         child: Row(
                           children: [
@@ -121,9 +128,15 @@ class _SearchTopicsViewState extends State<SearchTopicsView> {
                             padding: const EdgeInsets.symmetric(
                               horizontal: spacing16,
                             ),
-                            itemBuilder: (context, index) => TopicCard(
+                            itemBuilder: (context, index) => SearchTopicCard(
                               item: state.topicsListEntity.topics![index],
-                              onTap: () {},
+                              onFavTap: () {},
+                              onTopicsRefresh: () => context
+                                  .read<SearchTopicsBloc>()
+                                  .add(SearchTopicsQuerySubmitEvent(
+                                    searchContent:
+                                        _searchController.text.trim(),
+                                  )),
                             ),
                             separatorBuilder: (_, __) => const SizedBox(
                               height: spacing16,
