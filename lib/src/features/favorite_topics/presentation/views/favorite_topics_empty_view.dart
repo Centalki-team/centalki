@@ -34,6 +34,7 @@ class FavoriteTopicsEmptyView extends StatelessWidget {
                 color: colorsByTheme(context).defaultFont,
                 height: 1.0,
               ),
+              textAlign: TextAlign.center,
             ),
           ),
           const SizedBox(

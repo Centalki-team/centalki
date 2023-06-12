@@ -70,14 +70,14 @@ class SessionGiveFeedbackBloc
     if (event.summarySatisfied.isEmpty) {
       satisfiedChipError = S.current.txtSatisfiedChipNotEmpty;
     } else if (event.summarySatisfied.contains('OTHERS') &&
-        event.satisfiedDescription.isEmpty) {
+        event.satisfiedDescription.trim().isEmpty) {
       satisfiedDescriptionError = S.current.txtDescriptionNotEmpty;
     }
 
     if (event.summaryNotSatisfied.isEmpty) {
       notSatisfiedChipError = S.current.txtSatisfiedChipNotEmpty;
     } else if (event.summaryNotSatisfied.contains('OTHERS') &&
-        event.notSatisfiedDescription.isEmpty) {
+        event.notSatisfiedDescription.trim().isEmpty) {
       notSatisfiedDescriptionError = S.current.txtDescriptionNotEmpty;
     }
 

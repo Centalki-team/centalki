@@ -48,9 +48,7 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
               ),
             );
             if (mounted) {
-              Navigator.pop(context);
-              Navigator.pop(context);
-              Navigator.pop(context);
+              Navigator.of(context).popUntil((route) => route.isFirst);
             }
           } else if (state is SessionGiveFeedbackSendErrorState) {
             await showDialog(
@@ -81,11 +79,7 @@ class _SessionGiveFeedbackViewState extends State<SessionGiveFeedbackView> {
                     SliverAppBar.medium(
                       expandedHeight: sliverAppBarHeight,
                       leading: GestureDetector(
-                        onTap: (() {
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                        }),
+                        onTap: Navigator.of(context).pop,
                         child: Icon(
                           Icons.arrow_back,
                           color: colorsByTheme(context).defaultFont,

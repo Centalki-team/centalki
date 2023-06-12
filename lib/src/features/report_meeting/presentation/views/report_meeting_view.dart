@@ -34,7 +34,9 @@ class _ReportMeetingViewState extends State<ReportMeetingView> {
     "No voices",
     "Others"
   ];
-  var selectedProblems = <bool>[false, false, false, false, false, false];
+  ValueNotifier<List<bool>> selectedProblems =
+      ValueNotifier(<bool>[false, false, false, false, false, false]);
+  ValueNotifier<String> feedbackDesc = ValueNotifier("");
 
   @override
   Widget build(BuildContext context) {
@@ -99,32 +101,41 @@ class _ReportMeetingViewState extends State<ReportMeetingView> {
                 const SizedBox(
                   height: spacing8,
                 ),
-                Wrap(
-                  spacing: spacing16,
-                  runSpacing: spacing8,
-                  children: problems
-                      .map((e) => FilterChip(
-                          backgroundColor:
-                              colorsByTheme(context).selectableChipBg,
-                          shape: const StadiumBorder(),
-                          label: Text(e),
-                          labelStyle: TextStyle(
-                            fontSize: bodyLargeSize,
-                            fontWeight: bodyLargeWeight,
-                            color: selectedProblems[problems.indexOf(e)]
-                                ? AppColor.defaultFontLight
-                                : colorsByTheme(context).defaultFont,
-                          ),
-                          checkmarkColor: AppColor.defaultFontLight,
-                          selectedColor: AppColor.mainColor2Surface,
-                          selected: selectedProblems[problems.indexOf(e)],
-                          onSelected: (value) {
-                            setState(() {
-                              selectedProblems[problems.indexOf(e)] = value;
-                            });
-                          }))
-                      .toList(),
-                ),
+                ValueListenableBuilder(
+                    valueListenable: selectedProblems,
+                    builder: (_, value, __) => Wrap(
+                          spacing: spacing16,
+                          runSpacing: spacing8,
+                          children: problems
+                              .map(
+                                (e) => FilterChip(
+                                  backgroundColor:
+                                      colorsByTheme(context).selectableChipBg,
+                                  shape: const StadiumBorder(),
+                                  label: Text(e),
+                                  labelStyle: TextStyle(
+                                    fontSize: bodyLargeSize,
+                                    fontWeight: bodyLargeWeight,
+                                    color: value[problems.indexOf(e)]
+                                        ? AppColor.defaultFontLight
+                                        : colorsByTheme(context).defaultFont,
+                                  ),
+                                  checkmarkColor: AppColor.defaultFontLight,
+                                  selectedColor: AppColor.mainColor2Surface,
+                                  selected: value[problems.indexOf(e)],
+                                  onSelected: (selection) {
+                                    // setState(() {
+                                    //   selectedProblems[problems.indexOf(e)] = value;
+                                    // });
+                                    var newList =
+                                        List<bool>.from(selectedProblems.value);
+                                    newList[problems.indexOf(e)] = selection;
+                                    selectedProblems.value = newList;
+                                  },
+                                ),
+                              )
+                              .toList(),
+                        )),
                 const SizedBox(
                   height: spacing16,
                 ),
@@ -143,29 +154,42 @@ class _ReportMeetingViewState extends State<ReportMeetingView> {
                   controller: descriptionController,
                   hintText: S.current.txtReportMeetingHint,
                   maxLines: 5,
+                  maxLength: 500,
+                  onChanged: (value) => feedbackDesc.value = value,
                 ),
                 const SizedBox(
                   height: spacing12,
                 ),
-                AppFilledButton(
-                  onPressed: () async {
-                    var summary = <String>[];
-                    for (var i = 0; i < selectedProblems.length; i++) {
-                      if (selectedProblems[i]) {
-                        summary.add(problems[i]);
-                      }
-                    }
-                    context.read<ReportMeetingBloc>().add(
-                          ReportMeetingLoadEvent(
-                            teacherId: args.teacherId ?? '',
-                            problems: summary,
-                            description: descriptionController.text,
-                          ),
-                        );
-                  },
-                  text: S.current.txtSend,
-                  minimumSize: const Size.fromHeight(48),
-                ),
+                ValueListenableBuilder(
+                    valueListenable: selectedProblems,
+                    builder: (_, value, __) => ValueListenableBuilder(
+                        valueListenable: feedbackDesc,
+                        builder: (ctx, valueFb, w) => AppFilledButton(
+                              onPressed: value.any((element) => element == true)
+                                  ? (value.last && valueFb.trim().isEmpty)
+                                      ? null
+                                      : () {
+                                          var summary = <String>[];
+                                          for (var i = 0;
+                                              i < value.length;
+                                              i++) {
+                                            if (value[i]) {
+                                              summary.add(problems[i]);
+                                            }
+                                          }
+                                          context.read<ReportMeetingBloc>().add(
+                                                ReportMeetingLoadEvent(
+                                                  teacherId:
+                                                      args.teacherId ?? '',
+                                                  problems: summary,
+                                                  description: valueFb.trim(),
+                                                ),
+                                              );
+                                        }
+                                  : null,
+                              text: S.current.txtSend,
+                              minimumSize: const Size.fromHeight(48),
+                            ))),
               ],
             ),
           ),

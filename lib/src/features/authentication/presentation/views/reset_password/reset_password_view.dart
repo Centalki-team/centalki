@@ -96,11 +96,11 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                   ),
                   Text(
                     S.current.txtResetPasswordIntroduction,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: titleLargeSize,
                       fontWeight: titleLargeWeight,
                       height: 30 / 28,
-                      color: AppColor.defaultFontContainer,
+                      color: colorsByTheme(context).defaultFont,
                     ),
                   ),
                   const SizedBox(height: spacing16),
