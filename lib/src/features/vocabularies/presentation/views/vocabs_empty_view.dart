@@ -37,6 +37,7 @@ class VocabsEmptyView extends StatelessWidget {
                 color: colorsByTheme(context).defaultFont,
                 height: 1.0,
               ),
+              textAlign: TextAlign.center,
             ),
           ),
           const SizedBox(
@@ -55,6 +56,7 @@ class VocabsEmptyView extends StatelessWidget {
                 color: AppColor.shadow,
                 height: 20 / 22,
               ),
+              textAlign: TextAlign.center,
             ),
           ),
         ],
