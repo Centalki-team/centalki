@@ -38,18 +38,17 @@ class QuestionCard extends StatelessWidget {
           iconColor: colorsByTheme(context).expansionIcon,
           collapsedIconColor: colorsByTheme(context).expansionIcon,
           expandedCrossAxisAlignment: CrossAxisAlignment.start,
-          childrenPadding:
-              const EdgeInsets.fromLTRB(padding16, 0, padding8, padding16),
-          tilePadding:
-              const EdgeInsets.fromLTRB(padding16, padding8, padding8, 0),
+          childrenPadding: const EdgeInsets.fromLTRB(padding16, 0, padding8, padding16),
+          tilePadding: const EdgeInsets.fromLTRB(padding16, padding8, padding8, 0),
           title: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 '${index + 1}.',
                 style: TextStyle(
-                  fontSize: titleMediumSize,
-                  fontWeight: titleMediumWeight,
+                  height: 1.0,
+                  fontSize: titleSmallSize,
+                  fontWeight: titleSmallWeight,
                   color: colorsByTheme(context).defaultFont,
                 ),
               ),
@@ -58,6 +57,7 @@ class QuestionCard extends StatelessWidget {
                 child: Text(
                   questionContent,
                   style: TextStyle(
+                    height: 1.0,
                     fontSize: titleSmallSize,
                     fontWeight: titleSmallWeight,
                     color: colorsByTheme(context).defaultFont,

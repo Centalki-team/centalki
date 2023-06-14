@@ -56,8 +56,7 @@ class VocabLearningNotEnoughView extends StatelessWidget {
                 TextSpan(
                   children: [
                     TextSpan(
-                      text:
-                          '${S.current.txtYouHaveOnly} $currentVocabsQuantity.\n${S.current.txtConsiderSaveMore} ',
+                      text: '${S.current.txtYouHaveOnly} $currentVocabsQuantity.\n${S.current.txtConsiderSaveMore} ',
                       style: const TextStyle(
                         fontSize: bodyMediumSize,
                         fontWeight: bodyMediumWeight,

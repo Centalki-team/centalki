@@ -402,7 +402,7 @@ class _HistoryDetailViewState extends State<HistoryDetailView> {
                                           ?.feedbackDescription ??
                                       'No description',
                                   style: TextStyle(
-                                    height: 1.5,
+                                    height: 1.15,
                                     fontSize: bodyLargeSize,
                                     fontWeight: bodyLargeWeight,
                                     color: colorsByTheme(context).defaultFont,
@@ -436,7 +436,7 @@ class _HistoryDetailViewState extends State<HistoryDetailView> {
                                           .feedbackStudent!.suggestions!
                                       : 'No suggestions',
                                   style: TextStyle(
-                                    height: 1.5,
+                                    height: 1.15,
                                     fontSize: bodyLargeSize,
                                     fontWeight: bodyLargeWeight,
                                     color: colorsByTheme(context).defaultFont,
@@ -485,7 +485,7 @@ class _HistoryDetailViewState extends State<HistoryDetailView> {
                             width: spacing8,
                           ),
                           AppTextButton(
-                            minimumSize: const Size(124, 20),
+                            // minimumSize: const Size(124, 20),
                             onPressed: () => Navigator.push(
                               context,
                               MaterialPageRoute(

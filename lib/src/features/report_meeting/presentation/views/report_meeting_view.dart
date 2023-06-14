@@ -14,6 +14,7 @@ import '../blocs/report_meeting_bloc.dart';
 class ScreenArguments {
   final String? teacherId;
   final String sessionId;
+
   ScreenArguments(this.teacherId, this.sessionId);
 }
 
@@ -26,16 +27,8 @@ class ReportMeetingView extends StatefulWidget {
 
 class _ReportMeetingViewState extends State<ReportMeetingView> {
   final descriptionController = TextEditingController();
-  final problems = <String>[
-    "Teacher was late",
-    "Teacher did not join",
-    "Network was unstable",
-    "No videos",
-    "No voices",
-    "Others"
-  ];
-  ValueNotifier<List<bool>> selectedProblems =
-      ValueNotifier(<bool>[false, false, false, false, false, false]);
+  final problems = <String>["Teacher was late", "Teacher did not join", "Network was unstable", "No videos", "No voices", "Others"];
+  ValueNotifier<List<bool>> selectedProblems = ValueNotifier(<bool>[false, false, false, false, false, false]);
   ValueNotifier<String> feedbackDesc = ValueNotifier("");
 
   @override
@@ -109,16 +102,13 @@ class _ReportMeetingViewState extends State<ReportMeetingView> {
                           children: problems
                               .map(
                                 (e) => FilterChip(
-                                  backgroundColor:
-                                      colorsByTheme(context).selectableChipBg,
+                                  backgroundColor: colorsByTheme(context).selectableChipBg,
                                   shape: const StadiumBorder(),
                                   label: Text(e),
                                   labelStyle: TextStyle(
                                     fontSize: bodyLargeSize,
                                     fontWeight: bodyLargeWeight,
-                                    color: value[problems.indexOf(e)]
-                                        ? AppColor.defaultFontLight
-                                        : colorsByTheme(context).defaultFont,
+                                    color: value[problems.indexOf(e)] ? AppColor.defaultFontLight : colorsByTheme(context).defaultFont,
                                   ),
                                   checkmarkColor: AppColor.defaultFontLight,
                                   selectedColor: AppColor.mainColor2Surface,
@@ -127,8 +117,7 @@ class _ReportMeetingViewState extends State<ReportMeetingView> {
                                     // setState(() {
                                     //   selectedProblems[problems.indexOf(e)] = value;
                                     // });
-                                    var newList =
-                                        List<bool>.from(selectedProblems.value);
+                                    var newList = List<bool>.from(selectedProblems.value);
                                     newList[problems.indexOf(e)] = selection;
                                     selectedProblems.value = newList;
                                   },
@@ -170,17 +159,14 @@ class _ReportMeetingViewState extends State<ReportMeetingView> {
                                       ? null
                                       : () {
                                           var summary = <String>[];
-                                          for (var i = 0;
-                                              i < value.length;
-                                              i++) {
+                                          for (var i = 0; i < value.length; i++) {
                                             if (value[i]) {
                                               summary.add(problems[i]);
                                             }
                                           }
                                           context.read<ReportMeetingBloc>().add(
                                                 ReportMeetingLoadEvent(
-                                                  teacherId:
-                                                      args.teacherId ?? '',
+                                                  teacherId: args.teacherId ?? '',
                                                   problems: summary,
                                                   description: valueFb.trim(),
                                                 ),
