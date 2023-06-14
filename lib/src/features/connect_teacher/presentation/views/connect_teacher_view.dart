@@ -38,9 +38,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                         AppFilledButton(
                           text: S.current.txtTryAgain,
                           onPressed: () {
-                            pContext
-                                .read<ConnectTeacherBloc>()
-                                .add(ConnectTeacherTryInternetConnect());
+                            pContext.read<ConnectTeacherBloc>().add(ConnectTeacherTryInternetConnect());
                           },
                         )
                       ]
@@ -77,9 +75,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                 AppFilledButton(
                   text: S.current.txtTryAgain,
                   onPressed: () {
-                    pContext
-                        .read<ConnectTeacherBloc>()
-                        .add(ConnectTeacherTryInternetConnect());
+                    pContext.read<ConnectTeacherBloc>().add(ConnectTeacherTryInternetConnect());
                   },
                 )
               ],
@@ -123,19 +119,14 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                 alignment: Alignment.bottomCenter,
                 child: Wave(
                   widthScreen: width,
-                  heightScreen: (state is ConnectTeacherInitState ||
-                          state is ConnectTeacherFindingTeacherState ||
-                          state is ConnectTeacherFindFailureState)
+                  heightScreen: (state is ConnectTeacherInitState || state is ConnectTeacherFindingTeacherState || state is ConnectTeacherFindFailureState)
                       ? height * 1 / 3
                       : (state is ConnectTeacherConnectingRoomState)
                           ? height
                           : height * 2 / 3,
-                  colors: state is ConnectTeacherFindingTeacherState ||
-                          state is ConnectTeacherInitState
+                  colors: state is ConnectTeacherFindingTeacherState || state is ConnectTeacherInitState
                       ? [AppColor.secondary]
-                      : (state is ConnectTeacherConnectErrorState ||
-                              state is ConnectTeacherFindFailureState ||
-                              state is ConnectTeacherCancelState)
+                      : (state is ConnectTeacherConnectErrorState || state is ConnectTeacherFindFailureState || state is ConnectTeacherCancelState)
                           ? [AppColor.error]
                           : state is ConnectTeacherConnectingRoomState
                               ? [AppColor.support]
@@ -151,8 +142,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                   children: [
                     state is ConnectTeacherConnectingRoomState
                         ? CircleAvatar(
-                            backgroundColor:
-                                colorsByTheme(context).backgroundAvatar,
+                            backgroundColor: colorsByTheme(context).backgroundAvatar,
                             radius: 48,
                           )
                         : const SizedBox.shrink(),
@@ -179,8 +169,7 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                           final result = await showDialog(
                             context: context,
                             builder: (context) => AlertDialog(
-                              backgroundColor:
-                                  colorsByTheme(context).backgroundCardsChip,
+                              backgroundColor: colorsByTheme(context).backgroundCardsChip,
                               title: Text(
                                 S.current.txtCancelTitle,
                                 textAlign: TextAlign.center,
@@ -202,16 +191,14 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                                   children: [
                                     Expanded(
                                       child: AppElevatedButton(
-                                        onPressed: () =>
-                                            Navigator.pop(context, false),
+                                        onPressed: () => Navigator.pop(context, false),
                                         text: S.current.txtNo,
                                       ),
                                     ),
                                     const SizedBox(width: spacing10),
                                     Expanded(
                                       child: AppTextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(context, true),
+                                        onPressed: () => Navigator.pop(context, true),
                                         text: S.current.txtYes,
                                       ),
                                     ),
@@ -222,13 +209,11 @@ class _FindTeacherViewState extends State<ConnectTeacherView> {
                           ).then((value) => value ?? false);
                           if (result) {
                             if (mounted) {
-                              context.read<ConnectTeacherBloc>().add(
-                                  const ConnectTeacherCancelButtonPressed());
+                              context.read<ConnectTeacherBloc>().add(const ConnectTeacherCancelButtonPressed());
                             }
                           }
                         },
-                        icon: const Icon(Icons.close_rounded,
-                            color: AppColor.error),
+                        icon: const Icon(Icons.close_rounded, color: AppColor.error),
                         label: Text(
                           S.current.txtCancel,
                           style: const TextStyle(

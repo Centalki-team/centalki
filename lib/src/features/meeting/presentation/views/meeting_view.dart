@@ -61,9 +61,7 @@ class _MeetingViewState extends State<MeetingView> {
                       MaterialPageRoute(
                         builder: (context) => const SessionCompletedView(),
                         settings: RouteSettings(
-                          arguments: ScreenArguments(
-                              state.session.sessionTeacher?.id ?? "",
-                              state.session.sessionId),
+                          arguments: ScreenArguments(state.session.sessionTeacher?.id ?? "", state.session.sessionId),
                         ),
                       ),
                     );
@@ -73,9 +71,7 @@ class _MeetingViewState extends State<MeetingView> {
                   }
                 }
               },
-              buildWhen: (previous, current) =>
-                  current is MeetingInitIosState ||
-                  current is MeetingInitAndroidState,
+              buildWhen: (previous, current) => current is MeetingInitIosState || current is MeetingInitAndroidState,
               builder: (context, state) {
                 if (state is MeetingInitIosState) {
                   return JitsiNativeViewTest(

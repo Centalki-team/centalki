@@ -87,16 +87,13 @@ class _TopicDetailViewState extends State<TopicDetailView> {
     );
     if (result == true) {
       if (mounted) {
-        context.read<TopicDetailBloc>().add(
-            TopicDetailPhraseRemoveBookmarkEvent(
-                bookmarkId: item.bookmark!.id!));
+        context.read<TopicDetailBloc>().add(TopicDetailPhraseRemoveBookmarkEvent(bookmarkId: item.bookmark!.id!));
       }
     }
   }
 
   @override
-  Widget build(BuildContext context) =>
-      BlocListener<TopicDetailBloc, TopicDetailState>(
+  Widget build(BuildContext context) => BlocListener<TopicDetailBloc, TopicDetailState>(
         listener: (context, state) {
           if (state is TopicDetailLoadingState) {
             LoadingManager.setLoading(
@@ -176,9 +173,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                 ),
               ),
             ).show(context);
-            context
-                .read<TopicDetailBloc>()
-                .add(TopicDetailLoadEvent(topicId: widget.topicId));
+            context.read<TopicDetailBloc>().add(TopicDetailLoadEvent(topicId: widget.topicId));
           } else if (state is TopicDetailRemoveFavoriteDoneState) {
             AppToast(
               duration: const Duration(seconds: 3),
@@ -192,9 +187,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                 ),
               ),
             ).show(context);
-            context
-                .read<TopicDetailBloc>()
-                .add(TopicDetailLoadEvent(topicId: widget.topicId));
+            context.read<TopicDetailBloc>().add(TopicDetailLoadEvent(topicId: widget.topicId));
           } else if (state is ConnectTeacherLoadingState) {
             LoadingManager.setLoading(
               context,
@@ -275,8 +268,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
         },
         child: Scaffold(
           bottomNavigationBar: BlocBuilder<TopicDetailBloc, TopicDetailState>(
-            buildWhen: (previous, current) =>
-                previous != current && current is TopicDetailLoadDoneState,
+            buildWhen: (previous, current) => previous != current && current is TopicDetailLoadDoneState,
             builder: (context, state) {
               if (state is TopicDetailLoadDoneState) {
                 return Padding(
@@ -291,8 +283,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                         child: AppElevatedButton(
                           text: S.current.txtTalk,
                           onPressed: () => context.read<TopicDetailBloc>().add(
-                                TopicDetailConnectTeacherEvent(
-                                    topicId: widget.topicId),
+                                TopicDetailConnectTeacherEvent(topicId: widget.topicId),
                               ),
                         ),
                       ),
@@ -302,14 +293,10 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                         margin: const EdgeInsets.only(left: spacing8),
                         padding: const EdgeInsets.all(padding8),
                         decoration: BoxDecoration(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(radius12)),
+                          borderRadius: const BorderRadius.all(Radius.circular(radius12)),
                           border: Border.all(
-                            width:
-                                state.topicDetail.bookmark != null ? 2.0 : 1.0,
-                            color: state.topicDetail.bookmark != null
-                                ? AppColor.error
-                                : AppColor.shadow,
+                            width: state.topicDetail.bookmark != null ? 2.0 : 1.0,
+                            color: state.topicDetail.bookmark != null ? AppColor.error : AppColor.shadow,
                           ),
                         ),
                         child: GestureDetector(
@@ -319,8 +306,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                 barrierDismissible: false,
                                 context: context,
                                 builder: (context) => AlertDialog(
-                                  backgroundColor: colorsByTheme(context)
-                                      .backgroundCardsChip,
+                                  backgroundColor: colorsByTheme(context).backgroundCardsChip,
                                   title: Text(
                                     S.current.txtConfirmRemoveFavoriteTitle,
                                     style: TextStyle(
@@ -340,12 +326,10 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                   actions: [
                                     AppTextButton(
                                       text: S.current.txtCancel,
-                                      onPressed: () =>
-                                          Navigator.pop(context, false),
+                                      onPressed: () => Navigator.pop(context, false),
                                     ),
                                     ElevatedButton(
-                                      onPressed: () =>
-                                          Navigator.pop(context, true),
+                                      onPressed: () => Navigator.pop(context, true),
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: AppColor.error,
                                         foregroundColor: Colors.white,
@@ -363,19 +347,13 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                               ).then((confirmRemoved) => {
                                     if (confirmRemoved)
                                       {
-                                        context
-                                            .read<TopicDetailBloc>()
-                                            .add(TopicDetailRemoveFavoriteEvent(
-                                              id: state.topicDetail.bookmark
-                                                      ?.bookmarkId ??
-                                                  '',
+                                        context.read<TopicDetailBloc>().add(TopicDetailRemoveFavoriteEvent(
+                                              id: state.topicDetail.bookmark?.bookmarkId ?? '',
                                             )),
                                       }
                                   });
                             } else {
-                              context
-                                  .read<TopicDetailBloc>()
-                                  .add(TopicDetailAddFavoriteEvent(
+                              context.read<TopicDetailBloc>().add(TopicDetailAddFavoriteEvent(
                                     topicId: widget.topicId,
                                   ));
                             }
@@ -423,8 +401,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
             },
           ),
           body: BlocBuilder<TopicDetailBloc, TopicDetailState>(
-            buildWhen: (previous, current) =>
-                previous != current && (current is TopicDetailLoadDoneState),
+            buildWhen: (previous, current) => previous != current && (current is TopicDetailLoadDoneState),
             builder: (context, state) {
               if (state is TopicDetailLoadDoneState) {
                 return Stack(
@@ -451,8 +428,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(
-                          top: MediaQuery.of(context).padding.top),
+                      padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
                       child: IconButton(
                         padding: EdgeInsets.zero,
                         constraints: const BoxConstraints(),
@@ -483,8 +459,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                               Align(
                                 alignment: Alignment.center,
                                 child: Text(
-                                  state.topicDetail.topicName ??
-                                      'null name. Someone must be joking here',
+                                  state.topicDetail.topicName ?? 'null name. Someone must be joking here',
                                   style: const TextStyle(
                                     fontSize: headlineSmallSize,
                                     fontWeight: headlineSmallWeight,
@@ -496,15 +471,12 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                               SizedBox(
                                 height: 48.0,
                                 child: Row(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
+                                  crossAxisAlignment: CrossAxisAlignment.stretch,
                                   children: [
                                     Expanded(
                                       child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment: CrossAxisAlignment.end,
                                         children: [
                                           Text(
                                             S.current.txtTopicCategory,
@@ -516,14 +488,12 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                           ),
                                           Expanded(
                                             child: Text(
-                                              state.topicDetail.topicCategory ??
-                                                  'null. This topic is out of this world',
+                                              state.topicDetail.topicCategory ?? 'null. This topic is out of this world',
                                               style: TextStyle(
                                                 height: 0.9,
                                                 fontSize: bodySmallSize,
                                                 fontWeight: bodySmallWeight,
-                                                color: colorsByTheme(context)
-                                                    .defaultFont,
+                                                color: colorsByTheme(context).defaultFont,
                                               ),
                                               overflow: TextOverflow.ellipsis,
                                             ),
@@ -544,10 +514,8 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                     const SizedBox(width: spacing10),
                                     Expanded(
                                       child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             S.current.txtTopicLevel,
@@ -559,14 +527,12 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                           ),
                                           Expanded(
                                             child: Text(
-                                              state.topicDetail.topicLevel ??
-                                                  'null. This topic is for Einstein',
+                                              state.topicDetail.topicLevel ?? 'null. This topic is for Einstein',
                                               style: TextStyle(
                                                 height: 0.9,
                                                 fontSize: bodySmallSize,
                                                 fontWeight: bodySmallWeight,
-                                                color: colorsByTheme(context)
-                                                    .defaultFont,
+                                                color: colorsByTheme(context).defaultFont,
                                               ),
                                               overflow: TextOverflow.ellipsis,
                                             ),
@@ -579,8 +545,7 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                               ),
                               const SizedBox(height: spacing20),
                               Text(
-                                state.topicDetail.topicDescription ??
-                                    'null. This topic is about nothing',
+                                state.topicDetail.topicDescription ?? 'null. This topic is about nothing',
                                 style: const TextStyle(
                                   height: 1.15,
                                   fontSize: bodyLargeSize,
@@ -600,22 +565,18 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                 physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 padding: const EdgeInsets.all(0.0),
-                                itemCount:
-                                    state.topicDetail.topicPhrases?.length ?? 0,
+                                itemCount: state.topicDetail.topicPhrases?.length ?? 0,
                                 itemBuilder: (context, index) {
-                                  final phrase =
-                                      state.topicDetail.topicPhrases?[index];
+                                  final phrase = state.topicDetail.topicPhrases?[index];
                                   if (phrase == null) {
                                     return const Text('Null Phrase');
                                   }
                                   return PhraseCard(
                                     phraseEntity: phrase,
-                                    onRemovePhraseBookmark:
-                                        _showConfirmRemoveSavedPhrase,
+                                    onRemovePhraseBookmark: _showConfirmRemoveSavedPhrase,
                                   );
                                 },
-                                separatorBuilder: (context, index) =>
-                                    const SizedBox(
+                                separatorBuilder: (context, index) => const SizedBox(
                                   height: spacing20,
                                 ),
                               ),
@@ -633,23 +594,17 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                 physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 padding: const EdgeInsets.all(0.0),
-                                itemCount:
-                                    state.topicDetail.topicQuestions?.length ??
-                                        0,
+                                itemCount: state.topicDetail.topicQuestions?.length ?? 0,
                                 itemBuilder: (context, index) {
-                                  final questionContent = state.topicDetail
-                                      .topicQuestions?[index].questionContent;
-                                  final answers = state.topicDetail
-                                      .topicQuestions?[index].topicAnswers;
+                                  final questionContent = state.topicDetail.topicQuestions?[index].questionContent;
+                                  final answers = state.topicDetail.topicQuestions?[index].topicAnswers;
                                   return QuestionCard(
                                     index: index,
-                                    questionContent:
-                                        questionContent ?? 'null question',
+                                    questionContent: questionContent ?? 'null question',
                                     answers: answers ?? [],
                                   );
                                 },
-                                separatorBuilder: (context, index) =>
-                                    const SizedBox(
+                                separatorBuilder: (context, index) => const SizedBox(
                                   height: spacing16,
                                 ),
                               )

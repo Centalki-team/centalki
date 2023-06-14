@@ -24,8 +24,7 @@ class VocabLearningView extends StatefulWidget {
   State<VocabLearningView> createState() => _VocabLearningViewState();
 }
 
-class _VocabLearningViewState extends State<VocabLearningView>
-    with SingleTickerProviderStateMixin {
+class _VocabLearningViewState extends State<VocabLearningView> with SingleTickerProviderStateMixin {
   bool allowPop = true;
   late ValueNotifier<int> _currentTabIndex;
   late TabController _tabController;
@@ -151,8 +150,7 @@ class _VocabLearningViewState extends State<VocabLearningView>
                                     text: S.current.txtNextBtn,
                                     minimumSize: const Size(171, 40),
                                     onPressed: () {
-                                      _tabController
-                                          .animateTo(++_currentTabIndex.value);
+                                      _tabController.animateTo(++_currentTabIndex.value);
                                     },
                                   ),
                                   const SizedBox(
@@ -169,10 +167,7 @@ class _VocabLearningViewState extends State<VocabLearningView>
                                   AppFilledButton(
                                     text: S.current.txtCompleteBtn,
                                     minimumSize: const Size(171, 40),
-                                    onPressed: () => context
-                                        .read<VocabLearningBloc>()
-                                        .add(
-                                            const VocabLearningCompleteEvent()),
+                                    onPressed: () => context.read<VocabLearningBloc>().add(const VocabLearningCompleteEvent()),
                                   )
                                 ],
                               ],
@@ -196,12 +191,11 @@ class _VocabLearningViewState extends State<VocabLearningView>
                         AppElevatedButton(
                           text: S.current.txtOfCourse,
                           minimumSize: const Size(171, 40),
-                          onPressed: () =>
-                              context.read<VocabLearningBloc>().add(
-                                    VocabLearningStartEvent(
-                                      vocabsList: widget.vocabsList,
-                                    ),
-                                  ),
+                          onPressed: () => context.read<VocabLearningBloc>().add(
+                                VocabLearningStartEvent(
+                                  vocabsList: widget.vocabsList,
+                                ),
+                              ),
                         ),
                         const SizedBox(
                           height: spacing16,
@@ -219,10 +213,7 @@ class _VocabLearningViewState extends State<VocabLearningView>
               ),
             ),
             body: BlocBuilder<VocabLearningBloc, VocabLearningState>(
-              buildWhen: (previous, current) =>
-                  current is VocabLearningInitState ||
-                  current is VocabLearningStartState ||
-                  current is VocabLearningCongratState,
+              buildWhen: (previous, current) => current is VocabLearningInitState || current is VocabLearningStartState || current is VocabLearningCongratState,
               builder: (context, state) {
                 if (state is VocabLearningInitState) {
                   return Column(
@@ -246,8 +237,8 @@ class _VocabLearningViewState extends State<VocabLearningView>
                               TextSpan(
                                 text: S.current.txtYouWillBePresented,
                                 style: const TextStyle(
-                                  fontSize: bodySmallSize,
-                                  fontWeight: bodySmallWeight,
+                                  fontSize: bodyMediumSize,
+                                  fontWeight: bodyMediumWeight,
                                   color: AppColor.shadow,
                                   height: 16 / 20,
                                 ),
@@ -255,7 +246,7 @@ class _VocabLearningViewState extends State<VocabLearningView>
                               TextSpan(
                                 text: S.current.txtRandomPhrases,
                                 style: const TextStyle(
-                                  fontSize: bodySmallSize,
+                                  fontSize: bodyMediumSize,
                                   fontWeight: FontWeight.w700,
                                   color: AppColor.shadow,
                                   height: 16 / 20,
@@ -264,8 +255,8 @@ class _VocabLearningViewState extends State<VocabLearningView>
                               TextSpan(
                                 text: S.current.txtSavedVocabsList,
                                 style: const TextStyle(
-                                  fontSize: bodySmallSize,
-                                  fontWeight: bodySmallWeight,
+                                  fontSize: bodyMediumSize,
+                                  fontWeight: bodyMediumWeight,
                                   color: AppColor.shadow,
                                   height: 16 / 20,
                                 ),
@@ -273,7 +264,7 @@ class _VocabLearningViewState extends State<VocabLearningView>
                               TextSpan(
                                 text: '${S.current.txtYouSaved}\n\n',
                                 style: const TextStyle(
-                                  fontSize: bodySmallSize,
+                                  fontSize: bodyMediumSize,
                                   fontWeight: FontWeight.w700,
                                   color: AppColor.shadow,
                                   height: 16 / 20,
@@ -282,8 +273,8 @@ class _VocabLearningViewState extends State<VocabLearningView>
                               TextSpan(
                                 text: S.current.txtForEachOne,
                                 style: const TextStyle(
-                                  fontSize: bodySmallSize,
-                                  fontWeight: bodySmallWeight,
+                                  fontSize: bodyMediumSize,
+                                  fontWeight: bodyMediumWeight,
                                   color: AppColor.shadow,
                                   height: 16 / 20,
                                 ),
@@ -291,7 +282,7 @@ class _VocabLearningViewState extends State<VocabLearningView>
                               TextSpan(
                                 text: S.current.txtTouchFlashcard,
                                 style: const TextStyle(
-                                  fontSize: bodySmallSize,
+                                  fontSize: bodyMediumSize,
                                   fontWeight: FontWeight.w700,
                                   color: AppColor.shadow,
                                   height: 16 / 20,
@@ -300,8 +291,8 @@ class _VocabLearningViewState extends State<VocabLearningView>
                               const TextSpan(
                                 text: '.',
                                 style: TextStyle(
-                                  fontSize: bodySmallSize,
-                                  fontWeight: bodySmallWeight,
+                                  fontSize: bodyMediumSize,
+                                  fontWeight: bodyMediumWeight,
                                   color: AppColor.shadow,
                                   height: 16 / 20,
                                 ),

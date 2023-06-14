@@ -73,9 +73,7 @@ class SessionCompletedView extends StatelessWidget {
               text: S.current.txtSessionCompletedFeedbackBtn,
               onPressed: () => Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (_) => const SessionGiveFeedbackPage(),
-                    settings: RouteSettings(arguments: args)),
+                MaterialPageRoute(builder: (_) => const SessionGiveFeedbackPage(), settings: RouteSettings(arguments: args)),
               ),
             ),
             AppTextButton(
@@ -100,9 +98,7 @@ class SessionCompletedView extends StatelessWidget {
                 AppTextButton(
                   onPressed: () => Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (_) => const ReportMeetingPage(),
-                        settings: RouteSettings(arguments: args)),
+                    MaterialPageRoute(builder: (_) => const ReportMeetingPage(), settings: RouteSettings(arguments: args)),
                   ),
                   text: S.current.txtSessionCompletedReportBtn,
                 ),

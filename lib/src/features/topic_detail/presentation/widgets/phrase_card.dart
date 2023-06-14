@@ -34,8 +34,7 @@ class PhraseCard extends StatelessWidget {
           ),
           clipBehavior: Clip.hardEdge,
           child: ExpansionTile(
-            collapsedBackgroundColor:
-                colorsByTheme(context).backgroundCardsChip,
+            collapsedBackgroundColor: colorsByTheme(context).backgroundCardsChip,
             backgroundColor: colorsByTheme(context).backgroundCardsChip,
             iconColor: colorsByTheme(context).expansionIcon,
             collapsedIconColor: colorsByTheme(context).expansionIcon,
@@ -70,15 +69,11 @@ class PhraseCard extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           if (phraseEntity.bookmark == null) {
-                            if (phraseEntity.topicPhraseId != null &&
-                                phraseEntity.topicPhraseId!.isNotEmpty) {
-                              context.read<TopicDetailBloc>().add(
-                                  TopicDetailPhraseCreateBookmarkEvent(
-                                      phraseId: phraseEntity.topicPhraseId!));
+                            if (phraseEntity.topicPhraseId != null && phraseEntity.topicPhraseId!.isNotEmpty) {
+                              context.read<TopicDetailBloc>().add(TopicDetailPhraseCreateBookmarkEvent(phraseId: phraseEntity.topicPhraseId!));
                             }
                           } else {
-                            if (phraseEntity.bookmark!.id != null &&
-                                phraseEntity.bookmark!.id!.isNotEmpty) {
+                            if (phraseEntity.bookmark!.id != null && phraseEntity.bookmark!.id!.isNotEmpty) {
                               onRemovePhraseBookmark?.call(phraseEntity);
                             }
                           }
