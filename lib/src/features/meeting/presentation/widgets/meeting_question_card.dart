@@ -50,6 +50,7 @@ class MeetingQuestionCard extends StatelessWidget {
               Text(
                 '${index + 1}.',
                 style: TextStyle(
+                  height: 1.1,
                   fontSize: titleMediumSize,
                   fontWeight: titleMediumWeight,
                   color: colorsByTheme(context).defaultFont,
@@ -60,6 +61,7 @@ class MeetingQuestionCard extends StatelessWidget {
                 child: Text(
                   questionContent,
                   style: TextStyle(
+                    height: 1.1,
                     fontSize: titleSmallSize,
                     fontWeight: titleSmallWeight,
                     color: colorsByTheme(context).defaultFont,
