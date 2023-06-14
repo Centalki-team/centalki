@@ -297,7 +297,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtNewPasswordTooLong": MessageLookupByLibrary.simpleMessage(
             "New password cannot exceed 100 characters"),
         "txtNewPasswordTooShort": MessageLookupByLibrary.simpleMessage(
-            "New password must contain at least 6 characters"),
+            "New password must contain at least 8 characters"),
         "txtNewTeachers": MessageLookupByLibrary.simpleMessage("New Teachers"),
         "txtNewTopics": MessageLookupByLibrary.simpleMessage("New Topics"),
         "txtNext": MessageLookupByLibrary.simpleMessage("Next"),
@@ -386,6 +386,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Phone Number"),
         "txtPleaseTellUsWatUThink": MessageLookupByLibrary.simpleMessage(
             "Please tell us what you think"),
+        "txtPlsTellUsDetail": MessageLookupByLibrary.simpleMessage(
+            "Please describe detail of the problem if you select \'Others\' option."),
         "txtPreIntermediate":
             MessageLookupByLibrary.simpleMessage("Pre-Intermediate"),
         "txtPrevious":

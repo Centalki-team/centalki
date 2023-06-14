@@ -14,11 +14,12 @@ class ReportMeetingRepositoryImpl extends ReportMeetingRepository {
   @override
   Future<Either<AppException, bool>> reportMeeting(
       {required String reportedId,
+      required String sessionId,
       required List<String> summary,
       required String detail}) async {
     try {
       final result = await reportMeetingRemoteDatasource.reportMeeting(
-          reportedId: reportedId, summary: summary, detail: detail);
+          reportedId: reportedId, sessionId: sessionId, summary: summary, detail: detail);
       return Right(result);
     } on AppException catch (a) {
       return Left(a);

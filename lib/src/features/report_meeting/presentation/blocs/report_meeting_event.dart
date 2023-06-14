@@ -11,11 +11,13 @@ class ReportMeetingInitEvent extends ReportMeetingEvent {
 class ReportMeetingLoadEvent extends ReportMeetingEvent {
   const ReportMeetingLoadEvent({
     required this.teacherId,
+    required this.sessionId,
     required this.problems,
     required this.description,
   });
 
   final String teacherId;
+  final String sessionId;
   final List<String> problems;
   final String description;
 }

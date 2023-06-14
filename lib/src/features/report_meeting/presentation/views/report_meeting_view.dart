@@ -166,7 +166,9 @@ class _ReportMeetingViewState extends State<ReportMeetingView> {
                                           }
                                           context.read<ReportMeetingBloc>().add(
                                                 ReportMeetingLoadEvent(
-                                                  teacherId: args.teacherId ?? '',
+                                                  teacherId:
+                                                      args.teacherId ?? '',
+                                                  sessionId: args.sessionId,
                                                   problems: summary,
                                                   description: valueFb.trim(),
                                                 ),
