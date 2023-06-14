@@ -17,6 +17,7 @@ class ReportMeetingUseCase
   Future<Either<AppException, bool>> execute(ReportMeetingParams params) =>
       reportMeetingRepository.reportMeeting(
         reportedId: params.reportedId,
+        sessionId: params.sessionId,
         summary: params.summary,
         detail: params.detail,
       );

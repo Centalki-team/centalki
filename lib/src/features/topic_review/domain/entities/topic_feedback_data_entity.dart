@@ -45,6 +45,18 @@ class TopicFeedbackDataEntity extends Equatable {
       vocabFb.isEmpty &&
       qnaFb.isEmpty;
 
+  bool get isNotValid =>
+      (isContainOthersElement(nameFb) && nameFbDetail.trim().isEmpty) ||
+      (isContainOthersElement(picFb) && picFbDetail.trim().isEmpty) ||
+      (isContainOthersElement(descriptionFb) &&
+          descriptionFbDetail.trim().isEmpty) ||
+      (isContainOthersElement(vocabFb) && vocabFbDetail.trim().isEmpty) ||
+      (isContainOthersElement(qnaFb) && qnaFbDetail.trim().isEmpty);
+
+  bool isContainOthersElement(List<TopicFeedbackChipEntity> checkList) =>
+      checkList.any(
+          (element) => element.title.toUpperCase().compareTo('OTHERS') == 0);
+
   @override
   List<Object?> get props => [
         topicId,

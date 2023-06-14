@@ -5,7 +5,6 @@ import '../../../../../base/define/colors.dart';
 import '../../../../../base/define/dimensions.dart';
 import '../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../base/define/size.dart';
-import '../../../../../base/define/text.dart';
 import '../../../../../base/define/theme.dart';
 import '../../../../../base/widgets/buttons/button.dart';
 import '../../../../../base/widgets/toast/app_toast.dart';
@@ -248,7 +247,8 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                                   ? ValueListenableBuilder(
                                       valueListenable: topicFeedbackData,
                                       builder: (ctx, feedbackData, w) =>
-                                          feedbackData.isEmptyData
+                                          feedbackData.isEmptyData ||
+                                                  feedbackData.isNotValid
                                               ? AppElevatedButton(
                                                   text: S.current.txtSend,
                                                   minimumSize:
@@ -340,11 +340,19 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                                   fbDetail: valueTopicFeedback.nameFbDetail,
                                   hint: S.current.txtTopicFeedbackCommonHint,
                                   onAdjustSelection: (value) {
-                                    topicFeedbackData.value.nameFb =
-                                        List.from(value);
+                                    topicFeedbackData.value = topicFeedbackData
+                                        .value
+                                        .copyWith(nameFb: value);
                                   },
-                                  onAdjustDetail: (value) => topicFeedbackData
-                                      .value.nameFbDetail = value,
+                                  onAdjustDetail: (value) => topicFeedbackData.value = topicFeedbackData
+                                        .value
+                                        .copyWith(nameFbDetail: value),
+                                  isMissingDescWhenChoosingOthers:
+                                      valueTopicFeedback.isContainOthersElement(
+                                              valueTopicFeedback.nameFb) &&
+                                          valueTopicFeedback.nameFbDetail
+                                              .trim()
+                                              .isEmpty,
                                 ),
                               ),
                               ValueListenableBuilder(
@@ -358,11 +366,19 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                                   fbDetail: valueTopicFeedback.picFbDetail,
                                   hint: S.current.txtTopicFeedbackCommonHint,
                                   onAdjustSelection: (value) {
-                                    topicFeedbackData.value.picFb =
-                                        List.from(value);
+                                    topicFeedbackData.value = topicFeedbackData
+                                        .value
+                                        .copyWith(picFb: value);
                                   },
-                                  onAdjustDetail: (value) => topicFeedbackData
-                                      .value.picFbDetail = value,
+                                  onAdjustDetail: (value) => topicFeedbackData.value = topicFeedbackData
+                                        .value
+                                        .copyWith(picFbDetail: value),
+                                  isMissingDescWhenChoosingOthers:
+                                      valueTopicFeedback.isContainOthersElement(
+                                              valueTopicFeedback.picFb) &&
+                                          valueTopicFeedback.picFbDetail
+                                              .trim()
+                                              .isEmpty,
                                 ),
                               ),
                               ValueListenableBuilder(
@@ -379,11 +395,20 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                                       valueTopicFeedback.descriptionFbDetail,
                                   hint: S.current.txtTopicFeedbackCommonHint,
                                   onAdjustSelection: (value) {
-                                    topicFeedbackData.value.descriptionFb =
-                                        List.from(value);
+                                    topicFeedbackData.value = topicFeedbackData
+                                        .value
+                                        .copyWith(descriptionFb: value);
                                   },
-                                  onAdjustDetail: (value) => topicFeedbackData
-                                      .value.descriptionFbDetail = value,
+                                  onAdjustDetail: (value) => topicFeedbackData.value = topicFeedbackData
+                                        .value
+                                        .copyWith(descriptionFbDetail: value),
+                                  isMissingDescWhenChoosingOthers:
+                                      valueTopicFeedback.isContainOthersElement(
+                                              valueTopicFeedback
+                                                  .descriptionFb) &&
+                                          valueTopicFeedback.descriptionFbDetail
+                                              .trim()
+                                              .isEmpty,
                                 ),
                               ),
                               ValueListenableBuilder(
@@ -398,11 +423,19 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                                   hint: S.current.txtTopicVocabHint,
                                   maxLines: 5,
                                   onAdjustSelection: (value) {
-                                    topicFeedbackData.value.vocabFb =
-                                        List.from(value);
+                                    topicFeedbackData.value = topicFeedbackData
+                                        .value
+                                        .copyWith(vocabFb: value);
                                   },
-                                  onAdjustDetail: (value) => topicFeedbackData
-                                      .value.vocabFbDetail = value,
+                                  onAdjustDetail: (value) => topicFeedbackData.value = topicFeedbackData
+                                        .value
+                                        .copyWith(vocabFbDetail: value),
+                                  isMissingDescWhenChoosingOthers:
+                                      valueTopicFeedback.isContainOthersElement(
+                                              valueTopicFeedback.vocabFb) &&
+                                          valueTopicFeedback.vocabFbDetail
+                                              .trim()
+                                              .isEmpty,
                                 ),
                               ),
                               ValueListenableBuilder(
@@ -426,8 +459,13 @@ class _TopicReviewContentState extends State<TopicReviewContent>
                                     topicFeedbackData.value = topicFeedbackData
                                         .value
                                         .copyWith(qnaFbDetail: value);
-                                    //setState(() {});
                                   },
+                                  isMissingDescWhenChoosingOthers:
+                                      valueTopicFeedback.isContainOthersElement(
+                                              valueTopicFeedback.qnaFb) &&
+                                          valueTopicFeedback.qnaFbDetail
+                                              .trim()
+                                              .isEmpty,
                                 ),
                               ),
                             ],

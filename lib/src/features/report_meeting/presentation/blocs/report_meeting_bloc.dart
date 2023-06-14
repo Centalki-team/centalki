@@ -25,6 +25,7 @@ class ReportMeetingBloc extends Bloc<ReportMeetingEvent, ReportMeetingState> {
 
     final reportResult = await reportMeetingUseCase.execute(ReportMeetingParams(
       reportedId: event.teacherId,
+      sessionId: event.sessionId,
       summary: event.problems,
       detail: event.description,
     ));

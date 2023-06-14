@@ -12,6 +12,7 @@ class ReportMeetingRemoteDatasource {
 
   Future<bool> reportMeeting({
     required String reportedId,
+    required String sessionId,
     required List<String> summary,
     required String detail,
   }) async {
@@ -20,6 +21,7 @@ class ReportMeetingRemoteDatasource {
       method: HTTPMethod.post,
       data: {
         'reportedId': reportedId,
+        'sessionId': sessionId,
         'summary': summary,
         'detail': detail,
       },

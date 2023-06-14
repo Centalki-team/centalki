@@ -383,6 +383,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Số điện thoại"),
         "txtPleaseTellUsWatUThink": MessageLookupByLibrary.simpleMessage(
             "Vui lòng cho chúng tôi biết ý kiến của bạn"),
+        "txtPlsTellUsDetail": MessageLookupByLibrary.simpleMessage(
+            "Làm ơn hay mô tả chi tiết vấn đề nếu bạn lựa chọn \'Khác\'."),
         "txtPreIntermediate":
             MessageLookupByLibrary.simpleMessage("Pre-Intermediate"),
         "txtPrevious": MessageLookupByLibrary.simpleMessage("Trước đó"),

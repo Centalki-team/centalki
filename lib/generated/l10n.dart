@@ -1650,10 +1650,10 @@ class S {
     );
   }
 
-  /// `New password must contain at least 6 characters`
+  /// `New password must contain at least 8 characters`
   String get txtNewPasswordTooShort {
     return Intl.message(
-      'New password must contain at least 6 characters',
+      'New password must contain at least 8 characters',
       name: 'txtNewPasswordTooShort',
       desc: '',
       args: [],
@@ -3665,6 +3665,16 @@ class S {
     return Intl.message(
       'Subject and Category just contains characters',
       name: 'txtSubjectOnlyCharacters',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please describe detail of the problem if you select 'Others' option.`
+  String get txtPlsTellUsDetail {
+    return Intl.message(
+      'Please describe detail of the problem if you select \'Others\' option.',
+      name: 'txtPlsTellUsDetail',
       desc: '',
       args: [],
     );

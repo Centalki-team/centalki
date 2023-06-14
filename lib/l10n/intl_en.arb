@@ -159,7 +159,7 @@
   "txtTransactions": "Transactions",
   "txtCharged": "Charged",
   "txtNewPasswordEmptyWarning": "New password cannot be empty",
-  "txtNewPasswordTooShort": "New password must contain at least 6 characters",
+  "txtNewPasswordTooShort": "New password must contain at least 8 characters",
   "txtNewPasswordTooLong": "New password cannot exceed 100 characters",
   "txtNewPasswordNotValid": "New password must contain at least 1 uppercase, 1 numeric and 1 special character",
   "txtConfirmedPassword": "Confirmed password must match the new password",
@@ -360,5 +360,6 @@
   "txtConnectRoomFailed": "Connect room failed!",
   "txtFindTeacherFailedContent": "Sorry, it seems that no teacher is available at the moment. Please try again in 5 minutes.",
   "txtSubjectTooShort": "Subject and Category must contain at least 3 non-whitespace characters",
-  "txtSubjectOnlyCharacters": "Subject and Category just contains characters"
+  "txtSubjectOnlyCharacters": "Subject and Category just contains characters",
+  "txtPlsTellUsDetail": "Please describe detail of the problem if you select 'Others' option."
 }
