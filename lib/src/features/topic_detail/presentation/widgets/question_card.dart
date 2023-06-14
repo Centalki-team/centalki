@@ -48,8 +48,9 @@ class QuestionCard extends StatelessWidget {
               Text(
                 '${index + 1}.',
                 style: TextStyle(
-                  fontSize: titleMediumSize,
-                  fontWeight: titleMediumWeight,
+                  height: 1.0,
+                  fontSize: titleSmallSize,
+                  fontWeight: titleSmallWeight,
                   color: colorsByTheme(context).defaultFont,
                 ),
               ),
@@ -58,6 +59,7 @@ class QuestionCard extends StatelessWidget {
                 child: Text(
                   questionContent,
                   style: TextStyle(
+                    height: 1.0,
                     fontSize: titleSmallSize,
                     fontWeight: titleSmallWeight,
                     color: colorsByTheme(context).defaultFont,
