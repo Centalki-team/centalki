@@ -485,7 +485,7 @@ class _HistoryDetailViewState extends State<HistoryDetailView> {
                             width: spacing8,
                           ),
                           AppTextButton(
-                            minimumSize: const Size(124, 20),
+                            // minimumSize: const Size(124, 20),
                             onPressed: () => Navigator.push(
                               context,
                               MaterialPageRoute(

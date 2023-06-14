@@ -15,6 +15,7 @@ class VocabFlashCard extends StatefulWidget {
   });
 
   final BookmarkVocabsItemEntity bookmarkVocabsItemEntity;
+
   //final ValueNotifier<int> currentTabIndex;
 
   @override
@@ -69,12 +70,7 @@ class _VocabFlashCardState extends State<VocabFlashCard> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        (widget.bookmarkVocabsItemEntity.phrase?.translations ??
-                                    [])
-                                .sample(1)
-                                .single
-                                .meaning ??
-                            '',
+                        (widget.bookmarkVocabsItemEntity.phrase?.translations ?? []).sample(1).single.meaning ?? '',
                         style: TextStyle(
                           fontSize: titleMediumSize,
                           fontWeight: titleMediumWeight,
@@ -86,11 +82,7 @@ class _VocabFlashCardState extends State<VocabFlashCard> {
                         height: spacing8,
                       ),
                       Text(
-                        (widget.bookmarkVocabsItemEntity.phrase?.examples ?? [])
-                                .sample(1)
-                                .single
-                                .sentence ??
-                            '',
+                        (widget.bookmarkVocabsItemEntity.phrase?.examples ?? []).sample(1).single.sentence ?? '',
                         style: TextStyle(
                           fontSize: bodyLargeSize,
                           fontWeight: bodyLargeWeight,

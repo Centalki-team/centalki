@@ -62,8 +62,7 @@ class _HistoryViewState extends State<HistoryView> {
                     delegate: SliverChildBuilderDelegate(
                       childCount: 1,
                       (_, index) => Padding(
-                        padding: const EdgeInsets.fromLTRB(
-                            padding16, 0, padding16, padding12),
+                        padding: const EdgeInsets.fromLTRB(padding16, 0, padding16, padding12),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -74,10 +73,8 @@ class _HistoryViewState extends State<HistoryView> {
                                 horizontal: padding16,
                               ),
                               decoration: BoxDecoration(
-                                color: colorsByTheme(context)
-                                    .backgroundCardHistoryWallet,
-                                borderRadius: const BorderRadius.all(
-                                    Radius.circular(radius12)),
+                                color: colorsByTheme(context).backgroundCardHistoryWallet,
+                                borderRadius: const BorderRadius.all(Radius.circular(radius12)),
                               ),
                               child: Column(
                                 children: [
@@ -116,45 +113,35 @@ class _HistoryViewState extends State<HistoryView> {
                                       style: TextStyle(
                                         fontSize: bodyLargeSize,
                                         fontWeight: bodyLargeWeight,
-                                        color:
-                                            colorsByTheme(context).defaultFont,
+                                        color: colorsByTheme(context).defaultFont,
                                       ),
                                     ),
                                   )
                                 : ListView.separated(
                                     padding: EdgeInsets.zero,
                                     shrinkWrap: true,
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    separatorBuilder: (_, index) =>
-                                        const SizedBox(height: spacing16),
-                                    itemCount: state.hasReachMax
-                                        ? state.sessionList.length
-                                        : state.sessionList.length + 1,
-                                    itemBuilder: (_, index) => index ==
-                                            state.sessionList.length
+                                    physics: const NeverScrollableScrollPhysics(),
+                                    separatorBuilder: (_, index) => const SizedBox(height: spacing20),
+                                    itemCount: state.hasReachMax ? state.sessionList.length : state.sessionList.length + 1,
+                                    itemBuilder: (_, index) => index == state.sessionList.length
                                         ? Column(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
                                               InkWell(
                                                 onTap: () {
-                                                  context.read<HistoryBloc>().add(
-                                                      const HistoryLoadMoreEvent());
+                                                  context.read<HistoryBloc>().add(const HistoryLoadMoreEvent());
                                                 },
-                                                child:
-                                                    const CircularProgressIndicator(),
+                                                child: const CircularProgressIndicator(),
                                               ),
                                               const SizedBox(
                                                 height: spacing8,
                                               ),
                                               Text(
-                                                S.current
-                                                    .txtTapToLoadMoreSessions,
+                                                S.current.txtTapToLoadMoreSessions,
                                                 style: TextStyle(
                                                   fontSize: bodyLargeSize,
                                                   fontWeight: bodyLargeWeight,
-                                                  color: colorsByTheme(context)
-                                                      .defaultFont,
+                                                  color: colorsByTheme(context).defaultFont,
                                                 ),
                                               ),
                                             ],
@@ -164,25 +151,19 @@ class _HistoryViewState extends State<HistoryView> {
                                               Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      HistoryDetailPage(
-                                                    session: state
-                                                        .sessionList[index],
+                                                  builder: (context) => HistoryDetailPage(
+                                                    session: state.sessionList[index],
                                                   ),
                                                 ),
                                               ),
                                             },
                                             child: Container(
                                               decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        radius12),
-                                                color: colorsByTheme(context)
-                                                    .backgroundCardsChip,
+                                                borderRadius: BorderRadius.circular(radius12),
+                                                color: colorsByTheme(context).backgroundCardsChip,
                                                 boxShadow: [
                                                   BoxShadow(
-                                                    color: AppColor
-                                                        .shadow.shade200,
+                                                    color: AppColor.shadow.shade200,
                                                     blurRadius: 12,
                                                     offset: const Offset(1, 4),
                                                   )
@@ -190,103 +171,57 @@ class _HistoryViewState extends State<HistoryView> {
                                               ),
                                               clipBehavior: Clip.hardEdge,
                                               child: Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Expanded(
                                                     flex: 2,
                                                     child: CachedNetworkImage(
-                                                      imageUrl: state
-                                                              .sessionList[
-                                                                  index]
-                                                              .sessionTopic
-                                                              ?.imageURL ??
-                                                          '',
-                                                      fit: BoxFit.fill,
+                                                      imageUrl: state.sessionList[index].sessionTopic?.imageURL ?? '',
+                                                      fit: BoxFit.cover,
                                                       width: 100,
-                                                      height: 160,
-                                                      progressIndicatorBuilder:
-                                                          (context, url,
-                                                                  downloadProgress) =>
-                                                              Center(
-                                                        child:
-                                                            CircularProgressIndicator(
-                                                          value:
-                                                              downloadProgress
-                                                                  .progress,
+                                                      height: 132,
+                                                      progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                                                        child: CircularProgressIndicator(
+                                                          value: downloadProgress.progress,
                                                         ),
                                                       ),
-                                                      errorWidget: (context,
-                                                              url, error) =>
-                                                          const Text(''),
+                                                      errorWidget: (context, url, error) => const Text(''),
                                                     ),
                                                   ),
                                                   Expanded(
                                                     flex: 3,
                                                     child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              padding12),
+                                                      padding: const EdgeInsets.all(padding12),
                                                       child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
                                                         children: [
                                                           Text(
-                                                            state
-                                                                    .sessionList[
-                                                                        index]
-                                                                    .sessionTopic
-                                                                    ?.name ??
-                                                                '',
+                                                            state.sessionList[index].sessionTopic?.name ?? '',
                                                             style: TextStyle(
-                                                              fontWeight:
-                                                                  titleMediumWeight,
-                                                              fontSize:
-                                                                  titleMediumSize,
-                                                              color: colorsByTheme(
-                                                                      context)
-                                                                  .defaultFont,
+                                                              fontWeight: titleMediumWeight,
+                                                              fontSize: titleMediumSize,
+                                                              color: colorsByTheme(context).defaultFont,
+                                                              height: 1,
+                                                            ),
+                                                          ),
+                                                          const SizedBox(height: spacing4),
+                                                          Text(
+                                                            state.sessionList[index].sessionTeacher?.fullName ?? '',
+                                                            style: TextStyle(
+                                                              fontSize: bodyLargeSize,
+                                                              fontWeight: bodyLargeWeight,
+                                                              color: colorsByTheme(context).defaultFont,
                                                               height: 1,
                                                             ),
                                                           ),
                                                           Text(
-                                                            state
-                                                                    .sessionList[
-                                                                        index]
-                                                                    .sessionTeacher
-                                                                    ?.fullName ??
-                                                                '',
-                                                            style: TextStyle(
-                                                              fontSize:
-                                                                  bodyLargeSize,
-                                                              fontWeight:
-                                                                  bodyLargeWeight,
-                                                              color: colorsByTheme(
-                                                                      context)
-                                                                  .defaultFont,
-                                                              height: 1,
+                                                            DateTimeHelper.timeToString5(
+                                                              state.sessionList[index].sessionStartAt?.toLocal() ?? DateTime.now(),
                                                             ),
-                                                          ),
-                                                          Text(
-                                                            DateTimeHelper
-                                                                .timeToString5(
-                                                              state
-                                                                      .sessionList[
-                                                                          index]
-                                                                      .sessionStartAt
-                                                                      ?.toLocal() ??
-                                                                  DateTime
-                                                                      .now(),
-                                                            ),
-                                                            style:
-                                                                const TextStyle(
-                                                              color: AppColor
-                                                                  .secondary,
-                                                              fontWeight:
-                                                                  bodyLargeWeight,
-                                                              fontSize:
-                                                                  bodyLargeSize,
+                                                            style: const TextStyle(
+                                                              color: AppColor.secondary,
+                                                              fontWeight: bodyMediumWeight,
+                                                              fontSize: bodyMediumSize,
                                                               height: 1,
                                                             ),
                                                           ),

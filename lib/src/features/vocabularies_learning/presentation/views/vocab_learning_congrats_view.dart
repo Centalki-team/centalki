@@ -26,7 +26,7 @@ class VocabLearningCongratsView extends StatelessWidget {
             fit: BoxFit.cover,
           ),
           const SizedBox(
-            height: spacing16,
+            height: spacing32,
             width: double.infinity,
           ),
           Text(
