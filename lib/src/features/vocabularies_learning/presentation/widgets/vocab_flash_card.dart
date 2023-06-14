@@ -47,7 +47,7 @@ class _VocabFlashCardState extends State<VocabFlashCard> {
                 offset: const Offset(0, 2),
                 blurRadius: 10,
                 spreadRadius: 4,
-                color: Colors.black.withOpacity(0.25),
+                color: colorsByTheme(context).expansionIcon!.withOpacity(0.25),
               ),
             ],
           ),
