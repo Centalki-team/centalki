@@ -46,6 +46,8 @@ class NotiListBloc extends Bloc<NotiListEvent, NotiListState> {
         ),
       ),
       (r) {
+        r.data.sort((a, b) => b.createdAtTime!.compareTo(a.createdAtTime!));
+
         var todayList = <NotiListItemEntity>[];
         var thisWeekList = <NotiListItemEntity>[];
         var previousList = <NotiListItemEntity>[];
@@ -74,8 +76,10 @@ class NotiListBloc extends Bloc<NotiListEvent, NotiListState> {
         }
 
         todayList.sort((a, b) => b.createdAtTime!.compareTo(a.createdAtTime!));
-        thisWeekList.sort((a, b) => b.createdAtTime!.compareTo(a.createdAtTime!));
-        previousList.sort((a, b) => b.createdAtTime!.compareTo(a.createdAtTime!));
+        thisWeekList
+            .sort((a, b) => b.createdAtTime!.compareTo(a.createdAtTime!));
+        previousList
+            .sort((a, b) => b.createdAtTime!.compareTo(a.createdAtTime!));
 
         emit(
           NotiListLoadDoneState(
