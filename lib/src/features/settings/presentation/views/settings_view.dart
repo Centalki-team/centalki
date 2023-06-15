@@ -75,16 +75,16 @@ class SettingsView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  SettingTile(
-                    icon: Icons.notifications_outlined,
-                    title: S.current.txtNotification,
-                    onClick: () => Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const SettingsNotification(),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: spacing16),
+                  // SettingTile(
+                  //   icon: Icons.notifications_outlined,
+                  //   title: S.current.txtNotification,
+                  //   onClick: () => Navigator.of(context).push(
+                  //     MaterialPageRoute(
+                  //       builder: (context) => const SettingsNotification(),
+                  //     ),
+                  //   ),
+                  // ),
+                  // const SizedBox(height: spacing16),
                   SettingTile(
                     icon: Icons.brush_outlined,
                     title: S.current.txtAppearance,

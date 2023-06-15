@@ -243,47 +243,47 @@ class _StudentProfileViewState extends State<StudentProfileView> {
                                                     ? state.bioError
                                                     : null,
                                           ),
-                                          const SizedBox(height: spacing16),
-                                          Text(
-                                            S.current.txtInterestedTopics,
-                                            style: TextStyle(
-                                              fontSize: titleMediumSize,
-                                              fontWeight: titleMediumWeight,
-                                              color: colorsByTheme(context)
-                                                  .defaultFont,
-                                            ),
-                                          ),
-                                          GridView.builder(
-                                            padding: EdgeInsets.zero,
-                                            shrinkWrap: true,
-                                            gridDelegate:
-                                                SliverGridDelegateWithFixedCrossAxisCount(
-                                              mainAxisSpacing: 16.0,
-                                              crossAxisSpacing: 16.0,
-                                              crossAxisCount: 2,
-                                              childAspectRatio:
-                                                  _getTopicsAspectRatio(
-                                                      widthView),
-                                            ),
-                                            physics:
-                                                const NeverScrollableScrollPhysics(),
-                                            itemCount: topics.length,
-                                            itemBuilder: (_, index) =>
-                                                CustomCheckboxTile(
-                                              title:
-                                                  topics[index].topicName ?? '',
-                                              value: selectedTopics.contains(
-                                                  topics[index].topicId),
-                                              onChanged: (value) {
-                                                value
-                                                    ? selectedTopics.add(
-                                                        topics[index].topicId!)
-                                                    : selectedTopics.remove(
-                                                        topics[index].topicId!);
-                                                _validateStudentProfile('');
-                                              },
-                                            ),
-                                          ),
+                                          //const SizedBox(height: spacing16),
+                                          // Text(
+                                          //   S.current.txtInterestedTopics,
+                                          //   style: TextStyle(
+                                          //     fontSize: titleMediumSize,
+                                          //     fontWeight: titleMediumWeight,
+                                          //     color: colorsByTheme(context)
+                                          //         .defaultFont,
+                                          //   ),
+                                          // ),
+                                          // GridView.builder(
+                                          //   padding: EdgeInsets.zero,
+                                          //   shrinkWrap: true,
+                                          //   gridDelegate:
+                                          //       SliverGridDelegateWithFixedCrossAxisCount(
+                                          //     mainAxisSpacing: 16.0,
+                                          //     crossAxisSpacing: 16.0,
+                                          //     crossAxisCount: 2,
+                                          //     childAspectRatio:
+                                          //         _getTopicsAspectRatio(
+                                          //             widthView),
+                                          //   ),
+                                          //   physics:
+                                          //       const NeverScrollableScrollPhysics(),
+                                          //   itemCount: topics.length,
+                                          //   itemBuilder: (_, index) =>
+                                          //       CustomCheckboxTile(
+                                          //     title:
+                                          //         topics[index].topicName ?? '',
+                                          //     value: selectedTopics.contains(
+                                          //         topics[index].topicId),
+                                          //     onChanged: (value) {
+                                          //       value
+                                          //           ? selectedTopics.add(
+                                          //               topics[index].topicId!)
+                                          //           : selectedTopics.remove(
+                                          //               topics[index].topicId!);
+                                          //       _validateStudentProfile('');
+                                          //     },
+                                          //   ),
+                                          // ),
                                           const SizedBox(
                                             height: 32.0,
                                           ),
