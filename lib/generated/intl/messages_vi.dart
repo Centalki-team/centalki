@@ -267,7 +267,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtLanguage":
             MessageLookupByLibrary.simpleMessage("Ngôn ngữ (Language)"),
         "txtLastUpdated": MessageLookupByLibrary.simpleMessage(
-            "Lần cuối cập nhật: Ngày 21 tháng 5 năm 2023"),
+            "Lần cuối cập nhật: Ngày 16 tháng 06 năm 2023"),
         "txtLaunchSession":
             MessageLookupByLibrary.simpleMessage(". Đang khởi tạo buổi học..."),
         "txtLevelLabel":
