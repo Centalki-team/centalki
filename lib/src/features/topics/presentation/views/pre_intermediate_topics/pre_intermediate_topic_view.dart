@@ -18,7 +18,8 @@ class PreIntermediateTopicView extends StatelessWidget {
       BlocListener<PreIntermediateTopicsBloc, PreIntermediateTopicsState>(
         listener: (context, state) {
           if (state is PreIntermediateTopicsLoadingState) {
-            LoadingManager.setLoading(context, loading: state.showLoading && state.isOverlay);
+            LoadingManager.setLoading(context,
+                loading: state.showLoading && state.isOverlay);
           } else if (state is PreIntermediateTopicsErrorState) {
             AppToast(
               mode: AppToastMode.error,
@@ -67,11 +68,13 @@ class PreIntermediateTopicView extends StatelessWidget {
                 .add(const PreIntermediateTopicsLoadEvent(isRefresh: true));
           }
         },
-        child: BlocBuilder<PreIntermediateTopicsBloc, PreIntermediateTopicsState>(
+        child:
+            BlocBuilder<PreIntermediateTopicsBloc, PreIntermediateTopicsState>(
           buildWhen: (previous, current) =>
               current != previous &&
               (current is PreIntermediateTopicsLoadDoneState ||
-                  (current is PreIntermediateTopicsLoadingState && !current.isOverlay)),
+                  (current is PreIntermediateTopicsLoadingState &&
+                      !current.isOverlay)),
           builder: (context, state) {
             if (state is PreIntermediateTopicsLoadDoneState) {
               return Padding(
@@ -79,8 +82,11 @@ class PreIntermediateTopicView extends StatelessWidget {
                 child: ListView.separated(
                   padding: const EdgeInsets.symmetric(vertical: padding16),
                   itemCount: state.topics.length,
-                  separatorBuilder: (context, index) => const SizedBox(height: spacing8),
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: spacing8),
                   itemBuilder: (context, index) => TopicCard(
+                    logKey: state.logKey,
+                    logName: state.logName,
                     item: state.topics[index],
                     onTap: () async {
                       if (state.topics[index].topicBookmark != null) {
@@ -88,10 +94,11 @@ class PreIntermediateTopicView extends StatelessWidget {
                           barrierDismissible: false,
                           context: context,
                           builder: (context) => AlertDialog(
-                            backgroundColor: colorsByTheme(context).backgroundCardsChip,
+                            backgroundColor:
+                                colorsByTheme(context).backgroundCardsChip,
                             title: Text(
                               S.current.txtConfirmRemoveFavoriteTitle,
-                              style:  TextStyle(
+                              style: TextStyle(
                                 fontSize: titleLargeSize,
                                 fontWeight: titleLargeWeight,
                                 color: colorsByTheme(context).defaultFont,
@@ -99,7 +106,7 @@ class PreIntermediateTopicView extends StatelessWidget {
                             ),
                             content: Text(
                               S.current.txtConfirmRemoveFavoriteContent,
-                              style:  TextStyle(
+                              style: TextStyle(
                                 fontSize: bodySmallSize,
                                 fontWeight: bodySmallWeight,
                                 color: colorsByTheme(context).defaultFont,
@@ -129,10 +136,11 @@ class PreIntermediateTopicView extends StatelessWidget {
                         ).then((confirmRemoved) => {
                               if (confirmRemoved)
                                 {
-                                  context
-                                      .read<PreIntermediateTopicsBloc>()
-                                      .add(PreIntermediateTopicsRemoveFavoriteEvent(
-                                        id: state.topics[index].topicBookmark?.bookmarkId ?? '',
+                                  context.read<PreIntermediateTopicsBloc>().add(
+                                          PreIntermediateTopicsRemoveFavoriteEvent(
+                                        id: state.topics[index].topicBookmark
+                                                ?.bookmarkId ??
+                                            '',
                                       )),
                                 }
                             });

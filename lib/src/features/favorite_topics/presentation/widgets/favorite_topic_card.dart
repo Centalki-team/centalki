@@ -9,6 +9,7 @@ import '../../../../../../gen/assets.gen.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../../bookmark/topic/domain/entities/bookmark_topic_entity.dart';
 import '../../../topic_detail/presentation/views/topic_detail_page.dart';
+import '../../../tracking/tracking.dart';
 import '../blocs/favorite_topics_bloc.dart';
 
 class FavoriteTopicCard extends StatefulWidget {
@@ -26,13 +27,16 @@ class FavoriteTopicCard extends StatefulWidget {
 class _FavoriteTopicCardState extends State<FavoriteTopicCard> {
   @override
   Widget build(BuildContext context) => GestureDetector(
-        onTap: () => Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => TopicDetailPage(
-              topicId: widget.bookmark.bookmarkTopic?.topicId ?? '',
+        onTap: () {
+          logSelectItem(entity: widget.bookmark);
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => TopicDetailPage(
+                topicId: widget.bookmark.bookmarkTopic?.topicId ?? '',
+              ),
             ),
-          ),
-        ),
+          );
+        },
         child: Container(
           margin: const EdgeInsets.all(spacing8),
           height: 128,
@@ -196,4 +200,22 @@ class _FavoriteTopicCardState extends State<FavoriteTopicCard> {
           ),
         ),
       );
+
+  void logSelectItem({
+    BookmarkTopicEntity? entity,
+  }) {
+    Analytics.inst?.ecommerce(
+      (logger) => logger?.logSelectItem(
+        itemListId: 'favorite_topics',
+        itemListName: 'Favorite Topics',
+        items: [
+          EcommerceItem(
+            itemId: entity?.bookmarkTopic?.topicId,
+            itemName: entity?.bookmarkTopic?.topicImage,
+            itemCategory: entity?.bookmarkTopic?.topicCategory,
+          )
+        ],
+      ),
+    );
+  }
 }

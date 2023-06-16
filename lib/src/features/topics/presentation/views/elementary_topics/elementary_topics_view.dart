@@ -5,7 +5,6 @@ import '../../../../../../base/define/colors.dart';
 import '../../../../../../base/define/dimensions.dart';
 import '../../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../../base/define/size.dart';
-import '../../../../../../base/define/text.dart';
 import '../../../../../../base/define/theme.dart';
 import '../../../../../../base/widgets/buttons/text_button.dart';
 import '../../../../../../base/widgets/toast/app_toast.dart';
@@ -83,6 +82,8 @@ class ElementaryTopicView extends StatelessWidget {
                   itemCount: state.topics.length,
                   separatorBuilder: (context, index) => const SizedBox(height: spacing8),
                   itemBuilder: (context, index) => TopicCard(
+                    logKey: state.logKey,
+                    logName: state.logName,
                     item: state.topics[index],
                     onTap: () async {
                       if (state.topics[index].topicBookmark != null) {

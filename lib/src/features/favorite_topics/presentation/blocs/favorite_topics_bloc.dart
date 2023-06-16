@@ -6,6 +6,7 @@ import '../../../bookmark/topic/domain/entities/bookmark_topic_entity.dart';
 import '../../../bookmark/topic/domain/repositories/bookmark_topic_repository.dart';
 import '../../../bookmark/topic/domain/usecases/delete_bookmark_topic_usecase.dart';
 import '../../../bookmark/topic/domain/usecases/get_bookmark_topics_usecase.dart';
+import '../../../tracking/tracking.dart';
 
 part 'favorite_topics_event.dart';
 
@@ -45,11 +46,14 @@ class FavoriteTopicsBloc
           exception: l,
         ),
       ),
-      (r) => emit(
-        FavoriteTopicsLoadDoneState(
-          bookmarks: r,
-        ),
-      ),
+      (r) {
+        _logViewItemList(r);
+        return emit(
+          FavoriteTopicsLoadDoneState(
+            bookmarks: r,
+          ),
+        );
+      },
     );
   }
 
@@ -65,6 +69,22 @@ class FavoriteTopicsBloc
       ),
       (r) => emit(
         const RemoveFavoriteTopicDoneState(),
+      ),
+    );
+  }
+
+  void _logViewItemList(List<BookmarkTopicEntity> items) {
+    Analytics.inst?.ecommerce(
+      (logger) => logger?.logViewItemList(
+        itemListId: 'favorite_topics',
+        itemListName: 'Favorite Topics',
+        items: items
+            .map((e) => EcommerceItem(
+                  itemId: e.bookmarkTopic?.topicId,
+                  itemName: e.bookmarkTopic?.topicImage,
+                  itemCategory: e.bookmarkTopic?.topicCategory,
+                ))
+            .toList(),
       ),
     );
   }

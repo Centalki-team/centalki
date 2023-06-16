@@ -5,7 +5,6 @@ import '../../../../../../base/define/colors.dart';
 import '../../../../../../base/define/dimensions.dart';
 import '../../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../../base/define/size.dart';
-import '../../../../../../base/define/text.dart';
 import '../../../../../../base/define/theme.dart';
 import '../../../../../../base/widgets/buttons/text_button.dart';
 import '../../../../../../base/widgets/toast/app_toast.dart';
@@ -21,7 +20,8 @@ class IntermediateTopicsView extends StatelessWidget {
       BlocListener<IntermediateTopicsBloc, IntermediateTopicsState>(
         listener: (context, state) {
           if (state is IntermediateTopicsLoadingState) {
-            LoadingManager.setLoading(context, loading: state.showLoading && state.isOverlay);
+            LoadingManager.setLoading(context,
+                loading: state.showLoading && state.isOverlay);
           } else if (state is IntermediateTopicsErrorState) {
             AppToast(
               mode: AppToastMode.error,
@@ -74,7 +74,8 @@ class IntermediateTopicsView extends StatelessWidget {
           buildWhen: (previous, current) =>
               current != previous &&
               (current is IntermediateTopicsLoadDoneState ||
-                  (current is IntermediateTopicsLoadingState && !current.isOverlay)),
+                  (current is IntermediateTopicsLoadingState &&
+                      !current.isOverlay)),
           builder: (context, state) {
             if (state is IntermediateTopicsLoadDoneState) {
               return Padding(
@@ -82,8 +83,11 @@ class IntermediateTopicsView extends StatelessWidget {
                 child: ListView.separated(
                   padding: const EdgeInsets.symmetric(vertical: padding16),
                   itemCount: state.topics.length,
-                  separatorBuilder: (context, index) => const SizedBox(height: spacing8),
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: spacing8),
                   itemBuilder: (context, index) => TopicCard(
+                    logKey: state.logKey,
+                    logName: state.logName,
                     item: state.topics[index],
                     onTap: () async {
                       if (state.topics[index].topicBookmark != null) {
@@ -91,7 +95,8 @@ class IntermediateTopicsView extends StatelessWidget {
                           barrierDismissible: false,
                           context: context,
                           builder: (context) => AlertDialog(
-                            backgroundColor: colorsByTheme(context).backgroundCardsChip,
+                            backgroundColor:
+                                colorsByTheme(context).backgroundCardsChip,
                             title: Text(
                               S.current.txtConfirmRemoveFavoriteTitle,
                               style: TextStyle(
@@ -132,10 +137,11 @@ class IntermediateTopicsView extends StatelessWidget {
                         ).then((confirmRemoved) => {
                               if (confirmRemoved)
                                 {
-                                  context
-                                      .read<IntermediateTopicsBloc>()
-                                      .add(IntermediateTopicsRemoveFavoriteEvent(
-                                        id: state.topics[index].topicBookmark?.bookmarkId ?? '',
+                                  context.read<IntermediateTopicsBloc>().add(
+                                          IntermediateTopicsRemoveFavoriteEvent(
+                                        id: state.topics[index].topicBookmark
+                                                ?.bookmarkId ??
+                                            '',
                                       )),
                                 }
                             });
@@ -154,7 +160,9 @@ class IntermediateTopicsView extends StatelessWidget {
                 ),
               );
             }
-            if (state is IntermediateTopicsLoadingState && state.showLoading && !state.isOverlay) {
+            if (state is IntermediateTopicsLoadingState &&
+                state.showLoading &&
+                !state.isOverlay) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
