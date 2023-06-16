@@ -56,6 +56,7 @@ import '../../src/features/topic_suggestion/domain/repositories/topic_suggestion
 import '../../src/features/topics/data/datasources/topics_datasource/remote_data/topics_remote_datasource.dart';
 import '../../src/features/topics/data/repositories/topic_repository_impl.dart';
 import '../../src/features/topics/domain/repositories/topic_repository.dart';
+import '../../src/features/tracking/tracking.dart';
 import '../di_module.dart';
 
 class RepositoriesModule extends DIModule {
@@ -144,6 +145,7 @@ class RepositoriesModule extends DIModule {
           ApplicationRepositoryImpl.new)
       ..registerLazySingleton<LogOutRepository>(LogOutRepositoryImpl.new)
       // BLOCS
-      ..registerSingleton<ApplicationBloc>(ApplicationBloc());
+      ..registerSingleton<ApplicationBloc>(ApplicationBloc())
+      ..registerSingleton<Analytics>(Analytics(ecommerce: FirebaseAnalyticsEcommerce.tryInit(),),);
   }
 }

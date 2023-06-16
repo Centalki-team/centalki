@@ -29,13 +29,19 @@ class ElementaryTopicsLoadingState extends ElementaryTopicsState {
 
 class ElementaryTopicsLoadDoneState extends ElementaryTopicsState {
   const ElementaryTopicsLoadDoneState({
+    required this.logKey,
+    required this.logName,
     required this.topics,
   });
 
+  final String logKey;
+  final String logName;
   final List<TopicItemEntity> topics;
 
   @override
   List<Object?> get props => [
+        logKey,
+        logName,
         topics,
       ];
 }
