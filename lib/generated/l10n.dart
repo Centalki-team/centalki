@@ -2083,7 +2083,7 @@ class S {
   /// `Last updated: Mar 03, 2023`
   String get txtLastUpdated {
     return Intl.message(
-      'Last updated: Mar 03, 2023',
+      'Last updated: Jun 16, 2023',
       name: 'txtLastUpdated',
       desc: '',
       args: [],

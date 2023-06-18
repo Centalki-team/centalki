@@ -269,7 +269,7 @@ class TextDoc {
   static const txtCentalkiSource =
       'Developed by Centalki Team\n2023, All Rights Reserved\nContact: centalki.dev@gmail.com';
   static const txtCentalkiVersion = 'Version 0.4.0';
-  static const txtLastUpdated = 'Last updated: Mar 03, 2023';
+  static const txtLastUpdated = 'Last updated: Jun 16, 2023';
 
   // Feedback
   // Validation error messages
