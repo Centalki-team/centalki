@@ -5,6 +5,7 @@ import '../../../../../../base/define/styles.dart';
 import '../../../../../base/define/theme.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../topic_detail/presentation/views/topic_detail_page.dart';
+import '../../../tracking/tracking.dart';
 import '../../domain/entities/topic_item_entity.dart';
 
 class TopicCard extends StatefulWidget {
@@ -13,11 +14,15 @@ class TopicCard extends StatefulWidget {
     required this.item,
     required this.onTap,
     this.onTopicsRefresh,
+    required this.logKey,
+    required this.logName,
   }) : super(key: key);
 
   final TopicItemEntity item;
   final Function() onTap;
   final Function()? onTopicsRefresh;
+  final String logKey;
+  final String logName;
 
   @override
   State<TopicCard> createState() => _TopicCardState();
@@ -27,6 +32,7 @@ class _TopicCardState extends State<TopicCard> {
   @override
   Widget build(BuildContext context) => GestureDetector(
         onTap: () async {
+          logSelectItem(entity: widget.item);
           await Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => TopicDetailPage(
@@ -134,4 +140,22 @@ class _TopicCardState extends State<TopicCard> {
           ),
         ),
       );
+
+  void logSelectItem({
+    TopicItemEntity? entity,
+  }) {
+    Analytics.inst?.ecommerce(
+      (logger) => logger?.logSelectItem(
+        itemListId: widget.logKey,
+        itemListName: widget.logName,
+        items: [
+          EcommerceItem(
+            itemId: entity?.topicId,
+            itemName: entity?.topicName,
+            itemCategory: entity?.topicCategory,
+          )
+        ],
+      ),
+    );
+  }
 }

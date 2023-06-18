@@ -30,13 +30,19 @@ class UpperIntermediateTopicsLoadingState extends UpperIntermediateTopicsState {
 class UpperIntermediateTopicsLoadDoneState
     extends UpperIntermediateTopicsState {
   const UpperIntermediateTopicsLoadDoneState({
+    required this.logKey,
+    required this.logName,
     required this.topics,
   });
 
+  final String logKey;
+  final String logName;
   final List<TopicItemEntity> topics;
 
   @override
   List<Object?> get props => [
+        logKey,
+        logName,
         topics,
       ];
 }

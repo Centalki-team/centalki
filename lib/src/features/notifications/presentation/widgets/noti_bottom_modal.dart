@@ -40,14 +40,6 @@ class NotiModalBottomSheet extends StatelessWidget {
                 title: S.current.txtMarkAllNotiAsUnread,
                 onTap: () => Navigator.pop(context, 1),
               ),
-              const SizedBox(
-                height: spacing24,
-              ),
-              NotiModalOption(
-                iconData: Icons.edit_notifications_outlined,
-                title: S.current.txtEditNotiSettings,
-                onTap: () => Navigator.pop(context, 2),
-              ),
             ],
           ),
         ),

@@ -7,6 +7,7 @@ import '../../../../bookmark/topic/domain/repositories/bookmark_topic_repository
 import '../../../../bookmark/topic/domain/usecases/create_bookmark_topic_usecase.dart';
 import '../../../../bookmark/topic/domain/usecases/delete_bookmark_topic_usecase.dart';
 import '../../../../bookmark/topic/domain/usecases/params/create_bookmark_topic_params.dart';
+import '../../../../tracking/tracking.dart';
 import '../../../domain/entities/topic_item_entity.dart';
 import '../../../domain/repositories/topic_repository.dart';
 import '../../../domain/usecases/get_topics_usecase.dart';
@@ -66,11 +67,16 @@ class PreIntermediateTopicsBloc
           exception: l,
         ),
       ),
-      (r) => emit(
-        PreIntermediateTopicsLoadDoneState(
-          topics: r.topics ?? [],
-        ),
-      ),
+      (r) {
+        _logViewItemList(r.topics ?? []);
+        return emit(
+          PreIntermediateTopicsLoadDoneState(
+            logKey: 'pre_intermediate_topics',
+            logName: 'Pre-Intermediate Topics',
+            topics: r.topics ?? [],
+          ),
+        );
+      },
     );
   }
 
@@ -110,6 +116,22 @@ class PreIntermediateTopicsBloc
       ),
       (r) => emit(
         const PreIntermediateTopicsRemoveFavoriteDoneState(),
+      ),
+    );
+  }
+
+  void _logViewItemList(List<TopicItemEntity> items) {
+    Analytics.inst?.ecommerce(
+      (logger) => logger?.logViewItemList(
+        itemListId: 'pre_intermediate_topics',
+        itemListName: 'Pre-Intermediate Topics',
+        items: items
+            .map((e) => EcommerceItem(
+                  itemId: e.topicId,
+                  itemName: e.topicName,
+                  itemCategory: e.topicCategory,
+                ))
+            .toList(),
       ),
     );
   }
