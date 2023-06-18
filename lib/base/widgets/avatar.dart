@@ -54,10 +54,10 @@ class Avatar extends StatelessWidget {
         child: _checkLocalAvatar(avatarUrl)
             ? Image.file(
                 File(avatarUrl),
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
               )
             : CachedNetworkImage(
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
                 imageUrl: avatarUrl,
                 progressIndicatorBuilder: (context, url, downloadProgress) =>
                     Center(
