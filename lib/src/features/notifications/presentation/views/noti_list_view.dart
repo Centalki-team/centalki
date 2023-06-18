@@ -49,15 +49,6 @@ class _NotiListViewState extends State<NotiListView> {
                 .add(const NotiListMarkAllUnreadEvent());
           }
           break;
-        case 2:
-          if (mounted) {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const SettingsNotification(),
-              ),
-            );
-          }
-          break;
         default:
           return;
       }
