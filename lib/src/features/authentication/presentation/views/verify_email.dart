@@ -1,5 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../base/define/styles.dart';
@@ -7,7 +7,6 @@ import '../../../../../base/define/theme.dart';
 import '../../../../../base/widgets/buttons/filled_error_button.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../../../generated/l10n.dart';
-import '../../../account/presentation/blocs/your_account_bloc/your_account_bloc.dart';
 
 class VerifyEmailView extends StatefulWidget {
   const VerifyEmailView({Key? key}) : super(key: key);
@@ -74,9 +73,7 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
                 ),
                 AppFilledErrorButton(
                   onPressed: () async {
-                    context.read<YourAccountBloc>().add(
-                          const YourAccountLogOutEvent(),
-                        );
+                    await FirebaseAuth.instance.signOut();
                     // ignore: use_build_context_synchronously
                     Navigator.of(context).popUntil((route) => route.isFirst);
                   },
