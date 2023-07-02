@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jitsi_meet_wrapper/jitsi_meet_wrapper.dart';
@@ -27,13 +29,14 @@ class JitsiNativeViewTest extends StatefulWidget {
 }
 
 class _JitsiNativeViewTestState extends State<JitsiNativeViewTest>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   CustomJitsiNativeViewController? _controller;
   late final TabController _tabController;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _tabController = TabController(
       length: 2,
       vsync: this,
@@ -42,20 +45,23 @@ class _JitsiNativeViewTestState extends State<JitsiNativeViewTest>
   }
 
   @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    super.didChangeAppLifecycleState(state);
+    if (state == AppLifecycleState.detached) {
+      log("App kill=======================");
+      await _controller?.hangUp();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) => Column(
         children: [
-          // ElevatedButton(
-          //   onPressed: () {
-          //     _controller?.join();
-          //   },
-          //   child: const Text('Join'),
-          // ),
-          // ElevatedButton(
-          //   onPressed: () {
-          //     _controller?.hangUp();
-          //   },
-          //   child: const Text('hangup'),
-          // ),
           Stack(
             alignment: AlignmentDirectional.bottomEnd,
             children: [
@@ -73,8 +79,15 @@ class _JitsiNativeViewTestState extends State<JitsiNativeViewTest>
                   },
                 ),
               ),
+              AbsorbPointer(
+                child: Container(
+                  color: Colors.red.withOpacity(0),
+                  width: MediaQuery.of(context).size.width / 5 - 10,
+                  height: MediaQuery.of(context).size.width / 5 - 10,
+                ),
+              ),
               GestureDetector(
-                behavior: HitTestBehavior.deferToChild,
+                behavior: HitTestBehavior.opaque,
                 onTap: () async {
                   await _controller?.hangUp();
                   if (mounted) {
@@ -87,48 +100,13 @@ class _JitsiNativeViewTestState extends State<JitsiNativeViewTest>
                   }
                 },
                 child: Container(
-                  color: Colors.transparent,
+                  color: Colors.red.withOpacity(0),
                   width: MediaQuery.of(context).size.width / 5 - 10,
                   height: MediaQuery.of(context).size.width / 5 - 10,
                 ),
               ),
             ],
           ),
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(
-          //     vertical: spacing10,
-          //   ),
-          //   child: Align(
-          //     alignment: Alignment.center,
-          //     child: Material(
-          //       color: AppColor.error,
-          //       borderRadius: BorderRadius.circular(radius24),
-          //       child: InkWell(
-          //         onHover: (hover) {},
-          //         onTap: () {
-          //           context.read<MeetingBloc>().add(
-          //                 MeetingExitRoomEvent(
-          //                   notCompleted: BlocProvider.of<MeetingBloc>(context)
-          //                       .notCompleted,
-          //                 ),
-          //               );
-          //         },
-          //         borderRadius: BorderRadius.circular(radius24),
-          //         child: SizedBox(
-          //           width: MediaQuery.of(context).size.width * 1 / 3,
-          //           child: const Padding(
-          //             padding: EdgeInsets.symmetric(vertical: padding8),
-          //             child: Icon(
-          //               Icons.call_end_outlined,
-          //               size: iconButtonSize,
-          //               color: AppColor.white,
-          //             ),
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
           Expanded(
             child: TabBarView(
               controller: _tabController,

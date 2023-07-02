@@ -356,6 +356,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtOneSession": MessageLookupByLibrary.simpleMessage("1 buổi học"),
         "txtOneSessionLearningTime":
             MessageLookupByLibrary.simpleMessage("Tổng thời gian học 30 phút"),
+        "txtOngoingSessionNotCompletedContent":
+            MessageLookupByLibrary.simpleMessage(
+                "Bạn phải hoàn thành buổi học đang diễn ra trước khi bắt đầu một buổi học khác."),
+        "txtOngoingSessionNotCompletedTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "Buổi học đang diễn ra chưa hoàn thành"),
+        "txtOngoingSessionWith":
+            MessageLookupByLibrary.simpleMessage("Buổi học đang diễn ra với"),
         "txtOr": MessageLookupByLibrary.simpleMessage("hoặc"),
         "txtOrLoginWith":
             MessageLookupByLibrary.simpleMessage("Hoặc đăng nhập bằng"),

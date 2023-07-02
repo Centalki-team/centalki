@@ -8,6 +8,7 @@ import '../../../../../../base/define/theme.dart';
 import '../../../../../../gen/assets.gen.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../../../../shared/widgets/tab_indicator/tab_indicator.dart';
+import '../../../../check_ongoing_session/presentation/widgets/ongoing_session_noti_panel.dart';
 import '../../../../notifications/presentation/views/noti_list_page.dart';
 import '../../../../search_topics/presentation/views/search_topics_page.dart';
 import '../../../../topic_suggestion/presentation/views/topic_suggestion_page.dart';
@@ -104,59 +105,7 @@ class _SelectTopicLevelViewState extends State<SelectTopicLevelView>
         ),
         body: Column(
           children: [
-            // SizedBox(
-            //   height: MediaQuery.of(context).padding.top,
-            // ),
-            // Container(
-            //   height: 64.0,
-            //   padding: const EdgeInsets.only(
-            //     left: 16.0,
-            //     right: 4.0,
-            //   ),
-            //   child: Row(
-            //     children: [
-            //       Expanded(
-            //         child: Text(
-            //           AppText.appName,
-            //           style: CommonTxtStyle.t30Regular.apply(
-            //             color: colorsByTheme(context).defaultFont,
-            //           ),
-            //         ),
-            //       ),
-            //       const SizedBox(
-            //         width: 24.0,
-            //       ),
-            //       GestureDetector(
-            //         onTap: () => Navigator.push(
-            //           context,
-            //           MaterialPageRoute(
-            //             builder: (context) => const SearchTopicsPage(),
-            //           ),
-            //         ),
-            //         child: Padding(
-            //           padding: const EdgeInsets.symmetric(
-            //             horizontal: 12.0,
-            //           ),
-            //           child: Assets.icon.icSearchHeader.svg(),
-            //         ),
-            //       ),
-            //       GestureDetector(
-            //         onTap: () => Navigator.push(
-            //           context,
-            //           MaterialPageRoute(
-            //             builder: (context) => const NotiListPage(),
-            //           ),
-            //         ),
-            //         child: Padding(
-            //           padding: const EdgeInsets.symmetric(
-            //             horizontal: 12.0,
-            //           ),
-            //           child: Assets.icon.icNotiHeader.svg(),
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
+            const OngoingSessionNotiPanel(),
             TabBar(
               indicator: CircleTabIndicator(
                 color: AppColor.secondary,

@@ -359,6 +359,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtOneSession": MessageLookupByLibrary.simpleMessage("1 session"),
         "txtOneSessionLearningTime": MessageLookupByLibrary.simpleMessage(
             "Total 30 minutes of learning time"),
+        "txtOngoingSessionNotCompletedContent":
+            MessageLookupByLibrary.simpleMessage(
+                "You have to complete your ongoing session before starting another one."),
+        "txtOngoingSessionNotCompletedTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "Ongoing session is not completed"),
+        "txtOngoingSessionWith":
+            MessageLookupByLibrary.simpleMessage("Ongoing session with"),
         "txtOr": MessageLookupByLibrary.simpleMessage("or"),
         "txtOrLoginWith":
             MessageLookupByLibrary.simpleMessage("Or log in with"),

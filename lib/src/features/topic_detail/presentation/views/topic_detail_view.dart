@@ -6,8 +6,10 @@ import '../../../../../base/define/manager/loading_manager.dart';
 import '../../../../../base/define/theme.dart';
 import '../../../../../base/widgets/buttons/button.dart';
 import '../../../../../base/widgets/toast/app_toast.dart';
+import '../../../../../di/di_module.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../../../generated/l10n.dart';
+import '../../../check_ongoing_session/presentation/blocs/ongoing_session_bloc/ongoing_session_bloc.dart';
 import '../../../connect_teacher/presentation/views/connect_teacher_page.dart';
 import '../../../connect_teacher/presentation/widgets/warning_dialog_content.dart';
 import '../../../payment/presentation/views/payment_page.dart';
@@ -30,6 +32,14 @@ class TopicDetailView extends StatefulWidget {
 }
 
 class _TopicDetailViewState extends State<TopicDetailView> {
+  late final OngoingSessionBloc _ongoingSessionBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    _ongoingSessionBloc = getIt.get<OngoingSessionBloc>();
+  }
+
   _showConfirmRemoveSavedPhrase(TopicPhraseEntity item) async {
     final result = await showDialog(
       //barrierDismissible: false,
@@ -87,188 +97,250 @@ class _TopicDetailViewState extends State<TopicDetailView> {
     );
     if (result == true) {
       if (mounted) {
-        context.read<TopicDetailBloc>().add(TopicDetailPhraseRemoveBookmarkEvent(bookmarkId: item.bookmark!.id!));
+        context.read<TopicDetailBloc>().add(
+            TopicDetailPhraseRemoveBookmarkEvent(
+                bookmarkId: item.bookmark!.id!));
       }
     }
   }
 
   @override
-  Widget build(BuildContext context) => BlocListener<TopicDetailBloc, TopicDetailState>(
-        listener: (context, state) {
-          if (state is TopicDetailLoadingState) {
-            LoadingManager.setLoading(
-              context,
-              loading: state.showLoading,
-            );
-          } else if (state is TopicPhraseCreateBookmarkSuccessState) {
-            AppToast(
-              duration: const Duration(seconds: 3),
-              bottomOffset: 8.0,
-              message: Text(
-                S.current.txtCreateVocabBookmarkSuccess,
-                style: const TextStyle(
-                  fontSize: bodyLargeSize,
-                  fontWeight: bodyLargeWeight,
-                  color: AppColor.white,
-                ),
-              ),
-            ).show(context);
-            context.read<TopicDetailBloc>().add(TopicDetailLoadEvent(
-                  topicId: widget.topicId,
-                ));
-          } else if (state is TopicPhraseRemoveBookmarkSuccessState) {
-            AppToast(
-              duration: const Duration(seconds: 3),
-              bottomOffset: 8.0,
-              message: Text(
-                S.current.txtRemoteVocabBookmarkSuccess,
-                style: const TextStyle(
-                  fontSize: bodyLargeSize,
-                  fontWeight: bodyLargeWeight,
-                  color: AppColor.white,
-                ),
-              ),
-            ).show(context);
-            context.read<TopicDetailBloc>().add(TopicDetailLoadEvent(
-                  topicId: widget.topicId,
-                ));
-          } else if (state is TopicDetailLoadFailedState) {
-            AppToast(
-              mode: AppToastMode.error,
-              duration: const Duration(seconds: 3),
-              bottomOffset: 8.0,
-              message: Text(
-                state.exception.displayMessage,
-                style: const TextStyle(
-                  fontSize: bodyLargeSize,
-                  fontWeight: bodyLargeWeight,
-                  color: AppColor.white,
-                ),
-              ),
-            ).show(context);
-          } else if (state is TopicPhraseBookmarkAdjustFailedState) {
-            AppToast(
-              mode: AppToastMode.error,
-              duration: const Duration(seconds: 3),
-              bottomOffset: 8.0,
-              message: Text(
-                state.exception.displayMessage,
-                style: const TextStyle(
-                  fontSize: bodyLargeSize,
-                  fontWeight: bodyLargeWeight,
-                  color: AppColor.white,
-                ),
-              ),
-            ).show(context);
-          } else if (state is TopicDetailAddFavoriteDoneState) {
-            AppToast(
-              duration: const Duration(seconds: 3),
-              bottomOffset: 8.0,
-              message: Text(
-                S.current.txtAddFavoriteSuccess,
-                style: const TextStyle(
-                  fontSize: bodyLargeSize,
-                  fontWeight: bodyLargeWeight,
-                  color: AppColor.white,
-                ),
-              ),
-            ).show(context);
-            context.read<TopicDetailBloc>().add(TopicDetailLoadEvent(topicId: widget.topicId));
-          } else if (state is TopicDetailRemoveFavoriteDoneState) {
-            AppToast(
-              duration: const Duration(seconds: 3),
-              bottomOffset: 8.0,
-              message: Text(
-                S.current.txtRemoveFavoriteSuccess,
-                style: const TextStyle(
-                  fontSize: bodyLargeSize,
-                  fontWeight: bodyLargeWeight,
-                  color: AppColor.white,
-                ),
-              ),
-            ).show(context);
-            context.read<TopicDetailBloc>().add(TopicDetailLoadEvent(topicId: widget.topicId));
-          } else if (state is ConnectTeacherLoadingState) {
-            LoadingManager.setLoading(
-              context,
-              loading: true,
-            );
-          } else if (state is ConnectTeacherLoadDoneState) {
-            LoadingManager.setLoading(
-              context,
-              loading: false,
-            );
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ConnectTeacherPage(
-                  sessionId: state.sessionId,
-                ),
-              ),
-            );
-          } else if (state is ConnectTeacherLoadFailureState) {
-            LoadingManager.setLoading(
-              context,
-              loading: false,
-            );
-            showDialog(
-              context: context,
-              barrierDismissible: false,
-              builder: (context) => WarningDialogContent(
-                title: S.current.txtCreateSessionFailed,
-                content: state.message,
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text(S.current.txtOk),
-                  ),
-                ],
-              ),
-            );
-          } else if (state is ConnectTeacherInsufficientBalanceState) {
-            LoadingManager.setLoading(
-              context,
-              loading: false,
-            );
-            showDialog(
-              context: context,
-              barrierDismissible: false,
-              builder: (context) => WarningDialogContent(
-                title: S.current.txtInsufficientBalanceTitle,
-                content: S.current.txtInsufficientBalanceContent,
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      S.current.txtMaybeLater,
-                      style: const TextStyle(
-                        fontSize: labelLargeSize,
-                      ),
+  Widget build(BuildContext context) => MultiBlocListener(
+        listeners: [
+          BlocListener<TopicDetailBloc, TopicDetailState>(
+            listener: (context, state) {
+              if (state is TopicDetailLoadingState) {
+                LoadingManager.setLoading(
+                  context,
+                  loading: state.showLoading,
+                );
+              } else if (state is TopicPhraseCreateBookmarkSuccessState) {
+                AppToast(
+                  duration: const Duration(seconds: 3),
+                  bottomOffset: 8.0,
+                  message: Text(
+                    S.current.txtCreateVocabBookmarkSuccess,
+                    style: const TextStyle(
+                      fontSize: bodyLargeSize,
+                      fontWeight: bodyLargeWeight,
+                      color: AppColor.white,
                     ),
                   ),
-                  AppFilledButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const PaymentPage(),
-                        ),
-                      );
-                    },
-                    text: S.current.txtRefillNow,
+                ).show(context);
+                context.read<TopicDetailBloc>().add(TopicDetailLoadEvent(
+                      topicId: widget.topicId,
+                    ));
+              } else if (state is TopicPhraseRemoveBookmarkSuccessState) {
+                AppToast(
+                  duration: const Duration(seconds: 3),
+                  bottomOffset: 8.0,
+                  message: Text(
+                    S.current.txtRemoteVocabBookmarkSuccess,
+                    style: const TextStyle(
+                      fontSize: bodyLargeSize,
+                      fontWeight: bodyLargeWeight,
+                      color: AppColor.white,
+                    ),
                   ),
-                ],
-              ),
-            );
-          }
-        },
+                ).show(context);
+                context.read<TopicDetailBloc>().add(TopicDetailLoadEvent(
+                      topicId: widget.topicId,
+                    ));
+              } else if (state is TopicDetailLoadFailedState) {
+                AppToast(
+                  mode: AppToastMode.error,
+                  duration: const Duration(seconds: 3),
+                  bottomOffset: 8.0,
+                  message: Text(
+                    state.exception.displayMessage,
+                    style: const TextStyle(
+                      fontSize: bodyLargeSize,
+                      fontWeight: bodyLargeWeight,
+                      color: AppColor.white,
+                    ),
+                  ),
+                ).show(context);
+              } else if (state is TopicPhraseBookmarkAdjustFailedState) {
+                AppToast(
+                  mode: AppToastMode.error,
+                  duration: const Duration(seconds: 3),
+                  bottomOffset: 8.0,
+                  message: Text(
+                    state.exception.displayMessage,
+                    style: const TextStyle(
+                      fontSize: bodyLargeSize,
+                      fontWeight: bodyLargeWeight,
+                      color: AppColor.white,
+                    ),
+                  ),
+                ).show(context);
+              } else if (state is TopicDetailAddFavoriteDoneState) {
+                AppToast(
+                  duration: const Duration(seconds: 3),
+                  bottomOffset: 8.0,
+                  message: Text(
+                    S.current.txtAddFavoriteSuccess,
+                    style: const TextStyle(
+                      fontSize: bodyLargeSize,
+                      fontWeight: bodyLargeWeight,
+                      color: AppColor.white,
+                    ),
+                  ),
+                ).show(context);
+                context
+                    .read<TopicDetailBloc>()
+                    .add(TopicDetailLoadEvent(topicId: widget.topicId));
+              } else if (state is TopicDetailRemoveFavoriteDoneState) {
+                AppToast(
+                  duration: const Duration(seconds: 3),
+                  bottomOffset: 8.0,
+                  message: Text(
+                    S.current.txtRemoveFavoriteSuccess,
+                    style: const TextStyle(
+                      fontSize: bodyLargeSize,
+                      fontWeight: bodyLargeWeight,
+                      color: AppColor.white,
+                    ),
+                  ),
+                ).show(context);
+                context
+                    .read<TopicDetailBloc>()
+                    .add(TopicDetailLoadEvent(topicId: widget.topicId));
+              } else if (state is ConnectTeacherLoadingState) {
+                LoadingManager.setLoading(
+                  context,
+                  loading: true,
+                );
+              } else if (state is ConnectTeacherLoadDoneState) {
+                LoadingManager.setLoading(
+                  context,
+                  loading: false,
+                );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ConnectTeacherPage(
+                      sessionId: state.sessionId,
+                    ),
+                  ),
+                );
+              } else if (state is ConnectTeacherLoadFailureState) {
+                LoadingManager.setLoading(
+                  context,
+                  loading: false,
+                );
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (context) => WarningDialogContent(
+                    title: S.current.txtCreateSessionFailed,
+                    content: state.message,
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text(S.current.txtOk),
+                      ),
+                    ],
+                  ),
+                );
+              } else if (state is ConnectTeacherInsufficientBalanceState) {
+                LoadingManager.setLoading(
+                  context,
+                  loading: false,
+                );
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (context) => WarningDialogContent(
+                    title: S.current.txtInsufficientBalanceTitle,
+                    content: S.current.txtInsufficientBalanceContent,
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text(
+                          S.current.txtMaybeLater,
+                          style: const TextStyle(
+                            fontSize: labelLargeSize,
+                          ),
+                        ),
+                      ),
+                      AppFilledButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const PaymentPage(),
+                            ),
+                          );
+                        },
+                        text: S.current.txtRefillNow,
+                      ),
+                    ],
+                  ),
+                );
+              }
+            },
+          ),
+          BlocListener<OngoingSessionBloc, OngoingSessionState>(
+            bloc: _ongoingSessionBloc,
+            listener: (context, state) {
+              if (state is OngoingSessionCheckingDoneState &&
+                  state.isInOngoingSession) {
+                showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                          backgroundColor:
+                              colorsByTheme(context).backgroundCardsChip,
+                          title: Text(
+                            S.current.txtOngoingSessionNotCompletedTitle,
+                            style: TextStyle(
+                              fontSize: titleLargeSize,
+                              fontWeight: titleLargeWeight,
+                              color: colorsByTheme(context).defaultFont,
+                              height: 28 / 30,
+                            ),
+                          ),
+                          content: Text(
+                            S.current.txtOngoingSessionNotCompletedContent,
+                            style: TextStyle(
+                              fontSize: bodyLargeSize,
+                              fontWeight: bodyLargeWeight,
+                              color: colorsByTheme(context).defaultFont,
+                              height: 1.0,
+                            ),
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              style: TextButton.styleFrom(
+                                foregroundColor: AppColor.mainColor1,
+                              ),
+                              child: Text(
+                                S.current.txtOk,
+                                style: const TextStyle(
+                                  fontSize: labelLargeSize,
+                                  fontWeight: labelLargeWeight,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ));
+              } else {
+                context.read<TopicDetailBloc>().add(
+                      TopicDetailConnectTeacherEvent(topicId: widget.topicId),
+                    );
+              }
+            },
+          ),
+        ],
         child: Scaffold(
           bottomNavigationBar: BlocBuilder<TopicDetailBloc, TopicDetailState>(
-            buildWhen: (previous, current) => previous != current && current is TopicDetailLoadDoneState,
+            buildWhen: (previous, current) =>
+                previous != current && current is TopicDetailLoadDoneState,
             builder: (context, state) {
               if (state is TopicDetailLoadDoneState) {
                 return Padding(
@@ -282,9 +354,8 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                       Expanded(
                         child: AppElevatedButton(
                           text: S.current.txtTalk,
-                          onPressed: () => context.read<TopicDetailBloc>().add(
-                                TopicDetailConnectTeacherEvent(topicId: widget.topicId),
-                              ),
+                          onPressed: () => _ongoingSessionBloc
+                              .add(const OngoingSessionCheckingEvent()),
                         ),
                       ),
                       Container(
@@ -293,10 +364,14 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                         margin: const EdgeInsets.only(left: spacing8),
                         padding: const EdgeInsets.all(padding8),
                         decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(Radius.circular(radius12)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(radius12)),
                           border: Border.all(
-                            width: state.topicDetail.bookmark != null ? 2.0 : 1.0,
-                            color: state.topicDetail.bookmark != null ? AppColor.error : AppColor.shadow,
+                            width:
+                                state.topicDetail.bookmark != null ? 2.0 : 1.0,
+                            color: state.topicDetail.bookmark != null
+                                ? AppColor.error
+                                : AppColor.shadow,
                           ),
                         ),
                         child: GestureDetector(
@@ -306,7 +381,8 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                 barrierDismissible: false,
                                 context: context,
                                 builder: (context) => AlertDialog(
-                                  backgroundColor: colorsByTheme(context).backgroundCardsChip,
+                                  backgroundColor: colorsByTheme(context)
+                                      .backgroundCardsChip,
                                   title: Text(
                                     S.current.txtConfirmRemoveFavoriteTitle,
                                     style: TextStyle(
@@ -326,10 +402,12 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                   actions: [
                                     AppTextButton(
                                       text: S.current.txtCancel,
-                                      onPressed: () => Navigator.pop(context, false),
+                                      onPressed: () =>
+                                          Navigator.pop(context, false),
                                     ),
                                     ElevatedButton(
-                                      onPressed: () => Navigator.pop(context, true),
+                                      onPressed: () =>
+                                          Navigator.pop(context, true),
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: AppColor.error,
                                         foregroundColor: Colors.white,
@@ -347,13 +425,19 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                               ).then((confirmRemoved) => {
                                     if (confirmRemoved)
                                       {
-                                        context.read<TopicDetailBloc>().add(TopicDetailRemoveFavoriteEvent(
-                                              id: state.topicDetail.bookmark?.bookmarkId ?? '',
+                                        context
+                                            .read<TopicDetailBloc>()
+                                            .add(TopicDetailRemoveFavoriteEvent(
+                                              id: state.topicDetail.bookmark
+                                                      ?.bookmarkId ??
+                                                  '',
                                             )),
                                       }
                                   });
                             } else {
-                              context.read<TopicDetailBloc>().add(TopicDetailAddFavoriteEvent(
+                              context
+                                  .read<TopicDetailBloc>()
+                                  .add(TopicDetailAddFavoriteEvent(
                                     topicId: widget.topicId,
                                   ));
                             }
@@ -401,7 +485,8 @@ class _TopicDetailViewState extends State<TopicDetailView> {
             },
           ),
           body: BlocBuilder<TopicDetailBloc, TopicDetailState>(
-            buildWhen: (previous, current) => previous != current && (current is TopicDetailLoadDoneState),
+            buildWhen: (previous, current) =>
+                previous != current && (current is TopicDetailLoadDoneState),
             builder: (context, state) {
               if (state is TopicDetailLoadDoneState) {
                 return Stack(
@@ -428,7 +513,8 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+                      padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).padding.top),
                       child: IconButton(
                         padding: EdgeInsets.zero,
                         constraints: const BoxConstraints(),
@@ -459,7 +545,8 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                               Align(
                                 alignment: Alignment.center,
                                 child: Text(
-                                  state.topicDetail.topicName ?? 'null name. Someone must be joking here',
+                                  state.topicDetail.topicName ??
+                                      'null name. Someone must be joking here',
                                   style: const TextStyle(
                                     fontSize: headlineSmallSize,
                                     fontWeight: headlineSmallWeight,
@@ -471,12 +558,15 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                               SizedBox(
                                 height: 48.0,
                                 child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
                                   children: [
                                     Expanded(
                                       child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
                                         children: [
                                           Text(
                                             S.current.txtTopicCategory,
@@ -488,12 +578,14 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                           ),
                                           Expanded(
                                             child: Text(
-                                              state.topicDetail.topicCategory ?? 'null. This topic is out of this world',
+                                              state.topicDetail.topicCategory ??
+                                                  'null. This topic is out of this world',
                                               style: TextStyle(
                                                 height: 0.9,
                                                 fontSize: bodySmallSize,
                                                 fontWeight: bodySmallWeight,
-                                                color: colorsByTheme(context).defaultFont,
+                                                color: colorsByTheme(context)
+                                                    .defaultFont,
                                               ),
                                               overflow: TextOverflow.ellipsis,
                                             ),
@@ -514,8 +606,10 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                     const SizedBox(width: spacing10),
                                     Expanded(
                                       child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             S.current.txtTopicLevel,
@@ -527,12 +621,14 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                           ),
                                           Expanded(
                                             child: Text(
-                                              state.topicDetail.topicLevel ?? 'null. This topic is for Einstein',
+                                              state.topicDetail.topicLevel ??
+                                                  'null. This topic is for Einstein',
                                               style: TextStyle(
                                                 height: 0.9,
                                                 fontSize: bodySmallSize,
                                                 fontWeight: bodySmallWeight,
-                                                color: colorsByTheme(context).defaultFont,
+                                                color: colorsByTheme(context)
+                                                    .defaultFont,
                                               ),
                                               overflow: TextOverflow.ellipsis,
                                             ),
@@ -545,7 +641,8 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                               ),
                               const SizedBox(height: spacing20),
                               Text(
-                                state.topicDetail.topicDescription ?? 'null. This topic is about nothing',
+                                state.topicDetail.topicDescription ??
+                                    'null. This topic is about nothing',
                                 style: const TextStyle(
                                   height: 1.15,
                                   fontSize: bodyLargeSize,
@@ -565,18 +662,22 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                 physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 padding: const EdgeInsets.all(0.0),
-                                itemCount: state.topicDetail.topicPhrases?.length ?? 0,
+                                itemCount:
+                                    state.topicDetail.topicPhrases?.length ?? 0,
                                 itemBuilder: (context, index) {
-                                  final phrase = state.topicDetail.topicPhrases?[index];
+                                  final phrase =
+                                      state.topicDetail.topicPhrases?[index];
                                   if (phrase == null) {
                                     return const Text('Null Phrase');
                                   }
                                   return PhraseCard(
                                     phraseEntity: phrase,
-                                    onRemovePhraseBookmark: _showConfirmRemoveSavedPhrase,
+                                    onRemovePhraseBookmark:
+                                        _showConfirmRemoveSavedPhrase,
                                   );
                                 },
-                                separatorBuilder: (context, index) => const SizedBox(
+                                separatorBuilder: (context, index) =>
+                                    const SizedBox(
                                   height: spacing20,
                                 ),
                               ),
@@ -594,17 +695,23 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                                 physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 padding: const EdgeInsets.all(0.0),
-                                itemCount: state.topicDetail.topicQuestions?.length ?? 0,
+                                itemCount:
+                                    state.topicDetail.topicQuestions?.length ??
+                                        0,
                                 itemBuilder: (context, index) {
-                                  final questionContent = state.topicDetail.topicQuestions?[index].questionContent;
-                                  final answers = state.topicDetail.topicQuestions?[index].topicAnswers;
+                                  final questionContent = state.topicDetail
+                                      .topicQuestions?[index].questionContent;
+                                  final answers = state.topicDetail
+                                      .topicQuestions?[index].topicAnswers;
                                   return QuestionCard(
                                     index: index,
-                                    questionContent: questionContent ?? 'null question',
+                                    questionContent:
+                                        questionContent ?? 'null question',
                                     answers: answers ?? [],
                                   );
                                 },
-                                separatorBuilder: (context, index) => const SizedBox(
+                                separatorBuilder: (context, index) =>
+                                    const SizedBox(
                                   height: spacing16,
                                 ),
                               )
