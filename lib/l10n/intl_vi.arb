@@ -361,5 +361,8 @@
   "txtFindTeacherFailedContent": "Rất tiếc, có vẻ như hiện tại không có giáo viên nào đang rảnh. Vui lòng thử lại sau 5 phút.",
   "txtSubjectTooShort": "Chủ đề và thể loại phải chứa ít nhất 3 ký tự không phải khoảng trắng",
   "txtSubjectOnlyCharacters": "Chủ đề và thể loại chỉ chứa chữ cái",
-  "txtPlsTellUsDetail": "Làm ơn hay mô tả chi tiết vấn đề nếu bạn lựa chọn 'Khác'."
+  "txtPlsTellUsDetail": "Làm ơn hay mô tả chi tiết vấn đề nếu bạn lựa chọn 'Khác'.",
+  "txtOngoingSessionWith": "Buổi học đang diễn ra với",
+  "txtOngoingSessionNotCompletedTitle": "Buổi học đang diễn ra chưa hoàn thành",
+  "txtOngoingSessionNotCompletedContent": "Bạn phải hoàn thành buổi học đang diễn ra trước khi bắt đầu một buổi học khác."
 }

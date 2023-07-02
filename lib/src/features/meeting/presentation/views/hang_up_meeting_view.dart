@@ -19,14 +19,16 @@ class HangUpMeetingView extends StatefulWidget {
 class _HangUpMeetingViewState extends State<HangUpMeetingView> {
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as SessionScheduleEntity;
+    final args =
+        ModalRoute.of(context)!.settings.arguments as SessionScheduleEntity;
     final width = MediaQuery.of(context).size.width;
     return WillPopScope(
       onWillPop: () => Future.value(false),
       child: Scaffold(
         //backgroundColor: AppColor.white,
         body: Padding(
-          padding: const EdgeInsets.fromLTRB(padding24, padding48 + padding12, padding24, padding24),
+          padding: const EdgeInsets.fromLTRB(
+              padding24, padding48 + padding12, padding24, padding24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -68,14 +70,19 @@ class _HangUpMeetingViewState extends State<HangUpMeetingView> {
               ),
               const SizedBox(height: spacing12),
               ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
+                onPressed: () async {
+                  await Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => const SessionCompletedView(),
-                      settings: RouteSettings(arguments: ScreenArguments(args.sessionTeacher?.id ?? "", args.sessionId)),
+                      settings: RouteSettings(
+                          arguments: ScreenArguments(
+                              args.sessionTeacher?.id ?? "", args.sessionId)),
                     ),
                   );
+                  if (mounted) {
+                    Navigator.pop(context);
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   elevation: 0.0,

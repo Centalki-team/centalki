@@ -2080,7 +2080,7 @@ class S {
     );
   }
 
-  /// `Last updated: Mar 03, 2023`
+  /// `Last updated: Jun 16, 2023`
   String get txtLastUpdated {
     return Intl.message(
       'Last updated: Jun 16, 2023',
@@ -3675,6 +3675,36 @@ class S {
     return Intl.message(
       'Please describe detail of the problem if you select \'Others\' option.',
       name: 'txtPlsTellUsDetail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ongoing session with`
+  String get txtOngoingSessionWith {
+    return Intl.message(
+      'Ongoing session with',
+      name: 'txtOngoingSessionWith',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ongoing session is not completed`
+  String get txtOngoingSessionNotCompletedTitle {
+    return Intl.message(
+      'Ongoing session is not completed',
+      name: 'txtOngoingSessionNotCompletedTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have to complete your ongoing session before starting another one.`
+  String get txtOngoingSessionNotCompletedContent {
+    return Intl.message(
+      'You have to complete your ongoing session before starting another one.',
+      name: 'txtOngoingSessionNotCompletedContent',
       desc: '',
       args: [],
     );

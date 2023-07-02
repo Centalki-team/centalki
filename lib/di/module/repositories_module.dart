@@ -18,6 +18,7 @@ import '../../src/features/bookmark/domain/repositories/bookmark_repository.dart
 import '../../src/features/bookmark/topic/data/datasources/remote_data/bookmark_topic_remote_datasource.dart';
 import '../../src/features/bookmark/topic/data/repositories/bookmark_topic_repository_impl.dart';
 import '../../src/features/bookmark/topic/domain/repositories/bookmark_topic_repository.dart';
+import '../../src/features/check_ongoing_session/presentation/blocs/ongoing_session_bloc/ongoing_session_bloc.dart';
 import '../../src/features/introduction/data/datasources/local_data/intro_local_datasource.dart';
 import '../../src/features/introduction/data/repositories/app_intro_repository_impl.dart';
 import '../../src/features/introduction/domain/repositories/app_intro_repository.dart';
@@ -146,6 +147,7 @@ class RepositoriesModule extends DIModule {
       ..registerLazySingleton<LogOutRepository>(LogOutRepositoryImpl.new)
       // BLOCS
       ..registerSingleton<ApplicationBloc>(ApplicationBloc())
+      ..registerSingleton<OngoingSessionBloc>(OngoingSessionBloc())
       ..registerSingleton<Analytics>(Analytics(ecommerce: FirebaseAnalyticsEcommerce.tryInit(),),);
   }
 }

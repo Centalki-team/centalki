@@ -361,5 +361,8 @@
   "txtFindTeacherFailedContent": "Sorry, it seems that no teacher is available at the moment. Please try again in 5 minutes.",
   "txtSubjectTooShort": "Subject and Category must contain at least 3 non-whitespace characters",
   "txtSubjectOnlyCharacters": "Subject and Category just contains characters",
-  "txtPlsTellUsDetail": "Please describe detail of the problem if you select 'Others' option."
+  "txtPlsTellUsDetail": "Please describe detail of the problem if you select 'Others' option.",
+  "txtOngoingSessionWith": "Ongoing session with",
+  "txtOngoingSessionNotCompletedTitle": "Ongoing session is not completed",
+  "txtOngoingSessionNotCompletedContent": "You have to complete your ongoing session before starting another one."
 }
