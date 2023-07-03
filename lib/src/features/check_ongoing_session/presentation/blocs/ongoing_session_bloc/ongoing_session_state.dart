@@ -15,12 +15,14 @@ class OngoingSessionCheckingDoneState extends OngoingSessionState {
   const OngoingSessionCheckingDoneState({
     required this.isInOngoingSession,
     required this.isRecheckForRejoin,
+    required this.isCheckForNewSession,
     this.sessionScheduleEntity,
     required this.timeEmit,
   });
 
   final bool isInOngoingSession;
   final bool isRecheckForRejoin;
+  final bool isCheckForNewSession;
   final SessionScheduleEntity? sessionScheduleEntity;
   final DateTime timeEmit;
 
@@ -28,6 +30,7 @@ class OngoingSessionCheckingDoneState extends OngoingSessionState {
   List<Object?> get props => [
         isInOngoingSession,
         isRecheckForRejoin,
+        isCheckForNewSession,
         sessionScheduleEntity,
         timeEmit,
       ];
