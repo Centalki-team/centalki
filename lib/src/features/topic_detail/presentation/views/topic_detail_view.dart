@@ -289,50 +289,52 @@ class _TopicDetailViewState extends State<TopicDetailView> {
             bloc: _ongoingSessionBloc,
             listener: (context, state) {
               if (state is OngoingSessionCheckingDoneState &&
-                  state.isInOngoingSession) {
-                showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                          backgroundColor:
-                              colorsByTheme(context).backgroundCardsChip,
-                          title: Text(
-                            S.current.txtOngoingSessionNotCompletedTitle,
-                            style: TextStyle(
-                              fontSize: titleLargeSize,
-                              fontWeight: titleLargeWeight,
-                              color: colorsByTheme(context).defaultFont,
-                              height: 28 / 30,
-                            ),
-                          ),
-                          content: Text(
-                            S.current.txtOngoingSessionNotCompletedContent,
-                            style: TextStyle(
-                              fontSize: bodyLargeSize,
-                              fontWeight: bodyLargeWeight,
-                              color: colorsByTheme(context).defaultFont,
-                              height: 1.0,
-                            ),
-                          ),
-                          actions: [
-                            TextButton(
-                              onPressed: () => Navigator.pop(context),
-                              style: TextButton.styleFrom(
-                                foregroundColor: AppColor.mainColor1,
+                  state.isCheckForNewSession) {
+                if (state.isInOngoingSession) {
+                  showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                            backgroundColor:
+                                colorsByTheme(context).backgroundCardsChip,
+                            title: Text(
+                              S.current.txtOngoingSessionNotCompletedTitle,
+                              style: TextStyle(
+                                fontSize: titleLargeSize,
+                                fontWeight: titleLargeWeight,
+                                color: colorsByTheme(context).defaultFont,
+                                height: 28 / 30,
                               ),
-                              child: Text(
-                                S.current.txtOk,
-                                style: const TextStyle(
-                                  fontSize: labelLargeSize,
-                                  fontWeight: labelLargeWeight,
+                            ),
+                            content: Text(
+                              S.current.txtOngoingSessionNotCompletedContent,
+                              style: TextStyle(
+                                fontSize: bodyLargeSize,
+                                fontWeight: bodyLargeWeight,
+                                color: colorsByTheme(context).defaultFont,
+                                height: 1.0,
+                              ),
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                style: TextButton.styleFrom(
+                                  foregroundColor: AppColor.mainColor1,
+                                ),
+                                child: Text(
+                                  S.current.txtOk,
+                                  style: const TextStyle(
+                                    fontSize: labelLargeSize,
+                                    fontWeight: labelLargeWeight,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ));
-              } else {
-                context.read<TopicDetailBloc>().add(
-                      TopicDetailConnectTeacherEvent(topicId: widget.topicId),
-                    );
+                            ],
+                          ));
+                } else {
+                  context.read<TopicDetailBloc>().add(
+                        TopicDetailConnectTeacherEvent(topicId: widget.topicId),
+                      );
+                }
               }
             },
           ),
@@ -355,7 +357,9 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                         child: AppElevatedButton(
                           text: S.current.txtTalk,
                           onPressed: () => _ongoingSessionBloc
-                              .add(const OngoingSessionCheckingEvent()),
+                              .add(const OngoingSessionCheckingEvent(
+                            isCheckForNewSession: true,
+                          )),
                         ),
                       ),
                       Container(
