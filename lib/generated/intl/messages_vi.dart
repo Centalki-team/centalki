@@ -33,6 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Thông tin tài khoản"),
         "txtAddFavoriteSuccess": MessageLookupByLibrary.simpleMessage(
             "Lưu chủ đề yêu thích thành công!"),
+        "txtAllow": MessageLookupByLibrary.simpleMessage("Cho phép"),
         "txtAppearance": MessageLookupByLibrary.simpleMessage("Giao diện"),
         "txtApple": MessageLookupByLibrary.simpleMessage("Apple"),
         "txtApplicationTheme":
@@ -46,6 +47,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tiểu sử của bạn không thể vượt quá 200 ký tự"),
         "txtBuyMoreSessions":
             MessageLookupByLibrary.simpleMessage("Mua thêm buổi học"),
+        "txtCamPermissionContent": MessageLookupByLibrary.simpleMessage(
+            "Vui lòng cho phép ứng dụng truy cập vào máy ảnh trên thiết bị, để giáo viên có thể thấy hình ảnh của bạn khi tham gia buổi luyện nói."),
+        "txtCamPermissionTitle":
+            MessageLookupByLibrary.simpleMessage("Cấp quyền truy cập máy ảnh"),
         "txtCancel": MessageLookupByLibrary.simpleMessage("Huỷ"),
         "txtCancelContent": MessageLookupByLibrary.simpleMessage(
             "Bạn có chắc chắn muốn huỷ kết nối tới giáo viên không?"),
@@ -132,6 +137,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Something wrong when delete account!\nTry again after some minutes."),
         "txtDeleteAccountResult":
             MessageLookupByLibrary.simpleMessage("Xoá kết quả"),
+        "txtDeny": MessageLookupByLibrary.simpleMessage("Từ chối"),
         "txtDescriptionAndRequirementsHint": MessageLookupByLibrary.simpleMessage(
             "Ví dụ: khám phá lợi ích và tác hại của thức ăn nhanh, xem xét vấn đề từ nhiều phía, các góc nhìn khác nhau về loại thức ăn được ưa chuộng này"),
         "txtDescriptionAndRequirementsLabel":
@@ -283,6 +289,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtMarkAllNotiAsUnread": MessageLookupByLibrary.simpleMessage(
             "Đánh dấu tất cả thông báo là chưa đọc"),
         "txtMaybeLater": MessageLookupByLibrary.simpleMessage("Để sau"),
+        "txtMicPermissionContent": MessageLookupByLibrary.simpleMessage(
+            "Vui lòng cho phép ứng dụng truy cập vào micro trên thiết bị, để giáo viên có thể nghe giọng của bạn khi tham gia buổi luyện nói."),
+        "txtMicPermissionTitle":
+            MessageLookupByLibrary.simpleMessage("Cấp quyền truy cập micro"),
         "txtMinutes": MessageLookupByLibrary.simpleMessage("phút"),
         "txtMostPopular": MessageLookupByLibrary.simpleMessage("Phổ biến nhất"),
         "txtNewPassword": MessageLookupByLibrary.simpleMessage("Mật khẩu mới"),

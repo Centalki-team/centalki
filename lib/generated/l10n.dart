@@ -3709,6 +3709,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Camera Access Permission`
+  String get txtCamPermissionTitle {
+    return Intl.message(
+      'Camera Access Permission',
+      name: 'txtCamPermissionTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please allow access to your device's camera for capturing your images during speaking sessions with teachers.`
+  String get txtCamPermissionContent {
+    return Intl.message(
+      'Please allow access to your device\'s camera for capturing your images during speaking sessions with teachers.',
+      name: 'txtCamPermissionContent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Microphone Access Permission`
+  String get txtMicPermissionTitle {
+    return Intl.message(
+      'Microphone Access Permission',
+      name: 'txtMicPermissionTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please allow access to your device's microphone for capturing your voice during speaking sessions with teachers.`
+  String get txtMicPermissionContent {
+    return Intl.message(
+      'Please allow access to your device\'s microphone for capturing your voice during speaking sessions with teachers.',
+      name: 'txtMicPermissionContent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deny`
+  String get txtDeny {
+    return Intl.message(
+      'Deny',
+      name: 'txtDeny',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Allow`
+  String get txtAllow {
+    return Intl.message(
+      'Allow',
+      name: 'txtAllow',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

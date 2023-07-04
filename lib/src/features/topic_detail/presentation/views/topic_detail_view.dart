@@ -9,6 +9,7 @@ import '../../../../../base/widgets/toast/app_toast.dart';
 import '../../../../../di/di_module.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../../../generated/l10n.dart';
+import '../../../../shared/utilities/permission_helper.dart';
 import '../../../check_ongoing_session/presentation/blocs/ongoing_session_bloc/ongoing_session_bloc.dart';
 import '../../../connect_teacher/presentation/views/connect_teacher_page.dart';
 import '../../../connect_teacher/presentation/widgets/warning_dialog_content.dart';
@@ -331,9 +332,16 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                             ],
                           ));
                 } else {
-                  context.read<TopicDetailBloc>().add(
-                        TopicDetailConnectTeacherEvent(topicId: widget.topicId),
-                      );
+                  if (mounted) {
+                    PermissionHelper.processPermission(
+                      context,
+                      callback: () => context.read<TopicDetailBloc>().add(
+                            TopicDetailConnectTeacherEvent(
+                                topicId: widget.topicId),
+                          ),
+                    );
+                  }
+                  ;
                 }
               }
             },

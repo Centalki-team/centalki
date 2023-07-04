@@ -33,6 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Account Information"),
         "txtAddFavoriteSuccess": MessageLookupByLibrary.simpleMessage(
             "Add favorite topic successfully!"),
+        "txtAllow": MessageLookupByLibrary.simpleMessage("Allow"),
         "txtAppearance": MessageLookupByLibrary.simpleMessage("Appearance"),
         "txtApple": MessageLookupByLibrary.simpleMessage("Apple"),
         "txtApplicationTheme":
@@ -46,6 +47,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Your biography cannot exceed 200 characters"),
         "txtBuyMoreSessions":
             MessageLookupByLibrary.simpleMessage("Buy More Sessions"),
+        "txtCamPermissionContent": MessageLookupByLibrary.simpleMessage(
+            "Please allow access to your device\'s camera for capturing your images during speaking sessions with teachers."),
+        "txtCamPermissionTitle":
+            MessageLookupByLibrary.simpleMessage("Camera Access Permission"),
         "txtCancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "txtCancelContent": MessageLookupByLibrary.simpleMessage(
             "Are you sure to cancel connecting to teacher?"),
@@ -134,6 +139,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Something wrong when delete account!\nTry again after some minutes."),
         "txtDeleteAccountResult":
             MessageLookupByLibrary.simpleMessage("Delete result"),
+        "txtDeny": MessageLookupByLibrary.simpleMessage("Deny"),
         "txtDescriptionAndRequirementsHint": MessageLookupByLibrary.simpleMessage(
             "e.g. explores the pros and cons of fast food, examining both sides of the debate and providing insight into the potential benefits and drawbacks of this popular food choice."),
         "txtDescriptionAndRequirementsLabel":
@@ -287,6 +293,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "txtMarkAllNotiAsUnread": MessageLookupByLibrary.simpleMessage(
             "Mark all notifications as unread"),
         "txtMaybeLater": MessageLookupByLibrary.simpleMessage("Maybe later"),
+        "txtMicPermissionContent": MessageLookupByLibrary.simpleMessage(
+            "Please allow access to your device\'s microphone for capturing your voice during speaking sessions with teachers."),
+        "txtMicPermissionTitle": MessageLookupByLibrary.simpleMessage(
+            "Microphone Access Permission"),
         "txtMinutes": MessageLookupByLibrary.simpleMessage("minutes"),
         "txtMostPopular": MessageLookupByLibrary.simpleMessage("Most Popular"),
         "txtNewPassword": MessageLookupByLibrary.simpleMessage("New password"),

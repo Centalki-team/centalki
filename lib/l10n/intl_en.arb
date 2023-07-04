@@ -364,5 +364,11 @@
   "txtPlsTellUsDetail": "Please describe detail of the problem if you select 'Others' option.",
   "txtOngoingSessionWith": "Ongoing session with",
   "txtOngoingSessionNotCompletedTitle": "Ongoing session is not completed",
-  "txtOngoingSessionNotCompletedContent": "You have to complete your ongoing session before starting another one."
+  "txtOngoingSessionNotCompletedContent": "You have to complete your ongoing session before starting another one.",
+  "txtCamPermissionTitle": "Camera Access Permission",
+  "txtCamPermissionContent": "Please allow access to your device's camera for capturing your images during speaking sessions with teachers.",
+  "txtMicPermissionTitle": "Microphone Access Permission",
+  "txtMicPermissionContent": "Please allow access to your device's microphone for capturing your voice during speaking sessions with teachers.",
+  "txtDeny": "Deny",
+  "txtAllow": "Allow"
 }

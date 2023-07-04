@@ -364,5 +364,11 @@
   "txtPlsTellUsDetail": "Làm ơn hay mô tả chi tiết vấn đề nếu bạn lựa chọn 'Khác'.",
   "txtOngoingSessionWith": "Buổi học đang diễn ra với",
   "txtOngoingSessionNotCompletedTitle": "Buổi học đang diễn ra chưa hoàn thành",
-  "txtOngoingSessionNotCompletedContent": "Bạn phải hoàn thành buổi học đang diễn ra trước khi bắt đầu một buổi học khác."
+  "txtOngoingSessionNotCompletedContent": "Bạn phải hoàn thành buổi học đang diễn ra trước khi bắt đầu một buổi học khác.",
+  "txtCamPermissionTitle": "Cấp quyền truy cập máy ảnh",
+  "txtCamPermissionContent": "Vui lòng cho phép ứng dụng truy cập vào máy ảnh trên thiết bị, để giáo viên có thể thấy hình ảnh của bạn khi tham gia buổi luyện nói.",
+  "txtMicPermissionTitle": "Cấp quyền truy cập micro",
+  "txtMicPermissionContent": "Vui lòng cho phép ứng dụng truy cập vào micro trên thiết bị, để giáo viên có thể nghe giọng của bạn khi tham gia buổi luyện nói.",
+  "txtDeny": "Từ chối",
+  "txtAllow": "Cho phép"
 }
