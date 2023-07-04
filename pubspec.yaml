@@ -76,6 +76,7 @@ dependencies:
   sentry_flutter: ^7.6.3
 
   flutter_local_notifications: ^12.0.3
+  permission_handler: ^10.4.1
 
 dependency_overrides:
   permission_handler: "any"

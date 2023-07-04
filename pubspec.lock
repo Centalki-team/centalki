@@ -1009,7 +1009,7 @@ packages:
     source: hosted
     version: "1.11.1"
   permission_handler:
-    dependency: "direct overridden"
+    dependency: "direct main"
     description:
       name: permission_handler
       url: "https://pub.dartlang.org"
