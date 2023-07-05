@@ -7,25 +7,24 @@ import '../../../base/define/theme.dart';
 import '../../../generated/l10n.dart';
 
 class PermissionHelper {
-  static Future<bool> checkCameraPermission() async {
-    var isDenied = await Permission.camera.isDenied;
-    var isPermanentlyDenied = await Permission.camera.isPermanentlyDenied;
-    return !(isDenied && isPermanentlyDenied);
+  static Future<bool> checkCameraIsAllowed() async {
+    var cameraStatus = await Permission.camera.status;
+    return cameraStatus != PermissionStatus.denied &&
+        cameraStatus != PermissionStatus.permanentlyDenied;
   }
 
-  static Future<bool> checkMicroPermission() async {
-    var isDenied = await Permission.microphone.isDenied;
-    var isPermanentlyDenied = await Permission.microphone.isPermanentlyDenied;
-    return !(isDenied && isPermanentlyDenied);
+  static Future<bool> checkMicroIsAllowed() async {
+    var micStatus = await Permission.microphone.status;
+    return micStatus != PermissionStatus.denied && micStatus != PermissionStatus.permanentlyDenied;
   }
 
   static Future<void> processPermission(
     BuildContext context, {
     VoidCallback? callback,
   }) async {
-    var checkCamPermission = await checkCameraPermission();
+    var isCamAllow = await checkCameraIsAllowed();
     PermissionStatus? cameraStatus;
-    if (!checkCamPermission) {
+    if (!isCamAllow) {
       // ignore: use_build_context_synchronously
       final result = await showDialog(
         barrierDismissible: false,
@@ -37,14 +36,18 @@ class PermissionHelper {
       );
       if (result) {
         cameraStatus = await Permission.camera.request();
-        checkCamPermission =
-            !(cameraStatus.isDenied || cameraStatus.isPermanentlyDenied);
+        if (cameraStatus == PermissionStatus.permanentlyDenied) {
+          await openAppSettings();
+          return;
+        }
+        isCamAllow =
+            !cameraStatus.isDenied && !cameraStatus.isPermanentlyDenied;
       }
     }
 
-    var checkMicPermission = await checkMicroPermission();
+    var isMicAllow = await checkMicroIsAllowed();
     PermissionStatus? micStatus;
-    if (!checkMicPermission) {
+    if (!isMicAllow) {
       // ignore: use_build_context_synchronously
       final result = await showDialog(
         barrierDismissible: false,
@@ -56,12 +59,15 @@ class PermissionHelper {
       );
       if (result) {
         micStatus = await Permission.microphone.request();
-        checkMicPermission =
-            !(micStatus.isDenied || micStatus.isPermanentlyDenied);
+        if (micStatus == PermissionStatus.permanentlyDenied) {
+          await openAppSettings();
+          return;
+        }
+        isMicAllow = !(micStatus.isDenied || micStatus.isPermanentlyDenied);
       }
     }
 
-    if (checkCamPermission && checkMicPermission) {
+    if (isCamAllow && isMicAllow) {
       callback?.call();
     }
   }
@@ -81,7 +87,7 @@ class PermissionDialog extends StatelessWidget {
   Widget build(BuildContext context) => AlertDialog(
         backgroundColor: colorsByTheme(context).backgroundCardsChip,
         title: Text(
-          S.current.txtEndProgress,
+          title,
           style: TextStyle(
             fontSize: titleMediumSize,
             fontWeight: titleMediumWeight,
@@ -90,7 +96,7 @@ class PermissionDialog extends StatelessWidget {
           ),
         ),
         content: Text(
-          S.current.txtEndProgressContent,
+          content,
           style: TextStyle(
             fontSize: bodyLargeSize,
             fontWeight: bodyLargeWeight,
@@ -102,10 +108,10 @@ class PermissionDialog extends StatelessWidget {
           TextButton(
             onPressed: () => Navigator.pop(context, false),
             style: TextButton.styleFrom(
-              foregroundColor: AppColor.mainColor1,
+              foregroundColor: AppColor.error,
             ),
             child: Text(
-              S.current.txtOk,
+              S.current.txtDeny,
               style: const TextStyle(
                 fontSize: labelLargeSize,
                 fontWeight: labelLargeWeight,
@@ -115,11 +121,11 @@ class PermissionDialog extends StatelessWidget {
           ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppColor.error,
-              foregroundColor: Colors.white,
+              backgroundColor: AppColor.mainColor2,
+              foregroundColor: AppColor.defaultFontLight,
             ),
             child: Text(
-              S.current.txtCancel,
+              S.current.txtAllow,
               style: const TextStyle(
                 fontSize: labelLargeSize,
                 fontWeight: labelLargeWeight,

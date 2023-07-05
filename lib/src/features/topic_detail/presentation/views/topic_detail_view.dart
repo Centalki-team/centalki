@@ -341,7 +341,6 @@ class _TopicDetailViewState extends State<TopicDetailView> {
                           ),
                     );
                   }
-                  ;
                 }
               }
             },
